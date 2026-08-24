@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>MCTV Proposal — Starkville School District</title>
+<title>MCTV Proposal — Starkville Oktibbeha School District</title>
 <style>
   @page { size: letter; margin: 0; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { background: #ffffff; }
   body {
     font-family: "Work Sans", Arial, sans-serif;
-    color: #1b2434;
+    color: #22211d;
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
   .page {
@@ -24,102 +24,112 @@
 
   /* ---------- shared chrome ---------- */
   .masthead {
-    background: #00377d; color: #ffffff;
+    background: #141414; color: #ffffff;
     padding: 0.32in 0.6in 0.30in;
     display: flex; justify-content: space-between; align-items: baseline;
   }
   .masthead .brand { font-weight: 700; font-size: 13px; letter-spacing: 0.26em; white-space: nowrap; }
-  .masthead .brand span { color: #c9a127; }
-  .masthead .tag { font-size: 7.5px; letter-spacing: 0.14em; color: #c7d3e8; font-weight: 500; white-space: nowrap; }
-  .goldrule { height: 3px; background: #c9a127; }
+  .masthead .brand span { color: #F5B914; }
+  .masthead .tag { font-size: 7.5px; letter-spacing: 0.14em; color: #d8d3c6; font-weight: 500; white-space: nowrap; }
+  .goldrule { height: 3px; background: #F5B914; }
   .footer {
     margin-top: auto;
     padding: 0.16in 0.6in;
-    background: #00377d; color: #c7d3e8;
+    background: #141414; color: #d8d3c6;
     font-size: 8px; letter-spacing: 0.2em; font-weight: 500;
     display: flex; justify-content: space-between;
   }
   .body { padding: 0.34in 0.6in 0.25in; flex: 1 1 auto; display: flex; flex-direction: column; }
-  .kicker { font-size: 10px; letter-spacing: 0.3em; font-weight: 600; color: #c9a127; margin-bottom: 8px; }
-  h1 { font-family: "Playfair Display", Georgia, serif; font-weight: 700; color: #00377d; }
-  .lede { color: #3d4a60; }
+  .kicker { font-size: 10px; letter-spacing: 0.3em; font-weight: 600; color: #b8890f; margin-bottom: 8px; }
+  h1 { font-family: "Playfair Display", Georgia, serif; font-weight: 700; color: #141414; }
+  .lede { color: #44423a; }
 
   /* ---------- page 1 ---------- */
   .prepared {
     display: flex; justify-content: space-between;
     border-bottom: 1px solid #d9d2c2; padding-bottom: 10px; margin-bottom: 22px;
-    font-size: 8.6px; letter-spacing: 0.1em; color: #5a6478; font-weight: 500;
+    font-size: 8.6px; letter-spacing: 0.1em; color: #5d5a50; font-weight: 500;
   }
   .prepared div { white-space: nowrap; }
-  .prepared b { color: #00377d; letter-spacing: 0.1em; }
+  .prepared b { color: #141414; letter-spacing: 0.1em; }
+  .cobrand {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid #d9d2c2; padding-bottom: 14px; margin-bottom: 20px;
+  }
+  .ssdlogo { width: 2.35in; }
+  .pinfo {
+    text-align: right; font-size: 8.6px; letter-spacing: 0.1em;
+    color: #5d5a50; font-weight: 500; line-height: 2.1; white-space: nowrap;
+  }
+  .pinfo b { color: #141414; }
   .p1 h1 { font-size: 40px; line-height: 1.12; margin-bottom: 12px; }
   .p1 .lede { font-size: 12.5px; line-height: 1.55; max-width: 6.4in; margin-bottom: 20px; }
   .offer {
-    background: #ffffff; border: 2px solid #c9a127; border-radius: 8px;
+    background: #ffffff; border: 2px solid #F5B914; border-radius: 8px;
     padding: 20px 24px 18px; margin-bottom: 16px;
   }
-  .offer .label { font-size: 10px; letter-spacing: 0.3em; font-weight: 700; color: #c9a127; margin-bottom: 8px; }
+  .offer .label { font-size: 10px; letter-spacing: 0.3em; font-weight: 700; color: #b8890f; margin-bottom: 8px; }
   .offer .headline { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; }
-  .offer .headline .big { font-family: "Playfair Display", Georgia, serif; font-size: 30px; font-weight: 700; color: #00377d; }
-  .offer .headline .price { font-family: "Playfair Display", Georgia, serif; font-size: 30px; font-weight: 700; color: #c9a127; }
-  .offer .strike { font-size: 11.5px; color: #5a6478; margin-bottom: 12px; }
-  .offer .strike s { color: #8a93a5; }
+  .offer .headline .big { font-family: "Playfair Display", Georgia, serif; font-size: 30px; font-weight: 700; color: #141414; }
+  .offer .headline .price { font-family: "Playfair Display", Georgia, serif; font-size: 30px; font-weight: 700; color: #b8890f; }
+  .offer .strike { font-size: 11.5px; color: #5d5a50; margin-bottom: 12px; }
+  .offer .strike s { color: #928d7e; }
   .offer ul { list-style: none; columns: 2; column-gap: 28px; }
-  .offer li { font-size: 10.8px; line-height: 1.5; color: #3d4a60; padding-left: 15px; position: relative; margin-bottom: 6px; break-inside: avoid; }
-  .offer li::before { content: "—"; position: absolute; left: 0; color: #c9a127; font-weight: 600; }
-  .offer .fineprint { margin-top: 10px; font-size: 9px; color: #7a8296; }
+  .offer li { font-size: 10.8px; line-height: 1.5; color: #44423a; padding-left: 15px; position: relative; margin-bottom: 6px; break-inside: avoid; }
+  .offer li::before { content: "—"; position: absolute; left: 0; color: #b8890f; font-weight: 600; }
+  .offer .fineprint { margin-top: 10px; font-size: 9px; color: #807c6f; }
   .statband { display: flex; gap: 10px; margin-bottom: 16px; }
   .stat {
-    flex: 1; background: #00377d; color: #fff; border-radius: 6px;
+    flex: 1; background: #141414; color: #fff; border-radius: 6px;
     padding: 12px 10px 10px; text-align: center;
   }
   .stat .n { font-family: "Playfair Display", Georgia, serif; font-size: 21px; font-weight: 700; color: #ffffff; }
-  .stat .n em { font-style: normal; color: #c9a127; }
-  .stat .l { font-size: 7.5px; letter-spacing: 0.18em; color: #c7d3e8; font-weight: 600; margin-top: 4px; }
+  .stat .n em { font-style: normal; color: #F5B914; }
+  .stat .l { font-size: 7.5px; letter-spacing: 0.18em; color: #d8d3c6; font-weight: 600; margin-top: 4px; }
   .outlaw {
-    background: #fff6de; border-left: 4px solid #c9a127; border-radius: 0 6px 6px 0;
+    background: #fdf3d3; border-left: 4px solid #b8890f; border-radius: 0 6px 6px 0;
     padding: 14px 18px;
   }
-  .outlaw .t { font-size: 10px; letter-spacing: 0.24em; font-weight: 700; color: #00377d; margin-bottom: 5px; }
-  .outlaw p { font-size: 10.8px; line-height: 1.55; color: #3d4a60; }
+  .outlaw .t { font-size: 10px; letter-spacing: 0.24em; font-weight: 700; color: #141414; margin-bottom: 5px; }
+  .outlaw p { font-size: 10.8px; line-height: 1.55; color: #44423a; }
   .netband {
     margin-top: auto;
     border-top: 1px solid #d9d2c2; padding-top: 12px;
     display: flex; justify-content: space-between; align-items: baseline;
   }
   .netband .cell { text-align: center; }
-  .netband .n { font-family: "Playfair Display", Georgia, serif; font-size: 17px; font-weight: 700; color: #00377d; }
-  .netband .l { font-size: 7px; letter-spacing: 0.16em; color: #7a8296; font-weight: 600; margin-top: 2px; }
+  .netband .n { font-family: "Playfair Display", Georgia, serif; font-size: 17px; font-weight: 700; color: #141414; }
+  .netband .l { font-size: 7px; letter-spacing: 0.16em; color: #807c6f; font-weight: 600; margin-top: 2px; }
 
   /* ---------- page 2 ---------- */
   .p2 h1 { font-size: 30px; margin-bottom: 8px; }
   .p2 .lede { font-size: 11.5px; line-height: 1.55; max-width: 6.6in; margin-bottom: 16px; }
   .chartcard { background: #ffffff; border: 1px solid #e4dfd3; border-radius: 8px; padding: 16px 20px 12px; margin-bottom: 14px; }
-  .chartcard .ct { font-size: 10px; letter-spacing: 0.24em; font-weight: 700; color: #00377d; margin-bottom: 2px; }
-  .chartcard .cs { font-size: 9px; color: #7a8296; margin-bottom: 8px; }
-  .chartnote { font-size: 8px; color: #8a93a5; margin-top: 6px; }
+  .chartcard .ct { font-size: 10px; letter-spacing: 0.24em; font-weight: 700; color: #141414; margin-bottom: 2px; }
+  .chartcard .cs { font-size: 9px; color: #807c6f; margin-bottom: 8px; }
+  .chartnote { font-size: 8px; color: #928d7e; margin-top: 6px; }
   .mathband {
-    background: #00377d; border-radius: 8px; color: #ffffff;
+    background: #141414; border-radius: 8px; color: #ffffff;
     padding: 14px 20px; margin-bottom: 14px;
     display: flex; align-items: center; gap: 18px;
   }
   .mathband .cell { flex: 1; text-align: center; }
   .mathband .n { font-family: "Playfair Display", Georgia, serif; font-size: 22px; font-weight: 700; }
-  .mathband .gold { color: #c9a127; }
-  .mathband .l { font-size: 8px; letter-spacing: 0.16em; color: #c7d3e8; font-weight: 600; margin-top: 3px; }
-  .mathband .vs { font-family: "Playfair Display", Georgia, serif; font-size: 15px; color: #c7d3e8; flex: 0 0 auto; }
+  .mathband .gold { color: #F5B914; }
+  .mathband .l { font-size: 8px; letter-spacing: 0.16em; color: #d8d3c6; font-weight: 600; margin-top: 3px; }
+  .mathband .vs { font-family: "Playfair Display", Georgia, serif; font-size: 15px; color: #d8d3c6; flex: 0 0 auto; }
   .threecol { display: flex; gap: 12px; }
   .col { flex: 1; background: #ffffff; border: 1px solid #e4dfd3; border-radius: 8px; padding: 14px 16px; }
-  .col .t { font-size: 9.5px; letter-spacing: 0.2em; font-weight: 700; color: #c9a127; margin-bottom: 6px; }
-  .col p { font-size: 10.2px; line-height: 1.55; color: #3d4a60; }
-  .col p b { color: #00377d; }
+  .col .t { font-size: 9.5px; letter-spacing: 0.2em; font-weight: 700; color: #b8890f; margin-bottom: 6px; }
+  .col p { font-size: 10.2px; line-height: 1.55; color: #44423a; }
+  .col p b { color: #141414; }
   .venues {
     margin-top: auto;
-    background: #fff6de; border-left: 4px solid #c9a127; border-radius: 0 6px 6px 0;
+    background: #fdf3d3; border-left: 4px solid #b8890f; border-radius: 0 6px 6px 0;
     padding: 12px 18px;
   }
-  .venues .t { font-size: 9px; letter-spacing: 0.2em; font-weight: 700; color: #00377d; margin-bottom: 5px; }
-  .venues p { font-size: 9.6px; line-height: 1.7; color: #3d4a60; }
+  .venues .t { font-size: 9px; letter-spacing: 0.2em; font-weight: 700; color: #141414; margin-bottom: 5px; }
+  .venues p { font-size: 9.6px; line-height: 1.7; color: #44423a; }
 
   /* ---------- page 3 ---------- */
   .p3 h1 { font-size: 30px; margin-bottom: 8px; }
@@ -129,50 +139,50 @@
     flex: 1; background: #ffffff; border: 1px solid #e4dfd3; border-radius: 8px;
     padding: 16px 16px 14px; text-align: center; position: relative;
   }
-  .tier.rec { border: 2px solid #c9a127; background: #fffdf6; }
+  .tier.rec { border: 2px solid #F5B914; background: #fffdf6; }
   .tier .badge {
     position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
-    background: #c9a127; color: #ffffff; font-size: 7.5px; font-weight: 700;
+    background: #F5B914; color: #141414; font-size: 7.5px; font-weight: 700;
     letter-spacing: 0.2em; padding: 3px 10px; border-radius: 9px; white-space: nowrap;
   }
-  .tier .screens { font-size: 10px; letter-spacing: 0.22em; font-weight: 700; color: #00377d; margin-bottom: 6px; }
-  .tier .price { font-family: "Playfair Display", Georgia, serif; font-size: 27px; font-weight: 700; color: #00377d; }
-  .tier.rec .price { color: #c9a127; }
-  .tier .per { font-size: 9px; color: #7a8296; margin: 3px 0 10px; }
+  .tier .screens { font-size: 10px; letter-spacing: 0.22em; font-weight: 700; color: #141414; margin-bottom: 6px; }
+  .tier .price { font-family: "Playfair Display", Georgia, serif; font-size: 27px; font-weight: 700; color: #141414; }
+  .tier.rec .price { color: #b8890f; }
+  .tier .per { font-size: 9px; color: #807c6f; margin: 3px 0 10px; }
   .tier .facts { border-top: 1px solid #eee8da; padding-top: 8px; }
-  .tier .facts div { font-size: 9.6px; color: #3d4a60; line-height: 1.7; }
-  .tier .facts b { color: #00377d; }
+  .tier .facts div { font-size: 9.6px; color: #44423a; line-height: 1.7; }
+  .tier .facts b { color: #141414; }
   .prepay {
-    background: #00377d; color: #ffffff; border-radius: 8px;
+    background: #141414; color: #ffffff; border-radius: 8px;
     padding: 16px 22px 14px; margin-bottom: 14px;
   }
-  .prepay .t { font-size: 10px; letter-spacing: 0.26em; font-weight: 700; color: #c9a127; margin-bottom: 6px; }
+  .prepay .t { font-size: 10px; letter-spacing: 0.26em; font-weight: 700; color: #F5B914; margin-bottom: 6px; }
   .prepay .h { font-family: "Playfair Display", Georgia, serif; font-size: 19px; font-weight: 700; margin-bottom: 8px; }
-  .prepay p { font-size: 10.4px; line-height: 1.55; color: #dce4f2; margin-bottom: 8px; }
+  .prepay p { font-size: 10.4px; line-height: 1.55; color: #cfcabe; margin-bottom: 8px; }
   .prepay p b { color: #ffffff; }
   .prepay .row { display: flex; gap: 10px; }
   .prepay .cell {
-    flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(199,211,232,0.35);
+    flex: 1; background: rgba(255,255,255,0.07); border: 1px solid rgba(245,185,20,0.4);
     border-radius: 6px; padding: 9px 10px; text-align: center;
   }
-  .prepay .cell .n { font-family: "Playfair Display", Georgia, serif; font-size: 16px; font-weight: 700; color: #c9a127; }
-  .prepay .cell .l { font-size: 7.6px; letter-spacing: 0.14em; color: #c7d3e8; font-weight: 600; margin-top: 3px; }
+  .prepay .cell .n { font-family: "Playfair Display", Georgia, serif; font-size: 16px; font-weight: 700; color: #F5B914; }
+  .prepay .cell .l { font-size: 7.6px; letter-spacing: 0.14em; color: #d8d3c6; font-weight: 600; margin-top: 3px; }
   .includes { display: flex; gap: 12px; margin-bottom: 14px; }
   .includes .box { flex: 1.4; background: #ffffff; border: 1px solid #e4dfd3; border-radius: 8px; padding: 13px 16px; }
-  .includes .t { font-size: 9.5px; letter-spacing: 0.2em; font-weight: 700; color: #00377d; margin-bottom: 6px; }
+  .includes .t { font-size: 9.5px; letter-spacing: 0.2em; font-weight: 700; color: #141414; margin-bottom: 6px; }
   .includes ul { list-style: none; columns: 2; column-gap: 22px; }
-  .includes li { font-size: 9.8px; line-height: 1.5; color: #3d4a60; padding-left: 13px; position: relative; margin-bottom: 4px; break-inside: avoid; }
-  .includes li::before { content: "—"; position: absolute; left: 0; color: #c9a127; font-weight: 600; }
-  .contact { flex: 1; background: #fff6de; border: 1px solid #c9a127; border-radius: 8px; padding: 13px 16px; }
-  .contact .t { font-size: 9.5px; letter-spacing: 0.2em; font-weight: 700; color: #c9a127; margin-bottom: 6px; }
-  .contact .name { font-family: "Playfair Display", Georgia, serif; font-size: 15px; font-weight: 700; color: #00377d; }
-  .contact .role { font-size: 8.4px; letter-spacing: 0.18em; color: #5a6478; font-weight: 600; margin: 2px 0 6px; }
-  .contact .line { font-size: 10.4px; color: #3d4a60; line-height: 1.6; }
+  .includes li { font-size: 9.8px; line-height: 1.5; color: #44423a; padding-left: 13px; position: relative; margin-bottom: 4px; break-inside: avoid; }
+  .includes li::before { content: "—"; position: absolute; left: 0; color: #b8890f; font-weight: 600; }
+  .contact { flex: 1; background: #fdf3d3; border: 1px solid #F5B914; border-radius: 8px; padding: 13px 16px; }
+  .contact .t { font-size: 9.5px; letter-spacing: 0.2em; font-weight: 700; color: #b8890f; margin-bottom: 6px; }
+  .contact .name { font-family: "Playfair Display", Georgia, serif; font-size: 15px; font-weight: 700; color: #141414; }
+  .contact .role { font-size: 8.4px; letter-spacing: 0.18em; color: #5d5a50; font-weight: 600; margin: 2px 0 6px; }
+  .contact .line { font-size: 10.4px; color: #44423a; line-height: 1.6; }
   .nextsteps { background: #ffffff; border: 1px solid #e4dfd3; border-radius: 8px; padding: 12px 18px; }
-  .nextsteps .t { font-size: 9.5px; letter-spacing: 0.2em; font-weight: 700; color: #00377d; margin-bottom: 5px; }
+  .nextsteps .t { font-size: 9.5px; letter-spacing: 0.2em; font-weight: 700; color: #141414; margin-bottom: 5px; }
   .nextsteps ol { margin-left: 16px; }
-  .nextsteps li { font-size: 10.2px; line-height: 1.6; color: #3d4a60; }
-  .nextsteps li b { color: #00377d; }
+  .nextsteps li { font-size: 10.2px; line-height: 1.6; color: #44423a; }
+  .nextsteps li b { color: #141414; }
 </style>
 </head>
 <body>
@@ -185,9 +195,13 @@
   </div>
   <div class="goldrule"></div>
   <div class="body">
-    <div class="prepared">
-      <div>PREPARED FOR <b>STARKVILLE SCHOOL DISTRICT</b> · ATTN: ROYANN BELL</div>
-      <div>AUGUST 24, 2026 · PREPARED BY <b>SWAYZE HOLLINGSWORTH</b></div>
+    <div class="cobrand">
+      <img class="ssdlogo" src="ssd_lockup.svg" alt="Starkville Oktibbeha School District">
+      <div class="pinfo">
+        <div>PREPARED FOR <b>STARKVILLE OKTIBBEHA SCHOOL DISTRICT</b></div>
+        <div>ATTN: ROYANN BELL</div>
+        <div>AUGUST 24, 2026 · PREPARED BY <b>SWAYZE HOLLINGSWORTH</b></div>
+      </div>
     </div>
 
     <div class="kicker">A PARTNERSHIP PROPOSAL</div>
@@ -200,7 +214,7 @@
     </p>
 
     <div class="offer">
-      <div class="label">SEPTEMBER WELCOME OFFER · STARKVILLE SCHOOL DISTRICT ONLY</div>
+      <div class="label">SEPTEMBER WELCOME OFFER · STARKVILLE OKTIBBEHA SCHOOL DISTRICT</div>
       <div class="headline">
         <span class="big">10 screens · all of September ·</span>
         <span class="price">$200</span>
@@ -271,30 +285,30 @@
         <!-- rows: y step 34, bar h 14, label col 150, scale: $65 -> 520px -->
         <g font-family="Work Sans, Arial, sans-serif" font-size="11.5">
           <!-- Magazine -->
-          <text x="142" y="24" text-anchor="end" fill="#5a6478">Magazine</text>
-          <rect x="150" y="14" width="520" height="14" rx="4" fill="#c7d3e8"/>
-          <text x="662" y="25" text-anchor="end" fill="#3d4a60" font-weight="600" font-size="10.5">$65</text>
+          <text x="142" y="24" text-anchor="end" fill="#5d5a50">Magazine</text>
+          <rect x="150" y="14" width="520" height="14" rx="4" fill="#eed99b"/>
+          <text x="662" y="25" text-anchor="end" fill="#44423a" font-weight="600" font-size="10.5">$65</text>
           <!-- Television -->
-          <text x="142" y="58" text-anchor="end" fill="#5a6478">Television</text>
-          <rect x="150" y="48" width="280" height="14" rx="4" fill="#c7d3e8"/>
-          <text x="438" y="59" fill="#3d4a60" font-weight="600" font-size="10.5">$35</text>
+          <text x="142" y="58" text-anchor="end" fill="#5d5a50">Television</text>
+          <rect x="150" y="48" width="280" height="14" rx="4" fill="#eed99b"/>
+          <text x="438" y="59" fill="#44423a" font-weight="600" font-size="10.5">$35</text>
           <!-- Radio -->
-          <text x="142" y="92" text-anchor="end" fill="#5a6478">Radio</text>
-          <rect x="150" y="82" width="216" height="14" rx="4" fill="#c7d3e8"/>
-          <text x="374" y="93" fill="#3d4a60" font-weight="600" font-size="10.5">$27</text>
+          <text x="142" y="92" text-anchor="end" fill="#5d5a50">Radio</text>
+          <rect x="150" y="82" width="216" height="14" rx="4" fill="#eed99b"/>
+          <text x="374" y="93" fill="#44423a" font-weight="600" font-size="10.5">$27</text>
           <!-- Social -->
-          <text x="142" y="126" text-anchor="end" fill="#5a6478">Social media</text>
-          <rect x="150" y="116" width="156" height="14" rx="4" fill="#c7d3e8"/>
-          <text x="314" y="127" fill="#3d4a60" font-weight="600" font-size="10.5">$19.51</text>
+          <text x="142" y="126" text-anchor="end" fill="#5d5a50">Social media</text>
+          <rect x="150" y="116" width="156" height="14" rx="4" fill="#eed99b"/>
+          <text x="314" y="127" fill="#44423a" font-weight="600" font-size="10.5">$19.51</text>
           <!-- Billboards -->
-          <text x="142" y="160" text-anchor="end" fill="#00377d" font-weight="600">Outdoor billboards</text>
-          <rect x="150" y="150" width="48" height="14" rx="4" fill="#8fa6cd"/>
-          <text x="206" y="161" fill="#00377d" font-weight="700" font-size="10.5">$6</text>
+          <text x="142" y="160" text-anchor="end" fill="#141414" font-weight="600">Outdoor billboards</text>
+          <rect x="150" y="150" width="48" height="14" rx="4" fill="#d9b856"/>
+          <text x="206" y="161" fill="#141414" font-weight="700" font-size="10.5">$6</text>
           <!-- MCTV -->
-          <text x="142" y="196" text-anchor="end" fill="#00377d" font-weight="700">MCTV indoor network</text>
-          <rect x="150" y="185" width="21" height="16" rx="4" fill="#00377d"/>
-          <text x="179" y="198" fill="#00377d" font-weight="700" font-size="11.5">$2.63</text>
-          <text x="222" y="198" fill="#c9a127" font-weight="700" font-size="10">◂ LESS THAN HALF THE COST OF A BILLBOARD</text>
+          <text x="142" y="196" text-anchor="end" fill="#141414" font-weight="700">MCTV indoor network</text>
+          <rect x="150" y="185" width="21" height="16" rx="4" fill="#141414"/>
+          <text x="179" y="198" fill="#141414" font-weight="700" font-size="11.5">$2.63</text>
+          <text x="222" y="198" fill="#b8890f" font-weight="700" font-size="10">◂ LESS THAN HALF THE COST OF A BILLBOARD</text>
         </g>
       </svg>
       <div class="chartnote">*CPM = cost per 1,000 impressions. MCTV figure is the network blended average — campaigns run as low as $1.64 CPM at scale. Comparison figures are typical U.S. local CPM ranges by channel (industry estimates). Impressions modelled from venue traffic and dwell.</div>
@@ -360,7 +374,7 @@
     <div class="tiers">
       <div class="tier">
         <div class="screens">10 SCREENS</div>
-        <div class="price">$350<span style="font-size:12px;color:#7a8296;">/mo</span></div>
+        <div class="price">$350<span style="font-size:12px;color:#807c6f;">/mo</span></div>
         <div class="per">$35 per screen</div>
         <div class="facts">
           <div><b>15K+</b> plays / month</div>
@@ -371,7 +385,7 @@
       <div class="tier rec">
         <div class="badge">RECOMMENDED FOR THE DISTRICT</div>
         <div class="screens">20 SCREENS</div>
-        <div class="price">$500<span style="font-size:12px;color:#7a8296;">/mo</span></div>
+        <div class="price">$500<span style="font-size:12px;color:#807c6f;">/mo</span></div>
         <div class="per">$25 per screen · save 29% per screen</div>
         <div class="facts">
           <div><b>30K+</b> plays / month</div>
@@ -381,7 +395,7 @@
       </div>
       <div class="tier">
         <div class="screens">40 SCREENS</div>
-        <div class="price">$800<span style="font-size:12px;color:#7a8296;">/mo</span></div>
+        <div class="price">$800<span style="font-size:12px;color:#807c6f;">/mo</span></div>
         <div class="per">$20 per screen · best rate shown</div>
         <div class="facts">
           <div><b>60K+</b> plays / month</div>

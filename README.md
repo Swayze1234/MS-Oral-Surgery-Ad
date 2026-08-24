@@ -8,9 +8,11 @@ offer on 10 screens (reg. $350/mo), the CPM case vs. outdoor billboards
 ($2.63 vs $6), and an October tiered menu (10/$350 · **20/$500 recommended** ·
 40/$800) with a 12-month prepay pitch (months 13–14 free).
 
-Source: `proposal/starkville_school_proposal.html` (brand: Playfair Display +
-Work Sans, navy `#00377d` / gold `#c9a127` / cream `#f9f6ef`, matching the
-media kit). Rebuild with:
+Source: `proposal/starkville_school_proposal.html`. Co-branded in Starkville
+Oktibbeha School District colors — black `#141414` / gold `#F5B914` / cream
+`#f9f6ef` — with a vector recreation of the district's confetti lockup
+(`proposal/ssd_lockup.svg`; swap in the official logo file if provided).
+Typefaces: Playfair Display + Work Sans. Rebuild with:
 
 ```bash
 chromium --headless --no-pdf-header-footer \
