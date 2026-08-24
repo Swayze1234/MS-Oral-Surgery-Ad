@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MCTV Proposal — Starkville School District</title>
+<style>
+  @page { size: letter; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #ffffff; }
+  body {
+    font-family: "Work Sans", Arial, sans-serif;
+    color: #1b2434;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page {
+    width: 8.5in; height: 11in;
+    page-break-after: always;
+    position: relative;
+    background: #f9f6ef;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* ---------- shared chrome ---------- */
+  .masthead {
+    background: #00377d; color: #ffffff;
+    padding: 0.32in 0.6in 0.30in;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .masthead .brand { font-weight: 700; font-size: 13px; letter-spacing: 0.26em; white-space: nowrap; }
+  .masthead .brand span { color: #c9a127; }
+  .masthead .tag { font-size: 7.5px; letter-spacing: 0.14em; color: #c7d3e8; font-weight: 500; white-space: nowrap; }
+  .goldrule { height: 3px; background: #c9a127; }
+  .footer {
+    margin-top: auto;
+    padding: 0.16in 0.6in;
+    background: #00377d; color: #c7d3e8;
+    font-size: 8px; letter-spacing: 0.2em; font-weight: 500;
+    display: flex; justify-content: space-between;
+  }
+  .body { padding: 0.34in 0.6in 0.25in; flex: 1 1 auto; display: flex; flex-direction: column; }
+  .kicker { font-size: 10px; letter-spacing: 0.3em; font-weight: 600; color: #c9a127; margin-bottom: 8px; }
+  h1 { font-family: "Playfair Display", Georgia, serif; font-weight: 700; color: #00377d; }
+  .lede { color: #3d4a60; }
+
+  /* ---------- page 1 ---------- */
+  .prepared {
+    display: flex; justify-content: space-between;
+    border-bottom: 1px solid #d9d2c2; padding-bottom: 10px; margin-bottom: 22px;
+    font-size: 8.6px; letter-spacing: 0.1em; color: #5a6478; font-weight: 500;
+  }
+  .prepared div { white-space: nowrap; }
+  .prepared b { color: #00377d; letter-spacing: 0.1em; }
+  .p1 h1 { font-size: 40px; line-height: 1.12; margin-bottom: 12px; }
+  .p1 .lede { font-size: 12.5px; line-height: 1.55; max-width: 6.4in; margin-bottom: 20px; }
+  .offer {
+    background: #ffffff; border: 2px solid #c9a127; border-radius: 8px;
+    padding: 20px 24px 18px; margin-bottom: 16px;
+  }
+  .offer .label { font-size: 10px; letter-spacing: 0.3em; font-weight: 700; color: #c9a127; margin-bottom: 8px; }
+  .offer .headline { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; }
+  .offer .headline .big { font-family: "Playfair Display", Georgia, serif; font-size: 30px; font-weight: 700; color: #00377d; }
+  .offer .headline .price { font-family: "Playfair Display", Georgia, serif; font-size: 30px; font-weight: 700; color: #c9a127; }
+  .offer .strike { font-size: 11.5px; color: #5a6478; margin-bottom: 12px; }
+  .offer .strike s { color: #8a93a5; }
+  .offer ul { list-style: none; columns: 2; column-gap: 28px; }
+  .offer li { font-size: 10.8px; line-height: 1.5; color: #3d4a60; padding-left: 15px; position: relative; margin-bottom: 6px; break-inside: avoid; }
+  .offer li::before { content: "—"; position: absolute; left: 0; color: #c9a127; font-weight: 600; }
+  .offer .fineprint { margin-top: 10px; font-size: 9px; color: #7a8296; }
+  .statband { display: flex; gap: 10px; margin-bottom: 16px; }
+  .stat {
+    flex: 1; background: #00377d; color: #fff; border-radius: 6px;
+    padding: 12px 10px 10px; text-align: center;
+  }
+  .stat .n { font-family: "Playfair Display", Georgia, serif; font-size: 21px; font-weight: 700; color: #ffffff; }
+  .stat .n em { font-style: normal; color: #c9a127; }
+  .stat .l { font-size: 7.5px; letter-spacing: 0.18em; color: #c7d3e8; font-weight: 600; margin-top: 4px; }
+  .outlaw {
+    background: #fff6de; border-left: 4px solid #c9a127; border-radius: 0 6px 6px 0;
+    padding: 14px 18px;
+  }
+  .outlaw .t { font-size: 10px; letter-spacing: 0.24em; font-weight: 700; color: #00377d; margin-bottom: 5px; }
+  .outlaw p { font-size: 10.8px; line-height: 1.55; color: #3d4a60; }
+  .netband {
+    margin-top: auto;
+    border-top: 1px solid #d9d2c2; padding-top: 12px;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .netband .cell { text-align: center; }
+  .netband .n { font-family: "Playfair Display", Georgia, serif; font-size: 17px; font-weight: 700; color: #00377d; }
+  .netband .l { font-size: 7px; letter-spacing: 0.16em; color: #7a8296; font-weight: 600; margin-top: 2px; }
+
+  /* ---------- page 2 ---------- */
+  .p2 h1 { font-size: 30px; margin-bottom: 8px; }
+  .p2 .lede { font-size: 11.5px; line-height: 1.55; max-width: 6.6in; margin-bottom: 16px; }
+  .chartcard { background: #ffffff; border: 1px solid #e4dfd3; border-radius: 8px; padding: 16px 20px 12px; margin-bottom: 14px; }
+  .chartcard .ct { font-size: 10px; letter-spacing: 0.24em; font-weight: 700; color: #00377d; margin-bottom: 2px; }
+  .chartcard .cs { font-size: 9px; color: #7a8296; margin-bottom: 8px; }
+  .chartnote { font-size: 8px; color: #8a93a5; margin-top: 6px; }
+  .mathband {
+    background: #00377d; border-radius: 8px; color: #ffffff;
+    padding: 14px 20px; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 18px;
+  }
+  .mathband .cell { flex: 1; text-align: center; }
+  .mathband .n { font-family: "Playfair Display", Georgia, serif; font-size: 22px; font-weight: 700; }
+  .mathband .gold { color: #c9a127; }
+  .mathband .l { font-size: 8px; letter-spacing: 0.16em; color: #c7d3e8; font-weight: 600; margin-top: 3px; }
+  .mathband .vs { font-family: "Playfair Display", Georgia, serif; font-size: 15px; color: #c7d3e8; flex: 0 0 auto; }
+  .threecol { display: flex; gap: 12px; }
+  .col { flex: 1; background: #ffffff; border: 1px solid #e4dfd3; border-radius: 8px; padding: 14px 16px; }
+  .col .t { font-size: 9.5px; letter-spacing: 0.2em; font-weight: 700; color: #c9a127; margin-bottom: 6px; }
+  .col p { font-size: 10.2px; line-height: 1.55; color: #3d4a60; }
+  .col p b { color: #00377d; }
+  .venues {
+    margin-top: auto;
+    background: #fff6de; border-left: 4px solid #c9a127; border-radius: 0 6px 6px 0;
+    padding: 12px 18px;
+  }
+  .venues .t { font-size: 9px; letter-spacing: 0.2em; font-weight: 700; color: #00377d; margin-bottom: 5px; }
+  .venues p { font-size: 9.6px; line-height: 1.7; color: #3d4a60; }
+
+  /* ---------- page 3 ---------- */
+  .p3 h1 { font-size: 30px; margin-bottom: 8px; }
+  .p3 .lede { font-size: 11.5px; line-height: 1.55; max-width: 6.6in; margin-bottom: 16px; }
+  .tiers { display: flex; gap: 12px; align-items: stretch; margin-bottom: 14px; }
+  .tier {
+    flex: 1; background: #ffffff; border: 1px solid #e4dfd3; border-radius: 8px;
+    padding: 16px 16px 14px; text-align: center; position: relative;
+  }
+  .tier.rec { border: 2px solid #c9a127; background: #fffdf6; }
+  .tier .badge {
+    position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
+    background: #c9a127; color: #ffffff; font-size: 7.5px; font-weight: 700;
+    letter-spacing: 0.2em; padding: 3px 10px; border-radius: 9px; white-space: nowrap;
+  }
+  .tier .screens { font-size: 10px; letter-spacing: 0.22em; font-weight: 700; color: #00377d; margin-bottom: 6px; }
+  .tier .price { font-family: "Playfair Display", Georgia, serif; font-size: 27px; font-weight: 700; color: #00377d; }
+  .tier.rec .price { color: #c9a127; }
+  .tier .per { font-size: 9px; color: #7a8296; margin: 3px 0 10px; }
+  .tier .facts { border-top: 1px solid #eee8da; padding-top: 8px; }
+  .tier .facts div { font-size: 9.6px; color: #3d4a60; line-height: 1.7; }
+  .tier .facts b { color: #00377d; }
+  .prepay {
+    background: #00377d; color: #ffffff; border-radius: 8px;
+    padding: 16px 22px 14px; margin-bottom: 14px;
+  }
+  .prepay .t { font-size: 10px; letter-spacing: 0.26em; font-weight: 700; color: #c9a127; margin-bottom: 6px; }
+  .prepay .h { font-family: "Playfair Display", Georgia, serif; font-size: 19px; font-weight: 700; margin-bottom: 8px; }
+  .prepay p { font-size: 10.4px; line-height: 1.55; color: #dce4f2; margin-bottom: 8px; }
+  .prepay p b { color: #ffffff; }
+  .prepay .row { display: flex; gap: 10px; }
+  .prepay .cell {
+    flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(199,211,232,0.35);
+    border-radius: 6px; padding: 9px 10px; text-align: center;
+  }
+  .prepay .cell .n { font-family: "Playfair Display", Georgia, serif; font-size: 16px; font-weight: 700; color: #c9a127; }
+  .prepay .cell .l { font-size: 7.6px; letter-spacing: 0.14em; color: #c7d3e8; font-weight: 600; margin-top: 3px; }
+  .includes { display: flex; gap: 12px; margin-bottom: 14px; }
+  .includes .box { flex: 1.4; background: #ffffff; border: 1px solid #e4dfd3; border-radius: 8px; padding: 13px 16px; }
+  .includes .t { font-size: 9.5px; letter-spacing: 0.2em; font-weight: 700; color: #00377d; margin-bottom: 6px; }
+  .includes ul { list-style: none; columns: 2; column-gap: 22px; }
+  .includes li { font-size: 9.8px; line-height: 1.5; color: #3d4a60; padding-left: 13px; position: relative; margin-bottom: 4px; break-inside: avoid; }
+  .includes li::before { content: "—"; position: absolute; left: 0; color: #c9a127; font-weight: 600; }
+  .contact { flex: 1; background: #fff6de; border: 1px solid #c9a127; border-radius: 8px; padding: 13px 16px; }
+  .contact .t { font-size: 9.5px; letter-spacing: 0.2em; font-weight: 700; color: #c9a127; margin-bottom: 6px; }
+  .contact .name { font-family: "Playfair Display", Georgia, serif; font-size: 15px; font-weight: 700; color: #00377d; }
+  .contact .role { font-size: 8.4px; letter-spacing: 0.18em; color: #5a6478; font-weight: 600; margin: 2px 0 6px; }
+  .contact .line { font-size: 10.4px; color: #3d4a60; line-height: 1.6; }
+  .nextsteps { background: #ffffff; border: 1px solid #e4dfd3; border-radius: 8px; padding: 12px 18px; }
+  .nextsteps .t { font-size: 9.5px; letter-spacing: 0.2em; font-weight: 700; color: #00377d; margin-bottom: 5px; }
+  .nextsteps ol { margin-left: 16px; }
+  .nextsteps li { font-size: 10.2px; line-height: 1.6; color: #3d4a60; }
+  .nextsteps li b { color: #00377d; }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page p1">
+  <div class="masthead">
+    <div class="brand">M C T V &nbsp;<span>·</span>&nbsp; E L I T E&nbsp; A D V E R T I S I N G</div>
+    <div class="tag">THE INDOOR BILLBOARD COMPANY · NORTH MISSISSIPPI</div>
+  </div>
+  <div class="goldrule"></div>
+  <div class="body">
+    <div class="prepared">
+      <div>PREPARED FOR <b>STARKVILLE SCHOOL DISTRICT</b> · ATTN: ROYANN BELL</div>
+      <div>AUGUST 24, 2026 · PREPARED BY <b>SWAYZE HOLLINGSWORTH</b></div>
+    </div>
+
+    <div class="kicker">A PARTNERSHIP PROPOSAL</div>
+    <h1>Put Starkville schools on the screens Starkville watches.</h1>
+    <p class="lede">
+      MCTV runs the Golden Triangle's indoor billboard network — high-definition screens inside
+      29+ Starkville, Columbus &amp; West Point venues where local families already spend their
+      time, including the <b>Travis Outlaw Center at Starkville Parks &amp; Recreation</b>.
+      We'd like to start this partnership with a gift.
+    </p>
+
+    <div class="offer">
+      <div class="label">SEPTEMBER WELCOME OFFER · STARKVILLE SCHOOL DISTRICT ONLY</div>
+      <div class="headline">
+        <span class="big">10 screens · all of September ·</span>
+        <span class="price">$200</span>
+      </div>
+      <div class="strike">Regular 10-screen rate: <s>$350/month</s> — MCTV is covering the difference as a welcome to the district.</div>
+      <ul>
+        <li>A custom 15–30 second HD ad, designed and produced by our in-house team — free</li>
+        <li>10 Golden Triangle screens, anchored on Starkville venues incl. Parks &amp; Recreation</li>
+        <li>Your spot on a 15-minute loop — 1,500+ plays per screen, unskippable</li>
+        <li>Proof-of-play reporting at month's end, so you see exactly what ran</li>
+        <li>You own the ad we build — keep it and use it anywhere, forever</li>
+        <li>No contract beyond September — decide about October after you've seen it work</li>
+      </ul>
+      <div class="fineprint">One-month courtesy rate for September 2026. Fits the district's remaining budget to the dollar.</div>
+    </div>
+
+    <div class="statband">
+      <div class="stat"><div class="n">10</div><div class="l">STARKVILLE-AREA SCREENS</div></div>
+      <div class="stat"><div class="n">15,000+</div><div class="l">AD PLAYS IN SEPTEMBER</div></div>
+      <div class="stat"><div class="n">~150K</div><div class="l">EST. IMPRESSIONS*</div></div>
+      <div class="stat"><div class="n"><em>$1.33</em></div><div class="l">EFFECTIVE CPM AT $200</div></div>
+    </div>
+
+    <div class="outlaw">
+      <div class="t">WHY THIS FOOTPRINT FITS THE DISTRICT</div>
+      <p>
+        Your audience is Starkville families — and they're already standing in front of these screens.
+        The <b>Travis Outlaw Center (Starkville Parks &amp; Recreation)</b> puts the district's message in front of
+        parents at practices, games, and community events, alongside screens in the restaurants, clinics, and
+        local spots those same families visit every week. Enrollment news, event dates, school pride — seen
+        where the community actually gathers.
+      </p>
+    </div>
+
+    <div class="netband">
+      <div class="cell"><div class="n">125+</div><div class="l">DIGITAL SCREENS</div></div>
+      <div class="cell"><div class="n">100+</div><div class="l">PREMIER VENUES</div></div>
+      <div class="cell"><div class="n">1.9M+</div><div class="l">IMPRESSIONS / MO</div></div>
+      <div class="cell"><div class="n">55+ min</div><div class="l">AVG DWELL TIME</div></div>
+      <div class="cell"><div class="n">3</div><div class="l">GROWTH MARKETS</div></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div>MCTV DIGITAL, INC · THE INDOOR BILLBOARD COMPANY</div>
+    <div>WWW.MCTVOFMS.COM · PAGE 01</div>
+  </div>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page p2">
+  <div class="masthead">
+    <div class="brand">M C T V &nbsp;<span>·</span>&nbsp; E L I T E&nbsp; A D V E R T I S I N G</div>
+    <div class="tag">THE INDOOR BILLBOARD COMPANY · NORTH MISSISSIPPI</div>
+  </div>
+  <div class="goldrule"></div>
+  <div class="body">
+    <div class="kicker">THE VALUE, IN NUMBERS</div>
+    <h1>More Starkville for every dollar.</h1>
+    <p class="lede">
+      You've bought outdoor billboards before. Dollar for dollar, MCTV's indoor network delivers the
+      same audience for a fraction of the cost — with proof that the message actually ran.
+    </p>
+
+    <div class="chartcard">
+      <div class="ct">COST PER 1,000 IMPRESSIONS · LOCAL CHANNELS</div>
+      <div class="cs">Typical U.S. local CPM by channel vs. the MCTV network blended average</div>
+      <svg viewBox="0 0 700 218" width="100%" role="img" aria-label="Bar chart: cost per thousand impressions by channel. Magazine $65, Television $35, Radio $27, Social media $19.51, Outdoor billboards $6, MCTV indoor network $2.63.">
+        <!-- rows: y step 34, bar h 14, label col 150, scale: $65 -> 520px -->
+        <g font-family="Work Sans, Arial, sans-serif" font-size="11.5">
+          <!-- Magazine -->
+          <text x="142" y="24" text-anchor="end" fill="#5a6478">Magazine</text>
+          <rect x="150" y="14" width="520" height="14" rx="4" fill="#c7d3e8"/>
+          <text x="662" y="25" text-anchor="end" fill="#3d4a60" font-weight="600" font-size="10.5">$65</text>
+          <!-- Television -->
+          <text x="142" y="58" text-anchor="end" fill="#5a6478">Television</text>
+          <rect x="150" y="48" width="280" height="14" rx="4" fill="#c7d3e8"/>
+          <text x="438" y="59" fill="#3d4a60" font-weight="600" font-size="10.5">$35</text>
+          <!-- Radio -->
+          <text x="142" y="92" text-anchor="end" fill="#5a6478">Radio</text>
+          <rect x="150" y="82" width="216" height="14" rx="4" fill="#c7d3e8"/>
+          <text x="374" y="93" fill="#3d4a60" font-weight="600" font-size="10.5">$27</text>
+          <!-- Social -->
+          <text x="142" y="126" text-anchor="end" fill="#5a6478">Social media</text>
+          <rect x="150" y="116" width="156" height="14" rx="4" fill="#c7d3e8"/>
+          <text x="314" y="127" fill="#3d4a60" font-weight="600" font-size="10.5">$19.51</text>
+          <!-- Billboards -->
+          <text x="142" y="160" text-anchor="end" fill="#00377d" font-weight="600">Outdoor billboards</text>
+          <rect x="150" y="150" width="48" height="14" rx="4" fill="#8fa6cd"/>
+          <text x="206" y="161" fill="#00377d" font-weight="700" font-size="10.5">$6</text>
+          <!-- MCTV -->
+          <text x="142" y="196" text-anchor="end" fill="#00377d" font-weight="700">MCTV indoor network</text>
+          <rect x="150" y="185" width="21" height="16" rx="4" fill="#00377d"/>
+          <text x="179" y="198" fill="#00377d" font-weight="700" font-size="11.5">$2.63</text>
+          <text x="222" y="198" fill="#c9a127" font-weight="700" font-size="10">◂ LESS THAN HALF THE COST OF A BILLBOARD</text>
+        </g>
+      </svg>
+      <div class="chartnote">*CPM = cost per 1,000 impressions. MCTV figure is the network blended average — campaigns run as low as $1.64 CPM at scale. Comparison figures are typical U.S. local CPM ranges by channel (industry estimates). Impressions modelled from venue traffic and dwell.</div>
+    </div>
+
+    <div class="mathband">
+      <div class="cell"><div class="n">$200</div><div class="l">SAME BUDGET</div></div>
+      <div class="vs">→</div>
+      <div class="cell"><div class="n">≈ 33,000</div><div class="l">IMPRESSIONS ON A BILLBOARD</div></div>
+      <div class="vs">vs</div>
+      <div class="cell"><div class="n gold">≈ 150,000</div><div class="l">EST. IMPRESSIONS ON MCTV</div></div>
+    </div>
+
+    <div class="threecol">
+      <div class="col">
+        <div class="t">A CAPTIVE AUDIENCE</div>
+        <p>A car passes a billboard in seconds. Our venues hold people for <b>55+ minutes on average</b> —
+        long enough to see your message again and again. Unskippable, unblockable, impossible to scroll past.</p>
+      </div>
+      <div class="col">
+        <div class="t">COMMUNITY, NOT TRAFFIC</div>
+        <p>MCTV is <b>Starkville's own network</b> — screens inside Parks &amp; Recreation, local restaurants,
+        clinics, and shops. The district's message runs beside the businesses families already trust, not on a highway.</p>
+      </div>
+      <div class="col">
+        <div class="t">PROOF, NOT PROMISES</div>
+        <p>A billboard can't tell you who saw it. Every MCTV campaign gets an <b>Ad Traction Report</b> —
+        plays, screen time, dwell, and venue-by-venue results. You'll see where every dollar went.</p>
+      </div>
+    </div>
+
+    <div class="venues">
+      <div class="t">A FEW OF THE STARKVILLE-AREA VENUES WHERE FAMILIES WILL SEE YOU</div>
+      <p>
+        Starkville Parks &amp; Recreation — Travis Outlaw Center &nbsp;·&nbsp; The Breakfast Club &nbsp;·&nbsp;
+        Umi Japanese Steakhouse &nbsp;·&nbsp; Arepas Coffee &amp; Bar &nbsp;·&nbsp; Two Brothers Smoked Meats &nbsp;·&nbsp;
+        Skate Odyssey &nbsp;·&nbsp; Skate Zone &nbsp;·&nbsp; Elm Lake Golf Course &nbsp;·&nbsp;
+        Starkville Veterinary Hospital &nbsp;·&nbsp; Legends Hair Salon &nbsp;·&nbsp; and more across the Golden Triangle
+      </p>
+    </div>
+  </div>
+  <div class="footer">
+    <div>MCTV DIGITAL, INC · THE INDOOR BILLBOARD COMPANY</div>
+    <div>WWW.MCTVOFMS.COM · PAGE 02</div>
+  </div>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page p3">
+  <div class="masthead">
+    <div class="brand">M C T V &nbsp;<span>·</span>&nbsp; E L I T E&nbsp; A D V E R T I S I N G</div>
+    <div class="tag">THE INDOOR BILLBOARD COMPANY · NORTH MISSISSIPPI</div>
+  </div>
+  <div class="goldrule"></div>
+  <div class="body">
+    <div class="kicker">OCTOBER &amp; BEYOND</div>
+    <h1>When the new budget lands, here's the plan.</h1>
+    <p class="lede">
+      September proves the platform. In October, choose the footprint that fits the district's new budget —
+      every step up cuts the per-screen rate.
+    </p>
+
+    <div class="tiers">
+      <div class="tier">
+        <div class="screens">10 SCREENS</div>
+        <div class="price">$350<span style="font-size:12px;color:#7a8296;">/mo</span></div>
+        <div class="per">$35 per screen</div>
+        <div class="facts">
+          <div><b>15K+</b> plays / month</div>
+          <div><b>~150K</b> est. impressions / mo</div>
+          <div>Keep the September footprint</div>
+        </div>
+      </div>
+      <div class="tier rec">
+        <div class="badge">RECOMMENDED FOR THE DISTRICT</div>
+        <div class="screens">20 SCREENS</div>
+        <div class="price">$500<span style="font-size:12px;color:#7a8296;">/mo</span></div>
+        <div class="per">$25 per screen · save 29% per screen</div>
+        <div class="facts">
+          <div><b>30K+</b> plays / month</div>
+          <div><b>~300K</b> est. impressions / mo</div>
+          <div>Double the reach for $150 more</div>
+        </div>
+      </div>
+      <div class="tier">
+        <div class="screens">40 SCREENS</div>
+        <div class="price">$800<span style="font-size:12px;color:#7a8296;">/mo</span></div>
+        <div class="per">$20 per screen · best rate shown</div>
+        <div class="facts">
+          <div><b>60K+</b> plays / month</div>
+          <div><b>~600K</b> est. impressions / mo</div>
+          <div>Golden Triangle saturation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prepay">
+      <div class="t">FOR AN ANNUAL BUDGET</div>
+      <div class="h">Prepay 12 months — get months 13 and 14 free.</div>
+      <p>
+        One purchase order in October covers the <b>entire school year, the summer, and beyond</b> —
+        14 months on screen for the price of 12, with a fresh ad build every quarter included.
+        On the recommended 20-screen package:
+      </p>
+      <div class="row">
+        <div class="cell"><div class="n">$6,000</div><div class="l">ONE ANNUAL PO (12 × $500)</div></div>
+        <div class="cell"><div class="n">14 months</div><div class="l">ON SCREEN · OCT 2026 – NOV 2027</div></div>
+        <div class="cell"><div class="n">$429/mo</div><div class="l">EFFECTIVE RATE — 14% OFF</div></div>
+        <div class="cell"><div class="n">420K+</div><div class="l">TOTAL AD PLAYS</div></div>
+      </div>
+    </div>
+
+    <div class="includes">
+      <div class="box">
+        <div class="t">EVERY MCTV CAMPAIGN INCLUDES</div>
+        <ul>
+          <li>Custom 15–30 sec ad production</li>
+          <li>Fresh ad build every quarter</li>
+          <li>Unlimited rotation on your screens</li>
+          <li>Proof-of-play reporting</li>
+          <li>Quarterly Ad Traction Report</li>
+          <li>You own your ad forever</li>
+        </ul>
+      </div>
+      <div class="contact">
+        <div class="t">YOUR MCTV CONTACT</div>
+        <div class="name">Swayze Hollingsworth</div>
+        <div class="role">DIRECTOR OF SALES · MCTV DIGITAL, INC</div>
+        <div class="line">swayze@mctvofms.com<br>662-907-0404</div>
+      </div>
+    </div>
+
+    <div class="nextsteps">
+      <div class="t">NEXT STEPS</div>
+      <ol>
+        <li><b>Today:</b> say yes to September — $200, and our team starts your custom ad immediately.</li>
+        <li><b>This week:</b> approve the creative; your message goes live across 10 Starkville-area screens.</li>
+        <li><b>Early October:</b> review your September proof-of-play results and lock in the annual plan.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="footer">
+    <div>MCTV DIGITAL, INC · THE INDOOR BILLBOARD COMPANY</div>
+    <div>WWW.MCTVOFMS.COM · PAGE 03</div>
+  </div>
+</div>
+
+</body>
+</html>

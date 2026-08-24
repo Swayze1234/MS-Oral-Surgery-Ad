@@ -1,3 +1,25 @@
+# MCTV Sales Collateral
+
+## Starkville School District Proposal
+
+`Starkville_School_District_Proposal.pdf` — 3-page print-ready proposal for
+RoyAnn Bell / Starkville School District (Aug 2026): a $200 September welcome
+offer on 10 screens (reg. $350/mo), the CPM case vs. outdoor billboards
+($2.63 vs $6), and an October tiered menu (10/$350 · **20/$500 recommended** ·
+40/$800) with a 12-month prepay pitch (months 13–14 free).
+
+Source: `proposal/starkville_school_proposal.html` (brand: Playfair Display +
+Work Sans, navy `#00377d` / gold `#c9a127` / cream `#f9f6ef`, matching the
+media kit). Rebuild with:
+
+```bash
+chromium --headless --no-pdf-header-footer \
+  --print-to-pdf=Starkville_School_District_Proposal.pdf \
+  proposal/starkville_school_proposal.html
+```
+
+(Work Sans and Playfair Display must be installed locally for a faithful render.)
+
 # MCTV Media Kit — Tupelo Edition
 
 `MCTV_Media_Kit_Tupelo.pdf` is a Tupelo-customized version of the MCTV Digital
