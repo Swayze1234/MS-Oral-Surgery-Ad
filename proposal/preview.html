@@ -1,0 +1,627 @@
+<title>Financial Concepts Proposal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Barlow:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap">
+<style>
+/* ---- proof-room chrome (single committed look; pages carry their own brand) ---- */
+html, body { margin: 0; background: #171E2B; }
+body { font-family: 'Barlow', 'Liberation Sans', Arial, sans-serif; color: #93A2B8; }
+.bar {
+  position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between;
+  align-items: baseline; gap: 16px; padding: 14px 22px; background: rgba(23,30,43,0.94);
+  border-bottom: 1px solid #2A3548; backdrop-filter: blur(4px);
+}
+.bar .t { font-family: 'Playfair Display', Georgia, serif; font-size: 17px; color: #F4F1EA; }
+.bar .t em { font-style: italic; color: #E8C87A; }
+.bar .s { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; white-space: nowrap; }
+main { max-width: 1120px; margin: 0 auto; padding: 26px 20px 60px; }
+.note {
+  font-size: 13px; line-height: 1.5; background: #202A3D; border: 1px solid #2A3548;
+  border-radius: 6px; padding: 10px 14px; margin-bottom: 26px;
+}
+.note b { color: #E8C87A; font-weight: 600; }
+.proof { margin-bottom: 34px; }
+.plabel { font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 8px; }
+.plabel .pnum { color: #E8C87A; margin-right: 6px; }
+.sheet { overflow: hidden; border-radius: 3px; box-shadow: 0 10px 34px rgba(0,0,0,0.45); }
+.zoom { width: 1056px; transform-origin: top left; }
+/* ---- shared booklet styles ---- */
+/* MCTV brand tokens — sampled from the North MS media kit */
+:root {
+  --cream: #F6F4F0;
+  --ink: #1C1C1C;
+  --body: #3A3A38;
+  --navy: #0B2044;
+  --steel: #5E7391;          /* letterspaced kicker labels on cream */
+  --steel-dark: #8FA3BF;     /* kicker labels on navy/black */
+  --line: #DCD6CA;
+  --line-dark: #2A3D5E;
+  --black: #0A0A0A;
+  --sand: #C6BDAB;           /* muted comparison bars */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+
+
+body {
+  font-family: 'Barlow', 'Liberation Sans', Arial, sans-serif;
+  color: var(--body);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.page {
+  position: relative;
+  width: 11in;
+  height: 8.5in;
+  overflow: hidden;
+  background: var(--cream);
+  page-break-after: always;
+}
+
+/* Top 0.55in stays clear of content — spiral coil punches along the top edge. */
+.inner {
+  position: absolute;
+  inset: 0.82in 0.65in 0.52in 0.65in;
+  display: flex;
+  flex-direction: column;
+}
+
+.kicker {
+  font-size: 10pt;
+  font-weight: 600;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+h1 {
+  font-family: 'Playfair Display', 'Liberation Serif', Georgia, serif;
+  font-weight: 500;
+  font-size: 30pt;
+  line-height: 1.16;
+  color: var(--navy);
+  letter-spacing: 0.005em;
+  margin: 0.14in 0 0;
+}
+
+.lede {
+  font-size: 11.5pt;
+  line-height: 1.55;
+  max-width: 6.6in;
+  margin-top: 0.12in;
+}
+
+p { font-size: 10.5pt; line-height: 1.58; }
+
+.rule { border: 0; border-top: 1px solid var(--line); margin: 0.18in 0; }
+
+/* ---------- stat blocks (kit p2 style) ---------- */
+.stats {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+}
+.stats .stat { padding: 0.16in 0.22in 0.14in 0; }
+.stats .stat + .stat { border-left: 1px solid var(--line); padding-left: 0.24in; }
+.stat .num {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+  font-size: 33pt;
+  color: var(--navy);
+  line-height: 1;
+  font-variant-numeric: oldstyle-nums;
+}
+.stat .lbl {
+  margin-top: 0.09in;
+  font-size: 8.5pt;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--steel);
+  line-height: 1.45;
+}
+
+/* ---------- booklet footer ---------- */
+.foot {
+  margin-top: auto;
+  padding-top: 0.14in;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 7.5pt;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+.dark .foot { border-top-color: var(--line-dark); color: var(--steel-dark); }
+
+/* ---------- dark pages ---------- */
+.dark { background: var(--navy); color: #E9E6DF; }
+.dark .kicker { color: var(--steel-dark); }
+.dark h1 { color: #F4F1EA; }
+
+/* ---------- photo placeholder slots ---------- */
+.ph {
+  width: 100%; height: 100%;
+  border: 1.5px dashed #B9B1A2;
+  border-radius: 4px;
+  background: #EFECE5;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0.06in;
+  color: #9A9184;
+  text-align: center;
+}
+.ph .cam { font-size: 16pt; line-height: 1; }
+.ph .t1 { font-size: 8.5pt; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+.ph .t2 { font-size: 7.5pt; letter-spacing: 0.04em; }
+.slot img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; display: block; }
+
+.page { page-break-after: auto; }
+/* ---- per-page styles, scoped ---- */
+#pg1 .cover .inner{ inset: 0.85in 0.75in 0 0.75in; }
+#pg1 .logorow{ display: flex; justify-content: space-between; align-items: center; }
+#pg1 .logorow .mctv img{ height: 0.72in; display: block; }
+#pg1 .fincon{ text-align: right; }
+#pg1 .fincon img{ height: 0.78in; display: block; }
+#pg1 .fincon .wm{ font-family: 'Montserrat', 'Barlow', sans-serif; font-weight: 800; font-size: 19pt;
+    letter-spacing: 0.06em; color: #1F8748; line-height: 1.08; text-transform: uppercase; }
+#pg1 .titleblock{ margin-top: auto; margin-bottom: auto; padding: 0.3in 0 0.35in; }
+#pg1 .cover .kicker{ font-size: 11pt; }
+#pg1 .cover h1{ font-size: 56pt; font-weight: 500; line-height: 1.05; margin-top: 0.16in; }
+#pg1 .cta{ margin-top: 0.24in; font-size: 13pt; line-height: 1.5; color: var(--body); max-width: 6.8in; }
+#pg1 .cta strong{ color: var(--navy); font-weight: 600; }
+#pg1 .meta{ margin-top: 0.26in; display: flex; gap: 0.45in; font-size: 9pt; font-weight: 600;
+    letter-spacing: 0.24em; text-transform: uppercase; color: var(--steel); }
+#pg1 .band{
+    position: absolute; left: 0; right: 0; bottom: 0; height: 1.9in;
+    background: var(--navy) center / cover no-repeat;
+  }
+#pg1 .band .bandscrim{ position: absolute; inset: 0; }
+#pg1 .band.hasphoto .bandscrim{ background: linear-gradient(to top, rgba(6,13,28,0.55), rgba(6,13,28,0.15)); }
+#pg1 .band .markets{
+    position: absolute; left: 0.75in; right: 0.75in; bottom: 0.3in;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 8.5pt; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: #A9BAD3;
+  }
+#pg1 .band .markets .gt{ color: #E8C87A; }
+#pg2 .grid{ flex: 1; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 0.3in; margin-top: 0.3in; }
+#pg2 .item{ border: 1px solid var(--line); border-radius: 6px; background: #FBFAF7; padding: 0.26in 0.3in; display: flex; flex-direction: column; }
+#pg2 .item .n{ font-family: 'Playfair Display', Georgia, serif; font-size: 13pt; font-weight: 600; color: var(--steel); margin-bottom: 0.09in; }
+#pg2 .item h3{ font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 19pt; color: var(--navy); line-height: 1.2; margin-bottom: 0.1in; }
+#pg2 .item p{ font-size: 11.5pt; line-height: 1.55; }
+#pg2 .item.excl{ background: var(--navy); border-color: var(--navy); }
+#pg2 .item.excl .n{ color: var(--steel-dark); }
+#pg2 .item.excl h3{ color: #fff; }
+#pg2 .item.excl p{ color: #D5DBE6; }
+#pg2 .item.excl h3 em{ font-style: italic; color: #E8C87A; }
+#pg3 .stats{ margin-top: 0.28in; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+#pg3 .below{ display: grid; grid-template-columns: 1fr 1fr; gap: 0.55in; margin-top: 0.26in; }
+#pg3 .below h2{ font-size: 9.5pt; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--steel); margin-bottom: 0.12in; }
+#pg3 .below p{ font-size: 10pt; }
+#pg3 .apart .row{ display: flex; gap: 0.14in; padding: 0.085in 0; border-top: 1px solid var(--line); }
+#pg3 .apart .row:last-child{ border-bottom: 1px solid var(--line); }
+#pg3 .apart .n{ font-family: 'Playfair Display', Georgia, serif; font-size: 11pt; color: var(--steel); font-weight: 600; min-width: 0.22in; }
+#pg3 .apart .row p{ font-size: 9.5pt; line-height: 1.45; }
+#pg3 .apart .row p strong{ color: var(--navy); font-weight: 600; }
+#pg4 .grid{ display: grid; grid-template-columns: 1fr 1fr 1.12fr; gap: 0.3in; margin-top: 0.24in; flex: 1; }
+#pg4 .card{ border: 1px solid var(--line); border-radius: 6px; padding: 0.22in 0.24in; display: flex; flex-direction: column; background: #FBFAF7; }
+#pg4 .card .mk{ font-size: 8pt; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--steel); }
+#pg4 .card h2{ font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 16.5pt; color: var(--navy); margin-top: 0.06in; }
+#pg4 .card .count{ display: flex; align-items: baseline; gap: 0.08in; margin: 0.1in 0 0.08in; }
+#pg4 .card .count .num{ font-family: 'Playfair Display', Georgia, serif; font-size: 30pt; font-weight: 500; color: var(--navy); line-height: 1; }
+#pg4 .card .count .u{ font-size: 8pt; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--steel); }
+#pg4 .card p{ font-size: 9pt; line-height: 1.5; }
+#pg4 .venues{ margin-top: 0.14in; padding-top: 0.12in; border-top: 1px solid var(--line); }
+#pg4 .venues .vh{ font-size: 7.5pt; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--steel); margin-bottom: 0.07in; }
+#pg4 .venues ul{ list-style: none; }
+#pg4 .venues li{ font-size: 8.8pt; line-height: 1.65; }
+#pg4 .venues .more{ margin-top: 0.07in; font-size: 7.5pt; letter-spacing: 0.1em; text-transform: uppercase; color: #9A9184; }
+#pg4 .home{ background: var(--navy); border-color: var(--navy); color: #DEE3EC; }
+#pg4 .home .badge{ align-self: flex-start; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--navy); background: #E8C87A; border-radius: 3px; padding: 0.035in 0.08in; margin-bottom: 0.1in; }
+#pg4 .home .mk,#pg4 .home .count .u,#pg4 .home .venues .vh{ color: var(--steel-dark); }
+#pg4 .home h2,#pg4 .home .count .num{ color: #fff; }
+#pg4 .home .venues{ border-top-color: var(--line-dark); }
+#pg4 .home .venues .more{ color: #7C8FA9; }
+#pg5 .statements{ flex: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 0.1in; }
+#pg5 .st{ display: flex; align-items: baseline; gap: 0.3in; padding: 0.155in 0; border-top: 1px solid var(--line-dark); }
+#pg5 .st:first-child{ border-top: 0; }
+#pg5 .st .n{ font-size: 9pt; font-weight: 600; letter-spacing: 0.14em; color: var(--steel-dark); min-width: 0.32in; }
+#pg5 .st .txt{ font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: 21.5pt; color: #F4F1EA; line-height: 1.2; }
+#pg5 .st.hero .txt{ font-size: 27pt; font-weight: 600; color: #fff; }
+#pg5 .st .txt em{ font-style: italic; color: #E8C87A; }
+#pg6 .grid{ flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 1fr; gap: 0.22in; margin-top: 0.24in; }
+#pg6 .slot{ display: flex; flex-direction: column; }
+#pg6 .slot .frame{ flex: 1; min-height: 0; }
+#pg6 .slot figcaption{ margin-top: 0.06in; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--steel); }
+#pg7 .lede{ max-width: 8.4in; }
+#pg7 .tvs{ flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 0.38in; margin-top: 0.22in; align-items: center; }
+#pg7 .tv{ display: flex; flex-direction: column; }
+#pg7 .bezel{ background: #0C0C0E; border-radius: 8px; padding: 0.09in; box-shadow: 0 6px 18px rgba(10,14,22,0.22); }
+#pg7 .screen16x9{ aspect-ratio: 16 / 9; border-radius: 3px; overflow: hidden; background: #17181B; }
+#pg7 .screen16x9 .ph{ border-color: #4A4C52; background: #1E2024; color: #8B8E96; border-radius: 3px; }
+#pg7 .stand{ width: 1.5in; height: 0.055in; background: #101114; margin: 0 auto; border-radius: 0 0 4px 4px; }
+#pg7 .tv figcaption{ margin-top: 0.12in; text-align: center; }
+#pg7 .tv figcaption .c1{ font-size: 9pt; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); }
+#pg7 .tv figcaption .c2{ font-size: 8.5pt; color: var(--body); margin-top: 0.03in; }
+#pg7 .slot img{ border-radius: 0; }
+#pg8 .chart{ flex: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 0.1in; max-width: 9in; }
+#pg8 .row{ display: grid; grid-template-columns: 1.55in 1fr; align-items: center; gap: 0.18in; padding: 0.075in 0; }
+#pg8 .row .name{ font-size: 9.5pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); text-align: right; line-height: 1.25; }
+#pg8 .row .name .sub{ display: block; font-size: 7pt; font-weight: 600; letter-spacing: 0.14em; color: var(--steel); margin-top: 0.02in; }
+#pg8 .track{ display: flex; align-items: center; gap: 0.09in; }
+#pg8 .bar{ height: 0.24in; background: #B5A98F; border-radius: 0 4px 4px 0; }
+#pg8 .row.mctv .bar{ background: var(--navy); }
+#pg8 .val{ font-size: 10.5pt; font-weight: 600; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+#pg8 .row.mctv .val{ color: var(--navy); font-weight: 700; }
+#pg8 .row.mctv .name{ color: var(--navy); }
+#pg8 .callout{ margin-top: 0.16in; margin-left: 1.73in; display: inline-flex; align-items: baseline; gap: 0.12in; }
+#pg8 .callout .tag{ font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 12.5pt; color: var(--navy); }
+#pg8 .notes{ margin-top: 0.18in; font-size: 7.5pt; line-height: 1.5; color: #8A8375; max-width: 8.6in; }
+#pg9 .tiers{ display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 0.26in; margin-top: 0.24in; }
+#pg9 .tier{ border: 1px solid var(--line); border-radius: 6px; padding: 0.2in 0.22in; background: #FBFAF7; display: flex; flex-direction: column; }
+#pg9 .tier .tag{ font-size: 7.5pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); }
+#pg9 .tier h2{ font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 15.5pt; color: var(--navy); margin-top: 0.05in; line-height: 1.2; }
+#pg9 .price{ display: flex; align-items: baseline; gap: 0.06in; margin: 0.1in 0 0.04in; }
+#pg9 .price .p{ font-family: 'Playfair Display', Georgia, serif; font-size: 29pt; font-weight: 500; color: var(--navy); line-height: 1; }
+#pg9 .price .per{ font-size: 8.5pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); }
+#pg9 .tier p.desc{ font-size: 8.8pt; line-height: 1.5; margin-top: 0.06in; }
+#pg9 .specs{ margin-top: 0.12in; padding-top: 0.1in; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 0.08in 0.15in; }
+#pg9 .specs .s .v{ font-size: 11.5pt; font-weight: 600; color: var(--navy); font-variant-numeric: tabular-nums; }
+#pg9 .specs .s .k{ font-size: 6.8pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); margin-top: 0.015in; }
+#pg9 .feat{ background: var(--navy); border-color: var(--navy); color: #DEE3EC; }
+#pg9 .feat .badge{ align-self: flex-start; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--navy); background: #E8C87A; border-radius: 3px; padding: 0.035in 0.08in; margin-bottom: 0.08in; }
+#pg9 .feat .tag,#pg9 .feat .price .per,#pg9 .feat .specs .s .k{ color: var(--steel-dark); }
+#pg9 .feat h2,#pg9 .feat .price .p,#pg9 .feat .specs .s .v{ color: #fff; }
+#pg9 .feat .specs{ border-top-color: var(--line-dark); }
+#pg9 .strip{ display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 0.3in; margin-top: 0.22in; padding-top: 0.16in; border-top: 1px solid var(--line); }
+#pg9 .strip h3{ font-size: 8pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); margin-bottom: 0.06in; }
+#pg9 .strip p,#pg9 .strip li{ font-size: 8.6pt; line-height: 1.5; }
+#pg9 .strip ul{ list-style: none; }
+#pg9 .strip li{ padding-left: 0.14in; text-indent: -0.14in; }
+#pg9 .strip li::before{ content: "— "; color: var(--steel); }
+#pg9 .strip .excl{ color: var(--navy); font-weight: 600; }
+#pg10 .cols{ flex: 1; display: grid; grid-template-columns: 1.35fr 1fr; gap: 0.55in; margin-top: 0.24in; }
+#pg10 .step{ display: flex; gap: 0.22in; padding: 0.16in 0; border-top: 1px solid var(--line); }
+#pg10 .step:last-of-type{ border-bottom: 1px solid var(--line); }
+#pg10 .step .n{ font-family: 'Playfair Display', Georgia, serif; font-size: 25pt; font-weight: 500; color: var(--steel); line-height: 1; min-width: 0.42in; }
+#pg10 .step h3{ font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 14pt; color: var(--navy); margin-bottom: 0.04in; }
+#pg10 .step p{ font-size: 9.5pt; line-height: 1.5; }
+#pg10 .sig{ margin-top: 0.32in; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5in; }
+#pg10 .sig .line{ border-top: 1px solid #8A8375; padding-top: 0.06in; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--steel); }
+#pg10 .side{ display: flex; flex-direction: column; }
+#pg10 .card{ background: var(--navy); border-radius: 6px; padding: 0.26in; color: #DEE3EC; }
+#pg10 .card img{ height: 0.44in; display: block; margin-bottom: 0.16in; }
+#pg10 .card .who{ font-family: 'Playfair Display', Georgia, serif; font-size: 15pt; font-weight: 600; color: #fff; }
+#pg10 .card .role{ font-size: 8pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel-dark); margin: 0.04in 0 0.14in; }
+#pg10 .card .c{ font-size: 10pt; line-height: 1.7; }
+#pg10 .card .c a{ color: #E9E6DF; text-decoration: none; }
+#pg10 .closing{ margin-top: auto; padding-top: 0.28in; }
+#pg10 .closing .big{ font-family: 'Playfair Display', Georgia, serif; font-size: 21pt; font-weight: 500; font-style: italic; color: var(--navy); }
+</style>
+<div class="bar">
+  <div class="t">Financial Concepts &middot; <em>Advertiser Partnership Proposal</em></div>
+  <div class="s">Print proof &middot; 11&times;8.5&Prime; &middot; built Aug 25, 2026 · 18:29</div>
+</div>
+<main>
+  <div class="note">Live proof of the spiral booklet — refresh this page after each edit.
+  <b>Dashed frames are photo slots</b> (cover band, screen photos, billboard creative) that fill
+  automatically once the image files are attached.</div>
+  <section class="proof"><div class="plabel"><span class="pnum">01</span> Cover</div><div class="sheet" id="pg1"><div class="zoom"><div class="page cover">
+  <div class="inner">
+    <div class="logorow">
+      <div class="mctv"><img src="data:image/png;base64,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" alt="MCTV Elite Advertising"></div>
+      <div class="fincon" id="fincon-logo"><div class="wm">Financial<br>Concepts</div></div>
+    </div>
+    <div class="titleblock">
+      <div class="kicker">Advertiser Partnership Proposal</div>
+      <h1>Financial Concepts</h1>
+      <div class="cta">Your billboards own the Golden Triangle's highways.<br>
+      <strong>Let's put your name in every waiting room, lobby, and showroom too — and make Financial Concepts impossible to ignore.</strong></div>
+      <div class="meta"><span>August 27, 2026</span><span>www.mctvofms.com</span></div>
+    </div>
+  </div>
+  <div class="band">
+    <div class="bandscrim"></div>
+    <div class="markets">
+      <span class="gt">Starkville &middot; Columbus &middot; West Point</span>
+      <span>Oxford &middot; Tupelo &middot; The Golden Triangle</span>
+    </div>
+  </div>
+</div></div></div></section>
+<section class="proof"><div class="plabel"><span class="pnum">02</span> Where MCTV Fits</div><div class="sheet" id="pg2"><div class="zoom"><div class="page">
+  <div class="inner">
+    <div class="kicker">Financial Concepts &times; MCTV &middot; fincon.net</div>
+    <h1>Where MCTV fits.</h1>
+    <div class="grid">
+      <div class="item">
+        <div class="n">01</div>
+        <h3>You already believe in out-of-home.</h3>
+        <p>Your billboards work the highways — but a driver gets seconds. MCTV puts the same brand in
+        front of a seated audience for 55+ minutes at a time.</p>
+      </div>
+      <div class="item">
+        <div class="n">02</div>
+        <h3>Our rooms are your client list.</h3>
+        <p>Clinics, dealerships, co-ops, and civic buildings — the venues where the Golden Triangle's
+        families, professionals, and retirees already wait.</p>
+      </div>
+      <div class="item">
+        <div class="n">03</div>
+        <h3>Trust is built on repetition.</h3>
+        <p>A wealth-management brand seen every 15 minutes, inside the hometown places people trust,
+        all month long.</p>
+      </div>
+      <div class="item excl">
+        <div class="n">04</div>
+        <h3><em>Own the category.</em></h3>
+        <p>Financial-services exclusivity is available — no competing advisor on any screen you buy.</p>
+      </div>
+    </div>
+    <div class="foot"><span>MCTV &middot; The Indoor Billboard Company</span><span>02</span></div>
+  </div>
+</div></div></div></section>
+<section class="proof"><div class="plabel"><span class="pnum">03</span> The Network</div><div class="sheet" id="pg3"><div class="zoom"><div class="page">
+  <div class="inner">
+    <div class="kicker">The MCTV Network</div>
+    <h1>One network, three growing<br>North Mississippi markets.</h1>
+    <div class="stats">
+      <div class="stat"><div class="num">125+</div><div class="lbl">Digital<br>screens</div></div>
+      <div class="stat"><div class="num">100+</div><div class="lbl">Premier<br>venues</div></div>
+      <div class="stat"><div class="num">1.9M+</div><div class="lbl">Impressions<br>per month</div></div>
+      <div class="stat"><div class="num">55+</div><div class="lbl">Min average<br>dwell time</div></div>
+      <div class="stat"><div class="num">3</div><div class="lbl">Growth<br>markets</div></div>
+    </div>
+    <div class="below">
+      <div>
+        <h2>Where the screens live</h2>
+        <p>Our screens sit inside the restaurants, medical clinics, salons, dealerships, pharmacies,
+        co-ops, and civic buildings North Mississippians already spend their week in. Dwell time is
+        measured in tens of minutes, not seconds — your spot plays to a seated, waiting audience.</p>
+        <p style="margin-top:0.12in;">Buy one market or all three: reach compounds as your footprint
+        grows across Oxford, Tupelo, and the Golden Triangle.</p>
+      </div>
+      <div class="apart">
+        <h2>What sets MCTV apart</h2>
+        <div class="row"><div class="n">01</div><p><strong>Owner-operated and local.</strong> The fastest-growing owner-operated indoor billboard network in North America — run from North Mississippi, not a coast.</p></div>
+        <div class="row"><div class="n">02</div><p><strong>Unskippable by design.</strong> No remote, no ad-blocker, no scroll. Your spot can't be skipped, muted into irrelevance, or thrown away.</p></div>
+        <div class="row"><div class="n">03</div><p><strong>A captive, seated audience.</strong> 1,500+ plays per screen every month, in rooms where people are waiting anyway.</p></div>
+        <div class="row"><div class="n">04</div><p><strong>Accountable.</strong> Proof-of-play reporting documents play counts by screen — you see exactly where and how often your ad ran.</p></div>
+      </div>
+    </div>
+    <div class="foot"><span>MCTV &middot; The Indoor Billboard Company</span><span>03</span></div>
+  </div>
+</div></div></div></section>
+<section class="proof"><div class="plabel"><span class="pnum">04</span> Three Markets</div><div class="sheet" id="pg4"><div class="zoom"><div class="page">
+  <div class="inner">
+    <div class="kicker">Host Network &middot; Where Your Ad Runs</div>
+    <h1>Three markets. One footprint.</h1>
+    <div class="grid">
+      <div class="card">
+        <div class="mk">Market 01</div>
+        <h2>Oxford / Lafayette</h2>
+        <div class="count"><div class="num">44</div><div class="u">Venues</div></div>
+        <p>Our deepest footprint — game-weekend traffic, a university town's year-round service
+        economy, and the civic buildings every resident passes through.</p>
+        <div class="venues"><div class="vh">Premium locations</div>
+          <ul><li>RedMed Urgent Clinic</li><li>Cannon Chevrolet Buick Cadillac</li><li>Oxford-Lafayette Chamber</li><li>Oxford Park Commission</li><li>The Children's Dental Center</li><li>Rafters Music and Food</li></ul>
+          <div class="more">Sample of 44 &middot; full list on request</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="mk">Market 02</div>
+        <h2>Tupelo / Lee County</h2>
+        <div class="count"><div class="num">28</div><div class="u">Venues</div></div>
+        <p>North Mississippi's regional hub — medical, retail, and travel venues drawing from a
+        dozen surrounding counties, including both airport terminals.</p>
+        <div class="venues"><div class="vh">Premium locations</div>
+          <ul><li>Cardiology Associates of North MS</li><li>Tupelo Regional Airport</li><li>Hotel Tupelo</li><li>Midtown Pointe Shopping Center</li><li>Right Track Medical Group</li><li>Tupelo River Coffee</li></ul>
+          <div class="more">Sample of 28 &middot; full list on request</div>
+        </div>
+      </div>
+      <div class="card home">
+        <div class="badge">Your home market</div>
+        <div class="mk">Market 03</div>
+        <h2>Golden Triangle</h2>
+        <div class="count"><div class="num">29</div><div class="u">Venues</div></div>
+        <p>Starkville, Columbus, and West Point — three towns, one buying market. Screens sit in the
+        co-ops, clinics, dealerships, and family restaurants that anchor daily life across Oktibbeha,
+        Lowndes, and Clay counties — the same roads your billboards already work.</p>
+        <div class="venues"><div class="vh">Premium locations</div>
+          <ul><li>Magnolia Dermatology</li><li>Revive Wellness Clinic</li><li>Cannon Chevrolet GMC</li><li>Oktibbeha County Co-op</li><li>BJ's Family Pharmacy</li><li>Elm Lake Golf Course</li></ul>
+          <div class="more">Sample of 29 &middot; full list on request</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>MCTV &middot; The Indoor Billboard Company</span><span>04</span></div>
+  </div>
+</div></div></div></section>
+<section class="proof"><div class="plabel"><span class="pnum">05</span> How Your Spot Runs</div><div class="sheet" id="pg5"><div class="zoom"><div class="page dark">
+  <div class="inner">
+    <div class="kicker">How Your Spot Runs</div>
+    <div class="statements">
+      <div class="st hero"><div class="n">01</div><div class="txt">Full-motion, silent, <em>no skipping</em> these ads.</div></div>
+      <div class="st"><div class="n">02</div><div class="txt">Your brand, on a loop, all day, every day.</div></div>
+      <div class="st"><div class="n">03</div><div class="txt">A 30-second full-motion spot, produced by MCTV.</div></div>
+      <div class="st"><div class="n">04</div><div class="txt">Designed to be read, not heard.</div></div>
+      <div class="st"><div class="n">05</div><div class="txt">Every 15 minutes, on every screen you buy.</div></div>
+      <div class="st"><div class="n">06</div><div class="txt">Category exclusivity available.</div></div>
+    </div>
+    <div class="foot"><span>MCTV &middot; The Indoor Billboard Company</span><span>05</span></div>
+  </div>
+</div></div></div></section>
+<section class="proof"><div class="plabel"><span class="pnum">06</span> Real Screens</div><div class="sheet" id="pg6"><div class="zoom"><div class="page">
+  <div class="inner">
+    <div class="kicker">On Location</div>
+    <h1>Real screens, real venues,<br>photographed this year.</h1>
+    <div class="grid">
+      <figure class="slot"><div class="frame" data-fill="screens/1"><div class="ph"><div class="cam">&#9635;</div><div class="t1">Screen photo</div><div class="t2">assets/screens/ &middot; photo 1</div></div></div><figcaption>Venue &middot; Market</figcaption></figure>
+      <figure class="slot"><div class="frame" data-fill="screens/2"><div class="ph"><div class="cam">&#9635;</div><div class="t1">Screen photo</div><div class="t2">assets/screens/ &middot; photo 2</div></div></div><figcaption>Venue &middot; Market</figcaption></figure>
+      <figure class="slot"><div class="frame" data-fill="screens/3"><div class="ph"><div class="cam">&#9635;</div><div class="t1">Screen photo</div><div class="t2">assets/screens/ &middot; photo 3</div></div></div><figcaption>Venue &middot; Market</figcaption></figure>
+      <figure class="slot"><div class="frame" data-fill="screens/4"><div class="ph"><div class="cam">&#9635;</div><div class="t1">Screen photo</div><div class="t2">assets/screens/ &middot; photo 4</div></div></div><figcaption>Venue &middot; Market</figcaption></figure>
+      <figure class="slot"><div class="frame" data-fill="screens/5"><div class="ph"><div class="cam">&#9635;</div><div class="t1">Screen photo</div><div class="t2">assets/screens/ &middot; photo 5</div></div></div><figcaption>Venue &middot; Market</figcaption></figure>
+      <figure class="slot"><div class="frame" data-fill="screens/6"><div class="ph"><div class="cam">&#9635;</div><div class="t1">Screen photo</div><div class="t2">assets/screens/ &middot; photo 6</div></div></div><figcaption>Venue &middot; Market</figcaption></figure>
+    </div>
+    <div class="foot"><span>MCTV &middot; The Indoor Billboard Company</span><span>06</span></div>
+  </div>
+</div></div></div></section>
+<section class="proof"><div class="plabel"><span class="pnum">07</span> Your Creative</div><div class="sheet" id="pg7"><div class="zoom"><div class="page">
+  <div class="inner">
+    <div class="kicker">Your Creative, Our Screens</div>
+    <h1>What we'd put on the screens for you.</h1>
+    <p class="lede">Your billboard creative already works — the brand, the faces, the promise are proven on the
+    highway. Our in-house team rebuilds it as a 30-second, full-motion spot designed for a seated audience:
+    silent, readable, and refreshed every quarter at no extra cost.</p>
+    <div class="tvs">
+      <figure class="tv">
+        <div class="bezel"><div class="screen16x9" data-fill="billboards/1"><div class="ph"><div class="cam">&#9635;</div><div class="t1">Billboard creative</div><div class="t2">assets/billboards/ &middot; ad 1</div></div></div></div>
+        <div class="stand"></div>
+        <figcaption><div class="c1">Today: your Golden Triangle billboard</div><div class="c2">The campaign your market already recognizes.</div></figcaption>
+      </figure>
+      <figure class="tv">
+        <div class="bezel"><div class="screen16x9" data-fill="billboards/2"><div class="ph"><div class="cam">&#9635;</div><div class="t1">Billboard creative</div><div class="t2">assets/billboards/ &middot; ad 2</div></div></div></div>
+        <div class="stand"></div>
+        <figcaption><div class="c1">On MCTV: the same brand, in motion</div><div class="c2">Rebuilt as a 30-second silent spot &mdash; designed to be read across the room.</div></figcaption>
+      </figure>
+    </div>
+    <div class="foot"><span>MCTV &middot; The Indoor Billboard Company</span><span>07</span></div>
+  </div>
+</div></div></div></section>
+<section class="proof"><div class="plabel"><span class="pnum">08</span> CPM Comparison</div><div class="sheet" id="pg8"><div class="zoom"><div class="page">
+  <div class="inner">
+    <div class="kicker">Cost per 1,000 Impressions &middot; Local Media Comparison</div>
+    <h1>A fraction of the CPM of any<br>other local channel.</h1>
+    <div class="chart">
+      <!-- bar widths: linear scale, $65 = 100% -->
+      <div class="row"><div class="name">Magazine</div><div class="track"><div class="bar" style="width:100%"></div><div class="val">$65</div></div></div>
+      <div class="row"><div class="name">Television</div><div class="track"><div class="bar" style="width:53.8%"></div><div class="val">$35</div></div></div>
+      <div class="row"><div class="name">Radio</div><div class="track"><div class="bar" style="width:41.5%"></div><div class="val">$27</div></div></div>
+      <div class="row"><div class="name">Social media</div><div class="track"><div class="bar" style="width:30.0%"></div><div class="val">$19.51</div></div></div>
+      <div class="row"><div class="name">Outdoor billboards<span class="sub">Your current channel</span></div><div class="track"><div class="bar" style="width:9.2%"></div><div class="val">$6</div></div></div>
+      <div class="row mctv"><div class="name">MCTV indoor network</div><div class="track"><div class="bar" style="width:4.05%"></div><div class="val">$2.63</div></div></div>
+      <div class="callout"><span class="tag">Less than half the cost of the billboards already working for you &mdash; as low as $1.64 at full network scale.</span></div>
+      <div class="notes">CPM = cost per thousand impressions. The MCTV figure is a network blended average; campaigns price as low
+      as $1.64 CPM at full scale. Comparison figures are typical U.S. local CPM ranges by channel (industry estimates).</div>
+    </div>
+    <div class="foot"><span>MCTV &middot; The Indoor Billboard Company</span><span>08</span></div>
+  </div>
+</div></div></div></section>
+<section class="proof"><div class="plabel"><span class="pnum">09</span> Pricing</div><div class="sheet" id="pg9"><div class="zoom"><div class="page">
+  <div class="inner">
+    <div class="kicker">Your Proposal &middot; Monthly Network Rates</div>
+    <h1>Start with your home market.<br>Scale when you're ready.</h1>
+    <div class="tiers">
+      <div class="tier feat">
+        <div class="badge">Recommended for Financial Concepts</div>
+        <div class="tag">40 Screens</div>
+        <h2>Golden Triangle saturation</h2>
+        <div class="price"><span class="p">$800</span><span class="per">/ month</span></div>
+        <p class="desc">Every Golden Triangle venue — Starkville, Columbus &amp; West Point — with
+        remaining screens extending your reach into Oxford or Tupelo.*</p>
+        <div class="specs">
+          <div class="s"><div class="v">60K</div><div class="k">Ad plays / mo</div></div>
+          <div class="s"><div class="v">$20</div><div class="k">Per screen</div></div>
+        </div>
+      </div>
+      <div class="tier">
+        <div class="tag">80 Screens</div>
+        <h2>Two-market saturation</h2>
+        <div class="price"><span class="p">$1,400</span><span class="per">/ month</span></div>
+        <p class="desc">Deep saturation across the Golden Triangle plus a full second market.</p>
+        <div class="specs">
+          <div class="s"><div class="v">120K</div><div class="k">Ad plays / mo</div></div>
+          <div class="s"><div class="v">$17.50</div><div class="k">Per screen</div></div>
+        </div>
+      </div>
+      <div class="tier">
+        <div class="tag">125+ Screens</div>
+        <h2>The entire network</h2>
+        <div class="price"><span class="p">$2,000</span><span class="per">/ month</span></div>
+        <p class="desc">All three markets — every screen, every venue, all of North Mississippi.</p>
+        <div class="specs">
+          <div class="s"><div class="v">187.5K</div><div class="k">Ad plays / mo</div></div>
+          <div class="s"><div class="v">$16</div><div class="k">Per screen</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="strip">
+      <div>
+        <h3>Every campaign includes</h3>
+        <ul>
+          <li>Custom 30-second spot, produced in-house &amp; refreshed quarterly</li>
+          <li>Unlimited rotation — every 15 minutes, every operating hour</li>
+          <li>Proof-of-play reporting, by screen</li>
+          <li>You own the finished creative, forever</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Volume pricing</h3>
+        <p>Six-month minimum. Prepay six months and the seventh is free; prepay twelve and
+        months thirteen and fourteen are free.</p>
+      </div>
+      <div>
+        <h3>Add-ons &amp; exclusivity</h3>
+        <p>Animated logo bumper — $10/screen/mo + $150 setup. Cause sponsorship — $10/screen/mo.</p>
+        <p class="excl" style="margin-top:0.05in;">Financial-services category exclusivity available on every screen you buy.</p>
+      </div>
+    </div>
+    <div class="foot"><span>MCTV &middot; The Indoor Billboard Company</span><span>*Final screen list confirmed at signing &middot; 09</span></div>
+  </div>
+</div></div></div></section>
+<section class="proof"><div class="plabel"><span class="pnum">10</span> Next Steps</div><div class="sheet" id="pg10"><div class="zoom"><div class="page">
+  <div class="inner">
+    <div class="kicker">Next Steps</div>
+    <h1>Three steps to launch.</h1>
+    <div class="cols">
+      <div>
+        <div class="step"><div class="n">1</div><div>
+          <h3>Choose your footprint.</h3>
+          <p>Pick your package and we reserve your screens the same day — and lock financial-services
+          exclusivity across every one of them.</p></div></div>
+        <div class="step"><div class="n">2</div><div>
+          <h3>We build your spot.</h3>
+          <p>Our in-house team produces your 30-second full-motion ad from the billboard creative your
+          market already knows — included in the rate, refreshed quarterly, yours to keep.</p></div></div>
+        <div class="step"><div class="n">3</div><div>
+          <h3>You're live within the month.</h3>
+          <p>Every 15 minutes, on every screen in your footprint, every operating hour — with
+          proof-of-play reporting delivered to your inbox.</p></div></div>
+        <div class="sig">
+          <div class="line">Client signature / date</div>
+          <div class="line">MCTV Digital / date</div>
+        </div>
+      </div>
+      <div class="side">
+        <div class="card">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdgAAACSCAYAAADmbdsnAAALL0lEQVR4nO3dbY/jtg6GYedg//9fzvnQTjebjR1LIsWH5H0Bg6JoJ5aoF4pOxnk8n88DAADY+hXdAAAo5LVieYS1AhL+F90AACk9X37wj/dYEJvmSLAAVpFIgA+4RYzKvDd+bgH+9jz6xoMDBj76lGCtJkvXxfbDctF1j+Vduze69+t1Hyev+M/GNTrxKc2H0Vi8tn02jir9n2n/Sv//+13PCrbriTZ6UXeiFmsSrg+1ce6ge8xN+u99i7hrkoWfTAv/p63V1kCmMQDC7HgPtlOSZePxE3HL3eqaVRMtgAufEuz7JkDS2IcN+G+r828lptZrgUSLKBbvqY5cQ8lZu9w/b/QYfJLTSoNUg29l9Y10/El9rkUm/mi7P/RisRGuxDv7h3yudJ7Hr1Y+BHb+P00+KpFk8jeXAWoq0/xSPwh4GOmzZR8V5kVU3z1VPkCMuBuH2/2efdDETGAr32omudqYeTLQ44iNJ2P5mce4jL6ex9hEzzcP1foz604chmK18iQnBgWWsiXWV0ptUdAhFtX6WK0/HoZjtPtRiRWrWKrXNbNVqyLVdu3kHQOlGCu1xUK1/oy62oemYsOziBEpc9V6Rr19njr3vaOKBdMn0/M6IsF2GRRcq1K1fpKprVbU+ryrPWr9XlWtP3e55CUq2DUcFuZUTq5AJ9X3wKW9JyrBVh8UnOuSXLO2G2DuGqGCncchYVyX5Poje/vv6tLPM937n30vdGs/CRa7dEuuVWXfTHEP688gBpEJNvNCzdz2DCot7qu+MI9QRda57NpuKljsUPHxciMq9gnXKox5hT7MMul7dILNeOrJ2OZIxAvogbX+xiPBdj31dO23JWKYD2OGrNwPBNEV7HFw6qms+63hV9X7h5o6zluzPnsl2KqDwmEAAM5l2SO3tFOhgj2OPINyZuRAkb2vd1G9AjV0Wp+mff1l+WJvHketZFKpL4hRYU102mxHEJffngfxOI5Dp4I9jrwbDxPpb1SvQC2V1um2XONZwR5HjRP7cdToAzRU2qiAMxmrWPP2KlWwx5EvkWWbQDtkG0MA91TY77buT2oJFr1UWLAAPst02HbZi3Yk2Oyb6Nkkyd4vABjFvjdAsYLNdOrBnxg7AK+U9oTtbdmVYLOeepQmRzVZ5wTQXbW169aflQTrmXzUE1u1CQYAlYXklJ23iLMlpZkBydZHAPCmXDC57tmK78H+UB0UkiiA7tgHb9idYLMMimpyV0bMAJyJ3B/Crq1cwR6H3qad5YCgjjgC+WVfx+7tj0iw2QcFADAuomAKLdLUK9jj2B8gtaoZAFRlLZi2tDtDglWRdSIBgIpWBUxUgh1NVrsGpdXgA4AB1eIjfD+ngr1HdQIBAMZs288jE6xaFRt+2gGApEb28x17rcR+TgX7HdUrANSwdT+PTrAkLwDoR6LC9BadYEd5DUqLwQYARyoFk8x3eCskWJVB+US5bQCQWfnCRiHBjrIelPKDDACbRBclUvu5SoKNHpRPPNskNQkCdO8/gH/s2gtCcoxKgh1lNShs9ABgS7FgCpE1wXpjggDAHt4FU9h+rpRg1R48gTEcSgD8YD84tBLsbnKnHQDAFMmCSy3BUsX2wdgBtSkUK6FtUEuwu7C5A4COknuyYoKNrGIVTlwAgPtk3+5TTLDeSp6URHCLH8ArtW/Z2Uo1wUacPMJPOwCAIdJJWTXBjrobZOnBAICCIqpYiYJJOcHuDJDEYBTBbWIAO8jvHdYJNjJRqQSbZA0Af9pZxcrswcoVrDWVBIy/MTYAylFPsDtuN8qcdgohpteebz9AB5b7Qop1o55graQYjOYYIwA/ZvcDqcN9hgTrWcVKDUYxxPYzDhLozGJfSLOGMiTYVWkGA4wVgP+M7gdyh/osCdajipUbjIJmYkySBVBClgSLvEiyv1XtFzBi5U92Uq2hTAl2popNNRgAgCmSdyQzJVhLkoNRGFVsvf4AK2aq2HRrKFuCJTHmRZIF4EE2L2RLsBZkBwMfVUiyFfoAWCv/VXYdE6yKlBNm0ezhJnOsMrcdwIKMCXalAqV6jdcxyV5hTgLzpNfPbIKtutlhjy5JNlt7gd2kE+Qq6wp214ZSelCaqJ5ks7SzKuJfn3weyHiLeJb8YDS0kmSVN1DltgFqyu7NmRNs2UFp5nHUqmYV21QJ8UUaMwn22wRXXAAkY30VqlmVdgDVpdjTRxOs2gaiGOSRGKnFM9rKeEbGUinJ4zfGJA/FvXzZSIIdTRwdJ/dMnzvG6crqLePdc4/x22N2XBmfetIk48fz+XX+WUxQ74BctXHHYFgt4jQTZ6PV2HrENMOaqMIyQRJzfaW+avTX2797nfbOXjdNoP7lfRr+9vrZ4mXhcazF/fV3FW5BdxzDM7ury1KbN/S9J1hA0eumZ5Vsd2PjBr77dqBOtY4y/5nOq7OgpxoM3LLyHm2EbO0FYKRSBbt6KxG5WFW1HkiowLyzvTzdurrzIScgm92TOt3CBxKw+vxEmEoVLPDjbDEqfiIZwGfp1xsJFp2kX7AA8qjyIScAAKSQYAEAcECCBQDAAQkWAAAHJFgAAByQYAEAcECCBQDAAQkWAAAHJFgAAByQYAEAcECCBQDAAQkWAAAHJFgAAByQYAEAcECCBQDAAQkWAAAHJFgAAByQYAEAcECCBQDAAQkWAAAHJFgAAByQYAEAcECCBQDAAQkWAAAHvxxe82n4Wo+J6935nVEz17CMw7tv17e6tkcsR3iOrUWMRtrj0ZfR19y5NlevdTc+SutsdkxX+mB1zYi5nDl+t1DBIhPPzXTGSntW+6IWC2vPgz7efY0dv7Pz9XZe23WekWChKsvm2iERRCK23ynEKKINltd0aT8JNp/o27bRFDaTaMQgP8ZwTYr4ebwH+0nHpKDy/rHn63qJWDyr76s/b77G6u9Y2n1tj/dtldaZhdkYRc8llTYch1AMqWCRUdTp9XHML0DvjUdhY1t11ocU1YqBO2O4Mgd32DFWZ9e4G5ttMSTBQk2GzTTy08wZ4rNCOXl4qtRv1TtQ25FggTkzC5q3ANBF9YPgLSRYZFVpAd/tS6U+Yw2HqnXuMSTBQsnVeytVWPelUmw6m/2A1+uPmmwHQvMYkmCh7mrSZ1vAV771pVJfUUvmNep6QNn1Zzp3gqx4AqsiQ/y/tfFx4//pZnXM7sZz59zoPMajfY9es6+u1qfKn+9sp1TBdl5YChTjH/3MZy8tN5svrp6IRbw+U3uKGOP0ZlcFC1wZqaSUNhRrZyf9Kn2u0g8LlnNZqUI865dCG+/cJTOlVMECnawu5ujNapfK/azct0/UvxTAvH1KFWy3yaZGLf6jX5+l1v5Z732h6qtt5Wvi3v+byhrg/dh/8SziHpTjf7UQq5u9TWg1nsrzQrltUTIdvEiyB7eIUYf6hjPi+fbPKt7/brPFJtuY0viGtIUEi0jVEsiM0YWvtGlZ6PiA/+fbz4ws80BpfLcf8EiwqKTSplypL4Ai9zVGggXm8I0hdpSqnAjV+1l13n6l9Cli9GLxUIEqG1P1v+9d0eYDMYOyzRfvOS45T6hgocRigXhvPGpPz6lCbnPcbGROZZ1/3p9+l4uh0rOIP5kZkMg/e1Cl9kEKq8lt/TScFRYPjrhqg8dYrPTZoz3KTwHaIWviVCI1p6lgocJycrNRQZnX4SSDLO00QYJFdgoL1vvWl0Ifd+nU164sxjjF9yqTYKEg66bKwxJ8dIip1dzJOgeV+u4Wv8fz6XI3zfI9Nu/rzVxDfULvjv8M63iOvp7ye/Vecy1yXY72472tlt99q7x+d33ji9XYqMVS6juOvRIsAACt/R+AjOBWO6LVaAAAAABJRU5ErkJggg==" alt="MCTV Elite Advertising">
+          <div class="who">Swayze Hollingsworth</div>
+          <div class="role">Director of Sales</div>
+          <div class="c">swayze@mctvofms.com<br>662-907-0404<br>www.mctvofms.com</div>
+        </div>
+        <div class="closing">
+          <div class="big">Be impossible to ignore.</div>
+          <p style="font-size:9pt; margin-top:0.08in; color:#8A8375;">Thank you for your time — let's
+          launch Financial Concepts across the Golden Triangle this month.</p>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>MCTV &middot; The Indoor Billboard Company</span><span>10</span></div>
+  </div>
+</div></div></div></section>
+</main>
+<script>
+function fit() {
+  document.querySelectorAll('.sheet').forEach(function (sheet) {
+    var s = sheet.clientWidth / 1056;
+    sheet.querySelector('.zoom').style.transform = 'scale(' + s + ')';
+    sheet.style.height = (816 * s) + 'px';
+  });
+}
+addEventListener('resize', fit);
+addEventListener('load', fit);
+fit();
+</script>
