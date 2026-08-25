@@ -1,0 +1,172 @@
+<!doctype html>
+<title>MCTV Photo Drop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+  html, body { margin: 0; background: #171E2B; }
+  body { font-family: 'Barlow', 'Liberation Sans', Arial, sans-serif; color: #C6CFDC; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 28px 18px 70px; }
+  h1 { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 26px; color: #F4F1EA; margin: 0 0 6px; }
+  h1 em { font-style: italic; color: #E8C87A; }
+  .sub { font-size: 14px; line-height: 1.55; color: #93A2B8; margin: 0 0 22px; max-width: 60ch; }
+  .drop {
+    border: 2px dashed #46587A; border-radius: 10px; padding: 38px 20px; text-align: center;
+    background: #1D2637; cursor: pointer; transition: border-color .15s, background .15s;
+  }
+  .drop.over { border-color: #E8C87A; background: #232E44; }
+  .drop .big { font-size: 17px; font-weight: 600; color: #E9E6DF; }
+  .drop .small { font-size: 12.5px; color: #7C8FA9; margin-top: 6px; letter-spacing: .04em; }
+  .drop input { display: none; }
+  .status { min-height: 22px; margin: 14px 2px; font-size: 13px; color: #E8C87A; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; margin-top: 8px; }
+  .card { background: #1D2637; border: 1px solid #2A3548; border-radius: 8px; overflow: hidden; }
+  .card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; background: #0F1420; }
+  .card .row { display: flex; gap: 8px; align-items: center; padding: 10px; }
+  .card input {
+    flex: 1; min-width: 0; background: #141B29; color: #E9E6DF; border: 1px solid #2A3548;
+    border-radius: 5px; padding: 7px 9px; font: inherit; font-size: 13px;
+  }
+  .card input::placeholder { color: #5E7391; }
+  .card button {
+    background: none; border: 1px solid #3A4A66; color: #93A2B8; border-radius: 5px;
+    padding: 6px 9px; cursor: pointer; font: inherit; font-size: 12px;
+  }
+  .card button:hover { border-color: #C96A5A; color: #E0A79E; }
+  .actions { margin-top: 20px; display: flex; gap: 12px; align-items: center; }
+  .save {
+    background: #E8C87A; color: #1B2331; border: 0; border-radius: 6px; font: inherit;
+    font-weight: 700; font-size: 14px; padding: 11px 22px; cursor: pointer; letter-spacing: .02em;
+  }
+  .save:disabled { opacity: .45; cursor: default; }
+  .hint { font-size: 12.5px; color: #7C8FA9; }
+  .ro { display: none; margin-top: 16px; font-size: 13px; color: #C9A15E; }
+  button:focus-visible, .drop:focus-visible, input:focus-visible { outline: 2px solid #E8C87A; outline-offset: 2px; }
+</style>
+<div class="wrap">
+  <h1>MCTV <em>Photo Drop</em></h1>
+  <p class="sub">Drop the proposal photos here — the Starkville mural for the cover, venue screen
+  shots for page 6, and Financial Concepts' billboard creative for page 7. They save into this page;
+  Claude picks them up and places them in the booklet. A short label (venue &amp; market, or
+  "cover mural" / "billboard ad") tells Claude where each one goes.</p>
+  <div class="drop" id="drop" tabindex="0" role="button" aria-label="Add photos">
+    <div class="big">Drop photos here — or tap to choose</div>
+    <div class="small">JPG · PNG · HEIC — compressed on your device before saving</div>
+    <input type="file" id="file" accept="image/*" multiple>
+  </div>
+  <div class="status" id="status" role="status"></div>
+  <div class="grid" id="grid"></div>
+  <div class="actions">
+    <button class="save" id="save" disabled>Save labels</button>
+    <span class="hint" id="count"></span>
+  </div>
+  <p class="ro" id="ro">This view is read-only — photos can't be saved from here.</p>
+</div>
+<script id="state" type="application/json">[]</script>
+<script>
+(function () {
+  var state = JSON.parse(document.getElementById('state').textContent);
+  var art = null, canWrite = true, dirty = false, busy = false;
+  var $ = function (id) { return document.getElementById(id); };
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function render() {
+    var g = $('grid');
+    g.innerHTML = state.map(function (p, i) {
+      return '<div class="card"><img alt="' + esc(p.label || p.name) + '" src="' + p.data + '">' +
+        '<div class="row"><input data-i="' + i + '" placeholder="Label (venue, market…)" value="' + esc(p.label || '') + '">' +
+        '<button data-del="' + i + '" aria-label="Remove photo">Remove</button></div></div>';
+    }).join('');
+    $('count').textContent = state.length ? state.length + ' photo' + (state.length > 1 ? 's' : '') + ' saved in this page' : '';
+    $('save').disabled = !dirty || busy || !canWrite;
+  }
+
+  function setStatus(t) { $('status').textContent = t || ''; }
+
+  function shrink(file) {
+    return new Promise(function (res, rej) {
+      var url = URL.createObjectURL(file), img = new Image();
+      img.onload = function () {
+        var MAX = 1600, s = Math.min(1, MAX / Math.max(img.width, img.height));
+        var c = document.createElement('canvas');
+        c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        res(c.toDataURL('image/jpeg', 0.82));
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); rej(new Error('unreadable')); };
+      img.src = url;
+    });
+  }
+
+  function save(msg) {
+    if (!art || busy) return;
+    busy = true; render(); setStatus(msg || 'Saving…');
+    fetch(location.href, { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error('fetch'); return r.text(); })
+      .then(function (src) {
+        var block = '<script id="state" type="application/json">' +
+          JSON.stringify(state).replace(/</g, '\\u003c') + '<\/script>';
+        var next = src.replace(/<script id="state"[^>]*>[\s\S]*?<\/script>/, block);
+        if (next === src) throw new Error('state block not found');
+        return art.publish(next);
+      })
+      .then(function () { setStatus('Saved.'); dirty = false; })
+      .catch(function (e) {
+        busy = false;
+        if (e && (e.code === 'not_writer' || e.code === 'not_granted')) { canWrite = false; $('ro').style.display = 'block'; setStatus(''); }
+        else if (e && e.code === 'conflict') { setStatus('Someone else just saved — reloading…'); }
+        else setStatus('Could not save (' + ((e && e.code) || (e && e.message) || 'error') + '). Try again.');
+        render();
+      });
+  }
+
+  function addFiles(files) {
+    var list = Array.prototype.slice.call(files).filter(function (f) { return /^image\//.test(f.type) || /\.heic$/i.test(f.name); });
+    if (!list.length) { setStatus('No images found in that drop.'); return; }
+    setStatus('Preparing ' + list.length + ' photo' + (list.length > 1 ? 's' : '') + '…');
+    Promise.all(list.map(function (f) {
+      return shrink(f).then(function (data) { return { name: f.name, label: '', data: data }; })
+        .catch(function () { setStatus('Couldn’t read ' + f.name + ' — try exporting it as JPG.'); return null; });
+    })).then(function (items) {
+      items.filter(Boolean).forEach(function (it) { state.push(it); });
+      render();
+      save('Uploading ' + list.length + ' photo' + (list.length > 1 ? 's' : '') + '…');
+    });
+  }
+
+  var drop = $('drop');
+  drop.addEventListener('click', function () { $('file').click(); });
+  drop.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('file').click(); } });
+  $('file').addEventListener('change', function (e) { addFiles(e.target.files); e.target.value = ''; });
+  ['dragover', 'dragenter'].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('over'); });
+  });
+  ['dragleave', 'drop'].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('over'); });
+  });
+  drop.addEventListener('drop', function (e) { addFiles(e.dataTransfer.files); });
+  $('grid').addEventListener('input', function (e) {
+    var i = e.target.getAttribute('data-i');
+    if (i !== null) { state[i].label = e.target.value; dirty = true; $('save').disabled = busy || !canWrite; }
+  });
+  $('grid').addEventListener('click', function (e) {
+    var d = e.target.getAttribute('data-del');
+    if (d !== null) { state.splice(+d, 1); dirty = true; render(); save('Removing…'); }
+  });
+  $('save').addEventListener('click', function () { save(); });
+
+  render();
+  if (window.claude && claude.use) {
+    claude.use('artifact').then(function (ns) {
+      art = ns;
+      if (!art) { canWrite = false; $('ro').style.display = 'block'; }
+      render();
+    });
+  } else { canWrite = false; $('ro').style.display = 'block'; }
+})();
+</script>
