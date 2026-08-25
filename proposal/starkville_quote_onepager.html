@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MCTV Advertising Quote — Starkville Oktibbeha School District</title>
+<style>
+  @page { size: letter; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #ffffff; }
+  body {
+    font-family: "Work Sans", Arial, sans-serif;
+    color: #22211d;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page {
+    width: 8.5in; height: 11in;
+    position: relative;
+    background: #f9f6ef;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+
+  .masthead {
+    background: #141414; color: #ffffff;
+    padding: 0.24in 0.6in 0.22in;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .mctvlogo .word {
+    font-family: "Playfair Display", Georgia, serif; font-weight: 400;
+    font-size: 30px; letter-spacing: 0.3em; color: #ffffff; line-height: 1;
+  }
+  .mctvlogo .sub {
+    font-size: 8.5px; letter-spacing: 0.45em; color: #8b95a0;
+    font-weight: 500; margin-top: 6px;
+  }
+  .quotemark { text-align: right; }
+  .quotemark .q { font-family: "Playfair Display", Georgia, serif; font-size: 21px; font-weight: 700; color: #F5B914; letter-spacing: 0.08em; }
+  .quotemark .m { font-size: 7.5px; letter-spacing: 0.16em; color: #d8d3c6; font-weight: 500; margin-top: 4px; }
+  .goldrule { height: 3px; background: #F5B914; }
+  .footer {
+    margin-top: auto;
+    padding: 0.14in 0.6in;
+    background: #141414; color: #d8d3c6;
+    font-size: 8px; letter-spacing: 0.2em; font-weight: 500;
+    display: flex; justify-content: space-between;
+  }
+  .body { padding: 0.26in 0.6in 0.2in; flex: 1 1 auto; display: flex; flex-direction: column; }
+
+  .cobrand {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid #d9d2c2; padding-bottom: 10px; margin-bottom: 14px;
+  }
+  .ssdlogo { width: 1.85in; }
+  .meta { text-align: right; font-size: 8.4px; letter-spacing: 0.08em; color: #5d5a50; font-weight: 500; line-height: 1.9; }
+  .meta b { color: #141414; }
+
+  .qtable { width: 100%; border-collapse: collapse; background: #ffffff; border: 1px solid #e4dfd3; border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
+  .qtable th {
+    background: #141414; color: #ffffff; text-align: left;
+    font-size: 8.6px; letter-spacing: 0.18em; font-weight: 600; padding: 8px 14px;
+  }
+  .qtable th:last-child, .qtable td:last-child { text-align: right; }
+  .qtable td { padding: 10px 14px; font-size: 10.6px; color: #44423a; border-top: 1px solid #eee8da; vertical-align: top; }
+  .qtable td .li-t { font-weight: 600; color: #141414; font-size: 11.2px; }
+  .qtable td .li-d { font-size: 9.4px; color: #807c6f; margin-top: 2px; line-height: 1.45; }
+  .qtable .amount { font-family: "Playfair Display", Georgia, serif; font-size: 15px; font-weight: 700; color: #141414; white-space: nowrap; }
+  .qtable .free { color: #b8890f; }
+  .qtable tr.total td { background: #fdf3d3; border-top: 2px solid #F5B914; }
+  .qtable tr.total .li-t { font-size: 11.5px; letter-spacing: 0.06em; }
+  .qtable tr.total .amount { font-size: 17px; }
+
+  .kicker { font-size: 9px; letter-spacing: 0.26em; font-weight: 700; color: #b8890f; margin: 4px 0 7px; }
+
+  .tiers { display: flex; gap: 10px; margin-bottom: 12px; }
+  .tier {
+    flex: 1; background: #ffffff; border: 1px solid #e4dfd3; border-radius: 8px;
+    padding: 11px 12px 10px; text-align: center; position: relative;
+  }
+  .tier.all { border: 2px solid #F5B914; background: #fffdf6; }
+  .tier .badge {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    background: #F5B914; color: #141414; font-size: 6.8px; font-weight: 700;
+    letter-spacing: 0.18em; padding: 2px 9px; border-radius: 8px; white-space: nowrap;
+  }
+  .tier .screens { font-size: 9px; letter-spacing: 0.2em; font-weight: 700; color: #141414; margin-bottom: 4px; }
+  .tier .price { font-family: "Playfair Display", Georgia, serif; font-size: 22px; font-weight: 700; color: #141414; }
+  .tier .price span { font-size: 10px; color: #807c6f; font-family: "Work Sans", Arial, sans-serif; font-weight: 500; }
+  .tier.all .price { color: #b8890f; }
+  .tier .reg { font-size: 8.6px; color: #807c6f; margin-top: 2px; }
+  .tier .reg s { color: #928d7e; }
+
+  .prepay {
+    background: #141414; color: #ffffff; border-radius: 8px;
+    padding: 11px 16px; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .prepay .t { font-size: 8.6px; letter-spacing: 0.22em; font-weight: 700; color: #F5B914; flex: 0 0 auto; }
+  .prepay p { font-size: 9.8px; line-height: 1.5; color: #cfcabe; }
+  .prepay p b { color: #ffffff; }
+
+  .bottom { display: flex; gap: 10px; }
+  .includes { flex: 1.5; background: #ffffff; border: 1px solid #e4dfd3; border-radius: 8px; padding: 10px 14px; }
+  .includes .t { font-size: 8.6px; letter-spacing: 0.18em; font-weight: 700; color: #141414; margin-bottom: 5px; }
+  .includes ul { list-style: none; columns: 2; column-gap: 18px; }
+  .includes li { font-size: 9.2px; line-height: 1.45; color: #44423a; padding-left: 12px; position: relative; margin-bottom: 3px; break-inside: avoid; }
+  .includes li::before { content: "—"; position: absolute; left: 0; color: #b8890f; font-weight: 600; }
+  .contact { flex: 1; background: #fdf3d3; border: 1px solid #F5B914; border-radius: 8px; padding: 10px 14px; }
+  .contact .t { font-size: 8.6px; letter-spacing: 0.18em; font-weight: 700; color: #b8890f; margin-bottom: 4px; }
+  .contact .name { font-family: "Playfair Display", Georgia, serif; font-size: 13.5px; font-weight: 700; color: #141414; }
+  .contact .role { font-size: 7.6px; letter-spacing: 0.16em; color: #5d5a50; font-weight: 600; margin: 1px 0 4px; }
+  .contact .line { font-size: 9.6px; color: #44423a; line-height: 1.55; }
+
+  .terms { margin-top: 9px; font-size: 7.6px; line-height: 1.55; color: #928d7e; }
+  .valband {
+    margin-top: auto;
+    border-top: 1px solid #d9d2c2; padding-top: 12px;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .valband .cell { text-align: center; flex: 1; }
+  .valband .n { font-family: "Playfair Display", Georgia, serif; font-size: 18px; font-weight: 700; color: #141414; }
+  .valband .n em { font-style: normal; color: #b8890f; }
+  .valband .l { font-size: 7px; letter-spacing: 0.16em; color: #807c6f; font-weight: 600; margin-top: 2px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="masthead">
+    <div class="mctvlogo">
+      <div class="word">M&thinsp;C&thinsp;T&thinsp;V</div>
+      <div class="sub">ELITE&nbsp;&nbsp;ADVERTISING</div>
+    </div>
+    <div class="quotemark">
+      <div class="q">ADVERTISING QUOTE</div>
+      <div class="m">MCTV DIGITAL, INC · THE INDOOR BILLBOARD COMPANY</div>
+    </div>
+  </div>
+  <div class="goldrule"></div>
+  <div class="body">
+
+    <div class="cobrand">
+      <img class="ssdlogo" src="ssd_lockup.svg" alt="Starkville Oktibbeha School District">
+      <div class="meta">
+        <div>QUOTE NO. <b>MCTV-2026-SSD-01</b> · DATE <b>AUGUST 25, 2026</b> · VALID THROUGH <b>SEPTEMBER 30, 2026</b></div>
+        <div>PREPARED FOR <b>STARKVILLE OKTIBBEHA SCHOOL DISTRICT</b> · ATTN: <b>ROYANN BELL</b></div>
+        <div>PREPARED BY <b>SWAYZE HOLLINGSWORTH</b> · SWAYZE@MCTVOFMS.COM · 662-907-0404</div>
+      </div>
+    </div>
+
+    <table class="qtable">
+      <tr>
+        <th>DESCRIPTION</th>
+        <th>AMOUNT</th>
+      </tr>
+      <tr>
+        <td>
+          <div class="li-t">September 2026 — Indoor digital screen advertising · 10 screens</div>
+          <div class="li-d">September 1–30, 2026 · 10 screens across the Starkville-area network, anchored on Starkville venues
+          including Starkville Parks &amp; Recreation (Travis Outlaw Center) · custom 15–30 second HD ad produced by MCTV's
+          in-house team · 1,500+ plays per screen on a 15-minute loop · proof-of-play report at month's end.
+          District courtesy rate (regular $350/month).</div>
+        </td>
+        <td><div class="amount">$200.00</div></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="li-t">October 2026 — 10 screens · MCTV partnership gift</div>
+          <div class="li-d">October 1–31, 2026 · same 10-screen footprint and full service, gifted by MCTV as a welcome
+          to the district — two full months on screen for the September investment.</div>
+        </td>
+        <td><div class="amount free">FREE</div></td>
+      </tr>
+      <tr class="total">
+        <td><div class="li-t">TOTAL DUE — SEPTEMBER &amp; OCTOBER 2026</div></td>
+        <td><div class="amount">$200.00</div></td>
+      </tr>
+    </table>
+
+    <div class="kicker">DISTRICT-EXCLUSIVE CONTINUING RATES · NOVEMBER 2026 ONWARD</div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="screens">10 SCREENS</div>
+        <div class="price">$200<span>/mo</span></div>
+        <div class="reg">regular <s>$350/mo</s> — save 43%</div>
+      </div>
+      <div class="tier">
+        <div class="screens">20 SCREENS</div>
+        <div class="price">$400<span>/mo</span></div>
+        <div class="reg">regular <s>$500/mo</s> — save 20%</div>
+      </div>
+      <div class="tier all">
+        <div class="badge">EVERY SCREEN IN STARKVILLE</div>
+        <div class="screens">ALL 35 STARKVILLE SCREENS</div>
+        <div class="price">$550<span>/mo</span></div>
+        <div class="reg">full Starkville market coverage</div>
+      </div>
+    </div>
+
+    <div class="prepay">
+      <div class="t">PREPAY BONUS</div>
+      <p>Pay a 6-month term in full and receive the <b>7th month free</b>. Pay a 12-month term in full and receive the
+      <b>13th and 14th months free</b> — a full school year and summer covered on one purchase order.</p>
+    </div>
+
+    <div class="bottom">
+      <div class="includes">
+        <div class="t">EVERY MCTV CAMPAIGN INCLUDES</div>
+        <ul>
+          <li>Custom 15–30 sec ad production</li>
+          <li>Fresh ad build every quarter</li>
+          <li>Unlimited rotation on your screens</li>
+          <li>Proof-of-play reporting</li>
+          <li>Quarterly Ad Traction Report</li>
+          <li>You own your ad forever</li>
+        </ul>
+      </div>
+      <div class="contact">
+        <div class="t">QUESTIONS / TO ACCEPT</div>
+        <div class="name">Swayze Hollingsworth</div>
+        <div class="role">DIRECTOR OF SALES · MCTV DIGITAL, INC</div>
+        <div class="line">swayze@mctvofms.com · 662-907-0404</div>
+      </div>
+    </div>
+
+    <div class="terms">
+      September and October constitute a one-month paid engagement ($200.00) plus a complimentary month gifted by MCTV Digital, Inc — no obligation
+      beyond September. Continuing rates shown are exclusive to Starkville Oktibbeha School District and available at the district's option beginning
+      November 2026; standard terms then apply (month-to-month with 30-day written notice, or prepaid terms as described above). Creative approval
+      required before launch; MCTV begins ad production upon acceptance to meet a September 1 start.
+    </div>
+
+    <div class="valband">
+      <div class="cell"><div class="n">2 months</div><div class="l">ON SCREEN FOR $200</div></div>
+      <div class="cell"><div class="n">30,000+</div><div class="l">AD PLAYS · SEPT–OCT</div></div>
+      <div class="cell"><div class="n">~300K</div><div class="l">EST. IMPRESSIONS · SEPT–OCT</div></div>
+      <div class="cell"><div class="n"><em>$100</em></div><div class="l">EFFECTIVE MONTHLY COST</div></div>
+      <div class="cell"><div class="n">55+ min</div><div class="l">AVG VENUE DWELL TIME</div></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div>MCTV DIGITAL, INC · THE INDOOR BILLBOARD COMPANY</div>
+    <div>WWW.MCTVOFMS.COM</div>
+  </div>
+</div>
+</body>
+</html>

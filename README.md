@@ -1,5 +1,14 @@
 # MCTV Sales Collateral
 
+## Starkville School District Quote (one-pager)
+
+`Starkville_School_District_Quote.pdf` — official quote for the district's
+purchasing department (Aug 25, 2026): September on 10 screens for $200,
+October gifted free, district-exclusive continuing rates from November
+(10/$200 · 20/$400 · all 35 Starkville screens/$550) and prepay bonuses.
+Source: `proposal/starkville_quote_onepager.html`; rebuild the same way as
+the proposal below.
+
 ## Starkville School District Proposal
 
 `Starkville_School_District_Proposal.pdf` — 3-page print-ready proposal for
