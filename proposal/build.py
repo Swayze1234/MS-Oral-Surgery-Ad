@@ -49,16 +49,29 @@ def fill_slots(html: str) -> str:
     )
 
 
-def set_cover_photo(html: str) -> str:
+def set_cover_assets(html: str) -> str:
+    """assets/cover/: images named *logo* fill the Financial Concepts logo slot;
+    the first other image becomes the bottom-band photo (mural)."""
     imgs = asset_images("cover")
-    if imgs:
-        html = html.replace(
-            'class="cover-photo"',
-            f'class="cover-photo" style="background-image: url({data_uri(imgs[0])})"',
+    logos = [p for p in imgs if "logo" in p.name.lower()]
+    photos = [p for p in imgs if p not in logos]
+    if logos:
+        html = re.sub(
+            r'(<div class="fincon" id="fincon-logo">).*?(</div>\s*</div>)',
+            rf'\1<img src="{data_uri(logos[0])}" alt="Financial Concepts">\2',
+            html, flags=re.S,
         )
-        print(f"  cover photo: {imgs[0].name}")
+        print(f"  fincon logo: {logos[0].name}")
     else:
-        print("  cover photo: none found in assets/cover/ — using black fallback")
+        print("  fincon logo: none in assets/cover/ (*logo*) — using wordmark stand-in")
+    if photos:
+        html = html.replace(
+            'class="band"',
+            f'class="band hasphoto" style="background-image: url({data_uri(photos[0])})"',
+        )
+        print(f"  band photo: {photos[0].name}")
+    else:
+        print("  band photo: none in assets/cover/ — using navy band fallback")
     return html
 
 
@@ -86,7 +99,7 @@ def main() -> None:
             print(f"building {page.name}")
             html = page.read_text()
             if "cover" in page.name:
-                html = set_cover_photo(html)
+                html = set_cover_assets(html)
             html = fill_slots(html)
             # stage next to the originals so relative asset/css paths keep working
             stage = page.parent / f"_build_{page.name}"
