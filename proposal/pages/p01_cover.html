@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../style.css">
+<style>
+  .page.cover { background: var(--black); }
+  .cover-photo {
+    position: absolute; inset: 0;
+    background: var(--black) center / cover no-repeat;
+    /* COVER_PHOTO: build.py sets the background-image when assets/cover/ has a photo */
+  }
+  .scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(100deg, rgba(4,6,10,0.93) 0%, rgba(4,6,10,0.82) 42%, rgba(6,10,18,0.55) 100%),
+                linear-gradient(to top, rgba(4,6,10,0.55) 0%, rgba(4,6,10,0) 35%);
+  }
+  .cover .inner { inset: 0.85in 0.75in 0.55in 0.75in; }
+  .logo img { height: 0.62in; display: block; }
+  .titleblock { margin-top: auto; margin-bottom: auto; padding-top: 0.35in; }
+  .cover .kicker { color: #A9BAD3; font-size: 10.5pt; }
+  .cover h1 {
+    color: #FFFFFF; font-size: 58pt; font-weight: 500;
+    letter-spacing: 0.01em; margin-top: 0.18in; line-height: 1.05;
+  }
+  .cta {
+    margin-top: 0.26in;
+    font-size: 13.5pt; line-height: 1.5; color: #D8DCE4;
+    max-width: 6.4in;
+  }
+  .cta strong { color: #fff; font-weight: 600; }
+  .coverfoot {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 8.5pt; font-weight: 600; letter-spacing: 0.26em;
+    text-transform: uppercase; color: #93A2B8;
+  }
+</style></head>
+<body>
+<div class="page cover">
+  <div class="cover-photo"></div>
+  <div class="scrim"></div>
+  <div class="inner">
+    <div class="logo"><img src="../assets/mctv_logo_white.png" alt="MCTV Elite Advertising"></div>
+    <div class="titleblock">
+      <div class="kicker">Advertiser Partnership Proposal</div>
+      <h1>Financial Concepts</h1>
+      <div class="cta">Your billboards own the Golden Triangle's highways.<br>
+      <strong>Let's put your name in every waiting room, lobby, and showroom too — and make Financial Concepts impossible to ignore.</strong></div>
+    </div>
+    <div class="coverfoot">
+      <span>www.mctvofms.com</span>
+      <span>Prepared for Financial Concepts · August 27, 2026</span>
+    </div>
+  </div>
+</div>
+</body></html>

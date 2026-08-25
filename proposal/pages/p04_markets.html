@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../style.css">
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1.12fr; gap: 0.3in; margin-top: 0.24in; flex: 1; }
+  .card { border: 1px solid var(--line); border-radius: 6px; padding: 0.22in 0.24in; display: flex; flex-direction: column; background: #FBFAF7; }
+  .card .mk { font-size: 8pt; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--steel); }
+  .card h2 { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 16.5pt; color: var(--navy); margin-top: 0.06in; }
+  .card .count { display: flex; align-items: baseline; gap: 0.08in; margin: 0.1in 0 0.08in; }
+  .card .count .num { font-family: 'Playfair Display', Georgia, serif; font-size: 30pt; font-weight: 500; color: var(--navy); line-height: 1; }
+  .card .count .u { font-size: 8pt; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--steel); }
+  .card p { font-size: 9pt; line-height: 1.5; }
+  .venues { margin-top: 0.14in; padding-top: 0.12in; border-top: 1px solid var(--line); }
+  .venues .vh { font-size: 7.5pt; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--steel); margin-bottom: 0.07in; }
+  .venues ul { list-style: none; }
+  .venues li { font-size: 8.8pt; line-height: 1.65; }
+  .venues .more { margin-top: 0.07in; font-size: 7.5pt; letter-spacing: 0.1em; text-transform: uppercase; color: #9A9184; }
+  /* Golden Triangle — highlighted home market */
+  .home { background: var(--navy); border-color: var(--navy); color: #DEE3EC; }
+  .home .badge { align-self: flex-start; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--navy); background: #E8C87A; border-radius: 3px; padding: 0.035in 0.08in; margin-bottom: 0.1in; }
+  .home .mk, .home .count .u, .home .venues .vh { color: var(--steel-dark); }
+  .home h2, .home .count .num { color: #fff; }
+  .home .venues { border-top-color: var(--line-dark); }
+  .home .venues .more { color: #7C8FA9; }
+</style></head>
+<body>
+<div class="page">
+  <div class="inner">
+    <div class="kicker">Host Network &middot; Where Your Ad Runs</div>
+    <h1>Three markets. One footprint.</h1>
+    <div class="grid">
+      <div class="card">
+        <div class="mk">Market 01</div>
+        <h2>Oxford / Lafayette</h2>
+        <div class="count"><div class="num">44</div><div class="u">Venues</div></div>
+        <p>Our deepest footprint — game-weekend traffic, a university town's year-round service
+        economy, and the civic buildings every resident passes through.</p>
+        <div class="venues"><div class="vh">Premium locations</div>
+          <ul><li>RedMed Urgent Clinic</li><li>Cannon Chevrolet Buick Cadillac</li><li>Oxford-Lafayette Chamber</li><li>Oxford Park Commission</li><li>The Children's Dental Center</li><li>Rafters Music and Food</li></ul>
+          <div class="more">Sample of 44 &middot; full list on request</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="mk">Market 02</div>
+        <h2>Tupelo / Lee County</h2>
+        <div class="count"><div class="num">28</div><div class="u">Venues</div></div>
+        <p>North Mississippi's regional hub — medical, retail, and travel venues drawing from a
+        dozen surrounding counties, including both airport terminals.</p>
+        <div class="venues"><div class="vh">Premium locations</div>
+          <ul><li>Cardiology Associates of North MS</li><li>Tupelo Regional Airport</li><li>Hotel Tupelo</li><li>Midtown Pointe Shopping Center</li><li>Right Track Medical Group</li><li>Tupelo River Coffee</li></ul>
+          <div class="more">Sample of 28 &middot; full list on request</div>
+        </div>
+      </div>
+      <div class="card home">
+        <div class="badge">Your home market</div>
+        <div class="mk">Market 03</div>
+        <h2>Golden Triangle</h2>
+        <div class="count"><div class="num">29</div><div class="u">Venues</div></div>
+        <p>Starkville, Columbus, and West Point — three towns, one buying market. Screens sit in the
+        co-ops, clinics, dealerships, and family restaurants that anchor daily life across Oktibbeha,
+        Lowndes, and Clay counties — the same roads your billboards already work.</p>
+        <div class="venues"><div class="vh">Premium locations</div>
+          <ul><li>Magnolia Dermatology</li><li>Revive Wellness Clinic</li><li>Cannon Chevrolet GMC</li><li>Oktibbeha County Co-op</li><li>BJ's Family Pharmacy</li><li>Elm Lake Golf Course</li></ul>
+          <div class="more">Sample of 29 &middot; full list on request</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>MCTV &middot; The Indoor Billboard Company</span><span>04</span></div>
+  </div>
+</div>
+</body></html>

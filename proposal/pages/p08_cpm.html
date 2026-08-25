@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../style.css">
+<style>
+  .chart { flex: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 0.1in; max-width: 9in; }
+  .row { display: grid; grid-template-columns: 1.55in 1fr; align-items: center; gap: 0.18in; padding: 0.075in 0; }
+  .row .name { font-size: 9.5pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); text-align: right; line-height: 1.25; }
+  .row .name .sub { display: block; font-size: 7pt; font-weight: 600; letter-spacing: 0.14em; color: var(--steel); margin-top: 0.02in; }
+  .track { display: flex; align-items: center; gap: 0.09in; }
+  .bar { height: 0.24in; background: #B5A98F; border-radius: 0 4px 4px 0; }
+  .row.mctv .bar { background: var(--navy); }
+  .val { font-size: 10.5pt; font-weight: 600; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .row.mctv .val { color: var(--navy); font-weight: 700; }
+  .row.mctv .name { color: var(--navy); }
+  .callout { margin-top: 0.16in; margin-left: 1.73in; display: inline-flex; align-items: baseline; gap: 0.12in; }
+  .callout .tag { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 12.5pt; color: var(--navy); }
+  .notes { margin-top: 0.18in; font-size: 7.5pt; line-height: 1.5; color: #8A8375; max-width: 8.6in; }
+</style></head>
+<body>
+<div class="page">
+  <div class="inner">
+    <div class="kicker">Cost per 1,000 Impressions &middot; Local Media Comparison</div>
+    <h1>A fraction of the CPM of any<br>other local channel.</h1>
+    <div class="chart">
+      <!-- bar widths: linear scale, $65 = 100% -->
+      <div class="row"><div class="name">Magazine</div><div class="track"><div class="bar" style="width:100%"></div><div class="val">$65</div></div></div>
+      <div class="row"><div class="name">Television</div><div class="track"><div class="bar" style="width:53.8%"></div><div class="val">$35</div></div></div>
+      <div class="row"><div class="name">Radio</div><div class="track"><div class="bar" style="width:41.5%"></div><div class="val">$27</div></div></div>
+      <div class="row"><div class="name">Social media</div><div class="track"><div class="bar" style="width:30.0%"></div><div class="val">$19.51</div></div></div>
+      <div class="row"><div class="name">Outdoor billboards<span class="sub">Your current channel</span></div><div class="track"><div class="bar" style="width:9.2%"></div><div class="val">$6</div></div></div>
+      <div class="row mctv"><div class="name">MCTV indoor network</div><div class="track"><div class="bar" style="width:4.05%"></div><div class="val">$2.63</div></div></div>
+      <div class="callout"><span class="tag">Less than half the cost of the billboards already working for you &mdash; as low as $1.64 at full network scale.</span></div>
+      <div class="notes">CPM = cost per thousand impressions. The MCTV figure is a network blended average; campaigns price as low
+      as $1.64 CPM at full scale. Comparison figures are typical U.S. local CPM ranges by channel (industry estimates).</div>
+    </div>
+    <div class="foot"><span>MCTV &middot; The Indoor Billboard Company</span><span>08</span></div>
+  </div>
+</div>
+</body></html>
