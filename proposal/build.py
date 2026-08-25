@@ -35,18 +35,25 @@ def data_uri(path: Path) -> str:
 
 
 def fill_slots(html: str) -> str:
-    """Replace placeholder markup inside data-fill="dir/N" elements with real images."""
-    def repl(m: re.Match) -> str:
-        head, subdir, idx, body = m.group(1), m.group(2), int(m.group(3)), m.group(4)
+    """Replace the whole placeholder subtree inside data-fill="dir/N" elements
+    with real images (div-depth counted — the placeholder contains nested divs)."""
+    out, pos = [], 0
+    for m in re.finditer(r'<div class="[^"]*" data-fill="(\w+)/(\d+)">', html):
+        subdir, idx = m.group(1), int(m.group(2))
         imgs = asset_images(subdir)
-        if idx <= len(imgs):
-            return f'{head}<img src="{data_uri(imgs[idx - 1])}" alt="">'
-        return m.group(0)
-
-    return re.sub(
-        r'(<div class="[^"]*" data-fill="(\w+)/(\d+)">)(<div class="ph">.*?</div>)',
-        repl, html, flags=re.S,
-    )
+        if idx > len(imgs):
+            continue
+        depth, i = 1, m.end()
+        for tag in re.finditer(r"<div\b|</div>", html[m.end():]):
+            depth += 1 if tag.group(0) == "<div" else -1
+            if depth == 0:
+                i = m.end() + tag.start()
+                break
+        out.append(html[pos:m.end()])
+        out.append(f'<img src="{data_uri(imgs[idx - 1])}" alt="">')
+        pos = i
+    out.append(html[pos:])
+    return "".join(out)
 
 
 def set_cover_assets(html: str) -> str:
