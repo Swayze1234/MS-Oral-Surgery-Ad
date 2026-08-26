@@ -158,6 +158,30 @@
   .bar-row.mctv .pct { color:var(--gold-deep); }
   .fineprint { font-size:7.8pt; font-style:italic; color:#8A8468; margin-top:6pt; line-height:1.5; }
 
+  /* ---- market page ---- */
+  .mkt-stats { display:flex; border-top:1.5pt solid var(--navy); border-bottom:1.5pt solid var(--navy); padding:8pt 0; margin:11pt 0 12pt; }
+  .mkt-stats .stat { flex:1; padding-right:8pt; }
+  .mkt-stats .num { font-family:'Source Serif 4'; font-weight:600; font-size:16.5pt; color:var(--navy); }
+  .mkt-stats .num .g { color:var(--gold-deep); }
+  .mkt-stats .lbl {
+    font-family:'Archivo'; font-weight:700; font-size:6.6pt; letter-spacing:0.1em;
+    text-transform:uppercase; color:#8A8468; margin-top:3pt; line-height:1.5;
+  }
+  .roster-note { font-size:9.3pt; line-height:1.5; color:var(--ink); margin:3pt 0 8pt; max-width:6.9in; }
+  .venue-cols { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0 16pt; }
+  .vcat { margin-bottom:8pt; }
+  .vcat .ch {
+    font-family:'Archivo'; font-weight:700; font-size:7.6pt; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--gold-deep);
+    border-bottom:0.75pt solid var(--gold); padding-bottom:3pt; margin-bottom:4pt;
+  }
+  .vcat ul { list-style:none; }
+  .vcat li {
+    font-size:8pt; line-height:1.3; color:var(--ink); padding:1.8pt 0 1.8pt 9pt;
+    position:relative;
+  }
+  .vcat li::before { content:'·'; position:absolute; left:1pt; color:var(--navy); font-weight:700; }
+
   /* ---- page 3 (cream, kit pricing style) ---- */
   .options { display:flex; gap:10pt; margin:6pt 0 12pt; }
   .opt {
@@ -337,7 +361,119 @@
   <div class="footer"><span>MCTV Digital, Inc &nbsp;·&nbsp; The Indoor Billboard Company</span><span>The Warehouse Market &nbsp;·&nbsp; Host Partnership Proposal</span></div>
 </div>
 
-<!-- ================= PAGE 3 · OPTIONS & NEXT STEPS (cream) ================= -->
+<!-- ================= PAGE 3 · THE MARKET & VENUE ROSTER (cream) ================= -->
+<div class="page light">
+  <div class="pagehead">
+    <div class="wordmark">
+      <div class="mctv">M C T V</div>
+      <div class="elite">ELITE ADVERTISING</div>
+    </div>
+    <div class="right">The Golden Triangle Network</div>
+  </div>
+
+  <span class="kick">The Market</span>
+  <h1 class="display" style="margin-bottom:8pt;">Three towns, one audience<br>that keeps <span class="g">moving.</span></h1>
+
+  <p class="lede">Starkville runs on Mississippi State — 23,000+ students, the faculty and staff behind
+  them, and the maroon-and-white crowds that fill Davis Wade Stadium every home Saturday. But the Golden
+  Triangle is bigger than one campus: <b>Columbus and West Point share the same roads, the same
+  employers, and the same weekend plans</b>, and money moves between all three towns every day.</p>
+  <p class="lede" style="margin-top:7pt;">MCTV's screens sit where that traffic lands — steakhouses and
+  smoked-meat joints, medical and veterinary waiting rooms, the golf course, the wine shop, the co-op, a
+  dermatology clinic in Columbus, and a Chevrolet GMC dealership in West Point. With <b>55+ minutes of average dwell
+  time</b>, your ad isn't glanced at — it's seen again and again in places people already trust. And
+  this is our fastest-growing territory, with more screens slated for Columbus and West Point.</p>
+
+  <div class="mkt-stats">
+    <div class="stat"><div class="num">23,000<span class="g">+</span></div><div class="lbl">MSU Students, Plus<br>Faculty &amp; Staff</div></div>
+    <div class="stat"><div class="num">60,000<span class="g">+</span></div><div class="lbl">Fans in Davis Wade<br>on Home Saturdays</div></div>
+    <div class="stat"><div class="num">3</div><div class="lbl">Towns in One Footprint<br>Starkville · Columbus · West Point</div></div>
+    <div class="stat"><div class="num">55<span class="g">+</span> min</div><div class="lbl">Average Dwell Time<br>Per Venue Visit</div></div>
+  </div>
+
+  <span class="kick">Where Your Ad Runs</span>
+  <div style="font-family:'Source Serif 4'; font-weight:600; font-size:16pt; color:var(--navy); margin:2pt 0 4pt;">29+ partner venues across the Golden Triangle.</div>
+  <p class="roster-note">The current roster, by category — the actual rooms your ad plays in. We'll help
+  you match venues to the customers you want to reach.</p>
+
+  <div class="venue-cols">
+    <div>
+      <div class="vcat">
+        <div class="ch">Restaurants, Bars &amp; Food</div>
+        <ul>
+          <li>Arepas Coffee &amp; Bar</li>
+          <li>Hobie's Tiki Dawgs &amp; Daqs</li>
+          <li>Mississippi Ice Daiquiri Shop</li>
+          <li>The Breakfast Club</li>
+          <li>Two Brothers Smoked Meats</li>
+          <li>Umi Japanese Steakhouse &amp; Sushi Bar</li>
+          <li>Uno Mas Tacos y Tequila Starkville</li>
+        </ul>
+      </div>
+      <div class="vcat">
+        <div class="ch">Fitness &amp; Wellness</div>
+        <ul><li>39759 Nutrition</li></ul>
+      </div>
+      <div class="vcat">
+        <div class="ch">Services</div>
+        <ul><li>Copy Cow</li></ul>
+      </div>
+    </div>
+    <div>
+      <div class="vcat">
+        <div class="ch">Medical &amp; Healthcare</div>
+        <ul>
+          <li>BJ's Family Pharmacy</li>
+          <li>Magnolia Dermatology — Columbus Clinic</li>
+          <li>Mississippi Asthma &amp; Allergy Clinic, PA — Starkville</li>
+          <li>Revive Wellness Clinic — Starkville</li>
+          <li>Right Track Medical Group — Starkville</li>
+          <li>Starkville Veterinary Hospital</li>
+        </ul>
+      </div>
+      <div class="vcat">
+        <div class="ch">Retail &amp; Specialty</div>
+        <ul>
+          <li>Bennett Home Furniture &amp; More</li>
+          <li>Cellars Wine &amp; Spirits</li>
+          <li>Little Magnolia Gifts &amp; Apparel — Starkville</li>
+          <li>Montgomery's Jewelry</li>
+          <li>Oktibbeha County Co-op</li>
+          <li>Starkvegas Pawnshop</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="vcat">
+        <div class="ch">Recreation &amp; Civic</div>
+        <ul>
+          <li>Elm Lake Golf Course</li>
+          <li>Skate Odyssey Inc</li>
+          <li>Skate Zone</li>
+          <li>Starkville Parks and Recreation</li>
+        </ul>
+      </div>
+      <div class="vcat">
+        <div class="ch">Automotive</div>
+        <ul>
+          <li>Cannon Chevrolet GMC of West Point</li>
+          <li>William Wells Tire &amp; Auto</li>
+        </ul>
+      </div>
+      <div class="vcat">
+        <div class="ch">Beauty, Salons &amp; Spas</div>
+        <ul>
+          <li>Legends Hair Salon</li>
+          <li>Lucky Nails &amp; Spa</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><span>MCTV Digital, Inc &nbsp;·&nbsp; The Indoor Billboard Company</span><span>The Warehouse Market &nbsp;·&nbsp; Host Partnership Proposal</span></div>
+</div>
+
+<!-- ================= PAGE 4 · OPTIONS & NEXT STEPS (cream) ================= -->
 <div class="page light">
   <div class="pagehead">
     <div class="wordmark">
