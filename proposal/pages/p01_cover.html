@@ -2,57 +2,60 @@
 <html><head><meta charset="utf-8">
 <link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../style.css">
 <style>
-  .cover .inner { inset: 0.85in 0.75in 0 0.75in; }
-  .logorow { display: flex; justify-content: space-between; align-items: center; }
-  .logorow .mctv img { height: 0.72in; display: block; }
-  /* Financial Concepts wordmark — typographic stand-in until the real logo
-     file lands in assets/cover/ (any image with "logo" in its name). */
-  .fincon { text-align: right; }
-  .fincon img { height: 0.78in; display: block; }
-  .fincon .wm { font-family: 'Montserrat', 'Barlow', sans-serif; font-weight: 800; font-size: 19pt;
-    letter-spacing: 0.06em; color: #1F8748; line-height: 1.08; text-transform: uppercase; }
-  .titleblock { margin-top: auto; margin-bottom: auto; padding: 0.3in 0 0.35in; }
-  .cover .kicker { font-size: 11pt; }
-  .cover h1 { font-size: 56pt; font-weight: 500; line-height: 1.05; margin-top: 0.16in; }
-  .cta { margin-top: 0.24in; font-size: 13pt; line-height: 1.5; color: var(--body); max-width: 6.8in; }
-  .cta strong { color: var(--navy); font-weight: 600; }
-  .meta { margin-top: 0.26in; display: flex; gap: 0.45in; font-size: 9pt; font-weight: 600;
-    letter-spacing: 0.24em; text-transform: uppercase; color: var(--steel); }
-  /* Bottom band: navy strip that becomes the mural photo when one is added */
-  .band {
-    position: absolute; left: 0; right: 0; bottom: 0; height: 1.9in;
-    background: var(--navy) center / cover no-repeat;
+  .page.cover { background: var(--navy); }
+  .cover-photo {
+    position: absolute; inset: 0;
+    background: var(--navy) center 45% / cover no-repeat;
+    /* build.py sets the background-image from assets/cover/ */
   }
-  .band .bandscrim { position: absolute; inset: 0; }
-  .band.hasphoto { background-position: center 62%; }
-  .band.hasphoto .bandscrim { background: linear-gradient(to top, rgba(6,13,28,0.55), rgba(6,13,28,0.15)); }
-  .band .markets {
-    position: absolute; left: 0.75in; right: 0.75in; bottom: 0.3in;
+  .scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(93deg, rgba(7,12,22,0.88) 0%, rgba(7,12,22,0.72) 38%, rgba(9,15,28,0.42) 72%, rgba(9,15,28,0.30) 100%),
+                linear-gradient(to top, rgba(7,12,22,0.72) 0%, rgba(7,12,22,0.05) 34%),
+                linear-gradient(to bottom, rgba(7,12,22,0.45) 0%, rgba(7,12,22,0) 22%);
+  }
+  .cover .inner { inset: 0.5in 0.7in 0.42in 0.7in; }
+  .logorow { display: flex; justify-content: space-between; align-items: flex-start; }
+  .logorow .mctv img { height: 0.5in; display: block; }
+  /* real Financial Concepts logo drops in here from assets/cover/*logo*; empty until then */
+  .fincon img { height: 0.55in; display: block; background: rgba(246,244,240,0.92); border-radius: 4px; padding: 0.06in 0.1in; }
+  .titleblock { margin-top: auto; }
+  .cover .kicker { color: #CBD6E6; font-size: 9.5pt; }
+  .cover .kicker::after { border-bottom-color: #C9A227; }
+  .cover h1 {
+    color: #FFFFFF; font-size: 44pt; font-weight: 600;
+    letter-spacing: 0.005em; margin-top: 0.17in; line-height: 1.07;
+  }
+  .clientpill {
+    display: inline-block; margin-top: 0.24in;
+    border: 1.5px solid rgba(255,255,255,0.85); border-radius: 3px;
+    padding: 0.075in 0.16in;
+    font-size: 9.5pt; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: #fff;
+  }
+  .coverfoot {
+    margin-top: 0.42in;
     display: flex; justify-content: space-between; align-items: baseline;
-    font-size: 8.5pt; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: #A9BAD3;
+    font-size: 8pt; font-weight: 600; letter-spacing: 0.24em;
+    text-transform: uppercase; color: #C3CDDC;
   }
-  .band .markets .gt { color: #E8C87A; }
 </style></head>
 <body>
 <div class="page cover">
+  <div class="cover-photo"></div>
+  <div class="scrim"></div>
   <div class="inner">
     <div class="logorow">
-      <div class="mctv"><img src="../assets/mctv_logo_navy.png" alt="MCTV Elite Advertising"></div>
-      <div class="fincon" id="fincon-logo"><div class="wm">Financial<br>Concepts</div></div>
+      <div class="mctv"><img src="../assets/mctv_logo_white.png" alt="MCTV Elite Advertising"></div>
+      <div class="fincon" id="fincon-logo"></div>
     </div>
     <div class="titleblock">
       <div class="kicker">Advertiser Partnership Proposal</div>
-      <h1>Financial Concepts</h1>
-      <div class="cta">Your billboards own the Golden Triangle's highways.<br>
-      <strong>Let's put your name in every waiting room, lobby, and showroom too — and make Financial Concepts impossible to ignore.</strong></div>
-      <div class="meta"><span>August 27, 2026</span><span>www.mctvofms.com</span></div>
+      <h1>Own the room,<br>not just the road.</h1>
+      <div class="clientpill">Financial Concepts</div>
     </div>
-  </div>
-  <div class="band">
-    <div class="bandscrim"></div>
-    <div class="markets">
-      <span class="gt">Starkville &middot; Columbus &middot; West Point</span>
-      <span>Oxford &middot; Tupelo &middot; The Golden Triangle</span>
+    <div class="coverfoot">
+      <span>Prepared for Financial Concepts &middot; Columbus, MS</span>
+      <span>August 27, 2026</span>
     </div>
   </div>
 </div>

@@ -73,12 +73,12 @@ def set_cover_assets(html: str) -> str:
         print("  fincon logo: none in assets/cover/ (*logo*) — using wordmark stand-in")
     if photos:
         html = html.replace(
-            'class="band"',
-            f'class="band hasphoto" style="background-image: url({data_uri(photos[0])})"',
+            'class="cover-photo"',
+            f'class="cover-photo" style="background-image: url({data_uri(photos[0])})"',
         )
-        print(f"  band photo: {photos[0].name}")
+        print(f"  cover photo: {photos[0].name}")
     else:
-        print("  band photo: none in assets/cover/ — using navy band fallback")
+        print("  cover photo: none in assets/cover/ — using navy fallback")
     return html
 
 

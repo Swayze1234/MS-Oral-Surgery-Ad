@@ -14,7 +14,7 @@ from pathlib import Path
 from build import ROOT, asset_images, fill_slots, set_cover_assets  # noqa: F401
 
 OUT = ROOT / "preview.html"
-PAGE_W, PAGE_H = 1056, 816  # 11in x 8.5in at 96dpi
+PAGE_W, PAGE_H = 1056, 624  # 11in x 6.5in at 96dpi
 
 GOOGLE_FONTS = (
     '<link rel="stylesheet" href="https://fonts.googleapis.com/css2'
@@ -52,7 +52,7 @@ def main() -> None:
     shared = (ROOT / "style.css").read_text()
     # the proof scales pages itself and paints its own ground; drop the print-only
     # page sizing and white document background from the shared css
-    shared = shared.replace("@page { size: 11in 8.5in; margin: 0; }", "")
+    shared = shared.replace("@page { size: 11in 6.5in; margin: 0; }", "")
     shared = shared.replace("html, body { background: #fff; }", "")
 
     scoped_css, sheets = [], []
