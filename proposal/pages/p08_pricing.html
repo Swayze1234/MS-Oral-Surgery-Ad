@@ -2,15 +2,16 @@
 <html><head><meta charset="utf-8">
 <link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../style.css">
 <style>
-  .tiers { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 0.26in; margin-top: 0.24in; }
-  .tier { border: 1px solid var(--line); border-radius: 6px; padding: 0.2in 0.22in; background: #FBFAF7; display: flex; flex-direction: column; }
+  .tiers { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 0.26in; margin-top: 0.14in; }
+  .tier { border: 1px solid var(--line); border-radius: 6px; padding: 0.14in 0.18in; background: #FBFAF7; display: flex; flex-direction: column; }
   .tier .tag { font-size: 7.5pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); }
   .tier h2 { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 15.5pt; color: var(--navy); margin-top: 0.05in; line-height: 1.2; }
-  .price { display: flex; align-items: baseline; gap: 0.06in; margin: 0.1in 0 0.04in; }
-  .price .p { font-family: 'Playfair Display', Georgia, serif; font-size: 29pt; font-weight: 500; color: var(--navy); line-height: 1; }
+  .price { display: flex; align-items: baseline; gap: 0.06in; margin: 0.06in 0 0.02in; }
+  .price .p { font-family: 'Playfair Display', Georgia, serif; font-size: 25pt; font-weight: 500; color: var(--navy); line-height: 1; }
   .price .per { font-size: 8.5pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); }
-  .tier p.desc { font-size: 8.8pt; line-height: 1.5; margin-top: 0.06in; }
-  .specs { margin-top: 0.12in; padding-top: 0.1in; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 0.08in 0.15in; }
+  .tier p.desc { font-size: 8.4pt; line-height: 1.42; margin-top: 0.05in; }
+  .feat p.desc strong { color: #E8C87A; font-weight: 600; }
+  .specs { margin-top: auto; padding-top: 0.08in; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 0.08in 0.15in; }
   .specs .s .v { font-size: 11.5pt; font-weight: 600; color: var(--navy); font-variant-numeric: tabular-nums; }
   .specs .s .k { font-size: 6.8pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); margin-top: 0.015in; }
   .feat { background: var(--navy); border-color: var(--navy); color: #DEE3EC; }
@@ -18,9 +19,9 @@
   .feat .tag, .feat .price .per, .feat .specs .s .k { color: var(--steel-dark); }
   .feat h2, .feat .price .p, .feat .specs .s .v { color: #fff; }
   .feat .specs { border-top-color: var(--line-dark); }
-  .strip { display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 0.3in; margin-top: 0.22in; padding-top: 0.16in; border-top: 1px solid var(--line); }
+  .strip { display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 0.3in; margin-top: 0.14in; padding-top: 0.1in; border-top: 1px solid var(--line); }
   .strip h3 { font-size: 8pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); margin-bottom: 0.06in; }
-  .strip p, .strip li { font-size: 8.6pt; line-height: 1.5; }
+  .strip p, .strip li { font-size: 8.2pt; line-height: 1.42; }
   .strip ul { list-style: none; }
   .strip li { padding-left: 0.14in; text-indent: -0.14in; }
   .strip li::before { content: "— "; color: var(--steel); }
@@ -30,38 +31,41 @@
 <div class="page">
   <div class="inner">
     <div class="kicker">Your Proposal &middot; Monthly Network Rates</div>
-    <h1>Start with your home market.<br>Scale when you're ready.</h1>
+    <h1 style="font-size:22pt;">Start with your home market.<br>Scale when you're ready.</h1>
     <div class="tiers">
+      <div class="tier">
+        <div class="tag">Starter</div>
+        <h2>10 screens</h2>
+        <div class="price"><span class="p">$350</span><span class="per">/ month</span></div>
+        <p class="desc">Hand-picked Golden Triangle venues to put Financial Concepts in the rooms
+        that matter most.</p>
+        <div class="specs">
+          <div class="s"><div class="v">15K</div><div class="k">Ad plays / mo</div></div>
+          <div class="s"><div class="v">$35</div><div class="k">Per screen</div></div>
+        </div>
+      </div>
+      <div class="tier">
+        <div class="tag">Builder</div>
+        <h2>20 screens</h2>
+        <div class="price"><span class="p">$500</span><span class="per">/ month</span></div>
+        <p class="desc">Serious coverage across the Golden Triangle's highest-traffic rooms.</p>
+        <div class="specs">
+          <div class="s"><div class="v">30K</div><div class="k">Ad plays / mo</div></div>
+          <div class="s"><div class="v">$25</div><div class="k">Per screen</div></div>
+        </div>
+      </div>
       <div class="tier feat">
         <div class="badge">Recommended for Financial Concepts</div>
-        <div class="tag">40 Screens</div>
-        <h2>Golden Triangle saturation</h2>
+        <div class="tag">Every Screen &middot; Starkville, Columbus &amp; West Point</div>
+        <h2>The entire Golden Triangle market</h2>
         <div class="price"><span class="p">$800</span><span class="per">/ month</span></div>
-        <p class="desc">Every Golden Triangle venue — Starkville, Columbus &amp; West Point — with
-        remaining screens extending your reach into Oxford or Tupelo.*</p>
+        <p class="desc">Every Golden Triangle screen we operate today — <strong>plus every new screen we
+        install in the Golden Triangle during your contract, at no added cost</strong> — with
+        <strong>financial-services category exclusivity</strong> across the market. Your footprint
+        grows as the network does; no competing advisor ever shares your screens.</p>
         <div class="specs">
-          <div class="s"><div class="v">60K</div><div class="k">Ad plays / mo</div></div>
-          <div class="s"><div class="v">$20</div><div class="k">Per screen</div></div>
-        </div>
-      </div>
-      <div class="tier">
-        <div class="tag">80 Screens</div>
-        <h2>Two-market saturation</h2>
-        <div class="price"><span class="p">$1,400</span><span class="per">/ month</span></div>
-        <p class="desc">Deep saturation across the Golden Triangle plus a full second market.</p>
-        <div class="specs">
-          <div class="s"><div class="v">120K</div><div class="k">Ad plays / mo</div></div>
-          <div class="s"><div class="v">$17.50</div><div class="k">Per screen</div></div>
-        </div>
-      </div>
-      <div class="tier">
-        <div class="tag">125+ Screens</div>
-        <h2>The entire network</h2>
-        <div class="price"><span class="p">$2,000</span><span class="per">/ month</span></div>
-        <p class="desc">All three markets — every screen, every venue, all of North Mississippi.</p>
-        <div class="specs">
-          <div class="s"><div class="v">187.5K</div><div class="k">Ad plays / mo</div></div>
-          <div class="s"><div class="v">$16</div><div class="k">Per screen</div></div>
+          <div class="s"><div class="v">35+</div><div class="k">Screens &amp; growing</div></div>
+          <div class="s"><div class="v">52K+</div><div class="k">Ad plays / mo</div></div>
         </div>
       </div>
     </div>
@@ -83,7 +87,7 @@
       <div>
         <h3>Add-ons &amp; exclusivity</h3>
         <p>Animated logo bumper — $10/screen/mo + $150 setup. Cause sponsorship — $10/screen/mo.</p>
-        <p class="excl" style="margin-top:0.05in;">Financial-services category exclusivity available on every screen you buy.</p>
+        <p class="excl" style="margin-top:0.05in;">Financial-services category exclusivity: included with the full Golden Triangle package; available on any tier.</p>
       </div>
     </div>
     <div class="foot"><span>Financial Concepts &times; MCTV</span><span>*Final screen list confirmed at signing &middot; 08</span></div>
