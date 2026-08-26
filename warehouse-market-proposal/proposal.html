@@ -13,6 +13,8 @@
   @font-face { font-family:'Source Serif 4'; font-weight:400; font-style:italic; src:url('../bjs-traction-report/assets/fonts/SourceSerif4-400-italic.ttf'); }
   @font-face { font-family:'Source Serif 4'; font-weight:600; src:url('../bjs-traction-report/assets/fonts/SourceSerif4-600-normal.ttf'); }
   @font-face { font-family:'Source Serif 4'; font-weight:700; src:url('../bjs-traction-report/assets/fonts/SourceSerif4-700-normal.ttf'); }
+  @font-face { font-family:'Oswald'; font-weight:500; src:url('../bjs-traction-report/assets/fonts/Oswald-500-normal.ttf'); }
+  @font-face { font-family:'Oswald'; font-weight:600; src:url('../bjs-traction-report/assets/fonts/Oswald-600-normal.ttf'); }
 
   :root {
     --navy:#262D64; --navy-deep:#1C2250; --ink:#232842;
@@ -55,10 +57,7 @@
 
   /* ---------- cover ---------- */
   .cover { display:flex; flex-direction:column; }
-  .client-name {
-    font-family:'Archivo'; font-weight:900; font-size:30pt; line-height:1.08;
-    color:var(--navy); margin:12pt 0 6pt;
-  }
+  .wm-logo { width:2.55in; height:auto; display:block; margin:10pt 0 12pt; }
   .cover .subtitle { font-size:12pt; color:#3A3F60; }
   .cover-title {
     font-family:'Archivo'; font-weight:900; font-size:38pt; line-height:1.05;
@@ -180,6 +179,25 @@
   .team .rl { font-size:9pt; font-style:italic; color:#5A5F7E; margin:1pt 0 3pt; }
   .team .ct { font-size:9pt; color:#3A3F60; line-height:1.45; }
 
+  .netstats {
+    margin-top:10pt; background:var(--navy); border-radius:4pt;
+    display:flex; padding:11pt 14pt;
+  }
+  .netstats .stat { flex:1; }
+  .netstats .num { font-family:'Archivo'; font-weight:800; font-size:16pt; color:#E8C87E; }
+  .netstats .lbl {
+    font-family:'Archivo'; font-weight:700; font-size:6.6pt; letter-spacing:0.12em;
+    text-transform:uppercase; color:#B9BDD6; margin-top:3pt;
+  }
+
+  .bar-row { display:flex; align-items:center; margin-bottom:4.5pt; }
+  .bar-row .bl { width:1.65in; font-family:'Archivo'; font-weight:600; font-size:8.4pt; color:var(--ink); }
+  .bar-row .track { flex:1; height:9pt; background:var(--panel); border-radius:1.5pt; }
+  .bar-row .fill { height:100%; background:var(--navy); border-radius:1.5pt; }
+  .bar-row .pct { width:0.55in; font-family:'Archivo'; font-weight:700; font-size:8.4pt; color:var(--navy); text-align:right; }
+  .bar-row.mctv .bl, .bar-row.mctv .pct { color:var(--bronze); }
+  .bar-row.mctv .fill { background:var(--bronze-lt); }
+
   .benefits { display:grid; grid-template-columns:1fr 1fr; gap:8pt; margin-top:9pt; }
   .bn { background:var(--panel); border-radius:3pt; padding:8pt 11pt; }
   .bn .t { font-family:'Archivo'; font-weight:700; font-size:9pt; color:var(--navy); margin-bottom:2pt; }
@@ -191,7 +209,17 @@
 <!-- ================= PAGE 1 · COVER ================= -->
 <div class="page cover">
   <div class="kicker">Prepared For</div>
-  <div class="client-name">THE WAREHOUSE<br>MARKET</div>
+  <svg class="wm-logo" viewBox="0 0 720 600" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#591F2C" stroke-width="13" fill="none" stroke-linecap="square">
+      <polyline points="60,168 250,168 250,140 292,140 360,88 428,140 470,140 470,168 660,168"/>
+      <polyline points="160,420 160,468 216,468"/>
+      <polyline points="560,420 560,468 504,468"/>
+      <polyline points="248,512 360,562 472,512"/>
+    </g>
+    <text x="360" y="205" text-anchor="middle" font-family="Oswald" font-weight="600" font-size="86" letter-spacing="4" fill="#591F2C">THE</text>
+    <text x="360" y="378" text-anchor="middle" font-family="Oswald" font-weight="600" font-size="148" textLength="616" lengthAdjust="spacingAndGlyphs" fill="#591F2C">WAREHOUSE</text>
+    <text x="360" y="487" text-anchor="middle" font-family="Oswald" font-weight="600" font-size="82" textLength="252" lengthAdjust="spacingAndGlyphs" fill="#591F2C">MARKET</text>
+  </svg>
   <div class="subtitle">Indoor Digital Billboard Network &nbsp;·&nbsp; Starkville, Mississippi</div>
 
   <div class="cover-title">HOST PARTNERSHIP<br>PROPOSAL</div>
@@ -222,56 +250,51 @@
   <div class="footer"><span>MCTV Elite Advertising</span><span>The Warehouse Market &nbsp;·&nbsp; Host Partnership Proposal</span></div>
 </div>
 
-<!-- ================= PAGE 2 · PARTNERSHIP & WHAT'S CHANGING ================= -->
+<!-- ================= PAGE 2 · HOST BENEFITS & THE NETWORK ================= -->
 <div class="page">
   <div class="kicker">Section 01</div>
-  <h1 class="section">WHAT'S CHANGING THIS FALL</h1>
+  <h1 class="section">WHAT HOST PARTNERS GET</h1>
   <div class="section-rule"></div>
 
-  <div class="val-band">
-    <div class="num">5 Free</div>
-    <div class="txt">Every host venue partner earns <b>five screen locations at no cost</b>. While
-    inventory was open, we went further and ran host ads network-wide free — The Warehouse Market has
-    been reaching customers all over town without spending a dollar.</div>
-  </div>
-
-  <div class="h2">The network is filling up</div>
-  <p class="lede">Paid advertisers are signing on and loop inventory is being committed to their
-  agreements. As of this fall, <b class="nv">every host partner on the network moves to the standard
-  host benefit — five free screens</b> — and the remaining slots are allocated to signed campaigns,
-  first come, first served. Before any of those screens is released to a paying advertiser, we're
-  giving our host partners first right to keep them at a rate no advertiser can access.</p>
-
-  <div class="h2">Why keep the bigger footprint</div>
-  <p class="lede">Our screens average <b class="nv">1,500+ plays per screen every month</b> in venues
-  where people wait — 55+ minutes of average dwell time, with no skipping, blocking, or scrolling past.
-  A five-screen presence keeps your name in five rooms; a fifteen- or twenty-five-screen footprint makes
-  The Warehouse Market feel like it's everywhere your customers already go. That's how a local name
-  becomes the first name people think of.</p>
-
-  <table class="compare">
-    <tr>
-      <th style="width:1.75in;"></th>
-      <th class="r">Standard Host<br>(5 Screens)</th>
-      <th class="r">Expanded<br>(15 Screens)</th>
-      <th class="r keep">Full Network Tier<br>(25 Screens)</th>
-    </tr>
-    <tr><td class="lbl2">Est. plays / month*</td><td class="r">7,500+</td><td class="r">22,500+</td><td class="r keep">37,500+</td></tr>
-    <tr><td class="lbl2">Est. impressions / month*</td><td class="r">~75,000</td><td class="r">~225,000</td><td class="r keep">~380,000</td></tr>
-    <tr><td class="lbl2">Monthly cost</td><td class="r">$0</td><td class="r">$280 (reg. $350)</td><td class="r keep">$400 (reg. $500)</td></tr>
-    <tr><td class="lbl2">Effective cost per screen</td><td class="r">—</td><td class="r">$18.67 across 15</td><td class="r keep">$16 across 25</td></tr>
-    <tr><td class="lbl2">Effective cost per 1,000 impressions</td><td class="r">—</td><td class="r">~$1.24 CPM</td><td class="r keep">~$1.05 CPM</td></tr>
-  </table>
-  <p style="font-size:8.4pt; font-style:italic; color:#5A5F7E; margin-top:7pt;">*Based on network
-  averages of 1,500+ plays and ~15,000 estimated impressions per screen per month (NTV360 network
-  analytics). Venue-level proof-of-play reporting is included with every paid tier.</p>
+  <p class="lede" style="margin-bottom:11pt;">Hosting an MCTV screen makes The Warehouse Market more
+  than a venue — it makes you a partner. Every host partner receives all of the following,
+  <b class="nv">completely free, for as long as you host</b>:</p>
 
   <div class="benefits">
-    <div class="bn"><div class="t">A Rate No Advertiser Gets</div><div class="d">Your 20% host discount comes off the same rate card every advertiser on the network pays — $350/mo for 10 screens, $500/mo for 20.</div></div>
-    <div class="bn"><div class="t">You Choose the Venues</div><div class="d">Pick the screens that match your customers — restaurants, medical waiting rooms, retail, auto service — across Starkville and the Golden Triangle.</div></div>
-    <div class="bn"><div class="t">Creative Included</div><div class="d">Custom 15–30 second HD spot produced free, refreshed quarterly — holiday promos, seasonal items, whatever's moving that month.</div></div>
-    <div class="bn"><div class="t">Proof, Not Promises</div><div class="d">Quarterly proof-of-play reporting shows exactly where and how often your ad ran, venue by venue.</div></div>
+    <div class="bn"><div class="t">5 Free Advertising Screens</div><div class="d">Your ad running in five venues of your choice across the network — restaurants, clinics, salons, shops — at no cost, every month.</div></div>
+    <div class="bn"><div class="t">Custom HD Ad Production</div><div class="d">A custom 15–30 second high-definition spot showcasing your deals, location, and team — designed and built by our in-house creative team.</div></div>
+    <div class="bn"><div class="t">Quarterly Creative Refreshes</div><div class="d">A fresh ad build every quarter, free — holiday promos, seasonal items, new arrivals, whatever's moving that month.</div></div>
+    <div class="bn"><div class="t">Unlimited Rotation</div><div class="d">Your spot runs on a 15-minute loop — 1,500+ plays per screen every month. Unskippable, unblockable, impossible to scroll past.</div></div>
+    <div class="bn"><div class="t">Proof-of-Play Reporting</div><div class="d">Real numbers, venue by venue — exactly where and how often your ad ran, sourced from NTV360 network analytics.</div></div>
+    <div class="bn"><div class="t">You Own Your Ad Forever</div><div class="d">Every spot we produce for you is yours to keep — use it on social media, your website, anywhere you like.</div></div>
   </div>
+
+  <div class="h2" style="margin-top:15pt;">The network you're part of</div>
+  <p class="lede">MCTV is the fastest-growing owner-operated indoor billboard network in North America —
+  digital screens inside the venues North Mississippians already visit every week, across
+  <b class="nv">Oxford, Tupelo, and the Golden Triangle</b>. Our screens live where people wait: an
+  average dwell time of 55+ minutes puts your name in front of a captive local audience, month after
+  month.</p>
+
+  <div class="netstats">
+    <div class="stat"><div class="num">125+</div><div class="lbl">Digital Screens</div></div>
+    <div class="stat"><div class="num">100+</div><div class="lbl">Premier Venues</div></div>
+    <div class="stat"><div class="num">1.9M+</div><div class="lbl">Impressions / Mo</div></div>
+    <div class="stat"><div class="num">55+ min</div><div class="lbl">Avg Dwell Time</div></div>
+    <div class="stat"><div class="num">3</div><div class="lbl">Growth Markets</div></div>
+  </div>
+
+  <div class="kicker navy" style="margin:13pt 0 7pt;">Cost Per 1,000 Impressions — Local Comparison</div>
+  <div class="bar-row"><div class="bl">Magazine</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="pct">$65</div></div>
+  <div class="bar-row"><div class="bl">Television</div><div class="track"><div class="fill" style="width:54%"></div></div><div class="pct">$35</div></div>
+  <div class="bar-row"><div class="bl">Radio</div><div class="track"><div class="fill" style="width:42%"></div></div><div class="pct">$27</div></div>
+  <div class="bar-row"><div class="bl">Social Media</div><div class="track"><div class="fill" style="width:30%"></div></div><div class="pct">$19.51</div></div>
+  <div class="bar-row"><div class="bl">Outdoor Billboards</div><div class="track"><div class="fill" style="width:9.2%"></div></div><div class="pct">$6</div></div>
+  <div class="bar-row mctv"><div class="bl">MCTV Indoor Network</div><div class="track"><div class="fill" style="width:4%"></div></div><div class="pct">$2.63</div></div>
+  <p style="font-size:8pt; font-style:italic; color:#5A5F7E; margin-top:6pt;">MCTV figure is the network
+  blended average (campaigns priced as low as $1.64 CPM at scale). Comparison figures are typical U.S.
+  local CPM ranges by channel (industry estimates).</p>
+
   <div class="footer"><span>MCTV Elite Advertising</span><span>The Warehouse Market &nbsp;·&nbsp; Host Partnership Proposal</span></div>
 </div>
 
