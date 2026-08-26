@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="../fonts.css"><link rel="stylesheet" href="../style.css">
 <style>
   .chart { flex: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 0.1in; max-width: 9in; }
-  .row { display: grid; grid-template-columns: 1.55in 1fr; align-items: center; gap: 0.18in; padding: 0.075in 0; }
+  .row { display: grid; grid-template-columns: 1.55in 1fr; align-items: center; gap: 0.18in; padding: 0.05in 0; }
   .row .name { font-size: 9.5pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); text-align: right; line-height: 1.25; }
   .row .name .sub { display: block; font-size: 7pt; font-weight: 600; letter-spacing: 0.14em; color: var(--steel); margin-top: 0.02in; }
   .track { display: flex; align-items: center; gap: 0.09in; }
@@ -12,9 +12,13 @@
   .val { font-size: 10.5pt; font-weight: 600; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
   .row.mctv .val { color: var(--navy); font-weight: 700; }
   .row.mctv .name { color: var(--navy); }
-  .callout { margin-top: 0.16in; margin-left: 1.73in; display: inline-flex; align-items: baseline; gap: 0.12in; }
+  .callout { margin-top: 0.1in; margin-left: 1.73in; }
   .callout .tag { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 12.5pt; color: var(--navy); }
-  .notes { margin-top: 0.18in; font-size: 7.5pt; line-height: 1.5; color: #8A8375; max-width: 8.6in; }
+  .notes { margin-top: 0.1in; font-size: 7.5pt; line-height: 1.5; color: #8A8375; max-width: 8.6in; }
+  .proof3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.3in; margin-top: 0.14in; padding-top: 0.12in; border-top: 1px solid var(--line); max-width: 9in; }
+  .proof3 .p3 { display: flex; align-items: baseline; gap: 0.1in; }
+  .proof3 .v { font-family: 'Playfair Display', Georgia, serif; font-size: 21pt; font-weight: 600; color: var(--navy); line-height: 1; white-space: nowrap; }
+  .proof3 .k { font-size: 8pt; font-weight: 600; line-height: 1.35; color: var(--body); }
 </style></head>
 <body>
 <div class="page">
@@ -30,6 +34,11 @@
       <div class="row"><div class="name">Outdoor billboards<span class="sub">Your current channel</span></div><div class="track"><div class="bar" style="width:9.2%"></div><div class="val">$6</div></div></div>
       <div class="row mctv"><div class="name">MCTV indoor network</div><div class="track"><div class="bar" style="width:4.05%"></div><div class="val">$2.63</div></div></div>
       <div class="callout"><span class="tag">Less than half the cost of the billboards already working for you &mdash; as low as $1.64 at full network scale.</span></div>
+      <div class="proof3">
+        <div class="p3"><div class="v">84%</div><div class="k">ad recall &mdash; highest of any traditional medium</div></div>
+        <div class="p3"><div class="v">2.5&times;</div><div class="k">impact of full-motion video vs. static</div></div>
+        <div class="p3"><div class="v">0</div><div class="k">skip buttons, mute switches, or scroll-pasts</div></div>
+      </div>
       <div class="notes">CPM = cost per thousand impressions. The MCTV figure is a network blended average; campaigns price as low
       as $1.64 CPM at full scale. Comparison figures are typical U.S. local CPM ranges by channel (industry estimates).</div>
     </div>
