@@ -160,9 +160,9 @@
   .compare th.keep { color:var(--bronze); }
 
   /* ---------- page 6 : offer ---------- */
-  .options { display:flex; gap:12pt; margin:4pt 0 12pt; }
+  .options { display:flex; gap:9pt; margin:4pt 0 10pt; }
   .opt {
-    flex:1; border:1pt solid var(--panel-line); border-radius:4pt; padding:12pt 13pt 11pt;
+    flex:1; border:1pt solid var(--panel-line); border-radius:4pt; padding:11pt 10pt 9pt;
   }
   .opt.rec { border:2pt solid var(--bronze-lt); background:var(--gold-bg); position:relative; }
   .opt .tag {
@@ -170,18 +170,30 @@
     font-family:'Archivo'; font-weight:800; font-size:6.8pt; letter-spacing:0.16em;
     padding:2.5pt 7pt; border-radius:2pt; text-transform:uppercase;
   }
-  .opt .oname { font-family:'Archivo'; font-weight:800; font-size:11.5pt; color:var(--navy); }
-  .opt .oprice { font-family:'Archivo'; font-weight:900; font-size:22pt; color:var(--navy); margin:5pt 0 1pt; }
-  .opt .oprice .mo { font-weight:700; font-size:10pt; color:var(--mute); }
-  .opt .oprice .was { font-family:'Source Serif 4'; font-weight:400; font-size:10.5pt; color:var(--mute); text-decoration:line-through; margin-left:5pt; }
-  .opt .osub { font-family:'Archivo'; font-weight:600; font-size:7.6pt; letter-spacing:0.1em; text-transform:uppercase; color:var(--bronze); margin-bottom:7pt; }
+  .opt .oname { font-family:'Archivo'; font-weight:800; font-size:10.5pt; color:var(--navy); }
+  .opt .oprice { font-family:'Archivo'; font-weight:900; font-size:19pt; color:var(--navy); margin:4pt 0 1pt; }
+  .opt .oprice .mo { font-weight:700; font-size:9pt; color:var(--mute); }
+  .opt .oprice .was { font-family:'Source Serif 4'; font-weight:400; font-size:9.5pt; color:var(--mute); text-decoration:line-through; margin-left:4pt; }
+  .opt .osub { font-family:'Archivo'; font-weight:600; font-size:6.9pt; letter-spacing:0.08em; text-transform:uppercase; color:var(--bronze); margin-bottom:6pt; line-height:1.45; }
   .opt ul { list-style:none; }
-  .opt li { font-size:8.9pt; line-height:1.42; padding:3pt 0 3pt 12pt; position:relative; color:#33395C; border-top:0.6pt solid var(--panel-line); }
+  .opt li { font-size:8.2pt; line-height:1.4; padding:2.8pt 0 2.8pt 11pt; position:relative; color:#33395C; border-top:0.6pt solid var(--panel-line); }
   .opt li::before { content:'—'; position:absolute; left:0; color:var(--bronze-lt); }
   .opt.rec li::before { content:'✓'; color:var(--bronze); font-weight:700; }
 
-  .steps { margin:10pt 0 0; }
-  .step { display:flex; gap:10pt; margin-bottom:8pt; }
+  .prepay {
+    display:flex; gap:12pt; align-items:center;
+    background:var(--gold-bg); border:1pt solid var(--bronze-lt); border-radius:4pt;
+    padding:8pt 13pt; margin-bottom:9pt;
+  }
+  .prepay .pp-title {
+    font-family:'Archivo'; font-weight:800; font-size:8pt; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--bronze); white-space:nowrap;
+  }
+  .prepay .pp-body { font-size:9pt; line-height:1.45; color:#4A4020; }
+  .prepay .pp-body b { color:var(--bronze); }
+
+  .steps { margin:9pt 0 0; }
+  .step { display:flex; gap:10pt; margin-bottom:7pt; }
   .step .n {
     font-family:'Archivo'; font-weight:800; font-size:10pt; color:var(--bronze);
     min-width:20pt; padding-top:1pt;
@@ -397,16 +409,17 @@
 
   <table class="compare">
     <tr>
-      <th style="width:2.1in;"></th>
-      <th class="r">Standard Host Benefit<br>(5 Screens)</th>
+      <th style="width:1.75in;"></th>
+      <th class="r">Standard Host<br>(5 Screens)</th>
+      <th class="r">Expanded<br>(15 Screens)</th>
       <th class="r keep">Full Footprint<br>(All 25 Screens)</th>
     </tr>
-    <tr><td class="lbl2">Est. plays / month</td><td class="r">~11,400</td><td class="r keep">~21,400</td></tr>
-    <tr><td class="lbl2">Est. impressions / month</td><td class="r">~233,000</td><td class="r keep">519,000+</td></tr>
-    <tr><td class="lbl2">Markets covered</td><td class="r">Starkville + Columbus</td><td class="r keep">Starkville · Columbus · West Point</td></tr>
-    <tr><td class="lbl2">Monthly cost</td><td class="r">$0</td><td class="r keep">$400 (reg. $500)</td></tr>
-    <tr><td class="lbl2">Effective cost per screen</td><td class="r">—</td><td class="r keep">$16 across 25 screens</td></tr>
-    <tr><td class="lbl2">Effective cost per 1,000 impressions</td><td class="r">—</td><td class="r keep">~$0.77 CPM</td></tr>
+    <tr><td class="lbl2">Est. plays / month</td><td class="r">~11,400</td><td class="r">~18,200</td><td class="r keep">~21,400</td></tr>
+    <tr><td class="lbl2">Est. impressions / month</td><td class="r">~233,000</td><td class="r">~370,000</td><td class="r keep">519,000+</td></tr>
+    <tr><td class="lbl2">Markets covered</td><td class="r">Starkville + Columbus</td><td class="r">Starkville + Columbus</td><td class="r keep">All three markets</td></tr>
+    <tr><td class="lbl2">Monthly cost</td><td class="r">$0</td><td class="r">$280 (reg. $350)</td><td class="r keep">$400 (reg. $500)</td></tr>
+    <tr><td class="lbl2">Effective cost per screen</td><td class="r">—</td><td class="r">$18.67 across 15</td><td class="r keep">$16 across 25</td></tr>
+    <tr><td class="lbl2">Effective cost per 1,000 impressions</td><td class="r">—</td><td class="r">~$0.76 CPM</td><td class="r keep">~$0.77 CPM</td></tr>
   </table>
 
   <div class="h2">Why we're coming to you first</div>
@@ -426,30 +439,46 @@
 
   <div class="options">
     <div class="opt">
-      <div class="oname">Standard Host Partnership</div>
+      <div class="oname">Standard Host</div>
       <div class="oprice">Free</div>
       <div class="osub">5 Screens · Included as Our Host</div>
       <ul>
         <li>Choose any 5 venues from the page 3 table</li>
         <li>~11,400 plays / month at your top five</li>
         <li>~233,000 est. monthly impressions</li>
-        <li>Remaining 20 screens released to paid advertisers</li>
+        <li>Other 20 screens released to paid advertisers</li>
+      </ul>
+    </div>
+    <div class="opt">
+      <div class="oname">Expanded</div>
+      <div class="oprice">$280<span class="mo">/mo</span><span class="was">$350/mo</span></div>
+      <div class="osub">15 Screens · 5 Free + 10 at Your 20% Host Rate</div>
+      <ul>
+        <li>Keep your 15 strongest venues</li>
+        <li>~18,200 plays / month</li>
+        <li>~370,000 est. monthly impressions</li>
+        <li>Quarterly creative refreshes included free</li>
       </ul>
     </div>
     <div class="opt rec">
-      <div class="tag">Recommended · Host Exclusive</div>
-      <div class="oname">Full-Footprint Partnership</div>
+      <div class="tag">Recommended</div>
+      <div class="oname">Full Footprint</div>
       <div class="oprice">$400<span class="mo">/mo</span><span class="was">$500/mo</span></div>
       <div class="osub">All 25 Screens · 5 Free + 20 at Your 20% Host Rate</div>
       <ul>
-        <li>Keep every screen and all 3 markets — nothing changes</li>
+        <li>Every screen, all 3 markets — nothing changes</li>
         <li>519K+ est. monthly impressions · ~$0.77 CPM</li>
         <li>$16/screen effective — the whole-network rate</li>
-        <li>Quarterly creative refreshes included free</li>
-        <li>Proof-of-play reporting, every quarter</li>
-        <li>Prepay 6 months, get the 7th month free</li>
+        <li>Quarterly refreshes + proof-of-play reporting</li>
       </ul>
     </div>
+  </div>
+
+  <div class="prepay">
+    <div class="pp-title">Pay Upfront &amp; Save</div>
+    <div class="pp-body">Prepay <b>6 months</b> on either paid option and your <b>7th month is
+    free</b>. Prepay <b>12 months</b> and your <b>13th and 14th months are free</b> — on the full
+    footprint, that works out to an effective <b>$343/month, 31% below the standard rate</b>.</div>
   </div>
 
   <div class="hold"><b>Your footprint is held through September 15, 2026.</b> After that, the twenty
@@ -458,7 +487,7 @@
 
   <div class="steps">
     <div class="step"><div class="n">01</div><div class="body"><b>Call or text Swayze at (662) 907-0404</b> (or reply to this email) and tell us which option you'd like. One conversation — no paperwork needed to hold your rate.</div></div>
-    <div class="step"><div class="n">02</div><div class="body"><b>Lock your screens.</b> Full footprint: everything stays exactly as it runs today. Standard: pick your five from page 3 and we'll handle the rest.</div></div>
+    <div class="step"><div class="n">02</div><div class="body"><b>Lock your screens.</b> Full footprint: everything stays exactly as it runs today. Expanded or Standard: pick your venues from page 3 and we'll handle the rest.</div></div>
     <div class="step"><div class="n">03</div><div class="body"><b>We refresh your creative for fall — free.</b> Flu shots, back-to-school immunizations, and Medicare open enrollment. New spot live before October 1.</div></div>
   </div>
 
