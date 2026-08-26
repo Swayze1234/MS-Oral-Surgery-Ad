@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assemble preview.html — a single self-contained web proof of all 10 booklet
+"""Assemble preview.html — a single self-contained web proof of the booklet
 pages, published as a Claude Artifact so edits can be reviewed without
 downloading the PDF. Rerun after any page edit, then republish.
 
@@ -24,8 +24,8 @@ GOOGLE_FONTS = (
 )
 
 TITLES = [
-    "Cover", "Where MCTV Fits", "The Network", "Three Markets", "How Your Spot Runs",
-    "Real Screens", "Your Creative", "CPM Comparison", "Pricing", "Next Steps",
+    "Cover", "Where MCTV Fits", "The Network", "Host Locations", "How Your Spot Runs",
+    "Real Screens", "CPM Comparison", "Pricing", "Next Steps",
 ]
 
 
@@ -109,7 +109,7 @@ main {{ max-width: 1120px; margin: 0 auto; padding: 26px 20px 60px; }}
 </style>
 <div class="bar">
   <div class="t">Financial Concepts &middot; <em>Advertiser Partnership Proposal</em></div>
-  <div class="s">Print proof &middot; 11&times;8.5&Prime; &middot; built {stamp}</div>
+  <div class="s">Print proof &middot; 11&times;6.5&Prime; &middot; built {stamp}</div>
 </div>
 <main>
   <div class="note">Live proof of the spiral booklet — refresh this page after each edit.

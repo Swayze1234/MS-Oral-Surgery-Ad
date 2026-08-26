@@ -4,7 +4,6 @@
 Any images dropped into the asset folders are picked up automatically:
   assets/cover/       -> full-bleed cover background (first image, sorted by name)
   assets/screens/     -> page 6 photo grid, slots 1-6 (sorted by name)
-  assets/billboards/  -> page 7 screen mockups, slots 1-2 (sorted by name)
 
 Usage:  python3 build.py
 """
@@ -96,8 +95,8 @@ def print_page(html_path: Path, pdf_path: Path) -> None:
 
 def main() -> None:
     pages = sorted((ROOT / "pages").glob("p*.html"))
-    if len(pages) != 10:
-        sys.exit(f"expected 10 page templates, found {len(pages)}")
+    if not pages:
+        sys.exit("no page templates found")
 
     merged = pymupdf.open()
     with tempfile.TemporaryDirectory() as td:

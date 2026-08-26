@@ -218,26 +218,21 @@ p { font-size: 9.8pt; line-height: 1.5; }
 #pg3 .apart .n{ font-family: 'Playfair Display', Georgia, serif; font-size: 11pt; color: var(--steel); font-weight: 600; min-width: 0.22in; }
 #pg3 .apart .row p{ font-size: 9.5pt; line-height: 1.45; }
 #pg3 .apart .row p strong{ color: var(--navy); font-weight: 600; }
-#pg4 .grid{ display: grid; grid-template-columns: 1fr 1fr 1.12fr; gap: 0.24in; margin-top: 0.16in; flex: 1; min-height: 0; }
-#pg4 .card{ border: 1px solid var(--line); border-radius: 6px; padding: 0.15in 0.19in; min-height: 0; overflow: hidden; display: flex; flex-direction: column; background: #FBFAF7; }
-#pg4 .card .mk{ font-size: 8pt; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--steel); }
-#pg4 .card h2{ font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 14pt; color: var(--navy); margin-top: 0.04in; }
-#pg4 .card .count{ display: flex; align-items: baseline; gap: 0.08in; margin: 0.06in 0 0.05in; }
-#pg4 .card .count .num{ font-family: 'Playfair Display', Georgia, serif; font-size: 22pt; font-weight: 500; color: var(--navy); line-height: 1; }
-#pg4 .card .count .u{ font-size: 8pt; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--steel); }
-#pg4 .card p{ font-size: 8.4pt; line-height: 1.42; }
-#pg4 .venues{ margin-top: 0.09in; padding-top: 0.08in; border-top: 1px solid var(--line); }
-#pg4 .venues .vh{ font-size: 7pt; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--steel); margin-bottom: 0.04in; }
-#pg4 .venues ul{ list-style: none; }
-#pg4 .venues li{ font-size: 8.2pt; line-height: 1.5; }
-#pg4 .venues .more{ margin-top: 0.04in; font-size: 7.5pt; letter-spacing: 0.1em; text-transform: uppercase; color: #9A9184; }
-#pg4 .home{ background: var(--navy); border-color: var(--navy); color: #DEE3EC; }
-#pg4 .home .badge{ align-self: flex-start; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--navy); background: #E8C87A; border-radius: 3px; padding: 0.035in 0.08in; margin-bottom: 0.1in; }
-#pg4 .home .mk,#pg4 .home .count .u,#pg4 .home .venues .vh{ color: var(--steel-dark); }
-#pg4 .home h2,#pg4 .home .count .num{ color: #fff; }
-#pg4 .home .venues{ border-top-color: var(--line-dark); }
-#pg4 .home .venues .more{ color: #7C8FA9; }
+#pg4 .head{ display: flex; justify-content: space-between; align-items: flex-end; }
+#pg4 .head .nums{ display: flex; gap: 0.32in; text-align: right; }
+#pg4 .head .nums .v{ font-family: 'Playfair Display', Georgia, serif; font-size: 17pt; font-weight: 600; color: var(--navy); line-height: 1; }
+#pg4 .head .nums .k{ font-size: 6.8pt; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--steel); margin-top: 0.03in; }
+#pg4 .dir{ flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 0 0.26in; margin-top: 0.14in; }
+#pg4 .col{ min-width: 0; }
+#pg4 .terr{ padding-bottom: 0.045in; border-bottom: 2px solid var(--navy); margin-bottom: 0.055in; }
+#pg4 .terr.cont{ border-bottom-color: var(--line); }
+#pg4 .terr .t{ font-size: 8.5pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); }
+#pg4 .terr .c{ font-size: 6.6pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--steel); margin-top: 0.015in; }
+#pg4 .terr .home{ display: inline-block; font-size: 6.2pt; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); background: #E8C87A; border-radius: 2px; padding: 0.012in 0.045in; margin-left: 0.04in; vertical-align: 1px; }
+#pg4 ul{ list-style: none; }
+#pg4 li{ font-size: 7.35pt; line-height: 1.52; color: var(--body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#pg4 li .note{ color: #9A9184; font-size: 6.6pt; }
+#pg4 .gap{ height: 0.09in; }
 #pg5 .statements{ flex: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 0.1in; }
 #pg5 .st{ display: flex; align-items: baseline; gap: 0.3in; padding: 0.155in 0; border-top: 1px solid var(--line-dark); }
 #pg5 .st:first-child{ border-top: 0; }
@@ -250,74 +245,61 @@ p { font-size: 9.8pt; line-height: 1.5; }
 #pg6 .slot .frame{ flex: 1; min-height: 0; overflow: hidden; border-radius: 4px; }
 #pg6 .slot figcaption{ margin-top: 0.06in; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--steel); }
 #pg6 .slot img{ object-position: center top; }
-#pg7 .lede{ max-width: 8.4in; }
-#pg7 .tvs{ flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 0.38in; margin-top: 0.22in; align-items: center; }
-#pg7 .tv{ display: flex; flex-direction: column; }
-#pg7 .bezel{ background: #0C0C0E; border-radius: 8px; padding: 0.09in; box-shadow: 0 6px 18px rgba(10,14,22,0.22); }
-#pg7 .screen16x9{ aspect-ratio: 16 / 9; border-radius: 3px; overflow: hidden; background: #17181B; }
-#pg7 .screen16x9 .ph{ border-color: #4A4C52; background: #1E2024; color: #8B8E96; border-radius: 3px; }
-#pg7 .stand{ width: 1.5in; height: 0.055in; background: #101114; margin: 0 auto; border-radius: 0 0 4px 4px; }
-#pg7 .tv figcaption{ margin-top: 0.12in; text-align: center; }
-#pg7 .tv figcaption .c1{ font-size: 9pt; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); }
-#pg7 .tv figcaption .c2{ font-size: 8.5pt; color: var(--body); margin-top: 0.03in; }
-#pg7 .slot img{ border-radius: 0; }
-#pg8 .chart{ flex: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 0.1in; max-width: 9in; }
-#pg8 .row{ display: grid; grid-template-columns: 1.55in 1fr; align-items: center; gap: 0.18in; padding: 0.075in 0; }
-#pg8 .row .name{ font-size: 9.5pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); text-align: right; line-height: 1.25; }
-#pg8 .row .name .sub{ display: block; font-size: 7pt; font-weight: 600; letter-spacing: 0.14em; color: var(--steel); margin-top: 0.02in; }
-#pg8 .track{ display: flex; align-items: center; gap: 0.09in; }
-#pg8 .bar{ height: 0.24in; background: #B5A98F; border-radius: 0 4px 4px 0; }
-#pg8 .row.mctv .bar{ background: var(--navy); }
-#pg8 .val{ font-size: 10.5pt; font-weight: 600; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
-#pg8 .row.mctv .val{ color: var(--navy); font-weight: 700; }
-#pg8 .row.mctv .name{ color: var(--navy); }
-#pg8 .callout{ margin-top: 0.16in; margin-left: 1.73in; display: inline-flex; align-items: baseline; gap: 0.12in; }
-#pg8 .callout .tag{ font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 12.5pt; color: var(--navy); }
-#pg8 .notes{ margin-top: 0.18in; font-size: 7.5pt; line-height: 1.5; color: #8A8375; max-width: 8.6in; }
-#pg9 .tiers{ display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 0.26in; margin-top: 0.24in; }
-#pg9 .tier{ border: 1px solid var(--line); border-radius: 6px; padding: 0.2in 0.22in; background: #FBFAF7; display: flex; flex-direction: column; }
-#pg9 .tier .tag{ font-size: 7.5pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); }
-#pg9 .tier h2{ font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 15.5pt; color: var(--navy); margin-top: 0.05in; line-height: 1.2; }
-#pg9 .price{ display: flex; align-items: baseline; gap: 0.06in; margin: 0.1in 0 0.04in; }
-#pg9 .price .p{ font-family: 'Playfair Display', Georgia, serif; font-size: 29pt; font-weight: 500; color: var(--navy); line-height: 1; }
-#pg9 .price .per{ font-size: 8.5pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); }
-#pg9 .tier p.desc{ font-size: 8.8pt; line-height: 1.5; margin-top: 0.06in; }
-#pg9 .specs{ margin-top: 0.12in; padding-top: 0.1in; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 0.08in 0.15in; }
-#pg9 .specs .s .v{ font-size: 11.5pt; font-weight: 600; color: var(--navy); font-variant-numeric: tabular-nums; }
-#pg9 .specs .s .k{ font-size: 6.8pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); margin-top: 0.015in; }
-#pg9 .feat{ background: var(--navy); border-color: var(--navy); color: #DEE3EC; }
-#pg9 .feat .badge{ align-self: flex-start; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--navy); background: #E8C87A; border-radius: 3px; padding: 0.035in 0.08in; margin-bottom: 0.08in; }
-#pg9 .feat .tag,#pg9 .feat .price .per,#pg9 .feat .specs .s .k{ color: var(--steel-dark); }
-#pg9 .feat h2,#pg9 .feat .price .p,#pg9 .feat .specs .s .v{ color: #fff; }
-#pg9 .feat .specs{ border-top-color: var(--line-dark); }
-#pg9 .strip{ display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 0.3in; margin-top: 0.22in; padding-top: 0.16in; border-top: 1px solid var(--line); }
-#pg9 .strip h3{ font-size: 8pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); margin-bottom: 0.06in; }
-#pg9 .strip p,#pg9 .strip li{ font-size: 8.6pt; line-height: 1.5; }
-#pg9 .strip ul{ list-style: none; }
-#pg9 .strip li{ padding-left: 0.14in; text-indent: -0.14in; }
-#pg9 .strip li::before{ content: "— "; color: var(--steel); }
-#pg9 .strip .excl{ color: var(--navy); font-weight: 600; }
-#pg10 .cols{ flex: 1; display: grid; grid-template-columns: 1.35fr 1fr; gap: 0.55in; margin-top: 0.24in; }
-#pg10 .step{ display: flex; gap: 0.22in; padding: 0.16in 0; border-top: 1px solid var(--line); }
-#pg10 .step:last-of-type{ border-bottom: 1px solid var(--line); }
-#pg10 .step .n{ font-family: 'Playfair Display', Georgia, serif; font-size: 25pt; font-weight: 500; color: var(--steel); line-height: 1; min-width: 0.42in; }
-#pg10 .step h3{ font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 14pt; color: var(--navy); margin-bottom: 0.04in; }
-#pg10 .step p{ font-size: 9.5pt; line-height: 1.5; }
-#pg10 .sig{ margin-top: 0.32in; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5in; }
-#pg10 .sig .line{ border-top: 1px solid #8A8375; padding-top: 0.06in; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--steel); }
-#pg10 .side{ display: flex; flex-direction: column; }
-#pg10 .card{ background: var(--navy); border-radius: 6px; padding: 0.26in; color: #DEE3EC; }
-#pg10 .card img{ height: 0.44in; display: block; margin-bottom: 0.16in; }
-#pg10 .card .who{ font-family: 'Playfair Display', Georgia, serif; font-size: 15pt; font-weight: 600; color: #fff; }
-#pg10 .card .role{ font-size: 8pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel-dark); margin: 0.04in 0 0.14in; }
-#pg10 .card .c{ font-size: 10pt; line-height: 1.7; }
-#pg10 .card .c a{ color: #E9E6DF; text-decoration: none; }
-#pg10 .closing{ margin-top: auto; padding-top: 0.28in; }
-#pg10 .closing .big{ font-family: 'Playfair Display', Georgia, serif; font-size: 21pt; font-weight: 500; font-style: italic; color: var(--navy); }
+#pg7 .chart{ flex: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 0.1in; max-width: 9in; }
+#pg7 .row{ display: grid; grid-template-columns: 1.55in 1fr; align-items: center; gap: 0.18in; padding: 0.075in 0; }
+#pg7 .row .name{ font-size: 9.5pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); text-align: right; line-height: 1.25; }
+#pg7 .row .name .sub{ display: block; font-size: 7pt; font-weight: 600; letter-spacing: 0.14em; color: var(--steel); margin-top: 0.02in; }
+#pg7 .track{ display: flex; align-items: center; gap: 0.09in; }
+#pg7 .bar{ height: 0.24in; background: #B5A98F; border-radius: 0 4px 4px 0; }
+#pg7 .row.mctv .bar{ background: var(--navy); }
+#pg7 .val{ font-size: 10.5pt; font-weight: 600; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+#pg7 .row.mctv .val{ color: var(--navy); font-weight: 700; }
+#pg7 .row.mctv .name{ color: var(--navy); }
+#pg7 .callout{ margin-top: 0.16in; margin-left: 1.73in; display: inline-flex; align-items: baseline; gap: 0.12in; }
+#pg7 .callout .tag{ font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 12.5pt; color: var(--navy); }
+#pg7 .notes{ margin-top: 0.18in; font-size: 7.5pt; line-height: 1.5; color: #8A8375; max-width: 8.6in; }
+#pg8 .tiers{ display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 0.26in; margin-top: 0.24in; }
+#pg8 .tier{ border: 1px solid var(--line); border-radius: 6px; padding: 0.2in 0.22in; background: #FBFAF7; display: flex; flex-direction: column; }
+#pg8 .tier .tag{ font-size: 7.5pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); }
+#pg8 .tier h2{ font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 15.5pt; color: var(--navy); margin-top: 0.05in; line-height: 1.2; }
+#pg8 .price{ display: flex; align-items: baseline; gap: 0.06in; margin: 0.1in 0 0.04in; }
+#pg8 .price .p{ font-family: 'Playfair Display', Georgia, serif; font-size: 29pt; font-weight: 500; color: var(--navy); line-height: 1; }
+#pg8 .price .per{ font-size: 8.5pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); }
+#pg8 .tier p.desc{ font-size: 8.8pt; line-height: 1.5; margin-top: 0.06in; }
+#pg8 .specs{ margin-top: 0.12in; padding-top: 0.1in; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 0.08in 0.15in; }
+#pg8 .specs .s .v{ font-size: 11.5pt; font-weight: 600; color: var(--navy); font-variant-numeric: tabular-nums; }
+#pg8 .specs .s .k{ font-size: 6.8pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); margin-top: 0.015in; }
+#pg8 .feat{ background: var(--navy); border-color: var(--navy); color: #DEE3EC; }
+#pg8 .feat .badge{ align-self: flex-start; font-size: 7.5pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--navy); background: #E8C87A; border-radius: 3px; padding: 0.035in 0.08in; margin-bottom: 0.08in; }
+#pg8 .feat .tag,#pg8 .feat .price .per,#pg8 .feat .specs .s .k{ color: var(--steel-dark); }
+#pg8 .feat h2,#pg8 .feat .price .p,#pg8 .feat .specs .s .v{ color: #fff; }
+#pg8 .feat .specs{ border-top-color: var(--line-dark); }
+#pg8 .strip{ display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 0.3in; margin-top: 0.22in; padding-top: 0.16in; border-top: 1px solid var(--line); }
+#pg8 .strip h3{ font-size: 8pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); margin-bottom: 0.06in; }
+#pg8 .strip p,#pg8 .strip li{ font-size: 8.6pt; line-height: 1.5; }
+#pg8 .strip ul{ list-style: none; }
+#pg8 .strip li{ padding-left: 0.14in; text-indent: -0.14in; }
+#pg8 .strip li::before{ content: "— "; color: var(--steel); }
+#pg8 .strip .excl{ color: var(--navy); font-weight: 600; }
+#pg9 .cols{ flex: 1; display: grid; grid-template-columns: 1.35fr 1fr; gap: 0.55in; margin-top: 0.24in; }
+#pg9 .step{ display: flex; gap: 0.22in; padding: 0.16in 0; border-top: 1px solid var(--line); }
+#pg9 .step:last-of-type{ border-bottom: 1px solid var(--line); }
+#pg9 .step .n{ font-family: 'Playfair Display', Georgia, serif; font-size: 25pt; font-weight: 500; color: var(--steel); line-height: 1; min-width: 0.42in; }
+#pg9 .step h3{ font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 14pt; color: var(--navy); margin-bottom: 0.04in; }
+#pg9 .step p{ font-size: 9.5pt; line-height: 1.5; }
+#pg9 .side{ display: flex; flex-direction: column; }
+#pg9 .card{ background: var(--navy); border-radius: 6px; padding: 0.26in; color: #DEE3EC; }
+#pg9 .card img{ height: 0.44in; display: block; margin-bottom: 0.16in; }
+#pg9 .card .who{ font-family: 'Playfair Display', Georgia, serif; font-size: 15pt; font-weight: 600; color: #fff; }
+#pg9 .card .role{ font-size: 8pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel-dark); margin: 0.04in 0 0.14in; }
+#pg9 .card .c{ font-size: 10pt; line-height: 1.7; }
+#pg9 .card .c a{ color: #E9E6DF; text-decoration: none; }
+#pg9 .closing{ margin-top: auto; padding-top: 0.28in; }
+#pg9 .closing .big{ font-family: 'Playfair Display', Georgia, serif; font-size: 21pt; font-weight: 500; font-style: italic; color: var(--navy); }
 </style>
 <div class="bar">
   <div class="t">Financial Concepts &middot; <em>Advertiser Partnership Proposal</em></div>
-  <div class="s">Print proof &middot; 11&times;8.5&Prime; &middot; built Aug 26, 2026 · 15:11</div>
+  <div class="s">Print proof &middot; 11&times;6.5&Prime; &middot; built Aug 26, 2026 · 15:57</div>
 </div>
 <main>
   <div class="note">Live proof of the spiral booklet — refresh this page after each edit.
@@ -356,7 +338,7 @@ p { font-size: 9.8pt; line-height: 1.5; }
       <div class="item">
         <div class="n">02</div>
         <h3>Our rooms are your client list.</h3>
-        <p>Clinics, dealerships, co-ops, and civic buildings — the venues where the Golden Triangle's
+        <p>Restaurants, gyms, salons, and clinics — the venues where the Golden Triangle's
         families, professionals, and retirees already wait.</p>
       </div>
       <div class="item">
@@ -396,7 +378,7 @@ p { font-size: 9.8pt; line-height: 1.5; }
       </div>
       <div class="apart">
         <h2>What sets MCTV apart</h2>
-        <div class="row"><div class="n">01</div><p><strong>Owner-operated and local.</strong> The fastest-growing owner-operated indoor billboard network in North America — run from North Mississippi, not a coast.</p></div>
+        <div class="row"><div class="n">01</div><p><strong>Owner-operated and local.</strong> The fastest-growing owner-operated indoor billboard network in North America — run from North Mississippi.</p></div>
         <div class="row"><div class="n">02</div><p><strong>Unskippable by design.</strong> No remote, no ad-blocker, no scroll. Your spot can't be skipped, muted into irrelevance, or thrown away.</p></div>
         <div class="row"><div class="n">03</div><p><strong>A captive, seated audience.</strong> 1,500+ plays per screen every month, in rooms where people are waiting anyway.</p></div>
         <div class="row"><div class="n">04</div><p><strong>Accountable.</strong> Proof-of-play reporting documents play counts by screen — you see exactly where and how often your ad ran.</p></div>
@@ -405,48 +387,92 @@ p { font-size: 9.8pt; line-height: 1.5; }
     <div class="foot"><span>Financial Concepts &times; MCTV</span><span>03</span></div>
   </div>
 </div></div></div></section>
-<section class="proof"><div class="plabel"><span class="pnum">04</span> Three Markets</div><div class="sheet" id="pg4"><div class="zoom"><div class="page">
+<section class="proof"><div class="plabel"><span class="pnum">04</span> Host Locations</div><div class="sheet" id="pg4"><div class="zoom"><div class="page">
   <div class="inner">
-    <div class="kicker">Host Network &middot; Where Your Ad Runs</div>
-    <h1>Three markets. One footprint.</h1>
-    <div class="grid">
-      <div class="card">
-        <div class="mk">Market 01</div>
-        <h2>Oxford / Lafayette</h2>
-        <div class="count"><div class="num">44</div><div class="u">Venues</div></div>
-        <p>Our deepest footprint — game-weekend traffic, a university town's year-round service
-        economy, and the civic buildings every resident passes through.</p>
-        <div class="venues"><div class="vh">Premium locations</div>
-          <ul><li>RedMed Urgent Clinic</li><li>Cannon Chevrolet Buick Cadillac</li><li>Oxford-Lafayette Chamber</li><li>Oxford Park Commission</li><li>The Children's Dental Center</li><li>Rafters Music and Food</li></ul>
-          <div class="more">Sample of 44 &middot; full list on request</div>
-        </div>
+    <div class="head">
+      <div>
+        <div class="kicker">Host Network &middot; Where Your Ad Runs</div>
+        <h1 style="font-size:21pt;">Every venue, every market.</h1>
       </div>
-      <div class="card">
-        <div class="mk">Market 02</div>
-        <h2>Tupelo / Lee County</h2>
-        <div class="count"><div class="num">28</div><div class="u">Venues</div></div>
-        <p>North Mississippi's regional hub — medical, retail, and travel venues drawing from a
-        dozen surrounding counties, including both airport terminals.</p>
-        <div class="venues"><div class="vh">Premium locations</div>
-          <ul><li>Cardiology Associates of North MS</li><li>Tupelo Regional Airport</li><li>Hotel Tupelo</li><li>Midtown Pointe Shopping Center</li><li>Right Track Medical Group</li><li>Tupelo River Coffee</li></ul>
-          <div class="more">Sample of 28 &middot; full list on request</div>
-        </div>
-      </div>
-      <div class="card home">
-        <div class="badge">Your home market</div>
-        <div class="mk">Market 03</div>
-        <h2>Golden Triangle</h2>
-        <div class="count"><div class="num">29</div><div class="u">Venues</div></div>
-        <p>Starkville, Columbus, and West Point — three towns, one buying market. Screens sit in the
-        co-ops, clinics, dealerships, and family restaurants that anchor daily life across Oktibbeha,
-        Lowndes, and Clay counties — the same roads your billboards already work.</p>
-        <div class="venues"><div class="vh">Premium locations</div>
-          <ul><li>Magnolia Dermatology</li><li>Revive Wellness Clinic</li><li>Cannon Chevrolet GMC</li><li>Oktibbeha County Co-op</li><li>BJ's Family Pharmacy</li><li>Elm Lake Golf Course</li></ul>
-          <div class="more">Sample of 29 &middot; full list on request</div>
-        </div>
+      <div class="nums">
+        <div><div class="v">98</div><div class="k">Host venues</div></div>
+        <div><div class="v">123</div><div class="k">Screens</div></div>
+        <div><div class="v">5</div><div class="k">Markets</div></div>
       </div>
     </div>
-    <div class="foot"><span>Financial Concepts &times; MCTV</span><span>04</span></div>
+    <div class="dir">
+      <div class="col">
+        <div class="terr"><div class="t">Oxford</div><div class="c">45 venues &middot; 58 screens</div></div>
+        <ul>
+          <li>4 Corner's Chevron</li><li>Amara Salon &amp; Aesthetics</li><li>B's Hickory Smoke BBQ</li>
+          <li>Bep Haus</li><li>Booth's Barbeque and Yard</li><li>Built Different Fitness</li>
+          <li>Cannon Chevrolet Buick Cadillac</li><li>Cannon Collision Center</li><li>Casa Mexicana of Oxford</li>
+          <li>El Charro Cocina &amp; Cantina</li><li>Element Hair Studio</li><li>Finch &amp; Kelly</li>
+          <li>Internal Medicine Associates</li><li>James Food Center Post Office</li><li>LandShark Seafood &amp; Catfish</li>
+          <li>Little Bambini Children's Boutique</li><li>Luxe Styling Studio</li><li>Magnolia Wine &amp; Spirits</li>
+          <li>MARATHON South Lamar</li><li>MS Asthma &amp; Allergy Clinic</li><li>Nail E!</li>
+          <li>Nail Thology</li><li>Oxford Dental</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="terr cont"><div class="t" style="color:var(--steel);">Oxford</div><div class="c">continued</div></div>
+        <ul>
+          <li>Oxford Park Commission</li><li>Oxford Super Tan</li><li>Oxford T-Shirt Co.</li>
+          <li>Oxford-Lafayette Chamber</li><li>Party in the Sip</li><li>Rafters Music and Food</li>
+          <li>Rainbow Cleaners</li><li>Rebel Body Fitness</li><li>Rebel Yell Rooftop Bar</li>
+          <li>RedMed Urgent Clinic</li><li>Revive Wellness of Oxford</li><li>Right Track Medical Group</li>
+          <li>Rosati's Pizza</li><li>Sip Oxford</li><li>Southern Coop</li>
+          <li>Stouts Carpet &amp; Flooring</li><li>Texaco Lamar Express</li><li>The Blind Pig Pub</li>
+          <li>The Children's Dental Center</li><li>The Oxford Growler</li><li>The Velvet Ditch</li>
+          <li>Uno Mas Tacos y Tequila</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="terr"><div class="t">Starkville<span class="home">Home</span></div><div class="c">25 venues &middot; 31 screens</div></div>
+        <ul>
+          <li>39759 Nutrition</li><li>Arepas Coffee &amp; Bar</li><li>Bennett Home Furniture &amp; More</li>
+          <li>Big E's Dinner Club</li><li>BJ's Family Pharmacy</li><li>Cellars Wine &amp; Spirits</li>
+          <li>Copy Cow</li><li>Hobie's Tiki Dawgs &amp; Daqs</li><li>Legends Hair Salon</li>
+          <li>Little Magnolia Gifts &amp; Apparel</li><li>Lucky Nails &amp; Spa</li><li>MS Asthma &amp; Allergy Clinic</li>
+          <li>Mississippi Ice Daiquiri Shop</li><li>Montgomery's Jewelry</li><li>Oktibbeha County Co-op</li>
+          <li>Revive Wellness Clinic</li><li>Right Track Medical Group</li><li>Skate Odyssey Inc</li>
+          <li>Starkvegas Pawnshop</li><li>Starkville Veterinary Hospital</li><li>The Breakfast Club</li>
+          <li>Two Brothers Smoked Meats</li><li>Umi Japanese Steakhouse</li><li>Uno Mas Tacos y Tequila</li>
+          <li>William Wells Tire &amp; Auto</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="terr"><div class="t">Tupelo</div><div class="c">25 venues &middot; 30 screens</div></div>
+        <ul>
+          <li>662 Wine and Liquor</li><li>Aaron Wash Beard Co</li><li>All Shook Up Nutrition</li>
+          <li>Cardiology Associates of N. MS</li><li>CrossFit Tupelo</li><li>Exceed Technologies</li>
+          <li>Hotel Tupelo</li><li>Little Magnolia Gifts &amp; Apparel</li><li>Loaded Nutrition</li>
+          <li>Midtown Pointe Shopping Center</li><li>Mudcreek Wine and Spirit</li><li>Nail E! Tupelo</li>
+          <li>Oxford Urology &ndash; Tupelo</li><li>Pizza Doctor</li><li>Premier Aesthetics</li>
+          <li>Right Track Medical Group</li><li>Second Skin Waxing</li><li>Skate Zone in Tupelo</li>
+          <li>Sophia Misaki Beauty</li><li>STYLE SOCIETY</li><li>Tupelo Regional Airport <span class="note">&middot; 5 screens, soon</span></li>
+          <li>Tupelo River Coffee</li><li>Tupelo Small Animal Hospital</li><li>VIBE Aesthetics and Wellness</li>
+          <li>VIBE Performance &amp; Testosterone</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="terr"><div class="t">Columbus<span class="home">Home</span></div><div class="c">2 venues &middot; 3 screens &middot; expanding</div></div>
+        <ul>
+          <li>Elm Lake Golf Course</li>
+          <li>Magnolia Dermatology</li>
+        </ul>
+        <div class="gap"></div>
+        <div class="terr"><div class="t">West Point<span class="home">Home</span></div><div class="c">1 venue &middot; 1 screen &middot; expanding</div></div>
+        <ul>
+          <li>Cannon Chevrolet GMC</li>
+        </ul>
+        <div class="gap"></div>
+        <p style="font-size:7.3pt; line-height:1.5; color:#8A8375;">Columbus and West Point are our
+        newest builds — your home turf is where the network grows next, and early partners lock the
+        best screens first.</p>
+      </div>
+    </div>
+    <div class="foot"><span>Financial Concepts &times; MCTV</span><span>Host list as of February 2026 &middot; 04</span></div>
   </div>
 </div></div></div></section>
 <section class="proof"><div class="plabel"><span class="pnum">05</span> How Your Spot Runs</div><div class="sheet" id="pg5"><div class="zoom"><div class="page dark">
@@ -478,29 +504,7 @@ p { font-size: 9.8pt; line-height: 1.5; }
     <div class="foot"><span>Financial Concepts &times; MCTV</span><span>06</span></div>
   </div>
 </div></div></div></section>
-<section class="proof"><div class="plabel"><span class="pnum">07</span> Your Creative</div><div class="sheet" id="pg7"><div class="zoom"><div class="page">
-  <div class="inner">
-    <div class="kicker">Your Creative, Our Screens</div>
-    <h1>What we'd put on the screens for you.</h1>
-    <p class="lede">Your billboard creative already works — the brand, the faces, the promise are proven on the
-    highway. Our in-house team rebuilds it as a 30-second, full-motion spot designed for a seated audience:
-    silent, readable, and refreshed every quarter at no extra cost.</p>
-    <div class="tvs">
-      <figure class="tv">
-        <div class="bezel"><div class="screen16x9" data-fill="billboards/1"><div class="ph"><div class="cam">&#9635;</div><div class="t1">Billboard creative</div><div class="t2">assets/billboards/ &middot; ad 1</div></div></div></div>
-        <div class="stand"></div>
-        <figcaption><div class="c1">Today: your Golden Triangle billboard</div><div class="c2">The campaign your market already recognizes.</div></figcaption>
-      </figure>
-      <figure class="tv">
-        <div class="bezel"><div class="screen16x9" data-fill="billboards/2"><div class="ph"><div class="cam">&#9635;</div><div class="t1">Billboard creative</div><div class="t2">assets/billboards/ &middot; ad 2</div></div></div></div>
-        <div class="stand"></div>
-        <figcaption><div class="c1">On MCTV: the same brand, in motion</div><div class="c2">Rebuilt as a 30-second silent spot &mdash; designed to be read across the room.</div></figcaption>
-      </figure>
-    </div>
-    <div class="foot"><span>Financial Concepts &times; MCTV</span><span>07</span></div>
-  </div>
-</div></div></div></section>
-<section class="proof"><div class="plabel"><span class="pnum">08</span> CPM Comparison</div><div class="sheet" id="pg8"><div class="zoom"><div class="page">
+<section class="proof"><div class="plabel"><span class="pnum">07</span> CPM Comparison</div><div class="sheet" id="pg7"><div class="zoom"><div class="page">
   <div class="inner">
     <div class="kicker">Cost per 1,000 Impressions &middot; Local Media Comparison</div>
     <h1>A fraction of the CPM of any<br>other local channel.</h1>
@@ -516,10 +520,10 @@ p { font-size: 9.8pt; line-height: 1.5; }
       <div class="notes">CPM = cost per thousand impressions. The MCTV figure is a network blended average; campaigns price as low
       as $1.64 CPM at full scale. Comparison figures are typical U.S. local CPM ranges by channel (industry estimates).</div>
     </div>
-    <div class="foot"><span>Financial Concepts &times; MCTV</span><span>08</span></div>
+    <div class="foot"><span>Financial Concepts &times; MCTV</span><span>07</span></div>
   </div>
 </div></div></div></section>
-<section class="proof"><div class="plabel"><span class="pnum">09</span> Pricing</div><div class="sheet" id="pg9"><div class="zoom"><div class="page">
+<section class="proof"><div class="plabel"><span class="pnum">08</span> Pricing</div><div class="sheet" id="pg8"><div class="zoom"><div class="page">
   <div class="inner">
     <div class="kicker">Your Proposal &middot; Monthly Network Rates</div>
     <h1>Start with your home market.<br>Scale when you're ready.</h1>
@@ -578,10 +582,10 @@ p { font-size: 9.8pt; line-height: 1.5; }
         <p class="excl" style="margin-top:0.05in;">Financial-services category exclusivity available on every screen you buy.</p>
       </div>
     </div>
-    <div class="foot"><span>Financial Concepts &times; MCTV</span><span>*Final screen list confirmed at signing &middot; 09</span></div>
+    <div class="foot"><span>Financial Concepts &times; MCTV</span><span>*Final screen list confirmed at signing &middot; 08</span></div>
   </div>
 </div></div></div></section>
-<section class="proof"><div class="plabel"><span class="pnum">10</span> Next Steps</div><div class="sheet" id="pg10"><div class="zoom"><div class="page">
+<section class="proof"><div class="plabel"><span class="pnum">09</span> Next Steps</div><div class="sheet" id="pg9"><div class="zoom"><div class="page">
   <div class="inner">
     <div class="kicker">Next Steps</div>
     <h1>Three steps to launch.</h1>
@@ -599,10 +603,7 @@ p { font-size: 9.8pt; line-height: 1.5; }
           <h3>You're live within the month.</h3>
           <p>Every 15 minutes, on every screen in your footprint, every operating hour — with
           proof-of-play reporting delivered to your inbox.</p></div></div>
-        <div class="sig">
-          <div class="line">Client signature / date</div>
-          <div class="line">MCTV Digital / date</div>
-        </div>
+        
       </div>
       <div class="side">
         <div class="card">
@@ -618,7 +619,7 @@ p { font-size: 9.8pt; line-height: 1.5; }
         </div>
       </div>
     </div>
-    <div class="foot"><span>Financial Concepts &times; MCTV</span><span>10</span></div>
+    <div class="foot"><span>Financial Concepts &times; MCTV</span><span>09</span></div>
   </div>
 </div></div></div></section>
 </main>

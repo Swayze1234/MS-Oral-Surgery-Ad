@@ -1,6 +1,6 @@
 # Financial Concepts — Advertiser Partnership Proposal
 
-Builds `../Financial_Concepts_Proposal.pdf`: a 10-page, 11"×6.5" landscape booklet
+Builds `../Financial_Concepts_Proposal.pdf`: a 9-page, 11"×6.5" landscape booklet
 (spiral-bound along the **top** edge; format matches the OCC deck book example) for the Thursday Aug 27, 2026 meeting with Financial
 Concepts' marketing team (Columbus, MS — fincon.net).
 
@@ -24,7 +24,6 @@ Three folders are auto-detected by `build.py` — add images (jpg/png/webp) and 
 |---|---|---|
 | `assets/cover/` | Page 1 full-bleed cover photo (Starkville mural); a file named *logo* fills the Financial Concepts logo slot top-right | first image, sorted by name |
 | `assets/screens/` | Page 6 "Real screens, real venues" grid | 6, sorted by name |
-| `assets/billboards/` | Page 7 screen mockups (their billboard creative) | 2, sorted by name |
 
 Missing images leave a styled dashed placeholder, so the deck builds either way.
 Venue captions on page 6 ("VENUE · MARKET") are edited directly in
