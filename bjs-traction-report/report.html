@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BJ's Family Pharmacy · Ad Traction Report · August 2026</title>
+<style>
+  @font-face { font-family:'Archivo'; font-weight:500; src:url('assets/fonts/Archivo-500-normal.ttf'); }
+  @font-face { font-family:'Archivo'; font-weight:600; src:url('assets/fonts/Archivo-600-normal.ttf'); }
+  @font-face { font-family:'Archivo'; font-weight:700; src:url('assets/fonts/Archivo-700-normal.ttf'); }
+  @font-face { font-family:'Archivo'; font-weight:800; src:url('assets/fonts/Archivo-800-normal.ttf'); }
+  @font-face { font-family:'Archivo'; font-weight:900; src:url('assets/fonts/Archivo-900-normal.ttf'); }
+  @font-face { font-family:'Source Serif 4'; font-weight:400; src:url('assets/fonts/SourceSerif4-400-normal.ttf'); }
+  @font-face { font-family:'Source Serif 4'; font-weight:400; font-style:italic; src:url('assets/fonts/SourceSerif4-400-italic.ttf'); }
+  @font-face { font-family:'Source Serif 4'; font-weight:600; src:url('assets/fonts/SourceSerif4-600-normal.ttf'); }
+  @font-face { font-family:'Source Serif 4'; font-weight:700; src:url('assets/fonts/SourceSerif4-700-normal.ttf'); }
+
+  :root {
+    --navy:#262D64; --navy-deep:#1C2250; --ink:#232842;
+    --bronze:#8A6A34; --bronze-lt:#B08D4C;
+    --panel:#F1F1F6; --panel-line:#DDDEE8;
+    --mute:#8B8FA8; --gold-bg:#FBF6EC;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { background:#fff; }
+  body { font-family:'Source Serif 4', Georgia, serif; color:var(--ink); }
+
+  .page {
+    width:8.5in; height:11in; position:relative;
+    padding:0.55in 0.6in 0.85in;
+    page-break-after:always; overflow:hidden;
+  }
+  .page:last-child { page-break-after:auto; }
+
+  /* ---------- shared ---------- */
+  .kicker {
+    font-family:'Archivo'; font-weight:700; font-size:8.5pt;
+    letter-spacing:0.22em; text-transform:uppercase; color:var(--bronze);
+  }
+  .kicker.navy { color:var(--navy); }
+  h1.section {
+    font-family:'Archivo'; font-weight:800; font-size:24pt;
+    color:var(--navy); letter-spacing:0.01em; margin:2pt 0 4pt;
+  }
+  .section-rule { width:52pt; height:3.5pt; background:var(--navy); margin-bottom:14pt; }
+  .lede { font-size:10.5pt; line-height:1.55; color:var(--ink); }
+  .lede + .lede { margin-top:8pt; }
+  b.nv { color:var(--navy); font-weight:700; }
+
+  .footer {
+    position:absolute; left:0.6in; right:0.6in; bottom:0.38in;
+    border-top:0.75pt solid var(--panel-line); padding-top:6pt;
+    display:flex; justify-content:space-between;
+    font-family:'Archivo'; font-weight:600; font-size:6.8pt;
+    letter-spacing:0.18em; text-transform:uppercase; color:#A6AABF;
+  }
+
+  /* ---------- cover ---------- */
+  .cover { display:flex; flex-direction:column; }
+  .cover .logo-bjs { height:0.95in; margin:10pt 0 14pt; display:block; }
+  .cover .subtitle { font-size:12pt; color:#3A3F60; }
+  .cover-title {
+    font-family:'Archivo'; font-weight:900; font-size:52pt; line-height:1.02;
+    color:var(--navy); letter-spacing:0.005em; margin:0.75in 0 0;
+  }
+  .cover-dates {
+    border-top:0.75pt solid var(--panel-line); border-bottom:0.75pt solid var(--panel-line);
+    margin-top:20pt; padding:9pt 0;
+    font-family:'Archivo'; font-weight:700; font-size:12.5pt; color:var(--bronze);
+    letter-spacing:0.02em;
+  }
+  .gift-band {
+    margin-top:16pt; background:var(--gold-bg); border-left:3pt solid var(--bronze-lt);
+    padding:10pt 14pt; font-size:10.5pt; line-height:1.5; color:#4A4020;
+  }
+  .gift-band b { color:var(--bronze); font-family:'Archivo'; font-weight:800; font-size:11pt; }
+  .cover-stats {
+    margin-top:0.42in; border-top:2.25pt solid var(--navy); border-bottom:2.25pt solid var(--navy);
+    display:flex; padding:14pt 0;
+  }
+  .cover-stats .stat { flex:1; }
+  .cover-stats .num { font-family:'Archivo'; font-weight:800; font-size:21pt; color:var(--navy); }
+  .cover-stats .lbl {
+    font-family:'Archivo'; font-weight:700; font-size:7.5pt; letter-spacing:0.16em;
+    text-transform:uppercase; color:var(--mute); margin-top:4pt; line-height:1.5;
+  }
+  .cover-foot { margin-top:auto; display:flex; align-items:center; gap:22pt; padding-bottom:4pt;}
+  .cover-foot img { height:0.62in; }
+  .cover-foot .who .name { font-family:'Archivo'; font-weight:700; font-size:11pt; color:var(--navy); }
+  .cover-foot .who .role { font-size:10pt; color:#3A3F60; margin-top:2pt; }
+  .cover-foot .who .contact { font-size:9.5pt; color:#3A3F60; margin-top:1pt; }
+  .cover-foot .site {
+    margin-left:auto; font-family:'Archivo'; font-weight:700; font-size:9.5pt;
+    letter-spacing:0.2em; color:var(--bronze);
+  }
+
+  /* ---------- chips ---------- */
+  .chips { display:flex; gap:8pt; margin:0 0 14pt; }
+  .chip {
+    flex:1; background:var(--panel); border-radius:3pt; padding:9pt 10pt;
+  }
+  .chip .big { font-family:'Archivo'; font-weight:800; font-size:11.5pt; color:var(--navy); line-height:1.15; }
+  .chip .small {
+    font-family:'Archivo'; font-weight:700; font-size:6.8pt; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--mute); margin-top:4pt; line-height:1.5;
+  }
+
+  /* ---------- tables ---------- */
+  table { width:100%; border-collapse:collapse; }
+  th {
+    font-family:'Archivo'; font-weight:700; font-size:7pt; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--mute); text-align:left;
+    padding:5pt 6pt; border-bottom:1.5pt solid var(--navy);
+  }
+  th.r, td.r { text-align:right; }
+  td { font-size:8.6pt; padding:4.4pt 6pt; border-bottom:0.6pt solid var(--panel-line); vertical-align:top; }
+  table.dense td { font-size:8.1pt; padding:3.1pt 5pt; white-space:nowrap; }
+  table.dense th { font-size:6.6pt; padding:4pt 5pt; }
+  td.venue { font-weight:600; color:var(--ink); }
+  tr.hl td { background:var(--gold-bg); }
+  tr.hl td.venue::before { content:'★ '; color:var(--bronze-lt); }
+  tr.total td {
+    font-family:'Archivo'; font-weight:800; font-size:9pt; color:var(--navy);
+    border-top:1.5pt solid var(--navy); border-bottom:none; padding-top:6pt;
+  }
+  .tbl-note { font-size:8.6pt; font-style:italic; color:#5A5F7E; margin-top:8pt; line-height:1.5; }
+
+  /* ---------- bars (page 4) ---------- */
+  .bar-row { display:flex; align-items:center; margin-bottom:5.5pt; }
+  .bar-row .bl { width:1.85in; font-family:'Archivo'; font-weight:600; font-size:8.4pt; color:var(--ink); }
+  .bar-row .bv { width:1.05in; font-size:8.6pt; color:#3A3F60; text-align:right; padding-right:10pt; }
+  .bar-row .track { flex:1; height:9pt; background:var(--panel); border-radius:1.5pt; }
+  .bar-row .fill { height:100%; background:var(--navy); border-radius:1.5pt; }
+  .bar-row .pct { width:0.5in; font-family:'Archivo'; font-weight:700; font-size:8.4pt; color:var(--navy); text-align:right; }
+
+  .takeaways { display:grid; grid-template-columns:1fr 1fr; gap:9pt; margin-top:12pt; }
+  .tk { background:var(--panel); border-radius:3pt; padding:10pt 12pt; }
+  .tk .t { font-family:'Archivo'; font-weight:700; font-size:9.5pt; color:var(--navy); margin-bottom:3pt; }
+  .tk .d { font-size:9pt; line-height:1.45; color:#3A3F60; }
+
+  /* ---------- page 5 : value & change ---------- */
+  .val-band {
+    background:var(--navy); color:#fff; border-radius:4pt;
+    padding:14pt 16pt; display:flex; gap:16pt; align-items:center; margin-bottom:14pt;
+  }
+  .val-band .num { font-family:'Archivo'; font-weight:900; font-size:26pt; color:#E8C87E; white-space:nowrap; }
+  .val-band .txt { font-size:10pt; line-height:1.5; color:#E6E8F4; }
+  .val-band .txt b { color:#fff; }
+
+  .h2 {
+    font-family:'Archivo'; font-weight:800; font-size:12.5pt; color:var(--navy);
+    margin:14pt 0 5pt;
+  }
+  .h2:first-of-type { margin-top:0; }
+
+  .compare { margin-top:10pt; }
+  .compare th { border-bottom:1.5pt solid var(--navy); font-size:7.2pt; }
+  .compare td { font-size:9.3pt; padding:6pt; }
+  .compare td.lbl2 { font-family:'Archivo'; font-weight:600; font-size:8pt; letter-spacing:0.06em; text-transform:uppercase; color:var(--mute); }
+  .compare .keep { background:var(--gold-bg); font-weight:700; color:var(--navy); }
+  .compare th.keep { color:var(--bronze); }
+
+  /* ---------- page 6 : offer ---------- */
+  .options { display:flex; gap:12pt; margin:4pt 0 12pt; }
+  .opt {
+    flex:1; border:1pt solid var(--panel-line); border-radius:4pt; padding:12pt 13pt 11pt;
+  }
+  .opt.rec { border:2pt solid var(--bronze-lt); background:var(--gold-bg); position:relative; }
+  .opt .tag {
+    position:absolute; top:-8pt; left:12pt; background:var(--bronze); color:#fff;
+    font-family:'Archivo'; font-weight:800; font-size:6.8pt; letter-spacing:0.16em;
+    padding:2.5pt 7pt; border-radius:2pt; text-transform:uppercase;
+  }
+  .opt .oname { font-family:'Archivo'; font-weight:800; font-size:11.5pt; color:var(--navy); }
+  .opt .oprice { font-family:'Archivo'; font-weight:900; font-size:22pt; color:var(--navy); margin:5pt 0 1pt; }
+  .opt .oprice .mo { font-weight:700; font-size:10pt; color:var(--mute); }
+  .opt .oprice .was { font-family:'Source Serif 4'; font-weight:400; font-size:10.5pt; color:var(--mute); text-decoration:line-through; margin-left:5pt; }
+  .opt .osub { font-family:'Archivo'; font-weight:600; font-size:7.6pt; letter-spacing:0.1em; text-transform:uppercase; color:var(--bronze); margin-bottom:7pt; }
+  .opt ul { list-style:none; }
+  .opt li { font-size:8.9pt; line-height:1.42; padding:3pt 0 3pt 12pt; position:relative; color:#33395C; border-top:0.6pt solid var(--panel-line); }
+  .opt li::before { content:'—'; position:absolute; left:0; color:var(--bronze-lt); }
+  .opt.rec li::before { content:'✓'; color:var(--bronze); font-weight:700; }
+
+  .steps { margin:10pt 0 0; }
+  .step { display:flex; gap:10pt; margin-bottom:8pt; }
+  .step .n {
+    font-family:'Archivo'; font-weight:800; font-size:10pt; color:var(--bronze);
+    min-width:20pt; padding-top:1pt;
+  }
+  .step .body { font-size:9.8pt; line-height:1.45; }
+  .step .body b { font-weight:700; color:var(--navy); }
+
+  .hold {
+    margin-top:11pt; background:var(--navy); color:#E6E8F4; border-radius:4pt;
+    padding:10pt 14pt; font-size:9.6pt; line-height:1.5;
+  }
+  .hold b { color:#E8C87E; font-family:'Archivo'; }
+
+  .team { display:flex; gap:14pt; margin-top:13pt; }
+  .team .m { flex:1; }
+  .team .nm { font-family:'Archivo'; font-weight:700; font-size:10pt; color:var(--navy); }
+  .team .rl { font-size:9pt; font-style:italic; color:#5A5F7E; margin:1pt 0 3pt; }
+  .team .ct { font-size:9pt; color:#3A3F60; line-height:1.45; }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 · COVER ================= -->
+<div class="page cover">
+  <div class="kicker">Prepared For</div>
+  <img class="logo-bjs" src="assets/bjs_logo.png" alt="BJ's Family Pharmacy">
+  <div class="subtitle">Indoor Digital Billboard Performance &nbsp;·&nbsp; Starkville, Mississippi</div>
+
+  <div class="cover-title">AD TRACTION<br>REPORT</div>
+  <div class="cover-dates">April 30, 2025 – August 11, 2026 &nbsp;·&nbsp; 15 Months on the Network</div>
+
+  <div class="gift-band">
+    <b>$7,500+ in gifted advertising.</b> &nbsp;As our host venue partner, BJ's ran on the full
+    25-screen footprint below — 20 screens beyond the free host benefit — at no cost for the
+    entire campaign.
+  </div>
+
+  <div class="cover-stats">
+    <div class="stat"><div class="num">330,221</div><div class="lbl">Ad Plays</div></div>
+    <div class="stat"><div class="num">25</div><div class="lbl">Active Venues</div></div>
+    <div class="stat"><div class="num">1,834h</div><div class="lbl">Screen Time</div></div>
+    <div class="stat"><div class="num">519K+</div><div class="lbl">Est. Monthly<br>Impressions</div></div>
+  </div>
+
+  <div class="cover-foot">
+    <img src="assets/mctv_logo.png" alt="MCTV Elite Advertising">
+    <div class="who">
+      <div class="name">Swayze Hollingsworth</div>
+      <div class="role">Director of Sales &nbsp;|&nbsp; MCTV Elite Advertising</div>
+      <div class="contact">swayze@mctvofms.com &nbsp;·&nbsp; (662) 907-0404</div>
+    </div>
+    <div class="site">WWW.MCTVOFMS.COM</div>
+  </div>
+  <div class="footer"><span>MCTV Elite Advertising</span><span>BJ's Family Pharmacy &nbsp;·&nbsp; Ad Traction Report</span></div>
+</div>
+
+<!-- ================= PAGE 2 · EXECUTIVE SUMMARY ================= -->
+<div class="page">
+  <div class="kicker">Section 01</div>
+  <h1 class="section">EXECUTIVE SUMMARY</h1>
+  <div class="section-rule"></div>
+
+  <div class="chips">
+    <div class="chip"><div class="big">Uno Mas Tacos y Tequila</div><div class="small">Top Venue — 80,272 Plays</div></div>
+    <div class="chip"><div class="big">Starkville · Columbus · West Point</div><div class="small">3 Markets Covered</div></div>
+    <div class="chip"><div class="big">8 Categories</div><div class="small">Venue Types Reached</div></div>
+    <div class="chip"><div class="big">13,209</div><div class="small">Avg Plays Per Venue</div></div>
+  </div>
+
+  <p class="lede">Over the last fifteen months your ad ran <b class="nv">330,221 times</b> across
+  <b class="nv">25 active venues</b>, adding up to <b class="nv">1,834 hours and 33 minutes</b> of screen
+  time. Those are real hours in front of real people — neighbors, patients, students, and families moving
+  through the places they already visit every week in Starkville and the Golden Triangle.</p>
+
+  <p class="lede">Starkville carried the campaign with 23 venues and 92.5% of total plays, while Elm Lake
+  Golf Course in Columbus contributed another 7.4% on its own. Your strongest hosts were Uno Mas Tacos y
+  Tequila (80,272 plays), Two Brothers Smoked Meats (28,280), and your own pharmacy screen (24,915) —
+  proof that high-dwell restaurants and everyday service stops do the heaviest lifting. General locations,
+  restaurants and bars, and medical and dental offices together produced 77.7% of your exposure, which
+  means the message is landing both during downtime and in health-minded moments.</p>
+
+  <p class="lede">One number worth sitting with: your reach was never concentrated in a handful of
+  screens. The twenty venues <i>outside</i> your top five still generated <b class="nv">154,203 plays —
+  46.7% of the campaign</b> — and an estimated 286,000 monthly impressions. That breadth is what makes a
+  local name feel like it's everywhere, and it's the part of this campaign that Section 05 is about.</p>
+
+  <p class="lede">Every play above ran at no cost to BJ's. The host partnership includes five free
+  screens; the other twenty venues were gifted while network inventory was open — roughly
+  <b class="nv">$500/month of advertising at standard rates, $7,500+ across the campaign</b>.</p>
+
+  <div style="margin-top:14pt;">
+    <div class="kicker navy" style="margin-bottom:6pt;">Top Hosts by Ad Plays</div>
+    <table>
+      <tr><td class="venue">Uno Mas Tacos y Tequila</td><td>Starkville</td><td class="r"><b>80,272</b></td>
+          <td class="venue">Cellars Wine &amp; Spirits</td><td>Starkville</td><td class="r"><b>15,531</b></td></tr>
+      <tr><td class="venue">Two Brothers Smoked Meats</td><td>Starkville</td><td class="r"><b>28,280</b></td>
+          <td class="venue">Copy Cow</td><td>Starkville</td><td class="r"><b>12,216</b></td></tr>
+      <tr><td class="venue">BJ's Family Pharmacy</td><td>Starkville</td><td class="r"><b>24,915</b></td>
+          <td class="venue">Umi Japanese Steakhouse</td><td>Starkville</td><td class="r"><b>11,266</b></td></tr>
+      <tr><td class="venue">Elm Lake Golf Course</td><td>Columbus</td><td class="r"><b>24,399</b></td>
+          <td class="venue">Mississippi Ice Daiquiri Shop</td><td>Starkville</td><td class="r"><b>11,160</b></td></tr>
+      <tr><td class="venue">Right Track Medical Group</td><td>Starkville</td><td class="r"><b>18,152</b></td>
+          <td class="venue">MS Asthma &amp; Allergy Clinic</td><td>Starkville</td><td class="r"><b>10,884</b></td></tr>
+    </table>
+  </div>
+  <div class="footer"><span>MCTV Elite Advertising</span><span>BJ's Family Pharmacy &nbsp;·&nbsp; Ad Traction Report</span></div>
+</div>
+
+<!-- ================= PAGE 3 · VENUE TABLE ================= -->
+<div class="page">
+  <div class="kicker">Section 02</div>
+  <h1 class="section">PERFORMANCE BY VENUE</h1>
+  <div class="section-rule"></div>
+
+  <p class="lede" style="margin-bottom:9pt;">All 25 venues, sorted by total ad plays; impressions are
+  sourced from NTV360 network analytics. <b class="nv">★ marks your five highest-play venues</b> — they
+  account for 53.3% of plays; the remaining twenty screens carry the other 46.7%.</p>
+
+  <table class="dense">
+    <tr><th>Venue</th><th>City</th><th>Category</th><th class="r">Plays</th><th class="r">Air Time</th><th class="r">% Total</th><th class="r">Est. Mo. Impr.</th></tr>
+    <tr class="hl"><td class="venue">Uno Mas Tacos y Tequila</td><td>Starkville</td><td>Restaurant &amp; Bar</td><td class="r">80,272</td><td class="r">445h 57m</td><td class="r">24.3%</td><td class="r">63,171</td></tr>
+    <tr class="hl"><td class="venue">Two Brothers Smoked Meats</td><td>Starkville</td><td>General</td><td class="r">28,280</td><td class="r">157h 7m</td><td class="r">8.6%</td><td class="r">63,171</td></tr>
+    <tr class="hl"><td class="venue">BJ's Family Pharmacy</td><td>Starkville</td><td>Medical &amp; Dental</td><td class="r">24,915</td><td class="r">138h 25m</td><td class="r">7.5%</td><td class="r">16,816</td></tr>
+    <tr class="hl"><td class="venue">Elm Lake Golf Course</td><td>Columbus</td><td>General</td><td class="r">24,399</td><td class="r">135h 33m</td><td class="r">7.4%</td><td class="r">55,750</td></tr>
+    <tr class="hl"><td class="venue">Right Track Medical Group</td><td>Starkville</td><td>Medical &amp; Dental</td><td class="r">18,152</td><td class="r">100h 51m</td><td class="r">5.5%</td><td class="r">33,632</td></tr>
+    <tr><td class="venue">Cellars Wine &amp; Spirits</td><td>Starkville</td><td>Liquor &amp; Spirits</td><td class="r">15,531</td><td class="r">86h 17m</td><td class="r">4.7%</td><td class="r">11,141</td></tr>
+    <tr><td class="venue">Copy Cow</td><td>Starkville</td><td>General</td><td class="r">12,216</td><td class="r">67h 52m</td><td class="r">3.7%</td><td class="r">8,277</td></tr>
+    <tr><td class="venue">Umi Japanese Steakhouse</td><td>Starkville</td><td>Restaurant &amp; Bar</td><td class="r">11,266</td><td class="r">62h 35m</td><td class="r">3.4%</td><td class="r">21,057</td></tr>
+    <tr><td class="venue">Mississippi Ice Daiquiri Shop</td><td>Starkville</td><td>Retail &amp; Hospitality</td><td class="r">11,160</td><td class="r">62h 0m</td><td class="r">3.4%</td><td class="r">21,057</td></tr>
+    <tr><td class="venue">MS Asthma &amp; Allergy Clinic</td><td>Starkville</td><td>Medical &amp; Dental</td><td class="r">10,884</td><td class="r">60h 28m</td><td class="r">3.3%</td><td class="r">16,816</td></tr>
+    <tr><td class="venue">Montgomery's Jewelry</td><td>Starkville</td><td>Retail &amp; Hospitality</td><td class="r">10,372</td><td class="r">57h 37m</td><td class="r">3.1%</td><td class="r">8,277</td></tr>
+    <tr><td class="venue">Bennett Home Furniture &amp; More</td><td>Starkville</td><td>General</td><td class="r">8,826</td><td class="r">49h 2m</td><td class="r">2.7%</td><td class="r">8,277</td></tr>
+    <tr><td class="venue">Little Magnolia Gifts &amp; Apparel</td><td>Starkville</td><td>Retail &amp; Hospitality</td><td class="r">8,450</td><td class="r">46h 57m</td><td class="r">2.6%</td><td class="r">14,273</td></tr>
+    <tr><td class="venue">Hobie's Tiki Dawgs &amp; Daqs</td><td>Starkville</td><td>General</td><td class="r">8,197</td><td class="r">45h 32m</td><td class="r">2.5%</td><td class="r">21,057</td></tr>
+    <tr><td class="venue">Lucky Nails &amp; Spa</td><td>Starkville</td><td>Salon &amp; Beauty</td><td class="r">7,939</td><td class="r">44h 6m</td><td class="r">2.4%</td><td class="r">7,336</td></tr>
+    <tr><td class="venue">Oktibbeha County Co-op</td><td>Starkville</td><td>General</td><td class="r">7,668</td><td class="r">42h 36m</td><td class="r">2.3%</td><td class="r">8,277</td></tr>
+    <tr><td class="venue">Starkville Veterinary Hospital</td><td>Starkville</td><td>Medical &amp; Dental</td><td class="r">7,529</td><td class="r">41h 50m</td><td class="r">2.3%</td><td class="r">10,689</td></tr>
+    <tr><td class="venue">Revive Wellness Clinic</td><td>Starkville</td><td>Medical &amp; Dental</td><td class="r">7,492</td><td class="r">41h 37m</td><td class="r">2.3%</td><td class="r">10,689</td></tr>
+    <tr><td class="venue">William Wells Tire &amp; Auto</td><td>Starkville</td><td>Auto &amp; Service</td><td class="r">6,727</td><td class="r">37h 22m</td><td class="r">2.0%</td><td class="r">4,629</td></tr>
+    <tr><td class="venue">Starkvegas Pawnshop</td><td>Starkville</td><td>Retail &amp; Hospitality</td><td class="r">5,934</td><td class="r">32h 58m</td><td class="r">1.8%</td><td class="r">8,277</td></tr>
+    <tr><td class="venue">The Breakfast Club</td><td>Starkville</td><td>General</td><td class="r">5,783</td><td class="r">32h 8m</td><td class="r">1.8%</td><td class="r">21,057</td></tr>
+    <tr><td class="venue">Skate Odyssey Inc</td><td>Starkville</td><td>Community &amp; Ent.</td><td class="r">4,203</td><td class="r">23h 21m</td><td class="r">1.3%</td><td class="r">55,750</td></tr>
+    <tr><td class="venue">Legends Hair Salon</td><td>Starkville</td><td>Salon &amp; Beauty</td><td class="r">3,231</td><td class="r">17h 57m</td><td class="r">1.0%</td><td class="r">7,336</td></tr>
+    <tr><td class="venue">39759 Nutrition</td><td>Starkville</td><td>Restaurant &amp; Bar</td><td class="r">475</td><td class="r">2h 38m</td><td class="r">0.1%</td><td class="r">8,277</td></tr>
+    <tr><td class="venue">Cannon Chevrolet GMC of West Point</td><td>West Point</td><td>Auto &amp; Service</td><td class="r">320</td><td class="r">1h 47m</td><td class="r">0.1%</td><td class="r">14,273</td></tr>
+    <tr class="total"><td>TOTAL</td><td></td><td></td><td class="r">330,221</td><td class="r">1,834h 33m</td><td class="r">100.0%</td><td class="r">519,362</td></tr>
+  </table>
+  <div class="footer"><span>MCTV Elite Advertising</span><span>BJ's Family Pharmacy &nbsp;·&nbsp; Ad Traction Report</span></div>
+</div>
+
+<!-- ================= PAGE 4 · CATEGORY & MARKET ================= -->
+<div class="page">
+  <div class="kicker">Section 03</div>
+  <h1 class="section">CATEGORY &amp; MARKET BREAKDOWN</h1>
+  <div class="section-rule"></div>
+
+  <p class="lede" style="margin-bottom:12pt;">Where your exposure came from — which venue types drove
+  the most plays, and how the campaign was distributed across the three markets.</p>
+
+  <div class="kicker navy" style="margin-bottom:8pt;">By Category</div>
+  <div class="bar-row"><div class="bl">General</div><div class="bv">7 venues · 95,369</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="pct">28.9%</div></div>
+  <div class="bar-row"><div class="bl">Restaurant &amp; Bar</div><div class="bv">3 venues · 92,013</div><div class="track"><div class="fill" style="width:96%"></div></div><div class="pct">27.9%</div></div>
+  <div class="bar-row"><div class="bl">Medical &amp; Dental</div><div class="bv">5 venues · 68,972</div><div class="track"><div class="fill" style="width:72%"></div></div><div class="pct">20.9%</div></div>
+  <div class="bar-row"><div class="bl">Retail &amp; Hospitality</div><div class="bv">4 venues · 35,916</div><div class="track"><div class="fill" style="width:38%"></div></div><div class="pct">10.9%</div></div>
+  <div class="bar-row"><div class="bl">Liquor &amp; Spirits</div><div class="bv">1 venue · 15,531</div><div class="track"><div class="fill" style="width:16%"></div></div><div class="pct">4.7%</div></div>
+  <div class="bar-row"><div class="bl">Salon &amp; Beauty</div><div class="bv">2 venues · 11,170</div><div class="track"><div class="fill" style="width:12%"></div></div><div class="pct">3.4%</div></div>
+  <div class="bar-row"><div class="bl">Auto &amp; Service</div><div class="bv">2 venues · 7,047</div><div class="track"><div class="fill" style="width:7%"></div></div><div class="pct">2.1%</div></div>
+  <div class="bar-row"><div class="bl">Community &amp; Entertainment</div><div class="bv">1 venue · 4,203</div><div class="track"><div class="fill" style="width:4%"></div></div><div class="pct">1.3%</div></div>
+
+  <div class="kicker navy" style="margin:16pt 0 6pt;">By Market</div>
+  <table>
+    <tr><th>Market</th><th class="r">Venues</th><th class="r">Total Plays</th><th class="r">% of Total</th><th>Top Venue</th></tr>
+    <tr><td class="venue">Starkville</td><td class="r">23</td><td class="r">305,502</td><td class="r">92.5%</td><td>Uno Mas Tacos y Tequila</td></tr>
+    <tr><td class="venue">Columbus</td><td class="r">1</td><td class="r">24,399</td><td class="r">7.4%</td><td>Elm Lake Golf Course</td></tr>
+    <tr><td class="venue">West Point</td><td class="r">1</td><td class="r">320</td><td class="r">0.1%</td><td>Cannon Chevrolet GMC of West Point</td></tr>
+  </table>
+
+  <div class="takeaways">
+    <div class="tk"><div class="t">Top Performer</div><div class="d">Uno Mas Tacos y Tequila leads with 80,272 plays — 24.3% of the campaign — driven by long table-wait dwell time.</div></div>
+    <div class="tk"><div class="t">Health-Minded Moments</div><div class="d">Five medical &amp; dental venues delivered 68,972 plays to people already thinking about prescriptions, refills, and vaccines.</div></div>
+    <div class="tk"><div class="t">Breadth, Not Luck</div><div class="d">No single venue tops 25% of plays. Twenty screens outside your top five still produced 46.7% of your total exposure.</div></div>
+    <div class="tk"><div class="t">Multi-Market Reach</div><div class="d">Active across Starkville, Columbus, and West Point — the same Golden Triangle footprint your customers drive every week.</div></div>
+  </div>
+  <div class="footer"><span>MCTV Elite Advertising</span><span>BJ's Family Pharmacy &nbsp;·&nbsp; Ad Traction Report</span></div>
+</div>
+
+<!-- ================= PAGE 5 · VALUE & WHAT'S CHANGING ================= -->
+<div class="page">
+  <div class="kicker">Section 04</div>
+  <h1 class="section">YOUR FOOTPRINT &amp; WHAT'S CHANGING</h1>
+  <div class="section-rule"></div>
+
+  <div class="val-band">
+    <div class="num">$7,500+</div>
+    <div class="txt">The advertising value MCTV has gifted BJ's beyond the host benefit: <b>20 extra
+    screens at the standard $500/month rate, free for 15 months.</b> We did it because inventory was
+    open and we wanted our host partners to see what the full network can do. It did exactly that.</div>
+  </div>
+
+  <div class="h2">The network is filling up</div>
+  <p class="lede">When this campaign started, screen loops had room to spare, so every host partner ran
+  network-wide at no charge. That's no longer the case: paid advertisers are signing on and loop
+  inventory is being committed to their agreements. As of this fall, <b class="nv">every host partner on
+  the network moves to the standard host benefit — five free screens</b> — and the remaining slots are
+  allocated to signed campaigns, first come, first served.</p>
+
+  <div class="h2">What five screens keeps — and what it doesn't</div>
+  <p class="lede">Five well-chosen screens are genuinely valuable; that's why the host benefit exists.
+  But your last fifteen months show how much of your presence lives beyond them. Even if you keep your
+  five <i>best</i> performers, the twenty screens you'd give up carried <b class="nv">46.7% of your plays
+  and an estimated 286,000 monthly impressions</b> — more than half your current reach, including every
+  screen in Columbus and West Point but one.</p>
+
+  <table class="compare">
+    <tr>
+      <th style="width:2.1in;"></th>
+      <th class="r">Standard Host Benefit<br>(5 Screens)</th>
+      <th class="r keep">Full Footprint<br>(All 25 Screens)</th>
+    </tr>
+    <tr><td class="lbl2">Est. plays / month</td><td class="r">~11,400</td><td class="r keep">~21,400</td></tr>
+    <tr><td class="lbl2">Est. impressions / month</td><td class="r">~233,000</td><td class="r keep">519,000+</td></tr>
+    <tr><td class="lbl2">Markets covered</td><td class="r">Starkville + Columbus</td><td class="r keep">Starkville · Columbus · West Point</td></tr>
+    <tr><td class="lbl2">Monthly cost</td><td class="r">$0</td><td class="r keep">$400 (reg. $500)</td></tr>
+    <tr><td class="lbl2">Effective cost per screen</td><td class="r">—</td><td class="r keep">$16 across 25 screens</td></tr>
+    <tr><td class="lbl2">Effective cost per 1,000 impressions</td><td class="r">—</td><td class="r keep">~$0.77 CPM</td></tr>
+  </table>
+
+  <div class="h2">Why we're coming to you first</div>
+  <p class="lede">Because you're the incumbent on these screens, BJ's gets <b class="nv">first right to
+  keep the exact footprint that produced these numbers</b> — before any of those twenty slots is offered
+  to a paying advertiser — and a <b class="nv">20% host-partner discount</b> off the rate every advertiser
+  on the network pays. At $16 per screen effective, you'd be running at the per-screen rate advertisers
+  only unlock by purchasing the entire 125+ screen network.</p>
+  <div class="footer"><span>MCTV Elite Advertising</span><span>BJ's Family Pharmacy &nbsp;·&nbsp; Ad Traction Report</span></div>
+</div>
+
+<!-- ================= PAGE 6 · THE OFFER ================= -->
+<div class="page">
+  <div class="kicker">Section 05</div>
+  <h1 class="section">YOUR OPTIONS &amp; NEXT STEPS</h1>
+  <div class="section-rule"></div>
+
+  <div class="options">
+    <div class="opt">
+      <div class="oname">Standard Host Partnership</div>
+      <div class="oprice">Free</div>
+      <div class="osub">5 Screens · Included as Our Host</div>
+      <ul>
+        <li>Choose any 5 venues from the page 3 table</li>
+        <li>~11,400 plays / month at your top five</li>
+        <li>~233,000 est. monthly impressions</li>
+        <li>Remaining 20 screens released to paid advertisers</li>
+      </ul>
+    </div>
+    <div class="opt rec">
+      <div class="tag">Recommended · Host Exclusive</div>
+      <div class="oname">Full-Footprint Partnership</div>
+      <div class="oprice">$400<span class="mo">/mo</span><span class="was">$500/mo</span></div>
+      <div class="osub">All 25 Screens · 5 Free + 20 at Your 20% Host Rate</div>
+      <ul>
+        <li>Keep every screen and all 3 markets — nothing changes</li>
+        <li>519K+ est. monthly impressions · ~$0.77 CPM</li>
+        <li>$16/screen effective — the whole-network rate</li>
+        <li>Quarterly creative refreshes included free</li>
+        <li>Proof-of-play reporting, every quarter</li>
+        <li>Prepay 6 months, get the 7th month free</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hold"><b>Your footprint is held through September 15, 2026.</b> After that, the twenty
+  screens beyond your host benefit go into general inventory. Once a screen's loop sells out to another
+  advertiser — including other pharmacies — we can't guarantee we can get it back.</div>
+
+  <div class="steps">
+    <div class="step"><div class="n">01</div><div class="body"><b>Call or text Swayze at (662) 907-0404</b> (or reply to this email) and tell us which option you'd like. One conversation — no paperwork needed to hold your rate.</div></div>
+    <div class="step"><div class="n">02</div><div class="body"><b>Lock your screens.</b> Full footprint: everything stays exactly as it runs today. Standard: pick your five from page 3 and we'll handle the rest.</div></div>
+    <div class="step"><div class="n">03</div><div class="body"><b>We refresh your creative for fall — free.</b> Flu shots, back-to-school immunizations, and Medicare open enrollment. New spot live before October 1.</div></div>
+  </div>
+
+  <div class="team">
+    <div class="m"><div class="nm">Swayze Hollingsworth</div><div class="rl">Director of Sales</div><div class="ct">(662) 907-0404<br>swayze@mctvofms.com</div></div>
+    <div class="m"><div class="nm">T. Creed Cannon</div><div class="rl">Owner / Managing Partner</div><div class="ct">(601) 201-8202<br>creed@mctvofms.com</div></div>
+    <div class="m"><div class="nm">Mary Michael Cannon</div><div class="rl">Owner / Managing Partner</div><div class="ct">(662) 801-5677<br>mmc@mctvofms.com</div></div>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:16pt; margin-top:13pt; border-top:2pt solid var(--navy); padding-top:10pt;">
+    <img src="assets/mctv_logo.png" style="height:0.5in;" alt="MCTV">
+    <div style="font-size:9.3pt; line-height:1.45; color:#3A3F60; max-width:4.2in;">Thank you for being
+    one of our founding host partners. These numbers exist because BJ's opened its doors to the network —
+    we'd love to keep the whole footprint working for you.</div>
+    <div style="margin-left:auto; font-family:'Archivo'; font-weight:700; font-size:9pt; letter-spacing:0.18em; color:var(--bronze);">WWW.MCTVOFMS.COM</div>
+  </div>
+  <div class="footer"><span>MCTV Elite Advertising</span><span>BJ's Family Pharmacy &nbsp;·&nbsp; Ad Traction Report</span></div>
+</div>
+
+</body>
+</html>
