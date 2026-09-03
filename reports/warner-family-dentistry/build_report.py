@@ -1,144 +1,101 @@
-import json, html
+import json, html, os, base64
 from datetime import date
-d=json.load(open('agg.json'))
-hosts=d['hosts']; versions=d['versions']
 
-SELECTED = {  # client's chosen screens -> matching host name in reports (None = not found)
- '39759 Nutrition': None,
- 'Two Brothers': 'Two Brothers Smoked Meats',
- 'William Wells': 'William Wells Tire & Auto',
- 'Lucky Nails': 'Lucky Nails & Spa',
- 'Starkville Veterinary Hospital': 'Starkville Veterinary Hospital',
- 'Umi': 'Umi Japanese Steakhouse & Sushi Bar',
- 'Legends': 'Legends Hair Salon',
- 'MS Asthma': 'Mississippi Asthma & Allergy Clinic, PA - Starkville',
- 'Skate Odyssey': 'Skate Odyssey Inc',
- "BJ's Family Pharmacy": "BJ's Family Pharmacy",
+d = json.load(open('agg.json'))
+hosts = d['hosts']; versions = d['versions']
+
+SELECTED = {  # client's chosen screens -> matching host name in reports (None = not in the exports)
+    '39759 Nutrition': None,
+    'Two Brothers': 'Two Brothers Smoked Meats',
+    'William Wells': 'William Wells Tire & Auto',
+    'Lucky Nails': 'Lucky Nails & Spa',
+    'Starkville Veterinary Hospital': 'Starkville Veterinary Hospital',
+    'Umi': 'Umi Japanese Steakhouse & Sushi Bar',
+    'Legends': 'Legends Hair Salon',
+    'MS Asthma': 'Mississippi Asthma & Allergy Clinic, PA - Starkville',
+    'Skate Odyssey': 'Skate Odyssey Inc',
+    "BJ's Family Pharmacy": "BJ's Family Pharmacy",
 }
-paid_names={v for v in SELECTED.values() if v}
-DEMO='D.476 Dealer Demo'
+paid_names = {v for v in SELECTED.values() if v}
+DEMO = 'D.476 Dealer Demo'
+OFFLINE_NAME = '39759 Nutrition'   # played but disconnected from Wi-Fi, so no counts reported
 
 def fmt_d(s):
-    y,m,dd=s.split('-'); return f"{int(m)}/{int(dd)}/{y}"
-def hrs(sec): return sec/3600
+    y, m, dd = s.split('-'); return f"{int(m)}/{int(dd)}/{y}"
+def hrs(sec): return sec / 3600
 def n(x): return f"{x:,}"
 
-rows=[]
-for name,h in hosts.items():
-    if name==DEMO: continue
-    rows.append(dict(name=name,plays=h['plays'],secs=h['secs'],first=h['first'],last=h['last'],
-        paid=name in paid_names,city=h['city'],versions=h['versions']))
-rows.sort(key=lambda r:-r['plays'])
-OFFLINE={'name':'39759 Nutrition','city':'Starkville','paid':True,'nodata':True}
-n_screens=len(rows)+1  # 39759 Nutrition played but could not report
-tot_plays=sum(r['plays'] for r in rows); tot_secs=sum(r['secs'] for r in rows)
-paid_rows=[r for r in rows if r['paid']]; gift_rows=[r for r in rows if not r['paid']]
-paid_plays=sum(r['plays'] for r in paid_rows); gift_plays=sum(r['plays'] for r in gift_rows)
-first=min(r['first'] for r in rows); last=max(r['last'] for r in rows)
-months=5; spend=350*months
-cpp=spend/tot_plays*100  # cents per play
-maxp=rows[0]['plays']
+rows = []
+for name, h in hosts.items():
+    if name == DEMO: continue
+    rows.append(dict(name=name, plays=h['plays'], secs=h['secs'], first=h['first'], last=h['last'],
+                     paid=name in paid_names, city=h['city']))
+rows.sort(key=lambda r: -r['plays'])
+n_screens = len(rows) + 1
+tot_plays = sum(r['plays'] for r in rows); tot_secs = sum(r['secs'] for r in rows)
+paid_rows = [r for r in rows if r['paid']]; gift_rows = [r for r in rows if not r['paid']]
+paid_plays = sum(r['plays'] for r in paid_rows); gift_plays = sum(r['plays'] for r in gift_rows)
+first = min(r['first'] for r in rows); last = max(r['last'] for r in rows)
+months = 5; spend = 350 * months
+cpp = spend / tot_plays * 100
+demo = hosts[DEMO]
 
-# ---- chart (SVG horizontal bars)
-LW=250; BW=520; RH=24; PADT=6
-H=PADT*2+RH*(len(rows)+1)
-ticks=[0,5000,10000,15000,20000]
-def x(v): return LW+ v/20000*BW
-svg=[f'<svg class="bars" viewBox="0 0 {LW+BW+70} {H+28}" role="img" aria-label="Plays per screen, all four ad versions combined">']
-for t in ticks:
+# ---------------------------------------------------------------- chart: plays by screen
+LW, BW, RH, PADT = 250, 520, 24, 6
+H = PADT * 2 + RH * (len(rows) + 1)
+def x(v): return LW + v / 20000 * BW
+svg = [f'<svg class="bars" viewBox="0 0 {LW+BW+70} {H+28}" role="img" aria-label="Plays per screen, all four ad versions combined">']
+for t in (0, 5000, 10000, 15000, 20000):
     svg.append(f'<line class="grid" x1="{x(t):.1f}" y1="{PADT}" x2="{x(t):.1f}" y2="{H}"/>')
     svg.append(f'<text class="tick" x="{x(t):.1f}" y="{H+18}" text-anchor="middle">{n(t)}</text>')
-for i,r in enumerate(rows):
-    y=PADT+i*RH; bh=16; by=y+(RH-bh)/2
-    w=max(2,(r['plays']/20000)*BW)
-    cls='paid' if r['paid'] else 'gift'
-    label=r['name'].replace(' - Starkville','').replace(', PA','')
-    svg.append(f'<g class="row" data-name="{html.escape(r["name"])}" data-plays="{r["plays"]}" data-hours="{hrs(r["secs"]):.1f}" data-kind="{"Selected screen" if r["paid"] else "Gifted screen"}" data-range="{fmt_d(r["first"])} – {fmt_d(r["last"])}">')
+for i, r in enumerate(rows):
+    y = PADT + i * RH; bh = 16; by = y + (RH - bh) / 2
+    w = max(2, (r['plays'] / 20000) * BW)
+    cls = 'paid' if r['paid'] else 'gift'
+    label = r['name'].replace(' - Starkville', '').replace(', PA', '')
+    svg.append(f'<g class="row" data-name="{html.escape(r["name"])}" data-plays="{r["plays"]}" data-hours="{hrs(r["secs"]):.1f}" '
+               f'data-kind="{"Selected screen" if r["paid"] else "Gifted screen"}" data-range="{fmt_d(r["first"])} &ndash; {fmt_d(r["last"])}">')
     svg.append(f'<rect class="hit" x="0" y="{y}" width="{LW+BW+70}" height="{RH}"/>')
     svg.append(f'<text class="lbl" x="{LW-12}" y="{y+RH/2+4}" text-anchor="end">{html.escape(label)}</text>')
     svg.append(f'<path class="bar {cls}" d="M{LW},{by} h{w-4:.1f} a4,4 0 0 1 4,4 v{bh-8} a4,4 0 0 1 -4,4 h-{w-4:.1f} z"/>')
     svg.append(f'<text class="val" x="{LW+w+8:.1f}" y="{y+RH/2+4}">{n(r["plays"])}</text>')
     svg.append('</g>')
-y=PADT+len(rows)*RH
-svg.append(f'<g class="row" data-name="39759 Nutrition" data-plays="0" data-hours="0" data-kind="Selected screen" data-range="Played, not reported (screen offline from Wi-Fi)"><rect class="hit" x="0" y="{y}" width="{LW+BW+70}" height="{RH}"/>')
-svg.append(f'<text class="lbl" x="{LW-12}" y="{y+RH/2+4}" text-anchor="end">39759 Nutrition</text>')
+y = PADT + len(rows) * RH
+svg.append(f'<g class="row" data-name="{OFFLINE_NAME}" data-plays="0" data-hours="0" data-kind="Selected screen" data-range="Played, not reported (screen offline from Wi-Fi)">'
+           f'<rect class="hit" x="0" y="{y}" width="{LW+BW+70}" height="{RH}"/>')
+svg.append(f'<text class="lbl" x="{LW-12}" y="{y+RH/2+4}" text-anchor="end">{OFFLINE_NAME}</text>')
 svg.append(f'<rect class="bar paid nodata" x="{LW}" y="{y+(RH-16)/2}" width="4" height="16"/>')
 svg.append(f'<text class="val muted" x="{LW+12}" y="{y+RH/2+4}">played, not reported*</text></g>')
 svg.append('</svg>')
-svg='\n'.join(svg)
+svg = '\n'.join(svg)
 
-# ---- table
+# ---------------------------------------------------------------- table
 def trow(r):
-    badge='<span class="badge gift">Gifted</span>' if not r['paid'] else '<span class="badge paid">Selected</span>'
-    return f'<tr class="{"gift-row" if not r["paid"] else ""}"><td>{html.escape(r["name"])}<span class="city">{r["city"]}</span></td><td>{badge}</td><td class="num">{n(r["plays"])}</td><td class="num">{hrs(r["secs"]):.1f}</td><td class="dates">{fmt_d(r["first"])} – {fmt_d(r["last"])}</td></tr>'
-table_rows='\n'.join(trow(r) for r in rows)
-table_rows+='<tr><td>39759 Nutrition<span class="city">Starkville</span></td><td><span class="badge paid">Selected</span></td><td class="num muted">not reported*</td><td class="num muted">&mdash;</td><td class="dates">Played, no play data*</td></tr>'
+    badge = '<span class="badge paid">Selected</span>' if r['paid'] else '<span class="badge gift">Gifted</span>'
+    return (f'<tr class="{"" if r["paid"] else "gift-row"}"><td>{html.escape(r["name"])}<span class="city">{r["city"]}</span></td>'
+            f'<td>{badge}</td><td class="num">{n(r["plays"])}</td><td class="num">{hrs(r["secs"]):.1f}</td>'
+            f'<td class="dates">{fmt_d(r["first"])} &ndash; {fmt_d(r["last"])}</td></tr>')
+table_rows = '\n'.join(trow(r) for r in rows)
+table_rows += (f'<tr><td>{OFFLINE_NAME}<span class="city">Starkville</span></td><td><span class="badge paid">Selected</span></td>'
+               f'<td class="num muted">not reported*</td><td class="num muted">&mdash;</td><td class="dates muted">Played, no play data*</td></tr>')
 
-# ---- versions
-vlabels={1:'Original spot',2:'Revision 2',3:'Revision 3',4:'Final spot'}
-vrows=''
+# ---------------------------------------------------------------- versions
+vlabels = {1: 'Original spot', 2: 'Revision 2', 3: 'Revision 3', 4: 'Final spot'}
+vrows = ''
 for v in versions:
-    p=v['plays']-v['demo_plays']
-    vrows+=f'<div class="ver"><div class="ver-n">v{v["version"]}</div><div class="ver-body"><div class="ver-title">{vlabels[v["version"]]}</div><div class="ver-meta">{fmt_d(v["first"])} – {fmt_d(v["last"])}</div></div><div class="ver-plays">{n(p)}<span> plays</span></div></div>'
+    p = v['plays'] - v['demo_plays']
+    vrows += (f'<div class="ver"><div class="ver-dot"></div><div class="ver-n">v{v["version"]}</div>'
+              f'<div class="ver-title">{vlabels[v["version"]]}</div><div class="ver-meta">{fmt_d(v["first"])} &ndash; {fmt_d(v["last"])}</div>'
+              f'<div class="ver-plays">{n(p)}<span>plays</span></div></div>')
 
-
-# ---- delivery over time (estimated daily plays)
-from datetime import timedelta
-W0,W1=date(2026,7,2),date(2026,9,2)
-days=[W0+timedelta(i) for i in range((W1-W0).days+1)]
-daily={x:0.0 for x in days}
-for name,h in hosts.items():
-    if name==DEMO: continue
-    for v in h['versions']:
-        s0=date.fromisoformat(v['start']); e0=date.fromisoformat(v['end'])
-        nd=(e0-s0).days+1
-        wts={s0+timedelta(i):1.0 for i in range(nd)}
-        if nd>1:
-            wts[s0]=0.5
-            if e0<date(2026,9,2): wts[e0]=0.5
-        per=v['plays']/sum(wts.values())
-        for x,w in wts.items():
-            if W0<=x<=W1: daily[x]+=per*w
-dl_tot=sum(daily.values()); dl_days=len(days); dl_avg=dl_tot/dl_days
-wd=[x for x in days if x.weekday()<5]; we=[x for x in days if x.weekday()>=5]
-wd_tot=sum(daily[x] for x in wd); we_tot=sum(daily[x] for x in we)
-best=max(days,key=lambda x:daily[x]); best_v=daily[best]
-def md(x): return x.strftime('%b %-d')
-# svg
-CW,CH=820,230; LPAD,RPAD,TPAD,BPAD=46,10,18,34
-pw=(CW-LPAD-RPAD)/dl_days; ymax=1500
-def yy(v): return TPAD+(CH-TPAD-BPAD)*(1-v/ymax)
-dsvg=[f'<svg class="daily" viewBox="0 0 {CW} {CH}" role="img" aria-label="Estimated daily plays, July 2 to September 2, 2026">']
-for i,x in enumerate(days):
-    if x.weekday()>=5:
-        dsvg.append(f'<rect class="wkend" x="{LPAD+i*pw:.1f}" y="{TPAD}" width="{pw:.2f}" height="{CH-TPAD-BPAD}"/>')
-for t in (0,500,1000,1500):
-    dsvg.append(f'<line class="grid" x1="{LPAD}" y1="{yy(t):.1f}" x2="{CW-RPAD}" y2="{yy(t):.1f}"/>')
-    dsvg.append(f'<text class="tick" x="{LPAD-6}" y="{yy(t)+4:.1f}" text-anchor="end">{t:,}</text>')
-for i,x in enumerate(days):
-    v=daily[x]; bx=LPAD+i*pw+1; bw=pw-2; by=yy(v); bh=CH-BPAD-by
-    r=min(3,bw/2)
-    dsvg.append(f'<g class="col" data-d="{x.strftime("%A, %B %-d")}" data-v="{round(v):,}"><rect class="hit" x="{LPAD+i*pw:.1f}" y="{TPAD}" width="{pw:.2f}" height="{CH-TPAD-BPAD}"/>'
-                f'<path class="dbar{" best" if x==best else ""}" d="M{bx:.1f},{CH-BPAD} v-{bh-r:.1f} a{r},{r} 0 0 1 {r},-{r} h{bw-2*r:.1f} a{r},{r} 0 0 1 {r},{r} v{bh-r:.1f} z"/></g>')
-    if i%7==0 or i==dl_days-1:
-        dsvg.append(f'<text class="tick" x="{LPAD+i*pw+pw/2:.1f}" y="{CH-BPAD+16}" text-anchor="middle">{md(x)}</text>')
-bi=days.index(best)
-dsvg.append(f'<text class="val" x="{LPAD+bi*pw+pw/2:.1f}" y="{yy(best_v)-6:.1f}" text-anchor="middle">{round(best_v):,}</text>')
-dsvg.append('</svg>')
-dsvg='\n'.join(dsvg)
-
-legends=hosts['Legends Hair Salon']; ww=hosts['William Wells Tire & Auto']
-demo=hosts[DEMO]
-
-FONTS=open('fonts_inline.css').read()+open('logofonts_inline.css').read()
-import os,base64
-def img_or(path,fallback,cls):
+# ---------------------------------------------------------------- logos
+FONTS = open('fonts_inline.css').read() + open('logofonts_inline.css').read()
+def img_or(path, fallback, cls):
     if os.path.exists(path):
-        b=base64.b64encode(open(path,'rb').read()).decode()
+        b = base64.b64encode(open(path, 'rb').read()).decode()
         return f'<img class="{cls} real" src="data:image/png;base64,{b}" alt="">'
     return fallback
-WARNER_SVG='''<div class="warner-logo">
- <svg class="tooth" viewBox="0 0 104 128" aria-hidden="true">
+TOOTH = '''<svg class="tooth" viewBox="0 0 104 128" aria-hidden="true">
   <g transform="translate(3.5,3.5)" fill="none" stroke="#111" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
    <path d="M50,14 C33,4 13,12 11,34 C10,50 21,58 24,76 C27,96 31,116 40,118 C48,119 48,98 50,88 C52,98 52,119 60,118 C69,116 73,96 76,76 C79,58 90,50 89,34 C87,12 67,4 50,14 Z"/>
    <path d="M14,30 C6,22 8,6 22,6 C31,6 33,15 27,18" stroke-width="6"/>
@@ -147,177 +104,209 @@ WARNER_SVG='''<div class="warner-logo">
    <path d="M50,14 C33,4 13,12 11,34 C10,50 21,58 24,76 C27,96 31,116 40,118 C48,119 48,98 50,88 C52,98 52,119 60,118 C69,116 73,96 76,76 C79,58 90,50 89,34 C87,12 67,4 50,14 Z"/>
    <path d="M14,30 C6,22 8,6 22,6 C31,6 33,15 27,18" stroke-width="6"/>
   </g>
- </svg>
- <div class="warner-text">
-  <div class="warner-name">ARNER</div>
-  <div class="warner-sub">FAMILY DENTISTRY</div>
-  <div class="warner-spa">&amp; Med Spa</div>
- </div>
+ </svg>'''
+WARNER_SVG = f'''<div class="warner-logo">{TOOTH}
+ <div class="warner-text"><div class="warner-name">ARNER</div><div class="warner-sub">FAMILY DENTISTRY</div><div class="warner-spa">&amp; Med Spa</div></div>
 </div>'''
-MCTV_SVG='''<div class="mctv-logo"><div class="mctv-name">MCTV</div><div class="mctv-sub">ELITE ADVERTISING</div></div>'''
-WARNER_LOGO=img_or('logos/warner.png',WARNER_SVG,'warner-logo')
-MCTV_LOGO=img_or('logos/mctv.png',MCTV_SVG,'mctv-logo')
-page=f'''<title>Warner Family Dentistry Traction</title>
+MCTV_SVG = '<div class="mctv-logo"><div class="mctv-name">MCTV</div><div class="mctv-sub">ELITE ADVERTISING</div></div>'
+WARNER_LOGO = img_or('logos/warner.png', WARNER_SVG, 'warner-logo')
+MCTV_LOGO = img_or('logos/mctv.png', MCTV_SVG, 'mctv-logo')
+
+# ---------------------------------------------------------------- page
+page = f'''<title>Warner Family Dentistry Traction</title>
 <style>
 {FONTS}
 :root{{
-  --ground:#F6F8FA; --paper:#FFFFFF; --ink:#15191E; --ink-2:#4E5964; --ink-3:#7F8B96;
-  --rule:#DCE3E8; --rule-soft:#EBF0F3;
-  --teal:#149BD1; --teal-ink:#0B6C99; --teal-wash:#E3F3FB;
+  --ground:#F4F8FB; --paper:#FFFFFF; --ink:#111417; --ink-2:#4A5560; --ink-3:#7C8994;
+  --rule:#D9E3EA; --rule-soft:#EAF1F5;
+  --blue:#149BD1; --blue-deep:#0B6C99; --blue-wash:#E3F3FB; --blue-tint:#F1F9FD;
+  --black:#111417;
   --amber:#CC7A0E; --amber-ink:#8F5407; --amber-wash:#FBF0DF;
-  --grid:#E3EAEE;
+  --grid:#E1EAF0;
 }}
 @media (prefers-color-scheme: dark){{ :root:not([data-theme="light"]){{
-  --ground:#101418; --paper:#181E25; --ink:#EEF2F5; --ink-2:#B7C1CB; --ink-3:#8492A0;
-  --rule:#2C3640; --rule-soft:#222B34;
-  --teal:#1C9DD0; --teal-ink:#7CCBEF; --teal-wash:#143446;
+  --ground:#0E1419; --paper:#161D24; --ink:#EEF3F6; --ink-2:#B5C1CB; --ink-3:#8494A1;
+  --rule:#2A3640; --rule-soft:#202A33;
+  --blue:#1C9DD0; --blue-deep:#7CCBEF; --blue-wash:#143446; --blue-tint:#122733;
+  --black:#0A0D10;
   --amber:#CF7F12; --amber-ink:#F0B461; --amber-wash:#3D2C14;
-  --grid:#26313B;
+  --grid:#25313B;
 }}}}
 :root[data-theme="dark"]{{
-  --ground:#101418; --paper:#181E25; --ink:#EEF2F5; --ink-2:#B7C1CB; --ink-3:#8492A0;
-  --rule:#2C3640; --rule-soft:#222B34;
-  --teal:#1C9DD0; --teal-ink:#7CCBEF; --teal-wash:#143446;
+  --ground:#0E1419; --paper:#161D24; --ink:#EEF3F6; --ink-2:#B5C1CB; --ink-3:#8494A1;
+  --rule:#2A3640; --rule-soft:#202A33;
+  --blue:#1C9DD0; --blue-deep:#7CCBEF; --blue-wash:#143446; --blue-tint:#122733;
+  --black:#0A0D10;
   --amber:#CF7F12; --amber-ink:#F0B461; --amber-wash:#3D2C14;
-  --grid:#26313B;
+  --grid:#25313B;
 }}
 *{{box-sizing:border-box}}
-.brandbar{{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:0 0 22px}}
-.brandbar img.real{{height:64px;width:auto;max-width:300px;object-fit:contain}}
-.warner-logo{{display:flex;align-items:center;gap:2px}}
-.warner-logo .tooth{{height:66px;width:auto;margin-right:-6px}}
-.warner-text{{line-height:1}}
-.warner-name{{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:36px;letter-spacing:.06em;color:#149BD1;text-shadow:2px 2px 0 #111;line-height:.9}}
-.warner-sub{{font-family:"Josefin Sans","IBM Plex Sans",sans-serif;font-size:11.5px;letter-spacing:.2em;color:#15191E;margin:5px 0 0 2px}}
-.warner-spa{{font-family:"Great Vibes",cursive;font-size:20px;color:#149BD1;text-shadow:1.5px 1.5px 0 #111;text-align:right;margin-top:-1px;line-height:1}}
-.mctv-logo{{text-align:center;line-height:1}}
-.mctv-name{{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:38px;letter-spacing:.34em;color:#1C1F2B;padding-left:.34em}}
-.mctv-sub{{font-family:"Josefin Sans","IBM Plex Sans",sans-serif;font-size:10.5px;letter-spacing:.32em;color:#5A6B7D;padding-left:.32em;margin-top:6px}}
-@media (prefers-color-scheme: dark){{ :root:not([data-theme="light"]) .warner-sub, :root:not([data-theme="light"]) .mctv-name{{color:#EEF2F5}} :root:not([data-theme="light"]) .mctv-sub{{color:#B7C1CB}} }}
-:root[data-theme="dark"] .warner-sub, :root[data-theme="dark"] .mctv-name{{color:#EEF2F5}}
-:root[data-theme="dark"] .mctv-sub{{color:#B7C1CB}}
 body{{margin:0;background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}}
-.page{{max-width:860px;margin:0 auto;padding:34px 28px 48px}}
-h1,h2,.stat b,.ver-plays,.ver-n{{font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif}}
-.eyebrow{{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600}}
-header{{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;padding-bottom:22px;border-bottom:2px solid var(--ink)}}
-h1{{font-size:40px;line-height:1.02;margin:6px 0 0;font-weight:800;letter-spacing:-.02em;text-wrap:balance}}
-h1 small{{display:block;font-size:17px;font-weight:500;letter-spacing:0;color:var(--ink-2);margin-top:8px}}
-.meta{{text-align:right;font-size:13px;color:var(--ink-2);line-height:1.6}}
+h1,h2,.stat b,.hero-num,.ver-plays,.ver-n,.gifted .big{{font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif}}
+.eyebrow{{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-deep);font-weight:600}}
+
+/* running header / footer: repeat on every printed page via table thead/tfoot */
+.sheet{{width:100%;border-collapse:collapse}}
+.sheet>thead>tr>td,.sheet>tbody>tr>td,.sheet>tfoot>tr>td{{padding:0}}
+.runhead{{display:flex;justify-content:space-between;align-items:center;padding:14px 0 10px;border-bottom:3px solid var(--blue);max-width:860px;margin:0 auto;width:100%}}
+.runhead .rh-l{{display:flex;align-items:center;gap:10px;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:15px;letter-spacing:.05em;color:var(--ink)}}
+.runhead .rh-l .tooth{{height:26px;width:auto}}
+.runhead .rh-l small{{font-family:"Josefin Sans",sans-serif;font-weight:400;font-size:9.5px;letter-spacing:.2em;color:var(--ink-2);display:block;margin-top:2px}}
+.runhead .rh-r{{font-family:"Bodoni Moda",Georgia,serif;font-size:17px;letter-spacing:.3em;color:var(--ink);text-align:right}}
+.runhead .rh-r small{{display:block;font-family:"Josefin Sans",sans-serif;font-size:8.5px;letter-spacing:.28em;color:var(--ink-3);margin-top:3px}}
+.runfoot{{display:flex;justify-content:space-between;gap:16px;font-size:11px;color:var(--ink-3);padding:10px 0 0;border-top:1px solid var(--rule);max-width:860px;margin:0 auto;width:100%}}
+.runfoot b{{color:var(--ink-2);font-weight:600}}
+.runfoot i{{display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--blue);vertical-align:-1px;margin-right:6px}}
+
+.page{{max-width:860px;margin:0 auto;padding:0 0 28px}}
+.wrap{{padding:0 28px}}
+
+/* cover */
+.brandbar{{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:28px 0 20px}}
+.brandbar img.real{{height:68px;width:auto;max-width:300px;object-fit:contain}}
+.warner-logo{{display:flex;align-items:center;gap:2px}}
+.warner-logo .tooth{{height:70px;width:auto;margin-right:-6px}}
+.warner-text{{line-height:1}}
+.warner-name{{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:38px;letter-spacing:.06em;color:#149BD1;text-shadow:2px 2px 0 #111;line-height:.9}}
+.warner-sub{{font-family:"Josefin Sans","IBM Plex Sans",sans-serif;font-size:12px;letter-spacing:.2em;color:var(--ink);margin:5px 0 0 2px}}
+.warner-spa{{font-family:"Great Vibes",cursive;font-size:21px;color:#149BD1;text-shadow:1.5px 1.5px 0 #111;text-align:right;margin-top:-1px;line-height:1}}
+.mctv-logo{{text-align:center;line-height:1}}
+.mctv-name{{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:38px;letter-spacing:.34em;color:var(--ink);padding-left:.34em}}
+.mctv-sub{{font-family:"Josefin Sans","IBM Plex Sans",sans-serif;font-size:10.5px;letter-spacing:.32em;color:var(--ink-2);padding-left:.32em;margin-top:6px}}
+
+.titleblock{{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;padding:6px 0 22px}}
+h1{{font-size:42px;line-height:1;margin:6px 0 0;font-weight:800;letter-spacing:-.02em;text-wrap:balance}}
+h1 small{{display:block;font-size:16px;font-weight:500;letter-spacing:0;color:var(--ink-2);margin-top:10px}}
+.meta{{text-align:right;font-size:12.5px;color:var(--ink-2);line-height:1.7;border-right:3px solid var(--blue);padding-right:14px}}
 .meta b{{color:var(--ink);font-weight:600}}
-.stats{{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:26px 0 8px;border:1px solid var(--rule);border-radius:6px;background:var(--paper);overflow:hidden}}
-.stat{{padding:16px 18px;border-right:1px solid var(--rule)}}
-.stat:last-child{{border-right:0}}
-.stat b{{display:block;font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1.05;font-variant-numeric:tabular-nums;margin:4px 0 4px}}
-.stat span{{font-size:12.5px;color:var(--ink-2)}}
-.stat.gift{{background:var(--amber-wash)}}
-.stat.gift b{{color:var(--amber-ink)}}
-.stat.gift .eyebrow{{color:var(--amber-ink)}}
-.lede{{font-size:15.5px;max-width:64ch;color:var(--ink-2);margin:18px 0 0}}
+
+.hero{{display:grid;grid-template-columns:1.25fr 1fr 1fr 1fr;background:linear-gradient(135deg,var(--blue-deep) 0%,var(--blue) 70%,#3DB3E3 100%);color:#fff;border-radius:10px;overflow:hidden;box-shadow:0 10px 30px -14px rgba(11,108,153,.55)}}
+.hero>div{{padding:22px 22px 20px;border-right:1px solid rgba(255,255,255,.22)}}
+.hero>div:last-child{{border-right:0}}
+.hero .eyebrow{{color:rgba(255,255,255,.82)}}
+.hero .hero-num{{display:block;font-size:52px;font-weight:800;letter-spacing:-.03em;line-height:1;margin:8px 0 6px;font-variant-numeric:tabular-nums}}
+.hero b{{display:block;font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1.05;margin:10px 0 6px;font-variant-numeric:tabular-nums}}
+.hero span{{font-size:12.5px;color:rgba(255,255,255,.85)}}
+
+.lede{{font-size:15.5px;max-width:66ch;color:var(--ink-2);margin:22px 0 0}}
 .lede strong{{color:var(--ink);font-weight:600}}
-.gifted{{background:var(--amber-wash);border-left:4px solid var(--amber);padding:14px 18px;border-radius:0 6px 6px 0;margin:22px 0 0;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}}
-.gifted .big{{font-family:"Bricolage Grotesque",sans-serif;font-size:34px;font-weight:800;color:var(--amber-ink);letter-spacing:-.02em;line-height:1}}
-.gifted p{{margin:0;font-size:14px;color:var(--ink)}}
+
+.gifted{{margin:20px 0 0;display:grid;grid-template-columns:auto 1fr;gap:0;border-radius:10px;overflow:hidden;border:1px solid color-mix(in srgb,var(--amber) 35%,transparent);background:var(--paper)}}
+.gifted .big{{background:var(--amber);color:#fff;font-size:40px;font-weight:800;letter-spacing:-.02em;line-height:1;padding:18px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px}}
+.gifted .big small{{font-family:"IBM Plex Sans",sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;opacity:.9}}
+.gifted p{{margin:0;padding:16px 20px;font-size:14px;color:var(--ink);align-self:center}}
 .gifted p b{{font-weight:600}}
-section{{margin-top:40px}}
-h2{{font-size:21px;font-weight:700;letter-spacing:-.01em;margin:0 0 4px}}
-.sub{{color:var(--ink-2);margin:0 0 16px;font-size:13.5px;max-width:70ch}}
-.legend{{display:flex;gap:18px;font-size:12.5px;color:var(--ink-2);margin:0 0 6px}}
+.gifted .amt{{color:var(--amber-ink);font-weight:700}}
+
+.split{{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}}
+.card{{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:16px 18px}}
+.card .eyebrow{{margin-bottom:8px}}
+.share{{height:14px;border-radius:7px;overflow:hidden;display:flex;background:var(--rule-soft);margin:8px 0 8px}}
+.share i{{display:block;height:100%}}
+.share .p{{background:var(--blue)}} .share .g{{background:var(--amber);margin-left:2px}}
+.share-key{{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-2)}}
+.share-key b{{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}}
+.share-key i{{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:-1px;margin-right:6px}}
+.share-note{{margin:12px 0 0;font-size:13px;color:var(--ink-2);line-height:1.55}} .share-note b{{color:var(--ink);font-weight:600}}
+.kv{{display:grid;grid-template-columns:1fr auto;gap:4px 14px;font-size:13px;color:var(--ink-2)}}
+.kv b{{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;text-align:right}}
+.kv div{{padding:5px 0;border-bottom:1px solid var(--rule-soft)}}
+.kv div:nth-last-child(-n+2){{border-bottom:0}}
+
+/* sections */
+section{{margin-top:34px}}
+.sec-head{{display:flex;align-items:baseline;gap:14px;margin:0 0 6px}}
+.sec-num{{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:13px;color:#fff;background:var(--blue);border-radius:6px;padding:3px 8px;letter-spacing:.04em}}
+h2{{font-size:24px;font-weight:800;letter-spacing:-.015em;margin:0}}
+.sub{{color:var(--ink-2);margin:0 0 14px;font-size:13.5px;max-width:74ch}}
+.legend{{display:flex;gap:18px;font-size:12.5px;color:var(--ink-2);margin:0 0 8px}}
 .legend i{{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:6px}}
-.legend .p i{{background:var(--teal)}} .legend .g i{{background:var(--amber)}}
-.chart{{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:14px 10px 6px;position:relative;overflow-x:auto}}
+.legend .p i{{background:var(--blue)}} .legend .g i{{background:var(--amber)}}
+.chart{{background:var(--paper);border:1px solid var(--rule);border-top:4px solid var(--blue);border-radius:10px;padding:14px 10px 6px;position:relative;overflow-x:auto}}
 svg.bars{{width:100%;height:auto;display:block;font-family:"IBM Plex Sans",sans-serif}}
 .bars .grid{{stroke:var(--grid);stroke-width:1}}
 .bars .tick{{font-size:11px;fill:var(--ink-3);font-variant-numeric:tabular-nums}}
 .bars .lbl{{font-size:12px;fill:var(--ink)}}
 .bars .val{{font-size:11.5px;fill:var(--ink-2);font-variant-numeric:tabular-nums}}
-.bars .bar.paid{{fill:var(--teal)}} .bars .bar.gift{{fill:var(--amber)}}
+.bars .val.muted{{fill:var(--ink-3);font-style:italic}}
+.bars .bar.paid{{fill:var(--blue)}} .bars .bar.gift{{fill:var(--amber)}} .bars .bar.nodata{{opacity:.35}}
 .bars .hit{{fill:transparent}}
-.bars .val.muted,td.muted{{fill:var(--ink-3);color:var(--ink-3);font-style:italic}}
-.bars .bar.nodata{{opacity:.35}}
-.bars .row:hover .hit{{fill:var(--rule-soft)}}
-.tip{{position:absolute;pointer-events:none;background:var(--ink);color:var(--ground);font-size:12px;padding:8px 10px;border-radius:5px;line-height:1.4;box-shadow:0 4px 14px rgba(0,0,0,.18);max-width:240px;z-index:2}}
+.bars .row:hover .hit{{fill:var(--blue-tint)}}
+.tip{{position:absolute;pointer-events:none;background:var(--black);color:#fff;font-size:12px;padding:8px 10px;border-radius:6px;line-height:1.4;box-shadow:0 4px 14px rgba(0,0,0,.18);max-width:240px;z-index:2}}
 .tip b{{display:block;font-weight:600;margin-bottom:2px}}
+.fn{{font-size:11.5px;color:var(--ink-3);margin:10px 0 0;max-width:80ch}}
 
-.dstats{{display:grid;grid-template-columns:repeat(4,1fr);margin:0 0 14px;border:1px solid var(--rule);border-radius:6px;background:var(--paper);overflow:hidden}}
-.dstats .stat b{{font-size:26px}}
-svg.daily{{width:100%;height:auto;display:block;font-family:"IBM Plex Sans",sans-serif}}
-.daily .wkend{{fill:var(--rule-soft)}}
-.daily .grid{{stroke:var(--grid);stroke-width:1}}
-.daily .tick{{font-size:10.5px;fill:var(--ink-3);font-variant-numeric:tabular-nums}}
-.daily .val{{font-size:11px;fill:var(--ink-2);font-weight:600;font-variant-numeric:tabular-nums}}
-.daily .dbar{{fill:var(--teal)}}
-.daily .dbar.best{{fill:var(--teal-ink)}}
-.daily .hit{{fill:transparent}}
-.daily .col:hover .hit{{fill:color-mix(in srgb,var(--teal) 12%,transparent)}}
-.wkbox{{margin-top:14px;background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:14px 18px 10px}}
-.wkrow{{display:grid;grid-template-columns:120px 1fr 120px;gap:14px;align-items:center;padding:6px 0}}
-.wklbl{{font-weight:600;font-size:13.5px}} .wklbl span{{display:block;font-weight:400;font-size:11.5px;color:var(--ink-3)}}
-.wkbar{{height:16px;background:var(--rule-soft);border-radius:4px;overflow:hidden}}
-.wkbar i{{display:block;height:100%;background:var(--teal);border-radius:0 4px 4px 0}}
-.wkbar i.we{{background:var(--teal);opacity:.55}}
-.wknum{{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}} .wknum span{{display:block;font-weight:400;font-size:11.5px;color:var(--ink-3)}}
-.wknote{{margin:8px 0 0;font-size:12.5px;color:var(--ink-2)}}
-.fn{{font-size:11.5px;color:var(--ink-3);margin:12px 0 0;max-width:80ch}}
-table{{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--rule);border-radius:6px;overflow:hidden;font-size:13px}}
-thead th{{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600;padding:10px 12px;border-bottom:1px solid var(--rule);background:var(--paper)}}
-td{{padding:8px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:middle}}
-tbody tr:last-child td{{border-bottom:0}}
+table.data{{width:100%;border-collapse:separate;border-spacing:0;background:var(--paper);border:1px solid var(--rule);border-radius:10px;overflow:hidden;font-size:13px}}
+table.data thead th{{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff;font-weight:600;padding:11px 12px;background:var(--black)}}
+table.data thead th.num{{text-align:right}}
+table.data td{{padding:8px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:middle}}
+table.data tbody tr:last-child td{{border-bottom:0}}
 td .city{{display:block;font-size:11.5px;color:var(--ink-3)}}
 .num{{text-align:right;font-variant-numeric:tabular-nums}}
-th.num{{text-align:right}}
+td.muted,.dates.muted{{color:var(--ink-3);font-style:italic}}
 .dates{{white-space:nowrap;color:var(--ink-2);font-variant-numeric:tabular-nums}}
 tr.gift-row td{{background:color-mix(in srgb,var(--amber-wash) 45%,var(--paper))}}
-.badge{{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;padding:2px 8px;border-radius:999px;white-space:nowrap}}
-.badge.gift{{background:var(--amber-wash);color:var(--amber-ink);border:1px solid color-mix(in srgb,var(--amber) 40%,transparent)}}
-.badge.paid{{background:var(--teal-wash);color:var(--teal-ink);border:1px solid color-mix(in srgb,var(--teal) 40%,transparent)}}
-tfoot td{{font-weight:600;border-top:2px solid var(--rule);background:var(--paper)}}
+.badge{{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;padding:2px 9px;border-radius:999px;white-space:nowrap}}
+.badge.gift{{background:var(--amber-wash);color:var(--amber-ink)}}
+.badge.paid{{background:var(--blue);color:#fff}}
+table.data tfoot td{{font-weight:600;border-top:2px solid var(--blue);background:var(--blue-tint)}}
 .tablewrap{{overflow-x:auto}}
-.vers{{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}}
-.ver{{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:14px 14px 12px;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;gap:4px 10px}}
-.ver-n{{font-size:13px;font-weight:700;color:var(--teal-ink);background:var(--teal-wash);border-radius:4px;padding:2px 7px;align-self:start}}
-.ver-title{{font-weight:600;font-size:13.5px}}
-.ver-meta{{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}}
-.ver-plays{{grid-column:1/-1;font-size:24px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-top:4px}}
-.ver-plays span{{font-family:"IBM Plex Sans",sans-serif;font-size:12px;font-weight:400;color:var(--ink-3);margin-left:4px;letter-spacing:0}}
-.notes{{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:6px 20px}}
-.notes dl{{margin:0}}
-.notes .n{{display:grid;grid-template-columns:200px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--rule-soft)}}
-.notes .n:last-child{{border-bottom:0}}
-.notes dt{{font-weight:600;font-size:13.5px}}
-.notes dd{{margin:0;color:var(--ink-2);font-size:13.5px}}
-footer{{margin-top:44px;padding-top:16px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:16px;font-size:12.5px;color:var(--ink-2);flex-wrap:wrap}}
-footer b{{color:var(--ink);font-weight:600}}
-@media (max-width:640px){{ .stats,.vers,.dstats{{grid-template-columns:repeat(2,1fr)}} .wkrow{{grid-template-columns:90px 1fr 90px}} .stat:nth-child(2){{border-right:0}} .stat{{border-bottom:1px solid var(--rule)}} .stat:nth-child(n+3){{border-bottom:0}} header{{grid-template-columns:1fr}} .meta{{text-align:left}} .notes .n{{grid-template-columns:1fr}} }}
+
+.vers{{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;position:relative;padding-top:14px}}
+.vers:before{{content:"";position:absolute;left:4%;right:4%;top:19px;height:3px;background:var(--blue);border-radius:2px}}
+.ver{{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:22px 14px 14px;position:relative;text-align:center}}
+.ver-dot{{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:var(--blue);border:3px solid var(--ground)}}
+.ver-n{{display:inline-block;font-size:12px;font-weight:800;color:var(--blue-deep);background:var(--blue-wash);border-radius:4px;padding:2px 8px}}
+.ver-title{{font-weight:600;font-size:13.5px;margin-top:8px}}
+.ver-meta{{font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums;margin-top:2px}}
+.ver-plays{{font-size:26px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-top:8px;line-height:1}}
+.ver-plays span{{font-family:"IBM Plex Sans",sans-serif;font-size:11px;font-weight:400;color:var(--ink-3);margin-left:5px;letter-spacing:0}}
+
+.closing{{margin-top:26px;background:var(--black);color:#fff;border-radius:10px;padding:20px 24px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}}
+.closing h3{{margin:0 0 4px;font-family:"Bricolage Grotesque",sans-serif;font-size:19px;font-weight:800;letter-spacing:-.01em}}
+.closing p{{margin:0;font-size:13px;color:rgba(255,255,255,.78);max-width:56ch}}
+.closing .who{{text-align:right;font-size:13px;line-height:1.6;border-left:3px solid var(--blue);padding-left:16px}}
+.closing .who b{{display:block;font-size:14.5px}}
+
+@media (max-width:640px){{ .hero,.vers{{grid-template-columns:repeat(2,1fr)}} .hero>div{{border-bottom:1px solid rgba(255,255,255,.22)}} .split{{grid-template-columns:1fr}} .titleblock{{grid-template-columns:1fr}} .meta{{text-align:left;border-right:0;border-left:3px solid var(--blue);padding:0 0 0 14px}} .closing{{grid-template-columns:1fr}} .closing .who{{text-align:left}} .vers:before{{display:none}} .brandbar{{flex-wrap:wrap}} }}
+
 @media print{{
-  @page{{size:letter;margin:.55in .5in}}
+  @page{{size:letter;margin:.4in .5in .45in}}
   :root{{--ground:#fff}}
   body{{font-size:12.5px}}
-  .page{{max-width:none;padding:0}}
+  .sheet>thead{{display:table-header-group}} .sheet>tfoot{{display:table-footer-group}}
+  .runhead{{padding:6px 0 8px;max-width:none}} .runfoot{{max-width:none;padding-top:8px}}
+  .page{{max-width:none;padding:0}} .wrap{{padding:0}}
+  .brandbar{{padding:18px 0 14px}}
   section{{margin-top:22px}}
-  .ver{{padding:10px 12px 8px}} .ver-plays{{font-size:20px;margin-top:2px}}
-  td{{padding:6px 12px}}
-  .chart,.stats,table,.ver,.notes,.gifted{{break-inside:avoid;box-shadow:none}}
-  .stat b{{font-size:26px}}
-  h1{{font-size:34px}}
+  .chart,.hero,.gifted,.card,.ver,.closing,table.data{{break-inside:avoid;box-shadow:none}}
+  section.chart-sec,section.tbl{{break-before:page}}
+  h2,.sub,.legend,.sec-head{{break-after:avoid}}
+  .hero-num{{font-size:44px}} .hero b{{font-size:26px}} h1{{font-size:36px}}
   .bars .lbl{{font-size:11.5px}}
-  .tip{{display:none}}
+  table.data{{border-radius:0}}
+  table.data thead{{display:table-header-group}} table.data tfoot{{display:table-row-group}}
+  table.data td{{padding:6px 12px}}
   tr,td,th{{break-inside:avoid}}
-  section.chart-sec,section.delivery,section.tbl{{break-before:page}}
-  .dstats .stat b{{font-size:22px}}
-  h2,.sub,.legend{{break-after:avoid}}
-  thead{{display:table-header-group}}
-  tfoot{{display:table-row-group}}
-  .stats{{margin-top:18px}}
-  footer{{margin-top:18px;break-inside:avoid}}
+  .ver{{padding:18px 10px 12px}} .ver-plays{{font-size:22px}}
+  .tip{{display:none}}
 }}
 </style>
-<div class="page">
+<table class="sheet"><thead><tr><td>
+<div class="runhead">
+  <div class="rh-l">{TOOTH}<div>ARNER <small>FAMILY DENTISTRY &middot; SCREEN TRACTION REPORT</small></div></div>
+  <div class="rh-r">MCTV<small>ELITE ADVERTISING</small></div>
+</div>
+</td></tr></thead>
+<tbody><tr><td>
+<div class="page"><div class="wrap">
+
 <div class="brandbar">
   {WARNER_LOGO}
   {MCTV_LOGO}
 </div>
-<header>
+
+<div class="titleblock">
   <div>
     <div class="eyebrow">Screen Traction Report</div>
     <h1>Warner Family Dentistry<small>Starkville network &middot; {fmt_d(first)} &ndash; {fmt_d(last)}</small></h1>
@@ -328,77 +317,84 @@ footer b{{color:var(--ink);font-weight:600}}
     <div><b>Spot length:</b> 30 seconds</div>
     <div><b>Prepared:</b> {date.today().strftime("%B %-d, %Y")}</div>
   </div>
-</header>
-
-<div class="stats">
-  <div class="stat"><div class="eyebrow">Total plays</div><b>{n(tot_plays)}</b><span>every airing of the Warner spot</span></div>
-  <div class="stat"><div class="eyebrow">Hours on screen</div><b>{hrs(tot_secs):,.0f}</b><span>{hrs(tot_secs)/24:.0f} full days of airtime</span></div>
-  <div class="stat"><div class="eyebrow">Screens reached</div><b>{n_screens}</b><span>{len(paid_rows)+1} selected + {len(gift_rows)} gifted</span></div>
-  <div class="stat gift"><div class="eyebrow">Plays on gifted screens</div><b>{n(gift_plays)}</b><span>{gift_plays/tot_plays*100:.0f}% of all plays, at no charge</span></div>
 </div>
 
-<p class="lede">Over five months the Warner Family Dentistry spot aired <strong>{n(tot_plays)} times</strong> across the Starkville MCTV network. At $350 a month that works out to roughly <strong>{cpp:.1f}¢ per play</strong>. The spot went through four versions while the creative was refined; every version is counted here.</p>
+<div class="hero">
+  <div><div class="eyebrow">Total plays</div><div class="hero-num">{n(tot_plays)}</div><span>every airing of the Warner spot</span></div>
+  <div><div class="eyebrow">Hours on screen</div><b>{hrs(tot_secs):,.0f}</b><span>{hrs(tot_secs)/24:.0f} full days of airtime</span></div>
+  <div><div class="eyebrow">Screens reached</div><b>{n_screens}</b><span>{len(paid_rows)+1} selected + {len(gift_rows)} gifted</span></div>
+  <div><div class="eyebrow">Cost per play</div><b>{cpp:.1f}&cent;</b><span>at $350 a month</span></div>
+</div>
+
+<p class="lede">Over five months the Warner Family Dentistry spot aired <strong>{n(tot_plays)} times</strong> across the Starkville MCTV network. The spot went through four versions while the creative was refined; every version is counted here.</p>
 
 <div class="gifted">
-  <div class="big">+{len(gift_rows)}</div>
-  <p><b>Gifted screens.</b> Warner Family Dentistry paid for 10 screens. MCTV also ran the spot at no charge on {len(gift_rows)} additional locations, including high-traffic hosts like Uno Mas Tacos y Tequila, Skate Zone, Starkville Parks and Recreation, and Elm Lake Golf Course. Those bonus screens delivered <b>{n(gift_plays)} plays</b>, shown in amber throughout this report.</p>
+  <div class="big">+{len(gift_rows)}<small>gifted screens</small></div>
+  <p><b>Warner Family Dentistry paid for 10 screens.</b> MCTV also ran the spot at no charge on {len(gift_rows)} additional locations, including high-traffic hosts like Uno Mas Tacos y Tequila, Skate Zone, Starkville Parks and Recreation, and Elm Lake Golf Course. Those bonus screens delivered <span class="amt">{n(gift_plays)} plays</span>, shown in amber throughout this report.</p>
+</div>
+
+<div class="split">
+  <div class="card">
+    <div class="eyebrow">Where the plays came from</div>
+    <div class="share"><i class="p" style="width:{paid_plays/tot_plays*100:.1f}%"></i><i class="g" style="width:{gift_plays/tot_plays*100:.1f}%"></i></div>
+    <div class="share-key"><span><i style="background:var(--blue)"></i>Selected screens <b>{n(paid_plays)}</b></span><span><i style="background:var(--amber)"></i>Gifted screens <b>{n(gift_plays)}</b></span></div>
+    <p class="share-note"><b>{gift_plays/tot_plays*100:.0f}%</b> of all plays came from screens Warner Family Dentistry did not pay for. The 10 selected screens averaged <b>{paid_plays/len(paid_rows):,.0f}</b> plays each.</p>
+  </div>
+  <div class="card">
+    <div class="eyebrow">Campaign at a glance</div>
+    <div class="kv">
+      <div>Campaign window</div><div><b>{fmt_d(first)} &ndash; {fmt_d(last)}</b></div>
+      <div>Days on air</div><div><b>{(date.fromisoformat(last)-date.fromisoformat(first)).days+1}</b></div>
+      <div>Busiest screen</div><div><b>{html.escape(rows[0]['name'])}</b></div>
+      <div>Plays per screen per day</div><div><b>{tot_plays/len(rows)/((date.fromisoformat(last)-date.fromisoformat(first)).days+1):.0f}</b></div>
+    </div>
+  </div>
 </div>
 
 <section class="chart-sec">
-  <h2>Plays by screen</h2>
-  <p class="sub">All four spot versions combined, {fmt_d(first)} through {fmt_d(last)}. Hover a bar for details. *39759 Nutrition played but was offline from Wi-Fi, so no counts were reported.</p>
+  <div class="sec-head"><span class="sec-num">01</span><h2>Plays by screen</h2></div>
+  <p class="sub">All four spot versions combined, {fmt_d(first)} through {fmt_d(last)}. Hover a bar for details.</p>
   <div class="legend"><span class="p"><i></i>Selected screen (paid)</span><span class="g"><i></i>Gifted screen (no charge)</span></div>
   <div class="chart" id="chart">
   {svg}
   </div>
-</section>
-
-<section class="delivery">
-  <h2>Delivery over time</h2>
-  <p class="sub">Estimated daily plays across the {len(rows)} reporting screens from {md(W0)} to {md(W1)}, {W1.year}, the run of the final spot. Weekend days are shaded.</p>
-  <div class="dstats">
-    <div class="stat"><div class="eyebrow">Days on air</div><b>{dl_days}</b><span>{md(W0)} &ndash; {md(W1)}</span></div>
-    <div class="stat"><div class="eyebrow">Average day</div><b>{round(dl_avg):,}</b><span>plays per day</span></div>
-    <div class="stat"><div class="eyebrow">Best single day</div><b>{round(best_v):,}</b><span>{best.strftime('%A, %B %-d')}</span></div>
-    <div class="stat"><div class="eyebrow">Plays in period</div><b>{round(dl_tot):,}</b><span>final spot, all screens</span></div>
-  </div>
-  <div class="chart" id="dchart">
-  {dsvg}
-  </div>
-  <div class="wkbox">
-    <div class="wkrow"><div class="wklbl">Weekdays <span>{len(wd)} days</span></div><div class="wkbar"><i style="width:{wd_tot/max(wd_tot,we_tot)*100:.1f}%"></i></div><div class="wknum">{round(wd_tot):,}<span>{round(wd_tot/len(wd)):,} / day</span></div></div>
-    <div class="wkrow"><div class="wklbl">Weekends <span>{len(we)} days</span></div><div class="wkbar"><i class="we" style="width:{we_tot/max(wd_tot,we_tot)*100:.1f}%"></i></div><div class="wknum">{round(we_tot):,}<span>{round(we_tot/len(we)):,} / day</span></div></div>
-    <p class="wknote">Host screens loop the spot seven days a week, so a weekend day delivers about the same as a weekday. Weekdays total more simply because there are more of them.</p>
-  </div>
-  <p class="fn">How this is estimated: MCTV player exports list total plays per screen with first and last play dates, not day-by-day counts. Each screen's plays are spread evenly across its active days (a day when a spot switched or a screen stopped counts as half). Rises and dips reflect screens joining or leaving the rotation. Sept 3 is left off because the export was pulled that morning.</p>
+  <p class="fn">* {OFFLINE_NAME} ran the Warner spot but was disconnected from Wi-Fi during this period, so its player could not send play counts. Its plays are real but are not included in any total.</p>
 </section>
 
 <section class="tbl">
-  <h2>Every screen</h2>
+  <div class="sec-head"><span class="sec-num">02</span><h2>Every screen</h2></div>
   <p class="sub">Play count and airtime per host location. Gifted screens are shaded amber.</p>
   <div class="tablewrap">
-  <table>
+  <table class="data">
     <thead><tr><th>Host location</th><th>Status</th><th class="num">Plays</th><th class="num">Hours</th><th>Active dates</th></tr></thead>
     <tbody>
     {table_rows}
     </tbody>
-    <tfoot><tr><td>Total · {len(rows)} reporting screens</td><td></td><td class="num">{n(tot_plays)}</td><td class="num">{hrs(tot_secs):,.1f}</td><td></td></tr></tfoot>
+    <tfoot><tr><td>Total &middot; {len(rows)} reporting screens</td><td></td><td class="num">{n(tot_plays)}</td><td class="num">{hrs(tot_secs):,.1f}</td><td></td></tr></tfoot>
   </table>
   </div>
-  <p class="fn">* 39759 Nutrition ran the Warner spot but the screen was disconnected from Wi-Fi during this period, so its player could not send play counts. Its plays are real but are not included in any total in this report.</p>
+  <p class="fn">* {OFFLINE_NAME} played the spot but was offline from Wi-Fi, so no counts were reported. {n(demo['plays'])} plays on MCTV's internal demo player are excluded from every figure in this report.</p>
 </section>
 
 <section>
-  <h2>Four versions of the spot</h2>
-  <p class="sub">The creative was refined three times before settling on the final cut. Plays below exclude MCTV's internal demo player.</p>
+  <div class="sec-head"><span class="sec-num">03</span><h2>Four versions of the spot</h2></div>
+  <p class="sub">The creative was refined three times before settling on the final cut.</p>
   <div class="vers">{vrows}</div>
 </section>
 
-<footer>
-  <div><b>Swayze Hollingsworth</b> · MCTV Digital · swayze@mctvofms.com · 662-907-0404</div>
-  <div>Source: MCTV player reports, files FS_1 through FS_4, exported {fmt_d(last)}</div>
-</footer>
+<div class="closing">
+  <div>
+    <h3>Thank you for advertising with MCTV.</h3>
+    <p>Questions about this report, or ready to plan the next flight? Reach out any time.</p>
+  </div>
+  <div class="who"><b>Swayze Hollingsworth</b>MCTV Digital<br>swayze@mctvofms.com &middot; 662-907-0404</div>
 </div>
+
+</div></div>
+</td></tr></tbody>
+<tfoot><tr><td>
+<div class="runfoot"><div><i></i><b>Warner Family Dentistry</b> &middot; Screen Traction Report &middot; {fmt_d(first)} &ndash; {fmt_d(last)}</div><div>Source: MCTV player reports FS_1 &ndash; FS_4, exported {fmt_d(last)}</div></div>
+</td></tr></tfoot></table>
 <script>
 (function(){{
   var chart=document.getElementById('chart'); if(!chart) return;
@@ -406,7 +402,7 @@ footer b{{color:var(--ink);font-weight:600}}
   chart.querySelectorAll('.row').forEach(function(g){{
     g.addEventListener('mousemove',function(e){{
       var d=g.dataset; var r=chart.getBoundingClientRect();
-      tip.innerHTML='<b>'+d.name+'</b>'+d.kind+'<br>'+Number(d.plays).toLocaleString()+' plays · '+d.hours+' hrs<br>'+d.range;
+      tip.innerHTML='<b>'+d.name+'</b>'+d.kind+'<br>'+(d.plays>0?Number(d.plays).toLocaleString()+' plays &middot; '+d.hours+' hrs<br>':'')+d.range;
       tip.hidden=false;
       var x=e.clientX-r.left+12, y=e.clientY-r.top+12;
       if(x+250>r.width) x=e.clientX-r.left-250;
@@ -414,21 +410,9 @@ footer b{{color:var(--ink);font-weight:600}}
     }});
     g.addEventListener('mouseleave',function(){{tip.hidden=true;}});
   }});
-  var dc=document.getElementById('dchart'); if(!dc) return;
-  var dt=document.createElement('div'); dt.className='tip'; dt.hidden=true; dc.appendChild(dt);
-  dc.querySelectorAll('.col').forEach(function(g){{
-    g.addEventListener('mousemove',function(e){{
-      var r=dc.getBoundingClientRect();
-      dt.innerHTML='<b>'+g.dataset.d+'</b>about '+g.dataset.v+' plays';
-      dt.hidden=false; var x=e.clientX-r.left+12; if(x+180>r.width) x=e.clientX-r.left-180;
-      dt.style.left=x+'px'; dt.style.top=(e.clientY-r.top+12)+'px';
-    }});
-    g.addEventListener('mouseleave',function(){{dt.hidden=true;}});
-  }});
 }})();
 </script>
 '''
-out='Warner_Family_Dentistry_Traction_Report.html'
-open(out,'w').write(page.encode('ascii','xmlcharrefreplace').decode('ascii'))
-print('wrote',out)
-print(dict(tot_plays=tot_plays,tot_hours=round(hrs(tot_secs),1),paid=len(paid_rows),gift=len(gift_rows),paid_plays=paid_plays,gift_plays=gift_plays,cpp=round(cpp,2),first=first,last=last))
+out = 'Warner_Family_Dentistry_Traction_Report.html'
+open(out, 'w').write(page.encode('ascii', 'xmlcharrefreplace').decode('ascii'))
+print('wrote', out, dict(tot_plays=tot_plays, screens=n_screens, paid=len(paid_rows) + 1, gift=len(gift_rows), gift_plays=gift_plays))
