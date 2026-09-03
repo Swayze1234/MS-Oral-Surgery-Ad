@@ -37,7 +37,9 @@ h1 em, h2 em{ font-style:normal; color:var(--gold-d); }
 h2{ font-family:'Playfair Display',serif; font-weight:500; font-size:17pt; margin:6px 0 10px; color:var(--navy); }
 .lead{ font-size:10.3pt; color:#33415c; margin:0; }
 .content{ padding:0.24in 0.7in 0; flex:1; min-height:0; overflow:hidden; }
-.page3 .content{ padding-top:0.18in; }
+.page3 .content{ padding-top:0.24in; }
+.page3 .tbl{ font-size:9.4pt; } .page3 .tbl td{ padding:7px 0; }
+.page3 .choice{ font-size:9pt; } .page3 .fields div{ margin-top:20px; } .page3 .sig div{ margin-top:30px; } .page3 .fine{ font-size:7.4pt; }
 .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:18px 0 0; }
 .stat{ border-top:2px solid var(--gold); padding-top:6px; }
 .stat b{ display:block; font-family:'Playfair Display',serif; font-size:18pt; font-weight:500; line-height:1.1; }
@@ -99,7 +101,7 @@ h2{ font-family:'Playfair Display',serif; font-weight:500; font-size:17pt; margi
 .tbl td.c, .tbl th.c{ text-align:center; }
 .tbl td.c{ color:var(--gold-d); font-weight:700; }
 .tbl td.c.no{ color:#c4cbd6; font-weight:400; }
-.accept{ margin-top:10px; border:1px solid var(--line); border-radius:6px; padding:10px 18px 10px; }
+.accept{ margin-top:22px; border:1px solid var(--line); border-radius:6px; padding:14px 20px 12px; }
 .choose{ display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:10px; margin:8px 0 10px; }
 .choice{ display:flex; gap:7px; align-items:flex-start; font-size:8.4pt; color:var(--ink); }
 .choice.rec{ background:var(--soft); border:1px solid var(--gold); border-radius:4px; padding:7px; margin:-7px -8px; }
@@ -198,39 +200,29 @@ page3 = f'''
 <section class="page page3">
   {brandbar(small=True)}
   <div class="content">
-    <div class="kicker">Optional add-ons</div>
-    <h2 style="font-size:15pt">Make your brand move.</h2>
-    <div class="addons">
-      <div class="addon"><b class="t">Animated logo bumper</b>A custom motion graphic of the HOTWORX logo, played across the network between spots.
-        <div class="p">$10 <small>/ SCREEN / MO</small> &nbsp; + &nbsp; $150 <small>ONE-TIME SETUP</small></div></div>
-      <div class="addon"><b class="t">Cause sponsorship</b>Sponsor the local charity, organization or cause of your choice on screen.
-        <div class="p">$10 <small>/ SCREEN / MO</small></div></div>
-    </div>
-    <div class="kicker" style="margin-top:8px">Side by side</div>
-    <h2 style="margin-bottom:2px;font-size:15pt">What each package includes.</h2>
+    <div class="kicker">Side by side</div>
+    <h2 style="margin-bottom:6px">What each package includes.</h2>
     <table class="tbl">
       <tr><th></th><th class="c">20</th><th class="c" style="color:var(--navy)">40 ★</th><th class="c">80</th><th class="c">125+</th></tr>
       <tr><td>Monthly investment</td><td class="c" style="color:var(--navy)">$500</td><td class="c" style="color:var(--navy)">$800</td><td class="c" style="color:var(--navy)">$1,400</td><td class="c" style="color:var(--navy)">$2,000</td></tr>
       <tr><td>Ad plays per month</td><td class="c">30K</td><td class="c">60K</td><td class="c">120K</td><td class="c">187.5K</td></tr>
       <tr><td>Cost per screen</td><td class="c">$25</td><td class="c">$20</td><td class="c">$17.50</td><td class="c">$16</td></tr>
       <tr><td>Custom ad, quarterly refresh, unlimited rotation &amp; reporting</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
-      <tr><td>Animated logo add-on (per month)</td><td class="c">$200</td><td class="c">$400</td><td class="c">$800</td><td class="c">$1,250</td></tr>
-      <tr><td>Cause sponsorship add-on (per month)</td><td class="c">$200</td><td class="c">$400</td><td class="c">$800</td><td class="c">$1,250</td></tr>
+      <tr><td>You own your ad forever</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+      <tr><td>Prepay 6 months → 7th month free · 12 months → 13th &amp; 14th free</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
     </table>
-    <p class="fine" style="margin-top:3px">Add-ons shown at $10 per screen per month; 125+ tier calculated at 125 screens.</p>
 
     <div class="accept">
       <div class="kicker">Agreement &amp; order form</div>
-      <h2 style="margin-top:2px;font-size:15pt;margin-bottom:6px">Select your package.</h2>
+      <h2 style="margin-top:4px;margin-bottom:8px">Select your package.</h2>
       <div class="choose">
         <div class="choice"><div class="box"></div><div><b>20 Screens · $500/mo</b>Entry network reach.</div></div>
         <div class="choice rec"><div class="box"></div><div><b>40 Screens · $800/mo <em>Recommended</em></b>Oxford market saturation.</div></div>
         <div class="choice"><div class="box"></div><div><b>80 Screens · $1,400/mo</b>Deep saturation.</div></div>
         <div class="choice"><div class="box"></div><div><b>125+ Screens · $2,000/mo</b>Entire network.</div></div>
       </div>
-      <div style="display:flex;gap:22px;font-size:8.4pt;color:var(--ink)">
-        <div class="choice"><div class="box"></div><div>Animated logo — $10/screen/mo + $150 setup</div></div>
-        <div class="choice"><div class="box"></div><div>Cause sponsorship — $10/screen/mo</div></div>
+      <div class="kicker" style="margin-top:4px">Billing</div>
+      <div style="display:flex;gap:40px;font-size:8.8pt;color:var(--ink);margin-top:4px">
         <div class="choice"><div class="box"></div><div>Paid in full (prepay)</div></div>
         <div class="choice"><div class="box"></div><div>Monthly billing</div></div>
       </div>
@@ -244,13 +236,13 @@ page3 = f'''
         <div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
       </div>
       <div class="fields" style="margin-top:0">
-        <div style="margin-top:2px;border:0">Term (months) &amp; start date</div><div style="margin-top:2px;border:0">Monthly total</div><div style="margin-top:2px;border:0">One-time setup</div>
+        <div style="margin-top:2px;border:0">Term (months) &amp; start date</div><div style="margin-top:2px;border:0">Monthly total</div><div style="margin-top:2px;border:0">Billing address</div>
       </div>
       <div class="sig">
         <div>HOTWORX Oxford · Signature / Date</div>
         <div>Swayze Hollingsworth · MCTV Digital / Date</div>
       </div>
-      <p class="fine">Upon signing, the first month (or the full amount if prepaying) is billed immediately; monthly billing then begins 30 days after creative is approved and live. Minimum 90-day term, then month-to-month with 30-day written notice. Setup fees are non-refundable. Creative revisions beyond three rounds billed at $200/round. Prepay bonus: 6-month term → 7th month free; 12-month term → 13th &amp; 14th months free.</p>
+      <p class="fine">Upon signing, the first month (or the full amount if prepaying) is billed immediately; monthly billing then begins 30 days after creative is approved and live. Minimum 90-day term, then month-to-month with 30-day written notice. Creative revisions beyond three rounds billed at $200/round. Prepay bonus: 6-month term → 7th month free; 12-month term → 13th &amp; 14th months free.</p>
     </div>
   </div>
   {FOOT}

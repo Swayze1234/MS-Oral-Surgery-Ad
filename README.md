@@ -46,7 +46,7 @@ strings in `build.py`.
 `MCTV_Proposal_HOTWORX_Oxford.pdf` is a 7-page, 16:9 advertising proposal for
 HOTWORX (24 Hour Infrared Fitness Studio) in Oxford, MS, co-branded with the
 HOTWORX and MCTV logos and using **regular** monthly network rates (no seasonal
-specials).
+specials, no add-ons).
 
 | Page | Content |
 |------|---------|
@@ -67,7 +67,7 @@ in the Parlor 1858 proposal style (Playfair Display + Inter, navy/gold, white pa
 |------|---------|
 | 1 | Logos, pitch, key stats, the four regular packages (40 screens recommended), prepay bonus, inclusions |
 | 2 | All 44 Oxford host venues by type, CPM comparison, four steps to launch |
-| 3 | Add-ons, side-by-side package table, agreement & order form with signature lines |
+| 3 | Side-by-side package table, agreement & order form with signature lines |
 
 ## Rebuilding
 

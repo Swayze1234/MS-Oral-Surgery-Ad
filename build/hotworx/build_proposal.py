@@ -273,15 +273,10 @@ pages.append(f'''
         <li><span class="box"></span>80 Screens — $1,400/mo</li>
         <li><span class="box"></span>125+ Screens — $2,000/mo</li>
       </ul>
-      <div class="lbl" style="margin-top:8px">Add-ons</div>
-      <ul>
-        <li><span class="box"></span>Animated Logo — $10/screen/mo + $150 setup</li>
-        <li><span class="box"></span>Cause / Organization Sponsorship — $10/screen/mo</li>
-      </ul>
       <h3 style="margin-top:12px">Payment Authorization</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
         <div><div class="lbl">Monthly total</div><div class="fld">$</div></div>
-        <div><div class="lbl">One-time setup</div><div class="fld">$</div></div>
+        <div><div class="lbl">Prepay total (if paid in full)</div><div class="fld">$</div></div>
       </div>
       <div><span class="box"></span>Paid in Full (Prepay) &nbsp;&nbsp; <span class="box"></span>Monthly Billing</div>
       <p class="fine" style="margin:6px 0 0">Prepay bonus: Pay in full on a 6-month term → 7th month FREE. Pay in full on a 12-month term → 13th &amp; 14th months FREE.</p>
@@ -296,7 +291,7 @@ pages.append(f'''
         <div><div class="lbl">CVV</div><div class="fld"></div></div>
         <div><div class="lbl">Billing zip</div><div class="fld"></div></div>
       </div>
-      <p class="fine">I authorize MCTV Digital, Inc. to charge the payment method above according to the plan selected. Billing: upon signing, the first month — or the full amount if paying in full — is billed immediately. For monthly plans, the remaining billing cycle begins 30 days after creative is approved and pushed live. Minimum 90-day term; continues month-to-month thereafter with 30-day written cancellation notice. Setup fees are non-refundable. Each campaign includes a custom ad with a quarterly refresh; additional creative revisions billed at $200/round after three rounds. Pay-in-full bonus: 6-month agreements receive the 7th month free; 12-month agreements receive the 13th and 14th months free.</p>
+      <p class="fine">I authorize MCTV Digital, Inc. to charge the payment method above according to the plan selected. Billing: upon signing, the first month — or the full amount if paying in full — is billed immediately. For monthly plans, the remaining billing cycle begins 30 days after creative is approved and pushed live. Minimum 90-day term; continues month-to-month thereafter with 30-day written cancellation notice. Each campaign includes a custom ad with a quarterly refresh; additional creative revisions billed at $200/round after three rounds. Pay-in-full bonus: 6-month agreements receive the 7th month free; 12-month agreements receive the 13th and 14th months free.</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
         <div><div class="fld"></div><div class="lbl">Client signature / date</div></div>
         <div><div class="fld"></div><div class="lbl">Swayze Hollingsworth · MCTV Digital / date</div></div>
