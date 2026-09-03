@@ -9,8 +9,9 @@ Design instructions (paste into Canva / Adobe Express / CapCut, or hand to a des
 - Motion on photos: slow zoom-in (scale 100% to 106%) for the full length of each frame. Nothing else moves.
 - Transition between frames: 0.5-second cross-dissolve.
 - Text motion: simple fade-in only (0.6 seconds). No slides, bounces, or typewriter effects.
-- Fonts: one clean sans-serif (Montserrat, Inter, or the font from the OCC logo). Headline bold, body regular.
-- Colors: headline near-black (#1F1F1F). One accent color pulled from the OCC logo for the small label line and the Frame 4 tagline.
+- Logo files: use the **navy version** everywhere (it sits on white). The white version is only for a dark background and is not needed in this ad.
+- Fonts (match the logo): headlines in a classic serif like Playfair Display or Cormorant Garamond, body and labels in a clean sans-serif like Montserrat with wide letter-spacing.
+- Colors from the logo: headline navy `#2C4A5A`, accent gold `#B89B5E`. Use gold for the small labels, sub-lines, and the Frame 4 tagline. No other colors.
 - Safe margins: keep all text at least 100 px from every edge.
 
 ## Timeline
@@ -43,11 +44,14 @@ Design instructions (paste into Canva / Adobe Express / CapCut, or hand to a des
 
 ### Frame 4 — 0:24 to 0:30 (logo animation, 5 seconds)
 - Photo: **empty auditorium** (curved ceiling, rows of seats, OXFORD podium and screen). Keep it very faded: white gradient covers the whole frame at about 85% opacity so the room is only a hint.
-- Logo animation (0:24 to 0:28.5):
-  - 0:24.0 — OCC logo fades in from 0% and scales 92% to 100% over 1.2 seconds, centered.
-  - 0:25.5 — Tagline fades in under the logo, ~44 px, accent color: `Elevate Your Event`
-  - 0:26.5 — Contact line fades in, regular, ~32 px, near-black: `662.232.3367  ·  oxfordconferencecenter.com`
+- Logo animation (0:24 to 0:28.5), built from the logo's own three pieces, centered. Logo width about 900 px on a 1920 canvas:
+  - 0:24.0 — The gold diamond fades in at center, then the gold line **draws outward** from the diamond to both sides over 0.8 seconds.
+  - 0:24.8 — `OXFORD` (navy serif) fades in above the line while rising 20 px into place, 0.8 seconds.
+  - 0:25.4 — `CONFERENCE CENTER` (navy sans) fades in below the line, 0.6 seconds. Logo is now complete.
+  - 0:26.4 — Tagline fades in under the logo, serif italic, ~44 px, gold: `Elevate Your Event`
+  - 0:27.4 — Contact line fades in, sans, ~30 px, navy, letter-spaced: `662.232.3367  ·  oxfordconferencecenter.com`
   - 0:28.5 to 0:30 — hold everything still.
+  - If the tool can't split the logo into pieces, just fade the whole navy logo in while scaling 92% to 100% over 1.2 seconds, then continue from the tagline step.
 - End on the still frame (no fade to black).
 
 ## Photo assignment cheat sheet
@@ -65,3 +69,4 @@ Spares, in order of usefulness: gala table close-up (swap into Frame 3 if the re
 - Play it muted at full screen: every line should be readable in under 2 seconds.
 - Total text on screen at any moment: never more than 3 lines except Frame 3.
 - Export: MP4, H.264, 30 fps, no audio. Also export a PNG of Frame 4 as the static fallback.
+- Logo clear space: keep other text at least one "diamond width" away from the logo on all sides.
