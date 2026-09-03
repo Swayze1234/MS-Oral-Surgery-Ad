@@ -29,6 +29,8 @@ for name,h in hosts.items():
     rows.append(dict(name=name,plays=h['plays'],secs=h['secs'],first=h['first'],last=h['last'],
         paid=name in paid_names,city=h['city'],versions=h['versions']))
 rows.sort(key=lambda r:-r['plays'])
+OFFLINE={'name':'39759 Nutrition','city':'Starkville','paid':True,'nodata':True}
+n_screens=len(rows)+1  # 39759 Nutrition played but could not report
 tot_plays=sum(r['plays'] for r in rows); tot_secs=sum(r['secs'] for r in rows)
 paid_rows=[r for r in rows if r['paid']]; gift_rows=[r for r in rows if not r['paid']]
 paid_plays=sum(r['plays'] for r in paid_rows); gift_plays=sum(r['plays'] for r in gift_rows)
@@ -39,7 +41,7 @@ maxp=rows[0]['plays']
 
 # ---- chart (SVG horizontal bars)
 LW=250; BW=520; RH=24; PADT=6
-H=PADT*2+RH*len(rows)
+H=PADT*2+RH*(len(rows)+1)
 ticks=[0,5000,10000,15000,20000]
 def x(v): return LW+ v/20000*BW
 svg=[f'<svg class="bars" viewBox="0 0 {LW+BW+70} {H+28}" role="img" aria-label="Plays per screen, all four ad versions combined">']
@@ -57,6 +59,11 @@ for i,r in enumerate(rows):
     svg.append(f'<path class="bar {cls}" d="M{LW},{by} h{w-4:.1f} a4,4 0 0 1 4,4 v{bh-8} a4,4 0 0 1 -4,4 h-{w-4:.1f} z"/>')
     svg.append(f'<text class="val" x="{LW+w+8:.1f}" y="{y+RH/2+4}">{n(r["plays"])}</text>')
     svg.append('</g>')
+y=PADT+len(rows)*RH
+svg.append(f'<g class="row" data-name="39759 Nutrition" data-plays="0" data-hours="0" data-kind="Selected screen" data-range="Played, not reported (screen offline from Wi-Fi)"><rect class="hit" x="0" y="{y}" width="{LW+BW+70}" height="{RH}"/>')
+svg.append(f'<text class="lbl" x="{LW-12}" y="{y+RH/2+4}" text-anchor="end">39759 Nutrition</text>')
+svg.append(f'<rect class="bar paid nodata" x="{LW}" y="{y+(RH-16)/2}" width="4" height="16"/>')
+svg.append(f'<text class="val muted" x="{LW+12}" y="{y+RH/2+4}">played, not reported*</text></g>')
 svg.append('</svg>')
 svg='\n'.join(svg)
 
@@ -65,6 +72,7 @@ def trow(r):
     badge='<span class="badge gift">Gifted</span>' if not r['paid'] else '<span class="badge paid">Selected</span>'
     return f'<tr class="{"gift-row" if not r["paid"] else ""}"><td>{html.escape(r["name"])}<span class="city">{r["city"]}</span></td><td>{badge}</td><td class="num">{n(r["plays"])}</td><td class="num">{hrs(r["secs"]):.1f}</td><td class="dates">{fmt_d(r["first"])} – {fmt_d(r["last"])}</td></tr>'
 table_rows='\n'.join(trow(r) for r in rows)
+table_rows+='<tr><td>39759 Nutrition<span class="city">Starkville</span></td><td><span class="badge paid">Selected</span></td><td class="num muted">not reported*</td><td class="num muted">&mdash;</td><td class="dates">Played, no play data*</td></tr>'
 
 # ---- versions
 vlabels={1:'Original spot',2:'Revision 2',3:'Revision 3',4:'Final spot'}
@@ -225,6 +233,8 @@ svg.bars{{width:100%;height:auto;display:block;font-family:"IBM Plex Sans",sans-
 .bars .val{{font-size:11.5px;fill:var(--ink-2);font-variant-numeric:tabular-nums}}
 .bars .bar.paid{{fill:var(--teal)}} .bars .bar.gift{{fill:var(--amber)}}
 .bars .hit{{fill:transparent}}
+.bars .val.muted,td.muted{{fill:var(--ink-3);color:var(--ink-3);font-style:italic}}
+.bars .bar.nodata{{opacity:.35}}
 .bars .row:hover .hit{{fill:var(--rule-soft)}}
 .tip{{position:absolute;pointer-events:none;background:var(--ink);color:var(--ground);font-size:12px;padding:8px 10px;border-radius:5px;line-height:1.4;box-shadow:0 4px 14px rgba(0,0,0,.18);max-width:240px;z-index:2}}
 .tip b{{display:block;font-weight:600;margin-bottom:2px}}
@@ -284,7 +294,9 @@ footer b{{color:var(--ink);font-weight:600}}
   :root{{--ground:#fff}}
   body{{font-size:12.5px}}
   .page{{max-width:none;padding:0}}
-  section{{margin-top:26px}}
+  section{{margin-top:22px}}
+  .ver{{padding:10px 12px 8px}} .ver-plays{{font-size:20px;margin-top:2px}}
+  td{{padding:6px 12px}}
   .chart,.stats,table,.ver,.notes,.gifted{{break-inside:avoid;box-shadow:none}}
   .stat b{{font-size:26px}}
   h1{{font-size:34px}}
@@ -297,7 +309,7 @@ footer b{{color:var(--ink);font-weight:600}}
   thead{{display:table-header-group}}
   tfoot{{display:table-row-group}}
   .stats{{margin-top:18px}}
-  footer{{margin-top:28px}}
+  footer{{margin-top:18px;break-inside:avoid}}
 }}
 </style>
 <div class="page">
@@ -321,7 +333,7 @@ footer b{{color:var(--ink);font-weight:600}}
 <div class="stats">
   <div class="stat"><div class="eyebrow">Total plays</div><b>{n(tot_plays)}</b><span>every airing of the Warner spot</span></div>
   <div class="stat"><div class="eyebrow">Hours on screen</div><b>{hrs(tot_secs):,.0f}</b><span>{hrs(tot_secs)/24:.0f} full days of airtime</span></div>
-  <div class="stat"><div class="eyebrow">Screens reached</div><b>{len(rows)}</b><span>{len(paid_rows)} selected + {len(gift_rows)} gifted</span></div>
+  <div class="stat"><div class="eyebrow">Screens reached</div><b>{n_screens}</b><span>{len(paid_rows)+1} selected + {len(gift_rows)} gifted</span></div>
   <div class="stat gift"><div class="eyebrow">Plays on gifted screens</div><b>{n(gift_plays)}</b><span>{gift_plays/tot_plays*100:.0f}% of all plays, at no charge</span></div>
 </div>
 
@@ -334,7 +346,7 @@ footer b{{color:var(--ink);font-weight:600}}
 
 <section class="chart-sec">
   <h2>Plays by screen</h2>
-  <p class="sub">All four spot versions combined, {fmt_d(first)} through {fmt_d(last)}. Hover a bar for details.</p>
+  <p class="sub">All four spot versions combined, {fmt_d(first)} through {fmt_d(last)}. Hover a bar for details. *39759 Nutrition played but was offline from Wi-Fi, so no counts were reported.</p>
   <div class="legend"><span class="p"><i></i>Selected screen (paid)</span><span class="g"><i></i>Gifted screen (no charge)</span></div>
   <div class="chart" id="chart">
   {svg}
@@ -343,7 +355,7 @@ footer b{{color:var(--ink);font-weight:600}}
 
 <section class="delivery">
   <h2>Delivery over time</h2>
-  <p class="sub">Estimated daily plays across all {len(rows)} screens from {md(W0)} to {md(W1)}, {W1.year}, the run of the final spot. Weekend days are shaded.</p>
+  <p class="sub">Estimated daily plays across the {len(rows)} reporting screens from {md(W0)} to {md(W1)}, {W1.year}, the run of the final spot. Weekend days are shaded.</p>
   <div class="dstats">
     <div class="stat"><div class="eyebrow">Days on air</div><b>{dl_days}</b><span>{md(W0)} &ndash; {md(W1)}</span></div>
     <div class="stat"><div class="eyebrow">Average day</div><b>{round(dl_avg):,}</b><span>plays per day</span></div>
@@ -370,9 +382,10 @@ footer b{{color:var(--ink);font-weight:600}}
     <tbody>
     {table_rows}
     </tbody>
-    <tfoot><tr><td>Total · {len(rows)} screens</td><td></td><td class="num">{n(tot_plays)}</td><td class="num">{hrs(tot_secs):,.1f}</td><td></td></tr></tfoot>
+    <tfoot><tr><td>Total · {len(rows)} reporting screens</td><td></td><td class="num">{n(tot_plays)}</td><td class="num">{hrs(tot_secs):,.1f}</td><td></td></tr></tfoot>
   </table>
   </div>
+  <p class="fn">* 39759 Nutrition ran the Warner spot but the screen was disconnected from Wi-Fi during this period, so its player could not send play counts. Its plays are real but are not included in any total in this report.</p>
 </section>
 
 <section>
