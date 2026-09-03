@@ -238,6 +238,14 @@ img.mctv-logo.real{{height:40px;width:auto;object-fit:contain;filter:invert(1) b
 .ob .lab{{letter-spacing:.22em}}
 .obs-foot{{border-top:1px solid var(--line);margin-top:26px;padding-top:14px}}
 
+
+/* renewal */
+.renew{{display:grid;grid-template-columns:1.25fr 1fr;gap:44px;align-items:start}}
+.price{{display:flex;align-items:baseline;gap:14px;margin:22px 0 6px}}
+.price b{{font-size:64px;font-weight:600;letter-spacing:-.04em;line-height:1;color:var(--accent)}}
+.tiles.three{{grid-template-columns:repeat(3,1fr);gap:0 22px}}
+.pending{{border-left:2px solid var(--accent-deep);padding-left:22px;margin-top:6px}}
+.pending .dr b{{font-family:"Inter Tight",sans-serif;font-weight:600;color:var(--fg);font-size:13px}}
 /* contact */
 .team{{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:26px}}
 .tm{{border-top:1px solid var(--line);padding-top:14px}}
@@ -357,6 +365,31 @@ img.mctv-logo.real{{height:40px;width:auto;object-fit:contain;filter:invert(1) b
     <div class="ob"><span class="lab">Value</span><h3>About {cpp:.1f}&cent; per play</h3><p>${spend:,} over five months bought {n(tot_plays)} plays and {hrs(tot_secs):,.0f} hours on screen, roughly {n(round(tot_plays/len(rows)))} plays per reporting screen.</p></div>
   </div>
   <div class="obs-foot"><p>{OFFLINE_NAME}, a selected screen, ran the spot but was disconnected from Wi-Fi during the period, so its player could not report play counts. Its plays are real and are not included in any figure above.</p></div>
+</section>
+
+<!-- renewal -->
+<section class="slide">
+  {chrome('Renewal option', 'Same rate &middot; all ' + str(n_screens) + ' screens')}
+  <div class="renew">
+    <div>
+      <h2>Keep all {n_screens} screens<br>at the same rate</h2>
+      <p style="max-width:44ch;margin-top:8px">Renew the Warner Family Dentistry spot at the current monthly rate and every screen in this report stays in rotation, the {len(gift_rows)} gifted screens included.</p>
+      <div class="price"><b>$350</b><span class="lab" style="color:var(--mute)">per month</span></div>
+      <div class="tiles three">
+        <div class="tile"><b>{n_screens}</b><span class="lab">Screens in rotation</span></div>
+        <div class="tile"><b>~{n(round(tot_plays/months/1000))}K</b><span class="lab">Est. plays per month</span></div>
+        <div class="tile"><b>{cpp:.1f}&cent;</b><span class="lab">Cost per play</span></div>
+      </div>
+    </div>
+    <div class="pending">
+      <span class="lab">Pending installs in the Golden Triangle area</span>
+      <h3 style="margin-top:10px">Six more screens coming online</h3>
+      <div class="dr"><span>The Warehouse Market<small>Pending install</small></span><b>1 screen</b></div>
+      <div class="dr"><span>Starkville Athletic Club<small>Pending install</small></span><b>5 screens</b></div>
+      <p style="margin-top:14px;font-size:12.5px">New locations expand the network Warner's spot can reach across the Golden Triangle.</p>
+    </div>
+  </div>
+  <div class="foot"><span class="lab">Monthly plays estimated from this campaign's average</span><span class="lab">Renew: Swayze Hollingsworth &middot; 662-907-0404</span></div>
 </section>
 
 <!-- 9 · contact -->
