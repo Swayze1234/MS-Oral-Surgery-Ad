@@ -328,43 +328,7 @@ pages.append(f'''
   {footer(5)}
 </section>''')
 
-# 6 — Recommended plan & add-ons
-pages.append(f'''
-<section class="page light">
-  {header("Recommended Plan & Add-Ons")}
-  <div class="two" style="grid-template-columns:1.15fr 1fr">
-    <div>
-      <div class="eyebrow">Our recommendation for HOTWORX Oxford</div>
-      <h1 class="title serif" style="font-size:34px">40 screens. <span class="gold">Oxford saturation.</span></h1>
-      <div class="rule"></div>
-      <table class="inv">
-        <tr><th>Line item</th><th>Detail</th><th class="r">Monthly</th><th class="r">One-time</th></tr>
-        <tr><td><b>40-Screen Package</b></td><td>60K ad plays / mo · $20 per screen · custom ad included</td><td class="r">$800</td><td class="r">—</td></tr>
-        <tr><td><b>Animated Logo Bumper</b> <span style="color:#6a7891">(optional)</span></td><td>$10 / screen / mo × 40 screens + $150 setup</td><td class="r">$400</td><td class="r">$150</td></tr>
-        <tr><td><b>Cause Sponsorship</b> <span style="color:#6a7891">(optional)</span></td><td>$10 / screen / mo × 40 screens · sponsor a local cause of your choice</td><td class="r">$400</td><td class="r">—</td></tr>
-        <tr class="tot"><td colspan="2">Core campaign (40 screens, no add-ons)</td><td class="r">$800 / mo</td><td class="r">$0</td></tr>
-      </table>
-      <p style="font-size:11px;color:#3f4c62;margin:10px 0 0">Prefer a lighter start? The <b>20-screen package at $500/mo</b> is available on the same terms. Prepay 6 months and the 7th month is free.</p>
-    </div>
-    <div>
-      <div class="eyebrow">Add-on · Animated logo</div>
-      <div style="background:#0b2a5b;color:#fff;padding:16px 18px;margin:8px 0 14px">
-        <div class="serif" style="font-size:20px">Animated logo bumpers.</div>
-        <p style="font-size:11.5px;margin:6px 0 10px;color:#dbe6f5">A custom motion graphic of the HOTWORX logo that plays across the network — eye-catching movement that makes your brand impossible to scroll past.</p>
-        <div style="display:flex;gap:22px"><span class="serif" style="font-size:20px;color:#e8b84b">$10 <small style="font-size:11px;color:#dbe6f5">/ screen / mo</small></span><span class="serif" style="font-size:20px;color:#e8b84b">$150 <small style="font-size:11px;color:#dbe6f5">one-time setup</small></span></div>
-      </div>
-      <div class="eyebrow">Add-on · Sponsorship</div>
-      <div style="background:#fff;border:1px solid #e0d3b1;padding:16px 18px;margin-top:8px">
-        <div class="serif" style="font-size:20px;color:#0b2a5b">Own the moment.</div>
-        <p style="font-size:11.5px;margin:6px 0 10px">Sponsor the local charity, organization or cause of your choice — a natural fit for a community-minded fitness studio.</p>
-        <span class="serif" style="font-size:20px;color:#c9962e">$10 <small style="font-size:11px;color:#6a7891">/ screen / mo</small></span>
-      </div>
-    </div>
-  </div>
-  {footer(6)}
-</section>''')
-
-# 7 — Next steps / contact
+# 6 — Next steps / contact
 pages.append(f'''
 <section class="page dark" style="padding:0">
   <div style="position:absolute;left:0;top:0;width:42%;height:100%">
@@ -381,10 +345,10 @@ pages.append(f'''
     <div class="cta">Next steps: pick your package → sign the order form → we build your ad → you approve → HOTWORX goes live across Oxford.</div>
     <div class="spec" style="margin-top:16px"><b>Ad Specs &amp; Sizes</b><br>Dimensions: 1920×1080 HD · 16:9 aspect ratio<br>File formats: MP4 video or JPG static · Bitrate 300–700 kb/s · Max file size 20 MB</div>
   </div>
-  <div class="foot" style="left:calc(42% + 0.75in)"><span>07</span><span>MCTV Digital, Inc · The Indoor Billboard Company</span></div>
+  <div class="foot" style="left:calc(42% + 0.75in)"><span>06</span><span>MCTV Digital, Inc · The Indoor Billboard Company</span></div>
 </section>''')
 
-# 8 — Agreement & order form (regular packages only, HOTWORX pre-filled)
+# 7 — Agreement & order form (regular packages only, HOTWORX pre-filled)
 pages.append(f'''
 <section class="page light form">
   {header("Agreement & Order Form")}
@@ -437,7 +401,7 @@ pages.append(f'''
       </div>
     </div>
   </div>
-  {footer(8)}
+  {footer(7)}
 </section>''')
 
 html = f"<!doctype html><html><head><meta charset='utf-8'><title>MCTV × HOTWORX Oxford — Advertising Proposal</title><style>{CSS}</style></head><body>{''.join(pages)}</body></html>"
