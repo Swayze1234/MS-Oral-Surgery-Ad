@@ -73,6 +73,52 @@ for v in versions:
     p=v['plays']-v['demo_plays']
     vrows+=f'<div class="ver"><div class="ver-n">v{v["version"]}</div><div class="ver-body"><div class="ver-title">{vlabels[v["version"]]}</div><div class="ver-meta">{fmt_d(v["first"])} – {fmt_d(v["last"])}</div></div><div class="ver-plays">{n(p)}<span> plays</span></div></div>'
 
+
+# ---- delivery over time (estimated daily plays)
+from datetime import timedelta
+W0,W1=date(2026,7,2),date(2026,9,2)
+days=[W0+timedelta(i) for i in range((W1-W0).days+1)]
+daily={x:0.0 for x in days}
+for name,h in hosts.items():
+    if name==DEMO: continue
+    for v in h['versions']:
+        s0=date.fromisoformat(v['start']); e0=date.fromisoformat(v['end'])
+        nd=(e0-s0).days+1
+        wts={s0+timedelta(i):1.0 for i in range(nd)}
+        if nd>1:
+            wts[s0]=0.5
+            if e0<date(2026,9,2): wts[e0]=0.5
+        per=v['plays']/sum(wts.values())
+        for x,w in wts.items():
+            if W0<=x<=W1: daily[x]+=per*w
+dl_tot=sum(daily.values()); dl_days=len(days); dl_avg=dl_tot/dl_days
+wd=[x for x in days if x.weekday()<5]; we=[x for x in days if x.weekday()>=5]
+wd_tot=sum(daily[x] for x in wd); we_tot=sum(daily[x] for x in we)
+best=max(days,key=lambda x:daily[x]); best_v=daily[best]
+def md(x): return x.strftime('%b %-d')
+# svg
+CW,CH=820,230; LPAD,RPAD,TPAD,BPAD=46,10,18,34
+pw=(CW-LPAD-RPAD)/dl_days; ymax=1500
+def yy(v): return TPAD+(CH-TPAD-BPAD)*(1-v/ymax)
+dsvg=[f'<svg class="daily" viewBox="0 0 {CW} {CH}" role="img" aria-label="Estimated daily plays, July 2 to September 2, 2026">']
+for i,x in enumerate(days):
+    if x.weekday()>=5:
+        dsvg.append(f'<rect class="wkend" x="{LPAD+i*pw:.1f}" y="{TPAD}" width="{pw:.2f}" height="{CH-TPAD-BPAD}"/>')
+for t in (0,500,1000,1500):
+    dsvg.append(f'<line class="grid" x1="{LPAD}" y1="{yy(t):.1f}" x2="{CW-RPAD}" y2="{yy(t):.1f}"/>')
+    dsvg.append(f'<text class="tick" x="{LPAD-6}" y="{yy(t)+4:.1f}" text-anchor="end">{t:,}</text>')
+for i,x in enumerate(days):
+    v=daily[x]; bx=LPAD+i*pw+1; bw=pw-2; by=yy(v); bh=CH-BPAD-by
+    r=min(3,bw/2)
+    dsvg.append(f'<g class="col" data-d="{x.strftime("%A, %B %-d")}" data-v="{round(v):,}"><rect class="hit" x="{LPAD+i*pw:.1f}" y="{TPAD}" width="{pw:.2f}" height="{CH-TPAD-BPAD}"/>'
+                f'<path class="dbar{" best" if x==best else ""}" d="M{bx:.1f},{CH-BPAD} v-{bh-r:.1f} a{r},{r} 0 0 1 {r},-{r} h{bw-2*r:.1f} a{r},{r} 0 0 1 {r},{r} v{bh-r:.1f} z"/></g>')
+    if i%7==0 or i==dl_days-1:
+        dsvg.append(f'<text class="tick" x="{LPAD+i*pw+pw/2:.1f}" y="{CH-BPAD+16}" text-anchor="middle">{md(x)}</text>')
+bi=days.index(best)
+dsvg.append(f'<text class="val" x="{LPAD+bi*pw+pw/2:.1f}" y="{yy(best_v)-6:.1f}" text-anchor="middle">{round(best_v):,}</text>')
+dsvg.append('</svg>')
+dsvg='\n'.join(dsvg)
+
 legends=hosts['Legends Hair Salon']; ww=hosts['William Wells Tire & Auto']
 demo=hosts[DEMO]
 
@@ -182,6 +228,27 @@ svg.bars{{width:100%;height:auto;display:block;font-family:"IBM Plex Sans",sans-
 .bars .row:hover .hit{{fill:var(--rule-soft)}}
 .tip{{position:absolute;pointer-events:none;background:var(--ink);color:var(--ground);font-size:12px;padding:8px 10px;border-radius:5px;line-height:1.4;box-shadow:0 4px 14px rgba(0,0,0,.18);max-width:240px;z-index:2}}
 .tip b{{display:block;font-weight:600;margin-bottom:2px}}
+
+.dstats{{display:grid;grid-template-columns:repeat(4,1fr);margin:0 0 14px;border:1px solid var(--rule);border-radius:6px;background:var(--paper);overflow:hidden}}
+.dstats .stat b{{font-size:26px}}
+svg.daily{{width:100%;height:auto;display:block;font-family:"IBM Plex Sans",sans-serif}}
+.daily .wkend{{fill:var(--rule-soft)}}
+.daily .grid{{stroke:var(--grid);stroke-width:1}}
+.daily .tick{{font-size:10.5px;fill:var(--ink-3);font-variant-numeric:tabular-nums}}
+.daily .val{{font-size:11px;fill:var(--ink-2);font-weight:600;font-variant-numeric:tabular-nums}}
+.daily .dbar{{fill:var(--teal)}}
+.daily .dbar.best{{fill:var(--teal-ink)}}
+.daily .hit{{fill:transparent}}
+.daily .col:hover .hit{{fill:color-mix(in srgb,var(--teal) 12%,transparent)}}
+.wkbox{{margin-top:14px;background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:14px 18px 10px}}
+.wkrow{{display:grid;grid-template-columns:120px 1fr 120px;gap:14px;align-items:center;padding:6px 0}}
+.wklbl{{font-weight:600;font-size:13.5px}} .wklbl span{{display:block;font-weight:400;font-size:11.5px;color:var(--ink-3)}}
+.wkbar{{height:16px;background:var(--rule-soft);border-radius:4px;overflow:hidden}}
+.wkbar i{{display:block;height:100%;background:var(--teal);border-radius:0 4px 4px 0}}
+.wkbar i.we{{background:var(--teal);opacity:.55}}
+.wknum{{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}} .wknum span{{display:block;font-weight:400;font-size:11.5px;color:var(--ink-3)}}
+.wknote{{margin:8px 0 0;font-size:12.5px;color:var(--ink-2)}}
+.fn{{font-size:11.5px;color:var(--ink-3);margin:12px 0 0;max-width:80ch}}
 table{{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--rule);border-radius:6px;overflow:hidden;font-size:13px}}
 thead th{{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600;padding:10px 12px;border-bottom:1px solid var(--rule);background:var(--paper)}}
 td{{padding:8px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:middle}}
@@ -211,7 +278,7 @@ tfoot td{{font-weight:600;border-top:2px solid var(--rule);background:var(--pape
 .notes dd{{margin:0;color:var(--ink-2);font-size:13.5px}}
 footer{{margin-top:44px;padding-top:16px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:16px;font-size:12.5px;color:var(--ink-2);flex-wrap:wrap}}
 footer b{{color:var(--ink);font-weight:600}}
-@media (max-width:640px){{ .stats,.vers{{grid-template-columns:repeat(2,1fr)}} .stat:nth-child(2){{border-right:0}} .stat{{border-bottom:1px solid var(--rule)}} .stat:nth-child(n+3){{border-bottom:0}} header{{grid-template-columns:1fr}} .meta{{text-align:left}} .notes .n{{grid-template-columns:1fr}} }}
+@media (max-width:640px){{ .stats,.vers,.dstats{{grid-template-columns:repeat(2,1fr)}} .wkrow{{grid-template-columns:90px 1fr 90px}} .stat:nth-child(2){{border-right:0}} .stat{{border-bottom:1px solid var(--rule)}} .stat:nth-child(n+3){{border-bottom:0}} header{{grid-template-columns:1fr}} .meta{{text-align:left}} .notes .n{{grid-template-columns:1fr}} }}
 @media print{{
   @page{{size:letter;margin:.55in .5in}}
   :root{{--ground:#fff}}
@@ -224,7 +291,8 @@ footer b{{color:var(--ink);font-weight:600}}
   .bars .lbl{{font-size:11.5px}}
   .tip{{display:none}}
   tr,td,th{{break-inside:avoid}}
-  section.chart-sec{{break-before:page}}
+  section.chart-sec,section.delivery,section.tbl{{break-before:page}}
+  .dstats .stat b{{font-size:22px}}
   h2,.sub,.legend{{break-after:avoid}}
   thead{{display:table-header-group}}
   tfoot{{display:table-row-group}}
@@ -243,6 +311,7 @@ footer b{{color:var(--ink);font-weight:600}}
     <h1>Warner Family Dentistry<small>Starkville network &middot; {fmt_d(first)} &ndash; {fmt_d(last)}</small></h1>
   </div>
   <div class="meta">
+    <div><b>Prepared for:</b> Dr. Lindsey Warner</div>
     <div><b>Plan:</b> 10 screens &middot; $350 / month</div>
     <div><b>Spot length:</b> 30 seconds</div>
     <div><b>Prepared:</b> {date.today().strftime("%B %-d, %Y")}</div>
@@ -270,6 +339,26 @@ footer b{{color:var(--ink);font-weight:600}}
   <div class="chart" id="chart">
   {svg}
   </div>
+</section>
+
+<section class="delivery">
+  <h2>Delivery over time</h2>
+  <p class="sub">Estimated daily plays across all {len(rows)} screens from {md(W0)} to {md(W1)}, {W1.year}, the run of the final spot. Weekend days are shaded.</p>
+  <div class="dstats">
+    <div class="stat"><div class="eyebrow">Days on air</div><b>{dl_days}</b><span>{md(W0)} &ndash; {md(W1)}</span></div>
+    <div class="stat"><div class="eyebrow">Average day</div><b>{round(dl_avg):,}</b><span>plays per day</span></div>
+    <div class="stat"><div class="eyebrow">Best single day</div><b>{round(best_v):,}</b><span>{best.strftime('%A, %B %-d')}</span></div>
+    <div class="stat"><div class="eyebrow">Plays in period</div><b>{round(dl_tot):,}</b><span>final spot, all screens</span></div>
+  </div>
+  <div class="chart" id="dchart">
+  {dsvg}
+  </div>
+  <div class="wkbox">
+    <div class="wkrow"><div class="wklbl">Weekdays <span>{len(wd)} days</span></div><div class="wkbar"><i style="width:{wd_tot/max(wd_tot,we_tot)*100:.1f}%"></i></div><div class="wknum">{round(wd_tot):,}<span>{round(wd_tot/len(wd)):,} / day</span></div></div>
+    <div class="wkrow"><div class="wklbl">Weekends <span>{len(we)} days</span></div><div class="wkbar"><i class="we" style="width:{we_tot/max(wd_tot,we_tot)*100:.1f}%"></i></div><div class="wknum">{round(we_tot):,}<span>{round(we_tot/len(we)):,} / day</span></div></div>
+    <p class="wknote">Host screens loop the spot seven days a week, so a weekend day delivers about the same as a weekday. Weekdays total more simply because there are more of them.</p>
+  </div>
+  <p class="fn">How this is estimated: MCTV player exports list total plays per screen with first and last play dates, not day-by-day counts. Each screen's plays are spread evenly across its active days (a day when a spot switched or a screen stopped counts as half). Rises and dips reflect screens joining or leaving the rotation. Sept 3 is left off because the export was pulled that morning.</p>
 </section>
 
 <section class="tbl">
@@ -311,6 +400,17 @@ footer b{{color:var(--ink);font-weight:600}}
       tip.style.left=x+'px'; tip.style.top=y+'px';
     }});
     g.addEventListener('mouseleave',function(){{tip.hidden=true;}});
+  }});
+  var dc=document.getElementById('dchart'); if(!dc) return;
+  var dt=document.createElement('div'); dt.className='tip'; dt.hidden=true; dc.appendChild(dt);
+  dc.querySelectorAll('.col').forEach(function(g){{
+    g.addEventListener('mousemove',function(e){{
+      var r=dc.getBoundingClientRect();
+      dt.innerHTML='<b>'+g.dataset.d+'</b>about '+g.dataset.v+' plays';
+      dt.hidden=false; var x=e.clientX-r.left+12; if(x+180>r.width) x=e.clientX-r.left-180;
+      dt.style.left=x+'px'; dt.style.top=(e.clientY-r.top+12)+'px';
+    }});
+    g.addEventListener('mouseleave',function(){{dt.hidden=true;}});
   }});
 }})();
 </script>
