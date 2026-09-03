@@ -9,7 +9,8 @@ MCTV Elite Advertising logos and MCTV's navy/gold media-kit palette.
 | Option | What Parlor 1858 gives | What Parlor 1858 gets | Price |
 |---|---|---|---|
 | 1 · Host Exchange | 1 hosted MCTV screen in the parlor | Custom 30-second ad, free on MCTV screens in Oxford | $0 / mo |
-| 2 · Host + Growth | 1 hosted screen + $500/mo | Everything in Option 1 + Google Business Profile management + 15 additional Oxford screens | $500 / mo |
+| 2 · Host + Reach | 1 hosted screen + $350/mo | Everything in Option 1 + 15 additional Oxford screens + proof-of-play reporting | $350 / mo |
+| 3 · Host + Growth (recommended) | 1 hosted screen + $500/mo | Everything in Option 1 + 20 additional Oxford screens + Google Business Profile management + reporting | $500 / mo |
 
 ## Files
 - `partnership.html` — source document (edit copy/prices here).

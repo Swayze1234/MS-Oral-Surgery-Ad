@@ -41,25 +41,26 @@
   .stat span{ font-size:7.5pt; letter-spacing:0.16em; text-transform:uppercase; color:var(--slate); }
 
   /* options */
-  .options{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; }
+  .options{ display:grid; grid-template-columns:1fr 1fr 1.08fr; gap:12px; margin-top:16px; align-items:stretch; }
   .card{ border:1px solid var(--line); border-radius:6px; overflow:hidden; background:#fff; position:relative; display:flex; flex-direction:column; }
-  .card .top{ background:var(--navy); color:#fff; padding:13px 18px 12px; }
+  .card .top{ background:var(--navy); color:#fff; padding:12px 14px 11px; }
+  .card.best{ border:2px solid var(--gold); box-shadow:0 6px 18px rgba(19,32,58,.12); }
   .card.best .top{ background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%); }
   .card .opt{ font-size:7.5pt; letter-spacing:0.26em; text-transform:uppercase; color:var(--gold); font-weight:600; }
-  .card .name{ font-family:'Playfair Display',serif; font-size:16.5pt; font-weight:500; margin:4px 0 8px; }
-  .card .price{ font-family:'Playfair Display',serif; font-size:27pt; font-weight:500; line-height:1; color:var(--gold); }
-  .card .price small{ font-family:'Inter',sans-serif; font-size:8.5pt; color:#cfe0f5; letter-spacing:0.08em; margin-left:6px; }
-  .card .sub{ font-size:8.5pt; color:#bcd2ec; margin-top:6px; }
-  .badge{ position:absolute; top:12px; right:12px; background:var(--gold); color:var(--navy); font-size:6.8pt; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:4px 8px; border-radius:2px; }
-  .card .body{ padding:12px 18px 12px; flex:1; }
-  .card .give{ background:var(--soft); border-left:3px solid var(--gold); padding:7px 10px; font-size:8.8pt; margin-bottom:10px; }
+  .card .name{ font-family:'Playfair Display',serif; font-size:14pt; font-weight:500; margin:4px 0 8px; }
+  .card .price{ font-family:'Playfair Display',serif; font-size:24pt; font-weight:500; line-height:1; color:var(--gold); }
+  .card .price small{ font-family:'Inter',sans-serif; font-size:8pt; color:#cfe0f5; letter-spacing:0.08em; margin-left:6px; }
+  .card .sub{ font-size:8pt; color:#bcd2ec; margin-top:6px; }
+  .badge{ position:absolute; top:10px; right:10px; background:var(--gold); color:var(--navy); font-size:6.8pt; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:4px 8px; border-radius:2px; }
+  .card .body{ padding:11px 14px 10px; flex:1; }
+  .card .give{ background:var(--soft); border-left:3px solid var(--gold); padding:6px 9px; font-size:8.3pt; margin-bottom:9px; }
   .card .give b{ color:var(--navy); }
   .card ul{ list-style:none; margin:0; padding:0; }
-  .card li{ position:relative; padding-left:18px; margin:0 0 6px; font-size:9pt; color:#2b3752; }
+  .card li{ position:relative; padding-left:16px; margin:0 0 6px; font-size:8.6pt; color:#2b3752; }
   .card li::before{ content:""; position:absolute; left:0; top:5px; width:9px; height:9px; border-radius:50%; background:var(--gold); }
   .card li.plus::before{ background:var(--navy); }
   .card li b{ font-weight:600; color:var(--navy); }
-  .equals{ display:flex; align-items:center; gap:10px; margin:0 0 10px; font-size:8.3pt; color:var(--slate); letter-spacing:0.1em; text-transform:uppercase; }
+  .equals{ display:flex; align-items:center; gap:8px; margin:0 0 8px; font-size:7.6pt; color:var(--slate); letter-spacing:0.1em; text-transform:uppercase; }
   .equals span{ flex:1; height:1px; background:var(--line); }
 
   /* footer */
@@ -79,17 +80,20 @@
   .steps b{ color:var(--navy); display:block; font-weight:600; }
   .tbl{ width:100%; border-collapse:collapse; font-size:9.3pt; }
   .tbl th{ text-align:left; font-size:7.5pt; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-ink); padding:0 0 6px; border-bottom:1px solid var(--line); }
-  .tbl td{ padding:6px 0; border-bottom:1px solid var(--line); vertical-align:top; color:#2b3752; }
-  .tbl td:first-child{ color:var(--navy); font-weight:600; width:56%; }
+  .tbl td{ padding:5px 0; border-bottom:1px solid var(--line); vertical-align:top; color:#2b3752; }
+  .tbl td:first-child{ color:var(--navy); font-weight:600; width:49%; }
   .tbl td.c{ text-align:center; color:var(--gold-d); font-weight:700; }
+  .tbl td:last-child, .tbl th:last-child{ background:var(--soft); }
   .tbl td.c.no{ color:#c4cbd6; font-weight:400; }
-  .accept{ margin-top:14px; border:1px solid var(--line); border-radius:6px; padding:14px 20px 12px; }
-  .choose{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:8px 0 10px; }
-  .choice{ display:flex; gap:10px; align-items:flex-start; font-size:9.3pt; color:#2b3752; }
+  .accept{ margin-top:12px; border:1px solid var(--line); border-radius:6px; padding:14px 20px 12px; }
+  .choose{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin:8px 0 10px; }
+  .choice.rec{ background:var(--soft); border:1px solid var(--gold); border-radius:4px; padding:8px; margin:-8px -9px; }
+  .choice b em{ font-style:normal; color:var(--gold-ink); font-size:7pt; letter-spacing:0.14em; text-transform:uppercase; margin-left:6px; }
+  .choice{ display:flex; gap:8px; align-items:flex-start; font-size:8.6pt; color:#2b3752; }
   .box{ width:14px; height:14px; border:1.5px solid var(--navy); border-radius:2px; flex:none; margin-top:2px; }
   .choice b{ display:block; color:var(--navy); }
   .sig{ display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:8px; }
-  .sig div{ border-top:1px solid var(--navy); padding-top:4px; font-size:7pt; letter-spacing:0.16em; text-transform:uppercase; color:var(--slate); margin-top:26px; }
+  .sig div{ border-top:1px solid var(--navy); padding-top:4px; font-size:7pt; letter-spacing:0.16em; text-transform:uppercase; color:var(--slate); margin-top:24px; }
   .fine{ font-size:7.4pt; color:var(--slate); margin:10px 0 0; line-height:1.45; }
   .note{ background:var(--soft); border-left:3px solid var(--gold); padding:9px 14px; font-size:9pt; color:#2b3752; margin-top:12px; }
   .note b{ color:var(--navy); }
@@ -109,7 +113,7 @@
   <div class="content">
     <div class="kicker">Host Partnership Proposal &nbsp;·&nbsp; Oxford, Mississippi</div>
     <h1 class="serif">One screen in the Parlor.<br>Your brand <em>across Oxford.</em></h1>
-    <p class="lead">MCTV installs and maintains a high-definition screen inside Parlor 1858 at no cost to you. It runs a curated 15-minute loop of local advertisers. In return, Parlor 1858 gets its own custom ad on the MCTV network, in the venues your future customers already visit.</p>
+    <p class="lead">MCTV installs and maintains a high-definition screen inside Parlor 1858 at no cost to you. It runs a curated 15-minute loop of local advertisers. In return, Parlor 1858 gets its own custom ad on the MCTV network, in the venues your future customers already visit. Choose how far you want it to reach.</p>
 
     <div class="stats">
       <div class="stat"><b>125+</b><span>Digital screens</span></div>
@@ -124,42 +128,62 @@
         <div class="top">
           <div class="opt">Option 1</div>
           <div class="name">Host Exchange</div>
-          <div class="price">$0<small>/ MONTH</small></div>
-          <div class="sub">A straight trade. No invoice, ever.</div>
+          <div class="price">$0<small>/ MO</small></div>
+          <div class="sub">A straight trade. No invoice.</div>
         </div>
         <div class="body">
-          <div class="give"><b>You provide:</b> wall space for 1 MCTV screen inside the Parlor.</div>
+          <div class="give"><b>You provide:</b> wall space for 1 MCTV screen.</div>
           <div class="equals"><span></span>in return<span></span></div>
           <ul>
-            <li><b>30-second custom ad</b> for Parlor 1858, designed and produced by MCTV.</li>
-            <li>Runs <b>free on MCTV screens across Oxford</b>, on a 15-minute loop.</li>
-            <li>Screen installed, maintained, and updated by MCTV at no cost.</li>
-            <li>Refresh your ad each quarter to keep specials and events current.</li>
+            <li><b>Custom 30-second ad</b>, designed and produced by MCTV.</li>
+            <li>Runs <b>free on MCTV screens in Oxford</b>.</li>
+            <li>Screen installed and maintained at no cost.</li>
+            <li>Ad refreshed quarterly.</li>
           </ul>
         </div>
       </div>
 
       <!-- OPTION 2 -->
-      <div class="card best">
-        <div class="badge">Best value</div>
+      <div class="card">
         <div class="top">
           <div class="opt">Option 2</div>
-          <div class="name">Host + Growth</div>
-          <div class="price">$500<small>/ MONTH</small></div>
-          <div class="sub">Everything in Option 1, plus reach and search.</div>
+          <div class="name">Host + Reach</div>
+          <div class="price">$350<small>/ MO</small></div>
+          <div class="sub">More screens, more of Oxford.</div>
         </div>
         <div class="body">
-          <div class="give"><b>You provide:</b> wall space for 1 MCTV screen, plus $500 per month.</div>
+          <div class="give"><b>You provide:</b> wall space for 1 screen + $350/mo.</div>
           <div class="equals"><span></span>in return<span></span></div>
           <ul>
-            <li>Everything in <b>Option 1</b>, the hosted screen and your free 30-second ad.</li>
-            <li class="plus"><b>Google Business Profile</b> managed by MCTV: listing, photos, posts, and reviews kept current so Parlor 1858 shows up when Oxford searches “pizza near me.”</li>
-            <li class="plus"><b>15 additional screens</b> in Oxford carrying your ad, on top of the free placements in Option 1.</li>
-            <li>Proof-of-play reporting so you can see exactly where your ad ran.</li>
+            <li>Everything in <b>Option 1</b>.</li>
+            <li class="plus"><b>15 additional Oxford screens</b> carrying your ad.</li>
+            <li>Proof-of-play reporting.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- OPTION 3 -->
+      <div class="card best">
+        <div class="badge">Recommended</div>
+        <div class="top">
+          <div class="opt">Option 3</div>
+          <div class="name">Host + Growth</div>
+          <div class="price">$500<small>/ MO</small></div>
+          <div class="sub">Screens plus search. Our pick.</div>
+        </div>
+        <div class="body">
+          <div class="give"><b>You provide:</b> wall space for 1 screen + $500/mo.</div>
+          <div class="equals"><span></span>in return<span></span></div>
+          <ul>
+            <li>Everything in <b>Option 1</b>.</li>
+            <li class="plus"><b>20 additional Oxford screens</b> carrying your ad.</li>
+            <li class="plus"><b>Google Business Profile</b> managed by MCTV, so Parlor 1858 shows up for “pizza near me.”</li>
+            <li>Proof-of-play reporting.</li>
           </ul>
         </div>
       </div>
     </div>
+    <div class="note" style="margin-top:14px"><b>Why we recommend Option 3.</b> For $150 more than Option 2 you add five screens and MCTV takes over your Google Business Profile, the listing Oxford sees first when it searches for pizza. Screens bring people in the door; search catches the ones already looking.</div>
   </div>
 
   <div class="foot">
@@ -174,7 +198,7 @@
 
 <!-- ======================= PAGE 2 ======================= -->
 <section class="page">
-  <div class="brandbar" style="padding-top:0.4in;padding-bottom:0.18in">
+  <div class="brandbar" style="padding-top:0.34in;padding-bottom:0.14in">
     <img class="parlor" src="parlor1858_logo.svg" alt="Parlor 1858" style="height:0.95in">
     <img class="mctv" src="mctv_logo.png" alt="MCTV Elite Advertising" style="height:0.55in">
   </div>
@@ -189,22 +213,22 @@
           <li><b>Pick your option.</b> Check a box below and sign. That is the whole agreement.</li>
           <li><b>We install.</b> MCTV mounts and connects the screen in the Parlor. You supply wall space and a standard outlet.</li>
           <li><b>We build your ad.</b> Send us your logo, photos, and current specials. Our team designs a 30-second HD spot for your approval.</li>
-          <li><b>You go live.</b> Your ad enters the Oxford loop. Option 2 adds Google Business Profile management and 15 more screens.</li>
+          <li><b>You go live.</b> Your ad enters the Oxford loop. Options 2 and 3 add 15 or 20 more screens; Option 3 also puts MCTV to work on your Google Business Profile.</li>
         </ol>
       </div>
       <div>
         <div class="kicker">Side by side</div>
         <h2>What each option includes.</h2>
         <table class="tbl">
-          <tr><th></th><th style="text-align:center">Option 1</th><th style="text-align:center">Option 2</th></tr>
-          <tr><td>Hosted screen in the Parlor</td><td class="c">✓</td><td class="c">✓</td></tr>
-          <tr><td>Install, maintenance &amp; support</td><td class="c">✓</td><td class="c">✓</td></tr>
-          <tr><td>Custom 30-second ad</td><td class="c">✓</td><td class="c">✓</td></tr>
-          <tr><td>Free placement on Oxford screens</td><td class="c">✓</td><td class="c">✓</td></tr>
-          <tr><td>Google Business Profile management</td><td class="c no">—</td><td class="c">✓</td></tr>
-          <tr><td>15 additional Oxford screens</td><td class="c no">—</td><td class="c">✓</td></tr>
-          <tr><td>Proof-of-play reporting</td><td class="c no">—</td><td class="c">✓</td></tr>
-          <tr><td>Monthly investment</td><td class="c" style="color:var(--navy)">$0</td><td class="c" style="color:var(--navy)">$500</td></tr>
+          <tr><th></th><th style="text-align:center">Opt 1</th><th style="text-align:center">Opt 2</th><th style="text-align:center;color:var(--navy)">Opt 3 ★</th></tr>
+          <tr><td>Hosted screen in the Parlor</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+          <tr><td>Install, maintenance &amp; support</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+          <tr><td>Custom 30-second ad</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+          <tr><td>Free placement on Oxford screens</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+          <tr><td>Additional Oxford screens</td><td class="c no">—</td><td class="c">15</td><td class="c">20</td></tr>
+          <tr><td>Google Business Profile management</td><td class="c no">—</td><td class="c no">—</td><td class="c">✓</td></tr>
+          <tr><td>Proof-of-play reporting</td><td class="c no">—</td><td class="c">✓</td><td class="c">✓</td></tr>
+          <tr><td>Monthly investment</td><td class="c" style="color:var(--navy)">$0</td><td class="c" style="color:var(--navy)">$350</td><td class="c" style="color:var(--navy)">$500</td></tr>
         </table>
       </div>
     </div>
@@ -215,8 +239,9 @@
       <div class="kicker">Partnership acceptance</div>
       <h2 style="margin-top:4px">Select your option.</h2>
       <div class="choose">
-        <div class="choice"><div class="box"></div><div><b>Option 1 — Host Exchange · $0 / month</b>1 hosted screen in exchange for a free 30-second ad on Oxford screens.</div></div>
-        <div class="choice"><div class="box"></div><div><b>Option 2 — Host + Growth · $500 / month</b>Hosted screen + Google Business Profile + 15 additional Oxford screens.</div></div>
+        <div class="choice"><div class="box"></div><div><b>Option 1 · $0 / mo</b>Host Exchange: 1 screen for a free 30-second ad on Oxford screens.</div></div>
+        <div class="choice"><div class="box"></div><div><b>Option 2 · $350 / mo</b>Host + Reach: Option 1 plus 15 additional Oxford screens.</div></div>
+        <div class="choice rec"><div class="box"></div><div><b>Option 3 · $500 / mo <em>Recommended</em></b>Host + Growth: Option 1 plus 20 additional screens and Google Business Profile.</div></div>
       </div>
       <div class="sig">
         <div>Parlor 1858 · Authorized Signature / Date</div>
@@ -226,7 +251,7 @@
         <div style="margin-top:22px">Printed Name &amp; Title</div>
         <div style="margin-top:22px">Preferred Install Date</div>
       </div>
-      <p class="fine">Option 2 is billed monthly. Either party may end the hosting arrangement with 30 days’ written notice, after which MCTV removes the screen at no charge. Ad content is subject to MCTV’s approval and may be refreshed quarterly at no extra cost.</p>
+      <p class="fine">Options 2 and 3 are billed monthly. Either party may end the hosting arrangement with 30 days’ written notice, after which MCTV removes the screen at no charge. Ad content is subject to MCTV’s approval and may be refreshed quarterly at no extra cost.</p>
     </div>
   </div>
 
