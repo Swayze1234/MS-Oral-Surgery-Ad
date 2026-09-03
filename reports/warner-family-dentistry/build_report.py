@@ -1,10 +1,17 @@
-import json, html, os, base64
+"""Builds the Warner Family Dentistry Ad Traction Report as a 16:9 slide deck (HTML + print CSS).
+
+Inputs : agg.json (from agg.py), fonts_inline.css, logofonts_inline.css, deckfonts_inline.css
+Optional: photos/cover.jpg  (cover + screen-time photo; a branded gradient is used if missing)
+          logos/warner.png, logos/mctv.png (real logo artwork; vector look-alikes are used if missing)
+Output : Warner_Family_Dentistry_Traction_Report.html  (render to PDF with headless Chromium)
+"""
+import json, html, os, base64, mimetypes
 from datetime import date
 
 d = json.load(open('agg.json'))
 hosts = d['hosts']; versions = d['versions']
 
-SELECTED = {  # client's chosen screens -> matching host name in reports (None = not in the exports)
+SELECTED = {  # client's chosen screens -> host name in the player exports (None = not in the exports)
     '39759 Nutrition': None,
     'Two Brothers': 'Two Brothers Smoked Meats',
     'William Wells': 'William Wells Tire & Auto',
@@ -18,89 +25,66 @@ SELECTED = {  # client's chosen screens -> matching host name in reports (None =
 }
 paid_names = {v for v in SELECTED.values() if v}
 DEMO = 'D.476 Dealer Demo'
-OFFLINE_NAME = '39759 Nutrition'   # played but disconnected from Wi-Fi, so no counts reported
+OFFLINE_NAME = '39759 Nutrition'   # played, but the screen was off Wi-Fi so its player could not report
+HEALTHCARE = {"BJ's Family Pharmacy", 'Mississippi Asthma & Allergy Clinic, PA - Starkville',
+              'Revive Wellness Clinic - Starkville', 'Right Track Medical Group - Starkville',
+              'Starkville Veterinary Hospital'}
+CATEGORY = {
+    'Two Brothers Smoked Meats': 'Restaurant', 'Uno Mas Tacos y Tequila Starkville': 'Restaurant',
+    'Skate Zone': 'Entertainment', "BJ's Family Pharmacy": 'Medical', 'Starkville Parks and Recreation': 'Community',
+    'Elm Lake Golf Course': 'Recreation', 'Hobie’s Tiki Dawgs & Daqs': 'Restaurant',
+    'Umi Japanese Steakhouse & Sushi Bar': 'Restaurant', 'Mississippi Ice Daiquiri Shop': 'Restaurant',
+    'Right Track Medical Group - Starkville': 'Medical', 'Lucky Nails & Spa': 'Salon',
+    'Oktibbeha County Co-op': 'Retail', 'Cellars Wine & Spirits': 'Retail', 'Bennett Home Furniture & More': 'Retail',
+    'Little Magnolia Gifts & Apparel - Starkville': 'Retail', 'Copy Cow': 'Services', 'starkvegas pawnshop': 'Retail',
+    'Mississippi Asthma & Allergy Clinic, PA - Starkville': 'Medical', 'Starkville Veterinary Hospital': 'Medical',
+    "Montgomery's Jewelry": 'Retail', 'Skate Odyssey Inc': 'Entertainment', 'William Wells Tire & Auto': 'Auto',
+    'Revive Wellness Clinic - Starkville': 'Medical', 'The Breakfast Club': 'Restaurant', 'Legends Hair Salon': 'Salon',
+}
 
 def fmt_d(s):
     y, m, dd = s.split('-'); return f"{int(m)}/{int(dd)}/{y}"
+def mon(s):
+    return date.fromisoformat(s).strftime('%b %Y')
 def hrs(sec): return sec / 3600
 def n(x): return f"{x:,}"
+def short(name): return name.replace(' - Starkville', '').replace(', PA', '').replace(' Starkville', '').replace('starkvegas', 'Starkvegas')
 
 rows = []
 for name, h in hosts.items():
     if name == DEMO: continue
     rows.append(dict(name=name, plays=h['plays'], secs=h['secs'], first=h['first'], last=h['last'],
-                     paid=name in paid_names, city=h['city']))
+                     paid=name in paid_names, city=h['city'], cat=CATEGORY.get(name, 'General')))
 rows.sort(key=lambda r: -r['plays'])
 n_screens = len(rows) + 1
 tot_plays = sum(r['plays'] for r in rows); tot_secs = sum(r['secs'] for r in rows)
 paid_rows = [r for r in rows if r['paid']]; gift_rows = [r for r in rows if not r['paid']]
 paid_plays = sum(r['plays'] for r in paid_rows); gift_plays = sum(r['plays'] for r in gift_rows)
 first = min(r['first'] for r in rows); last = max(r['last'] for r in rows)
+days_on_air = (date.fromisoformat(last) - date.fromisoformat(first)).days + 1
 months = 5; spend = 350 * months
 cpp = spend / tot_plays * 100
 demo = hosts[DEMO]
+top = rows[0]
+hc_rows = [r for r in rows if r['name'] in HEALTHCARE]; hc_plays = sum(r['plays'] for r in hc_rows)
+period = f"{mon(first)} &ndash; {mon(last)}"
+period_caps = f"{date.fromisoformat(first).strftime('%b').upper()} &ndash; {date.fromisoformat(last).strftime('%b %Y').upper()}"
 
-# ---------------------------------------------------------------- chart: plays by screen
-LW, BW, RH, PADT = 250, 520, 24, 6
-H = PADT * 2 + RH * (len(rows) + 1)
-def x(v): return LW + v / 20000 * BW
-svg = [f'<svg class="bars" viewBox="0 0 {LW+BW+70} {H+28}" role="img" aria-label="Plays per screen, all four ad versions combined">']
-for t in (0, 5000, 10000, 15000, 20000):
-    svg.append(f'<line class="grid" x1="{x(t):.1f}" y1="{PADT}" x2="{x(t):.1f}" y2="{H}"/>')
-    svg.append(f'<text class="tick" x="{x(t):.1f}" y="{H+18}" text-anchor="middle">{n(t)}</text>')
-for i, r in enumerate(rows):
-    y = PADT + i * RH; bh = 16; by = y + (RH - bh) / 2
-    w = max(2, (r['plays'] / 20000) * BW)
-    cls = 'paid' if r['paid'] else 'gift'
-    label = r['name'].replace(' - Starkville', '').replace(', PA', '')
-    svg.append(f'<g class="row" data-name="{html.escape(r["name"])}" data-plays="{r["plays"]}" data-hours="{hrs(r["secs"]):.1f}" '
-               f'data-kind="{"Selected screen" if r["paid"] else "Gifted screen"}" data-range="{fmt_d(r["first"])} &ndash; {fmt_d(r["last"])}">')
-    svg.append(f'<rect class="hit" x="0" y="{y}" width="{LW+BW+70}" height="{RH}"/>')
-    svg.append(f'<text class="lbl" x="{LW-12}" y="{y+RH/2+4}" text-anchor="end">{html.escape(label)}</text>')
-    svg.append(f'<path class="bar {cls}" d="M{LW},{by} h{w-4:.1f} a4,4 0 0 1 4,4 v{bh-8} a4,4 0 0 1 -4,4 h-{w-4:.1f} z"/>')
-    svg.append(f'<text class="val" x="{LW+w+8:.1f}" y="{y+RH/2+4}">{n(r["plays"])}</text>')
-    svg.append('</g>')
-y = PADT + len(rows) * RH
-svg.append(f'<g class="row" data-name="{OFFLINE_NAME}" data-plays="0" data-hours="0" data-kind="Selected screen" data-range="Played, not reported (screen offline from Wi-Fi)">'
-           f'<rect class="hit" x="0" y="{y}" width="{LW+BW+70}" height="{RH}"/>')
-svg.append(f'<text class="lbl" x="{LW-12}" y="{y+RH/2+4}" text-anchor="end">{OFFLINE_NAME}</text>')
-svg.append(f'<rect class="bar paid nodata" x="{LW}" y="{y+(RH-16)/2}" width="4" height="16"/>')
-svg.append(f'<text class="val muted" x="{LW+12}" y="{y+RH/2+4}">played, not reported*</text></g>')
-svg.append('</svg>')
-svg = '\n'.join(svg)
+# ---------------------------------------------------------------- assets
+def data_uri(path):
+    mt = mimetypes.guess_type(path)[0] or 'application/octet-stream'
+    return f"data:{mt};base64,{base64.b64encode(open(path, 'rb').read()).decode()}"
+COVER = None
+for cand in ('photos/cover.jpg', 'photos/cover.jpeg', 'photos/cover.png', 'photos/cover.webp'):
+    if os.path.exists(cand): COVER = data_uri(cand); break
+FONTS = open('fonts_inline.css').read() + open('logofonts_inline.css').read() + open('deckfonts_inline.css').read()
 
-# ---------------------------------------------------------------- table
-def trow(r):
-    badge = '<span class="badge paid">Selected</span>' if r['paid'] else '<span class="badge gift">Gifted</span>'
-    return (f'<tr class="{"" if r["paid"] else "gift-row"}"><td>{html.escape(r["name"])}<span class="city">{r["city"]}</span></td>'
-            f'<td>{badge}</td><td class="num">{n(r["plays"])}</td><td class="num">{hrs(r["secs"]):.1f}</td>'
-            f'<td class="dates">{fmt_d(r["first"])} &ndash; {fmt_d(r["last"])}</td></tr>')
-table_rows = '\n'.join(trow(r) for r in rows)
-table_rows += (f'<tr><td>{OFFLINE_NAME}<span class="city">Starkville</span></td><td><span class="badge paid">Selected</span></td>'
-               f'<td class="num muted">not reported*</td><td class="num muted">&mdash;</td><td class="dates muted">Played, no play data*</td></tr>')
-
-# ---------------------------------------------------------------- versions
-vlabels = {1: 'Original spot', 2: 'Revision 2', 3: 'Revision 3', 4: 'Final spot'}
-vrows = ''
-for v in versions:
-    p = v['plays'] - v['demo_plays']
-    vrows += (f'<div class="ver"><div class="ver-dot"></div><div class="ver-n">v{v["version"]}</div>'
-              f'<div class="ver-title">{vlabels[v["version"]]}</div><div class="ver-meta">{fmt_d(v["first"])} &ndash; {fmt_d(v["last"])}</div>'
-              f'<div class="ver-plays">{n(p)}<span>plays</span></div></div>')
-
-# ---------------------------------------------------------------- logos
-FONTS = open('fonts_inline.css').read() + open('logofonts_inline.css').read()
-def img_or(path, fallback, cls):
-    if os.path.exists(path):
-        b = base64.b64encode(open(path, 'rb').read()).decode()
-        return f'<img class="{cls} real" src="data:image/png;base64,{b}" alt="">'
-    return fallback
 TOOTH = '''<svg class="tooth" viewBox="0 0 104 128" aria-hidden="true">
-  <g transform="translate(3.5,3.5)" fill="none" stroke="#111" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
+  <g transform="translate(3.5,3.5)" fill="none" stroke="#000" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
    <path d="M50,14 C33,4 13,12 11,34 C10,50 21,58 24,76 C27,96 31,116 40,118 C48,119 48,98 50,88 C52,98 52,119 60,118 C69,116 73,96 76,76 C79,58 90,50 89,34 C87,12 67,4 50,14 Z"/>
    <path d="M14,30 C6,22 8,6 22,6 C31,6 33,15 27,18" stroke-width="6"/>
   </g>
-  <g fill="none" stroke="#149BD1" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
+  <g fill="none" stroke="#2FB4E8" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
    <path d="M50,14 C33,4 13,12 11,34 C10,50 21,58 24,76 C27,96 31,116 40,118 C48,119 48,98 50,88 C52,98 52,119 60,118 C69,116 73,96 76,76 C79,58 90,50 89,34 C87,12 67,4 50,14 Z"/>
    <path d="M14,30 C6,22 8,6 22,6 C31,6 33,15 27,18" stroke-width="6"/>
   </g>
@@ -108,300 +92,293 @@ TOOTH = '''<svg class="tooth" viewBox="0 0 104 128" aria-hidden="true">
 WARNER_SVG = f'''<div class="warner-logo">{TOOTH}
  <div class="warner-text"><div class="warner-name">ARNER</div><div class="warner-sub">FAMILY DENTISTRY</div><div class="warner-spa">&amp; Med Spa</div></div>
 </div>'''
-MCTV_SVG = '<div class="mctv-logo"><div class="mctv-name">MCTV</div><div class="mctv-sub">ELITE ADVERTISING</div></div>'
+def img_or(path, fallback, cls):
+    return f'<img class="{cls} real" src="{data_uri(path)}" alt="">' if os.path.exists(path) else fallback
 WARNER_LOGO = img_or('logos/warner.png', WARNER_SVG, 'warner-logo')
+MCTV_SVG = '<div class="mctv-logo"><div class="mctv-name">MCTV</div><div class="mctv-sub">ELITE ADVERTISING</div></div>'
 MCTV_LOGO = img_or('logos/mctv.png', MCTV_SVG, 'mctv-logo')
 
-# ---------------------------------------------------------------- page
+# ---------------------------------------------------------------- pieces
+def chrome(label, right):
+    return f'<div class="chrome"><span class="lab">{label}</span><span class="lab muted">{right}</span></div>'
+
+def rank_list(items, maxv):
+    out = []
+    for i, r in enumerate(items, 1):
+        cls = 'sel' if r['paid'] else 'gift'
+        meta = f"{r['city']} &middot; {r['cat']}" + ('' if r['paid'] else ' &middot; <em>Gifted</em>')
+        out.append(f'<div class="rk"><span class="rk-n">{i:02d}</span><span class="rk-name {cls}">{html.escape(short(r["name"]))}</span>'
+                   f'<span class="rk-meta">{meta}</span><span class="rk-bar"><i class="{cls}" style="width:{r["plays"]/maxv*100:.1f}%"></i></span>'
+                   f'<span class="rk-val">{n(r["plays"])}</span></div>')
+    return '\n'.join(out)
+
+def dir_list(items):
+    return '\n'.join(f'<div class="dr"><span>{html.escape(short(r["name"]))}<small>{r["city"]} &middot; {r["cat"]}</small></span><b>{n(r["plays"])}</b></div>' for r in items)
+
+vlabels = {1: 'Original spot', 2: 'Revision 2', 3: 'Revision 3', 4: 'Final spot'}
+ver_cards = ''.join(
+    f'<div class="vc"><span class="lab">V{v["version"]} &middot; {vlabels[v["version"]].upper()}</span>'
+    f'<b>{n(v["plays"]-v["demo_plays"])}</b><span class="sub">{fmt_d(v["first"])} &ndash; {fmt_d(v["last"])}</span></div>'
+    for v in versions)
+
+cover_media = (f'<div class="cover-photo" style="background-image:url({COVER})"></div>' if COVER else
+               f'<div class="cover-photo placeholder"><div class="ph-mark">{TOOTH}</div></div>')
+band_media = (f'<div class="band-photo" style="background-image:url({COVER})"></div>' if COVER else
+              '<div class="band-photo placeholder"></div>')
+
 page = f'''<title>Warner Family Dentistry Traction</title>
 <style>
 {FONTS}
-:root{{
-  --ground:#F4F8FB; --paper:#FFFFFF; --ink:#111417; --ink-2:#4A5560; --ink-3:#7C8994;
-  --rule:#D9E3EA; --rule-soft:#EAF1F5;
-  --blue:#149BD1; --blue-deep:#0B6C99; --blue-wash:#E3F3FB; --blue-tint:#F1F9FD;
-  --black:#111417;
-  --amber:#CC7A0E; --amber-ink:#8F5407; --amber-wash:#FBF0DF;
-  --grid:#E1EAF0;
-}}
-@media (prefers-color-scheme: dark){{ :root:not([data-theme="light"]){{
-  --ground:#0E1419; --paper:#161D24; --ink:#EEF3F6; --ink-2:#B5C1CB; --ink-3:#8494A1;
-  --rule:#2A3640; --rule-soft:#202A33;
-  --blue:#1C9DD0; --blue-deep:#7CCBEF; --blue-wash:#143446; --blue-tint:#122733;
-  --black:#0A0D10;
-  --amber:#CF7F12; --amber-ink:#F0B461; --amber-wash:#3D2C14;
-  --grid:#25313B;
-}}}}
-:root[data-theme="dark"]{{
-  --ground:#0E1419; --paper:#161D24; --ink:#EEF3F6; --ink-2:#B5C1CB; --ink-3:#8494A1;
-  --rule:#2A3640; --rule-soft:#202A33;
-  --blue:#1C9DD0; --blue-deep:#7CCBEF; --blue-wash:#143446; --blue-tint:#122733;
-  --black:#0A0D10;
-  --amber:#CF7F12; --amber-ink:#F0B461; --amber-wash:#3D2C14;
-  --grid:#25313B;
-}}
+:root{{ --bg:#0b1216; --bg-2:#0f1a20; --fg:#f0f4f6; --fg-2:#b7c4cc; --mute:#7e8f99; --line:rgba(240,244,246,.13); --line-2:rgba(240,244,246,.07);
+  --accent:#2FB4E8; --accent-deep:#149BD1; --bar:#1C9DD0; --bar-gift:#CF7F12; --gift:#E8A24A; --track:rgba(240,244,246,.10); }}
 *{{box-sizing:border-box}}
-body{{margin:0;background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}}
-h1,h2,.stat b,.hero-num,.ver-plays,.ver-n,.gifted .big{{font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif}}
-.eyebrow{{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-deep);font-weight:600}}
+body{{margin:0;background:#06090b;color:var(--fg);font-family:"Inter Tight","IBM Plex Sans",system-ui,sans-serif;font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased}}
+.deck{{display:flex;flex-direction:column;align-items:center;gap:22px;padding:22px 12px}}
+.slide{{width:960px;height:540px;background:var(--bg);position:relative;overflow:hidden;padding:30px 48px 32px;flex:none;border-radius:4px}}
+.lab{{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);font-weight:500}}
+.lab.muted{{color:var(--mute)}}
+.chrome{{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:22px}}
+h1{{font-size:64px;font-weight:600;letter-spacing:-.035em;line-height:1;margin:14px 0 16px}}
+h2{{font-size:30px;font-weight:600;letter-spacing:-.025em;line-height:1.1;margin:0 0 6px}}
+h3{{font-size:17px;font-weight:600;letter-spacing:-.01em;margin:6px 0 4px}}
+p{{margin:0;color:var(--fg-2);font-size:13.5px;line-height:1.5}}
+.slide .big{{color:var(--fg);font-size:108px;font-weight:600;letter-spacing:-.045em;line-height:.95;font-variant-numeric:tabular-nums;margin:0}}
+.slide .big.md{{font-size:84px}}
+.mono{{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}}
+.foot{{position:absolute;left:48px;right:48px;bottom:22px;display:flex;justify-content:space-between;align-items:center}}
+.foot .lab{{color:var(--mute)}}
+.hl{{color:var(--accent)}} .gl{{color:var(--gift)}}
+em{{font-style:normal;color:var(--gift)}}
 
-/* running header / footer: repeat on every printed page via table thead/tfoot */
-.sheet{{width:100%;border-collapse:collapse}}
-.sheet>thead>tr>td,.sheet>tbody>tr>td,.sheet>tfoot>tr>td{{padding:0}}
-.runhead{{display:flex;justify-content:space-between;align-items:center;padding:14px 0 10px;border-bottom:3px solid var(--blue);max-width:860px;margin:0 auto;width:100%}}
-.runhead .rh-l{{display:flex;align-items:center;gap:10px;font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:15px;letter-spacing:.05em;color:var(--ink)}}
-.runhead .rh-l .tooth{{height:26px;width:auto}}
-.runhead .rh-l small{{font-family:"Josefin Sans",sans-serif;font-weight:400;font-size:9.5px;letter-spacing:.2em;color:var(--ink-2);display:block;margin-top:2px}}
-.runhead .rh-r{{font-family:"Bodoni Moda",Georgia,serif;font-size:17px;letter-spacing:.3em;color:var(--ink);text-align:right}}
-.runhead .rh-r small{{display:block;font-family:"Josefin Sans",sans-serif;font-size:8.5px;letter-spacing:.28em;color:var(--ink-3);margin-top:3px}}
-.runfoot{{display:flex;justify-content:space-between;gap:16px;font-size:11px;color:var(--ink-3);padding:10px 0 0;border-top:1px solid var(--rule);max-width:860px;margin:0 auto;width:100%}}
-.runfoot b{{color:var(--ink-2);font-weight:600}}
-.runfoot i{{display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--blue);vertical-align:-1px;margin-right:6px}}
-
-.page{{max-width:860px;margin:0 auto;padding:0 0 28px}}
-.wrap{{padding:0 28px}}
+/* logos */
+.warner-logo{{display:flex;align-items:center;gap:2px}} .warner-logo .tooth{{height:54px;width:auto;margin-right:-5px}}
+.warner-text{{line-height:1}}
+.warner-name{{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:29px;letter-spacing:.06em;color:#2FB4E8;text-shadow:1.5px 1.5px 0 #000;line-height:.9}}
+.warner-sub{{font-family:"Josefin Sans",sans-serif;font-size:9.5px;letter-spacing:.2em;color:var(--fg);margin:4px 0 0 2px}}
+.warner-spa{{font-family:"Great Vibes",cursive;font-size:16px;color:#2FB4E8;text-shadow:1px 1px 0 #000;text-align:right;line-height:1}}
+img.warner-logo.real{{height:56px;width:auto;max-width:240px;object-fit:contain}}
+.mctv-logo{{text-align:center;line-height:1}} .mctv-name{{font-family:"Bodoni Moda",Georgia,serif;font-size:26px;letter-spacing:.34em;color:var(--fg);padding-left:.34em}}
+.mctv-sub{{font-family:"Josefin Sans",sans-serif;font-size:7.5px;letter-spacing:.32em;color:var(--fg-2);padding-left:.32em;margin-top:4px}}
+img.mctv-logo.real{{height:40px;width:auto;object-fit:contain;filter:invert(1) brightness(1.4)}}
+.small-logo .warner-logo .tooth{{height:38px}} .small-logo .warner-name{{font-size:20px}} .small-logo .warner-sub{{font-size:7px}} .small-logo .warner-spa{{font-size:12px}} .small-logo img.warner-logo.real{{height:40px}}
 
 /* cover */
-.brandbar{{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:28px 0 20px}}
-.brandbar img.real{{height:68px;width:auto;max-width:300px;object-fit:contain}}
-.warner-logo{{display:flex;align-items:center;gap:2px}}
-.warner-logo .tooth{{height:70px;width:auto;margin-right:-6px}}
-.warner-text{{line-height:1}}
-.warner-name{{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:38px;letter-spacing:.06em;color:#149BD1;text-shadow:2px 2px 0 #111;line-height:.9}}
-.warner-sub{{font-family:"Josefin Sans","IBM Plex Sans",sans-serif;font-size:12px;letter-spacing:.2em;color:var(--ink);margin:5px 0 0 2px}}
-.warner-spa{{font-family:"Great Vibes",cursive;font-size:21px;color:#149BD1;text-shadow:1.5px 1.5px 0 #111;text-align:right;margin-top:-1px;line-height:1}}
-.mctv-logo{{text-align:center;line-height:1}}
-.mctv-name{{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:38px;letter-spacing:.34em;color:var(--ink);padding-left:.34em}}
-.mctv-sub{{font-family:"Josefin Sans","IBM Plex Sans",sans-serif;font-size:10.5px;letter-spacing:.32em;color:var(--ink-2);padding-left:.32em;margin-top:6px}}
+.cover{{padding:0;display:grid;grid-template-columns:1.05fr 1fr}}
+.cover-l{{padding:34px 40px 34px 48px;display:flex;flex-direction:column}}
+.cover-l .title{{margin-top:auto}}
+.cover-l h1{{font-size:56px}}
+.cover-l p{{font-size:15px;max-width:38ch}}
+.cover-meta{{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;border-top:1px solid var(--line);padding-top:16px;margin-top:38px}}
+.cover-meta b{{display:block;font-weight:500;font-size:13px;margin-top:6px;color:var(--fg)}}
+.cover-photo{{background-size:cover;background-position:center;position:relative}}
+.cover-photo:after{{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,rgba(11,18,22,0) 22%)}}
+.cover-photo.placeholder{{background:radial-gradient(120% 90% at 80% 20%,#1a6f92 0%,#0f3a4d 45%,#0b1216 100%);display:flex;align-items:center;justify-content:center}}
+.cover-photo.placeholder .tooth{{height:260px;opacity:.9}}
 
-.titleblock{{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;padding:6px 0 22px}}
-h1{{font-size:42px;line-height:1;margin:6px 0 0;font-weight:800;letter-spacing:-.02em;text-wrap:balance}}
-h1 small{{display:block;font-size:16px;font-weight:500;letter-spacing:0;color:var(--ink-2);margin-top:10px}}
-.meta{{text-align:right;font-size:12.5px;color:var(--ink-2);line-height:1.7;border-right:3px solid var(--blue);padding-right:14px}}
-.meta b{{color:var(--ink);font-weight:600}}
+/* glance */
+.glance{{display:grid;grid-template-columns:1.6fr 1fr;gap:40px;align-items:end;margin-bottom:26px}}
+.glance p{{font-size:14px;max-width:34ch}}
+.tiles{{display:grid;grid-template-columns:repeat(4,1fr);gap:0 28px}}
+.tile{{border-top:1px solid var(--line);padding:16px 0 18px}}
+.tile b{{display:block;font-size:30px;font-weight:600;letter-spacing:-.03em;line-height:1;margin-bottom:8px;font-variant-numeric:tabular-nums}}
+.tile b.gl{{color:var(--gift)}}
+.tile .lab{{color:var(--mute);letter-spacing:.2em}}
 
-.hero{{display:grid;grid-template-columns:1.25fr 1fr 1fr 1fr;background:linear-gradient(135deg,var(--blue-deep) 0%,var(--blue) 70%,#3DB3E3 100%);color:#fff;border-radius:10px;overflow:hidden;box-shadow:0 10px 30px -14px rgba(11,108,153,.55)}}
-.hero>div{{padding:22px 22px 20px;border-right:1px solid rgba(255,255,255,.22)}}
-.hero>div:last-child{{border-right:0}}
-.hero .eyebrow{{color:rgba(255,255,255,.82)}}
-.hero .hero-num{{display:block;font-size:52px;font-weight:800;letter-spacing:-.03em;line-height:1;margin:8px 0 6px;font-variant-numeric:tabular-nums}}
-.hero b{{display:block;font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1.05;margin:10px 0 6px;font-variant-numeric:tabular-nums}}
-.hero span{{font-size:12.5px;color:rgba(255,255,255,.85)}}
+/* gifted */
+.gift-grid{{display:grid;grid-template-columns:1fr 1.15fr;gap:44px;align-items:start}}
+.split{{display:flex;height:18px;border-radius:3px;overflow:hidden;margin:20px 0 10px;gap:2px}}
+.split i{{display:block;height:100%}} .split .s{{background:var(--bar)}} .split .g{{background:var(--bar-gift)}}
+.key{{display:flex;justify-content:space-between;font-size:12.5px;color:var(--fg-2)}} .key b{{color:var(--fg);font-weight:500}}
+.key i{{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:7px;vertical-align:-1px}}
+.gift-cols{{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;margin-top:6px}}
+.dr{{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:6px 0;border-bottom:1px solid var(--line-2);font-size:12.5px}}
+.dr span{{color:var(--fg)}} .dr small{{display:block;color:var(--mute);font-size:10.5px}} .dr b{{font-family:"IBM Plex Mono",monospace;font-weight:400;color:var(--fg-2);font-variant-numeric:tabular-nums;font-size:12px}}
+.dr.off b{{font-size:10.5px;color:var(--mute)}}
 
-.lede{{font-size:15.5px;max-width:66ch;color:var(--ink-2);margin:22px 0 0}}
-.lede strong{{color:var(--ink);font-weight:600}}
+/* band */
+.band{{padding:0}}
+.band-top{{padding:44px 48px 36px;display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:end;height:300px}}
+.band-top p{{font-size:13.5px;max-width:34ch}}
+.band-photo{{height:240px;background-size:cover;background-position:center 60%;position:relative}}
+.band-photo:before{{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0%,rgba(11,18,22,0) 60%)}}
+.band-photo.placeholder{{background:linear-gradient(180deg,#0b1216 0%,#0f3a4d 60%,#1a6f92 100%)}}
 
-.gifted{{margin:20px 0 0;display:grid;grid-template-columns:auto 1fr;gap:0;border-radius:10px;overflow:hidden;border:1px solid color-mix(in srgb,var(--amber) 35%,transparent);background:var(--paper)}}
-.gifted .big{{background:var(--amber);color:#fff;font-size:40px;font-weight:800;letter-spacing:-.02em;line-height:1;padding:18px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px}}
-.gifted .big small{{font-family:"IBM Plex Sans",sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;opacity:.9}}
-.gifted p{{margin:0;padding:16px 20px;font-size:14px;color:var(--ink);align-self:center}}
-.gifted p b{{font-weight:600}}
-.gifted .amt{{color:var(--amber-ink);font-weight:700}}
+/* rank */
+.rk{{display:grid;grid-template-columns:26px 236px 176px 1fr 74px;align-items:center;gap:14px;padding:6px 0;border-bottom:1px solid var(--line-2);font-size:13px}}
+.rk-n{{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--mute)}}
+.rk-name{{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}} .rk-name.sel{{color:var(--accent)}}
+.rk-meta{{font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.rk-bar{{height:7px;background:var(--track);border-radius:2px;overflow:hidden}} .rk-bar i{{display:block;height:100%;background:var(--bar);border-radius:2px}} .rk-bar i.gift{{background:var(--bar-gift)}}
+.rk-val{{font-family:"IBM Plex Mono",monospace;font-size:12px;text-align:right;color:var(--fg);font-variant-numeric:tabular-nums}}
+.legend{{display:flex;gap:18px;font-size:11px;color:var(--mute);margin-top:10px}} .legend i{{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:-1px}}
 
-.split{{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}}
-.card{{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:16px 18px}}
-.card .eyebrow{{margin-bottom:8px}}
-.share{{height:14px;border-radius:7px;overflow:hidden;display:flex;background:var(--rule-soft);margin:8px 0 8px}}
-.share i{{display:block;height:100%}}
-.share .p{{background:var(--blue)}} .share .g{{background:var(--amber);margin-left:2px}}
-.share-key{{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-2)}}
-.share-key b{{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}}
-.share-key i{{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:-1px;margin-right:6px}}
-.share-note{{margin:12px 0 0;font-size:13px;color:var(--ink-2);line-height:1.55}} .share-note b{{color:var(--ink);font-weight:600}}
-.kv{{display:grid;grid-template-columns:1fr auto;gap:4px 14px;font-size:13px;color:var(--ink-2)}}
-.kv b{{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;text-align:right}}
-.kv div{{padding:5px 0;border-bottom:1px solid var(--rule-soft)}}
-.kv div:nth-last-child(-n+2){{border-bottom:0}}
+/* directory */
+.dir{{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 30px}}
+.dir .span2{{grid-column:2/4}}
+.dir .dr{{padding:3px 0;font-size:11.5px;line-height:1.3}} .dir .dr small{{font-size:9.5px}}
+.dir-head h2{{margin-bottom:0}} .dir .lab{{margin-bottom:4px!important}}
+.dir-head{{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}}
+.dir-head h2{{font-size:24px}} .dir-head .lab{{color:var(--mute)}}
 
-/* sections */
-section{{margin-top:34px}}
-.sec-head{{display:flex;align-items:baseline;gap:14px;margin:0 0 6px}}
-.sec-num{{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:13px;color:#fff;background:var(--blue);border-radius:6px;padding:3px 8px;letter-spacing:.04em}}
-h2{{font-size:24px;font-weight:800;letter-spacing:-.015em;margin:0}}
-.sub{{color:var(--ink-2);margin:0 0 14px;font-size:13.5px;max-width:74ch}}
-.legend{{display:flex;gap:18px;font-size:12.5px;color:var(--ink-2);margin:0 0 8px}}
-.legend i{{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:6px}}
-.legend .p i{{background:var(--blue)}} .legend .g i{{background:var(--amber)}}
-.chart{{background:var(--paper);border:1px solid var(--rule);border-top:4px solid var(--blue);border-radius:10px;padding:14px 10px 6px;position:relative;overflow-x:auto}}
-svg.bars{{width:100%;height:auto;display:block;font-family:"IBM Plex Sans",sans-serif}}
-.bars .grid{{stroke:var(--grid);stroke-width:1}}
-.bars .tick{{font-size:11px;fill:var(--ink-3);font-variant-numeric:tabular-nums}}
-.bars .lbl{{font-size:12px;fill:var(--ink)}}
-.bars .val{{font-size:11.5px;fill:var(--ink-2);font-variant-numeric:tabular-nums}}
-.bars .val.muted{{fill:var(--ink-3);font-style:italic}}
-.bars .bar.paid{{fill:var(--blue)}} .bars .bar.gift{{fill:var(--amber)}} .bars .bar.nodata{{opacity:.35}}
-.bars .hit{{fill:transparent}}
-.bars .row:hover .hit{{fill:var(--blue-tint)}}
-.tip{{position:absolute;pointer-events:none;background:var(--black);color:#fff;font-size:12px;padding:8px 10px;border-radius:6px;line-height:1.4;box-shadow:0 4px 14px rgba(0,0,0,.18);max-width:240px;z-index:2}}
-.tip b{{display:block;font-weight:600;margin-bottom:2px}}
-.fn{{font-size:11.5px;color:var(--ink-3);margin:10px 0 0;max-width:80ch}}
+/* versions */
+.vcs{{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:10px}}
+.vc{{border-top:2px solid var(--accent-deep);padding-top:14px}}
+.vc b{{display:block;font-size:40px;font-weight:600;letter-spacing:-.035em;line-height:1;margin:14px 0 8px;font-variant-numeric:tabular-nums}}
+.vc .sub{{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--mute)}}
+.vline{{position:relative;height:2px;background:var(--line);margin:26px 0 22px}}
+.vline i{{position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--accent)}}
 
-table.data{{width:100%;border-collapse:separate;border-spacing:0;background:var(--paper);border:1px solid var(--rule);border-radius:10px;overflow:hidden;font-size:13px}}
-table.data thead th{{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff;font-weight:600;padding:11px 12px;background:var(--black)}}
-table.data thead th.num{{text-align:right}}
-table.data td{{padding:8px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:middle}}
-table.data tbody tr:last-child td{{border-bottom:0}}
-td .city{{display:block;font-size:11.5px;color:var(--ink-3)}}
-.num{{text-align:right;font-variant-numeric:tabular-nums}}
-td.muted,.dates.muted{{color:var(--ink-3);font-style:italic}}
-.dates{{white-space:nowrap;color:var(--ink-2);font-variant-numeric:tabular-nums}}
-tr.gift-row td{{background:color-mix(in srgb,var(--amber-wash) 45%,var(--paper))}}
-.badge{{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;padding:2px 9px;border-radius:999px;white-space:nowrap}}
-.badge.gift{{background:var(--amber-wash);color:var(--amber-ink)}}
-.badge.paid{{background:var(--blue);color:#fff}}
-table.data tfoot td{{font-weight:600;border-top:2px solid var(--blue);background:var(--blue-tint)}}
-.tablewrap{{overflow-x:auto}}
+/* observations */
+.obs{{display:grid;grid-template-columns:1fr 1fr;gap:26px 44px}}
+.ob{{border-top:1px solid var(--line);padding-top:14px}}
+.ob .lab{{letter-spacing:.22em}}
+.obs-foot{{border-top:1px solid var(--line);margin-top:26px;padding-top:14px}}
 
-.vers{{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;position:relative;padding-top:14px}}
-.vers:before{{content:"";position:absolute;left:4%;right:4%;top:19px;height:3px;background:var(--blue);border-radius:2px}}
-.ver{{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:22px 14px 14px;position:relative;text-align:center}}
-.ver-dot{{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:var(--blue);border:3px solid var(--ground)}}
-.ver-n{{display:inline-block;font-size:12px;font-weight:800;color:var(--blue-deep);background:var(--blue-wash);border-radius:4px;padding:2px 8px}}
-.ver-title{{font-weight:600;font-size:13.5px;margin-top:8px}}
-.ver-meta{{font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums;margin-top:2px}}
-.ver-plays{{font-size:26px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-top:8px;line-height:1}}
-.ver-plays span{{font-family:"IBM Plex Sans",sans-serif;font-size:11px;font-weight:400;color:var(--ink-3);margin-left:5px;letter-spacing:0}}
-
-.closing{{margin-top:26px;background:var(--black);color:#fff;border-radius:10px;padding:20px 24px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}}
-.closing h3{{margin:0 0 4px;font-family:"Bricolage Grotesque",sans-serif;font-size:19px;font-weight:800;letter-spacing:-.01em}}
-.closing p{{margin:0;font-size:13px;color:rgba(255,255,255,.78);max-width:56ch}}
-.closing .who{{text-align:right;font-size:13px;line-height:1.6;border-left:3px solid var(--blue);padding-left:16px}}
-.closing .who b{{display:block;font-size:14.5px}}
-
-@media (max-width:640px){{ .hero,.vers{{grid-template-columns:repeat(2,1fr)}} .hero>div{{border-bottom:1px solid rgba(255,255,255,.22)}} .split{{grid-template-columns:1fr}} .titleblock{{grid-template-columns:1fr}} .meta{{text-align:left;border-right:0;border-left:3px solid var(--blue);padding:0 0 0 14px}} .closing{{grid-template-columns:1fr}} .closing .who{{text-align:left}} .vers:before{{display:none}} .brandbar{{flex-wrap:wrap}} }}
+/* contact */
+.team{{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:26px}}
+.tm{{border-top:1px solid var(--line);padding-top:14px}}
+.tm h3{{margin:0 0 6px;font-size:18px}} .tm .lab{{letter-spacing:.2em}} .tm p{{margin-top:12px;font-size:13px;color:var(--fg)}}
 
 @media print{{
-  @page{{size:letter;margin:.4in .5in .45in}}
-  :root{{--ground:#fff}}
-  body{{font-size:12.5px}}
-  .sheet>thead{{display:table-header-group}} .sheet>tfoot{{display:table-footer-group}}
-  .runhead{{padding:6px 0 8px;max-width:none}} .runfoot{{max-width:none;padding-top:8px}}
-  .page{{max-width:none;padding:0}} .wrap{{padding:0}}
-  .brandbar{{padding:18px 0 14px}}
-  section{{margin-top:22px}}
-  .chart,.hero,.gifted,.card,.ver,.closing,table.data{{break-inside:avoid;box-shadow:none}}
-  section.chart-sec,section.tbl{{break-before:page}}
-  h2,.sub,.legend,.sec-head{{break-after:avoid}}
-  .hero-num{{font-size:44px}} .hero b{{font-size:26px}} h1{{font-size:36px}}
-  .bars .lbl{{font-size:11.5px}}
-  .chart svg.bars{{max-height:470px;margin:0 auto}} .chart{{padding:8px 10px 2px}}
-  .closing{{padding:14px 20px;margin-top:16px}} .closing h3{{font-size:16px}}
-  table.data{{border-radius:0}}
-  table.data thead{{display:table-header-group}} table.data tfoot{{display:table-row-group}}
-  table.data td{{padding:6px 12px}}
-  tr,td,th{{break-inside:avoid}}
-  .ver{{padding:16px 10px 10px}} .ver-plays{{font-size:20px;margin-top:4px}} .vers{{padding-top:10px}}
-  .tip{{display:none}}
+  @page{{size:10in 5.625in;margin:0}}
+  body{{background:var(--bg)}}
+  .deck{{display:block;padding:0;gap:0}}
+  .slide{{width:10in;height:5.625in;border-radius:0;break-after:page;page-break-after:always}}
+  .slide:last-child{{break-after:auto;page-break-after:auto}}
 }}
 </style>
-<table class="sheet"><thead><tr><td>
-<div class="runhead">
-  <div class="rh-l">{TOOTH}<div>ARNER <small>FAMILY DENTISTRY &middot; SCREEN TRACTION REPORT</small></div></div>
-  <div class="rh-r">MCTV<small>ELITE ADVERTISING</small></div>
-</div>
-</td></tr></thead>
-<tbody><tr><td>
-<div class="page"><div class="wrap">
+<div class="deck">
 
-<div class="brandbar">
-  {WARNER_LOGO}
-  {MCTV_LOGO}
-</div>
-
-<div class="titleblock">
-  <div>
-    <div class="eyebrow">Screen Traction Report</div>
-    <h1>Warner Family Dentistry<small>Starkville network &middot; {fmt_d(first)} &ndash; {fmt_d(last)}</small></h1>
-  </div>
-  <div class="meta">
-    <div><b>Prepared for:</b> Dr. Lindsey Warner</div>
-    <div><b>Plan:</b> 10 screens &middot; $350 / month</div>
-    <div><b>Spot length:</b> 30 seconds</div>
-    <div><b>Prepared:</b> {date.today().strftime("%B %-d, %Y")}</div>
-  </div>
-</div>
-
-<div class="hero">
-  <div><div class="eyebrow">Total plays</div><div class="hero-num">{n(tot_plays)}</div><span>every airing of the Warner spot</span></div>
-  <div><div class="eyebrow">Hours on screen</div><b>{hrs(tot_secs):,.0f}</b><span>{hrs(tot_secs)/24:.0f} full days of airtime</span></div>
-  <div><div class="eyebrow">Screens reached</div><b>{n_screens}</b><span>{len(paid_rows)+1} selected + {len(gift_rows)} gifted</span></div>
-  <div><div class="eyebrow">Cost per play</div><b>{cpp:.1f}&cent;</b><span>at $350 a month</span></div>
-</div>
-
-<p class="lede">Over five months the Warner Family Dentistry spot aired <strong>{n(tot_plays)} times</strong> across the Starkville MCTV network. The spot went through four versions while the creative was refined; every version is counted here.</p>
-
-<div class="gifted">
-  <div class="big">+{len(gift_rows)}<small>gifted screens</small></div>
-  <p><b>Warner Family Dentistry paid for 10 screens.</b> MCTV also ran the spot at no charge on {len(gift_rows)} additional locations, including high-traffic hosts like Uno Mas Tacos y Tequila, Skate Zone, Starkville Parks and Recreation, and Elm Lake Golf Course. Those bonus screens delivered <span class="amt">{n(gift_plays)} plays</span>, shown in amber throughout this report.</p>
-</div>
-
-<div class="split">
-  <div class="card">
-    <div class="eyebrow">Where the plays came from</div>
-    <div class="share"><i class="p" style="width:{paid_plays/tot_plays*100:.1f}%"></i><i class="g" style="width:{gift_plays/tot_plays*100:.1f}%"></i></div>
-    <div class="share-key"><span><i style="background:var(--blue)"></i>Selected screens <b>{n(paid_plays)}</b></span><span><i style="background:var(--amber)"></i>Gifted screens <b>{n(gift_plays)}</b></span></div>
-    <p class="share-note"><b>{gift_plays/tot_plays*100:.0f}%</b> of all plays came from screens Warner Family Dentistry did not pay for. The 10 selected screens averaged <b>{paid_plays/len(paid_rows):,.0f}</b> plays each.</p>
-  </div>
-  <div class="card">
-    <div class="eyebrow">Campaign at a glance</div>
-    <div class="kv">
-      <div>Campaign window</div><div><b>{fmt_d(first)} &ndash; {fmt_d(last)}</b></div>
-      <div>Days on air</div><div><b>{(date.fromisoformat(last)-date.fromisoformat(first)).days+1}</b></div>
-      <div>Busiest screen</div><div><b>{html.escape(rows[0]['name'])}</b></div>
-      <div>Plays per screen per day</div><div><b>{tot_plays/len(rows)/((date.fromisoformat(last)-date.fromisoformat(first)).days+1):.0f}</b></div>
+<!-- 1 · cover -->
+<section class="slide cover">
+  <div class="cover-l">
+    {WARNER_LOGO}
+    <div class="title">
+      <span class="lab">Prepared for Warner Family Dentistry &amp; Med Spa</span>
+      <h1>Ad Traction Report</h1>
+      <p>Indoor digital billboard performance across the Starkville MCTV network, {fmt_d(first)} through {fmt_d(last)}.</p>
+    </div>
+    <div class="cover-meta">
+      <div><span class="lab muted">Period</span><b>{period}</b></div>
+      <div><span class="lab muted">Network</span><b>{n_screens} screens</b></div>
+      <div><span class="lab muted">Prepared by</span><b>MCTV Elite Advertising</b></div>
     </div>
   </div>
-</div>
-
-<div class="closing">
-  <div>
-    <h3>Thank you for advertising with MCTV.</h3>
-    <p>Questions about this report, or ready to plan the next flight? Reach out any time.</p>
-  </div>
-  <div class="who"><b>Swayze Hollingsworth</b>MCTV Digital<br>swayze@mctvofms.com &middot; 662-907-0404</div>
-</div>
-
-<section class="chart-sec">
-  <div class="sec-head"><span class="sec-num">01</span><h2>Plays by screen</h2></div>
-  <p class="sub">All four spot versions combined, {fmt_d(first)} through {fmt_d(last)}. Hover a bar for details.</p>
-  <div class="legend"><span class="p"><i></i>Selected screen (paid)</span><span class="g"><i></i>Gifted screen (no charge)</span></div>
-  <div class="chart" id="chart">
-  {svg}
-  </div>
-  <p class="fn">* {OFFLINE_NAME} ran the Warner spot but was disconnected from Wi-Fi during this period, so its player could not send play counts. Its plays are real but are not included in any total. {n(demo['plays'])} plays on MCTV's internal demo player are excluded from every figure in this report.</p>
+  {cover_media}
 </section>
 
-
-<section>
-  <div class="sec-head"><span class="sec-num">02</span><h2>Four versions of the spot</h2></div>
-  <p class="sub">The creative was refined three times before settling on the final cut.</p>
-  <div class="vers">{vrows}</div>
+<!-- 2 · glance -->
+<section class="slide">
+  {chrome('Campaign at a glance', period_caps)}
+  <div class="glance">
+    <div><p class="big">{n(tot_plays)}</p><span class="lab" style="display:block;margin-top:10px">Total ad plays</span></div>
+    <p>Warner Family Dentistry ran on {n_screens} screens across Starkville for five consecutive months, on a plan that paid for 10.</p>
+  </div>
+  <div class="tiles">
+    <div class="tile"><b>{n_screens}</b><span class="lab">Screens reached</span></div>
+    <div class="tile"><b>{hrs(tot_secs):,.0f}</b><span class="lab">Hours of screen time</span></div>
+    <div class="tile"><b>{days_on_air}</b><span class="lab">Days on air</span></div>
+    <div class="tile"><b>{cpp:.1f}&cent;</b><span class="lab">Cost per play</span></div>
+    <div class="tile"><b>10</b><span class="lab">Selected screens</span></div>
+    <div class="tile"><b class="gl">{len(gift_rows)}</b><span class="lab">Gifted screens</span></div>
+    <div class="tile"><b>{n(round(tot_plays/len(rows)))}</b><span class="lab">Avg. plays per screen</span></div>
+    <div class="tile"><b>{len(versions)}</b><span class="lab">Versions of the spot</span></div>
+  </div>
 </section>
 
+<!-- 3 · gifted -->
+<section class="slide">
+  {chrome('Gifted screens', 'No charge to Warner')}
+  <div class="gift-grid">
+    <div>
+      <h2><span class="gl">{len(gift_rows)} extra screens</span><br>at no charge</h2>
+      <p>Warner Family Dentistry paid for 10 screens at $350 a month. MCTV also ran the spot on {len(gift_rows)} additional Starkville-area locations for free.</p>
+      <div class="split"><i class="s" style="width:{paid_plays/tot_plays*100:.1f}%"></i><i class="g" style="width:{gift_plays/tot_plays*100:.1f}%"></i></div>
+      <div class="key"><span><i style="background:var(--bar)"></i>Selected screens <b>{n(paid_plays)}</b></span><span><i style="background:var(--bar-gift)"></i>Gifted screens <b>{n(gift_plays)}</b></span></div>
+      <p style="margin-top:22px"><b class="gl">{gift_plays/tot_plays*100:.0f}%</b> of every play Warner received came from screens they did not pay for, including {short(gift_rows[0]['name'])}, the busiest gifted screen at {n(gift_rows[0]['plays'])} plays.</p>
+    </div>
+    <div>
+      <span class="lab muted" style="display:block;margin-bottom:6px">Gifted screens &middot; sorted by plays</span>
+      <div class="gift-cols"><div>{dir_list(gift_rows[:8])}</div><div>{dir_list(gift_rows[8:])}</div></div>
+    </div>
+  </div>
+</section>
 
-</div></div>
-</td></tr></tbody>
-<tfoot><tr><td>
-<div class="runfoot"><div><i></i><b>Warner Family Dentistry</b> &middot; Screen Traction Report &middot; {fmt_d(first)} &ndash; {fmt_d(last)}</div><div>Source: MCTV player reports FS_1 &ndash; FS_4, exported {fmt_d(last)}</div></div>
-</td></tr></tfoot></table>
-<script>
-(function(){{
-  var chart=document.getElementById('chart'); if(!chart) return;
-  var tip=document.createElement('div'); tip.className='tip'; tip.hidden=true; chart.appendChild(tip);
-  chart.querySelectorAll('.row').forEach(function(g){{
-    g.addEventListener('mousemove',function(e){{
-      var d=g.dataset; var r=chart.getBoundingClientRect();
-      tip.innerHTML='<b>'+d.name+'</b>'+d.kind+'<br>'+(d.plays>0?Number(d.plays).toLocaleString()+' plays &middot; '+d.hours+' hrs<br>':'')+d.range;
-      tip.hidden=false;
-      var x=e.clientX-r.left+12, y=e.clientY-r.top+12;
-      if(x+250>r.width) x=e.clientX-r.left-250;
-      tip.style.left=x+'px'; tip.style.top=y+'px';
-    }});
-    g.addEventListener('mouseleave',function(){{tip.hidden=true;}});
-  }});
-}})();
-</script>
+<!-- 4 · screen time band -->
+<section class="slide band">
+  <div class="band-top">
+    <div><span class="lab">Total screen time</span><p class="big md" style="margin-top:12px">{hrs(tot_secs):,.0f} hours</p></div>
+    <p>The equivalent of {hrs(tot_secs)/24:.0f} continuous days on screen, in the dining rooms, waiting rooms, salons and shops of Starkville, where nobody is scrolling past.</p>
+  </div>
+  {band_media}
+</section>
+
+<!-- 5 · top screens -->
+<section class="slide">
+  {chrome('Top screens', 'Ranked by ad plays')}
+  <h2>Ten highest-volume screens</h2>
+  <div style="margin-top:14px">{rank_list(rows[:10], rows[0]['plays'])}</div>
+  <div class="legend"><span><i style="background:var(--bar)"></i>Selected screen (paid)</span><span><i style="background:var(--bar-gift)"></i>Gifted screen (no charge)</span></div>
+</section>
+
+<!-- 6 · directory -->
+<section class="slide">
+  {chrome('Screen directory', f'{n_screens} screens &middot; sorted by plays')}
+  <div class="dir">
+    <div>
+      <div class="dir-head"><h2>Selected screens</h2></div>
+      <span class="lab" style="display:block;margin-bottom:6px">10 screens &middot; {n(paid_plays)} plays</span>
+      {dir_list(paid_rows)}
+      <div class="dr off"><span>{OFFLINE_NAME}<small>Starkville &middot; Played, screen offline from Wi-Fi so no counts reported</small></span><b>not reported</b></div>
+    </div>
+    <div class="span2">
+      <div class="dir-head"><h2>Gifted screens</h2></div>
+      <span class="lab" style="display:block;margin-bottom:6px;color:var(--gift)">{len(gift_rows)} screens &middot; {n(gift_plays)} plays &middot; no charge</span>
+      <div class="dir" style="grid-template-columns:1fr 1fr">
+        <div>{dir_list(gift_rows[:8])}</div><div>{dir_list(gift_rows[8:])}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · versions -->
+<section class="slide">
+  {chrome('The creative', period_caps)}
+  <h2>Four versions of the spot</h2>
+  <p style="max-width:60ch">The 30-second spot was refined three times before settling on the final cut. Every version is counted in this report.</p>
+  <div class="vline"><i style="left:0%"></i><i style="left:33%"></i><i style="left:66%"></i><i style="left:calc(100% - 10px)"></i></div>
+  <div class="vcs">{ver_cards}</div>
+  <div class="foot"><span class="lab">Plays exclude {n(demo['plays'])} airings on MCTV's internal demo player</span><span class="lab">Source: MCTV player reports FS_1 &ndash; FS_4</span></div>
+</section>
+
+<!-- 8 · observations -->
+<section class="slide">
+  {chrome('Observations', period_caps)}
+  <h2>What this means for Warner</h2>
+  <div class="obs" style="margin-top:18px">
+    <div class="ob"><span class="lab">Gifted reach</span><h3>{gift_plays/tot_plays*100:.0f}% of plays came free</h3><p>{n(gift_plays)} plays across {len(gift_rows)} screens MCTV added at no charge, more than doubling the footprint of the 10-screen plan.</p></div>
+    <div class="ob"><span class="lab">Top screen</span><h3>{short(top['name'])} carried {top['plays']/tot_plays*100:.0f}% alone</h3><p>{n(top['plays'])} plays and {hrs(top['secs']):,.0f} hours of screen time in one of Starkville's busiest dining rooms.</p></div>
+    <div class="ob"><span class="lab">Healthcare placement</span><h3>{n(hc_plays)} plays in clinical settings</h3><p>{len(hc_rows)} pharmacy, clinic and veterinary waiting rooms, including BJ's Family Pharmacy and Mississippi Asthma &amp; Allergy, where health is already the subject.</p></div>
+    <div class="ob"><span class="lab">Value</span><h3>About {cpp:.1f}&cent; per play</h3><p>${spend:,} over five months bought {n(tot_plays)} plays and {hrs(tot_secs):,.0f} hours on screen, roughly {n(round(tot_plays/len(rows)))} plays per reporting screen.</p></div>
+  </div>
+  <div class="obs-foot"><p>{OFFLINE_NAME}, a selected screen, ran the spot but was disconnected from Wi-Fi during the period, so its player could not report play counts. Its plays are real and are not included in any figure above.</p></div>
+</section>
+
+<!-- 9 · contact -->
+<section class="slide">
+  {chrome('Contact', 'mctvofms.com')}
+  <h2>Your MCTV team</h2>
+  <p style="max-width:62ch">Granular per-location data, including air time and play counts by screen, is available on request.</p>
+  <div class="team">
+    <div class="tm"><h3>T. Creed Cannon</h3><span class="lab">Owner / Managing Partner</span><p>(601) 201-8202<br>creed@mctvofms.com</p></div>
+    <div class="tm"><h3>Mary Michael Cannon</h3><span class="lab">Owner / Managing Partner</span><p>(662) 801-5677<br>mmc@mctvofms.com</p></div>
+    <div class="tm"><h3>Swayze Hollingsworth</h3><span class="lab">Director of Sales</span><p>(662) 907-0404<br>swayze@mctvofms.com</p></div>
+  </div>
+  <div class="foot small-logo">{WARNER_LOGO}<span class="lab">MCTV Elite Advertising &middot; North Mississippi</span></div>
+</section>
+
+</div>
 '''
 out = 'Warner_Family_Dentistry_Traction_Report.html'
 open(out, 'w').write(page.encode('ascii', 'xmlcharrefreplace').decode('ascii'))
-print('wrote', out, dict(tot_plays=tot_plays, screens=n_screens, paid=len(paid_rows) + 1, gift=len(gift_rows), gift_plays=gift_plays))
+print('wrote', out, dict(tot_plays=tot_plays, screens=n_screens, gift=len(gift_rows), gift_plays=gift_plays, hc_plays=hc_plays, cover='photo' if COVER else 'placeholder'))
