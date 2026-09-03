@@ -121,9 +121,9 @@ ver_cards = ''.join(
     f'<b>{n(v["plays"]-v["demo_plays"])}</b><span class="sub">{fmt_d(v["first"])} &ndash; {fmt_d(v["last"])}</span></div>'
     for v in versions)
 
-cover_media = ('' if COVER else f'<div class="cover-photo placeholder"><div class="ph-mark">{TOOTH}</div></div>')
-cover_cls = 'cover full' if COVER else 'cover'
-cover_bg = f' style="background-image:url({COVER})"' if COVER else ''
+cover_media = (f'<div class="cover-photo" style="background-image:url({COVER})"></div>' if COVER else f'<div class="cover-photo placeholder"><div class="ph-mark">{TOOTH}</div></div>')
+cover_cls = 'cover'
+cover_bg = ''
 band_media = (f'<div class="band-photo" style="background-image:url({COVER})"></div>' if COVER else
               '<div class="band-photo placeholder"></div>')
 
@@ -174,7 +174,7 @@ img.mctv-logo.real{{height:40px;width:auto;object-fit:contain;filter:invert(1) b
 .cover.full{{grid-template-columns:1fr;background-size:cover;background-position:center;position:relative}}
 .cover.full:before{{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,18,22,.96) 0%,rgba(11,18,22,.88) 38%,rgba(11,18,22,.35) 62%,rgba(11,18,22,.15) 100%)}}
 .cover.full .cover-l{{position:relative;z-index:1;max-width:520px}}
-.cover-photo{{background-size:cover;background-position:center;position:relative}}
+.cover-photo{{background-size:cover;background-position:38% center;position:relative}}
 .cover-photo:after{{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,rgba(11,18,22,0) 22%)}}
 .cover-photo.placeholder{{background:radial-gradient(120% 90% at 80% 20%,#1a6f92 0%,#0f3a4d 45%,#0b1216 100%);display:flex;align-items:center;justify-content:center}}
 .cover-photo.placeholder .tooth{{height:260px;opacity:.9}}
