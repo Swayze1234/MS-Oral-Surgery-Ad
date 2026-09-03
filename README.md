@@ -38,3 +38,36 @@ python3 build.py        # applies image + text edits, writes ../MCTV_Media_Kit_T
 
 To spin up another market version, drop in new photos and adjust the contact
 strings in `build.py`.
+
+---
+
+# HOTWORX Oxford — Advertising Proposal
+
+`MCTV_Proposal_HOTWORX_Oxford.pdf` is an 8-page, 16:9 advertising proposal for
+HOTWORX (24 Hour Infrared Fitness Studio) in Oxford, MS, co-branded with the
+HOTWORX and MCTV logos and using **regular** monthly network rates (no seasonal
+specials).
+
+| Page | Content |
+|------|---------|
+| 1 | Cover — MCTV + HOTWORX logos, Oxford stadium photo, Swayze Hollingsworth contact |
+| 2 | The opportunity — why HOTWORX × MCTV, key stats, how it works |
+| 3 | Network stats + local CPM comparison |
+| 4 | All 44 Oxford / Lafayette host locations, grouped by venue type |
+| 5 | Packages & pricing — 20 / 40 / 80 / 125+ screens, prepay bonus, inclusions |
+| 6 | Recommended plan (40 screens, $800/mo) with optional add-on line items |
+| 7 | Next steps, contact, ad specs |
+| 8 | Agreement & order form pre-filled for HOTWORX Oxford |
+
+## Rebuilding
+
+```bash
+pip install pymupdf playwright          # Chromium is pre-installed at /opt/pw-browsers
+python3 build/hotworx/build_proposal.py # writes MCTV_Proposal_HOTWORX_Oxford.pdf
+```
+
+`build/hotworx/build_proposal.py` pulls the MCTV logos, photos, pricing and
+host list from `build/source/MCTV_Media_Kit_Oxford_original.pdf`, generates
+HTML, and prints it to PDF with headless Chromium. The HOTWORX wordmark is
+drawn as inline SVG (`HOTWORX_SVG` in the script); swap in the official logo
+file there if you have one.
