@@ -308,15 +308,6 @@ img.mctv-logo.real{{height:40px;width:auto;object-fit:contain;filter:invert(1) b
   </div>
 </section>
 
-<!-- 4 · screen time band -->
-<section class="slide band">
-  <div class="band-top">
-    <div><span class="lab">Total screen time</span><p class="big md" style="margin-top:12px">{hrs(tot_secs):,.0f} hours</p></div>
-    <p>The equivalent of {hrs(tot_secs)/24:.0f} continuous days on screen, in the dining rooms, waiting rooms, salons and shops of Starkville, where nobody is scrolling past.</p>
-  </div>
-  {band_media}
-</section>
-
 <!-- 5 · top screens -->
 <section class="slide">
   {chrome('Top screens', 'Ranked by ad plays')}
