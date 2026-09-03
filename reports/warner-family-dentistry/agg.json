@@ -1,0 +1,890 @@
+{
+ "versions": [
+  {
+   "version": 1,
+   "file": "18NTVMCTV_38AWarnerFamilyDentistry_FS_1.webm",
+   "plays": 44364,
+   "secs": 1330920,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "demo_plays": 3342
+  },
+  {
+   "version": 2,
+   "file": "18NTVMCTV_38AWarnerFamilyDentistry_FS_2.webm",
+   "plays": 7547,
+   "secs": 226410,
+   "first": "2026-05-13",
+   "last": "2026-05-25",
+   "demo_plays": 2702
+  },
+  {
+   "version": 3,
+   "file": "18NTVMCTV_38AWarnerFamilyDentistry_FS_3.webm",
+   "plays": 39853,
+   "secs": 1195590,
+   "first": "2026-05-18",
+   "last": "2026-07-13",
+   "demo_plays": 2690
+  },
+  {
+   "version": 4,
+   "file": "18NTVMCTV_38AWarnerFamilyDentistry_FS_4.webm",
+   "plays": 64626,
+   "secs": 1938780,
+   "first": "2026-07-02",
+   "last": "2026-09-03",
+   "demo_plays": 341
+  }
+ ],
+ "hosts": {
+  "Starkville Parks and Recreation": {
+   "plays": 9963,
+   "secs": 298890,
+   "first": "2026-04-26",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Starkville Parks Commission",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 9242,
+     "start": "2026-04-26",
+     "end": "2026-09-02"
+    },
+    {
+     "v": 4,
+     "plays": 721,
+     "start": "2026-08-19",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Bennett Home Furniture & More": {
+   "plays": 4250,
+   "secs": 127500,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 962,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 142,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 1150,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 1996,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Skate Odyssey Inc": {
+   "plays": 2722,
+   "secs": 81660,
+   "first": "2026-04-08",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 616,
+     "start": "2026-04-08",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 75,
+     "start": "2026-05-13",
+     "end": "2026-05-17"
+    },
+    {
+     "v": 3,
+     "plays": 733,
+     "start": "2026-05-20",
+     "end": "2026-07-01"
+    },
+    {
+     "v": 4,
+     "plays": 1298,
+     "start": "2026-07-03",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Copy Cow": {
+   "plays": 3673,
+   "secs": 110190,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 813,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 112,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 968,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 1780,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "BJ's Family Pharmacy": {
+   "plays": 10113,
+   "secs": 303390,
+   "first": "2026-04-06",
+   "last": "2026-09-03",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 2226,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 315,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 2602,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 4970,
+     "start": "2026-07-02",
+     "end": "2026-09-03"
+    }
+   ]
+  },
+  "Elm Lake Golf Course": {
+   "plays": 8736,
+   "secs": 262080,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "city": "Columbus",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 1929,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 289,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 2307,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 4211,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Umi Japanese Steakhouse & Sushi Bar": {
+   "plays": 6914,
+   "secs": 207420,
+   "first": "2026-04-08",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 1468,
+     "start": "2026-04-08",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 245,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 1842,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 3359,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Legends Hair Salon": {
+   "plays": 183,
+   "secs": 5490,
+   "first": "2026-04-06",
+   "last": "2026-04-14",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 183,
+     "start": "2026-04-06",
+     "end": "2026-04-14"
+    }
+   ]
+  },
+  "Oktibbeha County Co-op": {
+   "plays": 4740,
+   "secs": 142200,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 1103,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 153,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 1262,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 2222,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Revive Wellness Clinic - Starkville": {
+   "plays": 2208,
+   "secs": 66240,
+   "first": "2026-04-07",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 496,
+     "start": "2026-04-07",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 59,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 506,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 1147,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Montgomery's Jewelry": {
+   "plays": 3018,
+   "secs": 90540,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 679,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 99,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 815,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 1425,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "William Wells Tire & Auto": {
+   "plays": 2583,
+   "secs": 77490,
+   "first": "2026-04-06",
+   "last": "2026-07-11",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 989,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 136,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 1158,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 300,
+     "start": "2026-07-02",
+     "end": "2026-07-11"
+    }
+   ]
+  },
+  "Hobie\u2019s Tiki Dawgs & Daqs": {
+   "plays": 7017,
+   "secs": 210510,
+   "first": "2026-04-07",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 901,
+     "start": "2026-04-07",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 228,
+     "start": "2026-05-13",
+     "end": "2026-05-17"
+    },
+    {
+     "v": 3,
+     "plays": 2025,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 3863,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Little Magnolia Gifts & Apparel - Starkville": {
+   "plays": 4035,
+   "secs": 121050,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 890,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 132,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 1024,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 1989,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "The Breakfast Club": {
+   "plays": 1337,
+   "secs": 40110,
+   "first": "2026-04-07",
+   "last": "2026-06-16",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 702,
+     "start": "2026-04-07",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 100,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 535,
+     "start": "2026-05-19",
+     "end": "2026-06-16"
+    }
+   ]
+  },
+  "Skate Zone": {
+   "plays": 10186,
+   "secs": 305580,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "city": "Columbus",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 2401,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 344,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 2380,
+     "start": "2026-05-18",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 5061,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Right Track Medical Group - Starkville": {
+   "plays": 5894,
+   "secs": 176820,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 1322,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 176,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 1556,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 2840,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "starkvegas pawnshop": {
+   "plays": 3671,
+   "secs": 110130,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 887,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 276,
+     "start": "2026-05-13",
+     "end": "2026-05-25"
+    },
+    {
+     "v": 3,
+     "plays": 785,
+     "start": "2026-05-26",
+     "end": "2026-07-13"
+    },
+    {
+     "v": 4,
+     "plays": 1723,
+     "start": "2026-07-14",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Uno Mas Tacos y Tequila Starkville": {
+   "plays": 15192,
+   "secs": 455760,
+   "first": "2026-04-06",
+   "last": "2026-09-03",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 3256,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 500,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 3764,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 7672,
+     "start": "2026-07-02",
+     "end": "2026-09-03"
+    }
+   ]
+  },
+  "Mississippi Ice Daiquiri Shop": {
+   "plays": 6510,
+   "secs": 195300,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 1405,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 216,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 1655,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 3234,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Starkville Veterinary Hospital": {
+   "plays": 3313,
+   "secs": 99390,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 747,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 99,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 896,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 1571,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Lucky Nails & Spa": {
+   "plays": 4917,
+   "secs": 147510,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 1090,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 157,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 1313,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 2357,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Mississippi Asthma & Allergy Clinic, PA - Starkville": {
+   "plays": 3371,
+   "secs": 101130,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 755,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 94,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 905,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 1617,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Cellars Wine & Spirits": {
+   "plays": 4698,
+   "secs": 140940,
+   "first": "2026-04-06",
+   "last": "2026-09-02",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 1048,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 153,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 1217,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 2280,
+     "start": "2026-07-02",
+     "end": "2026-09-02"
+    }
+   ]
+  },
+  "Two Brothers Smoked Meats": {
+   "plays": 18071,
+   "secs": 542130,
+   "first": "2026-04-06",
+   "last": "2026-08-20",
+   "city": "Starkville",
+   "playlist": "D.476 1-Mainshow Starkville",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 4912,
+     "start": "2026-04-06",
+     "end": "2026-05-13"
+    },
+    {
+     "v": 2,
+     "plays": 745,
+     "start": "2026-05-13",
+     "end": "2026-05-18"
+    },
+    {
+     "v": 3,
+     "plays": 5765,
+     "start": "2026-05-19",
+     "end": "2026-07-02"
+    },
+    {
+     "v": 4,
+     "plays": 6649,
+     "start": "2026-07-02",
+     "end": "2026-08-20"
+    }
+   ]
+  },
+  "D.476 Dealer Demo": {
+   "plays": 9075,
+   "secs": 272250,
+   "first": "2026-04-22",
+   "last": "2026-09-03",
+   "city": "Jackson",
+   "playlist": "D.476 1-Mainshow Demo Player",
+   "versions": [
+    {
+     "v": 1,
+     "plays": 3342,
+     "start": "2026-04-22",
+     "end": "2026-09-03"
+    },
+    {
+     "v": 2,
+     "plays": 2702,
+     "start": "2026-05-28",
+     "end": "2026-09-03"
+    },
+    {
+     "v": 3,
+     "plays": 2690,
+     "start": "2026-05-28",
+     "end": "2026-09-03"
+    },
+    {
+     "v": 4,
+     "plays": 341,
+     "start": "2026-07-03",
+     "end": "2026-07-14"
+    }
+   ]
+  }
+ }
+}

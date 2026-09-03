@@ -19,3 +19,9 @@ python3 build_report.py   # writes the HTML report
 ```
 
 Edit the `SELECTED` list in `build_report.py` to change which screens count as paid vs. gifted.
+
+## Logos
+
+The header logos are vector recreations. To use the real artwork, save the
+files as `logos/warner.png` and `logos/mctv.png` (transparent PNG, roughly
+600px wide) and rerun `build_report.py`; the script embeds them automatically.

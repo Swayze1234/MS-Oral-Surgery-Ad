@@ -75,34 +75,68 @@ for v in versions:
 legends=hosts['Legends Hair Salon']; ww=hosts['William Wells Tire & Auto']
 demo=hosts[DEMO]
 
-FONTS=open('fonts_inline.css').read()
+FONTS=open('fonts_inline.css').read()+open('logofonts_inline.css').read()
+import os,base64
+def img_or(path,fallback,cls):
+    if os.path.exists(path):
+        b=base64.b64encode(open(path,'rb').read()).decode()
+        return f'<img class="{cls} real" src="data:image/png;base64,{b}" alt="">'
+    return fallback
+WARNER_SVG='''<div class="warner-logo">
+ <svg class="tooth" viewBox="0 0 100 124" aria-hidden="true">
+  <path d="M50,14 C33,4 13,12 11,34 C10,50 21,58 24,76 C27,96 31,116 40,118 C48,119 48,98 50,88 C52,98 52,119 60,118 C69,116 73,96 76,76 C79,58 90,50 89,34 C87,12 67,4 50,14 Z" fill="none" stroke="#149BD1" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M14,30 C6,22 8,6 22,6 C31,6 33,15 27,18" fill="none" stroke="#149BD1" stroke-width="6" stroke-linecap="round"/>
+ </svg>
+ <div class="warner-text">
+  <div class="warner-name">ARNER</div>
+  <div class="warner-sub">FAMILY DENTISTRY</div>
+  <div class="warner-spa">&amp; Med Spa</div>
+ </div>
+</div>'''
+MCTV_SVG='''<div class="mctv-logo"><div class="mctv-name">MCTV</div><div class="mctv-sub">ELITE ADVERTISING</div></div>'''
+WARNER_LOGO=img_or('logos/warner.png',WARNER_SVG,'warner-logo')
+MCTV_LOGO=img_or('logos/mctv.png',MCTV_SVG,'mctv-logo')
 page=f'''<title>Warner Family Dentistry Traction</title>
 <style>
 {FONTS}
 :root{{
-  --ground:#F5F8F8; --paper:#FFFFFF; --ink:#152F36; --ink-2:#4B6168; --ink-3:#7B9096;
-  --rule:#D8E2E3; --rule-soft:#E9EFF0;
-  --teal:#1093A3; --teal-ink:#0B6B77; --teal-wash:#E4F3F5;
+  --ground:#F6F8FA; --paper:#FFFFFF; --ink:#15191E; --ink-2:#4E5964; --ink-3:#7F8B96;
+  --rule:#DCE3E8; --rule-soft:#EBF0F3;
+  --teal:#149BD1; --teal-ink:#0B6C99; --teal-wash:#E3F3FB;
   --amber:#CC7A0E; --amber-ink:#8F5407; --amber-wash:#FBF0DF;
-  --grid:#E1E9EA;
+  --grid:#E3EAEE;
 }}
 @media (prefers-color-scheme: dark){{ :root:not([data-theme="light"]){{
-  --ground:#0F1B1E; --paper:#16252A; --ink:#EDF3F4; --ink-2:#B4C4C8; --ink-3:#7F959B;
-  --rule:#2B3D42; --rule-soft:#213136;
-  --teal:#1B9BAB; --teal-ink:#7FD3DD; --teal-wash:#173C42;
+  --ground:#101418; --paper:#181E25; --ink:#EEF2F5; --ink-2:#B7C1CB; --ink-3:#8492A0;
+  --rule:#2C3640; --rule-soft:#222B34;
+  --teal:#1C9DD0; --teal-ink:#7CCBEF; --teal-wash:#143446;
   --amber:#CF7F12; --amber-ink:#F0B461; --amber-wash:#3D2C14;
-  --grid:#25373C;
+  --grid:#26313B;
 }}}}
 :root[data-theme="dark"]{{
-  --ground:#0F1B1E; --paper:#16252A; --ink:#EDF3F4; --ink-2:#B4C4C8; --ink-3:#7F959B;
-  --rule:#2B3D42; --rule-soft:#213136;
-  --teal:#1B9BAB; --teal-ink:#7FD3DD; --teal-wash:#173C42;
+  --ground:#101418; --paper:#181E25; --ink:#EEF2F5; --ink-2:#B7C1CB; --ink-3:#8492A0;
+  --rule:#2C3640; --rule-soft:#222B34;
+  --teal:#1C9DD0; --teal-ink:#7CCBEF; --teal-wash:#143446;
   --amber:#CF7F12; --amber-ink:#F0B461; --amber-wash:#3D2C14;
-  --grid:#25373C;
+  --grid:#26313B;
 }}
 *{{box-sizing:border-box}}
+.brandbar{{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:0 0 22px}}
+.brandbar img.real{{height:64px;width:auto;max-width:300px;object-fit:contain}}
+.warner-logo{{display:flex;align-items:center;gap:2px}}
+.warner-logo .tooth{{height:66px;width:auto;margin-right:-6px}}
+.warner-text{{line-height:1}}
+.warner-name{{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:36px;letter-spacing:.06em;color:#15191E;line-height:.9}}
+.warner-sub{{font-family:"Josefin Sans","IBM Plex Sans",sans-serif;font-size:11.5px;letter-spacing:.2em;color:#15191E;margin:5px 0 0 2px}}
+.warner-spa{{font-family:"Great Vibes",cursive;font-size:19px;color:#149BD1;text-align:right;margin-top:-1px;line-height:1}}
+.mctv-logo{{text-align:center;line-height:1}}
+.mctv-name{{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:38px;letter-spacing:.34em;color:#1C1F2B;padding-left:.34em}}
+.mctv-sub{{font-family:"Josefin Sans","IBM Plex Sans",sans-serif;font-size:10.5px;letter-spacing:.32em;color:#5A6B7D;padding-left:.32em;margin-top:6px}}
+@media (prefers-color-scheme: dark){{ :root:not([data-theme="light"]) .warner-name, :root:not([data-theme="light"]) .warner-sub, :root:not([data-theme="light"]) .mctv-name{{color:#EEF2F5}} :root:not([data-theme="light"]) .mctv-sub{{color:#B7C1CB}} }}
+:root[data-theme="dark"] .warner-name, :root[data-theme="dark"] .warner-sub, :root[data-theme="dark"] .mctv-name{{color:#EEF2F5}}
+:root[data-theme="dark"] .mctv-sub{{color:#B7C1CB}}
 body{{margin:0;background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}}
-.page{{max-width:860px;margin:0 auto;padding:40px 28px 56px}}
+.page{{max-width:860px;margin:0 auto;padding:34px 28px 48px}}
 h1,h2,.stat b,.ver-plays,.ver-n{{font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif}}
 .eyebrow{{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600}}
 header{{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;padding-bottom:22px;border-bottom:2px solid var(--ink)}}
@@ -192,13 +226,17 @@ footer b{{color:var(--ink);font-weight:600}}
 }}
 </style>
 <div class="page">
+<div class="brandbar">
+  {WARNER_LOGO}
+  {MCTV_LOGO}
+</div>
 <header>
   <div>
-    <div class="eyebrow">MCTV Digital · Screen Traction Report</div>
-    <h1>Warner Family Dentistry<small>Starkville network · {fmt_d(first)} – {fmt_d(last)}</small></h1>
+    <div class="eyebrow">Screen Traction Report</div>
+    <h1>Warner Family Dentistry<small>Starkville network &middot; {fmt_d(first)} &ndash; {fmt_d(last)}</small></h1>
   </div>
   <div class="meta">
-    <div><b>Plan:</b> 10 screens · $350 / month</div>
+    <div><b>Plan:</b> 10 screens &middot; $350 / month</div>
     <div><b>Spot length:</b> 30 seconds</div>
     <div><b>Prepared:</b> {date.today().strftime("%B %-d, %Y")}</div>
   </div>
@@ -245,18 +283,6 @@ footer b{{color:var(--ink);font-weight:600}}
   <h2>Four versions of the spot</h2>
   <p class="sub">The creative was refined three times before settling on the final cut. Plays below exclude MCTV's internal demo player.</p>
   <div class="vers">{vrows}</div>
-</section>
-
-<section>
-  <h2>Notes on the numbers</h2>
-  <div class="notes"><dl>
-    <div class="n"><dt>39759 Nutrition</dt><dd>This selected screen does not appear in any of the four player reports, so no plays are recorded for it in this period. MCTV is checking the player.</dd></div>
-    <div class="n"><dt>Legends Hair Salon</dt><dd>Recorded {n(legends['plays'])} plays from {fmt_d(legends['first'])} to {fmt_d(legends['last'])}, then stopped reporting.</dd></div>
-    <div class="n"><dt>William Wells Tire &amp; Auto</dt><dd>Recorded {n(ww['plays'])} plays through {fmt_d(ww['last'])}; no plays reported after that date.</dd></div>
-    <div class="n"><dt>Selected screen list</dt><dd>The plan covers 10 screens; 9 were named on the order. The gifted count above is measured against the 10-screen plan.</dd></div>
-    <div class="n"><dt>Excluded plays</dt><dd>{n(demo['plays'])} plays on MCTV's Jackson demo player are left out of every total in this report. Including them, the spot aired {n(tot_plays+demo['plays'])} times.</dd></div>
-    <div class="n"><dt>Cost per play</dt><dd>Based on five months at $350 (${spend:,}) divided by {n(tot_plays)} plays. Airtime assumes a 30-second spot per play.</dd></div>
-  </dl></div>
 </section>
 
 <footer>
