@@ -58,12 +58,27 @@ specials).
 | 6 | Next steps, contact, ad specs |
 | 7 | Agreement & order form pre-filled for HOTWORX Oxford |
 
+## Portrait version
+
+`MCTV_Proposal_HOTWORX_Oxford_Letter.pdf` is a 3-page US Letter (portrait) version
+in the Parlor 1858 proposal style (Playfair Display + Inter, navy/gold, white paper):
+
+| Page | Content |
+|------|---------|
+| 1 | Logos, pitch, key stats, the four regular packages (40 screens recommended), prepay bonus, inclusions |
+| 2 | All 44 Oxford host venues by type, CPM comparison, four steps to launch |
+| 3 | Add-ons, side-by-side package table, agreement & order form with signature lines |
+
 ## Rebuilding
 
 ```bash
 pip install pymupdf playwright          # Chromium is pre-installed at /opt/pw-browsers
-python3 build/hotworx/build_proposal.py # writes MCTV_Proposal_HOTWORX_Oxford.pdf
+python3 build/hotworx/build_proposal.py # landscape: MCTV_Proposal_HOTWORX_Oxford.pdf
+python3 build/hotworx/build_portrait.py # portrait:  MCTV_Proposal_HOTWORX_Oxford_Letter.pdf
 ```
+
+Shared data (pricing, host list, logos, contact) lives in `build/hotworx/common.py`;
+`build/hotworx/fonts/embedded.css` carries the Playfair Display + Inter fonts.
 
 `build/hotworx/build_proposal.py` pulls the MCTV logos, photos, pricing and
 host list from `build/source/MCTV_Media_Kit_Oxford_original.pdf`, generates
