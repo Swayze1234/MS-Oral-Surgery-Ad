@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts_ref.css">
+<style>
+  :root {
+    --cream: #F6F4F0; --ink: #1C1C1C; --body: #3A3A38; --navy: #0B2044;
+    --steel: #5E7391; --line: #DCD6CA; --gold: #C9A227;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @page { size: 8.5in 11in; margin: 0; }
+  html, body { background: #fff; }
+  body { font-family: 'Barlow', 'Liberation Sans', Arial, sans-serif; color: var(--body);
+         -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { position: relative; width: 8.5in; height: 11in; overflow: hidden; background: var(--cream); }
+  .inner { position: absolute; inset: 0.7in 0.75in 0.55in; display: flex; flex-direction: column; }
+  .logo img { height: 0.62in; display: block; }
+  .kicker { position: relative; padding-bottom: 0.09in; margin-top: 0.42in;
+    font-size: 10pt; font-weight: 600; letter-spacing: 0.30em; text-transform: uppercase; color: var(--steel); }
+  .kicker::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0.55in; border-bottom: 2.5px solid var(--gold); }
+  h1 { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: 30pt;
+       line-height: 1.12; color: var(--navy); margin: 0.16in 0 0.1in; }
+  .lede { font-size: 11pt; line-height: 1.55; max-width: 6.4in; }
+  .refs { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 0.16in; margin-top: 0.18in; }
+  .ref { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 0.3in;
+         background: #FBFAF7; border: 1px solid var(--line); border-radius: 6px; padding: 0.17in 0.24in; }
+  .ref .v { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 15.5pt; color: var(--navy); }
+  .ref .mk { font-size: 7.5pt; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--steel); margin-top: 0.035in; }
+  .ref .c { text-align: right; }
+  .ref .who { font-size: 11.5pt; font-weight: 600; color: var(--ink); }
+  .ref .tel { font-size: 11pt; color: var(--body); margin-top: 0.02in; font-variant-numeric: tabular-nums; }
+  .foot { margin-top: auto; padding-top: 0.14in; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 8pt; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); }
+</style></head>
+<body>
+<div class="page">
+  <div class="inner">
+    <div class="logo"><img src="assets/mctv_logo_navy.png" alt="MCTV Elite Advertising"></div>
+    <div class="kicker">Advertising Partner References</div>
+    <h1>Don't take our word for it.<br>Take theirs.</h1>
+    <p class="lede">These MCTV advertising partners have agreed to share their experience with the
+    network. Feel free to reach out to any of them directly.</p>
+    <div class="refs">
+      <div class="ref">
+        <div><div class="v">Oxford Park Commission</div><div class="mk">Oxford</div></div>
+        <div class="c"><div class="who">John Davis</div><div class="tel">662-801-2362</div></div>
+      </div>
+      <div class="ref">
+        <div><div class="v">Tupelo Regional Airport</div><div class="mk">Tupelo</div></div>
+        <div class="c"><div class="who">Brandon Pannell</div><div class="tel">662-266-9074</div></div>
+      </div>
+      <div class="ref">
+        <div><div class="v">Exceed Technologies</div><div class="mk">Tupelo</div></div>
+        <div class="c"><div class="who">Jesse Bandre</div><div class="tel">662-871-5515</div></div>
+      </div>
+      <div class="ref">
+        <div><div class="v">Allegiant Insurance</div><div class="mk">&nbsp;</div></div>
+        <div class="c"><div class="who">Brittney McAfee</div><div class="tel">601-410-0616</div></div>
+      </div>
+      <div class="ref">
+        <div><div class="v">Starkville Parks &amp; Recreation</div><div class="mk">Starkville</div></div>
+        <div class="c"><div class="who">Kayla Davenport</div><div class="tel">601-618-6787</div></div>
+      </div>
+      <div class="ref">
+        <div><div class="v">Oktibbeha County Co-op</div><div class="mk">Starkville</div></div>
+        <div class="c"><div class="who">Rocky Vaughan</div><div class="tel">&nbsp;</div></div>
+      </div>
+    </div>
+    <div class="foot">
+      <span>MCTV &middot; Elite Advertising</span>
+      <span>Swayze Hollingsworth &middot; 662-907-0404</span>
+    </div>
+  </div>
+</div>
+</body></html>
