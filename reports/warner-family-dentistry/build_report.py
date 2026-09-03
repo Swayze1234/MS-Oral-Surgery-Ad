@@ -284,11 +284,13 @@ table.data tfoot td{{font-weight:600;border-top:2px solid var(--blue);background
   h2,.sub,.legend,.sec-head{{break-after:avoid}}
   .hero-num{{font-size:44px}} .hero b{{font-size:26px}} h1{{font-size:36px}}
   .bars .lbl{{font-size:11.5px}}
+  .chart svg.bars{{max-height:470px;margin:0 auto}} .chart{{padding:8px 10px 2px}}
+  .closing{{padding:14px 20px;margin-top:16px}} .closing h3{{font-size:16px}}
   table.data{{border-radius:0}}
   table.data thead{{display:table-header-group}} table.data tfoot{{display:table-row-group}}
   table.data td{{padding:6px 12px}}
   tr,td,th{{break-inside:avoid}}
-  .ver{{padding:18px 10px 12px}} .ver-plays{{font-size:22px}}
+  .ver{{padding:16px 10px 10px}} .ver-plays{{font-size:20px;margin-top:4px}} .vers{{padding-top:10px}}
   .tip{{display:none}}
 }}
 </style>
@@ -351,37 +353,6 @@ table.data tfoot td{{font-weight:600;border-top:2px solid var(--blue);background
   </div>
 </div>
 
-<section class="chart-sec">
-  <div class="sec-head"><span class="sec-num">01</span><h2>Plays by screen</h2></div>
-  <p class="sub">All four spot versions combined, {fmt_d(first)} through {fmt_d(last)}. Hover a bar for details.</p>
-  <div class="legend"><span class="p"><i></i>Selected screen (paid)</span><span class="g"><i></i>Gifted screen (no charge)</span></div>
-  <div class="chart" id="chart">
-  {svg}
-  </div>
-  <p class="fn">* {OFFLINE_NAME} ran the Warner spot but was disconnected from Wi-Fi during this period, so its player could not send play counts. Its plays are real but are not included in any total.</p>
-</section>
-
-<section class="tbl">
-  <div class="sec-head"><span class="sec-num">02</span><h2>Every screen</h2></div>
-  <p class="sub">Play count and airtime per host location. Gifted screens are shaded amber.</p>
-  <div class="tablewrap">
-  <table class="data">
-    <thead><tr><th>Host location</th><th>Status</th><th class="num">Plays</th><th class="num">Hours</th><th>Active dates</th></tr></thead>
-    <tbody>
-    {table_rows}
-    </tbody>
-    <tfoot><tr><td>Total &middot; {len(rows)} reporting screens</td><td></td><td class="num">{n(tot_plays)}</td><td class="num">{hrs(tot_secs):,.1f}</td><td></td></tr></tfoot>
-  </table>
-  </div>
-  <p class="fn">* {OFFLINE_NAME} played the spot but was offline from Wi-Fi, so no counts were reported. {n(demo['plays'])} plays on MCTV's internal demo player are excluded from every figure in this report.</p>
-</section>
-
-<section>
-  <div class="sec-head"><span class="sec-num">03</span><h2>Four versions of the spot</h2></div>
-  <p class="sub">The creative was refined three times before settling on the final cut.</p>
-  <div class="vers">{vrows}</div>
-</section>
-
 <div class="closing">
   <div>
     <h3>Thank you for advertising with MCTV.</h3>
@@ -389,6 +360,24 @@ table.data tfoot td{{font-weight:600;border-top:2px solid var(--blue);background
   </div>
   <div class="who"><b>Swayze Hollingsworth</b>MCTV Digital<br>swayze@mctvofms.com &middot; 662-907-0404</div>
 </div>
+
+<section class="chart-sec">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Plays by screen</h2></div>
+  <p class="sub">All four spot versions combined, {fmt_d(first)} through {fmt_d(last)}. Hover a bar for details.</p>
+  <div class="legend"><span class="p"><i></i>Selected screen (paid)</span><span class="g"><i></i>Gifted screen (no charge)</span></div>
+  <div class="chart" id="chart">
+  {svg}
+  </div>
+  <p class="fn">* {OFFLINE_NAME} ran the Warner spot but was disconnected from Wi-Fi during this period, so its player could not send play counts. Its plays are real but are not included in any total. {n(demo['plays'])} plays on MCTV's internal demo player are excluded from every figure in this report.</p>
+</section>
+
+
+<section>
+  <div class="sec-head"><span class="sec-num">02</span><h2>Four versions of the spot</h2></div>
+  <p class="sub">The creative was refined three times before settling on the final cut.</p>
+  <div class="vers">{vrows}</div>
+</section>
+
 
 </div></div>
 </td></tr></tbody>
