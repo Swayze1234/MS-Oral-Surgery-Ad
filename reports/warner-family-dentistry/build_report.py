@@ -13,6 +13,7 @@ SELECTED = {  # client's chosen screens -> matching host name in reports (None =
  'Legends': 'Legends Hair Salon',
  'MS Asthma': 'Mississippi Asthma & Allergy Clinic, PA - Starkville',
  'Skate Odyssey': 'Skate Odyssey Inc',
+ "BJ's Family Pharmacy": "BJ's Family Pharmacy",
 }
 paid_names={v for v in SELECTED.values() if v}
 DEMO='D.476 Dealer Demo'
@@ -83,9 +84,15 @@ def img_or(path,fallback,cls):
         return f'<img class="{cls} real" src="data:image/png;base64,{b}" alt="">'
     return fallback
 WARNER_SVG='''<div class="warner-logo">
- <svg class="tooth" viewBox="0 0 100 124" aria-hidden="true">
-  <path d="M50,14 C33,4 13,12 11,34 C10,50 21,58 24,76 C27,96 31,116 40,118 C48,119 48,98 50,88 C52,98 52,119 60,118 C69,116 73,96 76,76 C79,58 90,50 89,34 C87,12 67,4 50,14 Z" fill="none" stroke="#149BD1" stroke-width="9" stroke-linejoin="round"/>
-  <path d="M14,30 C6,22 8,6 22,6 C31,6 33,15 27,18" fill="none" stroke="#149BD1" stroke-width="6" stroke-linecap="round"/>
+ <svg class="tooth" viewBox="0 0 104 128" aria-hidden="true">
+  <g transform="translate(3.5,3.5)" fill="none" stroke="#111" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M50,14 C33,4 13,12 11,34 C10,50 21,58 24,76 C27,96 31,116 40,118 C48,119 48,98 50,88 C52,98 52,119 60,118 C69,116 73,96 76,76 C79,58 90,50 89,34 C87,12 67,4 50,14 Z"/>
+   <path d="M14,30 C6,22 8,6 22,6 C31,6 33,15 27,18" stroke-width="6"/>
+  </g>
+  <g fill="none" stroke="#149BD1" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M50,14 C33,4 13,12 11,34 C10,50 21,58 24,76 C27,96 31,116 40,118 C48,119 48,98 50,88 C52,98 52,119 60,118 C69,116 73,96 76,76 C79,58 90,50 89,34 C87,12 67,4 50,14 Z"/>
+   <path d="M14,30 C6,22 8,6 22,6 C31,6 33,15 27,18" stroke-width="6"/>
+  </g>
  </svg>
  <div class="warner-text">
   <div class="warner-name">ARNER</div>
@@ -126,14 +133,14 @@ page=f'''<title>Warner Family Dentistry Traction</title>
 .warner-logo{{display:flex;align-items:center;gap:2px}}
 .warner-logo .tooth{{height:66px;width:auto;margin-right:-6px}}
 .warner-text{{line-height:1}}
-.warner-name{{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:36px;letter-spacing:.06em;color:#15191E;line-height:.9}}
+.warner-name{{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:36px;letter-spacing:.06em;color:#149BD1;text-shadow:2px 2px 0 #111;line-height:.9}}
 .warner-sub{{font-family:"Josefin Sans","IBM Plex Sans",sans-serif;font-size:11.5px;letter-spacing:.2em;color:#15191E;margin:5px 0 0 2px}}
-.warner-spa{{font-family:"Great Vibes",cursive;font-size:19px;color:#149BD1;text-align:right;margin-top:-1px;line-height:1}}
+.warner-spa{{font-family:"Great Vibes",cursive;font-size:20px;color:#149BD1;text-shadow:1.5px 1.5px 0 #111;text-align:right;margin-top:-1px;line-height:1}}
 .mctv-logo{{text-align:center;line-height:1}}
 .mctv-name{{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:38px;letter-spacing:.34em;color:#1C1F2B;padding-left:.34em}}
 .mctv-sub{{font-family:"Josefin Sans","IBM Plex Sans",sans-serif;font-size:10.5px;letter-spacing:.32em;color:#5A6B7D;padding-left:.32em;margin-top:6px}}
-@media (prefers-color-scheme: dark){{ :root:not([data-theme="light"]) .warner-name, :root:not([data-theme="light"]) .warner-sub, :root:not([data-theme="light"]) .mctv-name{{color:#EEF2F5}} :root:not([data-theme="light"]) .mctv-sub{{color:#B7C1CB}} }}
-:root[data-theme="dark"] .warner-name, :root[data-theme="dark"] .warner-sub, :root[data-theme="dark"] .mctv-name{{color:#EEF2F5}}
+@media (prefers-color-scheme: dark){{ :root:not([data-theme="light"]) .warner-sub, :root:not([data-theme="light"]) .mctv-name{{color:#EEF2F5}} :root:not([data-theme="light"]) .mctv-sub{{color:#B7C1CB}} }}
+:root[data-theme="dark"] .warner-sub, :root[data-theme="dark"] .mctv-name{{color:#EEF2F5}}
 :root[data-theme="dark"] .mctv-sub{{color:#B7C1CB}}
 body{{margin:0;background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}}
 .page{{max-width:860px;margin:0 auto;padding:34px 28px 48px}}
@@ -253,7 +260,7 @@ footer b{{color:var(--ink);font-weight:600}}
 
 <div class="gifted">
   <div class="big">+{len(gift_rows)}</div>
-  <p><b>Gifted screens.</b> Warner Family Dentistry paid for 10 screens. MCTV also ran the spot at no charge on {len(gift_rows)} additional locations, including high-traffic hosts like Uno Mas Tacos y Tequila, Skate Zone, BJ's Family Pharmacy, and Starkville Parks and Recreation. Those bonus screens delivered <b>{n(gift_plays)} plays</b>, shown in amber throughout this report.</p>
+  <p><b>Gifted screens.</b> Warner Family Dentistry paid for 10 screens. MCTV also ran the spot at no charge on {len(gift_rows)} additional locations, including high-traffic hosts like Uno Mas Tacos y Tequila, Skate Zone, Starkville Parks and Recreation, and Elm Lake Golf Course. Those bonus screens delivered <b>{n(gift_plays)} plays</b>, shown in amber throughout this report.</p>
 </div>
 
 <section class="chart-sec">
