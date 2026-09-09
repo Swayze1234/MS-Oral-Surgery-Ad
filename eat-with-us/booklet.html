@@ -377,18 +377,18 @@ p { font-size: 9.8pt; line-height: 1.5; }
 #pg8 .strip li{ padding-left: 0.14in; text-indent: -0.14in; }
 #pg8 .strip li::before{ content: "— "; color: var(--steel); }
 
-#pg9 .qtrs{ flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.22in; margin-top: 0.24in; min-height: 0; }
-#pg9 .qtr{ border-radius: 8px; color: #fff; padding: 0.2in 0.22in; display: flex; flex-direction: column; min-height: 0; }
-#pg9 .qtr .q{ font-size: 8pt; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.72; }
-#pg9 .qtr h3{ font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 16.5pt; line-height: 1.12; margin-top: 0.08in; }
-#pg9 .qtr p{ font-size: 8.8pt; line-height: 1.45; margin-top: 0.08in; opacity: 0.88; }
-#pg9 .qtr .brandline{ margin-top: auto; padding-top: 0.1in; font-size: 7pt; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.65; }
-#pg9 .qtr.q1{ background: var(--bb); }
-#pg9 .qtr.q2{ background: var(--sp); }
-#pg9 .qtr.q3{ background: var(--gr); }
-#pg9 .qtr.q4{ background: var(--hv); color: #241D0E; }
-#pg9 .qtr.q4 .q,#pg9 .qtr.q4 .brandline{ opacity: 0.75; }
-#pg9 .bumpnote{ margin-top: 0.16in; font-size: 8.8pt; line-height: 1.5; color: var(--body); max-width: 8.6in; }
+#pg9 .rota{ flex: 1; min-height: 0; display: grid; grid-template-columns: 1.7in repeat(4, 1fr); gap: 0.07in; margin-top: 0.22in; align-content: center; }
+#pg9 .rota .wh{ font-size: 8pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); align-self: end; padding-bottom: 0.03in; }
+#pg9 .rota .tl{ display: flex; flex-direction: column; justify-content: center; }
+#pg9 .rota .tl .t{ font-size: 9.5pt; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); }
+#pg9 .rota .tl .c{ font-size: 7pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--steel); margin-top: 0.02in; }
+#pg9 .cell{ border-radius: 6px; color: #fff; padding: 0.1in 0.13in; min-height: 0.85in; display: flex; flex-direction: column; justify-content: center; }
+#pg9 .cell .b{ font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 11.5pt; line-height: 1.12; }
+#pg9 .cell.bb{ background: var(--bb); }
+#pg9 .cell.sp{ background: var(--sp); }
+#pg9 .cell.sc{ background: var(--gr); }
+#pg9 .cell.hg{ background: var(--hv); color: #241D0E; }
+#pg9 .bumpnote{ margin-top: 0.16in; font-size: 8.8pt; line-height: 1.5; color: var(--body); max-width: 9in; }
 #pg9 .bumpnote strong{ color: var(--navy); font-weight: 600; }
 
 #pg10 .dir{ grid-template-columns: repeat(6, 1fr); gap: 0 0.18in; }
@@ -482,8 +482,9 @@ p { font-size: 9.8pt; line-height: 1.5; }
       <div class="item excl">
         <div class="n">04</div>
         <h3><em>One family, one campaign.</em></h3>
-        <p>Six concepts share one contract: a rotating quarterly spotlight, a group bumper that keeps
-        the whole family on screen, and finished creative you own forever — in any market.</p>
+        <p>Six concepts share one contract: a spot for every brand, a weekly territory rotation, a
+        group bumper that keeps the whole family on screen, and creative you own forever — in any
+        market.</p>
       </div>
     </div>
     <div class="foot"><span>Eat With Us &times; MCTV</span><span>02</span></div>
@@ -637,7 +638,7 @@ p { font-size: 9.8pt; line-height: 1.5; }
       <div class="st"><div class="n">03</div><div class="txt">A 30-second spot, produced by MCTV, yours forever.</div></div>
       <div class="st"><div class="n">04</div><div class="txt">Designed to be read, not heard.</div></div>
       <div class="st"><div class="n">05</div><div class="txt">Every 15 minutes, on every screen you buy.</div></div>
-      <div class="st"><div class="n">06</div><div class="txt">A different restaurant in the spotlight, <em>every quarter</em>.</div></div>
+      <div class="st"><div class="n">06</div><div class="txt">A different restaurant in the spotlight, <em>every week</em>.</div></div>
     </div>
     <div class="foot"><span>Eat With Us &times; MCTV</span><span>06</span></div>
   </div>
@@ -714,7 +715,7 @@ p { font-size: 9.8pt; line-height: 1.5; }
       <div>
         <h3>Every campaign includes</h3>
         <ul>
-          <li>Custom 30-second spot, produced in-house &amp; refreshed quarterly</li>
+          <li>A 30-second spot for every brand, produced in-house &amp; refreshed quarterly</li>
           <li>Unlimited rotation — every 15 minutes, every operating hour</li>
           <li>Proof-of-play reporting, by screen</li>
           <li>You own the finished creative, forever</li>
@@ -737,39 +738,36 @@ p { font-size: 9.8pt; line-height: 1.5; }
   </div>
 </div></div></div></section>
 
-<section class="proof"><div class="plabel"><span class="pnum">09</span> Quarterly Rotation</div><div class="sheet" id="pg9"><div class="zoom"><div class="page">
+<section class="proof"><div class="plabel"><span class="pnum">09</span> Weekly Rotation</div><div class="sheet" id="pg9"><div class="zoom"><div class="page">
   <div class="inner">
-    <div class="kicker">One Contract &middot; Four Spotlights</div>
-    <h1>A different brand every quarter.</h1>
-    <div class="qtrs">
-      <div class="qtr q1">
-        <div class="q">Q1 &middot; Winter</div>
-        <h3>Bulldog Burger</h3>
-        <p>Comfort-food season — burgers, basketball nights, and the post-holiday crowd.</p>
-        <div class="brandline">Starkville &middot; Tupelo</div>
-      </div>
-      <div class="qtr q2">
-        <div class="q">Q2 &middot; Spring</div>
-        <h3>Sweet Peppers Deli</h3>
-        <p>Lunch season — graduation catering, office orders, and patio weather.</p>
-        <div class="brandline">Starkville &middot; Columbus</div>
-      </div>
-      <div class="qtr q3">
-        <div class="q">Q3 &middot; Summer</div>
-        <h3>Super Chix &amp; Smackers</h3>
-        <p>Family season for the fast-casual concepts — ballpark nights and school's-out traffic.</p>
-        <div class="brandline">Tupelo &middot; Columbus</div>
-      </div>
-      <div class="qtr q4">
-        <div class="q">Q4 &middot; Fall</div>
-        <h3>Harvey's &amp; The Grill</h3>
-        <p>Game days, date nights, and holiday parties — the flagship season for the flagship brands.</p>
-        <div class="brandline">All three markets</div>
-      </div>
+    <div class="kicker">One Contract &middot; Every Brand On Air</div>
+    <h1>A different brand every week,<br>in every territory.</h1>
+    <div class="rota">
+      <div></div>
+      <div class="wh">Week 1</div>
+      <div class="wh">Week 2</div>
+      <div class="wh">Week 3</div>
+      <div class="wh">Week 4</div>
+      <div class="tl"><div class="t">Oxford</div><div class="c">58 screens</div></div>
+      <div class="cell hg"><div class="b">Harvey's &amp; The Grill</div></div>
+      <div class="cell bb"><div class="b">Bulldog Burger</div></div>
+      <div class="cell sp"><div class="b">Sweet Peppers Deli</div></div>
+      <div class="cell sc"><div class="b">Super Chix &amp; Smackers</div></div>
+      <div class="tl"><div class="t">Tupelo</div><div class="c">30 screens</div></div>
+      <div class="cell bb"><div class="b">Bulldog Burger</div></div>
+      <div class="cell sp"><div class="b">Sweet Peppers Deli</div></div>
+      <div class="cell sc"><div class="b">Super Chix &amp; Smackers</div></div>
+      <div class="cell hg"><div class="b">Harvey's &amp; The Grill</div></div>
+      <div class="tl"><div class="t">Golden Triangle</div><div class="c">38 screens</div></div>
+      <div class="cell sp"><div class="b">Sweet Peppers Deli</div></div>
+      <div class="cell sc"><div class="b">Super Chix &amp; Smackers</div></div>
+      <div class="cell hg"><div class="b">Harvey's &amp; The Grill</div></div>
+      <div class="cell bb"><div class="b">Bulldog Burger</div></div>
     </div>
-    <p class="bumpnote"><strong>The quarterly creative refresh is already in the rate</strong> — for a
-    six-concept family it becomes a rotation stage. Add the animated group bumper and the whole
-    family stays on screen year-round, even in single-brand quarters.</p>
+    <p class="bumpnote"><strong>Every spot is produced up front and runs at the same time</strong> —
+    each territory features a different brand each week on a four-week cycle, so every restaurant
+    headlines 13 weeks a year in every market. The included quarterly refresh keeps each spot
+    current, and the animated group bumper keeps the whole family on screen between features.</p>
     <div class="foot"><span>Eat With Us &times; MCTV</span><span>09</span></div>
   </div>
 </div></div></div></section>

@@ -245,6 +245,18 @@
   .qtr.q4 { background: var(--gold); color: var(--ink); }
   .qtr.q4 .q, .qtr.q4 .why { opacity: .8; }
 
+  /* weekly rotation matrix */
+  .rotamat { display: grid; grid-template-columns: 150px repeat(4, 1fr); gap: 8px; margin-top: 20px; font-family: var(--sans); }
+  .rotamat .wh { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); align-self: end; padding-bottom: 2px; }
+  .rotamat .tl { display: flex; flex-direction: column; justify-content: center; }
+  .rotamat .tl b { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+  .rotamat .tl small { font-size: 11px; font-weight: 600; color: var(--muted); }
+  .rotamat .cell { border-radius: 10px; color: #fff; padding: 12px; font-weight: 700; font-size: 13px; line-height: 1.25; display: flex; align-items: center; min-height: 54px; }
+  .rotamat .cell.bb { background: var(--charcoal); }
+  .rotamat .cell.sp { background: var(--navy); }
+  .rotamat .cell.sc { background: var(--red); }
+  .rotamat .cell.hg { background: var(--gold); color: var(--ink); }
+
   /* add-ons + prepay */
   .addons { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
   .addon { border: 1px solid var(--line); border-radius: 14px; background: #fff; padding: 20px 24px; }
@@ -452,7 +464,7 @@
         <ul>
           <li>All 126 screens across Oxford, Tupelo &amp; the Golden Triangle — plus every screen we add</li>
           <li>Custom 15–30 second HD spot, produced by our in-house team</li>
-          <li>Fresh ad build every quarter — one per brand, if you like</li>
+          <li>A custom spot for every brand — a different one featured each week, per territory</li>
           <li>Unlimited rotation · proof-of-play reporting</li>
           <li>You own your ad forever</li>
         </ul>
@@ -471,14 +483,31 @@
     <p class="includes"><b>Every campaign includes:</b> custom ad production · unlimited rotation ·
     proof-of-play reporting · quarterly creative refresh · your ad is yours to keep, forever.</p>
 
-    <h2 style="margin-top:44px; font-size:28px;">One contract, a different brand every quarter</h2>
-    <p>The quarterly creative refresh is built into the rate — for a multi-brand group
-    it becomes a rotation stage. One suggested year:</p>
-    <div class="rotation">
-      <div class="qtr q1"><div class="q">Q1 · Winter</div><div class="b">Bulldog Burger</div><div class="why">Comfort food season; burgers &amp; basketball nights.</div></div>
-      <div class="qtr q2"><div class="q">Q2 · Spring</div><div class="b">Sweet Peppers Deli</div><div class="why">Lunch, graduation catering, office orders.</div></div>
-      <div class="qtr q3"><div class="q">Q3 · Summer</div><div class="b">Super Chix &amp; Smackers</div><div class="why">Family season for the fast-casual concepts.</div></div>
-      <div class="qtr q4"><div class="q">Q4 · Fall</div><div class="b">Harvey's &amp; The Grill</div><div class="why">Game days, date nights, holiday parties.</div></div>
+    <h2 style="margin-top:44px; font-size:28px;">Every brand on air — a different one each week</h2>
+    <p>We produce a spot for every concept up front and run them all at the same time. Each
+    territory features a different brand each week on a four-week cycle, so every restaurant
+    headlines 13 weeks a year in every market:</p>
+    <div class="rotamat">
+      <div></div>
+      <div class="wh">Week 1</div>
+      <div class="wh">Week 2</div>
+      <div class="wh">Week 3</div>
+      <div class="wh">Week 4</div>
+      <div class="tl"><b>Oxford</b><small>58 screens</small></div>
+      <div class="cell hg">Harvey's &amp; The Grill</div>
+      <div class="cell bb">Bulldog Burger</div>
+      <div class="cell sp">Sweet Peppers Deli</div>
+      <div class="cell sc">Super Chix &amp; Smackers</div>
+      <div class="tl"><b>Tupelo</b><small>30 screens</small></div>
+      <div class="cell bb">Bulldog Burger</div>
+      <div class="cell sp">Sweet Peppers Deli</div>
+      <div class="cell sc">Super Chix &amp; Smackers</div>
+      <div class="cell hg">Harvey's &amp; The Grill</div>
+      <div class="tl"><b>Golden Triangle</b><small>38 screens</small></div>
+      <div class="cell sp">Sweet Peppers Deli</div>
+      <div class="cell sc">Super Chix &amp; Smackers</div>
+      <div class="cell hg">Harvey's &amp; The Grill</div>
+      <div class="cell bb">Bulldog Burger</div>
     </div>
   </section>
 
@@ -489,8 +518,8 @@
       <div class="addon">
         <h3>Animated logo bumpers <span class="p">$10 / screen / mo + $150 setup</span></h3>
         <p>Your four-color brand card was made for motion. A custom animated bumper of the
-        Eat With Us stack playing across the network keeps the whole family in view even
-        during single-brand quarters.</p>
+        Eat With Us stack playing across the network keeps the whole family in view between
+        brand features.</p>
       </div>
       <div class="addon">
         <h3>Cause sponsorship <span class="p">$10 / screen / mo</span></h3>
