@@ -1,6 +1,6 @@
 <title>WTEC Proposal</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
 
 :root {
   --navy: #1a2744;
@@ -58,8 +58,50 @@ body {
 }
 
 .cover-wtec-logo {
-  width: min(520px, 90%);
+  display: flex;
+  align-items: center;
+  gap: 24px;
   margin-bottom: 48px;
+}
+
+.cover-wtec-globe {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3aab3a 0%, #2d8c2d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(45, 140, 45, 0.25);
+}
+
+.cover-wtec-globe svg {
+  width: 60px;
+  height: 60px;
+}
+
+.cover-wtec-text {
+  text-align: left;
+}
+
+.cover-wtec-text .wtec-line1 {
+  font-family: 'Source Sans 3', Arial, sans-serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  color: #222;
+  letter-spacing: 2px;
+  line-height: 1.15;
+}
+
+.cover-wtec-text .wtec-line2 {
+  font-family: 'Source Sans 3', Arial, sans-serif;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 400;
+  color: #444;
+  letter-spacing: 3px;
+  line-height: 1.15;
 }
 
 .cover-divider {
@@ -130,19 +172,20 @@ body {
 }
 
 .cover-mctv-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 8px;
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: 10px;
   color: var(--navy);
 }
 
 .cover-mctv-sub {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 4px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 5px;
   text-transform: uppercase;
-  color: var(--gold);
+  color: #5a6a7e;
 }
 
 .cover-date {
@@ -167,20 +210,21 @@ body {
 }
 
 .section-header .mctv-mark-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 4px;
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 5px;
   color: var(--navy);
 }
 
 .section-header .mctv-mark-sub {
+  font-family: 'Source Sans 3', sans-serif;
   font-size: 8px;
-  font-weight: 600;
-  letter-spacing: 2.5px;
+  font-weight: 400;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-left: 4px;
+  color: #5a6a7e;
+  margin-left: 6px;
 }
 
 .section-header .page-label {
@@ -845,11 +889,11 @@ body {
 }
 
 .page-footer .mctv-footer-mark {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  letter-spacing: 3px;
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 4px;
   color: var(--navy);
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .page-footer .footer-contact {
@@ -882,40 +926,21 @@ body {
 <!-- PAGE 1 · COVER                                     -->
 <!-- ═══════════════════════════════════════════════════ -->
 <div class="page cover">
-  <!-- WTEC Logo SVG -->
-  <svg class="cover-wtec-logo" viewBox="0 0 750 180" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <clipPath id="globe-clip"><circle cx="100" cy="100" r="62"/></clipPath>
-    </defs>
-    <g transform="translate(0,0)">
-      <!-- Globe circle outline (the vine/stem wrapping around) -->
-      <path d="M100 38 C52 38, 38 78, 38 100 C38 148, 68 162, 100 162 C140 162, 162 136, 162 100 C162 64, 140 38, 100 38Z" fill="none" stroke="#3aab3a" stroke-width="6.5"/>
-      <!-- Large upper leaf -->
-      <path d="M88 48 C78 28, 62 8, 42 4 C36 3, 30 8, 34 16 C40 28, 56 44, 72 54 C80 58, 86 52, 88 48Z" fill="#3aab3a"/>
-      <path d="M50 14 C56 26, 68 40, 80 48" fill="none" stroke="#fff" stroke-width="1.8" opacity="0.45"/>
-      <!-- Small lower leaf -->
-      <path d="M62 68 C50 50, 34 38, 22 38 C16 38, 14 44, 18 50 C24 60, 40 70, 54 72 C58 72, 62 70, 62 68Z" fill="#3aab3a"/>
-      <path d="M28 42 C34 50, 44 60, 56 68" fill="none" stroke="#fff" stroke-width="1.4" opacity="0.4"/>
-      <!-- Globe landmasses -->
-      <g clip-path="url(#globe-clip)" fill="#3aab3a">
-        <!-- North America -->
-        <path d="M78 52 C72 50, 68 52, 72 56 C74 58, 82 56, 86 58 C92 60, 98 56, 102 58 C108 60, 112 58, 114 54 C112 50, 106 48, 100 50 C96 52, 90 48, 86 50 C84 51, 80 52, 78 52Z" opacity="0.95"/>
-        <path d="M82 60 C78 62, 76 68, 78 74 C80 78, 86 82, 92 84 C96 84, 100 80, 102 76 C104 72, 102 66, 98 62 C94 60, 88 58, 82 60Z" opacity="0.95"/>
-        <path d="M72 72 C70 74, 70 78, 72 80 C74 82, 76 80, 76 76 C76 74, 74 72, 72 72Z" opacity="0.95"/>
-        <!-- Central America -->
-        <path d="M92 86 C90 88, 90 92, 92 96 C94 98, 96 96, 96 92 C96 88, 94 86, 92 86Z" opacity="0.95"/>
-        <!-- South America -->
-        <path d="M96 100 C92 100, 88 104, 88 110 C88 118, 92 126, 96 132 C100 138, 104 142, 106 146 C108 148, 110 146, 110 142 C110 136, 108 128, 106 122 C104 116, 106 110, 108 106 C108 102, 102 100, 96 100Z" opacity="0.95"/>
-        <!-- Europe / Africa hints -->
-        <path d="M118 58 C116 56, 114 58, 114 62 C114 66, 116 70, 118 72 C120 74, 122 72, 122 68 C122 64, 120 60, 118 58Z" opacity="0.7"/>
-        <path d="M116 78 C114 80, 114 86, 116 92 C118 98, 120 104, 122 110 C124 114, 126 112, 126 108 C126 102, 124 94, 122 88 C120 82, 118 78, 116 78Z" opacity="0.7"/>
-      </g>
-    </g>
-    <!-- WILLIAMS TOTAL -->
-    <text x="195" y="82" font-family="'Source Sans 3', Arial, Helvetica, sans-serif" font-size="52" font-weight="800" fill="#222222" letter-spacing="3">WILLIAMS TOTAL</text>
-    <!-- EROSION CONTROL, LLC -->
-    <text x="195" y="138" font-family="'Source Sans 3', Arial, Helvetica, sans-serif" font-size="42" font-weight="400" fill="#222222" letter-spacing="5">EROSION CONTROL, LLC</text>
-  </svg>
+  <div class="cover-wtec-logo">
+    <div class="cover-wtec-globe">
+      <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="28" stroke="white" stroke-width="1.5" fill="none"/>
+        <ellipse cx="30" cy="30" rx="14" ry="28" stroke="white" stroke-width="1.2" fill="none"/>
+        <line x1="2" y1="20" x2="58" y2="20" stroke="white" stroke-width="1" opacity="0.7"/>
+        <line x1="2" y1="40" x2="58" y2="40" stroke="white" stroke-width="1" opacity="0.7"/>
+        <line x1="30" y1="2" x2="30" y2="58" stroke="white" stroke-width="1" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="cover-wtec-text">
+      <div class="wtec-line1">WILLIAMS TOTAL</div>
+      <div class="wtec-line2">EROSION CONTROL, LLC</div>
+    </div>
+  </div>
 
   <div class="cover-divider"></div>
 
