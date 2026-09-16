@@ -58,50 +58,8 @@ body {
 }
 
 .cover-wtec-logo {
-  display: flex;
-  align-items: center;
-  gap: 24px;
+  width: min(560px, 92%);
   margin-bottom: 48px;
-}
-
-.cover-wtec-globe {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #3aab3a 0%, #2d8c2d 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  position: relative;
-  box-shadow: 0 4px 16px rgba(45, 140, 45, 0.25);
-}
-
-.cover-wtec-globe svg {
-  width: 60px;
-  height: 60px;
-}
-
-.cover-wtec-text {
-  text-align: left;
-}
-
-.cover-wtec-text .wtec-line1 {
-  font-family: 'Source Sans 3', Arial, sans-serif;
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 800;
-  color: #222;
-  letter-spacing: 2px;
-  line-height: 1.15;
-}
-
-.cover-wtec-text .wtec-line2 {
-  font-family: 'Source Sans 3', Arial, sans-serif;
-  font-size: clamp(22px, 3vw, 32px);
-  font-weight: 400;
-  color: #444;
-  letter-spacing: 3px;
-  line-height: 1.15;
 }
 
 .cover-divider {
@@ -926,21 +884,35 @@ body {
 <!-- PAGE 1 · COVER                                     -->
 <!-- ═══════════════════════════════════════════════════ -->
 <div class="page cover">
-  <div class="cover-wtec-logo">
-    <div class="cover-wtec-globe">
-      <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="30" cy="30" r="28" stroke="white" stroke-width="1.5" fill="none"/>
-        <ellipse cx="30" cy="30" rx="14" ry="28" stroke="white" stroke-width="1.2" fill="none"/>
-        <line x1="2" y1="20" x2="58" y2="20" stroke="white" stroke-width="1" opacity="0.7"/>
-        <line x1="2" y1="40" x2="58" y2="40" stroke="white" stroke-width="1" opacity="0.7"/>
-        <line x1="30" y1="2" x2="30" y2="58" stroke="white" stroke-width="1" opacity="0.5"/>
-      </svg>
-    </div>
-    <div class="cover-wtec-text">
-      <div class="wtec-line1">WILLIAMS TOTAL</div>
-      <div class="wtec-line2">EROSION CONTROL, LLC</div>
-    </div>
-  </div>
+  <svg class="cover-wtec-logo" viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <clipPath id="gc"><circle cx="80" cy="85" r="58"/></clipPath>
+    </defs>
+    <!-- Globe outline -->
+    <circle cx="80" cy="85" r="58" fill="white" stroke="#2eaa2e" stroke-width="4"/>
+    <!-- Continents inside globe -->
+    <g clip-path="url(#gc)" fill="#2eaa2e">
+      <!-- North America -->
+      <path d="M60 38 C56 36, 50 38, 48 42 C46 46, 48 50, 52 52 C54 54, 52 58, 50 62 C48 66, 50 70, 54 72 C56 74, 60 76, 64 78 C68 80, 72 78, 74 74 C76 70, 80 68, 84 66 C88 64, 92 60, 96 56 C100 52, 104 46, 102 42 C100 38, 96 34, 90 34 C84 34, 78 34, 74 36 C70 38, 64 40, 60 38Z"/>
+      <!-- Central America -->
+      <path d="M66 80 C64 82, 62 86, 64 90 C66 94, 68 96, 66 100 C64 104, 66 106, 68 104 C70 100, 72 96, 70 92 C68 88, 70 84, 68 80 C67 79, 66 79, 66 80Z"/>
+      <!-- South America -->
+      <path d="M68 106 C66 108, 64 112, 66 116 C68 120, 72 124, 76 128 C80 132, 82 136, 80 140 C78 144, 76 148, 78 150 C80 150, 82 148, 84 144 C86 140, 86 134, 84 128 C82 122, 80 118, 80 114 C80 110, 76 106, 72 106 C70 106, 68 106, 68 106Z"/>
+      <!-- Europe hint -->
+      <path d="M104 44 C102 42, 100 44, 100 48 C100 52, 102 56, 104 58 C106 60, 108 58, 108 54 C108 50, 106 46, 104 44Z" opacity="0.6"/>
+      <!-- Africa hint -->
+      <path d="M102 62 C100 64, 98 68, 100 74 C102 80, 104 86, 106 92 C108 98, 110 102, 112 106 C114 108, 116 106, 114 100 C112 94, 110 86, 108 80 C106 74, 104 66, 102 62Z" opacity="0.6"/>
+    </g>
+    <!-- Large leaf (upper, pointing up-left) -->
+    <path d="M54 32 C44 16, 28 2, 10 0 C4 0, 0 6, 4 12 C12 24, 28 38, 44 44 C50 46, 54 40, 54 32Z" fill="#2eaa2e"/>
+    <path d="M14 6 C22 16, 34 30, 48 38" fill="none" stroke="white" stroke-width="1.8" opacity="0.5"/>
+    <!-- Small leaf (lower, pointing left) -->
+    <path d="M30 56 C18 44, 6 38, 0 42 C-2 46, 2 52, 10 58 C18 64, 28 66, 34 62 C36 60, 34 58, 30 56Z" fill="#2eaa2e"/>
+    <path d="M6 44 C14 50, 22 56, 30 58" fill="none" stroke="white" stroke-width="1.2" opacity="0.4"/>
+    <!-- Text -->
+    <text x="160" y="78" font-family="'Source Sans 3', Arial, Helvetica, sans-serif" font-size="48" font-weight="800" fill="#222" letter-spacing="2">WILLIAMS TOTAL</text>
+    <text x="160" y="126" font-family="'Source Sans 3', Arial, Helvetica, sans-serif" font-size="36" font-weight="400" fill="#333" letter-spacing="4">EROSION CONTROL, LLC</text>
+  </svg>
 
   <div class="cover-divider"></div>
 
