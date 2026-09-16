@@ -1,0 +1,1406 @@
+<title>WTEC Proposal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+  --navy: #1a2744;
+  --navy-deep: #0f1a2e;
+  --gold: #c9a84c;
+  --gold-light: #d4bc72;
+  --cream: #f5f0e8;
+  --cream-light: #faf7f2;
+  --white: #ffffff;
+  --text-dark: #1a2744;
+  --text-body: #3a4a5e;
+  --text-light: #7a8a9e;
+  --border: #e0dbd2;
+  --green-wtec: #3aab3a;
+  --green-dark: #2d8c2d;
+  --bg-page: #ffffff;
+  --bg-section: #f5f0e8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+  color: var(--text-dark);
+  background: var(--bg-page);
+  padding: 0;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+@media print {
+  .page { page-break-after: always; break-after: page; }
+  .page:last-child { page-break-after: avoid; break-after: avoid; }
+  body { padding: 0; }
+}
+
+.page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── COVER PAGE ─── */
+.cover {
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 40px;
+}
+
+.cover-wtec-logo {
+  width: 280px;
+  margin-bottom: 48px;
+}
+
+.cover-divider {
+  width: 80px;
+  height: 3px;
+  background: var(--gold);
+  margin: 0 auto 40px;
+}
+
+.cover-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.25;
+  margin-bottom: 12px;
+  text-wrap: balance;
+}
+
+.cover-subtitle {
+  font-size: 17px;
+  color: var(--text-body);
+  margin-bottom: 48px;
+}
+
+.cover-services {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.cover-service-tag {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--navy);
+  padding: 10px 20px;
+  border: 1.5px solid var(--border);
+  border-radius: 2px;
+}
+
+.cover-footer {
+  margin-top: auto;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+  width: 100%;
+  max-width: 500px;
+}
+
+.cover-mctv-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.cover-mctv-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 8px;
+  color: var(--navy);
+}
+
+.cover-mctv-sub {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.cover-date {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-top: 12px;
+  letter-spacing: 1px;
+}
+
+/* ─── SECTION HEADERS ─── */
+.section-header {
+  background: var(--cream-light);
+  padding: 32px 48px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-header .mctv-mark {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+
+.section-header .mctv-mark-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--navy);
+}
+
+.section-header .mctv-mark-sub {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-left: 4px;
+}
+
+.section-header .page-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  float: right;
+  margin-top: 8px;
+}
+
+.section-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 3.5vw, 38px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.section-title span {
+  color: var(--gold);
+}
+
+/* ─── PRICING PAGE ─── */
+.pricing-page {
+  background: var(--white);
+}
+
+.pricing-body {
+  padding: 40px 48px 48px;
+}
+
+.pricing-intro {
+  font-size: 16px;
+  color: var(--text-body);
+  line-height: 1.6;
+  max-width: 700px;
+  margin-bottom: 36px;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.pricing-card {
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  padding: 32px 28px;
+  position: relative;
+}
+
+.pricing-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+
+.pricing-card-type {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.pricing-card .price {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.pricing-card .price-unit {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-light);
+}
+
+.pricing-card .setup {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pricing-card .setup-label { color: var(--text-body); }
+.pricing-card .setup-price { color: var(--navy); }
+
+.pricing-card .features {
+  list-style: none;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pricing-card .features li {
+  font-size: 14px;
+  color: var(--text-body);
+  line-height: 1.5;
+  padding-left: 18px;
+  position: relative;
+}
+
+.pricing-card .features li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.pricing-card .note {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-light);
+  margin-top: 16px;
+}
+
+/* ─── BILLBOARD PAGE ─── */
+.billboard-page {
+  background: var(--white);
+}
+
+.billboard-body {
+  padding: 40px 48px 48px;
+}
+
+.stats-row {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.tier-card {
+  background: var(--navy-deep);
+  color: var(--white);
+  border-radius: 3px;
+  padding: 28px 24px;
+  position: relative;
+}
+
+.tier-card.popular::after {
+  content: 'MOST POPULAR';
+  position: absolute;
+  top: 0;
+  right: 16px;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 0 0 3px 3px;
+}
+
+.tier-card.best::after {
+  content: 'BEST VALUE';
+  position: absolute;
+  top: 0;
+  right: 16px;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 0 0 3px 3px;
+}
+
+.tier-screens {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+}
+
+.tier-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.tier-price-unit {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.tier-details {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tier-detail {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.tier-detail-value {
+  font-weight: 600;
+  color: var(--white);
+  opacity: 1;
+}
+
+.tier-note {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--gold-light);
+  margin-top: 12px;
+  opacity: 0.8;
+}
+
+.summer-banner {
+  background: var(--cream);
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.summer-banner .badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: var(--gold);
+  padding: 4px 12px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.summer-banner .summer-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.summer-banner .summer-price span {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-light);
+}
+
+.summer-banner .summer-detail {
+  font-size: 14px;
+  color: var(--text-body);
+}
+
+.includes-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.includes-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-body);
+}
+
+.includes-item .check {
+  color: var(--gold);
+  font-size: 14px;
+}
+
+.prepay-note {
+  font-size: 13px;
+  color: var(--text-body);
+  margin-top: 20px;
+  padding: 14px 20px;
+  background: var(--cream-light);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 3px 3px 0;
+}
+
+.prepay-note strong { color: var(--navy); }
+
+/* ─── BUNDLES PAGE ─── */
+.bundles-page {
+  background: var(--white);
+}
+
+.bundles-body {
+  padding: 40px 48px 48px;
+}
+
+.bundle-intro {
+  font-size: 16px;
+  color: var(--text-body);
+  line-height: 1.6;
+  max-width: 700px;
+  margin-bottom: 36px;
+}
+
+.bundle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.bundle-card {
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.bundle-card-head {
+  background: var(--navy-deep);
+  color: var(--white);
+  padding: 20px 24px;
+}
+
+.bundle-card-head .bundle-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.bundle-card-head .bundle-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+.bundle-card-body {
+  padding: 24px;
+}
+
+.bundle-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.bundle-items li {
+  font-size: 14px;
+  color: var(--text-body);
+  line-height: 1.4;
+  padding-left: 18px;
+  position: relative;
+}
+
+.bundle-items li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.bundle-price-row {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.bundle-total-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+.bundle-total-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.bundle-total-price .unit {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-light);
+}
+
+.bundle-setup {
+  font-size: 12px;
+  color: var(--text-light);
+  text-align: right;
+  margin-top: 4px;
+}
+
+/* ─── PORTFOLIO PAGE ─── */
+.portfolio-page {
+  background: var(--white);
+}
+
+.portfolio-body {
+  padding: 40px 48px 48px;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.portfolio-item {
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  padding: 24px 20px;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.portfolio-item:hover {
+  border-color: var(--gold);
+}
+
+.portfolio-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--cream);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  font-size: 20px;
+}
+
+.portfolio-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.portfolio-type {
+  font-size: 12px;
+  color: var(--text-light);
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.portfolio-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.portfolio-link:hover {
+  color: var(--navy);
+  text-decoration: underline;
+}
+
+/* ─── CONTACT / THANK YOU PAGE ─── */
+.contact-page {
+  background: var(--navy-deep);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-top {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 48px 40px;
+}
+
+.contact-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.contact-name-gold {
+  color: var(--gold);
+}
+
+.contact-info {
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.85;
+  margin-bottom: 8px;
+}
+
+.contact-info a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.contact-cta {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--gold-light);
+  margin-top: 32px;
+  padding: 16px 32px;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 3px;
+}
+
+.contact-specs {
+  background: rgba(255,255,255,0.06);
+  padding: 16px 32px;
+  border-radius: 3px;
+  margin-top: 24px;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.contact-specs strong {
+  opacity: 1;
+  color: var(--white);
+}
+
+.contact-bottom {
+  background: var(--navy);
+  padding: 32px 48px;
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+.contact-person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+}
+
+.contact-person-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.contact-person-role {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.contact-person-detail {
+  font-size: 14px;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+.contact-person-detail a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* ─── FINE PRINT ─── */
+.fine-print {
+  font-size: 11px;
+  color: var(--text-light);
+  line-height: 1.5;
+  padding: 20px 48px;
+  border-top: 1px solid var(--border);
+}
+
+/* ─── FOOTER ─── */
+.page-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 48px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+.page-footer .mctv-footer-mark {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--navy);
+  font-size: 13px;
+}
+
+.page-footer .footer-contact {
+  letter-spacing: 0.5px;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  .section-header { padding: 24px 20px 20px; }
+  .pricing-body, .billboard-body, .bundles-body, .portfolio-body {
+    padding: 28px 20px 36px;
+  }
+  .cover { padding: 40px 20px; }
+  .cover-services { gap: 12px; }
+  .cover-service-tag { font-size: 10px; padding: 8px 14px; }
+  .stats-row { gap: 20px; }
+  .tier-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .bundle-grid { grid-template-columns: 1fr; }
+  .portfolio-grid { grid-template-columns: 1fr 1fr; }
+  .contact-bottom { gap: 40px; padding: 28px 20px; }
+  .contact-top { padding: 48px 20px 32px; }
+  .page-footer { padding: 12px 20px; flex-direction: column; gap: 4px; }
+  .fine-print { padding: 16px 20px; }
+  .summer-banner { padding: 16px 20px; }
+}
+</style>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PAGE 1 · COVER                                     -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page cover">
+  <!-- WTEC Logo SVG -->
+  <svg class="cover-wtec-logo" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <clipPath id="globe-clip">
+        <circle cx="120" cy="110" r="65"/>
+      </clipPath>
+    </defs>
+    <!-- Outer circle / vine -->
+    <path d="M120 45 C60 45, 55 110, 55 110 C55 165, 95 180, 120 180 C155 180, 185 155, 185 110 C185 70, 155 45, 120 45Z" fill="none" stroke="#3aab3a" stroke-width="7"/>
+    <!-- Leaf top -->
+    <path d="M95 55 C75 25, 55 15, 50 18 C45 22, 55 50, 75 65 C85 72, 95 60, 95 55Z" fill="#3aab3a"/>
+    <path d="M72 40 C72 40, 80 55, 88 58" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.5"/>
+    <!-- Leaf small -->
+    <path d="M68 75 C55 55, 38 50, 35 53 C32 56, 42 72, 56 80 C62 84, 68 78, 68 75Z" fill="#3aab3a"/>
+    <!-- Globe landmasses (simplified) -->
+    <g clip-path="url(#globe-clip)" fill="#3aab3a" opacity="0.35">
+      <!-- North America -->
+      <path d="M95 75 C100 70, 115 68, 120 72 C125 76, 130 80, 128 90 C126 95, 118 100, 112 98 C106 96, 100 90, 95 85Z"/>
+      <!-- South America -->
+      <path d="M115 105 C118 102, 124 104, 126 110 C128 118, 130 130, 126 140 C122 148, 116 150, 114 145 C112 138, 110 125, 112 115Z"/>
+    </g>
+    <!-- WTEC text -->
+    <text x="210" y="128" font-family="'Source Sans 3', Arial, sans-serif" font-size="72" font-weight="700" fill="#3aab3a" letter-spacing="2">WTEC</text>
+  </svg>
+
+  <div class="cover-divider"></div>
+
+  <div class="cover-label">Prepared for</div>
+  <h1 class="cover-title">Williams Total<br>Erosion Control</h1>
+  <p class="cover-subtitle">A tailored digital presence &amp; indoor advertising strategy for your business.</p>
+
+  <div class="cover-services">
+    <div class="cover-service-tag">Website Creation</div>
+    <div class="cover-service-tag">Google Business Profile</div>
+    <div class="cover-service-tag">Indoor Billboards</div>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-mctv-logo">
+      <div class="cover-mctv-name">MCTV</div>
+      <div class="cover-mctv-sub">ELITE ADVERTISING</div>
+    </div>
+    <div class="cover-date">September 2026</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PAGE 2 · DIGITAL SERVICES PRICING                  -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page pricing-page">
+  <div class="section-header">
+    <div class="mctv-mark">
+      <span class="mctv-mark-name">MCTV</span>
+      <span class="mctv-mark-sub">ELITE ADVERTISING</span>
+    </div>
+    <span class="page-label">Digital Services</span>
+    <div class="section-eyebrow">Your Online Foundation</div>
+    <h2 class="section-title">Digital services <span>pricing.</span></h2>
+  </div>
+
+  <div class="pricing-body">
+    <p class="pricing-intro">
+      Build a professional online presence for Williams Total Erosion Control. We handle everything from website design to making sure customers find you on Google Maps and local search.
+    </p>
+
+    <div class="pricing-grid">
+      <!-- Website Creation -->
+      <div class="pricing-card">
+        <div class="pricing-card-label">Website Creation</div>
+        <div class="pricing-card-type">Single Page Web Starter</div>
+        <div class="price">$700<span class="price-unit"> one-time</span></div>
+        <ul class="features">
+          <li>Custom single-page responsive website</li>
+          <li>Mobile-friendly design</li>
+          <li>Contact form and calls-to-action</li>
+          <li>SEO-optimized structure</li>
+          <li>Professional copywriting</li>
+          <li>You own your site forever</li>
+        </ul>
+        <div class="note">Delivered in approximately 2 to 3 weeks.</div>
+      </div>
+
+      <!-- Website Management -->
+      <div class="pricing-card">
+        <div class="pricing-card-label">Website Management</div>
+        <div class="pricing-card-type">Monthly Maintenance</div>
+        <div class="price">$125<span class="price-unit">/mo</span></div>
+        <ul class="features">
+          <li>Hosting and security updates</li>
+          <li>Content edits and page updates</li>
+          <li>Performance monitoring</li>
+          <li>Monthly analytics reporting</li>
+          <li>Technical support</li>
+        </ul>
+        <div class="note">Month-to-month after initial 3-month term.</div>
+      </div>
+
+      <!-- Google Business Profile -->
+      <div class="pricing-card">
+        <div class="pricing-card-label">Google Business Profile</div>
+        <div class="pricing-card-type">Monthly</div>
+        <div class="price">$350<span class="price-unit">/mo</span></div>
+        <div class="setup">
+          <span class="setup-label">One-time setup</span>
+          <span class="setup-price">$175</span>
+        </div>
+        <ul class="features">
+          <li>Maps and local search optimization</li>
+          <li>5 new photos a month, 1 post a week</li>
+          <li>Reviews answered within 72 business hours</li>
+          <li>Quarterly performance reports</li>
+        </ul>
+        <div class="note">Onboarding takes 5 to 7 business days.</div>
+      </div>
+    </div>
+
+    <div class="fine-print" style="padding: 16px 0; border-top: 1px solid var(--border);">
+      Round-about pricing as of September 2026. Your final quote is built around your timeline. Digital services are invoiced at signing and scheduled on payment. Initial digital term 3 months, then 30-day written notice.
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="mctv-footer-mark">MCTV</span>
+    <span class="footer-contact">CREED@MCTVOFMS.COM &middot; (601) 201-8202</span>
+    <span>WTEC DIGITAL SERVICES &middot; SEPT 2026</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PAGE 3 · INDOOR BILLBOARD PRICING                  -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page billboard-page">
+  <div class="section-header">
+    <div class="mctv-mark">
+      <span class="mctv-mark-name">MCTV</span>
+      <span class="mctv-mark-sub">ELITE ADVERTISING</span>
+    </div>
+    <span class="page-label">Packages &amp; Pricing</span>
+    <div class="section-eyebrow">Monthly Network Rates &middot; Volume Pricing</div>
+    <h2 class="section-title">Choose your <span>footprint.</span></h2>
+  </div>
+
+  <div class="billboard-body">
+    <div class="stats-row">
+      <div class="stat-item">
+        <span class="stat-number">125+</span>
+        <span class="stat-label">Digital Screens</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">100+</span>
+        <span class="stat-label">Premier Venues</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">1.9M+</span>
+        <span class="stat-label">Impressions / Mo</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">55+</span>
+        <span class="stat-label">Min Avg Dwell</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">3</span>
+        <span class="stat-label">Growth Markets</span>
+      </div>
+    </div>
+
+    <div class="tier-grid">
+      <div class="tier-card">
+        <div class="tier-screens">20 Screens</div>
+        <div class="tier-price">$500<span class="tier-price-unit">/mo</span></div>
+        <div class="tier-details">
+          <div class="tier-detail">
+            <span>Ad Plays / Mo</span>
+            <span class="tier-detail-value">30K</span>
+          </div>
+          <div class="tier-detail">
+            <span>Per Screen</span>
+            <span class="tier-detail-value">$25</span>
+          </div>
+        </div>
+        <div class="tier-note">Entry network reach</div>
+      </div>
+
+      <div class="tier-card popular">
+        <div class="tier-screens">40 Screens</div>
+        <div class="tier-price">$800<span class="tier-price-unit">/mo</span></div>
+        <div class="tier-details">
+          <div class="tier-detail">
+            <span>Ad Plays / Mo</span>
+            <span class="tier-detail-value">60K</span>
+          </div>
+          <div class="tier-detail">
+            <span>Per Screen</span>
+            <span class="tier-detail-value">$20</span>
+          </div>
+        </div>
+        <div class="tier-note">Market saturation</div>
+      </div>
+
+      <div class="tier-card">
+        <div class="tier-screens">80 Screens</div>
+        <div class="tier-price">$1,400<span class="tier-price-unit">/mo</span></div>
+        <div class="tier-details">
+          <div class="tier-detail">
+            <span>Ad Plays / Mo</span>
+            <span class="tier-detail-value">120K</span>
+          </div>
+          <div class="tier-detail">
+            <span>Per Screen</span>
+            <span class="tier-detail-value">$17.50</span>
+          </div>
+        </div>
+        <div class="tier-note">Deep saturation</div>
+      </div>
+
+      <div class="tier-card best">
+        <div class="tier-screens">125+ Screens</div>
+        <div class="tier-price">$2,000<span class="tier-price-unit">/mo</span></div>
+        <div class="tier-details">
+          <div class="tier-detail">
+            <span>Ad Plays / Mo</span>
+            <span class="tier-detail-value">187.5K</span>
+          </div>
+          <div class="tier-detail">
+            <span>Per Screen</span>
+            <span class="tier-detail-value">$16</span>
+          </div>
+        </div>
+        <div class="tier-note">Entire network</div>
+      </div>
+    </div>
+
+    <div class="summer-banner">
+      <span class="badge">Summer Special</span>
+      <span class="summer-price">$350<span>/mo</span></span>
+      <span class="summer-detail">10-Screen Package &middot; 3-Month Summer Run &mdash; $350/mo &middot; Prepay 6 Months &mdash; $350/mo, get the 7th month FREE.</span>
+    </div>
+
+    <div class="prepay-note">
+      <strong>Pay In Full &amp; Save</strong> &mdash; Prepay a 6-month contract, get your 7th month FREE. Prepay 12 months, get your 13th &amp; 14th months FREE.
+    </div>
+
+    <div style="margin-top: 24px;">
+      <div class="section-eyebrow" style="margin-bottom: 12px;">Every Campaign Includes</div>
+      <div class="includes-row">
+        <div class="includes-item"><span class="check">&#10003;</span> Custom 15-30 Sec Ad Production</div>
+        <div class="includes-item"><span class="check">&#10003;</span> Unlimited Rotation</div>
+        <div class="includes-item"><span class="check">&#10003;</span> Proof-of-Play Reporting</div>
+        <div class="includes-item"><span class="check">&#10003;</span> You Own Your Ad Forever</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="mctv-footer-mark">MCTV</span>
+    <span class="footer-contact">CREED@MCTVOFMS.COM &middot; (601) 201-8202</span>
+    <span>WTEC BILLBOARD PRICING &middot; SEPT 2026</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PAGE 4 · BUNDLE OPTIONS                            -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page bundles-page">
+  <div class="section-header">
+    <div class="mctv-mark">
+      <span class="mctv-mark-name">MCTV</span>
+      <span class="mctv-mark-sub">ELITE ADVERTISING</span>
+    </div>
+    <span class="page-label">Bundle Options</span>
+    <div class="section-eyebrow">Indoor Billboards + Digital</div>
+    <h2 class="section-title">Bundle &amp; <span>save.</span></h2>
+  </div>
+
+  <div class="bundles-body">
+    <p class="bundle-intro">
+      Pair indoor billboard advertising with your new website and Google Business Profile for a complete local marketing solution. When customers see your ad on our screens and then search for you online, everything connects.
+    </p>
+
+    <div class="bundle-grid">
+      <!-- Bundle 1: Starter -->
+      <div class="bundle-card">
+        <div class="bundle-card-head">
+          <div class="bundle-name">Starter Bundle</div>
+          <div class="bundle-tag">20 Screens + Digital</div>
+        </div>
+        <div class="bundle-card-body">
+          <ul class="bundle-items">
+            <li>20-Screen Indoor Billboard Package (30K plays/mo)</li>
+            <li>Single Page Web Starter website</li>
+            <li>Website Management (monthly)</li>
+            <li>Google Business Profile management</li>
+            <li>Custom ad production included</li>
+          </ul>
+          <div class="bundle-price-row">
+            <span class="bundle-total-label">Monthly</span>
+            <span class="bundle-total-price">$975<span class="unit">/mo</span></span>
+          </div>
+          <div class="bundle-setup">+ $875 one-time setup (website + GBP)</div>
+        </div>
+      </div>
+
+      <!-- Bundle 2: Growth -->
+      <div class="bundle-card">
+        <div class="bundle-card-head" style="background: linear-gradient(135deg, var(--navy-deep), #1e3050);">
+          <div class="bundle-name">Growth Bundle</div>
+          <div class="bundle-tag">40 Screens + Digital</div>
+        </div>
+        <div class="bundle-card-body">
+          <ul class="bundle-items">
+            <li>40-Screen Indoor Billboard Package (60K plays/mo)</li>
+            <li>Single Page Web Starter website</li>
+            <li>Website Management (monthly)</li>
+            <li>Google Business Profile management</li>
+            <li>Custom ad production included</li>
+          </ul>
+          <div class="bundle-price-row">
+            <span class="bundle-total-label">Monthly</span>
+            <span class="bundle-total-price">$1,275<span class="unit">/mo</span></span>
+          </div>
+          <div class="bundle-setup">+ $875 one-time setup (website + GBP)</div>
+        </div>
+      </div>
+
+      <!-- Bundle 3: Saturation -->
+      <div class="bundle-card">
+        <div class="bundle-card-head">
+          <div class="bundle-name">Saturation Bundle</div>
+          <div class="bundle-tag">80 Screens + Digital</div>
+        </div>
+        <div class="bundle-card-body">
+          <ul class="bundle-items">
+            <li>80-Screen Indoor Billboard Package (120K plays/mo)</li>
+            <li>Single Page Web Starter website</li>
+            <li>Website Management (monthly)</li>
+            <li>Google Business Profile management</li>
+            <li>Custom ad production included</li>
+          </ul>
+          <div class="bundle-price-row">
+            <span class="bundle-total-label">Monthly</span>
+            <span class="bundle-total-price">$1,875<span class="unit">/mo</span></span>
+          </div>
+          <div class="bundle-setup">+ $875 one-time setup (website + GBP)</div>
+        </div>
+      </div>
+
+      <!-- Bundle 4: Full Network -->
+      <div class="bundle-card">
+        <div class="bundle-card-head" style="background: linear-gradient(135deg, var(--navy-deep), #1e3050);">
+          <div class="bundle-name">Full Network Bundle</div>
+          <div class="bundle-tag">125+ Screens + Digital</div>
+        </div>
+        <div class="bundle-card-body">
+          <ul class="bundle-items">
+            <li>125+ Screen Indoor Billboard Package (187.5K plays/mo)</li>
+            <li>Single Page Web Starter website</li>
+            <li>Website Management (monthly)</li>
+            <li>Google Business Profile management</li>
+            <li>Custom ad production included</li>
+          </ul>
+          <div class="bundle-price-row">
+            <span class="bundle-total-label">Monthly</span>
+            <span class="bundle-total-price">$2,475<span class="unit">/mo</span></span>
+          </div>
+          <div class="bundle-setup">+ $875 one-time setup (website + GBP)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fine-print" style="margin-top: 28px; padding: 16px 0; border-top: 1px solid var(--border);">
+      Bundle pricing reflects the sum of individual services. Monthly totals include billboard package + website management ($125/mo) + Google Business Profile ($350/mo). One-time setup covers the website build ($700) + GBP onboarding ($175). 6-month minimum term on billboard packages. Prepay bonuses apply to the billboard portion.
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="mctv-footer-mark">MCTV</span>
+    <span class="footer-contact">CREED@MCTVOFMS.COM &middot; (601) 201-8202</span>
+    <span>WTEC BUNDLES &middot; SEPT 2026</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PAGE 5 · WEBSITE PORTFOLIO                         -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page portfolio-page">
+  <div class="section-header">
+    <div class="mctv-mark">
+      <span class="mctv-mark-name">MCTV</span>
+      <span class="mctv-mark-sub">ELITE ADVERTISING</span>
+    </div>
+    <span class="page-label">Website Portfolio</span>
+    <div class="section-eyebrow">From Concept to Reality</div>
+    <h2 class="section-title">Our <span>work.</span></h2>
+  </div>
+
+  <div class="portfolio-body">
+    <p class="pricing-intro" style="margin-bottom: 32px;">
+      Every website we build is custom-designed, mobile-friendly, and built to convert visitors into customers. Here are some of the businesses we have brought online.
+    </p>
+
+    <div class="portfolio-grid">
+      <div class="portfolio-item">
+        <div class="portfolio-icon">&#127961;</div>
+        <div class="portfolio-name">Nautilus Water &amp; Mold Damage</div>
+        <div class="portfolio-type">Service Business</div>
+        <a class="portfolio-link" href="#">View Live Site &rarr;</a>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="portfolio-icon">&#9877;</div>
+        <div class="portfolio-name">Andrew J. Leo, MD</div>
+        <div class="portfolio-type">Medical Practice</div>
+        <a class="portfolio-link" href="#">View Live Site &rarr;</a>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="portfolio-icon">&#9878;</div>
+        <div class="portfolio-name">Walke Wilson Law</div>
+        <div class="portfolio-type">Law Firm</div>
+        <a class="portfolio-link" href="#">View Live Site &rarr;</a>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="portfolio-icon">&#9878;</div>
+        <div class="portfolio-name">Feldman Lee</div>
+        <div class="portfolio-type">Personal Injury Lawyers</div>
+        <a class="portfolio-link" href="#">View Live Site &rarr;</a>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="portfolio-icon">&#127968;</div>
+        <div class="portfolio-name">Michael Gainey Signature Designs</div>
+        <div class="portfolio-type">Interior Design</div>
+        <a class="portfolio-link" href="#">View Live Site &rarr;</a>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="portfolio-icon">&#127860;</div>
+        <div class="portfolio-name">Jaa's Kitchen</div>
+        <div class="portfolio-type">Restaurant</div>
+        <a class="portfolio-link" href="#">View Live Site &rarr;</a>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="portfolio-icon">&#127831;</div>
+        <div class="portfolio-name">Fluckers Hot Chicken</div>
+        <div class="portfolio-type">Restaurant</div>
+        <a class="portfolio-link" href="#">View Live Site &rarr;</a>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="portfolio-icon">&#128736;</div>
+        <div class="portfolio-name">Elevated Coatings</div>
+        <div class="portfolio-type">Concrete Coating</div>
+        <a class="portfolio-link" href="#">View Live Site &rarr;</a>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="portfolio-icon">&#128241;</div>
+        <div class="portfolio-name">Acoola Ads</div>
+        <div class="portfolio-type">Advertising Agency</div>
+        <a class="portfolio-link" href="#">View Live Site &rarr;</a>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="portfolio-icon">&#127846;</div>
+        <div class="portfolio-name">SugarKoi Ice Cream</div>
+        <div class="portfolio-type">Food &amp; Beverage</div>
+        <a class="portfolio-link" href="#">View Live Site &rarr;</a>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="portfolio-icon">&#128134;</div>
+        <div class="portfolio-name">Losne Massage</div>
+        <div class="portfolio-type">Wellness &amp; Spa</div>
+        <a class="portfolio-link" href="#">View Live Site &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="mctv-footer-mark">MCTV</span>
+    <span class="footer-contact">CREED@MCTVOFMS.COM &middot; (601) 201-8202</span>
+    <span>WTEC PORTFOLIO &middot; SEPT 2026</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PAGE 6 · THANK YOU / CONTACT                       -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page contact-page">
+  <div class="contact-top">
+    <h2 class="contact-title">Thank you<br>for your <span class="contact-name-gold">time.</span></h2>
+
+    <div class="contact-info">
+      <span class="contact-name-gold" style="font-weight: 700;">Creed Cannon</span> &middot; MCTV Digital
+    </div>
+    <div class="contact-info">creed@mctvofms.com &middot; 601-201-8202</div>
+    <div class="contact-info" style="margin-top: 0;">www.mctvofms.com</div>
+
+    <div class="contact-cta">Let's launch your campaign this month.</div>
+
+    <div class="contact-specs">
+      <strong>Ad Specs &amp; Sizes</strong><br>
+      Dimensions: 1920&times;1080 HD &middot; 16:9 aspect ratio<br>
+      File formats: MP4 video or JPG static &middot; Bitrate 300&ndash;700 kb/s &middot; Max file size 20 MB
+    </div>
+  </div>
+
+  <div class="contact-bottom">
+    <div class="contact-person">
+      <div class="contact-person-name">Mary Michael Cannon</div>
+      <div class="contact-person-role">CEO &amp; Founder</div>
+      <div class="contact-person-detail">mmc@mctvofms.com &middot; 662-801-5677</div>
+    </div>
+    <div class="contact-person">
+      <div class="contact-person-name">Swayze Hollingsworth</div>
+      <div class="contact-person-role">Director of Sales</div>
+      <div class="contact-person-detail">swayze@mctvofms.com &middot; 662-907-0404</div>
+    </div>
+  </div>
+</div>
