@@ -58,7 +58,7 @@ body {
 }
 
 .cover-wtec-logo {
-  width: 280px;
+  width: min(520px, 90%);
   margin-bottom: 48px;
 }
 
@@ -883,34 +883,42 @@ body {
 <!-- ═══════════════════════════════════════════════════ -->
 <div class="page cover">
   <!-- WTEC Logo SVG -->
-  <svg class="cover-wtec-logo" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+  <svg class="cover-wtec-logo" viewBox="0 0 750 180" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <clipPath id="globe-clip">
-        <circle cx="120" cy="110" r="65"/>
-      </clipPath>
+      <clipPath id="globe-clip"><circle cx="100" cy="100" r="62"/></clipPath>
     </defs>
-    <!-- Outer circle / vine -->
-    <path d="M120 45 C60 45, 55 110, 55 110 C55 165, 95 180, 120 180 C155 180, 185 155, 185 110 C185 70, 155 45, 120 45Z" fill="none" stroke="#3aab3a" stroke-width="7"/>
-    <!-- Leaf top -->
-    <path d="M95 55 C75 25, 55 15, 50 18 C45 22, 55 50, 75 65 C85 72, 95 60, 95 55Z" fill="#3aab3a"/>
-    <path d="M72 40 C72 40, 80 55, 88 58" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.5"/>
-    <!-- Leaf small -->
-    <path d="M68 75 C55 55, 38 50, 35 53 C32 56, 42 72, 56 80 C62 84, 68 78, 68 75Z" fill="#3aab3a"/>
-    <!-- Globe landmasses (simplified) -->
-    <g clip-path="url(#globe-clip)" fill="#3aab3a" opacity="0.35">
-      <!-- North America -->
-      <path d="M95 75 C100 70, 115 68, 120 72 C125 76, 130 80, 128 90 C126 95, 118 100, 112 98 C106 96, 100 90, 95 85Z"/>
-      <!-- South America -->
-      <path d="M115 105 C118 102, 124 104, 126 110 C128 118, 130 130, 126 140 C122 148, 116 150, 114 145 C112 138, 110 125, 112 115Z"/>
+    <g transform="translate(0,0)">
+      <!-- Globe circle outline (the vine/stem wrapping around) -->
+      <path d="M100 38 C52 38, 38 78, 38 100 C38 148, 68 162, 100 162 C140 162, 162 136, 162 100 C162 64, 140 38, 100 38Z" fill="none" stroke="#3aab3a" stroke-width="6.5"/>
+      <!-- Large upper leaf -->
+      <path d="M88 48 C78 28, 62 8, 42 4 C36 3, 30 8, 34 16 C40 28, 56 44, 72 54 C80 58, 86 52, 88 48Z" fill="#3aab3a"/>
+      <path d="M50 14 C56 26, 68 40, 80 48" fill="none" stroke="#fff" stroke-width="1.8" opacity="0.45"/>
+      <!-- Small lower leaf -->
+      <path d="M62 68 C50 50, 34 38, 22 38 C16 38, 14 44, 18 50 C24 60, 40 70, 54 72 C58 72, 62 70, 62 68Z" fill="#3aab3a"/>
+      <path d="M28 42 C34 50, 44 60, 56 68" fill="none" stroke="#fff" stroke-width="1.4" opacity="0.4"/>
+      <!-- Globe landmasses -->
+      <g clip-path="url(#globe-clip)" fill="#3aab3a">
+        <!-- North America -->
+        <path d="M78 52 C72 50, 68 52, 72 56 C74 58, 82 56, 86 58 C92 60, 98 56, 102 58 C108 60, 112 58, 114 54 C112 50, 106 48, 100 50 C96 52, 90 48, 86 50 C84 51, 80 52, 78 52Z" opacity="0.95"/>
+        <path d="M82 60 C78 62, 76 68, 78 74 C80 78, 86 82, 92 84 C96 84, 100 80, 102 76 C104 72, 102 66, 98 62 C94 60, 88 58, 82 60Z" opacity="0.95"/>
+        <path d="M72 72 C70 74, 70 78, 72 80 C74 82, 76 80, 76 76 C76 74, 74 72, 72 72Z" opacity="0.95"/>
+        <!-- Central America -->
+        <path d="M92 86 C90 88, 90 92, 92 96 C94 98, 96 96, 96 92 C96 88, 94 86, 92 86Z" opacity="0.95"/>
+        <!-- South America -->
+        <path d="M96 100 C92 100, 88 104, 88 110 C88 118, 92 126, 96 132 C100 138, 104 142, 106 146 C108 148, 110 146, 110 142 C110 136, 108 128, 106 122 C104 116, 106 110, 108 106 C108 102, 102 100, 96 100Z" opacity="0.95"/>
+        <!-- Europe / Africa hints -->
+        <path d="M118 58 C116 56, 114 58, 114 62 C114 66, 116 70, 118 72 C120 74, 122 72, 122 68 C122 64, 120 60, 118 58Z" opacity="0.7"/>
+        <path d="M116 78 C114 80, 114 86, 116 92 C118 98, 120 104, 122 110 C124 114, 126 112, 126 108 C126 102, 124 94, 122 88 C120 82, 118 78, 116 78Z" opacity="0.7"/>
+      </g>
     </g>
-    <!-- WTEC text -->
-    <text x="210" y="128" font-family="'Source Sans 3', Arial, sans-serif" font-size="72" font-weight="700" fill="#3aab3a" letter-spacing="2">WTEC</text>
+    <!-- WILLIAMS TOTAL -->
+    <text x="195" y="82" font-family="'Source Sans 3', Arial, Helvetica, sans-serif" font-size="52" font-weight="800" fill="#222222" letter-spacing="3">WILLIAMS TOTAL</text>
+    <!-- EROSION CONTROL, LLC -->
+    <text x="195" y="138" font-family="'Source Sans 3', Arial, Helvetica, sans-serif" font-size="42" font-weight="400" fill="#222222" letter-spacing="5">EROSION CONTROL, LLC</text>
   </svg>
 
   <div class="cover-divider"></div>
 
-  <div class="cover-label">Prepared for</div>
-  <h1 class="cover-title">Williams Total<br>Erosion Control</h1>
   <p class="cover-subtitle">A tailored digital presence &amp; indoor advertising strategy for your business.</p>
 
   <div class="cover-services">
