@@ -256,8 +256,9 @@ img.mctv-logo.real{height:40px;width:auto;object-fit:contain;filter:invert(1) br
 .small-logo .ww-name{font-size:15px}
 .small-logo .ww-sub{font-size:7.5px;margin-top:4px}
 
-.cover-photo.tire{background:radial-gradient(120% 90% at 78% 22%,#8a3223 0%,#4a1d14 45%,#0b1216 100%);display:flex;align-items:center;justify-content:center}
-.cover-photo.tire svg{height:270px;opacity:.92}
+.WWBADGE{height:116px;width:auto;border-radius:5px;box-shadow:0 6px 22px rgba(0,0,0,.45);flex:none}
+.small-logo .WWBADGE{height:62px;box-shadow:none}
+.cover-photo .scene{position:absolute;inset:0;width:100%;height:100%;display:block}
 
 /* one-ad slide */
 .adgrid{display:grid;grid-template-columns:1.25fr 1fr;gap:44px;align-items:start;margin-top:6px}
@@ -288,17 +289,49 @@ img.mctv-logo.real{height:40px;width:auto;object-fit:contain;filter:invert(1) br
 <!-- 1 · cover -->
 <section class="slide cover">
   <div class="cover-l">
-    <div class="ww-logo">
-      <svg viewBox="0 0 100 100" aria-hidden="true">
-        <g fill="none" stroke="#F0553D" stroke-width="6" stroke-linecap="round">
-          <circle cx="50" cy="50" r="44"/>
-          <circle cx="50" cy="50" r="27" stroke-width="5"/>
-          <circle cx="50" cy="50" r="8" fill="#F0553D" stroke="none"/>
-          <path d="M50 42 V14 M57 46 L81 32 M57 55 L81 68 M50 58 V86 M43 55 L19 68 M43 46 L19 32" stroke-width="5"/>
-        </g>
-      </svg>
-      <div class="ww-text"><div class="ww-name">WILLIAM WELLS</div><div class="ww-sub">TIRE &amp; AUTO</div></div>
-    </div>
+    <svg class="WWBADGE" viewBox="0 0 480 400" aria-label="William Wells Tire - Auto - Wrecker, Starkville MS">
+  <rect width="480" height="400" fill="#E4231F"/>
+  <text x="240" y="112" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="60" fill="#0d0d0d" textLength="416" lengthAdjust="spacingAndGlyphs">WILLIAM WELLS</text>
+  <text x="240" y="152" text-anchor="middle" font-family="Bricolage Grotesque,Arial,sans-serif" font-weight="800" font-size="27" fill="#0d0d0d" textLength="300" lengthAdjust="spacingAndGlyphs">TIRE - AUTO - WRECKER</text>
+
+  <!-- tire -->
+  <g>
+    <circle cx="112" cy="216" r="40" fill="#0d0d0d"/>
+    <circle cx="112" cy="216" r="40" fill="none" stroke="#E4231F" stroke-width="2" stroke-dasharray="4 6"/>
+    <circle cx="112" cy="216" r="24" fill="#f5f2ec"/>
+    <circle cx="112" cy="216" r="15" fill="#0d0d0d"/>
+    <circle cx="112" cy="216" r="5" fill="#f5f2ec"/>
+  </g>
+
+  <!-- garage sign -->
+  <g>
+    <rect x="196" y="178" width="92" height="70" fill="#f5f2ec" stroke="#0d0d0d" stroke-width="4"/>
+    <rect x="196" y="178" width="92" height="20" fill="#0d0d0d"/>
+    <text x="242" y="193" text-anchor="middle" font-family="Bricolage Grotesque,Arial,sans-serif" font-weight="800" font-size="14" fill="#f5f2ec" letter-spacing="2">GARAGE</text>
+    <rect x="208" y="204" width="5" height="40" fill="#0d0d0d"/>
+    <rect x="271" y="204" width="5" height="40" fill="#0d0d0d"/>
+    <path d="M216 230 L222 219 Q226 213 234 213 L252 213 Q259 213 263 219 L268 230 Z" fill="#0d0d0d"/>
+    <rect x="213" y="229" width="58" height="6" fill="#0d0d0d"/>
+    <circle cx="226" cy="238" r="5" fill="#0d0d0d"/>
+    <circle cx="258" cy="238" r="5" fill="#0d0d0d"/>
+  </g>
+
+  <!-- tow truck -->
+  <g fill="#0d0d0d">
+    <path d="M312 224 L312 208 Q312 203 317 203 L332 203 L338 190 Q340 186 345 186 L362 186 Q366 186 366 190 L366 203 L430 203 L430 224 Z"/>
+    <rect x="342" y="190" width="18" height="12" fill="#f5f2ec"/>
+    <path d="M368 202 L410 178 L414 183 L376 205 Z"/>
+    <path d="M410 178 L410 196 L406 196 L406 182 Z"/>
+    <circle cx="330" cy="226" r="9"/>
+    <circle cx="330" cy="226" r="3.5" fill="#f5f2ec"/>
+    <circle cx="404" cy="226" r="9"/>
+    <circle cx="404" cy="226" r="3.5" fill="#f5f2ec"/>
+  </g>
+
+  <text x="240" y="290" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="32" fill="#0d0d0d" letter-spacing="1">STARKVILLE, MS.</text>
+  <text x="240" y="330" text-anchor="middle" font-family="Bricolage Grotesque,Arial,sans-serif" font-weight="800" font-size="29" fill="#0d0d0d" letter-spacing="1">662-324-1006</text>
+  <text x="240" y="366" text-anchor="middle" font-family="Bricolage Grotesque,Arial,sans-serif" font-weight="800" font-size="25" fill="#0d0d0d" letter-spacing="3">24 HOURS</text>
+</svg>
     <div class="title">
       <span class="lab">Prepared for William Wells Tire &amp; Auto</span>
       <h1>Ad Traction Report</h1>
@@ -310,18 +343,99 @@ img.mctv-logo.real{height:40px;width:auto;object-fit:contain;filter:invert(1) br
       <div><span class="lab muted">Prepared by</span><b>MCTV Elite Advertising</b></div>
     </div>
   </div>
-  <div class="cover-photo tire">
-    <svg viewBox="0 0 100 100" aria-hidden="true">
-      <g fill="none" stroke="#F0704F" stroke-width="4.5" stroke-linecap="round">
-        <circle cx="50" cy="50" r="45"/>
-        <circle cx="50" cy="50" r="34" stroke-width="3"/>
-        <circle cx="50" cy="50" r="20" stroke-width="3.5"/>
-        <circle cx="50" cy="50" r="6" fill="#F0704F" stroke="none"/>
-        <path d="M50 44 V24 M55 47 L72 37 M55 53 L72 63 M50 56 V76 M45 53 L28 63 M45 47 L28 37" stroke-width="3.5"/>
-        <path d="M50 5 L50 12 M95 50 L88 50 M50 95 L50 88 M5 50 L12 50 M82 18 L77 23 M82 82 L77 77 M18 82 L23 77 M18 18 L23 23" stroke-width="3"/>
-      </g>
-    </svg>
-  </div>
+  <div class="cover-photo"><svg class="scene" viewBox="0 0 512 600" preserveAspectRatio="xMidYMid slice" aria-label="William Wells Tire &amp; Auto shop with tow trucks">
+  <defs>
+    <linearGradient id="wwsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1B62A8"/>
+      <stop offset=".55" stop-color="#4E93CC"/>
+      <stop offset="1" stop-color="#BEDDF0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- sky -->
+  <rect width="512" height="480" fill="url(#wwsky)"/>
+
+  <!-- tree line -->
+  <path d="M0 322 Q36 302 80 314 Q124 298 176 312 Q220 300 268 312 Q316 298 364 310 Q412 296 460 310 Q488 302 512 312 L512 458 L0 458 Z" fill="#33503A"/>
+
+  <!-- building: gable + wall -->
+  <polygon points="52,242 256,196 460,242 460,250 52,250" fill="#8FA6B4"/>
+  <polygon points="64,248 256,204 448,248 448,262 64,262" fill="#DDE4E9"/>
+  <rect x="64" y="262" width="384" height="196" fill="#E9EDF0"/>
+  <g stroke="#CBD4DA" stroke-width="2">
+    <line x1="96" y1="262" x2="96" y2="458"/><line x1="128" y1="262" x2="128" y2="458"/>
+    <line x1="160" y1="262" x2="160" y2="458"/><line x1="192" y1="262" x2="192" y2="458"/>
+    <line x1="224" y1="262" x2="224" y2="458"/><line x1="256" y1="262" x2="256" y2="458"/>
+    <line x1="288" y1="262" x2="288" y2="458"/><line x1="320" y1="262" x2="320" y2="458"/>
+    <line x1="352" y1="262" x2="352" y2="458"/><line x1="384" y1="262" x2="384" y2="458"/>
+    <line x1="416" y1="262" x2="416" y2="458"/>
+  </g>
+  <rect x="64" y="262" width="384" height="8" fill="#C4CED5"/>
+
+  <!-- NAPA AutoCare sign -->
+  <g>
+    <rect x="128" y="288" width="118" height="40" rx="3" fill="#12356E"/>
+    <polygon points="136,294 176,294 182,308 176,322 136,322 142,308" fill="#FFD200"/>
+    <text x="159" y="313" text-anchor="middle" font-family="Inter Tight,Arial,sans-serif" font-weight="700" font-size="13" fill="#12356E">NAPA</text>
+    <text x="212" y="306" text-anchor="middle" font-family="Inter Tight,Arial,sans-serif" font-weight="700" font-size="11" fill="#fff">AutoCare</text>
+    <text x="212" y="319" text-anchor="middle" font-family="Inter Tight,Arial,sans-serif" font-weight="600" font-size="8" fill="#FFD200" letter-spacing="1">CENTER</text>
+  </g>
+
+  <!-- red William Wells sign -->
+  <g>
+    <rect x="262" y="292" width="150" height="24" rx="2" fill="#C8281F"/>
+    <text x="337" y="308" text-anchor="middle" font-family="Inter Tight,Arial,sans-serif" font-weight="700" font-size="10.5" fill="#fff" letter-spacing=".5">WILLIAM WELLS TIRE &amp; AUTO</text>
+  </g>
+
+  <!-- entrance: awning + sign + door -->
+  <g>
+    <polygon points="226,352 296,352 304,374 218,374" fill="#2E6FBE"/>
+    <rect x="228" y="376" width="66" height="12" fill="#F2F4F6"/>
+    <text x="261" y="385" text-anchor="middle" font-family="Inter Tight,Arial,sans-serif" font-weight="600" font-size="6.5" fill="#12356E" letter-spacing=".5">WILLIAM WELLS TIRE &amp; AUTO</text>
+    <rect x="242" y="390" width="38" height="68" fill="#9FB4C4"/>
+    <rect x="242" y="390" width="38" height="68" fill="none" stroke="#7C93A5" stroke-width="2"/>
+  </g>
+
+  <!-- lot -->
+  <rect x="0" y="458" width="512" height="142" fill="#C7CBCE"/>
+  <rect x="0" y="458" width="512" height="8" fill="#AEB4B8"/>
+  <line x1="60" y1="520" x2="130" y2="520" stroke="#B4B9BD" stroke-width="3"/>
+  <line x1="380" y1="540" x2="470" y2="540" stroke="#B4B9BD" stroke-width="3"/>
+
+  <!-- black tow truck (left) -->
+  <g>
+    <path d="M36 500 L36 470 Q36 464 42 464 L74 464 L82 446 Q84 442 89 442 L112 442 Q116 442 116 446 L116 464 L146 464 Q152 464 152 470 L152 500 Z" fill="#17171A"/>
+    <rect x="88" y="447" width="24" height="15" rx="2" fill="#BFD4E4"/>
+    <rect x="84" y="436" width="34" height="6" rx="2" fill="#E8A24A"/>
+    <path d="M120 462 L154 440 L159 446 L128 466 Z" fill="#17171A"/>
+    <circle cx="62" cy="502" r="13" fill="#0f0f10"/><circle cx="62" cy="502" r="5" fill="#5a5f63"/>
+    <circle cx="128" cy="502" r="13" fill="#0f0f10"/><circle cx="128" cy="502" r="5" fill="#5a5f63"/>
+  </g>
+
+  <!-- white wrecker (middle) -->
+  <g>
+    <path d="M176 502 L176 470 Q176 464 182 464 L216 464 L224 444 Q226 440 231 440 L256 440 Q260 440 260 444 L260 464 L292 464 Q298 464 298 470 L298 502 Z" fill="#F2F4F6"/>
+    <path d="M176 502 L176 470 Q176 464 182 464 L216 464 L224 444 Q226 440 231 440 L256 440 Q260 440 260 444 L260 464 L292 464 Q298 464 298 470 L298 502 Z" fill="none" stroke="#B9C2C9" stroke-width="2"/>
+    <rect x="230" y="446" width="26" height="16" rx="2" fill="#B9D2E4"/>
+    <rect x="226" y="434" width="36" height="6" rx="2" fill="#E8A24A"/>
+    <path d="M264 462 L296 436 L301 442 L272 466 Z" fill="#2b2b2e"/>
+    <circle cx="202" cy="504" r="13" fill="#0f0f10"/><circle cx="202" cy="504" r="5" fill="#8a9095"/>
+    <circle cx="274" cy="504" r="13" fill="#0f0f10"/><circle cx="274" cy="504" r="5" fill="#8a9095"/>
+  </g>
+
+  <!-- white flatbed (right) -->
+  <g>
+    <path d="M322 502 L322 480 L322 466 Q322 462 326 462 L344 462 L352 446 Q354 442 359 442 L382 442 Q386 442 386 446 L386 462 L392 462 L392 502 Z" fill="#F2F4F6"/>
+    <path d="M322 502 L322 466 Q322 462 326 462 L344 462 L352 446 Q354 442 359 442 L382 442 Q386 442 386 446 L386 462 L392 462 L392 502 Z" fill="none" stroke="#B9C2C9" stroke-width="2"/>
+    <rect x="357" y="448" width="24" height="14" rx="2" fill="#B9D2E4"/>
+    <rect x="390" y="470" width="102" height="12" fill="#DDE1E4" stroke="#B9C2C9" stroke-width="2"/>
+    <rect x="390" y="482" width="102" height="6" fill="#8a9095"/>
+    <text x="368" y="478" text-anchor="middle" font-family="Inter Tight,Arial,sans-serif" font-weight="700" font-size="7" fill="#C8281F">24</text>
+    <circle cx="348" cy="504" r="13" fill="#0f0f10"/><circle cx="348" cy="504" r="5" fill="#8a9095"/>
+    <circle cx="428" cy="504" r="13" fill="#0f0f10"/><circle cx="428" cy="504" r="5" fill="#8a9095"/>
+    <circle cx="462" cy="504" r="13" fill="#0f0f10"/><circle cx="462" cy="504" r="5" fill="#8a9095"/>
+  </g>
+</svg></div>
 </section>
 
 <!-- 2 · glance -->
@@ -521,17 +635,49 @@ img.mctv-logo.real{height:40px;width:auto;object-fit:contain;filter:invert(1) br
     <div class="tm"><h3>Swayze Hollingsworth</h3><span class="lab">Director of Sales</span><p>(662) 907-0404<br>swayze@mctvofms.com</p></div>
   </div>
   <div class="foot small-logo">
-    <div class="ww-logo">
-      <svg viewBox="0 0 100 100" aria-hidden="true">
-        <g fill="none" stroke="#F0553D" stroke-width="6" stroke-linecap="round">
-          <circle cx="50" cy="50" r="44"/>
-          <circle cx="50" cy="50" r="27" stroke-width="5"/>
-          <circle cx="50" cy="50" r="8" fill="#F0553D" stroke="none"/>
-          <path d="M50 42 V14 M57 46 L81 32 M57 55 L81 68 M50 58 V86 M43 55 L19 68 M43 46 L19 32" stroke-width="5"/>
-        </g>
-      </svg>
-      <div class="ww-text"><div class="ww-name">WILLIAM WELLS</div><div class="ww-sub">TIRE &amp; AUTO</div></div>
-    </div>
+    <svg class="WWBADGE" viewBox="0 0 480 400" aria-label="William Wells Tire - Auto - Wrecker, Starkville MS">
+  <rect width="480" height="400" fill="#E4231F"/>
+  <text x="240" y="112" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="60" fill="#0d0d0d" textLength="416" lengthAdjust="spacingAndGlyphs">WILLIAM WELLS</text>
+  <text x="240" y="152" text-anchor="middle" font-family="Bricolage Grotesque,Arial,sans-serif" font-weight="800" font-size="27" fill="#0d0d0d" textLength="300" lengthAdjust="spacingAndGlyphs">TIRE - AUTO - WRECKER</text>
+
+  <!-- tire -->
+  <g>
+    <circle cx="112" cy="216" r="40" fill="#0d0d0d"/>
+    <circle cx="112" cy="216" r="40" fill="none" stroke="#E4231F" stroke-width="2" stroke-dasharray="4 6"/>
+    <circle cx="112" cy="216" r="24" fill="#f5f2ec"/>
+    <circle cx="112" cy="216" r="15" fill="#0d0d0d"/>
+    <circle cx="112" cy="216" r="5" fill="#f5f2ec"/>
+  </g>
+
+  <!-- garage sign -->
+  <g>
+    <rect x="196" y="178" width="92" height="70" fill="#f5f2ec" stroke="#0d0d0d" stroke-width="4"/>
+    <rect x="196" y="178" width="92" height="20" fill="#0d0d0d"/>
+    <text x="242" y="193" text-anchor="middle" font-family="Bricolage Grotesque,Arial,sans-serif" font-weight="800" font-size="14" fill="#f5f2ec" letter-spacing="2">GARAGE</text>
+    <rect x="208" y="204" width="5" height="40" fill="#0d0d0d"/>
+    <rect x="271" y="204" width="5" height="40" fill="#0d0d0d"/>
+    <path d="M216 230 L222 219 Q226 213 234 213 L252 213 Q259 213 263 219 L268 230 Z" fill="#0d0d0d"/>
+    <rect x="213" y="229" width="58" height="6" fill="#0d0d0d"/>
+    <circle cx="226" cy="238" r="5" fill="#0d0d0d"/>
+    <circle cx="258" cy="238" r="5" fill="#0d0d0d"/>
+  </g>
+
+  <!-- tow truck -->
+  <g fill="#0d0d0d">
+    <path d="M312 224 L312 208 Q312 203 317 203 L332 203 L338 190 Q340 186 345 186 L362 186 Q366 186 366 190 L366 203 L430 203 L430 224 Z"/>
+    <rect x="342" y="190" width="18" height="12" fill="#f5f2ec"/>
+    <path d="M368 202 L410 178 L414 183 L376 205 Z"/>
+    <path d="M410 178 L410 196 L406 196 L406 182 Z"/>
+    <circle cx="330" cy="226" r="9"/>
+    <circle cx="330" cy="226" r="3.5" fill="#f5f2ec"/>
+    <circle cx="404" cy="226" r="9"/>
+    <circle cx="404" cy="226" r="3.5" fill="#f5f2ec"/>
+  </g>
+
+  <text x="240" y="290" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="900" font-size="32" fill="#0d0d0d" letter-spacing="1">STARKVILLE, MS.</text>
+  <text x="240" y="330" text-anchor="middle" font-family="Bricolage Grotesque,Arial,sans-serif" font-weight="800" font-size="29" fill="#0d0d0d" letter-spacing="1">662-324-1006</text>
+  <text x="240" y="366" text-anchor="middle" font-family="Bricolage Grotesque,Arial,sans-serif" font-weight="800" font-size="25" fill="#0d0d0d" letter-spacing="3">24 HOURS</text>
+</svg>
     <span class="lab">MCTV Elite Advertising &middot; North Mississippi</span>
   </div>
 </section>
