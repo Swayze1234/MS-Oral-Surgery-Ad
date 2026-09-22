@@ -7,7 +7,7 @@ Output: ../ProjectCARE_30s_1920x1080.mp4 and ../ProjectCARE_keyframes.png
 """
 import os, subprocess
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageChops
 
 W, H, FPS, DUR = 1920, 1080, 30, 30
 N = FPS * DUR
@@ -34,23 +34,69 @@ PHOTOS = {
     "roy":     crop("roy", (355, 225, 595, 775), insp),
 }
 LOCKUP = Image.open(os.path.join(SRC, logop)).convert("RGB")          # Discovery Center + CARE badge
+DLOGO = Image.open(os.path.join(SRC, "district_logo.jpg")).convert("RGB")
+GOLD = (247, 190, 24)
+
+def ease_out_back(p):
+    p = max(0.0, min(1.0, p)); c1 = 1.70158; c3 = c1 + 1
+    return 1 + c3 * (p - 1) ** 3 + c1 * (p - 1) ** 2
+
+def confetti(fr, cx, cy, p, seed=1, n=70, spread=620, clip=None):
+    """Gold squares bursting outward from (cx, cy); p in 0..1 drives the burst."""
+    if p <= 0 or p >= 1: return
+    rng = np.random.RandomState(seed)
+    ov = Image.new("RGBA", fr.size, (0, 0, 0, 0)); d = ImageDraw.Draw(ov)
+    go = 1 - (1 - p) ** 3                      # ease-out travel
+    fade = 1.0 if p < 0.55 else max(0.0, 1 - (p - 0.55) / 0.45)
+    for _ in range(n):
+        ang = rng.uniform(0, 2 * np.pi); dist = rng.uniform(0.35, 1.0) * spread
+        sz = rng.uniform(10, 30) * (1 - 0.4 * p); rot = rng.uniform(0, np.pi) + p * rng.uniform(2, 6)
+        x = cx + np.cos(ang) * dist * go; y = cy + np.sin(ang) * dist * go * 0.75 + 120 * p * p
+        col = GOLD if rng.rand() > 0.25 else (232, 168, 10)
+        pts = [(x + sz * np.cos(rot + k * np.pi / 2), y + sz * np.sin(rot + k * np.pi / 2)) for k in range(4)]
+        d.polygon(pts, fill=col + (int(255 * fade),))
+    if clip is not None:
+        m = Image.new("L", fr.size, 0); ImageDraw.Draw(m).rounded_rectangle(clip, radius=40, fill=255)
+        ov.putalpha(ImageChops.multiply(ov.split()[-1], m))
+    fr.alpha_composite(ov)
+
+def logo_pop(fr, cx, cy, width, p, underline=True):
+    """District logo scaling in with a bounce, then a gold rule drawing underneath."""
+    if p <= 0: return
+    sc = ease_out_back(min(1.0, p / 0.6)) if p < 0.6 else 1.0
+    w = max(2, int(width * sc)); h = max(2, int(DLOGO.height * w / DLOGO.width))
+    lg = DLOGO.resize((w, h), Image.LANCZOS).convert("RGBA")
+    a = int(255 * min(1.0, p / 0.15)); lg.putalpha(lg.split()[-1].point(lambda v: a))
+    fr.alpha_composite(lg, (int(cx - w / 2), int(cy - h / 2)))
+    if underline and p > 0.6:
+        q = ease((p - 0.6) / 0.4); full = int(width * 0.55)
+        d = ImageDraw.Draw(fr)
+        d.rounded_rectangle([cx - full * q / 2, cy + h / 2 - 6, cx + full * q / 2, cy + h / 2 + 4], radius=5, fill=GOLD + (255,))
+
+def intro_frame(t):
+    fr = Image.new("RGBA", (W, H), WHITE + (255,))
+    confetti(fr, W // 2, H // 2 - 40, t / 1.3, seed=7, n=90, spread=760)
+    logo_pop(fr, W // 2, H // 2 - 20, 1150, (t - 0.3) / 1.4)
+    return fr
+
 BADGE = Image.open(os.path.join(SRC, flyp)).convert("RGBA").crop((470, 30, 662, 217))
 
 # ---------------- script ----------------
 # each scene: (start, end, kicker, headline lines, body lines, yellow_tag, photo)
+INTRO = 2.5
 SCENES = [
-    (0, 5,  "SOSD Discovery Center · Family Resource Center",
+    (2.5, 7,  "SOSD Discovery Center · Family Resource Center",
             ["PROJECT", "CARE"], ["Healthy Families.", "Happy Families."], None, "family"),
-    (5, 10, "Join our parenting class",
+    (7, 11.5, "Join our parenting class",
             ["ACTIVE", "PARENTING"], ["Attend two classes and receive", "FREE diapers & wipes while supplies last"],
             ("Wednesdays & Thursdays", "11:00 am – 12:00 pm"), "podium"),
-    (10, 15, "Discovery Center",
+    (11.5, 16, "Discovery Center",
             ["FAMILY RESOURCE", "LIBRARY"], ["Children's books  ·  Manipulatives", "Educational games  ·  Skill-building activities"],
             ("Monday – Friday", "8:00 am – 4:30 pm"), "shelves"),
-    (15, 20, "Programs & Support",
+    (16, 20.5, "Programs & Support",
             ["MORE WAYS", "WE HELP"], ["Dolly Parton's Imagination Library: free books", "mailed to children birth to age 5",
                                         "Teen parent classes  ·  Family events  ·  Free adult therapy"], None, "rug"),
-    (20, 25, "For more information, contact Roy Ann Bell",
+    (20.5, 25, "For more information, contact Roy Ann Bell",
             ["CALL", "TODAY"], ["1504 Louisville Street", "Starkville, MS"],
             ("662-615-0033", "662-320-4607"), "family"),
 ]
@@ -143,20 +189,26 @@ def scene_frame(t):
     return end_card(t - SCENES[-1][1])
 
 def end_card(tl):
-    a = ease(tl / 0.8); A = int(255 * a)
+    a = ease(tl / 0.7); A = int(255 * a)
     fr = background(SCENES[-1][1] + tl).convert("RGBA")
     d = ImageDraw.Draw(fr)
-    # white panel with logo lockup
-    lw = 1100; lh = int(LOCKUP.height * lw / LOCKUP.width)
+    # white panel: district logo (left) + Discovery Center / CARE lockup (right)
+    pw, ph = 1560, 430
+    px, py = (W - pw) // 2, 80 - int(40 * (1 - a))
+    panel = Image.new("RGBA", (pw, ph), (0, 0, 0, 0))
+    ImageDraw.Draw(panel).rounded_rectangle([0, 0, pw - 1, ph - 1], radius=40, fill=(255, 255, 255, A))
+    lw = 800; lh = int(LOCKUP.height * lw / LOCKUP.width)
     lock = LOCKUP.resize((lw, lh), Image.LANCZOS).convert("RGBA")
-    px, py = (W - lw) // 2 - 60, 120 - int(40 * (1 - a))
-    panel = Image.new("RGBA", (lw + 120, lh + 80), (0, 0, 0, 0))
-    ImageDraw.Draw(panel).rounded_rectangle([0, 0, lw + 119, lh + 79], radius=40, fill=(255, 255, 255, A))
     lock.putalpha(lock.split()[-1].point(lambda v: v * A // 255))
-    panel.alpha_composite(lock, (60, 40))
+    panel.alpha_composite(lock, (pw - lw - 50, (ph - lh) // 2))
     fr.alpha_composite(panel, (px, py))
-    y = py + lh + 130
-    a2 = ease((tl - 0.5) / 0.7); A2 = int(255 * a2)
+    lcx, lcy = px + 380, py + ph // 2
+    confetti(fr, lcx, lcy, (tl - 0.25) / 1.3, seed=11, n=60, spread=420, clip=[px, py, px + pw, py + ph])
+    logo_pop(fr, lcx, lcy, 640, (tl - 0.35) / 1.4)
+    # divider
+    d.line([(px + 760, py + 70), (px + 760, py + ph - 70)], fill=(210, 210, 210, A), width=3)
+    y = py + ph + 70
+    a2 = ease((tl - 0.6) / 0.7); A2 = int(255 * a2)
     f = font(FB, 64); s = "StarkvilleSD.com/DiscoveryCenter"; tw = d.textlength(s, font=f)
     d.rounded_rectangle([(W - tw) // 2 - 50, y, (W + tw) // 2 + 50, y + 100], radius=50, fill=YELLOW + (A2,))
     d.text(((W - tw) // 2, y + 14), s, font=f, fill=INK + (A2,)); y += 130
@@ -170,9 +222,21 @@ def end_card(tl):
 
 def build_frame(i):
     t = i / FPS
-    fr = scene_frame(t)
-    if t < 0.5:
-        fr = Image.blend(Image.new("RGB", (W, H), TEAL_D), fr, ease(t / 0.5))
+    WIPE = 0.45
+    if t < INTRO - WIPE:
+        fr = intro_frame(t).convert("RGB")
+    elif t < INTRO:
+        # diagonal lime-edged wipe from left to right revealing scene 1
+        q = ease((t - (INTRO - WIPE)) / WIPE)
+        top = intro_frame(t).convert("RGB"); under = scene_frame(INTRO)
+        edge = int(-300 + (W + 600) * q)
+        m = Image.new("L", (W, H), 0)
+        ImageDraw.Draw(m).polygon([(0, 0), (edge, 0), (edge - 260, H), (0, H)], fill=255)
+        fr = Image.composite(under, top, m)
+        d = ImageDraw.Draw(fr)
+        d.polygon([(edge, 0), (edge + 110, 0), (edge - 150, H), (edge - 260, H)], fill=LIME)
+    else:
+        fr = scene_frame(t)
     if t > DUR - 0.6:
         fr = Image.blend(fr, Image.new("RGB", (W, H), TEAL_D), ease((t - (DUR - 0.6)) / 0.6))
     return fr
@@ -189,13 +253,14 @@ def main():
             "-movflags", "+faststart", OUT]
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.DEVNULL)
     keys = []
+    KEYT = {int(FPS * x) for x in (1.0, 4.5, 9, 13.5, 18, 22.5, 26.5)}
     for i in range(N):
         fr = build_frame(i); p.stdin.write(fr.tobytes())
-        if i % (FPS * 5) == FPS * 2: keys.append(fr.resize((640, 360), Image.LANCZOS))
+        if i in KEYT: keys.append(fr.resize((640, 360), Image.LANCZOS))
         if i % 150 == 0: print(f"  {i}/{N}", flush=True)
     p.stdin.close(); p.wait()
-    sheet = Image.new("RGB", (1920, 720), INK)
-    for k, im in enumerate(keys[:6]): sheet.paste(im, ((k % 3) * 640, (k // 3) * 360))
+    sheet = Image.new("RGB", (1920, 1080), INK)
+    for k, im in enumerate(keys[:9]): sheet.paste(im, ((k % 3) * 640, (k // 3) * 360))
     sheet.save(SHEET); print("wrote", OUT)
 
 if __name__ == "__main__":

@@ -4,15 +4,16 @@
 `ProjectCARE_keyframes.png` — one still from each scene for quick review.
 
 ## Scenes
+0. District logo sting (0–2.5 s): gold confetti burst, logo bounce-in, lime wipe into the ad
 1. Project CARE — Healthy Families, Happy Families (family photo)
 2. Active Parenting — Wed & Thu, 11:00–12:00, free diapers & wipes after two classes
 3. Family Resource Library — Mon–Fri 8:00–4:30, what you can check out
 4. More ways we help — Imagination Library, teen parent classes, family events, free adult therapy
 5. Call today — Roy Ann Bell, 662-615-0033 / 662-320-4607, 1504 Louisville Street
-6. End card — Discovery Center + Project CARE logos, StarkvilleSD.com/DiscoveryCenter, Facebook, funding line
+6. End card — animated district logo, Discovery Center + Project CARE logos, StarkvilleSD.com/DiscoveryCenter, Facebook, funding line
 
 ## Re-rendering
-Source art (flyer, brochure pages, logo from CARE_Logo.docx) is in `build/src/`.
+Source art (flyer, brochure pages, district logo, logo from CARE_Logo.docx) is in `build/src/`.
 Drop a `music.mp3` or `music.wav` into `build/src/` to add a soundtrack (auto-trimmed to 30 s with fades).
 
 ```bash
