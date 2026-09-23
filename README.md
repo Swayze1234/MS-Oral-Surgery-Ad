@@ -38,3 +38,24 @@ python3 build.py        # applies image + text edits, writes ../MCTV_Media_Kit_T
 
 To spin up another market version, drop in new photos and adjust the contact
 strings in `build.py`.
+
+---
+
+# Premier Aesthetics :30 TV Spot — 2026 Refresh
+
+`premier-aesthetics-ad/MCTV_PremierAesthetics_FS_2026.mp4` replaces
+`MCTV_48HPremierAesthetics_FS_In_1.mp4` (1920x1080, 29.97 fps, 30.03s, silent
+stereo AAC track — same spec as the original).
+
+| Time | Scene |
+|------|-------|
+| 0–2.6s | Original PA logo intro, dissolving into… |
+| 2.6–10s | **New team group photo** (old photo removed), full-bleed with slow push-in, "Meet Our Team / Welcome to Premier Aesthetics" |
+| 10–20s | Microneedling footage + "Summer Skin Prep — Essentials that aren't SPF" |
+| 20–27s | Injectables footage + "Introducing Premier Perks" |
+| 27–30s | **New end card**: logo, "Your natural beauty, elevated.", "Book your consultation today", phone, socials |
+
+Refreshed look: Playfair Display + Montserrat type, gold accents, animated
+text reveals, gentle zooms, and cross-dissolves between scenes.
+
+Rebuild: `cd premier-aesthetics-ad && pip install pillow numpy imageio-ffmpeg && python3 build_ad.py`
