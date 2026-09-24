@@ -15,10 +15,14 @@ OUT = "../ProjectCARE_ProofOfPlay_2026-09-22_to_09-24.pdf"
 wb = openpyxl.load_workbook(XLSX, data_only=True); ws = wb.worksheets[0]
 rows = list(ws.iter_rows(values_only=True))
 filename = rows[0][1]; total_count, total_dur = rows[2][2], rows[2][3]
-hosts = sorted([r for r in rows[5:] if r[0]], key=lambda r: -r[6])
+EXCLUDE = {"Bep Haus"}          # locations removed from the client report
 def secs(s):
     h, m, sec = re.match(r"(\d+)h (\d+)m (\d+)s", s).groups(); return int(h)*3600 + int(m)*60 + int(sec)
-assert sum(r[6] for r in hosts) == total_count and sum(secs(r[7]) for r in hosts) == secs(total_dur)
+def fmt(n): return f"{n//3600}h {n%3600//60}m {n%60}s"
+all_hosts = [r for r in rows[5:] if r[0]]
+assert sum(r[6] for r in all_hosts) == total_count and sum(secs(r[7]) for r in all_hosts) == secs(total_dur)
+hosts = sorted([r for r in all_hosts if r[0] not in EXCLUDE], key=lambda r: -r[6])
+total_count = sum(r[6] for r in hosts); total_dur = fmt(sum(secs(r[7]) for r in hosts))
 
 TEAL = colors.HexColor("#29A59E"); LIME = colors.HexColor("#8DB237"); YELLOW = colors.HexColor("#F7C948"); INK = colors.HexColor("#282828")
 ss = getSampleStyleSheet()
@@ -50,7 +54,7 @@ meta = [["Prepared for", "Roy Ann Bell, Project Manager – Project CARE, SOSD D
         ["Prepared by", "Swayze Hollingsworth, MCTV Digital"],
         ["Campaign", "Project CARE – Active Parenting & Family Resource Library (30-second spot)"],
         ["Media file", filename],
-        ["Playlist", "D.476 1-Mainshow Starkville (plus Oxford network)"],
+        ["Playlist", "D.476 1-Mainshow Starkville"],
         ["Report period", "Tuesday, September 22, 2026 through Thursday, September 24, 2026"]]
 t = Table([[Paragraph(f"<b>{a}</b>", CELL), Paragraph(b, CELL)] for a, b in meta], colWidths=[1.3*inch, 5.7*inch])
 t.setStyle(TableStyle([("VALIGN",(0,0),(-1,-1),"TOP"),("LINEBELOW",(0,0),(-1,-2),0.4,colors.HexColor("#DDDDDD")),
@@ -66,7 +70,7 @@ S += [st, Spacer(1, 8),
                 f"for a combined <b>{total_dur}</b> of on-screen time. Every play is the full 30-second spot. "
                 "Play counts and durations below come directly from the MCTV network playback log for this media file.", BODY),
       Spacer(1, 8)]
-note = Table([[Paragraph("<b>Bonus screens:</b> 9 of the 19 host screens above were added to the campaign <b>at no charge</b> as a gift to Project CARE, "
+note = Table([[Paragraph("<b>Bonus screens:</b> 9 of the 18 host screens above were added to the campaign <b>at no charge</b> as a gift to Project CARE, "
                          "extending the ad's reach across Starkville beyond the screens purchased.", CELL)],
               [Paragraph("<b>On track for 15,000+ plays:</b> at the current pace, the Project CARE ad is on target to play <b>at least 15,000 times "
                          "before October 1, 2026</b>. An updated report will follow at the end of the flight.", CELL)]],
@@ -85,8 +89,8 @@ ht.setStyle(TableStyle([("BACKGROUND",(0,0),(-1,0),TEAL),("TEXTCOLOR",(0,0),(-1,
        ("BACKGROUND",(0,-1),(-1,-1),colors.HexColor("#FFF3CF")),("FONTNAME",(0,-1),(-1,-1),"Helvetica-Bold"),("LINEABOVE",(0,-1),(-1,-1),1,YELLOW),
        ("TOPPADDING",(0,0),(-1,-1),4),("BOTTOMPADDING",(0,0),(-1,-1),4)]))
 S += [ht, Spacer(1, 6),
-      Paragraph("Locations are listed from most to fewest plays. Seventeen screens are in Starkville; Elm Lake Golf Course (Columbus) and Bep Haus (Oxford) "
-                "are on the same regional network and also carried the spot. Play counts vary by location because each screen's loop length and "
+      Paragraph("Locations are listed from most to fewest plays. Seventeen screens are in Starkville; Elm Lake Golf Course (Columbus) "
+                "is on the same regional network and also carried the spot. Play counts vary by location because each screen's loop length and "
                 "hours of operation differ.", SMALL),
       Paragraph("What Aired", H2),
       Paragraph("Stills from the 30-second Project CARE spot as it appeared on screen (1920x1080):", BODY), Spacer(1, 4)]
