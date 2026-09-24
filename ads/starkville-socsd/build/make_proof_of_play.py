@@ -65,7 +65,16 @@ S += [st, Spacer(1, 8),
       Paragraph(f"The Project CARE ad played <b>{total_count:,} times</b> across <b>{len(hosts)} host locations</b> between September 22 and September 24, 2026, "
                 f"for a combined <b>{total_dur}</b> of on-screen time. Every play is the full 30-second spot. "
                 "Play counts and durations below come directly from the MCTV network playback log for this media file.", BODY),
-      Paragraph("Screen Locations & Play Counts", H2)]
+      Spacer(1, 8)]
+note = Table([[Paragraph("<b>Bonus screens:</b> 9 of the 19 host screens above were added to the campaign <b>at no charge</b> as a gift to Project CARE, "
+                         "extending the ad's reach across Starkville beyond the screens purchased.", CELL)],
+              [Paragraph("<b>On track for 15,000+ plays:</b> at the current pace, the Project CARE ad is on target to play <b>at least 15,000 times "
+                         "before October 1, 2026</b>. An updated report will follow at the end of the flight.", CELL)]],
+             colWidths=[7*inch])
+note.setStyle(TableStyle([("BACKGROUND",(0,0),(-1,-1),colors.HexColor("#FFF8E1")),("BOX",(0,0),(-1,-1),0.8,YELLOW),
+                          ("LINEBELOW",(0,0),(-1,-2),0.5,YELLOW),("TOPPADDING",(0,0),(-1,-1),7),("BOTTOMPADDING",(0,0),(-1,-1),7),
+                          ("LEFTPADDING",(0,0),(-1,-1),10),("RIGHTPADDING",(0,0),(-1,-1),10)]))
+S += [note, Paragraph("Screen Locations & Play Counts", H2)]
 hdr = ["#", "Host location", "City", "Plays", "On-screen time", "First play", "Last play"]
 data = [hdr] + [[str(i+1), Paragraph(r[0], CELL), f"{r[1]}, {r[2]}", f"{r[6]:,}", r[7], r[8], r[9]] for i, r in enumerate(hosts)]
 data.append(["", Paragraph("<b>Total</b>", CELL), "", f"{total_count:,}", total_dur, "09/22/2026", "09/24/2026"])
