@@ -81,7 +81,9 @@ S += [ht, Spacer(1, 6),
                 "hours of operation differ.", SMALL),
       Paragraph("What Aired", H2),
       Paragraph("Stills from the 30-second Project CARE spot as it appeared on screen (1920x1080):", BODY), Spacer(1, 4)]
-g = Image("stills_grid.png"); g.drawWidth = 7*inch; g.drawHeight = 7*inch * g.imageHeight / g.imageWidth
+from PIL import Image as PILImage
+_w, _h = PILImage.open("stills_grid.png").size
+g = Image("stills_grid.png", width=7*inch, height=7*inch*_h/_w)
 S += [g, Spacer(1, 10),
       Paragraph("Source: MCTV network playback report for NTV18_SOCSD_OUT1.webm, exported September 24, 2026. Original spreadsheet available on request.", SMALL)]
 doc.build(S, onFirstPage=footer, onLaterPages=footer)
