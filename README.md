@@ -38,3 +38,15 @@ python3 build.py        # applies image + text edits, writes ../MCTV_Media_Kit_T
 
 To spin up another market version, drop in new photos and adjust the contact
 strings in `build.py`.
+
+---
+
+# MCTV Media Kit — Golden Triangle Edition
+
+`MCTV_Media_Kit_Golden_Triangle.pdf` — host-location updates on the
+"Where your ad runs" slide (p5), Golden Triangle section:
+
+- **Fitness & Wellness:** added Starkville Athletic Club
+- **Retail & Specialty:** added The Warehouse Market
+- **Beauty, Salons & Spas:** Legends Hair Salon → Maison De Couleur- House of Color Hair Salon
+- "Other / Copy Cow" moved to the bottom of the middle column so everything still fits in the box.
