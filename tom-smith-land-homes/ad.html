@@ -30,8 +30,11 @@
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:#fff}
 #stage{position:relative;width:1920px;height:1080px;overflow:hidden;
-  background:radial-gradient(120% 90% at 50% 30%,#ffffff 0%,#f6f8fb 100%);
+  background:#e9efe0 url(assets/img/background.jpg) center/cover no-repeat;
   font-family:Montserrat,sans-serif}
+/* light wash over the park photo so the navy type and the green parts of the logo stay legible */
+#stage::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.58) 0%,rgba(255,255,255,.50) 55%,rgba(255,255,255,.42) 100%)}
 .abs{position:absolute}
 .slide{position:absolute;inset:0}
 
@@ -44,7 +47,8 @@ html,body{margin:0;padding:0;background:#fff}
    build it piece by piece. Layer geometry comes from layers.js. */
 #logo{position:absolute;left:640px;top:40px;width:640px;transform-origin:0 0;
   animation:logoMove 30000ms linear both}
-#logo .lg{position:absolute;display:block}
+#logo .lg{position:absolute;display:block;
+  filter:drop-shadow(0 0 2.5px #fff) drop-shadow(0 0 2.5px #fff) drop-shadow(0 0 10px rgba(255,255,255,.85))}
 @keyframes logoMove{
   0%,21%          {transform:translate(0,0) scale(1);            animation-timing-function:cubic-bezier(.7,0,.3,1)}
   23.3333%,60%    {transform:translate(700px,20px) scale(.84375);animation-timing-function:cubic-bezier(.7,0,.3,1)}
@@ -66,6 +70,8 @@ html,body{margin:0;padding:0;background:#fff}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 /* ---------- shared text styles ---------- */
+.name,.headline{text-shadow:0 0 10px rgba(255,255,255,.95),0 0 22px rgba(255,255,255,.9),0 0 40px rgba(255,255,255,.7)}
+.name.band-name{text-shadow:none}
 .name .first{font-weight:300;font-size:72px;line-height:1;color:var(--navy);letter-spacing:3px}
 .name .last {font-weight:800;font-size:86px;line-height:1.05;color:var(--navy);margin-top:4px;letter-spacing:1px}
 .name .role {font-weight:400;font-size:32px;line-height:1;color:var(--grey);letter-spacing:5px;margin-top:14px}

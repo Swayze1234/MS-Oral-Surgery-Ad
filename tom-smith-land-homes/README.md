@@ -29,7 +29,11 @@ slide.
   positions.
 - `assets/fonts/` — Montserrat (name/phone text, as on the card) and Liberation
   Serif (band headlines).
-- `assets/source/` — the original logo, business card and headshots supplied.
+- `assets/img/background.jpg` — the supplied park bokeh photo, cropped to 16:9 and
+  scaled to 1920×1080. `ad.html` lays a light white wash over it so the navy
+  type and the green parts of the logo stay legible, and gives the logo pieces a
+  soft white halo.
+- `assets/source/` — the original logo, background, business card and headshots supplied.
 
 ## Notes
 
@@ -46,6 +50,8 @@ slide.
 ## Rebuild
 
 ```bash
+# background (only if the photo changes): crop to 16:9 and scale to 1920x1080
+python3 -c "from PIL import Image,ImageFilter; im=Image.open('assets/source/park-bokeh.webp').convert('RGB'); w,h=im.size; th=round(w*9/16); t=(h-th)//2; im.crop((0,t,w,t+th)).resize((1920,1080),Image.LANCZOS).filter(ImageFilter.GaussianBlur(1.5)).save('assets/img/background.jpg',quality=90)"
 pip install pillow numpy scipy rembg onnxruntime imageio-ffmpeg   # imageio-ffmpeg bundles ffmpeg
 python3 prepare_headshots.py                          # only if headshots change
 python3 prepare_logo.py                               # only if the logo changes
