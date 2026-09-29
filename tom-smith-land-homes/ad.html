@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tom Smith Land &amp; Homes — 30s Digital Ad (1920×1080)</title>
+<style>
+/* ---------- fonts (all local, so renders are deterministic) ---------- */
+@font-face{font-family:'Montserrat';font-weight:300;src:url(assets/fonts/Montserrat-300.ttf)}
+@font-face{font-family:'Montserrat';font-weight:400;src:url(assets/fonts/Montserrat-400.ttf)}
+@font-face{font-family:'Montserrat';font-weight:500;src:url(assets/fonts/Montserrat-500.ttf)}
+@font-face{font-family:'Montserrat';font-weight:600;src:url(assets/fonts/Montserrat-600.ttf)}
+@font-face{font-family:'Montserrat';font-weight:700;src:url(assets/fonts/Montserrat-700.ttf)}
+@font-face{font-family:'Montserrat';font-weight:800;src:url(assets/fonts/Montserrat-800.ttf)}
+@font-face{font-family:'Ultra';font-weight:400;src:url(assets/fonts/Ultra-400.ttf)}
+@font-face{font-family:'TSSerif';font-weight:400;src:url(assets/fonts/LiberationSerif-Regular.ttf)}
+@font-face{font-family:'TSSerif';font-weight:700;src:url(assets/fonts/LiberationSerif-Bold.ttf)}
+
+/* ---------- brand palette (sampled from the business card) ---------- */
+:root{
+  --blue:#134d95;        /* bottom band */
+  --navy:#12365f;        /* name text */
+  --green:#7d9c3e;       /* wave stripe */
+  --logo-blue:#1d5aa8;   /* "Tom", roof, LAND AND HOMES */
+  --logo-green:#86a03c;  /* "Smith", pine trees */
+  --logo-navy:#0f2c5c;   /* Expect More. Get More. */
+  --trunk:#55702a;
+  --text:#3a3a3a;
+  --grey:#6f7784;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 30%,#ffffff 0%,#f6f8fb 100%);
+  font-family:Montserrat,sans-serif}
+.abs{position:absolute}
+.slide{position:absolute;inset:0}
+
+/* ---------- green wave + blue band (persistent, like the card) ---------- */
+#band{position:absolute;left:0;top:0;animation:bandIn 900ms 0ms both cubic-bezier(.2,.8,.2,1)}
+@keyframes bandIn{from{transform:translateY(460px)}to{transform:none}}
+
+/* ---------- the logo: one element that travels between slides ---------- */
+#logo{position:absolute;left:640px;top:40px;width:640px;transform-origin:0 0;
+  animation:logoMove 30000ms linear both}
+#logo svg{display:block;width:100%;height:auto;overflow:visible}
+@keyframes logoMove{
+  0%,21%          {transform:translate(0,0) scale(1);            animation-timing-function:cubic-bezier(.7,0,.3,1)}
+  23.3333%,60%    {transform:translate(700px,20px) scale(.84375);animation-timing-function:cubic-bezier(.7,0,.3,1)}
+  62.6667%,100%   {transform:translate(-560px,-4px) scale(.53125)}
+}
+
+/* slide 1 — logo builds itself piece by piece */
+.roof-w,.roof-b{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 900ms 250ms both cubic-bezier(.4,0,.2,1)}
+@keyframes draw{to{stroke-dashoffset:0}}
+.chim{opacity:0;animation:fadeIn 350ms 950ms both}
+.lg-tom  {transform-box:fill-box;transform-origin:center;animation:pop 700ms 750ms  both cubic-bezier(.34,1.56,.64,1)}
+.lg-smith{transform-box:fill-box;transform-origin:center;animation:pop 700ms 1050ms both cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+.lg-tree{transform-box:fill-box;transform-origin:50% 100%;animation:grow 850ms both cubic-bezier(.34,1.35,.64,1)}
+.lg-tree-a{animation-delay:1350ms}
+.lg-tree-b{animation-delay:1550ms}
+@keyframes grow{from{opacity:0;transform:scaleY(.05) scaleX(.5)}to{opacity:1;transform:none}}
+.lg-land {animation:rise 600ms 1950ms both cubic-bezier(.2,.8,.2,1)}
+.lg-homes{animation:rise 600ms 2150ms both cubic-bezier(.2,.8,.2,1)}
+.lg-tag  {animation:rise 700ms 2550ms both cubic-bezier(.2,.8,.2,1)}
+@keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ---------- shared text styles ---------- */
+.name .first{font-weight:300;font-size:80px;line-height:1;color:var(--navy);letter-spacing:3px}
+.name .last {font-weight:800;font-size:96px;line-height:1.05;color:var(--navy);margin-top:4px;letter-spacing:1px}
+.name .role {font-weight:400;font-size:32px;line-height:1;color:var(--grey);letter-spacing:5px;margin-top:14px}
+.name .role sup{font-size:.45em;letter-spacing:0}
+.name .lbl{font-weight:500;font-size:32px;line-height:1;color:var(--grey);letter-spacing:1px;margin-top:34px}
+.name .lbl + .num + .lbl{margin-top:24px}
+.name .num{font-weight:700;font-size:46px;line-height:1.1;color:var(--text);margin-top:6px}
+.name.big .first{font-size:100px;letter-spacing:4px}
+.name.big .last {font-size:116px}
+
+.band-text .h1{font-family:TSSerif,serif;font-weight:700;font-size:74px;line-height:1.05;color:#fff}
+.band-text .h2{font-family:TSSerif,serif;font-weight:700;font-size:50px;line-height:1.1;color:#fff;margin-top:8px}
+.band-text.left .h1{font-size:66px}
+.url{font-family:Montserrat,sans-serif;font-weight:500;font-size:30px;line-height:1;color:#dfe9f8;letter-spacing:1px;margin-top:16px}
+
+.cut{display:block}
+
+/* ---------- slide enter / exit ---------- */
+@keyframes upIn   {from{opacity:0;transform:translateY(140px)}to{opacity:1;transform:none}}
+@keyframes downOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(120px)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:none}}
+@keyframes slideInR{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:none}}
+@keyframes fadeOut{from{opacity:1}to{opacity:0}}
+.fx{animation-fill-mode:both}
+
+/* slide 1 (0–7s) */
+#s1 .url{animation:rise 700ms 3200ms both cubic-bezier(.2,.8,.2,1),fadeOut 400ms 6300ms forwards}
+
+/* slide 2 (7–18s) */
+#chance{animation:upIn 900ms 6900ms both cubic-bezier(.2,.8,.2,1),downOut 600ms 18000ms forwards ease-in}
+#s2 .first {animation:slideIn 600ms 7200ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
+#s2 .last  {animation:slideIn 600ms 7320ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
+#s2 .role  {animation:slideIn 600ms 7440ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
+#s2 .p1    {animation:slideIn 600ms 7640ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
+#s2 .p2    {animation:slideIn 600ms 7720ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
+#s2 .p3    {animation:slideIn 600ms 7840ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
+#s2 .p4    {animation:slideIn 600ms 7920ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
+#s2 .h1    {animation:rise 650ms 8000ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
+#s2 .h2    {animation:rise 650ms 8200ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
+#s2 .url   {animation:rise 650ms 8400ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
+
+/* slide 3 (18.7–30s) */
+#brady{animation:upIn 900ms 18700ms both cubic-bezier(.2,.8,.2,1)}
+#s3 .first{animation:slideIn 650ms 19000ms both cubic-bezier(.2,.8,.2,1)}
+#s3 .last {animation:slideIn 650ms 19150ms both cubic-bezier(.2,.8,.2,1)}
+#s3 .l1   {animation:rise 650ms 19500ms both cubic-bezier(.2,.8,.2,1)}
+#s3 .l2   {animation:rise 650ms 19650ms both cubic-bezier(.2,.8,.2,1)}
+#s3 .url  {animation:rise 650ms 19850ms both cubic-bezier(.2,.8,.2,1)}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- green wave + blue band -->
+  <svg id="band" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true">
+    <path fill="var(--green)" d="M0,646 C400,656 700,786 960,776 C1250,766 1500,686 1920,696 L1920,1080 L0,1080 Z"/>
+    <path fill="var(--blue)"  d="M0,690 C400,700 700,830 960,820 C1250,810 1500,730 1920,740 L1920,1080 L0,1080 Z"/>
+  </svg>
+
+  <!-- slide 1: intro -->
+  <div class="slide" id="s1">
+    <div class="abs url" style="left:0;width:1920px;top:944px;text-align:center;margin:0">TomSmithLandandHomes.com</div>
+  </div>
+
+  <!-- slide 2: Chance Persac (mirrors the business card layout) -->
+  <div class="slide" id="s2">
+    <img class="abs cut" id="chance" src="assets/img/chance-cutout.png" alt="" style="left:40px;bottom:-8px;height:1008px">
+    <div class="abs name" style="left:880px;top:104px">
+      <div class="first">CHANCE</div>
+      <div class="last">PERSAC</div>
+      <div class="role">REALTOR<sup>®</sup></div>
+      <div class="lbl p1">Office phone:</div>
+      <div class="num p2">662.268.6333</div>
+      <div class="lbl p3">Cell phone:</div>
+      <div class="num p4">(601) 955-4587</div>
+    </div>
+    <div class="abs band-text" style="left:860px;width:1020px;top:822px;text-align:center">
+      <div class="h1">LAND OR HOME?</div>
+      <div class="h2">GET THE BEST OF BOTH WORLDS.</div>
+      <div class="url">TomSmithLandandHomes.com</div>
+    </div>
+  </div>
+
+  <!-- slide 3: Brady Richardson (headshot on the right) -->
+  <div class="slide" id="s3">
+    <img class="abs cut" id="brady" src="assets/img/brady-cutout.png" alt="" style="right:40px;bottom:-8px;height:1008px">
+    <div class="abs name big" style="left:80px;top:392px">
+      <div class="first">BRADY</div>
+      <div class="last">RICHARDSON</div>
+    </div>
+    <div class="abs band-text left" style="left:82px;top:800px">
+      <div class="h1 l1">YOUR LOCAL</div>
+      <div class="h1 l2">HOMETOWN REALTORS</div>
+      <div class="url">TomSmithLandandHomes.com</div>
+    </div>
+  </div>
+
+  <!-- the logo (vector re-creation of the Tom Smith Land and Homes mark) -->
+  <div id="logo"></div>
+</div>
+
+<script>
+/* ---- vector logo ------------------------------------------------------ */
+/* A stylised pine: layered "cloud" tiers built from overlapping circles.
+   Each tier is drawn twice (white, then green) so the union of its circles
+   gets one clean white outline, and tiers are drawn bottom-up so every tier
+   overlaps the one below it — the layered look of the original mark. */
+function tree(cls, cx, top, h, w){
+  const n = 7; let s = '';
+  s += `<path d="M${cx},${top + h*0.30} L${cx},${top + h*1.04}" stroke="var(--trunk)" stroke-width="${(w*0.075).toFixed(1)}" stroke-linecap="round" fill="none"/>`;
+  const tiers = [];
+  for (let i = 0; i < n; i++){
+    const f  = i / (n - 1);
+    const W  = w * (0.20 + 0.80 * Math.pow(f, 1.15));
+    const H  = (h / n) * 1.12;
+    const cy = top + h * (0.10 + 0.90 * f);
+    const r  = H * 0.46;
+    const k  = Math.max(1, Math.round((W - 2*r) / (r * 0.95)) + 1);
+    const circles = [];
+    for (let j = 0; j < k; j++){
+      const t  = k === 1 ? 0.5 : j / (k - 1);
+      const x  = cx - (W/2 - r) + t * (W - 2*r) + ((i + j) % 2 ? 1 : -1) * w * 0.012;
+      const y  = cy + ((j % 2) ? -H*0.10 : H*0.06) + ((i % 2) ? H*0.04 : 0);
+      const rr = r * (0.92 + 0.16 * (((i*3 + j*5) % 4) / 3));
+      circles.push([x, y, rr]);
+    }
+    if (i === 0) circles.push([cx, top + h*0.03, r*0.55]); /* spire */
+    tiers.push(circles);
+  }
+  for (let i = n - 1; i >= 0; i--){                 /* bottom tier first */
+    const c = tiers[i];
+    s += '<g>' + c.map(([x,y,r]) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="#fff" stroke="#fff" stroke-width="11"/>`).join('') + '</g>';
+    s += '<g>' + c.map(([x,y,r]) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="var(--logo-green)"/>`).join('') + '</g>';
+  }
+  return `<g class="lg-tree ${cls}">${s}</g>`;
+}
+const TXT = 'paint-order="stroke" stroke="#fff" stroke-linejoin="round"';
+const LOGO = `
+<svg viewBox="0 0 840 870" xmlns="http://www.w3.org/2000/svg">
+  <g class="lg-trees">
+    ${tree('lg-tree-a', 468, 30, 440, 250)}
+    ${tree('lg-tree-b', 672, 12, 440, 280)}
+  </g>
+  <g class="lg-roof">
+    <rect class="chim" x="126" y="192" width="44" height="120" rx="3" fill="var(--logo-blue)" stroke="#fff" stroke-width="9" paint-order="stroke"/>
+    <polyline class="roof-w" points="12,378 222,214 402,292" pathLength="1" fill="none" stroke="#fff" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline class="roof-b" points="12,378 222,214 402,292" pathLength="1" fill="none" stroke="var(--logo-blue)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text class="lg-tom"   x="78" y="455" font-family="Ultra" font-size="150" fill="var(--logo-blue)"  stroke-width="8" ${TXT}>Tom</text>
+  <text class="lg-smith" x="84" y="592" font-family="Ultra" font-size="192" fill="var(--logo-green)" stroke-width="9" ${TXT}>Smith</text>
+  <text class="lg-land"  x="500" y="692" text-anchor="middle" font-family="TSSerif" font-weight="700" font-size="104" letter-spacing="3"  fill="var(--logo-blue)" stroke-width="8" ${TXT}>LAND AND</text>
+  <text class="lg-homes" x="500" y="792" text-anchor="middle" font-family="TSSerif" font-weight="700" font-size="104" letter-spacing="12" fill="var(--logo-blue)" stroke-width="8" ${TXT}>HOMES</text>
+  <text class="lg-tag"   x="500" y="852" text-anchor="middle" font-family="TSSerif" font-weight="700" font-size="54" fill="var(--logo-navy)">Expect More. Get More.</text>
+</svg>`;
+document.getElementById('logo').innerHTML = LOGO;
+
+/* ---- deterministic playback hooks used by render.js ------------------- */
+window.__pauseAll = () => document.getAnimations().forEach(a => a.pause());
+window.__seek     = (t) => document.getAnimations().forEach(a => { a.currentTime = t; });
+</script>
+</body>
+</html>

@@ -38,3 +38,9 @@ python3 build.py        # applies image + text edits, writes ../MCTV_Media_Kit_T
 
 To spin up another market version, drop in new photos and adjust the contact
 strings in `build.py`.
+
+## Other ads in this repo
+
+- [`tom-smith-land-homes/`](tom-smith-land-homes/) — 30-second silent 1920×1080
+  digital ad for Tom Smith Land & Homes (Chance Persac / Brady Richardson).
+  See its README for the storyboard and how to rebuild the MP4.
