@@ -9,7 +9,7 @@ H.264 spot built to the MCTV Digital ad spec (MP4, 300–700 kb/s, under 20 MB).
 |------|-------|--------------|
 | 0–7 s | Intro | Green wave + blue band rise in. The logo builds itself in the center of the frame: roof wipes on, "Tom" and "Smith" pop in, the two pines grow up out of the lettering, then "LAND AND HOMES" and "Expect More. Get More." rise in. Website fades in on the band. |
 | 7–18 s | Chance Persac | Logo glides to the right (larger than the name). Chance's cut-out headshot rises on the left over the band, business-card style. "CHANCE / PERSAC / REALTOR®", "Office phone: (662)268-6333", "Cell phone: (601) 955-4587" slide in. Band headline: "LAND OR HOME? / GET THE BEST OF BOTH WORLDS." |
-| 18.7–30 s | Brady Richardson | Logo glides to the top-left at near full size (the largest element on the slide). Brady's cut-out headshot rises on the right. "YOUR LOCAL / HOMETOWN / REALTORS" and the website sit beside the logo. In the blue band: "BRADY / RICHARDSON" in white (larger than Chance's name), then "Office Phone (662) 268-6333" and "Mobile (662) 418-8791". |
+| 18.7–30 s | Brady Richardson | Logo glides to the top-left at near full size (the largest element on the slide). Brady's cut-out headshot rises on the right. "YOUR / LOCAL / HOMETOWN / REALTORS" and the website sit beside the logo. In the blue band: "BRADY / RICHARDSON" in white (larger than Chance's name), then "Office Phone (662) 268-6333" and "Mobile (662) 418-8791". |
 
 The website `TomSmithLandandHomes.com` (from the business card) appears on every
 slide.

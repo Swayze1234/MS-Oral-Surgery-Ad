@@ -24,12 +24,16 @@ const STILLS = process.env.STILLS ? process.env.STILLS.split(',').map(Number) : 
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
   await page.goto('file://' + path.join(__dirname, 'ad.html'));
   await page.evaluate(() => document.fonts.ready);
+  await page.evaluate(() => Promise.all([...document.images].map(i => i.decode().catch(() => {}))));
   await page.waitForTimeout(400);
   await page.evaluate(() => window.__pauseAll());
+  // let the compositor commit two frames after each seek so every tile is painted before capture
+  const settle = () => page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
 
   if (STILLS) {
     for (const sec of STILLS) {
       await page.evaluate(t => window.__seek(t), sec * 1000);
+      await settle();
       const file = path.join(OUT_DIR, `still_${String(sec).replace('.', '_')}s.png`);
       await page.screenshot({ path: file });
       console.log('wrote', file);
@@ -49,6 +53,7 @@ const STILLS = process.env.STILLS ? process.env.STILLS.split(',').map(Number) : 
 
   for (let i = 0; i < TOTAL; i++) {
     await page.evaluate(t => window.__seek(t), i * 1000 / FPS);
+    await settle();
     const buf = await page.screenshot({ type: 'jpeg', quality: 97 });
     if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r));
     if (i % 150 === 0) console.log(`frame ${i}/${TOTAL}`);
