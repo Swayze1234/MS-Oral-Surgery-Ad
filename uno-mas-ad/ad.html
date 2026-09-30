@@ -127,19 +127,12 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;font-family:'M
   <div class="scene" id="s5" style="background:#0E0D0E">
     <img class="photo" id="s5-photo" src="assets/tacos-tray.jpg" style="object-position:50% 50%;filter:blur(6px) brightness(.5) saturate(1.1)">
     <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(14,13,14,.15) 0%,rgba(14,13,14,.75) 70%,rgba(14,13,14,.9) 100%)"></div>
-    <div class="abs" id="s5-logo" style="left:700px;top:146px;width:520px;height:323px;opacity:0"></div>
-    <div class="abs kicker" id="s5-kicker" style="left:0;right:0;top:504px;text-align:center;font-size:24px;color:var(--mustard);opacity:0">Two locations</div>
-    <div class="abs" style="left:170px;top:582px;width:1580px;display:flex;gap:70px">
-      <div class="card" id="s5-card1" style="flex:1;opacity:0">
-        <div class="nm">Starkville &nbsp;·&nbsp; Cotton District</div>
-        <div class="ad">106 Maxwell St &nbsp;·&nbsp; Starkville, MS 39759</div>
-        <div class="ph">(662) 338-4644</div>
-      </div>
-      <div class="card" id="s5-card2" style="flex:1;opacity:0">
-        <div class="nm">Oxford &nbsp;·&nbsp; The Square</div>
-        <div class="ad">1101 E Jackson Ave &nbsp;·&nbsp; Oxford, MS 38655</div>
-        <div class="ph">(662) 371-9899</div>
-      </div>
+    <div class="abs" id="s5-logo" style="left:700px;top:170px;width:520px;height:323px;opacity:0"></div>
+    <div class="abs" id="s5-card1" style="left:0;right:0;top:548px;text-align:center;opacity:0">
+      <div id="s5-rule" style="width:90px;height:7px;background:var(--red);margin:0 auto 26px;transform-origin:50% 50%"></div>
+      <div class="bebas" style="font-size:64px;line-height:1;color:var(--cream);letter-spacing:.03em">Starkville &nbsp;·&nbsp; Cotton District</div>
+      <div style="font-size:30px;font-weight:600;color:rgba(247,238,221,.88);margin-top:16px;letter-spacing:.02em">106 Maxwell St, Starkville, MS 39759</div>
+      <div class="bebas" style="font-size:84px;line-height:1;font-weight:400;color:var(--mustard);margin-top:14px;letter-spacing:.05em">(662) 338-4644</div>
     </div>
     <div class="abs" id="s5-bar" style="left:0;right:0;bottom:0;height:112px;background:var(--red);display:flex;align-items:center;justify-content:space-between;padding:0 90px;color:var(--cream);font-weight:600;font-size:28px;letter-spacing:.03em">
       <div class="ci" id="s5-b1"><svg viewBox="0 0 24 24"><path class="fill" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM17.5 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg><span>@unomastacos</span></div>
@@ -321,9 +314,8 @@ function renderS5(t){
   const s=t-T.s5,u=clamp(s/5.6);
   $('s5-photo').style.transform=`scale(${lerp(1.1,1.2,u)})`;
   const lp=seg(t,T.s5+.15,T.s5+.85,E.outBack),lg=$('s5-logo');lg.style.opacity=clamp(lp*2);lg.style.transform=`scale(${lerp(.55,1,lp)})`;
-  const kp=seg(t,T.s5+.7,T.s5+1.2,E.outExpo),kk=$('s5-kicker');kk.style.opacity=kp;kk.style.letterSpacing=`${lerp(.6,.2,kp)}em`;
+  scaleX($('s5-rule'),seg(t,T.s5+.75,T.s5+1.25,E.outQuint));
   fadeUp($('s5-card1'),seg(t,T.s5+.9,T.s5+1.5,E.outQuint),50);
-  fadeUp($('s5-card2'),seg(t,T.s5+1.05,T.s5+1.65,E.outQuint),50);
   const bp=seg(t,T.s5+1.3,T.s5+2.0,E.outBackSoft);
   $('s5-bar').style.transform=`translateY(${(1-bp)*120}px)`;
   ['s5-b1','s5-b2','s5-b3'].forEach((id,k)=>fadeUp($(id),seg(t,T.s5+1.6+k*.14,T.s5+2.1+k*.14,E.outQuint),34));

@@ -11,7 +11,7 @@ for Uno Mas Tacos & Tequila (Starkville & Oxford, MS).
 | 6.5–12.5s | **Tacos & Tequila.** Flat-lay photo (chips, queso, loaded fries) with slow zoom, headline "Tacos & Tequila", "A modern taqueria & agave bar", "Salsas, tortillas & chips made in-house daily". |
 | 12.5–18.5s | **Fresh. Handcrafted. Fun.** Full-bleed al pastor close-up, headline reveals word by word. |
 | 18.5–24.5s | **Agave bar.** "50+ Tequilas & Mezcals", "Handcrafted margaritas · Patio seating", "Open late Thu–Sat 'til 1 AM", game-day taco photo. |
-| 24.5–30s | **Outro.** Logo, both locations with addresses and phone numbers, and a bottom bar with @unomastacos · unomastacos.com · Dine in · Takeout · Catering. |
+| 24.5–30s | **Outro.** Logo with the Starkville location centered beneath it (Starkville · Cotton District, 106 Maxwell St, (662) 338-4644) and a bottom bar with @unomastacos · unomastacos.com · Dine in · Takeout · Catering. |
 
 Scene changes use a skewed red/mustard wipe. The logo pieces are vectorized
 from `assets/logo.png` so every element (skull, flowers, sprigs, each letter)
@@ -23,7 +23,6 @@ Pulled from public listings (the site itself was not reachable from the build
 environment, so the site's own video is not included):
 
 - Starkville · Cotton District — 106 Maxwell St, Starkville, MS 39759 · (662) 338-4644
-- Oxford · The Square — 1101 E Jackson Ave, Oxford, MS 38655 · (662) 371-9899
 - unomastacos.com · @unomastacos
 - Starkville hours: Sun–Wed 11 AM–10 PM, Thu–Sat 11 AM–1 AM
 
