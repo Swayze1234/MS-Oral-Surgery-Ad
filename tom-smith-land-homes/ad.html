@@ -35,15 +35,19 @@ html,body{margin:0;padding:0;background:#fff}
 .slide{position:absolute;inset:0}
 
 /* ---------- timeline ----------------------------------------------------
-   0.0–0.9 s  wave + band rise in
-   0.3–1.0 s  roof appears (wipes on left to right)
-   1.0–2.2 s  the two pines rise, one after the other
-   2.2–3.8 s  "Tom", "Smith", "LAND AND", "HOMES", tagline drop in from above
-   5.0–6.2 s  a light sweeps across the logo
-   9.5–10.0 s logo pulses
-   9.9–11.4 s the wave sweeps up through the frame (transition)
-   10.65 s    while covered: logo jumps to its slide-2 spot
-   10.8–11.7  Chance's slide is revealed bottom-up, elements settle in
+   0.0–0.9 s   wave + band rise in
+   0.3–1.0 s   roof appears (wipes on left to right)
+   1.0–2.2 s   the two pines rise, one after the other
+   2.2–3.9 s   "Tom", "Smith", "LAND AND", "HOMES", tagline drop in from above
+   4.2–5.4 s   a light sweeps across the logo
+   6.0–6.5 s   logo pulses
+   6.4–7.9 s   the wave sweeps UP through the frame (transition 1)
+   7.15 s      while covered: logo jumps to its slide-2 spot
+   7.3–8.3 s   Chance's slide is revealed bottom-up, elements settle in
+   22.4–23.9 s the wave sweeps DOWN through the frame (transition 2)
+   23.15 s     while covered: Chance's slide hides, logo jumps to the outro spot
+   23.3–24.8 s outro revealed top-down; website and phone rise in
+   26.0–27.2 s light sweeps across the logo again; hold to 30 s
    ----------------------------------------------------------------------- */
 
 /* ---------- green wave + blue band (persistent, like the card) ---------- */
@@ -56,12 +60,13 @@ html,body{margin:0;padding:0;background:#fff}
 #logo{position:absolute;left:640px;top:40px;width:640px;transform-origin:0 0;
   animation:logoMove 30000ms linear both}
 #logoInner{position:relative;width:100%;height:100%;transform-origin:50% 50%;
-  animation:pulse 520ms 9480ms both cubic-bezier(.4,0,.2,1)}
+  animation:pulse 520ms 6000ms both cubic-bezier(.4,0,.2,1)}
 #logo .lg{position:absolute;display:block;
   filter:drop-shadow(0 0 2.5px #fff) drop-shadow(0 0 2.5px #fff) drop-shadow(0 0 10px rgba(255,255,255,.85))}
 @keyframes logoMove{
-  0%,35.5%        {transform:translate(0,0) scale(1)}
-  35.501%,100%    {transform:translate(700px,20px) scale(.84375)}
+  0%,23.833%       {transform:translate(0,0) scale(1)}
+  23.834%,77.166%  {transform:translate(700px,20px) scale(.84375)}
+  77.167%,100%     {transform:translate(20px,-4px) scale(.9375)}
 }
 @keyframes pulse{0%{transform:scale(1)}45%{transform:scale(1.07)}100%{transform:scale(1)}}
 
@@ -83,13 +88,16 @@ html,body{margin:0;padding:0;background:#fff}
   -webkit-mask:url(assets/img/logo/logo.png) 0 0/100% 100% no-repeat;mask:url(assets/img/logo/logo.png) 0 0/100% 100% no-repeat;
   background:linear-gradient(112deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.75) 50%,rgba(255,255,255,0) 58%);
   background-size:260% 100%;background-repeat:no-repeat;
-  animation:shine 1200ms 5000ms both cubic-bezier(.4,0,.6,1)}
+  animation:shine 1200ms 4200ms both cubic-bezier(.4,0,.6,1),shine 1200ms 26000ms forwards cubic-bezier(.4,0,.6,1)}
 @keyframes shine{from{background-position:130% 0}to{background-position:-30% 0}}
 
-/* ---------- the transition: a wave sweeps up through the frame ---------- */
+/* ---------- the transitions: a wave sweeps up, later another sweeps down ---------- */
 #wipe{position:absolute;left:-240px;top:1080px;transform-origin:50% 0;
-  animation:sweep 1500ms 9900ms both cubic-bezier(.65,0,.35,1)}
-@keyframes sweep{from{transform:rotate(-3deg) translateY(0)}to{transform:rotate(-3deg) translateY(-4200px)}}
+  animation:sweepUp 1500ms 6400ms both cubic-bezier(.65,0,.35,1)}
+@keyframes sweepUp{from{transform:rotate(-3deg) translateY(0)}to{transform:rotate(-3deg) translateY(-4200px)}}
+#wipe2{position:absolute;left:-240px;top:-3000px;transform-origin:50% 100%;
+  animation:sweepDown 1500ms 22400ms both cubic-bezier(.65,0,.35,1)}
+@keyframes sweepDown{from{transform:rotate(3deg) translateY(0)}to{transform:rotate(3deg) translateY(4200px)}}
 
 /* ---------- shared text styles ---------- */
 .name{text-shadow:0 0 10px rgba(255,255,255,.95),0 0 22px rgba(255,255,255,.9),0 0 40px rgba(255,255,255,.7)}
@@ -113,21 +121,29 @@ html,body{margin:0;padding:0;background:#fff}
 @keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
 @keyframes fadeOut{from{opacity:1}to{opacity:0}}
 
-/* slide 1 (0–10.65 s) */
-#s1 .url{animation:rise 700ms 3600ms both cubic-bezier(.2,.8,.2,1),fadeOut 400ms 9500ms forwards}
+/* slide 1 (0–7.15 s) */
+#s1 .url{animation:rise 700ms 3600ms both cubic-bezier(.2,.8,.2,1),fadeOut 400ms 6000ms forwards}
 
-/* slide 2 (revealed 10.8–11.4 s, holds to 30 s) */
-#chance   {animation:upIn 900ms 10850ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .h1   {animation:rise 650ms 10950ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .h2   {animation:rise 650ms 11050ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .url  {animation:rise 650ms 11150ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .first{animation:slideIn 600ms 11150ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .last {animation:slideIn 600ms 11250ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .role {animation:slideIn 600ms 11350ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .p1   {animation:slideIn 600ms 11500ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .p2   {animation:slideIn 600ms 11570ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .p3   {animation:slideIn 600ms 11680ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .p4   {animation:slideIn 600ms 11750ms both cubic-bezier(.2,.8,.2,1)}
+/* slide 2 (revealed 7.3–7.9 s, hidden again at 23.15 s while covered) */
+#s2{animation:hide 1ms 23150ms forwards}
+@keyframes hide{to{opacity:0}}
+#chance   {animation:upIn 900ms 7350ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .h1   {animation:rise 650ms 7450ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .h2   {animation:rise 650ms 7550ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .url  {animation:rise 650ms 7650ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .first{animation:slideIn 600ms 7650ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .last {animation:slideIn 600ms 7750ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .role {animation:slideIn 600ms 7850ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .p1   {animation:slideIn 600ms 8000ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .p2   {animation:slideIn 600ms 8070ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .p3   {animation:slideIn 600ms 8180ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .p4   {animation:slideIn 600ms 8250ms both cubic-bezier(.2,.8,.2,1)}
+
+/* slide 3: outro (revealed 23.3–23.9 s, holds to 30 s) */
+.outro .site{font-family:Montserrat,sans-serif;font-weight:700;font-size:72px;line-height:1;color:#fff;letter-spacing:1px}
+.outro .phone{font-family:Montserrat,sans-serif;font-weight:500;font-size:46px;line-height:1;color:#dfe9f8;letter-spacing:1px;margin-top:18px}
+#s3 .site {animation:rise 700ms 23900ms both cubic-bezier(.2,.8,.2,1)}
+#s3 .phone{animation:rise 700ms 24100ms both cubic-bezier(.2,.8,.2,1)}
 </style>
 </head>
 <body>
@@ -163,11 +179,23 @@ html,body{margin:0;padding:0;background:#fff}
     </div>
   </div>
 
+  <!-- slide 3: outro -->
+  <div class="slide" id="s3">
+    <div class="abs band-text outro" style="left:0;width:1920px;top:845px;text-align:center">
+      <div class="site">TomSmithLandandHomes.com</div>
+      <div class="phone">Call (662)268-6333</div>
+    </div>
+  </div>
+
   <!-- the logo (built from assets/img/logo/*.png) -->
   <div id="logo"><div id="logoInner"></div></div>
 
-  <!-- the transition wave: green-edged blue sheet that sweeps up through the frame -->
+  <!-- the transition waves: green-edged blue sheets; the first sweeps up, the second sweeps down -->
   <svg id="wipe" width="2400" height="3000" viewBox="0 0 2400 3000" aria-hidden="true">
+    <path fill="var(--green)" d="M0,150 C500,60 875,230 1200,190 C1560,150 1880,30 2400,90 L2400,2900 C1880,2960 1560,2840 1200,2880 C875,2920 500,2750 0,2840 Z"/>
+    <path fill="var(--blue)"  d="M0,205 C500,115 875,285 1200,245 C1560,205 1880,85 2400,145 L2400,2845 C1880,2905 1560,2785 1200,2825 C875,2865 500,2695 0,2785 Z"/>
+  </svg>
+  <svg id="wipe2" width="2400" height="3000" viewBox="0 0 2400 3000" aria-hidden="true">
     <path fill="var(--green)" d="M0,150 C500,60 875,230 1200,190 C1560,150 1880,30 2400,90 L2400,2900 C1880,2960 1560,2840 1200,2880 C875,2920 500,2750 0,2840 Z"/>
     <path fill="var(--blue)"  d="M0,205 C500,115 875,285 1200,245 C1560,205 1880,85 2400,145 L2400,2845 C1880,2905 1560,2785 1200,2825 C875,2865 500,2695 0,2785 Z"/>
   </svg>
