@@ -128,9 +128,24 @@ html,body{margin:0;padding:0;background:#fff}
 #s2{animation:hide 1ms 15350ms forwards}
 @keyframes hide{to{opacity:0}}
 #chance   {animation:upIn 900ms 5850ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .h1   {animation:rise 650ms 5950ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .h2   {animation:rise 650ms 6050ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .url  {animation:rise 650ms 6150ms both cubic-bezier(.2,.8,.2,1)}
+/* headline: LAND and HOME? swing in from opposite sides, OR pops in between,
+   then the second line rises word by word; LAND and HOME? each bounce twice while the slide holds */
+#s2 .h1 .w,#s2 .h2 .w{display:inline-block;transform-origin:50% 100%}
+#s2 .h1 .land{animation:fromLeft 700ms 6000ms both cubic-bezier(.34,1.5,.64,1),bounce 520ms 9800ms forwards,bounce 520ms 12600ms forwards}
+#s2 .h1 .home{animation:fromRight 700ms 6000ms both cubic-bezier(.34,1.5,.64,1),bounce 520ms 10250ms forwards,bounce 520ms 13050ms forwards}
+#s2 .h1 .or  {animation:popIn 500ms 6480ms both cubic-bezier(.34,1.56,.64,1)}
+@keyframes fromLeft {from{opacity:0;transform:translateX(-260px)}to{opacity:1;transform:none}}
+@keyframes fromRight{from{opacity:0;transform:translateX(260px)}to{opacity:1;transform:none}}
+@keyframes popIn{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+@keyframes bounce{0%{transform:none}40%{transform:translateY(-18px) scale(1.06)}100%{transform:none}}
+#s2 .h2 .w{animation:rise 500ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .h2 .w:nth-child(1){animation-delay:6700ms}
+#s2 .h2 .w:nth-child(2){animation-delay:6780ms}
+#s2 .h2 .w:nth-child(3){animation-delay:6860ms}
+#s2 .h2 .w:nth-child(4){animation-delay:6940ms}
+#s2 .h2 .w:nth-child(5){animation-delay:7020ms}
+#s2 .h2 .w:nth-child(6){animation-delay:7100ms}
+#s2 .url  {animation:rise 650ms 7350ms both cubic-bezier(.2,.8,.2,1)}
 #s2 .first{animation:slideIn 600ms 6150ms both cubic-bezier(.2,.8,.2,1)}
 #s2 .last {animation:slideIn 600ms 6250ms both cubic-bezier(.2,.8,.2,1)}
 #s2 .role {animation:slideIn 600ms 6350ms both cubic-bezier(.2,.8,.2,1)}
@@ -173,8 +188,8 @@ html,body{margin:0;padding:0;background:#fff}
       <div class="num p4">(601) 955-4587</div>
     </div>
     <div class="abs band-text" style="left:860px;width:1020px;top:822px;text-align:center">
-      <div class="h1">LAND OR HOME?</div>
-      <div class="h2">GET THE BEST OF BOTH WORLDS.</div>
+      <div class="h1"><span class="w land">LAND</span> <span class="w or">OR</span> <span class="w home">HOME?</span></div>
+      <div class="h2"><span class="w">GET</span> <span class="w">THE</span> <span class="w">BEST</span> <span class="w">OF</span> <span class="w">BOTH</span> <span class="w">WORLDS.</span></div>
       <div class="url">TomSmithLandandHomes.com</div>
     </div>
   </div>
