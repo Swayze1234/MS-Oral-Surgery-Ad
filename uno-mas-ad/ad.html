@@ -41,15 +41,10 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;font-family:'M
       <div class="abs" id="s1-burst" style="left:960px;top:370px;width:2400px;height:2400px;margin-left:-1200px;margin-top:-1200px;border-radius:50%;background:repeating-conic-gradient(from 0deg,#ECDDBF 0deg 9deg,transparent 9deg 18deg);-webkit-mask-image:radial-gradient(circle,rgba(0,0,0,1) 0%,rgba(0,0,0,.45) 30%,rgba(0,0,0,0) 58%);opacity:0;will-change:transform"></div>
       <div class="abs" id="s1-ring" style="left:960px;top:370px;width:600px;height:600px;margin-left:-300px;margin-top:-300px;border-radius:50%;border:10px solid var(--red);opacity:0"></div>
       <div class="abs" id="s1-ring2" style="left:960px;top:370px;width:600px;height:600px;margin-left:-300px;margin-top:-300px;border-radius:50%;border:5px solid var(--mustard);opacity:0"></div>
-      <div class="abs" id="s1-logo" style="left:550px;top:100px;width:820px;height:509px"></div>
-      <div class="abs bebas" id="s1-tag" style="left:0;right:0;top:648px;text-align:center;font-size:110px;color:var(--red);line-height:1;opacity:0">TACOS &amp; TEQUILA</div>
-      <div class="abs" id="s1-sub" style="left:0;right:0;top:778px;text-align:center;font-size:26px;font-weight:600;letter-spacing:.24em;color:var(--ink);text-transform:uppercase;opacity:0">A modern taqueria &amp; agave bar &nbsp;·&nbsp; Starkville &amp; Oxford, MS</div>
+      <div class="abs" id="s1-logo" style="left:550px;top:140px;width:820px;height:509px"></div>
+      <div class="abs" id="s1-addr" style="left:0;right:0;top:700px;text-align:center;font-size:46px;font-weight:700;letter-spacing:.04em;color:var(--ink);opacity:0">106 Maxwell St, Starkville, MS 39759</div>
+      <div class="abs bebas" id="s1-phone" style="left:0;right:0;top:772px;text-align:center;font-size:136px;line-height:1;letter-spacing:.05em;color:var(--red);opacity:0">(662) 338-4644</div>
       <div class="abs" id="s1-confetti" style="inset:0;pointer-events:none"></div>
-      <div class="abs" id="s1-bar" style="left:0;right:0;bottom:0;height:112px;background:var(--red);display:flex;align-items:center;justify-content:space-between;padding:0 90px;color:var(--cream);font-weight:600;font-size:28px;letter-spacing:.03em;box-shadow:0 -12px 40px rgba(23,24,28,.12)">
-        <div class="ci" id="s1-c1"><svg viewBox="0 0 24 24"><path class="fill" d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>106 Maxwell St &nbsp;·&nbsp; Starkville, MS</span></div>
-        <div class="ci" id="s1-c2"><svg viewBox="0 0 24 24"><path class="fill" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg><span>(662) 338-4644</span></div>
-        <div class="ci" id="s1-c3"><svg viewBox="0 0 24 24"><path class="fill" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 9h-2.9c-.1-2.3-.6-4.3-1.3-5.8A8 8 0 0 1 18.9 11zM12 4c1 0 2.4 2.5 2.9 7H9.1C9.6 6.5 11 4 12 4zM9.3 5.2C8.6 6.7 8.1 8.7 8 11H5.1a8 8 0 0 1 4.2-5.8zM5.1 13H8c.1 2.3.6 4.3 1.3 5.8A8 8 0 0 1 5.1 13zM12 20c-1 0-2.4-2.5-2.9-7h5.8c-.5 4.5-1.9 7-2.9 7zm2.7-1.2c.7-1.5 1.2-3.5 1.3-5.8h2.9a8 8 0 0 1-4.2 5.8z"/></svg><span>unomastacos.com</span></div>
-      </div>
     </div>
   </div>
 
@@ -282,14 +277,11 @@ function renderS1(t){
   });
   renderIntroLogo(t);
   renderConfetti(confetti,t,3.55);
-  // tagline: tracks in
-  const tp=seg(t,3.7,4.5,E.outExpo),tag=$('s1-tag');
-  tag.style.opacity=tp;tag.style.letterSpacing=`${lerp(.55,.12,tp)}em`;tag.style.transform=`translateY(${(1-tp)*20}px)`;
-  fadeUp($('s1-sub'),seg(t,4.0,4.6),24);
-  // contact bar slides up, items stagger in
-  const bp=seg(t,4.05,4.75,E.outBackSoft);
-  $('s1-bar').style.transform=`translateY(${(1-bp)*120}px)`;
-  ['s1-c1','s1-c2','s1-c3'].forEach((id,k)=>fadeUp($(id),seg(t,4.35+k*.14,4.85+k*.14,E.outQuint),34));
+  // address tracks in, phone number pops up under it
+  const ap=seg(t,3.75,4.55,E.outExpo),ad=$('s1-addr');
+  ad.style.opacity=ap;ad.style.letterSpacing=`${lerp(.5,.04,ap)}em`;ad.style.transform=`translateY(${(1-ap)*20}px)`;
+  const pp=seg(t,4.05,4.75,E.outBack),ph=$('s1-phone');
+  ph.style.opacity=clamp(pp*2);ph.style.transform=`translateY(${(1-pp)*40}px) scale(${lerp(.8,1,pp)})`;
 }
 function renderS2(t){
   const s=t-T.s2,u=clamp(s/6.2);
