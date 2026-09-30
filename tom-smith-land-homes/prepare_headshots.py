@@ -1,5 +1,5 @@
-"""Upscales the two headshots and removes their backgrounds (rembg) so they can
-sit over the green wave / blue band like the cut-out photo on the business card.
+"""Upscales the headshot and removes its background (rembg) so it can sit over
+the green wave / blue band like the cut-out photo on the business card.
 
     pip install pillow rembg onnxruntime
     python3 prepare_headshots.py
@@ -21,7 +21,7 @@ def prep(name, scale):
     cut = remove(im, session=session, post_process_mask=True)
     return im, cut
 
-for src, dst, scale in [("chance-headshot.jpg", "chance", 1.5), ("brady-headshot.jpg", "brady", 2.6)]:
+for src, dst, scale in [("chance-headshot.jpg", "chance", 1.5)]:
     im, cut = prep(src, scale)
     im.save(os.path.join(OUT, dst + "-upscaled.jpg"), quality=94)
     cut.save(os.path.join(OUT, dst + "-cutout.png"))

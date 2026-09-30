@@ -2,7 +2,7 @@
 transparent, high-resolution layers so the intro can build the logo piece by
 piece:
 
-    roof, tom, smith, trees, landand, homes, tagline
+    roof, treeA, treeB, tom, smith, landand, homes, tagline
 
 The green circle around the logo is removed and the white background is made
 transparent.  Pixels keep their original colours (upscaled 4x, Lanczos); the
@@ -54,17 +54,11 @@ masks = {"green": colored & is_green, "blue": colored & is_blue, "dark": colored
 
 def s(v): return v * SCALE           # 500-px coords -> working coords
 cx, cy = W / 2, H / 2
+rows = np.arange(H)[:, None]
+cols = np.arange(W)[None, :]
 
-def components(mask, split=0):
-    """Connected components. With split>0 the mask is eroded first so thin
-    bridges break, then every original pixel is handed to its nearest core."""
-    if split:
-        core = ndi.binary_erosion(mask, iterations=split)
-        lab, _ = ndi.label(core)
-        _, (iy, ix) = ndi.distance_transform_edt(lab == 0, return_indices=True)
-        lab = lab[iy, ix] * mask
-    else:
-        lab, _ = ndi.label(mask)
+def components(mask):
+    lab, _ = ndi.label(mask)
     out = []
     for i, sl in enumerate(ndi.find_objects(lab), start=1):
         if sl is None: continue
@@ -80,19 +74,47 @@ MIN = s(1) ** 2 * 2                      # ignore JPEG speckle
 
 # ---- green: ring (dropped), trees, Smith --------------------------------
 # The white keyline between the letters and the trees is sub-pixel in the
-# 500 px source, so they cannot be separated by connectivity.  Instead the
-# green artwork is cut at the letters' cap line: above it is "trees", below it
-# is "smith" (which therefore also carries the bottoms of the trunks).
-CAP = s(250.5)
+# 500 px source, so they cannot be separated by connectivity.  The green
+# artwork is cut at the letters' cap line and baseline instead: above the cap
+# line and below the baseline (right of the "S") is tree, the letter band is
+# "smith".  The trunks are then filled back in behind the letters so the trees
+# are complete shapes that can rise on their own.
+CAP, BASELINE, LETTER_L = s(250.5), s(300.5), s(200)
+for_smith = np.zeros((H, W), bool)
 lab, comps = components(masks["green"])
 for c in comps:
-    r = np.hypot(c["cx"] - cx, c["cy"] - cy)
-    if c["area"] < MIN or r > s(205) or (c["right"] - c["left"]) > s(300):
+    rr = np.hypot(c["cx"] - cx, c["cy"] - cy)
+    if c["area"] < MIN or rr > s(205) or (c["right"] - c["left"]) > s(300):
         continue                                     # the circle, and speckle
     m = lab == c["id"]
-    rows = np.arange(H)[:, None]
-    layers["trees"] |= m & (rows < CAP)
-    layers["smith"] |= m & (rows >= CAP)
+    upper = m & (rows < CAP)
+    lower = m & (rows >= BASELINE) & (cols >= LETTER_L)
+    layers["trees"] |= upper | lower
+    for_smith |= m & ~upper & ~lower
+layers["smith"] = for_smith
+
+# The trunks and lower branches end behind the letters.  Extend the trees'
+# footprint from the cut line down to the letters' baseline so each pine is a
+# complete shape; the letters (with their white keyline) drop on top later.
+touch = layers["trees"][int(CAP) - 10:int(CAP), :].any(axis=0)     # columns where a tree meets the cut
+touch = ndi.binary_opening(touch, structure=np.ones(9))
+touch = ndi.binary_closing(touch, structure=np.ones(41))
+tree_cols = np.nonzero(touch)[0]
+bottoms = [np.nonzero(for_smith[:, x])[0].max() for x in range(int(LETTER_L), W) if for_smith[:, x].any()]
+letter_bottom = int(np.median(bottoms)) - 2
+fill = np.zeros((H, W), bool)
+runs = np.split(tree_cols, np.nonzero(np.diff(tree_cols) > 1)[0] + 1)   # contiguous column runs
+for run in runs:
+    x0, x1 = run.min(), run.max()
+    top = int(np.median([np.nonzero(layers["trees"][:, x])[0].max() for x in run]))
+    for y in range(top, letter_bottom + 1):
+        f = (y - top) / max(1, letter_bottom - top)
+        inset = int((x1 - x0) * 0.22 * f)                # taper the stub toward its base
+        fill[y, x0 + inset:x1 - inset + 1] = True
+    for x in run:                                        # keep the join with the branches solid
+        y0 = np.nonzero(layers["trees"][:, x])[0].max()
+        fill[y0:top + 6, x] = True
+fill = ndi.binary_closing(fill, iterations=3)
 
 # ---- blue: roof, Tom, LAND AND, HOMES -----------------------------------
 lab, comps = components(masks["blue"])
@@ -118,28 +140,57 @@ for k, m in layers.items():
     for k2, m2 in layers.items():
         if k2 != k: others |= m2
     regions[k] = ndi.binary_dilation(m, iterations=4) & ~others
+regions["trees"] |= fill            # the reconstructed trunks belong to the trees
+
+# split the trees into the two pines (they are separate shapes) so each can
+# rise on its own; every tree pixel goes to the nearest pine
+tree_all = regions["trees"]
+raw = layers["trees"] | fill
+for erode in (0, 3, 6, 10, 14):
+    lab, comps = components(ndi.binary_erosion(raw, iterations=erode) if erode else raw)
+    comps.sort(key=lambda c: -c["area"])
+    if len(comps) >= 2 and comps[1]["area"] > comps[0]["area"] * 0.15: break
+big = sorted(comps[:2], key=lambda c: c["cx"])
+core = np.zeros((H, W), np.int32)
+for i, c in enumerate(big, start=1): core[lab == c["id"]] = i
+print("pines split with erosion", erode, "areas", [c["area"] for c in big])
+_, (iy, ix) = ndi.distance_transform_edt(core == 0, return_indices=True)
+owner = core[iy, ix]
+del regions["trees"]
+regions = {"treeA": tree_all & (owner == 1), "treeB": tree_all & (owner == 2), **regions}
+solid = {"treeA": fill & (owner == 1), "treeB": fill & (owner == 2)}
+COLOR = {"treeA": INKS["green"], "treeB": INKS["green"]}
 
 union = np.zeros((H, W), bool)
 for m in regions.values(): union |= m
-ys, xs = np.nonzero(union & (alpha > 0))
+ys, xs = np.nonzero(union & ((alpha > 0) | fill))
 PAD = 4
 X0, X1 = max(0, xs.min() - PAD), min(W, xs.max() + PAD + 1)
 Y0, Y1 = max(0, ys.min() - PAD), min(H, ys.max() + PAD + 1)
 CW, CH = int(X1 - X0), int(Y1 - Y0)
 
-geom = {"canvas": [CW, CH], "layers": {}}
+ORDER = ["treeA", "treeB", "roof", "tom", "smith", "landand", "homes", "tagline"]
+geom = {"canvas": [CW, CH], "order": ORDER, "layers": {}}
 composite = Image.new("RGBA", (CW, CH), (0, 0, 0, 0))
 dbg = Image.new("RGB", (CW, CH), "white") if DBG else None
-tints = dict(roof=(220, 40, 40), tom=(40, 120, 220), smith=(40, 170, 60), trees=(160, 60, 200),
+tints = dict(roof=(220, 40, 40), tom=(40, 120, 220), smith=(40, 170, 60), treeA=(160, 60, 200), treeB=(230, 60, 140),
              landand=(230, 140, 20), homes=(20, 170, 170), tagline=(0, 0, 0))
-for name, reg in regions.items():
-    a = (alpha * reg)[Y0:Y1, X0:X1]
+for name in ORDER:
+    reg = regions[name]
+    a = (alpha * reg)
+    if name in solid:
+        a = a.copy(); a[solid[name]] = 1.0
+    a = a[Y0:Y1, X0:X1]
     ys, xs = np.nonzero(a > 0.02)
     if len(xs) == 0:
         raise SystemExit(f"layer {name} is empty - check the thresholds")
     lx0, lx1, ly0, ly1 = int(xs.min()), int(xs.max() + 1), int(ys.min()), int(ys.max() + 1)
     rgba = np.zeros((ly1 - ly0, lx1 - lx0, 4), np.uint8)
-    rgba[..., :3] = np.clip(px[Y0 + ly0:Y0 + ly1, X0 + lx0:X0 + lx1], 0, 255).astype(np.uint8)
+    rgb = np.clip(px[Y0 + ly0:Y0 + ly1, X0 + lx0:X0 + lx1], 0, 255).astype(np.uint8)
+    if name in solid:
+        sm = solid[name][Y0 + ly0:Y0 + ly1, X0 + lx0:X0 + lx1]
+        rgb = rgb.copy(); rgb[sm] = COLOR[name]
+    rgba[..., :3] = rgb
     rgba[..., 3] = (a[ly0:ly1, lx0:lx1] * 255).astype(np.uint8)
     img = Image.fromarray(rgba, "RGBA")
     img.save(os.path.join(OUT, f"{name}.png"))
@@ -149,6 +200,9 @@ for name, reg in regions.items():
     geom["layers"][name] = {"x": lx0, "y": ly0, "w": lx1 - lx0, "h": ly1 - ly0}
     print(f"{name:8s} {lx1-lx0:5d}x{ly1-ly0:<5d} at ({lx0},{ly0})")
 
+for stale in ("trees.png",):
+    p = os.path.join(OUT, stale)
+    if os.path.exists(p): os.remove(p)
 composite.save(os.path.join(OUT, "logo.png"))
 with open(os.path.join(OUT, "layers.js"), "w") as f:
     f.write("window.LOGO_LAYERS = " + json.dumps(geom) + ";\n")

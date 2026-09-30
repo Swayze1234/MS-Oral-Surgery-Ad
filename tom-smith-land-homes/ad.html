@@ -19,10 +19,6 @@
   --blue:#134d95;        /* bottom band */
   --navy:#12365f;        /* name text */
   --green:#7d9c3e;       /* wave stripe */
-  --logo-blue:#1d5aa8;   /* "Tom", roof, LAND AND HOMES */
-  --logo-green:#86a03c;  /* "Smith", pine trees */
-  --logo-navy:#0f2c5c;   /* Expect More. Get More. */
-  --trunk:#55702a;
   --text:#3a3a3a;
   --grey:#6f7784;
 }
@@ -38,6 +34,18 @@ html,body{margin:0;padding:0;background:#fff}
 .abs{position:absolute}
 .slide{position:absolute;inset:0}
 
+/* ---------- timeline ----------------------------------------------------
+   0.0–0.9 s  wave + band rise in
+   0.3–1.0 s  roof appears (wipes on left to right)
+   1.0–2.2 s  the two pines rise, one after the other
+   2.2–3.8 s  "Tom", "Smith", "LAND AND", "HOMES", tagline drop in from above
+   5.0–6.2 s  a light sweeps across the logo
+   9.5–10.0 s logo pulses
+   9.9–11.4 s the wave sweeps up through the frame (transition)
+   10.65 s    while covered: logo jumps to its slide-2 spot
+   10.8–11.7  Chance's slide is revealed bottom-up, elements settle in
+   ----------------------------------------------------------------------- */
+
 /* ---------- green wave + blue band (persistent, like the card) ---------- */
 #band{position:absolute;left:0;top:0;animation:bandIn 900ms 0ms both cubic-bezier(.2,.8,.2,1)}
 @keyframes bandIn{from{transform:translateY(460px)}to{transform:none}}
@@ -47,31 +55,44 @@ html,body{margin:0;padding:0;background:#fff}
    build it piece by piece. Layer geometry comes from layers.js. */
 #logo{position:absolute;left:640px;top:40px;width:640px;transform-origin:0 0;
   animation:logoMove 30000ms linear both}
+#logoInner{position:relative;width:100%;height:100%;transform-origin:50% 50%;
+  animation:pulse 520ms 9480ms both cubic-bezier(.4,0,.2,1)}
 #logo .lg{position:absolute;display:block;
   filter:drop-shadow(0 0 2.5px #fff) drop-shadow(0 0 2.5px #fff) drop-shadow(0 0 10px rgba(255,255,255,.85))}
 @keyframes logoMove{
-  0%,21%          {transform:translate(0,0) scale(1);            animation-timing-function:cubic-bezier(.7,0,.3,1)}
-  23.3333%,60%    {transform:translate(700px,20px) scale(.84375);animation-timing-function:cubic-bezier(.7,0,.3,1)}
-  62.6667%,100%   {transform:translate(-568px,-8px) scale(.90625)}
+  0%,35.5%        {transform:translate(0,0) scale(1)}
+  35.501%,100%    {transform:translate(700px,20px) scale(.84375)}
 }
+@keyframes pulse{0%{transform:scale(1)}45%{transform:scale(1.07)}100%{transform:scale(1)}}
 
-/* slide 1 — logo builds itself piece by piece */
-.lg-roof   {animation:wipe 750ms 250ms both cubic-bezier(.4,0,.2,1)}
+/* slide 1 — the logo builds itself: roof, then the pines rise, then the lettering drops in */
+.lg-roof   {animation:wipe 700ms 300ms both cubic-bezier(.4,0,.2,1)}
 @keyframes wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
-.lg-tom    {transform-origin:50% 50%;animation:pop 700ms 800ms  both cubic-bezier(.34,1.56,.64,1)}
-.lg-smith  {transform-origin:50% 50%;animation:pop 700ms 1100ms both cubic-bezier(.34,1.56,.64,1)}
-@keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
-.lg-trees  {transform-origin:50% 100%;animation:grow 900ms 1450ms both cubic-bezier(.34,1.3,.64,1)}
-@keyframes grow{from{opacity:0;transform:scaleY(.04) scaleX(.6)}to{opacity:1;transform:none}}
-.lg-landand{animation:rise 600ms 2050ms both cubic-bezier(.2,.8,.2,1)}
-.lg-homes  {animation:rise 600ms 2250ms both cubic-bezier(.2,.8,.2,1)}
-.lg-tagline{animation:rise 700ms 2650ms both cubic-bezier(.2,.8,.2,1)}
-@keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.lg-treeA  {transform-origin:50% 100%;animation:grow 950ms 1000ms both cubic-bezier(.34,1.3,.64,1)}
+.lg-treeB  {transform-origin:50% 100%;animation:grow 950ms 1250ms both cubic-bezier(.34,1.3,.64,1)}
+@keyframes grow{from{opacity:0;transform:scaleY(.04) scaleX(.7)}to{opacity:1;transform:none}}
+.lg-tom    {animation:drop 650ms 2200ms both cubic-bezier(.34,1.56,.64,1)}
+.lg-smith  {animation:drop 650ms 2400ms both cubic-bezier(.34,1.56,.64,1)}
+.lg-landand{animation:drop 650ms 2650ms both cubic-bezier(.34,1.56,.64,1)}
+.lg-homes  {animation:drop 650ms 2850ms both cubic-bezier(.34,1.56,.64,1)}
+.lg-tagline{animation:dropSoft 650ms 3200ms both cubic-bezier(.2,.8,.2,1)}
+@keyframes drop{from{opacity:0;transform:translateY(-170px)}to{opacity:1;transform:none}}
+@keyframes dropSoft{from{opacity:0;transform:translateY(-60px)}to{opacity:1;transform:none}}
+/* a light sweeping across the logo while it holds */
+#shine{position:absolute;inset:0;pointer-events:none;
+  -webkit-mask:url(assets/img/logo/logo.png) 0 0/100% 100% no-repeat;mask:url(assets/img/logo/logo.png) 0 0/100% 100% no-repeat;
+  background:linear-gradient(112deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.75) 50%,rgba(255,255,255,0) 58%);
+  background-size:260% 100%;background-repeat:no-repeat;
+  animation:shine 1200ms 5000ms both cubic-bezier(.4,0,.6,1)}
+@keyframes shine{from{background-position:130% 0}to{background-position:-30% 0}}
+
+/* ---------- the transition: a wave sweeps up through the frame ---------- */
+#wipe{position:absolute;left:-240px;top:1080px;transform-origin:50% 0;
+  animation:sweep 1500ms 9900ms both cubic-bezier(.65,0,.35,1)}
+@keyframes sweep{from{transform:rotate(-3deg) translateY(0)}to{transform:rotate(-3deg) translateY(-4200px)}}
 
 /* ---------- shared text styles ---------- */
-.name,.headline{text-shadow:0 0 10px rgba(255,255,255,.95),0 0 22px rgba(255,255,255,.9),0 0 40px rgba(255,255,255,.7)}
-.name.band-name{text-shadow:none}
+.name{text-shadow:0 0 10px rgba(255,255,255,.95),0 0 22px rgba(255,255,255,.9),0 0 40px rgba(255,255,255,.7)}
 .name .first{font-weight:300;font-size:64px;line-height:1;color:var(--navy);letter-spacing:3px}
 .name .last {font-weight:800;font-size:78px;line-height:1.05;color:var(--navy);margin-top:4px;letter-spacing:1px}
 .name .role {font-weight:400;font-size:32px;line-height:1;color:var(--grey);letter-spacing:5px;margin-top:14px}
@@ -79,57 +100,34 @@ html,body{margin:0;padding:0;background:#fff}
 .name .lbl{font-weight:500;font-size:32px;line-height:1;color:var(--grey);letter-spacing:1px;margin-top:34px}
 .name .lbl + .num + .lbl{margin-top:24px}
 .name .num{font-weight:700;font-size:46px;line-height:1.1;color:var(--text);margin-top:6px}
-/* slide 3: name + contact sit in the blue band, headline beside the logo */
-.name.band-name .first{font-size:72px;letter-spacing:4px;color:#fff}
-.name.band-name .last {font-size:88px;line-height:1;color:#fff}
-.headline .hl{font-family:TSSerif,serif;font-weight:700;font-size:68px;line-height:1.05;color:var(--navy)}
-.headline .url{color:var(--blue);font-size:26px;margin-top:22px}
-.contact{display:flex;gap:64px}
-.contact .lbl{font-weight:500;font-size:28px;line-height:1;color:#cfdcf2;letter-spacing:1px}
-.contact .num{font-weight:700;font-size:44px;line-height:1.1;color:#fff;margin-top:8px}
 
 .band-text .h1{font-family:TSSerif,serif;font-weight:700;font-size:74px;line-height:1.05;color:#fff}
 .band-text .h2{font-family:TSSerif,serif;font-weight:700;font-size:50px;line-height:1.1;color:#fff;margin-top:8px}
-.band-text.left .h1{font-size:66px}
 .url{font-family:Montserrat,sans-serif;font-weight:500;font-size:30px;line-height:1;color:#dfe9f8;letter-spacing:1px;margin-top:16px}
 
 .cut{display:block}
 
-/* ---------- slide enter / exit ---------- */
+/* ---------- enter / exit ---------- */
 @keyframes upIn   {from{opacity:0;transform:translateY(140px)}to{opacity:1;transform:none}}
-@keyframes downOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(120px)}}
 @keyframes slideIn{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:none}}
-@keyframes slideInR{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
 @keyframes fadeOut{from{opacity:1}to{opacity:0}}
-.fx{animation-fill-mode:both}
 
-/* slide 1 (0–7s) */
-#s1 .url{animation:rise 700ms 3200ms both cubic-bezier(.2,.8,.2,1),fadeOut 400ms 6300ms forwards}
+/* slide 1 (0–10.65 s) */
+#s1 .url{animation:rise 700ms 3600ms both cubic-bezier(.2,.8,.2,1),fadeOut 400ms 9500ms forwards}
 
-/* slide 2 (7–18s) */
-#chance{animation:upIn 900ms 6900ms both cubic-bezier(.2,.8,.2,1),downOut 600ms 18000ms forwards ease-in}
-#s2 .first {animation:slideIn 600ms 7200ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
-#s2 .last  {animation:slideIn 600ms 7320ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
-#s2 .role  {animation:slideIn 600ms 7440ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
-#s2 .p1    {animation:slideIn 600ms 7640ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
-#s2 .p2    {animation:slideIn 600ms 7720ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
-#s2 .p3    {animation:slideIn 600ms 7840ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
-#s2 .p4    {animation:slideIn 600ms 7920ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
-#s2 .h1    {animation:rise 650ms 8000ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
-#s2 .h2    {animation:rise 650ms 8200ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
-#s2 .url   {animation:rise 650ms 8400ms both cubic-bezier(.2,.8,.2,1),fadeOut 450ms 18000ms forwards}
-
-/* slide 3 (18.7–30s) */
-#brady{animation:upIn 900ms 18700ms both cubic-bezier(.2,.8,.2,1)}
-#s3 .first{animation:slideIn 650ms 19000ms both cubic-bezier(.2,.8,.2,1)}
-#s3 .last {animation:slideIn 650ms 19150ms both cubic-bezier(.2,.8,.2,1)}
-#s3 .c1   {animation:rise 650ms 19450ms both cubic-bezier(.2,.8,.2,1)}
-#s3 .c2   {animation:rise 650ms 19600ms both cubic-bezier(.2,.8,.2,1)}
-#s3 .l1   {animation:rise 650ms 19500ms both cubic-bezier(.2,.8,.2,1)}
-#s3 .l2   {animation:rise 650ms 19650ms both cubic-bezier(.2,.8,.2,1)}
-#s3 .l3   {animation:rise 650ms 19800ms both cubic-bezier(.2,.8,.2,1)}
-#s3 .l4   {animation:rise 650ms 19950ms both cubic-bezier(.2,.8,.2,1)}
-#s3 .url  {animation:rise 650ms 20150ms both cubic-bezier(.2,.8,.2,1)}
+/* slide 2 (revealed 10.8–11.4 s, holds to 30 s) */
+#chance   {animation:upIn 900ms 10850ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .h1   {animation:rise 650ms 10950ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .h2   {animation:rise 650ms 11050ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .url  {animation:rise 650ms 11150ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .first{animation:slideIn 600ms 11150ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .last {animation:slideIn 600ms 11250ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .role {animation:slideIn 600ms 11350ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .p1   {animation:slideIn 600ms 11500ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .p2   {animation:slideIn 600ms 11570ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .p3   {animation:slideIn 600ms 11680ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .p4   {animation:slideIn 600ms 11750ms both cubic-bezier(.2,.8,.2,1)}
 </style>
 </head>
 <body>
@@ -165,39 +163,24 @@ html,body{margin:0;padding:0;background:#fff}
     </div>
   </div>
 
-  <!-- slide 3: Brady Richardson (headshot on the right) -->
-  <div class="slide" id="s3">
-    <img class="abs cut" id="brady" src="assets/img/brady-cutout.png" alt="" style="right:40px;bottom:-8px;height:948px">
-    <div class="abs headline" style="left:672px;top:150px;width:420px">
-      <div class="hl l1">YOUR</div>
-      <div class="hl l2">LOCAL</div>
-      <div class="hl l3">HOMETOWN</div>
-      <div class="hl l4">REALTORS</div>
-      <div class="url">TomSmithLandandHomes.com</div>
-    </div>
-    <div class="abs name band-name" style="left:80px;top:762px">
-      <div class="first">BRADY</div>
-      <div class="last">RICHARDSON</div>
-    </div>
-    <div class="abs contact" style="left:82px;top:962px">
-      <div class="col c1"><div class="lbl">Office Phone</div><div class="num">(662) 268-6333</div></div>
-      <div class="col c2"><div class="lbl">Mobile</div><div class="num">(662) 418-8791</div></div>
-    </div>
-  </div>
-
   <!-- the logo (built from assets/img/logo/*.png) -->
-  <div id="logo"></div>
+  <div id="logo"><div id="logoInner"></div></div>
+
+  <!-- the transition wave: green-edged blue sheet that sweeps up through the frame -->
+  <svg id="wipe" width="2400" height="3000" viewBox="0 0 2400 3000" aria-hidden="true">
+    <path fill="var(--green)" d="M0,150 C500,60 875,230 1200,190 C1560,150 1880,30 2400,90 L2400,2900 C1880,2960 1560,2840 1200,2880 C875,2920 500,2750 0,2840 Z"/>
+    <path fill="var(--blue)"  d="M0,205 C500,115 875,285 1200,245 C1560,205 1880,85 2400,145 L2400,2845 C1880,2905 1560,2785 1200,2825 C875,2865 500,2695 0,2785 Z"/>
+  </svg>
 </div>
 
 <script src="assets/img/logo/layers.js"></script>
 <script>
 /* ---- logo layers ------------------------------------------------------ */
 (function(){
-  const box = document.getElementById('logo');
+  const box = document.getElementById('logo'), inner = document.getElementById('logoInner');
   const [CW, CH] = LOGO_LAYERS.canvas;
   box.style.height = (640 * CH / CW) + 'px';
-  /* draw order: trees behind everything, lettering on top */
-  for (const name of ['trees', 'roof', 'tom', 'smith', 'landand', 'homes', 'tagline']) {
+  for (const name of LOGO_LAYERS.order) {          /* pines behind everything, lettering on top */
     const g = LOGO_LAYERS.layers[name];
     const img = document.createElement('img');
     img.src = `assets/img/logo/${name}.png`;
@@ -205,8 +188,9 @@ html,body{margin:0;padding:0;background:#fff}
     img.style.left  = (g.x / CW * 100) + '%';
     img.style.top   = (g.y / CH * 100) + '%';
     img.style.width = (g.w / CW * 100) + '%';
-    box.appendChild(img);
+    inner.appendChild(img);
   }
+  const shine = document.createElement('div'); shine.id = 'shine'; inner.appendChild(shine);
 })();
 
 /* ---- deterministic playback hooks used by render.js ------------------- */

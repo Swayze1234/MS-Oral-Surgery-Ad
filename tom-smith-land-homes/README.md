@@ -7,12 +7,12 @@ H.264 spot built to the MCTV Digital ad spec (MP4, 300–700 kb/s, under 20 MB).
 
 | Time | Slide | What happens |
 |------|-------|--------------|
-| 0–7 s | Intro | Green wave + blue band rise in. The logo builds itself in the center of the frame: roof wipes on, "Tom" and "Smith" pop in, the two pines grow up out of the lettering, then "LAND AND HOMES" and "Expect More. Get More." rise in. Website fades in on the band. |
-| 7–18 s | Chance Persac | Logo glides to the right (larger than the name). Chance's cut-out headshot rises on the left over the band, business-card style. "CHANCE / PERSAC / REALTOR®", "Office phone: (662)268-6333", "Cell phone: (601) 955-4587" slide in. Band headline: "LAND OR HOME? / GET THE BEST OF BOTH WORLDS." |
-| 18.7–30 s | Brady Richardson | Logo glides to the top-left at near full size (the largest element on the slide). Brady's cut-out headshot rises on the right. "YOUR / LOCAL / HOMETOWN / REALTORS" and the website sit beside the logo. In the blue band: "BRADY / RICHARDSON" in white (larger than Chance's name), then "Office Phone (662) 268-6333" and "Mobile (662) 418-8791". |
+| 0–9.9 s | Intro | Green wave + blue band rise in. The logo builds itself in the center of the frame: the roof appears (wipes on left to right), the two pines rise one after the other, then "Tom", "Smith", "LAND AND", "HOMES" and "Expect More. Get More." drop in from above. Website fades in on the band, a light sweeps across the logo at 5 s, and the logo pulses just before the transition. |
+| 9.9–11.4 s | Transition | A green-edged blue wave, slightly tilted, sweeps up through the whole frame. While it covers the screen the logo jumps to its slide-2 spot; the wave's trailing edge then uncovers Chance's slide from the bottom up. |
+| 10.8–30 s | Chance Persac | Chance's cut-out headshot rises on the left over the band, business-card style. "CHANCE / PERSAC / REALTOR®", "Office phone: (662)268-6333", "Cell phone: (601) 955-4587" slide in. The logo sits on the right, larger than the name. Band headline: "LAND OR HOME? / GET THE BEST OF BOTH WORLDS." |
 
-The website `TomSmithLandandHomes.com` (from the business card) appears on every
-slide.
+The website `TomSmithLandandHomes.com` (from the business card) appears on both
+slides.
 
 ## Files
 
@@ -20,13 +20,13 @@ slide.
   a browser to preview it playing in real time (it is sized to 1920×1080).
 - `render.js` — seeks the page's animations frame by frame with Playwright and
   pipes the frames to ffmpeg. Deterministic output.
-- `prepare_headshots.py` — upscales the two headshots and removes their
-  backgrounds (rembg) to produce `assets/img/*-cutout.png`.
+- `prepare_headshots.py` — upscales Chance's headshot and removes its
+  background (rembg) to produce `assets/img/chance-cutout.png`.
 - `prepare_logo.py` — takes the supplied logo (`assets/source/tom-smith-logo.jpg`),
   removes the green circle and the white background, upscales it 4×, and cuts it
-  into the seven layers in `assets/img/logo/` (roof, Tom, Smith, trees, LAND AND,
-  HOMES, tagline) that the intro animates one by one. `layers.js` holds their
-  positions.
+  into the eight layers in `assets/img/logo/` (roof, the two pines, Tom, Smith,
+  LAND AND, HOMES, tagline) that the intro animates one by one. `layers.js` holds
+  their positions and draw order.
 - `assets/fonts/` — Montserrat (name/phone text, as on the card) and Liberation
   Serif (band headlines).
 - `assets/img/background.jpg` — the supplied park bokeh photo, cropped to 16:9 and
@@ -41,11 +41,14 @@ slide.
   circle is removed and the artwork is upscaled 4× for 1080p. A larger or vector
   original would sharpen it further: drop it in as `assets/source/tom-smith-logo.jpg`
   (or adjust `SRC` in `prepare_logo.py`) and re-run the script.
-- In the intro the pines grow up out of the "Smith" lettering: the white keyline
-  between the letters and the trees is too thin in the 500 px file to separate
-  them any other way, so the green artwork is split at the letters' cap line.
-- Brady's headshot was supplied at 375×450 px and is upscaled 2.6× for 1080p, so it
-  is a little softer than Chance's. A larger original will drop straight in.
+- The pines' trunks end behind the "Smith" lettering in the artwork, and the
+  white keyline between letters and trees is too thin in the 500 px file to
+  separate them by colour. The green artwork is therefore split at the letters'
+  cap line, and each pine gets a short tapered trunk drawn down to the letters'
+  baseline so it is a complete shape while it rises; the letters then drop on
+  top and hide the join.
+- Brady Richardson's slide was removed at the client's request; his source photo
+  is kept in `assets/source/` in case it is wanted again.
 
 ## Rebuild
 
@@ -59,5 +62,5 @@ NODE_PATH=/opt/node22/lib/node_modules \
 FFMPEG=$(python3 -c "import imageio_ffmpeg as f; print(f.get_ffmpeg_exe())") \
 node render.js                                        # writes output/Tom_Smith_Land_Homes_30s.mp4
 
-STILLS=4,12,24 node render.js                         # preview PNGs instead of the video
+STILLS=2,6,10.5,14 node render.js                     # preview PNGs instead of the video
 ```
