@@ -23,6 +23,8 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;font-family:'B
 .cond{font-family:'Barlow Condensed',sans-serif}
 .fraunces{font-family:'Fraunces',serif;font-weight:700;font-style:italic;font-optical-sizing:auto}
 .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform}
+.footage{position:absolute;inset:0;overflow:hidden;background:#000}
+.footage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform,opacity}
 .reveal{overflow:hidden}
 .reveal>span{display:block;will-change:transform}
 .kicker{display:flex;align-items:center;gap:20px;height:40px}
@@ -39,6 +41,8 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;font-family:'B
 .row .ic svg{width:30px;height:30px}
 .fill{fill:currentColor}
 .tile{position:absolute;width:118px;height:118px;background:var(--white);will-change:transform;backface-visibility:hidden}
+.card{position:absolute;background:var(--white);padding:18px 18px 0;box-sizing:border-box;box-shadow:0 40px 90px rgba(0,0,0,.55);will-change:transform;transform-origin:50% 60%}
+.card .cap{height:92px;display:flex;align-items:center;justify-content:space-between;padding:0 10px}
 </style>
 </head>
 <body>
@@ -74,85 +78,97 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;font-family:'B
     </div>
   </div>
 
-  <!-- ===== SCENE 3: TORTA TRAY — polaroid card on charcoal ===== -->
+  <!-- ===== SCENE 3: POLAROID STACK — torta photo behind, food footage in front ===== -->
   <div class="scene" id="s3" style="background:var(--ink)">
     <div class="abs dotsdark" style="inset:0"></div>
-    <div class="abs" id="s3-card" style="left:900px;top:150px;width:960px;background:var(--white);padding:18px 18px 0;box-sizing:border-box;box-shadow:0 40px 90px rgba(0,0,0,.55);will-change:transform;transform-origin:50% 60%">
-      <div style="position:relative;width:924px;height:617px;overflow:hidden;background:#000">
+    <div class="card" id="s3-back" style="left:990px;top:110px;width:900px;opacity:0;transform-origin:50% 50%">
+      <div style="position:relative;width:864px;height:577px;overflow:hidden;background:#000">
         <img class="photo" id="s3-photo" src="assets/torta-tray.jpg" style="object-position:50% 50%">
       </div>
-      <div style="height:92px;display:flex;align-items:center;justify-content:space-between;padding:0 10px">
+      <div class="cap" style="height:80px"><div class="cond" style="font-size:26px;font-weight:700;letter-spacing:.2em;color:rgba(23,23,27,.55);text-transform:uppercase">Tortas &amp; fries</div></div>
+    </div>
+    <div class="card" id="s3-card" style="left:880px;top:190px;width:960px;opacity:0">
+      <div class="footage" id="s3-fx" style="position:relative;width:924px;height:617px"><img id="s3-fx-u" alt=""><img id="s3-fx-o" alt=""></div>
+      <div class="cap">
         <div class="fraunces" style="font-size:44px;color:var(--ink)">¡Uno más, por favor!</div>
         <div class="cond" style="font-size:26px;font-weight:700;letter-spacing:.2em;color:var(--chile);text-transform:uppercase">Oxford, MS</div>
       </div>
     </div>
-    <div class="abs" id="s3-sticker" style="left:820px;top:90px;width:190px;height:190px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;text-align:center;opacity:0;will-change:transform;box-shadow:0 18px 40px rgba(0,0,0,.35)">
+    <div class="abs" id="s3-sticker" style="left:800px;top:120px;width:190px;height:190px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;text-align:center;opacity:0;will-change:transform;box-shadow:0 18px 40px rgba(0,0,0,.35)">
       <div class="cond" style="font-size:30px;font-weight:800;line-height:1.05;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)">More<br>than<br>tacos</div>
     </div>
-    <div class="abs" style="left:110px;top:225px;width:720px">
+    <div class="abs" style="left:110px;top:225px;width:700px">
       <div class="kicker"><div class="bar" id="s3-bar"></div><div class="tx" id="s3-kick" style="opacity:0;color:var(--lime)">Big flavor, Oxford</div></div>
       <div class="h1" style="font-size:150px;color:var(--white);margin-top:22px">
         <div class="reveal"><span id="s3-w1">Tortas,</span></div>
-        <div class="reveal"><span id="s3-w2">Fries &amp;</span></div>
-        <div class="reveal"><span id="s3-w3" style="color:var(--lime)">Tequila.</span></div>
+        <div class="reveal"><span id="s3-w2">Fajitas</span></div>
+        <div class="reveal"><span id="s3-w3">&amp; <span style="color:var(--lime)">Fries.</span></span></div>
       </div>
-      <div id="s3-sub" style="font-size:33px;font-weight:600;color:rgba(250,250,247,.82);margin-top:30px;line-height:1.35;opacity:0">Small-batch tequilas &nbsp;·&nbsp; Handcrafted margaritas &nbsp;·&nbsp; Dine in or take out</div>
+      <div id="s3-sub" style="font-size:33px;font-weight:600;color:rgba(250,250,247,.82);margin-top:30px;line-height:1.35;opacity:0">Burritos &nbsp;·&nbsp; Enchiladas &nbsp;·&nbsp; Loaded fries &nbsp;·&nbsp; Desserts</div>
     </div>
   </div>
 
-  <!-- ===== SCENE 4: THE OXFORD BUILDING — drop assets/building.jpg in to use the photo ===== -->
-  <div class="scene" id="s4" style="background:var(--white)">
-    <img class="photo" id="s4-photo" src="assets/building.jpg" style="object-position:50% 50%">
-    <div class="abs" id="s4-scrim" style="inset:0;background:linear-gradient(to right,rgba(250,250,247,.97) 0%,rgba(250,250,247,.92) 36%,rgba(250,250,247,.55) 56%,rgba(250,250,247,0) 74%)"></div>
-    <!-- typographic fallback panel (shown only when there is no building photo) -->
-    <div class="abs" id="s4-panel" style="left:1120px;top:0;width:800px;height:1080px;background:var(--lime);overflow:hidden;will-change:transform">
-      <div class="abs dots" style="inset:0;opacity:.18;filter:brightness(.2)"></div>
-      <div class="abs slab" id="s4-num" style="left:0;right:0;top:250px;text-align:center;font-size:330px;line-height:1;color:var(--ink);letter-spacing:-.02em"><span class="reveal" style="display:block"><span id="s4-num-in">1101</span></span></div>
-      <div class="abs cond" id="s4-street" style="left:0;right:0;top:610px;text-align:center;font-size:64px;font-weight:800;letter-spacing:.14em;color:var(--ink);text-transform:uppercase;opacity:0">E Jackson Ave</div>
-      <div class="abs" id="s4-pin" style="left:355px;top:735px;width:90px;height:90px;color:var(--ink);opacity:0"><svg viewBox="0 0 24 24" style="width:100%;height:100%"><path class="fill" d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></div>
-    </div>
-    <div class="abs" style="left:120px;top:190px;width:960px">
-      <div class="kicker"><div class="bar" id="s4-bar"></div><div class="tx" id="s4-kick" style="opacity:0">Now in Oxford</div></div>
-      <div class="h1" style="font-size:176px;margin-top:22px">
-        <div class="reveal"><span id="s4-h1a">Find us</span></div>
-        <div class="reveal"><span id="s4-h1b">in <span style="color:var(--chile)">Oxford.</span></span></div>
+  <!-- ===== SCENE 4: FULL-BLEED FOOTAGE — bar + the big spread ===== -->
+  <div class="scene" id="s4" style="background:#000">
+    <div class="footage" id="s4-fx"><img id="s4-fx-u" alt=""><img id="s4-fx-o" alt=""></div>
+    <div class="abs" style="inset:0;background:linear-gradient(to top,rgba(10,10,12,.86) 0%,rgba(10,10,12,.6) 34%,rgba(10,10,12,.1) 62%,rgba(10,10,12,0) 80%)"></div>
+    <div class="abs" style="inset:0;background:linear-gradient(to right,rgba(10,10,12,.5) 0%,rgba(10,10,12,0) 55%)"></div>
+    <div class="abs" id="s4-badge" style="left:1590px;top:90px;width:230px;height:230px;opacity:0;will-change:transform;filter:drop-shadow(0 16px 30px rgba(0,0,0,.4))"></div>
+    <div class="abs" style="left:110px;bottom:100px;width:1500px">
+      <div class="kicker"><div class="bar" id="s4-bar"></div><div class="tx" id="s4-kick" style="opacity:0;color:var(--lime)">Agaveria &amp; taqueria</div></div>
+      <div class="h1" style="font-size:168px;color:var(--white);margin-top:18px;line-height:.92">
+        <div class="reveal"><span id="s4-h1a">Full bar.</span></div>
+        <div class="reveal"><span id="s4-h1b">Full <span style="color:var(--lime)">table.</span></span></div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:22px;margin-top:44px">
-        <div class="row" id="s4-r1" style="opacity:0"><div class="ic"><svg viewBox="0 0 24 24"><path class="fill" d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></div><span>1101 E Jackson Ave &nbsp;·&nbsp; Oxford, MS 38655</span></div>
-        <div class="row" id="s4-r2" style="opacity:0"><div class="ic"><svg viewBox="0 0 24 24"><path class="fill" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2.2a7.8 7.8 0 1 1 0 15.6 7.8 7.8 0 0 1 0-15.6zM11 7h2v5.2l3.6 2.1-1 1.7L11 13.4V7z"/></svg></div><span>Open daily from 11 AM</span></div>
-        <div class="row" id="s4-r3" style="opacity:0"><div class="ic"><svg viewBox="0 0 24 24"><path class="fill" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div><span>(662) 371-9899</span></div>
-      </div>
+      <div id="s4-sub" style="font-size:34px;font-weight:600;color:rgba(250,250,247,.9);margin-top:28px;opacity:0">Small-batch tequilas &nbsp;·&nbsp; Handcrafted margaritas &nbsp;·&nbsp; Dine in &nbsp;·&nbsp; Takeout</div>
     </div>
   </div>
 
-  <!-- ===== SCENE 5: OUTRO — logo + ticket ===== -->
+  <!-- ===== SCENE 5: THE WHITE OXFORD BUILDING — postcard strip + white info band ===== -->
   <div class="scene" id="s5" style="background:var(--white)">
+    <div class="footage" id="s5-fx" style="left:0;top:0;width:1920px;height:720px"><img id="s5-fx-u" alt=""><img id="s5-fx-o" alt=""></div>
+    <div class="abs" id="s5-band" style="left:0;top:720px;width:1920px;height:360px;background:var(--white);will-change:transform">
+      <div class="abs dots" style="inset:0;opacity:.7"></div>
+      <div class="abs" style="left:0;right:0;top:0;height:14px;background:var(--lime)"></div>
+      <div class="abs" style="left:110px;top:52px;width:1700px">
+        <div class="kicker"><div class="bar" id="s5-bar"></div><div class="tx" id="s5-kick" style="opacity:0">Now in Oxford</div></div>
+        <div class="h1 reveal" style="font-size:118px;margin-top:14px;line-height:1"><span id="s5-h1">Find us in <span style="color:var(--chile)">Oxford.</span></span></div>
+      </div>
+      <div class="abs" style="left:110px;top:262px;width:1700px;display:flex;gap:56px">
+        <div class="row" id="s5-r1" style="opacity:0"><div class="ic"><svg viewBox="0 0 24 24"><path class="fill" d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></div><span>1101 E Jackson Ave &nbsp;·&nbsp; Oxford, MS 38655</span></div>
+        <div class="row" id="s5-r2" style="opacity:0"><div class="ic"><svg viewBox="0 0 24 24"><path class="fill" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2.2a7.8 7.8 0 1 1 0 15.6 7.8 7.8 0 0 1 0-15.6zM11 7h2v5.2l3.6 2.1-1 1.7L11 13.4V7z"/></svg></div><span>Open daily from 11 AM</span></div>
+        <div class="row" id="s5-r3" style="opacity:0"><div class="ic"><svg viewBox="0 0 24 24"><path class="fill" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div><span>(662) 371-9899</span></div>
+      </div>
+    </div>
+    <div class="abs" id="s5-tag" style="left:110px;top:80px;background:var(--white);color:var(--ink);padding:14px 30px;border-radius:60px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:30px;letter-spacing:.2em;text-transform:uppercase;box-shadow:0 14px 34px rgba(0,0,0,.25);opacity:0;will-change:transform">Look for the white building</div>
+  </div>
+
+  <!-- ===== SCENE 6: OUTRO — logo + ticket ===== -->
+  <div class="scene" id="s6" style="background:var(--white)">
     <div class="abs dots" style="inset:0;opacity:.7"></div>
-    <div class="abs" id="s5-logo" style="left:150px;top:190px;width:700px;height:434px;opacity:0;will-change:transform"></div>
-    <div class="abs h1" id="s5-tag" style="left:150px;width:700px;top:660px;text-align:center;font-size:62px;line-height:1;opacity:0">Tacos &amp; Tequila</div>
-    <div class="abs cond" id="s5-ig" style="left:150px;width:700px;top:748px;text-align:center;font-size:34px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--chile);opacity:0">@unomastacos</div>
-    <div class="abs" id="s5-ticket" style="left:1010px;top:150px;width:790px;height:730px;will-change:transform;transform-origin:50% 50%;filter:drop-shadow(0 34px 60px rgba(23,23,27,.28))">
+    <div class="abs" id="s6-logo" style="left:150px;top:190px;width:700px;height:434px;opacity:0;will-change:transform"></div>
+    <div class="abs h1" id="s6-tag" style="left:150px;width:700px;top:660px;text-align:center;font-size:62px;line-height:1;opacity:0">Tacos &amp; Tequila</div>
+    <div class="abs cond" id="s6-ig" style="left:150px;width:700px;top:748px;text-align:center;font-size:34px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--chile);opacity:0">@unomastacos</div>
+    <div class="abs" id="s6-ticket" style="left:1010px;top:150px;width:790px;height:730px;will-change:transform;transform-origin:50% 50%;filter:drop-shadow(0 34px 60px rgba(23,23,27,.28))">
       <div class="abs" style="inset:0;background:var(--ink);border-radius:26px"></div>
       <div class="abs" style="left:0;right:0;top:0;height:530px;padding:64px 70px 0;box-sizing:border-box;color:var(--white)">
-        <div class="kicker"><div class="bar" id="s5-bar"></div><div class="tx" id="s5-kick" style="opacity:0;color:var(--lime)">Oxford, Mississippi</div></div>
-        <div class="h1 reveal" style="font-size:96px;margin-top:18px"><span id="s5-h1">Come see us.</span></div>
+        <div class="kicker"><div class="bar" id="s6-bar"></div><div class="tx" id="s6-kick" style="opacity:0;color:var(--lime)">Oxford, Mississippi</div></div>
+        <div class="h1 reveal" style="font-size:96px;margin-top:18px"><span id="s6-h1">Come see us.</span></div>
         <div style="display:flex;flex-direction:column;gap:16px;margin-top:34px;font-size:33px;font-weight:600;color:rgba(250,250,247,.86)">
-          <div id="s5-l1" style="opacity:0">1101 E Jackson Ave &nbsp;·&nbsp; Oxford, MS 38655</div>
-          <div id="s5-l2" style="opacity:0">Open daily from 11 AM</div>
-          <div id="s5-l3" style="opacity:0;color:var(--lime);font-weight:800;font-size:44px;margin-top:6px;letter-spacing:.01em">(662) 371-9899</div>
+          <div id="s6-l1" style="opacity:0">1101 E Jackson Ave &nbsp;·&nbsp; Oxford, MS 38655</div>
+          <div id="s6-l2" style="opacity:0">Open daily from 11 AM</div>
+          <div id="s6-l3" style="opacity:0;color:var(--lime);font-weight:800;font-size:44px;margin-top:6px;letter-spacing:.01em">(662) 371-9899</div>
         </div>
       </div>
-      <!-- perforation -->
       <div class="abs" style="left:34px;right:34px;top:544px;border-top:4px dashed rgba(250,250,247,.28)"></div>
       <div class="abs" style="left:-22px;top:522px;width:44px;height:44px;border-radius:50%;background:var(--white)"></div>
       <div class="abs" style="right:-22px;top:522px;width:44px;height:44px;border-radius:50%;background:var(--white)"></div>
-      <!-- stub -->
-      <div class="abs" id="s5-stub" style="left:0;right:0;top:560px;bottom:0;background:var(--lime);border-radius:0 0 26px 26px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transform-origin:50% 0;">
+      <div class="abs" id="s6-stub" style="left:0;right:0;top:560px;bottom:0;background:var(--lime);border-radius:0 0 26px 26px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transform-origin:50% 0;">
         <div class="slab" style="font-size:66px;line-height:1;color:var(--ink);letter-spacing:.01em">unomastacos.com</div>
         <div class="cond" style="font-size:28px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink)">Dine in &nbsp;·&nbsp; Takeout &nbsp;·&nbsp; Delivery</div>
       </div>
     </div>
-    <div class="ticker" id="s5-ticker"><div class="run" id="s5-run"></div></div>
+    <div class="ticker" id="s6-ticker"><div class="run" id="s6-run"></div></div>
   </div>
 
   <!-- ===== BLINDS transition ===== -->
@@ -160,6 +176,7 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;font-family:'B
 </div>
 
 <script src="assets/logo_glyphs.js"></script>
+<script src="assets/clips/manifest.js"></script>
 <script>
 // ---------- helpers ----------
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
@@ -168,7 +185,6 @@ const E={
   linear:p=>p,
   outCubic:p=>1-Math.pow(1-p,3),
   inOutCubic:p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2,
-  inCubic:p=>p*p*p,
   outExpo:p=>p>=1?1:1-Math.pow(2,-10*p),
   outQuint:p=>1-Math.pow(1-p,5),
   outBack:p=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2);},
@@ -183,8 +199,37 @@ const scaleX=(el,p)=>{el.style.transform=`scaleX(${p})`;};
 const pop=(el,p,rot=0)=>{el.style.opacity=p>0?1:0;el.style.transform=`rotate(${(1-p)*rot}deg) scale(${Math.max(0,p)})`;};
 
 // ---------- timeline ----------
-const T={s2:6.2,s3:12.4,s4:18.6,s5:24.6,end:30};
+const T={s2:5.0,s3:10.0,s4:15.0,s5:20.0,s6:25.2,end:30};
 const BL={pre:.5,post:.55}; // blinds: cover during [B-pre,B], uncover during [B,B+post]
+
+// ---------- footage (30 fps JPEG frame sequences from tools/make_clips.py) ----------
+// Each scene lists its shots with a scene-relative start; consecutive shots crossfade over `fade` seconds.
+const CLIPS=window.CLIP_MANIFEST||{};
+const SHOTS={
+  s3:[{clip:'p_tacos',start:0},{clip:'p_fries',start:1.75,fade:.3},{clip:'p_fajitas',start:3.5,fade:.3}],
+  s4:[{clip:'f_bar',start:0},{clip:'f_spread',start:2.15,fade:.35}],
+  s5:[{clip:'b_aerial',start:0},{clip:'b_side',start:1.75,fade:.3},{clip:'b_wide',start:3.5,fade:.3}],
+};
+const FPS=30,pending=new Set();
+function frameSrc(clip,localT){
+  const n=CLIPS[clip]||1,i=clamp(Math.round(localT*FPS),0,n-1);
+  return `assets/clips/${clip}/f${String(i+1).padStart(4,'0')}.jpg`;
+}
+function setSrc(img,src){if(img.dataset.src!==src){img.dataset.src=src;img.src=src;pending.add(img);}}
+function renderFootage(prefix,shots,s,zoom=1){
+  const under=$(prefix+'-u'),over=$(prefix+'-o');
+  let i=0;for(let k=0;k<shots.length;k++)if(s>=shots[k].start)i=k;
+  const cur=shots[i];
+  setSrc(over,frameSrc(cur.clip,s-cur.start));
+  const fade=cur.fade||0,prev=shots[i-1];
+  if(prev&&fade>0&&s<cur.start+fade){
+    setSrc(under,frameSrc(prev.clip,s-prev.start));under.style.opacity=1;
+    over.style.opacity=E.inOutCubic(clamp((s-cur.start)/fade));
+  }else{under.style.opacity=0;over.style.opacity=1;}
+  // gentle push-in over each shot so the cuts breathe
+  const local=s-cur.start,z=zoom+Math.min(local,3)*0.012;
+  over.style.transform=`scale(${z})`;under.style.transform=`scale(${zoom+0.036})`;
+}
 
 // ---------- logo ----------
 let LOGO=null;
@@ -204,21 +249,22 @@ function buildLogo(container,fill){
   return {svg,paths};
 }
 // Circular "sticker" badge: rotating text ring around the sugar skull
+let badgeN=0;
 function buildBadge(container){
   const g=LOGO.glyphs[G.skull],b=g.bbox,bw=b[2]-b[0],bh=b[3]-b[1];
-  const s=96/Math.max(bw,bh),tx=115-(b[0]+bw/2)*s,ty=112-(b[1]+bh/2)*s;
+  const s=96/Math.max(bw,bh),tx=115-(b[0]+bw/2)*s,ty=112-(b[1]+bh/2)*s,id='ring'+(badgeN++);
   container.innerHTML=`<svg viewBox="0 0 230 230" width="100%" height="100%" style="overflow:visible">
-    <defs><path id="ring" d="M115,115 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs>
+    <defs><path id="${id}" d="M115,115 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs>
     <circle cx="115" cy="115" r="115" fill="#A8D03C"/>
-    <g id="badge-ring"><text font-family="Barlow Condensed" font-weight="700" font-size="24.5" letter-spacing="3.1" fill="#17171B"><textPath href="#ring">UNO MAS · OXFORD, MS · TACOS &amp; TEQUILA · </textPath></text></g>
+    <g class="badge-ring"><text font-family="Barlow Condensed" font-weight="700" font-size="24.5" letter-spacing="3.1" fill="#17171B"><textPath href="#${id}">UNO MAS · OXFORD, MS · TACOS &amp; TEQUILA · </textPath></text></g>
     <path d="${g.d}" fill="#17171B" fill-rule="evenodd" transform="translate(${tx.toFixed(2)},${ty.toFixed(2)}) scale(${s.toFixed(4)})"/>
   </svg>`;
-  const ring=container.querySelector('#badge-ring');ring.style.transformOrigin='115px 115px';ring.style.transformBox='view-box';
+  const ring=container.querySelector('.badge-ring');ring.style.transformOrigin='115px 115px';ring.style.transformBox='view-box';
   return ring;
 }
 
 // ---------- scene 1: tile wall ----------
-let tiles=[],introLogo=null,outroLogo=null,badgeRing=null,runW={};
+let tiles=[],introLogo=null,badgeRing=null,badgeRing4=null,runW={};
 function buildTiles(){
   const c=$('s1-tiles');
   for(let r=0;r<9;r++)for(let col=0;col<16;col++){
@@ -234,7 +280,6 @@ function renderTiles(t){
     el.style.opacity=p>0?1:0;
     el.style.transform=`rotateY(${(1-p)*-90}deg) scale(${lerp(.6,1,p)})`;
   }
-  // grout: charcoal -> warm grey once the wall is up
   const gp=seg(t,.9,1.75);
   $('s1-grout').style.background=`rgb(${lerp(23,226,gp)|0},${lerp(23,221,gp)|0},${lerp(27,209,gp)|0})`;
 }
@@ -242,14 +287,11 @@ function renderIntroLogo(t){
   const P=introLogo.paths,wrap=$('s1-logo');
   const wp=seg(t,1.55,2.35,E.outBack);
   wrap.style.opacity=wp>0?1:0;wrap.style.transform=`scale(${lerp(.7,1,wp)})`;
-  // skull first
   pop(P[G.skull],seg(t,1.55,2.25,E.outBack));
-  // flowers + leaves bloom
   pop(P[G.lFlower],seg(t,1.95,2.6,E.outBack),-25);pop(P[G.rFlower],seg(t,2.0,2.65,E.outBack),25);
   pop(P[G.lLeaf],seg(t,2.15,2.75,E.outBack),-30);pop(P[G.rLeaf],seg(t,2.2,2.8,E.outBack),30);
   G.lSprigs.concat(G.rSprigs).forEach((i,k)=>pop(P[i],seg(t,2.3+k*.05,2.75+k*.05,E.outBack)));
   G.lDots.concat(G.rDots).forEach((i,k)=>pop(P[i],seg(t,2.4+k*.05,2.8+k*.05,E.outBack)));
-  // letters drop in from above and bounce
   G.letters.forEach((i,k)=>{
     const p=seg(t,2.35+k*.1,2.35+k*.1+.7,E.outBounce),el=P[i];
     el.style.opacity=t>=2.35+k*.1?1:0;el.style.transform=`translateY(${(1-p)*-90}px)`;
@@ -260,19 +302,20 @@ function renderTicker(runId,t,speed=150){
   const w=runW[runId]||1000;$(runId).style.transform=`translateX(${-((t*speed)%w)}px)`;
 }
 function renderS1(t){
-  renderTiles(t);
-  renderIntroLogo(t);
-  revealUp($('s1-h1'),seg(t,3.2,3.9,E.outQuint));
-  scaleX($('s1-ul'),seg(t,3.6,4.1,E.outQuint));
-  const kp=seg(t,3.85,4.45,E.outExpo),kk=$('s1-kick');kk.style.opacity=kp;kk.style.letterSpacing=`${lerp(.7,.32,kp)}em`;
-  fadeUp($('s1-sub'),seg(t,4.15,4.7),24);
-  const tp=seg(t,4.3,4.95,E.outBackSoft);$('s1-ticker').style.transform=`translateY(${(1-tp)*90}px)`;
+  const tt=t/0.8; // the intro was choreographed for ~6s; play it 20% faster to fit 5s
+  renderTiles(tt);
+  renderIntroLogo(tt);
+  revealUp($('s1-h1'),seg(tt,3.2,3.9,E.outQuint));
+  scaleX($('s1-ul'),seg(tt,3.6,4.1,E.outQuint));
+  const kp=seg(tt,3.85,4.45,E.outExpo),kk=$('s1-kick');kk.style.opacity=kp;kk.style.letterSpacing=`${lerp(.7,.32,kp)}em`;
+  fadeUp($('s1-sub'),seg(tt,4.15,4.7),24);
+  const tp=seg(tt,4.3,4.95,E.outBackSoft);$('s1-ticker').style.transform=`translateY(${(1-tp)*90}px)`;
   renderTicker('s1-run',t);
 }
 
 // ---------- scene 2 ----------
 function renderS2(t){
-  const s=t-T.s2,u=clamp(s/6.2);
+  const s=t-T.s2,u=clamp(s/5);
   const ap=seg(t,T.s2+.05,T.s2+.95,E.outQuint),arch=$('s2-arch');
   arch.style.opacity=ap;arch.style.transform=`translateY(${(1-ap)*260}px)`;
   $('s2-photo').style.transform=`scale(${lerp(1.18,1.04,u)}) translateY(${lerp(2.5,0,u)}%)`;
@@ -289,59 +332,67 @@ function renderS2(t){
 
 // ---------- scene 3 ----------
 function renderS3(t){
-  const s=t-T.s3,u=clamp(s/6.2);
-  const cp=seg(t,T.s3+.05,T.s3+1.0,E.outBackSoft),card=$('s3-card');
+  const s=t-T.s3;
+  const bp=seg(t,T.s3+.0,T.s3+.9,E.outBackSoft),back=$('s3-back');
+  back.style.opacity=bp>0?1:0;
+  back.style.transform=`translate(${(1-bp)*560}px,${(1-bp)*-120}px) rotate(${lerp(16,4,bp)}deg)`;
+  const cp=seg(t,T.s3+.15,T.s3+1.1,E.outBackSoft),card=$('s3-card');
   card.style.opacity=cp>0?1:0;
-  card.style.transform=`translate(${(1-cp)*520}px,${(1-cp)*160}px) rotate(${lerp(-14,-3,cp)}deg)`;
-  $('s3-photo').style.transform=`scale(${lerp(1.0,1.08,u)}) translateX(${lerp(0,-1.5,u)}%)`;
+  card.style.transform=`translate(${(1-cp)*520}px,${(1-cp)*180}px) rotate(${lerp(-14,-3,cp)}deg)`;
+  renderFootage('s3-fx',SHOTS.s3,s);
   scaleX($('s3-bar'),seg(t,T.s3+.35,T.s3+.85,E.outQuint));
   fadeUp($('s3-kick'),seg(t,T.s3+.45,T.s3+.95),18);
   revealUp($('s3-w1'),seg(t,T.s3+.55,T.s3+1.25,E.outQuint));
   revealUp($('s3-w2'),seg(t,T.s3+.7,T.s3+1.4,E.outQuint));
   revealUp($('s3-w3'),seg(t,T.s3+.85,T.s3+1.55,E.outQuint));
   fadeUp($('s3-sub'),seg(t,T.s3+1.35,T.s3+1.9),24);
-  const sp=seg(t,T.s3+1.15,T.s3+1.85,E.outBack),st=$('s3-sticker');
+  const sp=seg(t,T.s3+1.2,T.s3+1.9,E.outBack),st=$('s3-sticker');
   st.style.opacity=sp>0?1:0;st.style.transform=`scale(${Math.max(0,sp)}) rotate(${lerp(-60,-12,sp)}deg)`;
 }
 
 // ---------- scene 4 ----------
-let hasBuilding=false;
 function renderS4(t){
-  const s=t-T.s4,u=clamp(s/6.2);
-  if(hasBuilding){
-    $('s4-photo').style.transform=`scale(${lerp(1.0,1.1,u)}) translateX(${lerp(0,-1.2,u)}%)`;
-  }else{
-    const pp=seg(t,T.s4+.05,T.s4+.9,E.outQuint);
-    $('s4-panel').style.transform=`translateX(${(1-pp)*820}px)`;
-    revealUp($('s4-num-in'),seg(t,T.s4+.6,T.s4+1.3,E.outQuint));
-    fadeUp($('s4-street'),seg(t,T.s4+1.05,T.s4+1.55),22);
-    pop($('s4-pin'),seg(t,T.s4+1.3,T.s4+1.9,E.outBack));
-  }
-  scaleX($('s4-bar'),seg(t,T.s4+.3,T.s4+.8,E.outQuint));
-  fadeUp($('s4-kick'),seg(t,T.s4+.4,T.s4+.9),18);
-  revealUp($('s4-h1a'),seg(t,T.s4+.5,T.s4+1.2,E.outQuint));
-  revealUp($('s4-h1b'),seg(t,T.s4+.65,T.s4+1.35,E.outQuint));
-  ['s4-r1','s4-r2','s4-r3'].forEach((id,k)=>fadeUp($(id),seg(t,T.s4+1.15+k*.16,T.s4+1.7+k*.16,E.outQuint),30));
+  const s=t-T.s4;
+  renderFootage('s4-fx',SHOTS.s4,s);
+  scaleX($('s4-bar'),seg(t,T.s4+.35,T.s4+.85,E.outQuint));
+  fadeUp($('s4-kick'),seg(t,T.s4+.45,T.s4+.95),18);
+  revealUp($('s4-h1a'),seg(t,T.s4+.55,T.s4+1.25,E.outQuint));
+  revealUp($('s4-h1b'),seg(t,T.s4+.72,T.s4+1.42,E.outQuint));
+  fadeUp($('s4-sub'),seg(t,T.s4+1.3,T.s4+1.85),24);
+  const bp=seg(t,T.s4+.9,T.s4+1.6,E.outBack),bd=$('s4-badge');
+  bd.style.opacity=bp>0?1:0;bd.style.transform=`scale(${Math.max(0,bp)}) rotate(${(1-bp)*40}deg)`;
+  badgeRing4.style.transform=`rotate(${-s*22}deg)`;
 }
 
 // ---------- scene 5 ----------
 function renderS5(t){
   const s=t-T.s5;
-  const lp=seg(t,T.s5+.1,T.s5+.9,E.outBack),lg=$('s5-logo');
+  renderFootage('s5-fx',SHOTS.s5,s);
+  const bp=seg(t,T.s5+.1,T.s5+.9,E.outQuint);$('s5-band').style.transform=`translateY(${(1-bp)*370}px)`;
+  scaleX($('s5-bar'),seg(t,T.s5+.55,T.s5+1.0,E.outQuint));
+  fadeUp($('s5-kick'),seg(t,T.s5+.6,T.s5+1.05),16);
+  revealUp($('s5-h1'),seg(t,T.s5+.7,T.s5+1.4,E.outQuint));
+  ['s5-r1','s5-r2','s5-r3'].forEach((id,k)=>fadeUp($(id),seg(t,T.s5+1.15+k*.14,T.s5+1.65+k*.14,E.outQuint),26));
+  const tp=seg(t,T.s5+1.6,T.s5+2.3,E.outBackSoft),tg=$('s5-tag');
+  tg.style.opacity=tp>0?1:0;tg.style.transform=`translateX(${(1-tp)*-80}px) scale(${lerp(.9,1,tp)})`;
+}
+
+// ---------- scene 6 ----------
+function renderS6(t){
+  const lp=seg(t,T.s6+.1,T.s6+.85,E.outBack),lg=$('s6-logo');
   lg.style.opacity=clamp(lp*2);lg.style.transform=`scale(${lerp(.6,1,lp)})`;
-  fadeUp($('s5-tag'),seg(t,T.s5+.7,T.s5+1.25,E.outQuint),26);
-  fadeUp($('s5-ig'),seg(t,T.s5+.9,T.s5+1.4,E.outQuint),20);
-  const tp=seg(t,T.s5+.35,T.s5+1.25,E.outBackSoft),tk=$('s5-ticket');
+  fadeUp($('s6-tag'),seg(t,T.s6+.65,T.s6+1.15,E.outQuint),26);
+  fadeUp($('s6-ig'),seg(t,T.s6+.8,T.s6+1.3,E.outQuint),20);
+  const tp=seg(t,T.s6+.3,T.s6+1.15,E.outBackSoft),tk=$('s6-ticket');
   tk.style.opacity=tp>0?1:0;tk.style.transform=`translate(${(1-tp)*700}px,${(1-tp)*80}px) rotate(${lerp(8,0,tp)}deg)`;
-  scaleX($('s5-bar'),seg(t,T.s5+.75,T.s5+1.2,E.outQuint));
-  fadeUp($('s5-kick'),seg(t,T.s5+.8,T.s5+1.25),16);
-  revealUp($('s5-h1'),seg(t,T.s5+.9,T.s5+1.55,E.outQuint));
-  ['s5-l1','s5-l2','s5-l3'].forEach((id,k)=>fadeUp($(id),seg(t,T.s5+1.3+k*.15,T.s5+1.8+k*.15,E.outQuint),24));
-  // stub "tear": swings in from the perforation
-  const sp=seg(t,T.s5+1.7,T.s5+2.5,E.outBack);
-  $('s5-stub').style.transform=`perspective(900px) rotateX(${(1-sp)*-70}deg)`;$('s5-stub').style.opacity=sp>0?1:0;
-  const kp=seg(t,T.s5+.6,T.s5+1.3,E.outBackSoft);$('s5-ticker').style.transform=`translateY(${(1-kp)*90}px)`;
-  renderTicker('s5-run',t);
+  scaleX($('s6-bar'),seg(t,T.s6+.7,T.s6+1.1,E.outQuint));
+  fadeUp($('s6-kick'),seg(t,T.s6+.75,T.s6+1.15),16);
+  revealUp($('s6-h1'),seg(t,T.s6+.85,T.s6+1.45,E.outQuint));
+  ['s6-l1','s6-l2','s6-l3'].forEach((id,k)=>fadeUp($(id),seg(t,T.s6+1.2+k*.14,T.s6+1.65+k*.14,E.outQuint),24));
+  const sp=seg(t,T.s6+1.55,T.s6+2.3,E.outBack);
+  $('s6-stub').style.transform=`perspective(900px) rotateX(${(1-sp)*-70}deg)`;$('s6-stub').style.opacity=sp>0?1:0;
+  const kp=seg(t,T.s6+.5,T.s6+1.15,E.outBackSoft);$('s6-ticker').style.transform=`translateY(${(1-kp)*90}px)`;
+  renderTicker('s6-run',t);
 }
 
 // ---------- blinds transition ----------
@@ -357,7 +408,7 @@ function buildBlinds(){
 }
 function renderBlinds(t){
   const c=$('blinds');let shown=false;
-  for(const B of [T.s2,T.s3,T.s4,T.s5]){
+  for(const B of [T.s2,T.s3,T.s4,T.s5,T.s6]){
     if(t>=B-BL.pre&&t<=B+BL.post){
       shown=true;c.style.display='block';
       blindEls.forEach((el,k)=>{
@@ -373,36 +424,39 @@ function renderBlinds(t){
 }
 
 // ---------- master ----------
-function render(t){
+const SCENES=['s1','s2','s3','s4','s5','s6'];
+async function render(t){
   t=clamp(t,0,T.end);
-  const active=t<T.s2?'s1':t<T.s3?'s2':t<T.s4?'s3':t<T.s5?'s4':'s5';
-  ['s1','s2','s3','s4','s5'].forEach(id=>{$(id).style.display=id===active?'block':'none';});
-  ({s1:renderS1,s2:renderS2,s3:renderS3,s4:renderS4,s5:renderS5})[active](t);
+  const active=t<T.s2?'s1':t<T.s3?'s2':t<T.s4?'s3':t<T.s5?'s4':t<T.s6?'s5':'s6';
+  SCENES.forEach(id=>{$(id).style.display=id===active?'block':'none';});
+  ({s1:renderS1,s2:renderS2,s3:renderS3,s4:renderS4,s5:renderS5,s6:renderS6})[active](t);
   renderBlinds(t);
+  // make sure every footage frame we just pointed at is decoded before the screenshot is taken
+  const imgs=[...pending];pending.clear();
+  await Promise.all(imgs.map(im=>im.decode().catch(()=>{})));
+  return true;
 }
 window.render=render;
 
 // ---------- init ----------
 window.adReady=(async()=>{
   LOGO=window.LOGO_GLYPHS;
-  ['s1','s2','s3','s4','s5'].forEach(id=>$(id).style.display='block');
+  SCENES.forEach(id=>$(id).style.display='block');
   buildTiles();buildBlinds();
   introLogo=buildLogo($('s1-logo'),'#EF5040');
-  outroLogo=buildLogo($('s5-logo'),'#EF5040');
+  buildLogo($('s6-logo'),'#EF5040');
   badgeRing=buildBadge($('s2-badge'));
+  badgeRing4=buildBadge($('s4-badge'));
   const tick='TACOS <i>·</i> TEQUILA <i>·</i> OXFORD, MS <i>·</i> ';
-  for(const id of ['s1-run','s5-run'])$(id).innerHTML=`<span class="rep">${tick}</span>`+tick.repeat(9);
+  for(const id of ['s1-run','s6-run'])$(id).innerHTML=`<span class="rep">${tick}</span>`+tick.repeat(9);
   await document.fonts.load('400 100px "Alfa Slab One"');
   await document.fonts.load('italic 700 100px "Fraunces"');
   for(const w of [500,600,700,800])await document.fonts.load(`${w} 30px "Barlow"`);
   for(const w of [700,800])await document.fonts.load(`${w} 30px "Barlow Condensed"`);
   await document.fonts.ready;
-  await Promise.all([...document.images].map(im=>im.complete?null:new Promise(r=>{im.onload=r;im.onerror=r;})));
-  for(const id of ['s1-run','s5-run'])runW[id]=$(id).querySelector('.rep').getBoundingClientRect().width;
-  const b=$('s4-photo');hasBuilding=b.naturalWidth>0;
-  if(hasBuilding){$('s4-panel').style.display='none';}
-  else{b.style.display='none';$('s4-scrim').style.display='none';}
-  render(0);
+  await Promise.all([...document.images].filter(im=>im.getAttribute('src')).map(im=>im.complete?null:new Promise(r=>{im.onload=r;im.onerror=r;})));
+  for(const id of ['s1-run','s6-run'])runW[id]=$(id).querySelector('.rep').getBoundingClientRect().width;
+  await render(0);
   return true;
 })();
 
