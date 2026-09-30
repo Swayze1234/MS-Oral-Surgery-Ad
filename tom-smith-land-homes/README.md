@@ -1,17 +1,17 @@
-# Tom Smith Land & Homes — 30-second digital ad
+# Tom Smith Land & Homes — 20-second digital ad
 
-`output/Tom_Smith_Land_Homes_30s.mp4` is a silent, 30-second, 1920×1080 (16:9)
+`output/Tom_Smith_Land_Homes_20s.mp4` is a silent, 20-second, 1920×1080 (16:9)
 H.264 spot built to the MCTV Digital ad spec (MP4, 300–700 kb/s, under 20 MB).
 
 ## Storyboard
 
 | Time | Slide | What happens |
 |------|-------|--------------|
-| 0–6.4 s | Intro | Green wave + blue band rise in. The logo builds itself in the center of the frame: the roof appears (wipes on left to right), the two pines rise one after the other, then "Tom", "Smith", "LAND AND", "HOMES" and "Expect More. Get More." drop in from above. Website fades in on the band, a light sweeps across the logo, and the logo pulses just before the transition. |
-| 6.4–7.9 s | Transition | A green-edged blue wave, slightly tilted, sweeps up through the whole frame. While it covers the screen the logo jumps to its slide-2 spot; the wave's trailing edge then uncovers Chance's slide from the bottom up. |
-| 7.3–22.4 s | Chance Persac | Chance's cut-out headshot rises on the left over the band, business-card style. "CHANCE / PERSAC / REALTOR®", "Office phone: (662)268-6333", "Cell phone: (601) 955-4587" slide in. The logo sits on the right, larger than the name. Band headline: "LAND OR HOME? / GET THE BEST OF BOTH WORLDS." |
-| 22.4–23.9 s | Transition | The same wave sweeps down from the top. While covered, Chance's slide hides and the logo jumps back to the center. |
-| 23.3–30 s | Outro | Logo large in the center. In the band: "TomSmithLandandHomes.com" and "Call (662)268-6333" rise in; a light sweeps across the logo once more. |
+| 0–4.9 s | Intro | Green wave + blue band rise in. The logo builds itself in the center of the frame: the roof appears (wipes on left to right), the two pines rise one after the other, then "Tom", "Smith", "LAND AND", "HOMES" and "Expect More. Get More." drop in from above. Website fades in on the band, a light sweeps across the logo, and the logo pulses just before the transition. |
+| 4.9–6.4 s | Transition | A green-edged blue wave, slightly tilted, sweeps up through the whole frame. While it covers the screen the logo jumps to its slide-2 spot; the wave's trailing edge then uncovers Chance's slide from the bottom up. |
+| 5.8–14.6 s | Chance Persac | Chance's cut-out headshot rises on the left over the band, business-card style. "CHANCE / PERSAC / REALTOR®", "Office phone: (662)268-6333", "Cell phone: (601) 955-4587" slide in. The logo sits on the right, larger than the name. Band headline: "LAND OR HOME? / GET THE BEST OF BOTH WORLDS." |
+| 14.6–16.1 s | Transition | The same wave sweeps down from the top. While covered, Chance's slide hides and the logo jumps back to the center. |
+| 15.5–20 s | Outro | Logo large in the center. In the band: "TomSmithLandandHomes.com" and "Call (662)268-6333" rise in; a light sweeps across the logo once more. |
 
 The website `TomSmithLandandHomes.com` (from the business card) appears on every
 slide.
@@ -62,7 +62,7 @@ python3 prepare_headshots.py                          # only if headshots change
 python3 prepare_logo.py                               # only if the logo changes
 NODE_PATH=/opt/node22/lib/node_modules \
 FFMPEG=$(python3 -c "import imageio_ffmpeg as f; print(f.get_ffmpeg_exe())") \
-node render.js                                        # writes output/Tom_Smith_Land_Homes_30s.mp4
+node render.js                                        # writes output/Tom_Smith_Land_Homes_20s.mp4
 
-STILLS=2,5,12,26 node render.js                       # preview PNGs instead of the video
+STILLS=2,4,9,18 node render.js                        # preview PNGs instead of the video
 ```

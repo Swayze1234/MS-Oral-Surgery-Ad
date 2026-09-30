@@ -41,6 +41,6 @@ strings in `build.py`.
 
 ## Other ads in this repo
 
-- [`tom-smith-land-homes/`](tom-smith-land-homes/) — 30-second silent 1920×1080
-  digital ad for Tom Smith Land & Homes (Chance Persac / Brady Richardson).
+- [`tom-smith-land-homes/`](tom-smith-land-homes/) — 20-second silent 1920×1080
+  digital ad for Tom Smith Land & Homes (intro, Chance Persac, outro).
   See its README for the storyboard and how to rebuild the MP4.

@@ -1,5 +1,5 @@
 /*
- * Renders ad.html to a 30-second, silent, 1920x1080 H.264 MP4 (MCTV spec:
+ * Renders ad.html to a 20-second, silent, 1920x1080 H.264 MP4 (MCTV spec:
  * 16:9, 300-700 kb/s, < 20 MB).  Every frame is produced by seeking the page's
  * CSS animations to an exact time, so the output is deterministic.
  *
@@ -12,9 +12,9 @@ const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 
-const FPS = 30, DURATION = 30, TOTAL = FPS * DURATION;
+const FPS = 30, DURATION = 20, TOTAL = FPS * DURATION;
 const OUT_DIR = path.join(__dirname, 'output');
-const OUT = path.join(OUT_DIR, 'Tom_Smith_Land_Homes_30s.mp4');
+const OUT = path.join(OUT_DIR, 'Tom_Smith_Land_Homes_20s.mp4');
 const FFMPEG = process.env.FFMPEG || 'ffmpeg';
 const STILLS = process.env.STILLS ? process.env.STILLS.split(',').map(Number) : null;
 

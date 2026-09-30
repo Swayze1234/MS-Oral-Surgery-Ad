@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Tom Smith Land &amp; Homes — 30s Digital Ad (1920×1080)</title>
+<title>Tom Smith Land &amp; Homes — 20s Digital Ad (1920×1080)</title>
 <style>
 /* ---------- fonts (all local, so renders are deterministic) ---------- */
 @font-face{font-family:'Montserrat';font-weight:300;src:url(assets/fonts/Montserrat-300.ttf)}
@@ -34,20 +34,20 @@ html,body{margin:0;padding:0;background:#fff}
 .abs{position:absolute}
 .slide{position:absolute;inset:0}
 
-/* ---------- timeline ----------------------------------------------------
+/* ---------- timeline (20 s) --------------------------------------------
    0.0–0.9 s   wave + band rise in
    0.3–1.0 s   roof appears (wipes on left to right)
    1.0–2.2 s   the two pines rise, one after the other
    2.2–3.9 s   "Tom", "Smith", "LAND AND", "HOMES", tagline drop in from above
-   4.2–5.4 s   a light sweeps across the logo
-   6.0–6.5 s   logo pulses
-   6.4–7.9 s   the wave sweeps UP through the frame (transition 1)
-   7.15 s      while covered: logo jumps to its slide-2 spot
-   7.3–8.3 s   Chance's slide is revealed bottom-up, elements settle in
-   22.4–23.9 s the wave sweeps DOWN through the frame (transition 2)
-   23.15 s     while covered: Chance's slide hides, logo jumps to the outro spot
-   23.3–24.8 s outro revealed top-down; website and phone rise in
-   26.0–27.2 s light sweeps across the logo again; hold to 30 s
+   3.9–4.9 s   a light sweeps across the logo
+   4.5–5.0 s   logo pulses
+   4.9–6.4 s   the wave sweeps UP through the frame (transition 1)
+   5.65 s      while covered: logo jumps to its slide-2 spot
+   5.8–6.8 s   Chance's slide is revealed bottom-up, elements settle in
+   14.6–16.1 s the wave sweeps DOWN through the frame (transition 2)
+   15.35 s     while covered: Chance's slide hides, logo jumps to the outro spot
+   15.5–16.9 s outro revealed top-down; website and phone rise in
+   17.5–18.7 s light sweeps across the logo again; hold to 20 s
    ----------------------------------------------------------------------- */
 
 /* ---------- green wave + blue band (persistent, like the card) ---------- */
@@ -58,15 +58,15 @@ html,body{margin:0;padding:0;background:#fff}
 /* The supplied logo, cut into layers (assets/img/logo/*.png) so the intro can
    build it piece by piece. Layer geometry comes from layers.js. */
 #logo{position:absolute;left:640px;top:40px;width:640px;transform-origin:0 0;
-  animation:logoMove 30000ms linear both}
+  animation:logoMove 20000ms linear both}
 #logoInner{position:relative;width:100%;height:100%;transform-origin:50% 50%;
-  animation:pulse 520ms 6000ms both cubic-bezier(.4,0,.2,1)}
+  animation:pulse 520ms 4500ms both cubic-bezier(.4,0,.2,1)}
 #logo .lg{position:absolute;display:block;
   filter:drop-shadow(0 0 2.5px #fff) drop-shadow(0 0 2.5px #fff) drop-shadow(0 0 10px rgba(255,255,255,.85))}
 @keyframes logoMove{
-  0%,23.833%       {transform:translate(0,0) scale(1)}
-  23.834%,77.166%  {transform:translate(700px,20px) scale(.84375)}
-  77.167%,100%     {transform:translate(20px,-4px) scale(.9375)}
+  0%,28.25%        {transform:translate(0,0) scale(1)}
+  28.251%,76.75%   {transform:translate(700px,20px) scale(.84375)}
+  76.751%,100%     {transform:translate(20px,-4px) scale(.9375)}
 }
 @keyframes pulse{0%{transform:scale(1)}45%{transform:scale(1.07)}100%{transform:scale(1)}}
 
@@ -88,15 +88,15 @@ html,body{margin:0;padding:0;background:#fff}
   -webkit-mask:url(assets/img/logo/logo.png) 0 0/100% 100% no-repeat;mask:url(assets/img/logo/logo.png) 0 0/100% 100% no-repeat;
   background:linear-gradient(112deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.75) 50%,rgba(255,255,255,0) 58%);
   background-size:260% 100%;background-repeat:no-repeat;
-  animation:shine 1200ms 4200ms both cubic-bezier(.4,0,.6,1),shine 1200ms 26000ms forwards cubic-bezier(.4,0,.6,1)}
+  animation:shine 1000ms 3900ms both cubic-bezier(.4,0,.6,1),shine 1200ms 17500ms forwards cubic-bezier(.4,0,.6,1)}
 @keyframes shine{from{background-position:130% 0}to{background-position:-30% 0}}
 
 /* ---------- the transitions: a wave sweeps up, later another sweeps down ---------- */
 #wipe{position:absolute;left:-240px;top:1080px;transform-origin:50% 0;
-  animation:sweepUp 1500ms 6400ms both cubic-bezier(.65,0,.35,1)}
+  animation:sweepUp 1500ms 4900ms both cubic-bezier(.65,0,.35,1)}
 @keyframes sweepUp{from{transform:rotate(-3deg) translateY(0)}to{transform:rotate(-3deg) translateY(-4200px)}}
 #wipe2{position:absolute;left:-240px;top:-3000px;transform-origin:50% 100%;
-  animation:sweepDown 1500ms 22400ms both cubic-bezier(.65,0,.35,1)}
+  animation:sweepDown 1500ms 14600ms both cubic-bezier(.65,0,.35,1)}
 @keyframes sweepDown{from{transform:rotate(3deg) translateY(0)}to{transform:rotate(3deg) translateY(4200px)}}
 
 /* ---------- shared text styles ---------- */
@@ -121,29 +121,29 @@ html,body{margin:0;padding:0;background:#fff}
 @keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
 @keyframes fadeOut{from{opacity:1}to{opacity:0}}
 
-/* slide 1 (0–7.15 s) */
-#s1 .url{animation:rise 700ms 3600ms both cubic-bezier(.2,.8,.2,1),fadeOut 400ms 6000ms forwards}
+/* slide 1 (0–5.65 s) */
+#s1 .url{animation:rise 700ms 3400ms both cubic-bezier(.2,.8,.2,1),fadeOut 400ms 4400ms forwards}
 
-/* slide 2 (revealed 7.3–7.9 s, hidden again at 23.15 s while covered) */
-#s2{animation:hide 1ms 23150ms forwards}
+/* slide 2 (revealed 5.8–6.4 s, hidden again at 15.35 s while covered) */
+#s2{animation:hide 1ms 15350ms forwards}
 @keyframes hide{to{opacity:0}}
-#chance   {animation:upIn 900ms 7350ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .h1   {animation:rise 650ms 7450ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .h2   {animation:rise 650ms 7550ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .url  {animation:rise 650ms 7650ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .first{animation:slideIn 600ms 7650ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .last {animation:slideIn 600ms 7750ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .role {animation:slideIn 600ms 7850ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .p1   {animation:slideIn 600ms 8000ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .p2   {animation:slideIn 600ms 8070ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .p3   {animation:slideIn 600ms 8180ms both cubic-bezier(.2,.8,.2,1)}
-#s2 .p4   {animation:slideIn 600ms 8250ms both cubic-bezier(.2,.8,.2,1)}
+#chance   {animation:upIn 900ms 5850ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .h1   {animation:rise 650ms 5950ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .h2   {animation:rise 650ms 6050ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .url  {animation:rise 650ms 6150ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .first{animation:slideIn 600ms 6150ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .last {animation:slideIn 600ms 6250ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .role {animation:slideIn 600ms 6350ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .p1   {animation:slideIn 600ms 6500ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .p2   {animation:slideIn 600ms 6570ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .p3   {animation:slideIn 600ms 6680ms both cubic-bezier(.2,.8,.2,1)}
+#s2 .p4   {animation:slideIn 600ms 6750ms both cubic-bezier(.2,.8,.2,1)}
 
-/* slide 3: outro (revealed 23.3–23.9 s, holds to 30 s) */
+/* slide 3: outro (revealed 15.5–16.1 s, holds to 20 s) */
 .outro .site{font-family:Montserrat,sans-serif;font-weight:700;font-size:72px;line-height:1;color:#fff;letter-spacing:1px}
 .outro .phone{font-family:Montserrat,sans-serif;font-weight:500;font-size:46px;line-height:1;color:#dfe9f8;letter-spacing:1px;margin-top:18px}
-#s3 .site {animation:rise 700ms 23900ms both cubic-bezier(.2,.8,.2,1)}
-#s3 .phone{animation:rise 700ms 24100ms both cubic-bezier(.2,.8,.2,1)}
+#s3 .site {animation:rise 700ms 16050ms both cubic-bezier(.2,.8,.2,1)}
+#s3 .phone{animation:rise 700ms 16250ms both cubic-bezier(.2,.8,.2,1)}
 </style>
 </head>
 <body>
