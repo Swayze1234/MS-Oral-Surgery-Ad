@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+
+# generated reels
+campaigns/od-free/social/reels/out/
