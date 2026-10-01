@@ -15,7 +15,7 @@ Instagram and LinkedIn pages. **Lead angle on every post: partnership with MSDH.
 |------|------------|
 | `social/facebook-instagram-post.md` | The page post: caption (two versions), hashtags, alt text, step-by-step posting instructions, pinned comment, DM reply, comment moderation |
 | `social/reels/README.md` | Four reels: scripts, on-screen text, shot lists, captions, cover text, audio notes |
-| `social/reels/build_reels.sh` | One command that turns the six screen spots into vertical (9:16) reels with MSDH-partnership banners |
+| `social/reels/build_reels.py` | One command that restacks the six screen spots into vertical (9:16) reels and stills using the spots' own panels, logos and QR |
 | `social/linkedin-post.md` | Company LinkedIn post, plus a short version for Creed to post from his own profile |
 | `assets/spots/` | Drop the six MP4s and the approval PDF here (see `assets/spots/README.md`) |
 | `assets/approval-sheet-summary.md` | The spot copy, timings and pilot terms from Creed's approval sheet, for reference |
@@ -35,7 +35,7 @@ Instagram and LinkedIn pages. **Lead angle on every post: partnership with MSDH.
 2. Get Dominic's OK on the phrase "in partnership with the Mississippi State Department of Health" and on tagging MSDH. Send him the FB/IG caption and LinkedIn post with the spots. The approval sheet already asked MSDH which pages to tag.
 3. Get the direct link to the naloxone request form (same destination as the QR). Captions use `odfree.org` until then.
 4. Confirm the launch footprint (Oxford only vs. all North Mississippi) and fix the copy.
-5. Drop the six MP4s into `assets/spots/` and run `social/reels/build_reels.sh` to make the reels.
+5. Drop the six MP4s into `assets/spots/` and run `python3 social/reels/build_reels.py` to make the reels (needs ffmpeg and Pillow).
 6. Film Reel 2 (Creed on camera) and Reel 3 (QR scan) — about an hour at one venue.
 
 ## Suggested 30-day cadence

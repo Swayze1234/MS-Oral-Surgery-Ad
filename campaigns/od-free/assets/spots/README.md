@@ -18,5 +18,5 @@ carousel.
 
 To add the two missing files: attach them in the Claude chat, or on GitHub
 open this folder and use **Add file → Upload files**. Then run
-`../../social/reels/build_reels.sh` again; Reel 1 will switch to the :15 cut
+`../../social/reels/build_reels.py` again; Reel 1 will switch to the :15 cut
 automatically.

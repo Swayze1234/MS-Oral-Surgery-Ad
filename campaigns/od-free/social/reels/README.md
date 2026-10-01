@@ -1,7 +1,7 @@
 # Reels (Instagram + Facebook)
 
 Four reels. Reels 1 and 4 are built automatically from the screen spots by
-`build_reels.sh`. Reels 2 and 3 need about an hour of filming at one venue.
+`build_reels.py`. Reels 2 and 3 need about an hour of filming at one venue.
 
 **Specs for all:** 1080 x 1920 (9:16), MP4, under 60 seconds, keep key text out
 of the top 220 px and bottom 420 px (Instagram's UI covers those). Post each
@@ -127,11 +127,19 @@ From OD Free Mississippi, now on every MCTV screen in North Mississippi in partn
 1. Put the six MP4s in `campaigns/od-free/assets/spots/` (exact names in that folder's README).
 2. From this folder run:
    ```bash
-   ./build_reels.sh
+   python3 build_reels.py
    ```
-3. Output lands in `out/` (committed to the repo, so Creed can download them from GitHub): Reel 1, Reel 4, plus a vertical version of each individual spot (`spot_*.mp4`) for stories.
+   Needs ffmpeg and Pillow (`pip install pillow`).
+3. Output lands in `out/` (committed to the repo, so Creed can download from GitHub):
+   - `reel_1_three-spots.mp4` and `reel_4_fentanyl-anywhere.mp4`
+   - `spot_*.mp4`: a vertical version of each spot, for stories
+   - `stills/still_*.png`: a 9:16 still of each spot's closing frame, for stories and the carousel
 
-The script needs `ffmpeg`. It centers the 16:9 spot on a navy canvas with
-"MCTV × MSDH / On every MCTV screen in North Mississippi" above and "Free naloxone for every Mississippian / Scan the screen · odfree.org" below. Edit the
-`TOP_TEXT`, `BOTTOM_TEXT` and `BG` lines at the top of the script to change
-them. The spots themselves are never altered.
+**How the vertical version is built.** Each spot is two panels: the message
+(left, animated) and the MSDH / QR panel (right, static), split by a gold
+rule. The script puts the message panel on top at full width, then re-lays
+the right panel below it, cut straight from the spot at full quality: FREE
+NALOXONE KIT, the QR code at 560 px, SCAN TO REQUEST, and the MSDH and OD
+Free marks as a footer. Nothing is redrawn and no text is added, so the
+creative MSDH approves is the creative that runs. The QR block sits inside
+Instagram's safe zone, clear of the caption overlay.
