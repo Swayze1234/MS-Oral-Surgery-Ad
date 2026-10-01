@@ -49,8 +49,8 @@ Notes on the copy:
 
 Pick one:
 
-1. **Video (best reach):** `MCTV_OXF_ODFreeCommonAndDeadly_Paid_15s_v2.mp4`, the :15 spot, as the post video. Silent is fine on Facebook. On Instagram, use the vertical version from `reels/build_reels.sh` instead.
-2. **Photo carousel:** a phone photo of a real venue screen playing the spot (first slide), then the six opening frames from the approval PDF. The real-screen photo is what makes people stop.
+1. **Video (best reach):** `assets/spots/MCTV_OXF_ODFreeSaveALife_Paid_15s_v2.mp4`, the :15 "Save a life" spot, as the post video. Silent is fine on Facebook. On Instagram, use the vertical version `social/reels/out/spot_SaveALife_15s.mp4` instead.
+2. **Photo carousel:** a phone photo of a real venue screen playing the spot (first slide), then the five stills in `assets/stills/` in numbered order. The real-screen photo is what makes people stop. Facebook and Instagram both accept the .webp and .png files as they are.
 
 Alt text (for the image or video): "MCTV digital screen in a North Mississippi venue showing the OD Free Mississippi spot: Save a life. Get naloxone at no cost. QR code to request a free naloxone kit from the Mississippi State Department of Health."
 

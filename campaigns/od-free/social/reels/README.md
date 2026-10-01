@@ -15,9 +15,11 @@ voice, no music needed.
 
 ## Reel 1 — "Every screen. Starting today." (built by script, ~45 s)
 
-**What it is:** the three :15 spots stacked back to back, vertical, with an
-MSDH-partnership banner above and the call to action below.
-File: `out/reel_1_all-three-15s.mp4`
+**What it is:** three spots back to back (Common and deadly, Fentanyl can be
+anywhere, Save a life), vertical, with an MSDH-partnership banner above and the
+call to action below. Until the :15 cut of Common and deadly is added, the
+script uses the :10 cut, so the reel runs 40 s instead of 45.
+File: `out/reel_1_three-spots.mp4`
 
 **Cover text (choose cover frame in Instagram, add text):** "Partnering with MSDH"
 
@@ -127,7 +129,7 @@ From OD Free Mississippi, now on every MCTV screen in North Mississippi in partn
    ```bash
    ./build_reels.sh
    ```
-3. Output lands in `out/`: Reel 1, Reel 4, plus a vertical version of each individual spot (`spot_*.mp4`) for stories.
+3. Output lands in `out/` (committed to the repo, so Creed can download them from GitHub): Reel 1, Reel 4, plus a vertical version of each individual spot (`spot_*.mp4`) for stories.
 
 The script needs `ffmpeg`. It centers the 16:9 spot on a navy canvas with
 "MCTV × MSDH / On every MCTV screen in North Mississippi" above and "Free naloxone for every Mississippian / Scan the screen · odfree.org" below. Edit the

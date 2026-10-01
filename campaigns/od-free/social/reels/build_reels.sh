@@ -77,16 +77,19 @@ if have "$S15_2"; then
   echo "  wrote reel_4_fentanyl-anywhere.mp4"
 fi
 
-# Reel 1: the three :15 spots back to back (Common and deadly, Fentanyl, Save a life).
-if have "$S15_1" && have "$S15_2" && have "$S15_3"; then
-  echo "Building Reel 1 (three :15 spots)..."
+# Reel 1: Common and deadly, Fentanyl, Save a life, back to back.
+# Uses the :15 cut of Common and deadly when present, otherwise the :10 cut.
+cad=""
+if have "$S15_1"; then cad="CommonAndDeadly_15s"; elif have "$S10_3"; then cad="CommonAndDeadly_10s"; fi
+if [ -n "$cad" ] && have "$S15_2" && have "$S15_3"; then
+  echo "Building Reel 1 ($cad + Fentanyl + Save a life)..."
   list="$TXT/list.txt"
-  for s in CommonAndDeadly_15s FentanylAnywhere_15s SaveALife_15s; do
+  for s in "$cad" FentanylAnywhere_15s SaveALife_15s; do
     echo "file '$OUT/spot_${s}.mp4'" >> "$list"
   done
   ffmpeg -y -hide_banner -loglevel error -f concat -safe 0 -i "$list" -c copy \
-    "$OUT/reel_1_all-three-15s.mp4"
-  echo "  wrote reel_1_all-three-15s.mp4"
+    "$OUT/reel_1_three-spots.mp4"
+  echo "  wrote reel_1_three-spots.mp4"
 fi
 
 if [ "$missing" = 1 ]; then
