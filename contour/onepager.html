@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Round Trip</title>
+<meta name="description" content="MCTV Digital one-page proposal for Contour Airlines: two Oxford flights on Contour's dates in 24 curated venues, $3,600.">
+<style>
+  @page { size: Letter; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #f6f2e9; }
+  body {
+    font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
+    color: #01132f;
+    font-size: 9.5pt;
+    line-height: 1.32;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    width: 8.5in;
+    height: 11in;
+    padding: 18pt 36pt 0 36pt;
+    position: relative;
+    background: #f6f2e9;
+  }
+  .label {
+    font-size: 7pt;
+    font-weight: bold;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #6a7891;
+    white-space: nowrap;
+  }
+  p { margin: 0; }
+
+  /* Eyebrow */
+  .eyebrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1.5pt solid #e8b84b;
+    padding-bottom: 4pt;
+  }
+  .eyebrow .label b { color: #002d68; }
+  .eyebrow .brand { color: #002d68; font-size: 7.5pt; letter-spacing: .24em; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
+
+  /* Headline */
+  h1 {
+    font-family: "Liberation Serif", Georgia, "Times New Roman", serif;
+    font-weight: normal;
+    font-size: 18.5pt;
+    line-height: 1.14;
+    color: #002d68;
+    margin: 7pt 0 4pt 0;
+  }
+  h1 b { font-weight: bold; }
+  .setup { font-size: 9.6pt; line-height: 1.3; color: #01132f; }
+
+  /* Stat strip */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    background: #002d68;
+    color: #e3eef9;
+    margin: 8pt 0 8pt 0;
+  }
+  .stat { padding: 5pt 9pt 5pt 10pt; border-left: 1px solid rgba(227,238,249,.22); min-width: 0; }
+  .stat:first-child { border-left: 0; }
+  .stat .num { font-family: "Liberation Serif", Georgia, serif; font-size: 17pt; line-height: 1; color: #e8b84b; margin-bottom: 3pt; white-space: nowrap; }
+  .stat .lab { font-size: 7pt; font-weight: bold; letter-spacing: .08em; text-transform: uppercase; color: #e3eef9; margin-bottom: 2pt; white-space: nowrap; }
+  .stat .cap { font-size: 7.6pt; line-height: 1.28; color: #c2d2e6; }
+
+  /* Section heads */
+  .sec { display: flex; align-items: baseline; gap: 6pt; margin-bottom: 3pt; }
+  .sec .label { color: #002d68; }
+  .sec:before { content: ""; width: 14pt; height: 2pt; background: #e8b84b; align-self: center; flex: none; }
+  .sec .sub { font-size: 8.1pt; color: #6a7891; line-height: 1.3; }
+
+  /* Package block */
+  .flights { display: grid; grid-template-columns: 1fr 1fr; gap: 7pt; }
+  .flight { background: #ffffff; border: 1px solid #ddd6c6; }
+  .flight .head { background: #002d68; color: #e3eef9; padding: 4pt 8pt 4.5pt 8pt; }
+  .flight .head .name { font-family: "Liberation Serif", Georgia, serif; font-size: 11pt; line-height: 1.15; color: #ffffff; }
+  .flight .head .dates { font-size: 7.3pt; color: #c2d2e6; margin-top: 1pt; }
+  .flight ul { list-style: none; margin: 0; padding: 1.5pt 8pt 2pt 8pt; }
+  .flight li { font-size: 8.1pt; line-height: 1.25; padding: 1.3pt 0; border-top: 1px solid #ece7da; }
+  .flight li:first-child { border-top: 0; }
+  .flight li b { color: #002d68; }
+  .dark {
+    background: #01132f; color: #e3eef9; margin-top: 4pt;
+    padding: 3.5pt 9pt; font-size: 8.1pt; display: flex; align-items: baseline; gap: 9pt;
+  }
+  .dark .label { color: #e8b84b; }
+
+  /* Payment strip */
+  .pay { display: grid; grid-template-columns: 136pt 176pt minmax(0, 1fr); gap: 7pt; margin-top: 5pt; align-items: start; }
+  .check { background: #ffffff; border: 1px solid #ddd6c6; padding: 4pt 8pt 4.5pt 8pt; }
+  .check .when { font-size: 7pt; font-weight: bold; letter-spacing: .06em; text-transform: uppercase; color: #6a7891; margin-bottom: 2pt; white-space: nowrap; }
+  .check .row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 7pt; align-items: start; }
+  .check .amt { font-family: "Liberation Serif", Georgia, serif; font-size: 14pt; color: #002d68; line-height: 1.05; }
+  .check p { font-size: 7.8pt; line-height: 1.25; color: #3b4760; }
+  .rate { font-size: 7.8pt; line-height: 1.25; color: #3b4760; padding-top: 1pt; }
+  .rate b { color: #002d68; font-family: "Liberation Serif", Georgia, serif; font-size: 10.5pt; }
+
+  /* Who sits */
+  .rooms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 11pt; }
+  .col { min-width: 0; }
+  .room { margin-bottom: 3pt; font-size: 8pt; line-height: 1.25; color: #3b4760; }
+  .room .cat { font-size: 7pt; font-weight: bold; letter-spacing: .08em; text-transform: uppercase; color: #002d68; margin-bottom: .5pt; white-space: nowrap; }
+  .room .cat span { color: #6a7891; letter-spacing: .04em; }
+  .room b { color: #01132f; font-weight: bold; }
+
+  /* Bottom row */
+  .bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; margin-top: 4pt; }
+  .inc ul, .opt ul { list-style: none; margin: 0; padding: 0; }
+  .inc li { font-size: 8.1pt; line-height: 1.25; padding: 1.2pt 0 1.2pt 9pt; position: relative; border-top: 1px solid #e3dccb; }
+  .inc li:first-child { border-top: 0; padding-top: 0; }
+  .inc li:before { content: ""; position: absolute; left: 0; top: 4.5pt; width: 4pt; height: 4pt; background: #e8b84b; }
+  .inc li:first-child:before { top: 3.3pt; }
+  .inc li b { color: #002d68; }
+  .opt li { font-size: 8.1pt; line-height: 1.25; padding: 0 0 3pt 0; }
+  .opt li .ol { font-size: 7pt; font-weight: bold; letter-spacing: .12em; text-transform: uppercase; color: #002d68; display: block; margin-bottom: .5pt; }
+
+  /* Footer */
+  .footer {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: #01132f; color: #e3eef9;
+    padding: 5.5pt 36pt; font-size: 7.6pt; letter-spacing: .03em;
+    display: flex; justify-content: space-between; white-space: nowrap;
+  }
+  .footer .gold { color: #e8b84b; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="eyebrow">
+    <div class="label"><b>The Round Trip</b> &middot; Prepared for Contour Airlines &middot; October 2026 &middot; One page</div>
+    <div class="brand">MCTV Digital</div>
+  </div>
+
+  <h1>Two Oxford flights on your dates,<br>in the 24 rooms where travelers wait. <b>$3,600.</b></h1>
+  <p class="setup">Clint asked for Oxford only, aimed at adults 25 and up with household income above $75,000 who fly two or three times a year, and nothing on screen from Dec 6 to Jan 17. A screen network targets by room, so this buy runs in the 24 Oxford venues where that adult sits or stops, leaves out the 16 where people stand or the room is a bar, and goes dark on Clint's dates.</p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="num">48 miles</div>
+      <div class="lab">Oxford to Tupelo</div>
+      <div class="cap">About an hour. Memphis International is 69 miles and 1h20.</div>
+    </div>
+    <div class="stat">
+      <div class="num">5 home games</div>
+      <div class="lab">Inside the fall flight</div>
+      <div class="cap">Missouri, Auburn, Georgia, Wofford and the Egg Bowl.</div>
+    </div>
+    <div class="stat">
+      <div class="num">Mon Nov 30</div>
+      <div class="lab">Cyber Monday</div>
+      <div class="cap">Sale text on screen Nov 23 through Dec 5 in all 24 rooms.</div>
+    </div>
+    <div class="stat">
+      <div class="num">Mar 6 to 14</div>
+      <div class="lab">Ole Miss spring break</div>
+      <div class="cap">Booked inside the spring flight. The rooms are off campus.</div>
+    </div>
+  </div>
+
+  <div class="flights">
+    <div class="flight">
+      <div class="head">
+        <div class="name">Fall flight: Cyber Monday</div>
+        <div class="dates">Sat Oct 17 to Sat Dec 5, 2026 &middot; 7 weeks, 50 billed days</div>
+      </div>
+      <ul>
+        <li><b>Oct 9 and 14</b> Sign Fri Oct 9. The :15 approved by Wed Oct 14. First play after Mon Oct 19 bills at $36 a day.</li>
+        <li><b>Sat Oct 17</b> On screen for Ole Miss vs Missouri.</li>
+        <li><b>Sat Oct 31, Nov 7, Nov 21</b> Auburn, Georgia and Wofford at home.</li>
+        <li><b>Fri Nov 27</b> Egg Bowl vs Mississippi State in Oxford, 11 a.m. kickoff on ABC. Black Friday.</li>
+        <li><b>Mon Nov 30</b> Cyber Monday. Sale text on screen Mon Nov 23 through Sat Dec 5. Details to MCTV by Mon Nov 16.</li>
+        <li><b>Sat Dec 5</b> Last day on screen. Reports Mon Nov 2 and Mon Dec 7.</li>
+      </ul>
+    </div>
+    <div class="flight">
+      <div class="head">
+        <div class="name">Spring flight: Spring break and baseball</div>
+        <div class="dates">Mon Jan 18 to Fri Mar 12, 2027 &middot; 8 weeks, 54 billed days</div>
+      </div>
+      <ul>
+        <li><b>Mon Jan 18</b> First play, MLK Day. Refreshed :15 drafted by Mon Jan 4, approved by Mon Jan 11.</li>
+        <li><b>Tue Jan 19</b> Classes resume. Faculty, staff and parents are back.</li>
+        <li><b>Feb 14 and 15</b> Valentine's and Presidents' Day, a long weekend.</li>
+        <li><b>February</b> Ole Miss baseball opening weekend.</li>
+        <li><b>Mar 6 to 14</b> Ole Miss spring break. Families book it inside the flight.</li>
+        <li><b>Fri Mar 12</b> Last day on screen, a week before SEC baseball. Reports Mon Feb 1 and Mon Mar 15.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="dark"><span class="label">Dark Dec 6 through Jan 17</span><span>Nothing on screen, nothing billed. Oct 1 to 16 is not billed either. On screen through Sat Dec 5, back on Mon Jan 18.</span></div>
+
+  <div class="pay">
+    <div class="check">
+      <div class="when">Check one &middot; Fri Oct 9, 2026</div>
+      <div class="row"><div class="amt">$1,800</div><p>With the signed order. Covers the fall flight.</p></div>
+    </div>
+    <div class="check">
+      <div class="when">Check two &middot; Mon Jan 18, 2027</div>
+      <div class="row"><div class="amt">$1,800</div><p>The day the spring spot goes on screen. Not invoiced in the dark period. Ten-day grace to Thu Jan 28.</p></div>
+    </div>
+    <p class="rate"><b>$3,600</b> is $1,800 a flight. 40 screens at $25 a screen, the card's 20-screen rate, is $1,000 a month, $3,467 for the 104 days on screen; the price also carries both spots and the Cyber Monday text swap. $25 applies to 40 screens because the term is 15 weeks, not six months; the six-month minimum is waived.</p>
+  </div>
+
+  <div class="sec" style="margin-top:7pt"><span class="label">Who sits in these rooms</span><span class="sub">24 venues, grouped by the room. The 16 left out are gas stations, bars and nightlife, tanning, gameday retail and counter-service and takeout rooms.</span></div>
+  <div class="rooms">
+    <div class="col">
+      <div class="room">
+        <div class="cat">Medical and dental waiting rooms <span>&middot; 6</span></div>
+        <b>Internal Medicine Associates; Mississippi Asthma &amp; Allergy; Right Track Medical Group; Oxford Dental; The Children's Dental Center; RedMed Urgent Clinic, Jackson Ave.</b> Insured adults and parents, seated 20 to 60 minutes facing the screen.
+      </div>
+      <div class="room">
+        <div class="cat">Auto dealer and service drive <span>&middot; 2</span></div>
+        <b>Cannon Chevrolet Buick Cadillac, Cannon Collision Center.</b> Service lounge, 45 to 90 minutes on weekday mornings. Buick and Cadillac buyers clear the income line.
+      </div>
+    </div>
+    <div class="col">
+      <div class="room">
+        <div class="cat">Salons, aesthetics and wellness <span>&middot; 6</span></div>
+        <b>Amara Salon &amp; Aesthetics, Element Hair Studio, Luxe Styling Studio, Nail E!, Nail Thology, Revive Wellness of Oxford.</b> An hour in the chair, back every four to six weeks.
+      </div>
+      <div class="room">
+        <div class="cat">Sit-down dining <span>&middot; 4</span></div>
+        <b>Casa Mexicana of Oxford, El Charro Cocina &amp; Cantina, LandShark Seafood &amp; Catfish, B's Hickory Smoke BBQ.</b> Table service, 45 minutes seated.
+      </div>
+    </div>
+    <div class="col">
+      <div class="room">
+        <div class="cat">Fitness <span>&middot; 2</span></div>
+        <b>Built Different Fitness, Rebel Body Fitness.</b> Paid memberships off campus, 30 to 45 minutes on cardio facing the screen.
+      </div>
+      <div class="room">
+        <div class="cat">Home services and civic <span>&middot; 3</span></div>
+        <b>Stouts Carpet &amp; Flooring, Rainbow Cleaners, James Food Center Post Office.</b> Homeowners making a decision in the thousands, and working adults in every week.
+      </div>
+      <div class="room">
+        <div class="cat">Wine and spirits <span>&middot; 1</span></div>
+        <b>Magnolia Wine &amp; Spirits.</b> 21-plus by law. Wine buyers skew older and higher income.
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="inc">
+      <div class="sec"><span class="label">What is included</span></div>
+      <ul>
+        <li><b>Twice per loop</b> on every screen in the 24 venues, both flights. Floor of 1,500 plays per screen per full month, prorated by day: 5,226 per screen, about 209,000 in all. Make-good is added days at no charge.</li>
+        <li><b>Production included.</b> A silent :15 for fall, the Cyber Monday text swap, a refreshed :15 for spring. Contour owns both spots.</li>
+        <li><b>Four traction reports:</b> Nov 2, Dec 7, Feb 1, Mar 15. Proof of play by venue, plays against the floor, make-good tally.</li>
+        <li><b>Travel-category exclusivity</b> on all 75+ MCTV Oxford screens, Fri Oct 9, 2026 through Fri Mar 12, 2027, dark weeks included.</li>
+        <li><b>Screen-count guarantee.</b> Screens over 40 in the 24 venues run at no charge. Under 40, MCTV adds comparable rooms of these types, with Contour's okay, at no change in price.</li>
+      </ul>
+    </div>
+    <div class="opt">
+      <div class="sec"><span class="label">Options, not in the $3,600</span></div>
+      <ul>
+        <li><span class="ol">Memphis International geofence</span>Mobile ads inside a perimeter at Memphis International's parking decks and terminal, then Oxford Square and campus. $300 setup, paid once, plus $600 a month for 50,000 impressions or $1,200 for 100,000. Three weeks from payment to first impression: pay with check one for a Fri Oct 30 start, or with check two for about Feb 8.</li>
+        <li><span class="ol">2027 co-op path with Tupelo Regional</span>If the Airport Authority co-ops on 2027 advertising, MCTV adds at the Sept 20 card: terminal and flight board $600 a month, Tupelo venues $650, all 75+ Oxford screens $1,300 a month in place of the $1,000 (about $4,700 for these two flights instead of $3,600). The entire network is $2,400 a month, less than the three pieces. Fall 2027 renewal at $1,800 a flight if Contour says so by Thu Jul 1, 2027, co-op or not.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>MCTV Digital, Inc. &middot; Creed Cannon &middot; creed@mctvofms.com &middot; 601-201-8202 &middot; mctvofms.com</span>
+    <span><span class="gold">The Round Trip</span> &middot; Order MCTV-20261001-CNTR</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Round Trip, insertion order MCTV-20261001-CNTR</title>
+<style>
+  @page { size: Letter; margin: 0; }
+  html, body { margin: 0; padding: 0; background: #f6f2e9; }
+  body {
+    font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
+    font-size: 9.5pt; line-height: 1.2; color: #01132f;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page {
+    position: relative; width: 8.5in; height: 11in; box-sizing: border-box;
+    padding: 0 0.5in 0.55in; background: #f6f2e9;
+  }
+  .brk { page-break-after: always; break-after: page; }
+  .serif { font-family: "Liberation Serif", Georgia, "Times New Roman", serif; }
+  .lab {
+    font-family: "Liberation Sans", Arial, sans-serif; font-size: 7pt; font-weight: bold;
+    letter-spacing: 0.14em; text-transform: uppercase; color: #6a7891;
+  }
+  .lab.gold { color: #e8b84b; }
+  .lab.blue { color: #e3eef9; }
+  p { margin: 0; }
+
+  /* Top band, full bleed */
+  .band {
+    background: #01132f; color: #e3eef9; margin: 0 -0.5in; padding: 0.22in 0.5in 0.17in;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .band > div:first-child { flex: none; }
+  .band h1 { font-size: 15.5pt; font-weight: normal; margin: 2pt 0 0; line-height: 1.15; color: #fff; white-space: nowrap; }
+  .band .meta { text-align: right; font-size: 8.4pt; line-height: 1.3; color: #e3eef9; max-width: 250pt; }
+  .band .meta b { color: #e8b84b; font-weight: bold; }
+
+  /* Package panel */
+  .pkg {
+    background: #002d68; color: #e3eef9; margin: 0 -0.5in; padding: 8pt 0.5in 8pt;
+    display: grid; grid-template-columns: 2.55fr 1.25fr 1.25fr 1.45fr; column-gap: 14pt;
+    border-top: 1.5pt solid #e8b84b;
+  }
+  .pkg .name { font-size: 17pt; color: #fff; line-height: 1.1; margin-top: 2pt; }
+  .pkg .tag { font-size: 8.6pt; line-height: 1.25; margin-top: 3pt; color: #e3eef9; }
+  .pkg .v { font-size: 10.5pt; color: #fff; margin-top: 2pt; line-height: 1.2; }
+  .pkg .s { font-size: 8pt; color: #e3eef9; margin-top: 2pt; line-height: 1.25; }
+  .pkg .total { font-size: 21pt; color: #e8b84b; line-height: 1; margin-top: 1pt; }
+
+  .rate { font-size: 8.6pt; line-height: 1.25; color: #01132f; margin: 6pt 0 0; padding-bottom: 5pt; border-bottom: 0.6pt solid #cfc8b8; }
+
+  /* Order table */
+  table.order { width: 100%; border-collapse: collapse; margin-top: 0; font-size: 8.9pt; }
+  table.order td { vertical-align: top; padding: 2.2pt 0 2.2pt; border-bottom: 0.6pt solid #cfc8b8; }
+  table.order td.k { width: 84pt; padding-right: 8pt; padding-top: 3.5pt; }
+  table.order tr:last-child td { border-bottom: 1.2pt solid #002d68; }
+  table.order tr:first-child td { border-top: 1.2pt solid #002d68; }
+
+  h2.sec { font-size: 12pt; font-weight: normal; margin: 6pt 0 3.5pt; color: #002d68; }
+  h2.sec .lab { margin-left: 8pt; }
+
+  ol.terms { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: 14pt; font-size: 8.6pt; line-height: 1.19; }
+  ol.terms li { break-inside: avoid; margin: 0 0 2.6pt; padding-left: 13pt; text-indent: -13pt; }
+  ol.terms li .n { display: inline-block; width: 13pt; text-indent: 0; color: #6a7891; font-weight: bold; }
+  ol.terms li b { color: #002d68; }
+
+  .foot {
+    position: absolute; left: 0; right: 0; bottom: 0; background: #01132f; color: #e3eef9;
+    padding: 5.5pt 0.5in; font-size: 7.6pt; letter-spacing: 0.03em;
+    display: flex; justify-content: space-between; white-space: nowrap;
+  }
+  .foot .gold { color: #e8b84b; }
+
+  /* Page 2 */
+  .ph { margin: 0 -0.5in; padding: 0.25in 0.5in 0.17in; background: #01132f; color: #e3eef9; }
+  .ph h1 { font-size: 21pt; font-weight: normal; margin: 3pt 0 0; line-height: 1.1; color: #fff; }
+  .ph p { font-size: 9.5pt; margin-top: 5pt; color: #e3eef9; max-width: 6.3in; }
+  .venues { columns: 2; column-gap: 20pt; margin-top: 8pt; font-size: 9.4pt; }
+  .cat { break-inside: avoid; margin-bottom: 6pt; }
+  .cat h3 { font-size: 11.5pt; font-weight: normal; color: #002d68; margin: 0 0 3pt; padding-bottom: 2pt; border-bottom: 1pt solid #e8b84b; }
+  .cat h3 .cnt { color: #6a7891; font-size: 9pt; font-family: "Liberation Sans", Arial, sans-serif; }
+  .cat p { margin: 0 0 3.4pt; line-height: 1.25; }
+  .cat p b { color: #01132f; }
+  .note { margin-top: 7pt; padding: 6pt 10pt; background: #002d68; color: #e3eef9; font-size: 9pt; line-height: 1.3; }
+  .note b { color: #e8b84b; font-weight: bold; }
+  .notin { margin-top: 5pt; font-size: 8.4pt; color: #6a7891; line-height: 1.3; }
+
+  /* Page 3 */
+  table.pay { width: 100%; border-collapse: collapse; margin-top: 10pt; font-size: 9.5pt; }
+  table.pay th { text-align: left; font-family: "Liberation Sans", Arial, sans-serif; font-size: 7pt; letter-spacing: 0.14em; text-transform: uppercase; color: #6a7891; padding: 0 8pt 3pt 0; border-bottom: 1.2pt solid #002d68; }
+  table.pay td { vertical-align: top; padding: 4.5pt 8pt 4.5pt 0; border-bottom: 0.6pt solid #cfc8b8; line-height: 1.25; }
+  table.pay td.amt, table.pay th.amt { text-align: right; padding-right: 0; white-space: nowrap; }
+  table.pay tr.tot td { border-bottom: 1.2pt solid #002d68; font-weight: bold; color: #002d68; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; column-gap: 24pt; margin-top: 10pt; }
+  .field { border-bottom: 0.7pt solid #6a7891; padding: 9pt 0 2pt; margin-bottom: 4pt; }
+  .field.tall { padding-top: 20pt; }
+  .opt { display: flex; gap: 8pt; margin-bottom: 6pt; }
+  .box { flex: none; width: 10pt; height: 10pt; border: 1pt solid #002d68; margin-top: 1.5pt; background: #fff; }
+  .auth { margin-top: 10pt; padding: 8pt 10pt; background: #002d68; color: #e3eef9; font-size: 9.2pt; line-height: 1.3; }
+  .auth b { color: #e8b84b; }
+  .sig { display: grid; grid-template-columns: 1fr 1fr; column-gap: 24pt; margin-top: 10pt; }
+  .sig .line { border-bottom: 0.9pt solid #01132f; height: 22pt; }
+  .sig .sub { font-size: 7.3pt; color: #6a7891; margin: 2pt 0 8pt; }
+  .ret { margin-top: 6pt; padding-top: 5pt; border-top: 1pt solid #e8b84b; font-size: 9.5pt; }
+</style>
+</head>
+<body>
+
+<!-- ===================== PAGE 1 ===================== -->
+<section class="page brk">
+  <div class="band">
+    <div>
+      <div class="lab gold">MCTV Digital, Inc. d/b/a MCTV Elite Advertising</div>
+      <h1 class="serif">Insertion order and payment authorization</h1>
+    </div>
+    <div class="meta">
+      <div><span class="lab blue">Order</span> &nbsp;<b>MCTV-20261001-CNTR</b></div>
+      <div>Issued Thu Oct 1, 2026. Valid through Fri Oct 9, 2026.</div>
+      <div>Prepared for Contour Airlines: Kristin Garcia, Contour, and Clint Ostler, Embark Aviation.</div>
+    </div>
+  </div>
+
+  <div class="pkg">
+    <div>
+      <div class="lab gold">Package</div>
+      <div class="name serif">The Round Trip</div>
+      <div class="tag">Two Oxford flights on your dates, in the 24 rooms where travelers wait. Nothing on screen and nothing billed in between.</div>
+    </div>
+    <div>
+      <div class="lab gold">Fall flight</div>
+      <div class="v serif">Sat Oct 17 to<br>Sat Dec 5, 2026</div>
+      <div class="s">7 weeks, 50 billed days. Cyber Monday inside.</div>
+    </div>
+    <div>
+      <div class="lab gold">Spring flight</div>
+      <div class="v serif">Mon Jan 18 to<br>Fri Mar 12, 2027</div>
+      <div class="s">8 weeks, 54 billed days. Spring break inside.</div>
+    </div>
+    <div>
+      <div class="lab gold">Total</div>
+      <div class="total serif">$3,600</div>
+      <div class="s">Two checks of $1,800: Fri Oct 9, 2026 with the signed order, and Mon Jan 18, 2027.</div>
+    </div>
+  </div>
+  <div class="rate"><span class="lab">Rate</span> &nbsp;40 screens at $25 a screen a month, the 20-screen rate on MCTV's card, is $1,000 a month and $3,467 for the 104 days on screen. The price is $3,600, two even checks of $1,800, with both spots and the Cyber Monday text swap in it. $25 applies to 40 screens because the term is 15 weeks, not the card's six months. The six-month minimum is waived.</div>
+
+  <table class="order">
+    <tr><td class="k lab">What runs</td><td>Your :15 on every screen in 24 Oxford venues, about 40 screens, each venue named and grouped by room on page 2.</td></tr>
+    <tr><td class="k lab">Dates</td><td>Fall flight Sat Oct 17 to Sat Dec 5, 2026, 50 days. Spring flight Mon Jan 18 to Fri Mar 12, 2027, 54 days. 104 billed days in all.</td></tr>
+    <tr><td class="k lab">Rotation</td><td>Twice per loop on a 15-minute loop: 8 plays an hour per screen during venue hours, both flights.</td></tr>
+    <tr><td class="k lab">Play floor</td><td>1,500 plays per screen per full month, prorated by day for partial months. Oct 17 to 31: 726. November: 1,500. Dec 1 to 5: 242. Jan 18 to 31: 677. February: 1,500. Mar 1 to 12: 581. That is 5,226 guaranteed plays per screen, about 209,000 across 40 screens. Shortfalls are made good at no charge (term 1).</td></tr>
+    <tr><td class="k lab">Creative</td><td>One silent :15 for fall, the message in on-screen text, approved by Wed Oct 14 for first play Sat Oct 17. Cyber Monday sale text Mon Nov 23 through Sat Dec 5 if the details reach MCTV by Mon Nov 16. A refreshed :15 for spring, live Mon Jan 18. Contour owns both spots.</td></tr>
+    <tr><td class="k lab">Reporting</td><td>Four traction reports: Mon Nov 2, Mon Dec 7 (fall close-out), Mon Feb 1, Mon Mar 15 (spring close-out).</td></tr>
+    <tr><td class="k lab">Exclusivity</td><td>Travel category on all 75+ MCTV Oxford screens, not just the 40 in the buy, Fri Oct 9, 2026 through Fri Mar 12, 2027, dark weeks included.</td></tr>
+    <tr><td class="k lab">Dark period</td><td>On screen through Sat Dec 5. Dark Dec 6 through Jan 17: nothing on screen, nothing billed. Back on screen Mon Jan 18. Oct 1 to 16 is not billed either.</td></tr>
+    <tr><td class="k lab">Options, not in the $3,600</td><td>Memphis International geofence: $300 setup plus $600 a month for 50,000 impressions, or $1,200 a month for 100,000. Widen to all 75+ Oxford screens on the same dates: about $4,700 in place of the $3,600, about $1,100 more. Tupelo Regional co-op at the Sept 20 card, with the airport's share invoiced to the Airport Authority. Fall 2027 renewal at $1,800 a flight if Contour says so by Thu Jul 1, 2027, co-op or not. None of these is bought by this order, and none obligates Contour, MCTV or the Airport Authority.</td></tr>
+  </table>
+
+  <h2 class="sec serif">Terms, in plain English</h2>
+  <ol class="terms">
+    <li><span class="n">1</span><b>Play floor and make-good.</b> If a screen falls short of its prorated floor in a month, MCTV adds days on screen at no charge until it is made up, in the spring flight or after Mar 12, never between Dec 6 and Jan 17. Make-good is the sole remedy for a shortfall, and MCTV's liability under this order is capped at what Contour has paid. The floor and the twice-per-loop rotation are separate promises. MCTV prices 40 screens. Screens over 40 inside the 24 venues run at no charge. Under 40, MCTV adds comparable Oxford rooms of the types on page 2 with Contour's written okay, never a bar, tanning salon, gas station or gameday store, at no change in price.</li>
+    <li><span class="n">2</span><b>Creative and approval.</b> MCTV sends the fall :15 draft by Mon Oct 12, or within one business day of a later signature. Contour approves in writing, and email counts, by Wed Oct 14 for first play Sat Oct 17. Without the sale details by Mon Nov 16, the fall spot runs unchanged through Dec 5. The spring :15 is drafted by Mon Jan 4 and approved by Mon Jan 11 for first play Mon Jan 18. If first play slips past Mon Oct 19, the fall flight is billed from first play at $36 a day instead of the flat $1,800, still ending Sat Dec 5; the difference is credited against check two, or refunded within ten days if the spring flight is cancelled.</li>
+    <li><span class="n">3</span><b>Traction reports.</b> Each report goes to Clint and Kristin: proof of play by venue, plays per screen against the floor, the make-good tally. Plays are counted by the media player on each screen, not by viewers. MCTV does not measure who is in the room.</li>
+    <li><span class="n">4</span><b>Your content, your rights.</b> Contour owns both spots and may use them anywhere, and is responsible for the fares, claims and marks in its message. MCTV does not clear collegiate marks: no Ole Miss names, logos or colors appear in the spots unless Contour supplies the license.</li>
+    <li><span class="n">5</span><b>Host venues.</b> The venues on page 2 are MCTV host locations, not MCTV property. If a host closes, leaves the network or pulls a screen during a flight, MCTV substitutes a comparable Oxford room at no change in price and notes the swap in the next report. Contour may ask for a swap before Fri Oct 9 at no change in price.</li>
+    <li><span class="n">6</span><b>Payment.</b> Check one, $1,800, comes with the signed order by Fri Oct 9, 2026. Check two, $1,800, is due Mon Jan 18, 2027, the day the spring spot goes on screen; nothing is invoiced from Dec 6 through Jan 17. The spring spot loads on schedule. If check two has not arrived by Thu Jan 28, 2027, the spot pauses until it does, and paused days are not made up and do not extend the flight. A returned check or failed payment carries a $30 fee.</li>
+    <li><span class="n">7</span><b>The agreement.</b> This order is binding when Contour signs it and MCTV countersigns; e-signatures and scanned signatures count. It is three pages and the whole agreement, and it replaces the one-pager and any earlier proposal, including order MCTV-20260927-CNTR. Mississippi law applies. MCTV is MCTV Digital, Inc. d/b/a MCTV Elite Advertising.</li>
+  </ol>
+
+  <div class="foot"><span>MCTV Digital, Inc. · Creed Cannon · creed@mctvofms.com · 601-201-8202 · mctvofms.com</span><span><span class="gold">Order MCTV-20261001-CNTR</span> · Page 1 of 3</span></div>
+</section>
+
+<!-- ===================== PAGE 2 ===================== -->
+<section class="page brk">
+  <div class="ph">
+    <div class="lab gold">Where it runs</div>
+    <h1 class="serif">24 Oxford venues, about 40 screens.</h1>
+    <p>Each room on this page was chosen for the same reason: adults 25 and up are in it, most of them seated 30 minutes or more, with a screen in front of them. The spot runs twice per loop on every screen in every room below, both flights.</p>
+  </div>
+
+  <div class="venues">
+    <div class="cat">
+      <h3 class="serif">Medical and dental waiting rooms <span class="cnt">6 venues</span></h3>
+      <p><b>Internal Medicine Associates.</b> Adult primary care. Patients 25 and up sit 20 to 40 minutes with the screen in front of them.</p>
+      <p><b>Mississippi Asthma &amp; Allergy.</b> Specialist clinic. Insured adults and parents on standing appointments, every week of both flights.</p>
+      <p><b>RedMed Urgent Clinic, Jackson Ave.</b> Walk-in urgent care. Working adults and parents waiting 30 minutes or more.</p>
+      <p><b>Right Track Medical Group.</b> Scheduled adult appointments, weekday daytime. A quiet room where the screen gets read.</p>
+      <p><b>Oxford Dental.</b> Adult dental. Six-month cleanings put the same insured households in the chair-side wait in both flights.</p>
+      <p><b>The Children's Dental Center.</b> Parents 28 to 45 sit 30 to 60 minutes while a child is seen. The household that books the family trip.</p>
+    </div>
+    <div class="cat">
+      <h3 class="serif">Auto dealer and service drive <span class="cnt">2 venues</span></h3>
+      <p><b>Cannon Chevrolet Buick Cadillac.</b> Showroom and service lounge, 45 to 90 minutes on weekday mornings. Buick and Cadillac buyers clear the income line.</p>
+      <p><b>Cannon Collision Center.</b> Insured car owners waiting on estimates and pickups. Adults, not students.</p>
+    </div>
+    <div class="cat">
+      <h3 class="serif">Salons, aesthetics and wellness <span class="cnt">6 venues</span></h3>
+      <p><b>Amara Salon &amp; Aesthetics.</b> Color and aesthetic appointments, 60 to 120 minutes seated. Women 25 to 55 with discretionary income.</p>
+      <p><b>Element Hair Studio.</b> Cut and color, an hour or more in the chair. Clients return every four to six weeks, so the same person sees both flights.</p>
+      <p><b>Luxe Styling Studio.</b> Same appointment-book profile: adult professionals, long seated dwell, repeat visits.</p>
+      <p><b>Nail E!</b> 45 to 60 minutes seated, eyes on the wall. Adult women on a two-week repeat.</p>
+      <p><b>Nail Thology.</b> Same dwell and same repeat as Nail E!, a second nail room on the other side of town.</p>
+      <p><b>Revive Wellness of Oxford.</b> Wellness clinic, seated 30 to 60 minutes. Discretionary health spend is a $75K-plus marker.</p>
+    </div>
+    <div class="cat">
+      <h3 class="serif">Fitness <span class="cnt">2 venues</span></h3>
+      <p><b>Built Different Fitness.</b> Paid membership gym off campus; students have the campus rec center. Members read the screen from cardio equipment for 30 to 45 minutes.</p>
+      <p><b>Rebel Body Fitness.</b> Same case. Paid membership, off campus, 30 to 45 minutes on the floor.</p>
+    </div>
+    <div class="cat">
+      <h3 class="serif">Wine and spirits <span class="cnt">1 venue</span></h3>
+      <p><b>Magnolia Wine &amp; Spirits.</b> 21-plus by law. Wine buyers skew older and higher income. A weekday evening stop on the way home.</p>
+    </div>
+    <div class="cat">
+      <h3 class="serif">Sit-down dining <span class="cnt">4 venues</span></h3>
+      <p><b>Casa Mexicana of Oxford.</b> Table service. Weekday lunch is office workers seated 45 minutes; evenings are families.</p>
+      <p><b>El Charro Cocina &amp; Cantina.</b> Table service, same weekday lunch and family dinner trade. Seated dwell, not a bar crowd.</p>
+      <p><b>LandShark Seafood &amp; Catfish.</b> Sit-down seafood house. Local families and adults, 45-minute dwell.</p>
+      <p><b>B's Hickory Smoke BBQ.</b> Weekday lunch tables for working adults, 30 to 45 minutes seated.</p>
+    </div>
+    <div class="cat">
+      <h3 class="serif">Home services and civic <span class="cnt">3 venues</span></h3>
+      <p><b>Stouts Carpet &amp; Flooring.</b> A flooring purchase is a homeowner decision in the thousands. Customers sit with a salesperson 30 to 60 minutes.</p>
+      <p><b>Rainbow Cleaners.</b> Dry cleaning. Working professionals, in every week.</p>
+      <p><b>James Food Center Post Office.</b> The one civic counter on the list. Adults running errands, 5 to 15 minutes facing the screen.</p>
+    </div>
+  </div>
+
+  <div class="note"><b>Substitution.</b> Every venue on this page is an MCTV host location, not MCTV property. If a host closes, leaves the network or pulls a screen during a flight, MCTV substitutes a comparable Oxford room at no change in price and notes the swap in the next traction report. Contour may ask for a swap before Fri Oct 9, 2026 at no change in price. The 40-screen guarantee is term 1 on page 1: screens over 40 run at no charge, and under 40 MCTV adds comparable rooms of the types on this page.</div>
+
+  <p class="notin"><b>Not in this buy, 16 Oxford venues.</b> Dining made the list only with table service and a weekday seated wait; rooms built around a bar, a yard or a takeout counter did not. The 16 come back in with the widen option on page 1, about $4,700 in place of the $3,600 for the same two flights, about $1,100 more: 4 Corner's Chevron, Booth's Barbeque and Yard, Finch &amp; Kelly, Marathon South Lamar, Oxford Super Tan, Oxford T-Shirt Co., Party in the Sip, Rafters Music and Food, Rosati's Pizza, Sip Oxford, Southern Coop, Texaco Lamar Express, The Blind Pig Pub, The Oxford Growler, The Velvet Ditch, Uno Mas Tacos y Tequila.</p>
+
+  <div class="foot"><span>MCTV Digital, Inc. · Creed Cannon · creed@mctvofms.com · 601-201-8202 · mctvofms.com</span><span><span class="gold">Order MCTV-20261001-CNTR</span> · Page 2 of 3</span></div>
+</section>
+
+<!-- ===================== PAGE 3 ===================== -->
+<section class="page">
+  <div class="ph">
+    <div class="lab gold">Payment authorization</div>
+    <h1 class="serif">Two checks of $1,800. One in 2026, one in 2027.</h1>
+    <p>Nothing is invoiced between the flights. Check one comes with the signed order. Check two is due the day the spring spot goes on screen.</p>
+  </div>
+
+  <table class="pay">
+    <tr><th>Payment</th><th>Covers</th><th>Invoiced</th><th>Due</th><th class="amt">Amount</th></tr>
+    <tr>
+      <td><b>Check one</b></td>
+      <td>Fall flight, Sat Oct 17 to Sat Dec 5, 2026. 50 billed days. Oct 1 to 16 is not billed.</td>
+      <td>Thu Oct 1, 2026, with this order.</td>
+      <td>Fri Oct 9, 2026, with the signed order.</td>
+      <td class="amt">$1,800</td>
+    </tr>
+    <tr>
+      <td><b>Check two</b></td>
+      <td>Spring flight, Mon Jan 18 to Fri Mar 12, 2027. 54 billed days. Nothing billed Dec 6 through Jan 17.</td>
+      <td>Mon Jan 18, 2027. Not invoiced during the dark period.</td>
+      <td>Mon Jan 18, 2027, the day the spring spot goes on screen. Ten-day grace to Thu Jan 28, 2027, then the spot pauses until the check arrives.</td>
+      <td class="amt">$1,800</td>
+    </tr>
+    <tr class="tot"><td>Total</td><td colspan="3">The Round Trip, order MCTV-20261001-CNTR. Options are not in this total and are invoiced only on Contour's written request, at the rates on page 1.</td><td class="amt">$3,600</td></tr>
+  </table>
+
+  <div class="grid2">
+    <div>
+      <h2 class="sec serif">Who we bill</h2>
+      <div class="field"><span class="lab">Company, as it should read on the invoice</span></div>
+      <div class="field"><span class="lab">Billing contact and title</span></div>
+      <div class="field"><span class="lab">Billing email</span></div>
+      <div class="field"><span class="lab">Phone</span></div>
+      <div class="field tall"><span class="lab">Billing address</span></div>
+      <div class="field"><span class="lab">PO or reference number, if your accounts payable needs one</span></div>
+    </div>
+    <div>
+      <h2 class="sec serif">How you will pay</h2>
+      <div class="opt"><div class="box"></div><div><b>Check.</b> Payable to MCTV Digital, Inc. The invoice carries the mailing address. A check counts as paid when it clears.</div></div>
+      <div class="opt"><div class="box"></div><div><b>ACH or bank draft.</b> MCTV's bank details are printed on the invoice. Confirm them by phone with Creed Cannon at 601-201-8202 before the first transfer. MCTV never changes bank details by email.</div></div>
+      <div class="opt"><div class="box"></div><div><b>Card.</b> MCTV emails a secure payment link for each check date. Do not write a card number on this page. MCTV does not keep card numbers on paper or in email, and a card payment posts the day it is made.</div></div>
+      <div class="opt"><div class="box"></div><div><b>Same method for both payments.</b> Leave this unchecked if check two will come a different way, and tell MCTV before Mon Jan 18, 2027.</div></div>
+    </div>
+  </div>
+
+  <div class="auth"><b>Authorization.</b> By signing below, Contour accepts this order and its terms on page 1 and authorizes MCTV Digital, Inc. to invoice and collect the two payments above by the method checked, and nothing more without a new signed order. Setup fees on any option Contour adds later are not refunded once work begins. A returned check or failed payment carries a $30 fee. A late check two pauses the spring spot after Thu Jan 28, 2027, as term 6 says.</div>
+
+  <div class="sig">
+    <div>
+      <div class="lab">For Contour Airlines</div>
+      <div class="line"></div><div class="sub">Name and title</div>
+      <div class="line"></div><div class="sub">Signature</div>
+      <div class="line"></div><div class="sub">Date</div>
+    </div>
+    <div>
+      <div class="lab">For MCTV Digital, Inc. d/b/a MCTV Elite Advertising</div>
+      <div class="line" style="display:flex;align-items:flex-end;font-size:10pt;padding-bottom:2pt;">T. Creed Cannon, Owner</div><div class="sub">Name and title</div>
+      <div class="line"></div><div class="sub">Signature</div>
+      <div class="line"></div><div class="sub">Date</div>
+    </div>
+  </div>
+
+  <p class="ret"><b>Return the signed order to creed@mctvofms.com by Fri Oct 9, 2026.</b> A scanned copy or an e-signature counts. Sign by Fri Oct 9 and approve the :15 by Wed Oct 14, and the spot is on screen for the Missouri weekend, Sat Oct 17. Questions: Creed Cannon, 601-201-8202, or Swayze Hollingsworth, 662-907-0404.</p>
+
+  <div class="foot"><span>MCTV Digital, Inc. · Creed Cannon · creed@mctvofms.com · 601-201-8202 · mctvofms.com</span><span><span class="gold">Order MCTV-20261001-CNTR</span> · Page 3 of 3</span></div>
+</section>
+
+</body>
+</html>

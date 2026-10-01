@@ -38,3 +38,13 @@ python3 build.py        # applies image + text edits, writes ../MCTV_Media_Kit_T
 
 To spin up another market version, drop in new photos and adjust the contact
 strings in `build.py`.
+
+## Contour Airlines package (`contour/`)
+
+`contour/` holds the revised Contour Airlines proposal built after Clint Ostler's
+Sept 30, 2026 reply (Oxford only, two flights, nothing billed Dec 6 to Jan 17):
+
+- `onepager.html` / `onepager.pdf` — "The Round Trip" one-page offer ($3,600, two checks of $1,800).
+- `order.html` / `order.pdf` — three-page insertion order MCTV-20261001-CNTR.
+- `reply-email.md` — draft reply for Creed to review. Not sent to Contour.
+- `build.js` — renders the two HTML files to PDF: `node contour/build.js`.

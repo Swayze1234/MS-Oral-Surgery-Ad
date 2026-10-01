@@ -2,6 +2,10 @@
 // Usage:  node contour/build.js            (renders every *.html in this folder)
 //         node contour/build.js onepager   (renders just onepager.html)
 // Needs the playwright package (node) and its bundled Chromium.
+// Exits 1 if any .page block holds more content than fits on it: Chromium's
+// multicolumn and absolute-position fragmentation can paint overflow under the
+// next page's header without changing the PDF page count, so the count alone
+// does not catch it.
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
@@ -14,10 +18,22 @@ const targets = fs.readdirSync(here)
 
 (async () => {
   const browser = await chromium.launch();
+  let failed = false;
   for (const f of targets) {
     const page = await browser.newPage();
+    await page.emulateMedia({ media: 'print' });
     const html = fs.readFileSync(path.join(here, f), 'utf8');
     await page.setContent(html, { waitUntil: 'load' });
+    const overflow = await page.evaluate(() => {
+      const PT = 72 / 96;
+      return Array.from(document.querySelectorAll('.page'))
+        .map((pg, i) => ({ page: i + 1, scroll: pg.scrollHeight * PT, client: pg.clientHeight * PT }))
+        .filter(p => p.scroll > p.client + 0.5);
+    });
+    for (const o of overflow) {
+      console.error(`${f}: .page ${o.page} overflows, content ${o.scroll.toFixed(1)}pt in a ${o.client.toFixed(1)}pt page`);
+      failed = true;
+    }
     const out = path.join(here, f.replace(/\.html$/, '.pdf'));
     await page.pdf({
       path: out,
@@ -30,4 +46,5 @@ const targets = fs.readdirSync(here)
     console.log('wrote', path.relative(process.cwd(), out));
   }
   await browser.close();
+  if (failed) process.exit(1);
 })().catch(e => { console.error(e); process.exit(1); });
