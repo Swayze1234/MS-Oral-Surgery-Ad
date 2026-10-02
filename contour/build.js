@@ -22,8 +22,9 @@ const targets = fs.readdirSync(here)
   for (const f of targets) {
     const page = await browser.newPage();
     await page.emulateMedia({ media: 'print' });
-    const html = fs.readFileSync(path.join(here, f), 'utf8');
-    await page.setContent(html, { waitUntil: 'load' });
+    // Load by file URL so relative assets (the fonts/ folder) resolve.
+    await page.goto('file://' + path.join(here, f), { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts.ready);
     const overflow = await page.evaluate(() => {
       const PT = 72 / 96;
       return Array.from(document.querySelectorAll('.page'))
