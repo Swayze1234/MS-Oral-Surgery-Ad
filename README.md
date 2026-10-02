@@ -47,4 +47,5 @@ Sept 30, 2026 reply (Oxford only, two flights, nothing billed Dec 6 to Jan 17):
 - `onepager.html` / `onepager.pdf` — "The Round Trip" one-page offer ($3,600, two checks of $1,800).
 - `order.html` / `order.pdf` — three-page insertion order MCTV-20261001-CNTR.
 - `reply-email.md` — draft reply for Creed to review. Not sent to Contour.
-- `build.js` — renders the two HTML files to PDF: `node contour/build.js`.
+- `contract.html` / `contract.pdf` — insertion order MCTV-20261002-CNTR, the contract for what Clint accepted on Oct 2: Flight 1 at $4,250, Flight 2 at $3,000 on 26 higher-income rooms, $7,250 total, Kristin Garcia signing.
+- `build.js` — renders the HTML files to PDF: `node contour/build.js`.

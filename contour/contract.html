@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Oxford, Two Flights. Insertion order MCTV-20261002-CNTR</title>
+<style>
+  @page { size: Letter; margin: 0; }
+  html, body { margin: 0; padding: 0; background: #f6f2e9; }
+  body {
+    font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
+    font-size: 9.5pt; line-height: 1.2; color: #01132f;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page {
+    position: relative; width: 8.5in; height: 11in; box-sizing: border-box;
+    padding: 0 0.5in 0.55in; background: #f6f2e9;
+  }
+  .brk { page-break-after: always; break-after: page; }
+  .serif { font-family: "Liberation Serif", Georgia, "Times New Roman", serif; }
+  .lab {
+    font-family: "Liberation Sans", Arial, sans-serif; font-size: 7pt; font-weight: bold;
+    letter-spacing: 0.14em; text-transform: uppercase; color: #6a7891;
+  }
+  .lab.gold { color: #e8b84b; }
+  .lab.blue { color: #e3eef9; }
+  p { margin: 0; }
+
+  /* Top band, full bleed */
+  .band {
+    background: #01132f; color: #e3eef9; margin: 0 -0.5in; padding: 0.22in 0.5in 0.17in;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .band > div:first-child { flex: none; }
+  .band h1 { font-size: 15.5pt; font-weight: normal; margin: 2pt 0 0; line-height: 1.15; color: #fff; white-space: nowrap; }
+  .band .meta { text-align: right; font-size: 8.4pt; line-height: 1.3; color: #e3eef9; max-width: 250pt; }
+  .band .meta b { color: #e8b84b; font-weight: bold; }
+
+  /* Package panel */
+  .pkg {
+    background: #002d68; color: #e3eef9; margin: 0 -0.5in; padding: 8pt 0.5in 8pt;
+    display: grid; grid-template-columns: 2.55fr 1.25fr 1.25fr 1.45fr; column-gap: 14pt;
+    border-top: 1.5pt solid #e8b84b;
+  }
+  .pkg .name { font-size: 17pt; color: #fff; line-height: 1.1; margin-top: 2pt; }
+  .pkg .tag { font-size: 8.6pt; line-height: 1.25; margin-top: 3pt; color: #e3eef9; }
+  .pkg .v { font-size: 10.5pt; color: #fff; margin-top: 2pt; line-height: 1.2; }
+  .pkg .s { font-size: 8pt; color: #e3eef9; margin-top: 2pt; line-height: 1.25; }
+  .pkg .total { font-size: 21pt; color: #e8b84b; line-height: 1; margin-top: 1pt; }
+
+  .rate { font-size: 8.6pt; line-height: 1.25; color: #01132f; margin: 6pt 0 0; padding-bottom: 5pt; border-bottom: 0.6pt solid #cfc8b8; }
+
+  /* Order table */
+  table.order { width: 100%; border-collapse: collapse; margin-top: 0; font-size: 8.9pt; }
+  table.order td { vertical-align: top; padding: 2.2pt 0 2.2pt; border-bottom: 0.6pt solid #cfc8b8; }
+  table.order td.k { width: 84pt; padding-right: 8pt; padding-top: 3.5pt; }
+  table.order tr:last-child td { border-bottom: 1.2pt solid #002d68; }
+  table.order tr:first-child td { border-top: 1.2pt solid #002d68; }
+
+  h2.sec { font-size: 12pt; font-weight: normal; margin: 6pt 0 3.5pt; color: #002d68; }
+  h2.sec .lab { margin-left: 8pt; }
+
+  ol.terms { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: 14pt; font-size: 8.6pt; line-height: 1.19; }
+  ol.terms li { break-inside: avoid; margin: 0 0 2.6pt; padding-left: 13pt; text-indent: -13pt; }
+  ol.terms li .n { display: inline-block; width: 13pt; text-indent: 0; color: #6a7891; font-weight: bold; }
+  ol.terms li b { color: #002d68; }
+
+  .foot {
+    position: absolute; left: 0; right: 0; bottom: 0; background: #01132f; color: #e3eef9;
+    padding: 5.5pt 0.5in; font-size: 7.6pt; letter-spacing: 0.03em;
+    display: flex; justify-content: space-between; white-space: nowrap;
+  }
+  .foot .gold { color: #e8b84b; }
+
+  /* Page 2 */
+  .ph { margin: 0 -0.5in; padding: 0.25in 0.5in 0.17in; background: #01132f; color: #e3eef9; }
+  .ph h1 { font-size: 21pt; font-weight: normal; margin: 3pt 0 0; line-height: 1.1; color: #fff; }
+  .ph p { font-size: 9.5pt; margin-top: 5pt; color: #e3eef9; max-width: 6.3in; }
+  .venues { columns: 2; column-gap: 20pt; margin-top: 8pt; font-size: 9.4pt; }
+  .cat { break-inside: avoid; margin-bottom: 6pt; }
+  .cat h3 { font-size: 11.5pt; font-weight: normal; color: #002d68; margin: 0 0 3pt; padding-bottom: 2pt; border-bottom: 1pt solid #e8b84b; }
+  .cat h3 .cnt { color: #6a7891; font-size: 9pt; font-family: "Liberation Sans", Arial, sans-serif; }
+  .cat p { margin: 0 0 3.4pt; line-height: 1.25; }
+  .cat p b { color: #01132f; }
+  .note { margin-top: 7pt; padding: 6pt 10pt; background: #002d68; color: #e3eef9; font-size: 9pt; line-height: 1.3; }
+  .note b { color: #e8b84b; font-weight: bold; }
+  .notin { margin-top: 5pt; font-size: 8.4pt; color: #6a7891; line-height: 1.3; }
+
+  /* Page 3 */
+  table.pay { width: 100%; border-collapse: collapse; margin-top: 10pt; font-size: 9.5pt; }
+  table.pay th { text-align: left; font-family: "Liberation Sans", Arial, sans-serif; font-size: 7pt; letter-spacing: 0.14em; text-transform: uppercase; color: #6a7891; padding: 0 8pt 3pt 0; border-bottom: 1.2pt solid #002d68; }
+  table.pay td { vertical-align: top; padding: 4.5pt 8pt 4.5pt 0; border-bottom: 0.6pt solid #cfc8b8; line-height: 1.25; }
+  table.pay td.amt, table.pay th.amt { text-align: right; padding-right: 0; white-space: nowrap; }
+  table.pay tr.tot td { border-bottom: 1.2pt solid #002d68; font-weight: bold; color: #002d68; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; column-gap: 24pt; margin-top: 10pt; }
+  .field { border-bottom: 0.7pt solid #6a7891; padding: 9pt 0 2pt; margin-bottom: 4pt; }
+  .field.tall { padding-top: 20pt; }
+  .opt { display: flex; gap: 8pt; margin-bottom: 6pt; }
+  .box { flex: none; width: 10pt; height: 10pt; border: 1pt solid #002d68; margin-top: 1.5pt; background: #fff; }
+  .auth { margin-top: 10pt; padding: 8pt 10pt; background: #002d68; color: #e3eef9; font-size: 9.2pt; line-height: 1.3; }
+  .auth b { color: #e8b84b; }
+  .sig { display: grid; grid-template-columns: 1fr 1fr; column-gap: 24pt; margin-top: 10pt; }
+  .sig .line { border-bottom: 0.9pt solid #01132f; height: 22pt; }
+  .sig .sub { font-size: 7.3pt; color: #6a7891; margin: 2pt 0 8pt; }
+  .ret { margin-top: 6pt; padding-top: 5pt; border-top: 1pt solid #e8b84b; font-size: 9.5pt; }
+  .pkg.five { grid-template-columns: 2.1fr 1.15fr 1.15fr 1.15fr 1.35fr; }
+  .venues3 { columns: 3; column-gap: 14pt; margin-top: 6pt; font-size: 8.9pt; line-height: 1.3; }
+  .venues3 p { margin: 0 0 1.2pt; break-inside: avoid; }
+  .dot { color: #b8891a; font-weight: bold; }
+  .nodot { color: #f6f2e9; }
+  .pre { font-size: 9.5pt; color: #01132f; }
+  .field.pre { padding-top: 4pt; }
+  .field.pre .lab { display: block; margin-bottom: 1pt; }
+  .band { padding-top: 0.16in !important; padding-bottom: 0.12in !important; }
+  .pkg { padding-top: 6pt !important; padding-bottom: 6pt !important; }
+  .pkg .name { font-size: 15pt !important; }
+  .pkg .tag, .pkg .s { font-size: 7.8pt !important; }
+  .pkg .v { font-size: 9.6pt !important; }
+  .pkg .total { font-size: 19pt !important; }
+  .rate { font-size: 8pt !important; margin-top: 4pt !important; padding-bottom: 3pt !important; }
+  table.order { font-size: 8.1pt !important; }
+  table.order td { padding: 1.4pt 0 1.4pt !important; line-height: 1.17; }
+  table.order td.k { width: 76pt !important; padding-top: 2.4pt !important; }
+  h2.sec { margin: 4pt 0 2pt !important; font-size: 10.5pt !important; }
+  ol.terms { font-size: 7.75pt !important; line-height: 1.14 !important; column-gap: 12pt !important; }
+  ol.terms li { margin-bottom: 1.8pt !important; }
+  .ph { padding-top: 0.18in !important; padding-bottom: 0.12in !important; }
+  .ph h1 { font-size: 18pt !important; }
+  .ph p { font-size: 8.8pt !important; margin-top: 3pt !important; }
+  table.pay { font-size: 8.6pt !important; margin-top: 7pt !important; }
+  table.pay td { padding: 3pt 7pt 3pt 0 !important; line-height: 1.2 !important; }
+  .grid2 { margin-top: 6pt !important; }
+  .field { padding-top: 7pt !important; margin-bottom: 3pt !important; }
+  .field.pre { padding-top: 3pt !important; }
+  .opt { margin-bottom: 4pt !important; font-size: 8.5pt; line-height: 1.22; }
+  .auth { margin-top: 7pt !important; font-size: 8.5pt !important; padding: 6pt 9pt !important; }
+  .sig { margin-top: 7pt !important; }
+  .sig .line { height: 18pt !important; }
+  .sig .sub { margin: 1.5pt 0 5pt !important; }
+  .ret { font-size: 8.8pt !important; margin-top: 5pt !important; }
+</style>
+</head>
+<body>
+
+<!-- ===================== PAGE 1 ===================== -->
+<section class="page brk">
+  <div class="band">
+    <div>
+      <div class="lab gold">MCTV Digital, Inc. d/b/a MCTV Elite Advertising</div>
+      <h1 class="serif">Insertion order and payment authorization</h1>
+    </div>
+    <div class="meta">
+      <div><span class="lab blue">Order</span> &nbsp;<b>MCTV-20261002-CNTR</b></div>
+      <div>Issued Fri Oct 2, 2026. Valid through Fri Oct 9, 2026.</div>
+      <div>Prepared for Contour Airlines. Signer: Kristin Garcia. Copy: Clint Ostler, Embark Aviation.</div>
+    </div>
+  </div>
+
+  <div class="pkg five">
+    <div>
+      <div class="lab gold">Package</div>
+      <div class="name serif">Oxford, Two Flights</div>
+      <div class="tag">Fall on all 40 Oxford locations. Spring on the 26 high-intent rooms. Your name on the Tupelo Regional flight board from first play through March 12.</div>
+    </div>
+    <div>
+      <div class="lab gold">Flight 1 · Fall</div>
+      <div class="v serif">First play to<br>Sat Dec 5, 2026</div>
+      <div class="s">Eight weeks guaranteed. 40 locations. Cyber Monday inside.</div>
+    </div>
+    <div>
+      <div class="lab gold">Flight 2 · Spring</div>
+      <div class="v serif">Mon Jan 18 to<br>Fri Mar 12, 2027</div>
+      <div class="s">Eight weeks. 26 locations that skew higher income.</div>
+    </div>
+    <div>
+      <div class="lab gold">Flight board</div>
+      <div class="v serif">First play to<br>Mar 12, 2027</div>
+      <div class="s">Title on all five terminal screens, holidays included.</div>
+    </div>
+    <div>
+      <div class="lab gold">Total</div>
+      <div class="total serif">$7,250</div>
+      <div class="s">$4,250 at signing. $3,000 by Feb 1, 2027. Nothing due in January.</div>
+    </div>
+  </div>
+
+  <p class="rate"><span class="lab">Basis</span>&nbsp; This order replaces order MCTV-20261001-CNTR ($8,500) at Contour's request of October 2, 2026: Flight 1 exactly as offered at $4,250, and Flight 2 at $3,000 on a tighter list of rooms that skew higher income and more discretionary spending (restaurants, gyms, the car dealership, medical waiting rooms, salons). All invoices are emailed to Contour's accounts payable.</p>
+
+  <table class="order">
+    <tr><td class="k lab">Flight 1 · Fall</td><td>Every Oxford location on page 2, all 40, from the first play (targeted <b>October 16, 2026</b>) through <b>December 5, 2026</b>. Eight weeks guaranteed: if the first play lands after October 10, the missed days are added to the front of Flight 2.</td></tr>
+    <tr><td class="k lab">Oxford dark</td><td><b>December 6, 2026 through January 17, 2027.</b> No Oxford plays, nothing billed for them. The flight board title keeps running.</td></tr>
+    <tr><td class="k lab">Flight 2 · Spring</td><td>The 26 Oxford locations marked on page 2, <b>January 18 through March 12, 2027</b>, plus any days carried over from Flight 1. Contour may swap a location for another of the same kind on the Flight 1 list by telling MCTV in writing by January 4, 2027.</td></tr>
+    <tr><td class="k lab">Flight board title</td><td>Title sponsor position on the live Tupelo Regional flight board: on the five terminal screens named on page 2, and wherever the board runs on the Oxford screens. From the first play through <b>March 12, 2027</b>, Oxford dark weeks included.</td></tr>
+    <tr><td class="k lab">Play floor</td><td>1,500 plays per screen in each full month on every Oxford screen in the running flight, with make-good. The board title is a continuous position and carries no play count.</td></tr>
+    <tr><td class="k lab">Exclusivity</td><td>No other airline, competing airport, airport authority or destination marketing organization on the Oxford screens or in the board sponsor position during the term.</td></tr>
+    <tr><td class="k lab">Invoicing</td><td>Every invoice is emailed to Accountspayable@flycontour.com, attention Chris Hanvy, with the order number and Contour's PO on it. Nothing is invoiced by mail only.</td></tr>
+    <tr><td class="k lab">Renewal option</td><td>The Oxford fall flight again for fall 2027 at <b>$4,250</b>, same 40 locations, rotation, floor and reporting. Tell us in writing by July 1, 2027.</td></tr>
+    <tr><td class="k lab">Total</td><td><b>$7,250.00</b> · $4,250 at signing (Flight 1 and the board through January 17) · $3,000 by February 1, 2027 (Flight 2 and the board through March 12)</td></tr>
+  </table>
+
+  <h2 class="sec serif">Terms, in plain English</h2>
+  <ol class="terms">
+    <li><span class="n">1</span><b>What you get.</b> MCTV runs your :15 twice in every loop at every Oxford location on page 2 during Flight 1, at the 26 marked locations during Flight 2, and holds the title sponsor position on the Tupelo Regional flight board from the first play through March 12, 2027. This order is for Oxford and the board. The Tupelo venue screens, Starkville and the Golden Triangle are not in it.</li>
+    <li><span class="n">2</span><b>The flights.</b> Flight 1 runs from the first play through December 5, 2026. If the first play lands after October 10, 2026, every missed day is added to the front of Flight 2, so the two flights together are never shorter than sixteen weeks. Flight 2 runs January 18 through March 12, 2027 on the 26 locations marked on page 2. Nothing runs in Oxford, and nothing is billed for Oxford, from December 6 through January 17.</li>
+    <li><span class="n">3</span><b>Flight 2 locations.</b> The 26 are chosen for rooms that skew higher income and more discretionary spending. Contour may swap any of them for another location of the same kind on the Flight 1 list by writing to MCTV by January 4, 2027. MCTV may add locations to Flight 2 at no charge but will not remove one without Contour's okay.</li>
+    <li><span class="n">4</span><b>Play floor.</b> Every Oxford screen in the running flight delivers at least 1,500 plays of your spot in each full calendar month it runs. A partial month is prorated by days on air. Days lost waiting on creative approval do not count against the floor. If a screen falls short, MCTV makes up the missing plays in the next month of the same flight, or extends that screen day for day. That is the only remedy for missed plays or downtime, and MCTV's total liability under this order is limited to what Contour has paid.</li>
+    <li><span class="n">5</span><b>Creative.</b> MCTV designs and produces the spot and the board sponsor position at no extra cost and refreshes the spot for Flight 2. You approve both before they air. Ads on this network are silent. Creative on the terminal screens is also subject to the Tupelo Airport Authority's content approval under its venue agreement.</li>
+    <li><span class="n">6</span><b>The flight board.</b> MCTV maintains the board. Contour agrees to add MCTV to its schedule distribution so changes reach the board the day they are published. If a terminal screen is down, moved or covered during the terminal renovation, the title continues on the remaining screens and MCTV extends the board term day for day at no charge.</li>
+    <li><span class="n">7</span><b>Traction reports.</b> Each month MCTV sends a traction report for your spot: plays and air time by location, with the per-screen play log behind it. Plays are counted by the player, not viewers. MCTV does not report audience impressions for the screens.</li>
+    <li><span class="n">8</span><b>Your content, your rights.</b> You hold the rights to anything you supply. MCTV cannot clear collegiate or other licensed marks for you.</li>
+    <li><span class="n">9</span><b>Host venues.</b> Host venues are independent businesses. If one closes or leaves the network, MCTV substitutes a location of the same kind in Oxford when one is available, and tells you.</li>
+    <li><span class="n">10</span><b>Payment and invoicing.</b> $4,250 is due at signing and is invoiced by email the day this order is countersigned. The first play starts once it is paid, or once you tell us a check is in the mail. $3,000 is invoiced by email by January 1, 2027 and due February 1, 2027. Every invoice goes to Accountspayable@flycontour.com and shows the order number and Contour's PO. Flight 2 and the rest of the board term are part of this order. If the February payment is late, Flight 2 and the board title pause until it is paid. The payment is still owed, paused days are not made up, and the play floor does not apply while paused. A $30 fee applies to a returned or NSF payment, and is invoiced.</li>
+    <li><span class="n">11</span><b>Fall 2027 renewal option.</b> Contour may renew the Oxford fall flight for fall 2027, eight weeks on the 40 Oxford locations on page 2 with the same rotation, floor and reporting, at $4,250, by telling MCTV in writing by July 1, 2027. The board title is not part of the renewal unless both sides agree in writing. The renewal is a new order, paid at signing. There is no obligation to renew.</li>
+    <li><span class="n">12</span><b>Binding.</b> This order is three pages. It becomes binding when both sides sign and takes effect on the date MCTV countersigns. Scans, PDFs and e-signatures count as originals. This order is the whole agreement and replaces order MCTV-20261001-CNTR, the one-pager, The Season and any earlier proposal. Governed by the laws of the State of Mississippi. MCTV Digital, Inc. d/b/a MCTV Elite Advertising, T. Creed Cannon, (601) 201-8202.</li>
+  </ol>
+  <div class="foot"><span>MCTV Digital, Inc. · Creed Cannon · creed@mctvofms.com · 601-201-8202 · mctvofms.com</span><span><span class="gold">Order MCTV-20261002-CNTR</span> · Page 1 of 3</span></div>
+</section>
+
+<!-- ===================== PAGE 2 ===================== -->
+<section class="page brk">
+  <div class="ph">
+    <div class="lab gold">Where it runs · Order MCTV-20261002-CNTR</div>
+    <h1 class="serif">Every location by name.</h1>
+    <p>This list is the coverage in this order. Flight 1 runs at all 40 Oxford locations. Flight 2 runs at the 26 marked <span class="dot">●</span>, the rooms that skew higher income and more discretionary spending. The board title runs on all five terminal screens the whole way through.</p>
+  </div>
+
+  <div class="cat" style="margin-top:8pt">
+    <h3 class="serif">Tupelo Regional Airport <span class="cnt">flight board title · first play through March 12, 2027</span></h3>
+    <p>The title sponsor position on the live flight board, on all five terminal screens, every day the terminal is open, Oxford dark weeks included: <b>ticket counter, baggage claim, the stair, the rental wall, the center wall.</b> The board also runs on the Oxford screens below, carrying your name.</p>
+  </div>
+
+  <div class="cat">
+    <h3 class="serif">Oxford, Flight 1 <span class="cnt">40 locations · first play through Dec 5, 2026 · <span class="dot">●</span> = also in Flight 2</span></h3>
+  </div>
+  <div class="venues3"><p><span class="nodot">●</span> 4 Corner’s Chevron</p><p><span class="dot">●</span> Amara Salon & Aesthetics</p><p><span class="dot">●</span> B’s Hickory Smoke BBQ</p><p><span class="dot">●</span> Booth’s Barbeque and Yard</p><p><span class="dot">●</span> Built Different Fitness</p><p><span class="dot">●</span> Cannon Chevrolet Buick Cadillac</p><p><span class="dot">●</span> Cannon Collision Center</p><p><span class="dot">●</span> Casa Mexicana of Oxford</p><p><span class="dot">●</span> El Charro Cocina & Cantina</p><p><span class="dot">●</span> Element Hair Studio</p><p><span class="dot">●</span> Finch & Kelly</p><p><span class="dot">●</span> Internal Medicine Associates</p><p><span class="nodot">●</span> James Food Center Post Office</p><p><span class="dot">●</span> LandShark Seafood & Catfish</p><p><span class="dot">●</span> Luxe Styling Studio</p><p><span class="dot">●</span> Magnolia Wine & Spirits</p><p><span class="nodot">●</span> Marathon South Lamar</p><p><span class="dot">●</span> Mississippi Asthma & Allergy</p><p><span class="dot">●</span> Nail E!</p><p><span class="dot">●</span> Nail Thology</p><p><span class="dot">●</span> Oxford Dental</p><p><span class="nodot">●</span> Oxford Super Tan</p><p><span class="nodot">●</span> Oxford T-Shirt Co.</p><p><span class="nodot">●</span> Party in the Sip</p><p><span class="nodot">●</span> Rafters Music and Food</p><p><span class="nodot">●</span> Rainbow Cleaners</p><p><span class="dot">●</span> Rebel Body Fitness</p><p><span class="dot">●</span> RedMed Urgent Clinic, Jackson Ave</p><p><span class="dot">●</span> Revive Wellness of Oxford</p><p><span class="dot">●</span> Right Track Medical Group</p><p><span class="dot">●</span> Rosati’s Pizza</p><p><span class="nodot">●</span> Sip Oxford</p><p><span class="nodot">●</span> Southern Coop</p><p><span class="dot">●</span> Stouts Carpet & Flooring</p><p><span class="nodot">●</span> Texaco Lamar Express</p><p><span class="nodot">●</span> The Blind Pig Pub</p><p><span class="dot">●</span> The Children’s Dental Center</p><p><span class="nodot">●</span> The Oxford Growler</p><p><span class="nodot">●</span> The Velvet Ditch</p><p><span class="dot">●</span> Uno Mas Tacos y Tequila</p></div>
+
+  <div class="cat" style="margin-top:8pt">
+    <h3 class="serif">Oxford, Flight 2 <span class="cnt">26 locations · Jan 18 through Mar 12, 2027</span></h3>
+  </div>
+  <div class="venues"><div class="cat"><h3 class="serif">Medical and dental waiting rooms <span class="cnt">7</span></h3><p>Internal Medicine Associates; Mississippi Asthma & Allergy; Right Track Medical Group; RedMed Urgent Clinic, Jackson Ave; Oxford Dental; The Children’s Dental Center; Revive Wellness of Oxford.</p></div><div class="cat"><h3 class="serif">Sit-down restaurants <span class="cnt">7</span></h3><p>Casa Mexicana of Oxford; El Charro Cocina & Cantina; Booth’s Barbeque and Yard; LandShark Seafood & Catfish; Rosati’s Pizza; B’s Hickory Smoke BBQ; Uno Mas Tacos y Tequila.</p></div><div class="cat"><h3 class="serif">Car dealership and service drive <span class="cnt">2</span></h3><p>Cannon Chevrolet Buick Cadillac; Cannon Collision Center.</p></div><div class="cat"><h3 class="serif">Gyms <span class="cnt">2</span></h3><p>Built Different Fitness; Rebel Body Fitness.</p></div><div class="cat"><h3 class="serif">Salons and aesthetics <span class="cnt">5</span></h3><p>Amara Salon & Aesthetics; Element Hair Studio; Luxe Styling Studio; Nail E!; Nail Thology.</p></div><div class="cat"><h3 class="serif">Wine, home and boutique <span class="cnt">3</span></h3><p>Magnolia Wine & Spirits; Stouts Carpet & Flooring; Finch & Kelly.</p></div></div>
+
+  <div class="note"><b>Substitution.</b> Host venues are independent businesses. If one closes or leaves the network, MCTV substitutes a location of the same kind in Oxford when one is available, and tells you. Contour may swap a Flight 2 location for another of the same kind on the Flight 1 list by January 4, 2027. Your monthly traction report shows every location your spot ran.</div>
+  <p class="notin"><b>Not in Flight 2, 14 locations.</b> Fuel and convenience, the t-shirt shop, tanning, and the bars and nightlife: 4 Corner’s Chevron; James Food Center Post Office; Marathon South Lamar; Oxford Super Tan; Oxford T-Shirt Co.; Party in the Sip; Rafters Music and Food; Rainbow Cleaners; Sip Oxford; Southern Coop; Texaco Lamar Express; The Blind Pig Pub; The Oxford Growler; The Velvet Ditch. They run in Flight 1 only. The Tupelo venue screens, Starkville and the Golden Triangle are not part of this order.</p>
+  <div class="foot"><span>MCTV Digital, Inc. · Creed Cannon · creed@mctvofms.com · 601-201-8202 · mctvofms.com</span><span><span class="gold">Order MCTV-20261002-CNTR</span> · Page 2 of 3</span></div>
+</section>
+
+<!-- ===================== PAGE 3 ===================== -->
+<section class="page">
+  <div class="ph">
+    <div class="lab gold">Payment authorization · Order MCTV-20261002-CNTR · $7,250.00</div>
+    <h1 class="serif">$4,250 now. $3,000 by February 1, 2027.</h1>
+    <p>Nothing is invoiced between the flights. Every invoice is emailed to accounts payable. Check one comes with the signed order. Check two is invoiced by January 1 and due February 1.</p>
+  </div>
+
+  <table class="pay">
+    <tr><th>Payment</th><th>Covers</th><th>Invoiced</th><th>Due</th><th>Pay by</th><th class="amt">Amount</th></tr>
+    <tr><td><b>1. At signing</b></td><td>Flight 1, all 40 Oxford locations, first play through Dec 5, 2026. Board title from first play through Jan 17, 2027. Both spots and the board creative.</td><td>By email, the day MCTV countersigns.</td><td>At signing.</td><td>&nbsp;</td><td class="amt">$4,250.00</td></tr>
+    <tr><td><b>2. Spring</b></td><td>Flight 2, the 26 marked Oxford locations, Jan 18 through Mar 12, 2027. Board title Jan 18 through Mar 12, 2027.</td><td>By email, by Jan 1, 2027.</td><td>Feb 1, 2027.</td><td>&nbsp;</td><td class="amt">$3,000.00</td></tr>
+    <tr class="tot"><td>Total</td><td colspan="4">Oxford, Two Flights, order MCTV-20261002-CNTR. Methods can differ; write card, ACH or check under Pay by.</td><td class="amt">$7,250.00</td></tr>
+  </table>
+
+  <div class="grid2">
+    <div>
+      <h2 class="sec serif">Who we bill</h2>
+      <div class="field pre"><span class="lab">Legal company name (as on your W-9)</span><span class="pre">Contour Aviation</span></div>
+      <div class="field pre"><span class="lab">Accounts payable contact</span><span class="pre">Chris Hanvy, Accounting Controller</span></div>
+      <div class="field pre"><span class="lab">Email for invoices (all invoicing by email)</span><span class="pre">Accountspayable@flycontour.com</span></div>
+      <div class="field pre"><span class="lab">Phone</span><span class="pre">Office (615) 534-1962 · Cell (615) 439-5306</span></div>
+      <div class="field pre"><span class="lab">Billing address</span><span class="pre">808 Blue Angel Way, Smyrna, TN 37167</span></div>
+      <div class="field pre"><span class="lab">Taxpayer ID</span><span class="pre">62-1148507</span></div>
+      <div class="field"><span class="lab">Contour PO number (if your accounts payable needs one)</span></div>
+      <p style="font-size:8.4pt;color:#6a7891;margin-top:5pt;line-height:1.3"><b>Vendor setup.</b> We send our W-9 and a signed ACH letter to the AP contact above. Vendor portal? Send the invite to creed@mctvofms.com.</p>
+    </div>
+    <div>
+      <h2 class="sec serif">How you will pay</h2>
+      <div class="opt"><div class="box"></div><div><b>Check.</b> Payable to MCTV Digital, Inc. d/b/a MCTV Elite Advertising, with the order and invoice numbers on the memo line. Mail to the remit-to address on the invoice and W-9. Tell us the day you mail it and we set the first play to match.</div></div>
+      <div class="opt"><div class="box"></div><div><b>ACH or wire.</b> No fee. Bank details are on our signed ACH letter, sent with the W-9. Call (601) 201-8202 to confirm them before the first transfer. We never change bank details by email.</div></div>
+      <div class="opt"><div class="box"></div><div><b>Card.</b> Visa, MC, Amex, Discover, no surcharge. Please do not email card numbers. Email the signed pages with the card boxes blank, then call (601) 201-8202 with the numbers, or ask for a secure payment link. The CVV is used once and never stored. If the February payment is on the card, only our payment processor holds it until then, and we remove it after that charge.</div></div>
+      <div class="field"><span class="lab">Card number</span></div>
+      <div class="grid2" style="margin-top:0;column-gap:12pt"><div class="field"><span class="lab">Exp. MM/YY</span></div><div class="field"><span class="lab">CVV</span></div></div>
+      <div class="field"><span class="lab">Cardholder name · billing ZIP</span></div>
+    </div>
+  </div>
+
+  <div class="auth"><b>Authorize and sign.</b> By signing, Contour accepts this order, all three pages, and the signer confirms they can sign for Contour and use any card given. If you ticked the card, Contour authorizes MCTV Elite Advertising to charge it only for the payments marked card under Pay by: $4,250.00 when MCTV countersigns, and $3,000.00 on February 1, 2027. Nothing else is charged to it, and the 2027 renewal needs a new authorization. We email a reminder 7 days before February 1. To stop that charge, email creed@mctvofms.com at least 3 business days before; the February invoice then stays due, by ACH or check. You get a countersigned copy.</div>
+
+  <div class="sig">
+    <div>
+      <div class="lab">Authorized signer, Contour Airlines</div>
+      <div class="line"></div><div class="sub">Signature</div>
+      <div class="line" style="height:16pt"><span class="pre">Kristin Garcia</span></div><div class="sub">Print name</div>
+      <div class="line" style="height:16pt"></div><div class="sub">Title · Date</div>
+    </div>
+    <div>
+      <div class="lab">Countersigned, MCTV Elite Advertising</div>
+      <div class="line"></div><div class="sub">Signature</div>
+      <div class="line" style="height:16pt"><span class="pre">T. Creed Cannon</span></div><div class="sub">Print name</div>
+      <div class="line" style="height:16pt"><span class="pre">Owner</span></div><div class="sub">Title · Date</div>
+    </div>
+  </div>
+
+  <p class="ret"><b>Return the signed pages to creed@mctvofms.com by Friday, October 9, 2026.</b> A scanned copy or an e-signature counts. Sign by October 9 and approve the spot that week, and Oxford screens are live by October 16 with the board swapped the same day. Questions: Creed Cannon, 601-201-8202, or Swayze Hollingsworth, 662-907-0404.</p>
+  <div class="foot"><span>MCTV Digital, Inc. · Creed Cannon · creed@mctvofms.com · 601-201-8202 · mctvofms.com</span><span><span class="gold">Order MCTV-20261002-CNTR</span> · Page 3 of 3</span></div>
+</section>
+</body>
+</html>
