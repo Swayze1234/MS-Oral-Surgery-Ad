@@ -118,8 +118,8 @@
   .rtier .pr { margin-left: auto; text-align: right; font-family: "Playfair Display", serif; font-weight: 700; font-size: 17pt; color: var(--navy); line-height: 1; }
   .rtier .pr small { font-family: "Barlow", sans-serif; font-weight: 400; font-size: 7.6pt; color: var(--slate); }
   .rtier .pr s { display: block; font-family: "Barlow", sans-serif; font-weight: 400; font-size: 7pt; color: var(--slate); margin-top: 2pt; }
-  table.both { width: 100%; border-collapse: collapse; margin-top: 4pt; }
-  table.both th { font-weight: 600; font-size: 6.4pt; letter-spacing: .18em; color: var(--slate); text-align: right; padding: 0 6pt 4pt; border-bottom: 1.2pt solid var(--navy); }
+  table.both { width: 100%; border-collapse: collapse; margin-top: 7pt; }
+  table.both th { font-weight: 600; font-size: 6.4pt; letter-spacing: .18em; color: var(--slate); text-transform: uppercase; text-align: right; padding: 0 6pt 4pt; border-bottom: 1.2pt solid var(--navy); }
   table.both th:first-child, table.both td:first-child { text-align: left; padding-left: 0; }
   table.both td { font-size: 8.2pt; text-align: right; padding: 4.5pt 6pt; border-bottom: 1pt solid var(--line); color: var(--ink); }
   table.both td:first-child { color: var(--navy); font-weight: 600; }
@@ -161,12 +161,12 @@
   .side h4 { margin: 0 0 3pt; font-family: "Playfair Display", serif; font-weight: 700; font-size: 11.5pt; color: var(--navy); }
   .side p { margin: 0; font-size: 7.4pt; line-height: 1.45; color: var(--ink); }
   .board { position: relative; margin-top: 7pt; width: 252pt; height: 141.75pt; border-radius: 3pt; overflow: hidden;
-           background: url("../photos/traffic_board.jpg") center/cover no-repeat; border: 3pt solid #0d0f14; }
-  .board .lock { position: absolute; left: 32.2%; top: 83.4%; width: 35.6%; height: 15.6%; background: #11141b; border: 1pt solid #3a3f4a; border-radius: 4pt;
+           background: url("../photos/traffic_board.jpg") center/100% 100% no-repeat; border: 3pt solid #0d0f14; }
+  .board .lock { position: absolute; left: 31.9%; top: 83.7%; width: 36.2%; height: 15.6%; background: #11141b; border: 1pt solid #3a3f4a; border-radius: 4pt;
                  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1pt; }
   .board .lock b { font-weight: 700; font-size: 4.2pt; letter-spacing: .22em; color: #cfd6e2; }
   .board .lock span { font-family: "Barlow Semi Condensed", sans-serif; font-weight: 700; font-size: 6.2pt; color: #fff; letter-spacing: .04em; }
-  .side .cap { margin-top: 4pt; font-size: 6.2pt; line-height: 1.4; color: var(--slate); }
+  .side .cap { margin-top: 4pt; font-weight: 600; font-size: 5.8pt; letter-spacing: .14em; line-height: 1.6; color: var(--slate); }
   .side .cap b { font-weight: 700; color: var(--gold); letter-spacing: .1em; }
   .side .box { margin-top: 10pt; background: var(--card); border: 1pt solid var(--line); border-radius: 4pt; padding: 8pt 10pt; }
   .side ol { margin: 4pt 0 0; padding-left: 12pt; font-size: 7.2pt; line-height: 1.5; color: var(--ink); }
@@ -174,8 +174,8 @@
 
   /* ---------- 7. next ---------- */
   .next { background: var(--navy-deep); }
-  .next .bg { position: absolute; inset: 0; background: url("../photos/oxford_lights.jpg") center 40%/cover no-repeat; opacity: .32; }
-  .next .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,23,46,.92) 0%, rgba(8,23,46,.78) 55%, rgba(8,23,46,.9) 100%); }
+  .next .bg { position: absolute; inset: 0; background: url("../photos/oxford_lights.jpg") center 40%/cover no-repeat; }
+  .next .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,23,46,.86) 0%, rgba(8,23,46,.64) 55%, rgba(8,23,46,.76) 100%); }
   .next .head .k { color: var(--on-dark-2); }
   .next .head h1 { color: #fff; }
   .next .head .gr { background: var(--gold-soft); }
@@ -186,7 +186,7 @@
   .need { position: absolute; left: 462pt; right: 40pt; top: 96pt; }
   .need .t { font-weight: 700; font-size: 6.8pt; letter-spacing: .24em; color: var(--on-dark-2); margin-bottom: 6pt; }
   .need .q { display: flex; gap: 10pt; margin-bottom: 8pt; }
-  .need .n { flex: none; width: 16pt; height: 16pt; border-radius: 50%; border: 1pt solid var(--gold-soft); color: var(--gold-soft);
+  .need .n { flex: none; width: 16pt; height: 16pt; border-radius: 50%; background: var(--gold-soft); color: var(--navy-deep);
              font-family: "Playfair Display", serif; font-weight: 700; font-size: 8.5pt; display: flex; align-items: center; justify-content: center; }
   .need .q p { margin: 0; font-size: 8.6pt; line-height: 1.4; color: #fff; }
   .card { position: absolute; left: 462pt; right: 40pt; top: 232pt; display: flex; gap: 12pt; align-items: center;
@@ -263,7 +263,7 @@
 <!-- ============ 3. FOUR WAYS ============ -->
 <section class="page">
   <div class="head"><div class="gr"></div><div class="k">The investment · Little &amp; Holland, :15</div><h1>Four ways to build it.</h1></div>
-  <div class="why"><div class="t">Our standard rates.</div><p>Options 1 to 3 are the same network package prices in the media kit you have seen, not numbers made up for this proposal. Option 4 is the 80-screen package plus the presenting sponsorship of MCTV Traffic in Oxford.</p></div>
+  <div class="why"><div class="t">Our standard rates.</div><p>Options 1 to 3 are our standard network package prices, not a discount made for this proposal. Option 4 is the 80-screen package plus the presenting sponsorship of MCTV Traffic in Oxford.</p></div>
   <div class="tiers">
     {% for o in opts %}
     <div class="tier {{ 'dark' if o.traffic else '' }}">
@@ -293,7 +293,7 @@
   <div class="rphoto"></div>
   <div class="mock" style="left:48pt; top:262pt"><b>MOCKUP</b> · Your rental car spot on an MCTV screen at a host service station</div>
   <div class="credit" style="left:40pt; top:287pt; background:none; color:var(--slate); padding:0">Room photo: MCTV. The ad is a placeholder until we build yours.</div>
-  <div class="rhow"><b>How it runs.</b> The rental car spot gets its own 30-second slot in the loop, on every screen in the Little &amp; Holland option you pick: 1,500+ plays per screen, every month. Same production, reporting and quarterly refresh as the law firm spot, and no Bar filing.</div>
+  <div class="rhow"><b>How it runs.</b> The rental car spot gets its own 30-second slot in the loop, on every screen in the Little &amp; Holland option you pick: 1,500 plays per screen, every month. Same production, reporting and quarterly refresh as the law firm spot, and no Bar filing.</div>
   <div class="rcol">
     <div class="lbl">RENTAL CAR SPOT, 30 SECONDS · SAME SCREENS AS YOUR OPTION</div>
     {% for t in rental %}
@@ -353,7 +353,7 @@
     <h4>MCTV Traffic, in Oxford.</h4>
     <p>Road work and lane closures on the state routes around Oxford, from Mississippi DOT, refreshed about every two minutes. Your name presents it in the main loop. It never shows a crash report.</p>
     <div class="board"><div class="lock"><b>PRESENTED BY</b><span>YOUR BUSINESS</span></div></div>
-    <div class="cap"><b>MOCKUP</b> · The Tupelo board, live MDOT data. Oxford's board runs the same way, with your lockup.</div>
+    <div class="cap"><b>MOCKUP</b> · THE TUPELO BOARD, LIVE MDOT DATA.<br>YOUR NAME RUNS ON THE OXFORD BOARD.</div>
     <div class="box">
       <h4 style="font-size:10pt">Little &amp; Holland's spot, laid out to file.</h4>
       <ol>
@@ -379,11 +379,11 @@
     <div class="s" style="border-bottom:0"><div class="w">EVERY MONTH</div><div class="d">Proof of play by venue. Every quarter, a fresh spot if you want one.</div></div>
   </div>
   <div class="need">
-    <div class="t">FOUR THINGS WE NEED FROM YOU</div>
-    <div class="q"><div class="n">1</div><p>Your rental car business's name and logo.</p></div>
-    <div class="q"><div class="n">2</div><p>Which phone number each spot should carry.</p></div>
-    <div class="q"><div class="n">3</div><p>Which attorney is named as responsible for the Little &amp; Holland spot.</p></div>
-    <div class="q"><div class="n">4</div><p>For option 4, which business presents MCTV Traffic.</p></div>
+    <div class="t">FOUR QUESTIONS FOR YOU</div>
+    <div class="q"><div class="n">1</div><p>What is your rental car business called, and can you send its logo?</p></div>
+    <div class="q"><div class="n">2</div><p>Which phone number should each spot carry?</p></div>
+    <div class="q"><div class="n">3</div><p>Which attorney should be named as responsible for the Little &amp; Holland spot?</p></div>
+    <div class="q"><div class="n">4</div><p>If you pick option 4, which business should present MCTV Traffic?</p></div>
   </div>
   <div class="card">
     <img src="../photos/swayze.jpg" alt="">
@@ -402,7 +402,7 @@
   </div>
   <div class="bx" style="left:40pt; top:80pt; width:348pt">
     <div class="bt">LITTLE &amp; HOLLAND, :15 <span>Tick one</span></div>
-    {% for o in opts %}<div class="tick"><span class="b"></span>Option {{ o.n }}, {{ o.title }}<span class="r">{{ o.lh_s }}/mo</span></div>{% endfor %}
+    {% for o in opts %}<div class="tick"><span class="b"></span>Option {{ o.n }}, {{ o.long }}<span class="r">{{ o.lh_s }}/mo</span></div>{% endfor %}
   </div>
   <div class="bx" style="left:40pt; top:180pt; width:348pt">
     <div class="bt">RENTAL CAR SPOT, :30, SAME SCREENS <span>Tick if wanted</span></div>
@@ -420,14 +420,14 @@
     <div class="tick"><span class="b"></span>Monthly, six-month minimum</div>
     <div class="tick"><span class="b"></span>Six months up front<span class="r">7th month free</span></div>
     <div class="tick"><span class="b"></span>Twelve months up front<span class="r">13th &amp; 14th months free</span></div>
-    <div class="fld">MONTHLY OR UP-FRONT TOTAL &nbsp;$<i></i></div>
+    <div class="fld">TOTAL, FROM THE TABLE ON PAGE FIVE &nbsp;$<i></i></div>
   </div>
   <div class="bx" style="left:404pt; top:180pt; width:348pt">
     <div class="bt">PAYMENT METHOD <span>Tick one</span></div>
-    <div class="tick"><span class="b"></span>ACH bank draft<span class="r">No fee</span></div>
-    <div class="tick"><span class="b"></span>Check, payable to MCTV Elite Advertising</div>
+    <div class="tick"><span class="b"></span>ACH bank draft<span class="r">No fee. Preferred.</span></div>
+    <div class="tick"><span class="b"></span>Check, payable to MCTV Elite Advertising<span class="r">No fee</span></div>
     <div class="tick"><span class="b"></span>Card, by secure link sent with the invoice</div>
-    <div class="fn">No card or bank numbers go on this sheet. We send the details with your first invoice.</div>
+    <div class="fn">No card or bank numbers go on this sheet. We set up the ACH draft, or send the card link, with your first invoice.</div>
   </div>
   <div class="bx" style="left:404pt; top:282pt; width:348pt">
     <div class="bt">BILLING CONTACT</div>
@@ -441,7 +441,7 @@
     <div class="ln ln2"><span>PRINTED NAME AND TITLE</span></div>
   </div>
   <div class="sig" style="left:410pt">
-    <div class="who">MCTV Digital, Inc.</div>
+    <div class="who">MCTV Digital, Inc. d/b/a MCTV Elite Advertising</div>
     <div class="ln"><span>AUTHORIZED REPRESENTATIVE</span><span>DATE</span></div>
     <div class="ln ln2"><span>REPRESENTATIVE NAME</span></div>
   </div>

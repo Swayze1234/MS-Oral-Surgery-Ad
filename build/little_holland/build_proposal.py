@@ -45,9 +45,10 @@ OPTIONS = [  # Little & Holland's four options; "where"/"foot" are the card's la
      "where": "Can run entirely inside Oxford's host venues.", "foot": "Market saturation."},
     {"n": 3, "title": "80 Screens", "short": "80 screens", "screens": 80, "monthly": 1400,
      "where": "Oxford, plus Tupelo and the Golden Triangle.", "foot": "Deep saturation."},
-    {"n": 4, "title": "80 Screens + MCTV Traffic", "short": "80 + Traffic", "screens": 80, "monthly": 2000, "traffic": True,
+    {"n": 4, "title": "80 Screens + Traffic", "long": "80 Screens + MCTV Traffic", "short": "80 + Traffic", "screens": 80,
+     "monthly": 2000, "traffic": True,
      "where": "Oxford, plus Tupelo and the Golden Triangle, and your name on Oxford's traffic board.",
-     "foot": "Presenting sponsor, credited to the business you pick."},
+     "foot": "Credited to the business you pick."},
 ]
 
 def money(v):
@@ -60,7 +61,7 @@ def pricing():
         lh = o["monthly"]
         rental = round(SCREEN_RATE[s] * (1 - RENTAL_DISCOUNT))
         both = lh + rental
-        rows.append({**o,
+        rows.append({"long": o["title"], **o,
             "plays": PLAYS[s], "per_screen": PER_SCREEN[s],
             "lh": lh, "rental": rental, "both": both,
             "lh_s": money(lh), "rental_s": money(rental), "both_s": money(both), "lh_num": f"{lh:,}",
