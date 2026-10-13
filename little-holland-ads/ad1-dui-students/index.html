@@ -16,7 +16,7 @@
 
   :root{
     --blue:#2b7bff; --blue-hi:#8fbcff; --navy:#07122a;
-    --ivory:#f5f0e6; --gold:#d2ad66;
+    --ivory:#efebe6; --gold:#c29a5b;
   }
   html,body{margin:0;background:#000}
   #stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:#02040a}
@@ -34,16 +34,28 @@
   #rule{position:absolute;left:560px;top:820px;width:800px;height:6px;border-radius:3px;
         background:linear-gradient(90deg,rgba(43,123,255,0),#2b7bff 20%,#8fbcff 50%,#2b7bff 80%,rgba(43,123,255,0));transform-origin:50% 50%}
 
-  /* Scene B — confidentiality */
-  #kicker{font-family:"Montserrat";font-weight:700;font-size:64px;letter-spacing:.06em;color:var(--blue-hi);top:250px}
-  #l2{font-family:"Montserrat";font-weight:800;font-size:124px;letter-spacing:-.01em;color:#fff;top:350px}
-  #l3{font-family:"Montserrat";font-weight:800;font-size:124px;letter-spacing:-.01em;top:500px}
-  #l3 .w{background:linear-gradient(180deg,#cfe2ff 0%,#6fa6ff 55%,#2b7bff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-  #chip{position:absolute;top:720px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:22px;
-        padding:20px 40px 20px 30px;border-radius:999px;border:2px solid rgba(143,188,255,.55);
-        background:rgba(18,52,140,.32);font-family:"Montserrat";font-weight:700;font-size:32px;letter-spacing:.22em;color:#e6efff;white-space:nowrap}
-  #lockWrap{position:relative;width:52px;height:52px}
-  #lockPulse{position:absolute;left:50%;top:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;border:3px solid #8fbcff;opacity:0}
+  /* Scene B — split screen: attorneys photo | confidentiality message */
+  #photoPanel{position:absolute;left:0;top:0;width:960px;height:1080px;overflow:hidden;background:#0a1430}
+  #photo{position:absolute;left:0;top:0;width:960px;height:1080px;object-fit:cover;transform-origin:50% 30%;
+         filter:saturate(.95) contrast(1.05) brightness(.96)}
+  #photoShade{position:absolute;left:0;top:0;width:960px;height:1080px;
+         background:linear-gradient(180deg,rgba(4,10,26,.30) 0%,rgba(4,10,26,0) 18%,rgba(4,10,26,0) 72%,rgba(4,10,26,.55) 100%),
+                    linear-gradient(270deg,rgba(4,10,26,.45) 0%,rgba(4,10,26,0) 9%)}
+  #photoWash{position:absolute;left:0;top:0;width:960px;height:1080px;mix-blend-mode:screen;opacity:0;
+         background:radial-gradient(ellipse 85% 55% at 0% 0%,rgba(40,110,255,.9),rgba(40,110,255,0) 70%)}
+  #seam{position:absolute;left:957px;top:0;width:6px;height:1080px;
+        background:linear-gradient(180deg,rgba(143,188,255,0),#8fbcff 18%,#2b7bff 50%,#8fbcff 82%,rgba(143,188,255,0))}
+  #textB{position:absolute;left:1040px;top:0;width:840px;height:1080px}
+  .lb{position:absolute;left:0;white-space:nowrap}
+  #kicker{font-family:"Montserrat";font-weight:700;font-size:54px;letter-spacing:.05em;color:var(--blue-hi);top:205px}
+  .big{font-family:"Montserrat";font-weight:800;font-size:112px;line-height:1;letter-spacing:-.015em;color:#fff}
+  #b1{top:290px} #b2{top:405px} #b3{top:540px} #b4{top:655px}
+  #b3 .w,#b4 .w{background:linear-gradient(180deg,#cfe2ff 0%,#6fa6ff 55%,#2b7bff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  #chip{position:absolute;top:815px;left:0;display:flex;align-items:center;gap:20px;
+        padding:18px 36px 18px 26px;border-radius:999px;border:2px solid rgba(143,188,255,.55);
+        background:rgba(18,52,140,.32);font-family:"Montserrat";font-weight:700;font-size:30px;letter-spacing:.2em;color:#e6efff;white-space:nowrap}
+  #lockWrap{position:relative;width:50px;height:50px}
+  #lockPulse{position:absolute;left:50%;top:50%;width:50px;height:50px;margin:-25px 0 0 -25px;border-radius:50%;border:3px solid #8fbcff;opacity:0}
 
   /* Scene C — call */
   #badge{position:absolute;left:905px;top:270px;width:110px;height:110px;border-radius:50%;
@@ -58,22 +70,21 @@
   .oglow{position:absolute;width:1400px;height:1400px;border-radius:50%;
          background:radial-gradient(circle,rgba(43,123,255,.35) 0%,rgba(43,123,255,.10) 35%,rgba(43,123,255,0) 65%)}
   #og1{left:-700px;top:-760px} #og2{left:1220px;top:-760px}
-  #oGroup{transform-origin:50% 45%;top:30px}
-  #mono{position:absolute;left:860px;top:110px;width:200px;height:200px}
-  #monoText{position:absolute;left:860px;top:110px;width:200px;height:200px;display:flex;align-items:center;justify-content:center;
-            font-family:"Cormorant";font-weight:600;font-size:84px;color:var(--ivory);letter-spacing:.02em;line-height:1}
-  #monoText i{font-style:italic;color:var(--gold);font-size:.8em;margin:0 .02em;position:relative;top:.02em}
-  #word,#wordSheen{font-family:"Cormorant";font-weight:600;font-size:140px;letter-spacing:.07em;color:var(--ivory);top:350px;line-height:1.1}
-  #word i, #wordSheen i{font-style:italic;color:var(--gold)}
-  #wordSheen{color:transparent;-webkit-background-clip:text;background-clip:text;
-             background-image:linear-gradient(100deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.95) 50%,rgba(255,255,255,0) 58%);
-             background-size:300% 100%;background-repeat:no-repeat;opacity:0}
-  #wordSheen i{color:transparent}
-  #orule{position:absolute;left:600px;top:540px;width:720px;height:2px;background:linear-gradient(90deg,rgba(210,173,102,0),var(--gold) 15%,var(--gold) 85%,rgba(210,173,102,0))}
-  #pllc{font-family:"Montserrat";font-weight:600;font-size:28px;letter-spacing:.34em;color:rgba(245,240,230,.88);top:572px;padding-left:.34em}
-  #pill{position:absolute;top:705px;left:50%;display:flex;align-items:center;gap:26px;padding:24px 56px 24px 44px;border-radius:999px;
-        border:2px solid rgba(210,173,102,.75);background:rgba(4,10,26,.45);white-space:nowrap}
+  #oGroup{transform-origin:50% 45%;top:22px}
+  #lockup{position:absolute;left:0;top:235px;width:1920px;display:flex;justify-content:center;align-items:center;gap:44px}
+  #fleur{width:196px;height:235px;overflow:visible}
+  #ltext{position:relative;font-kerning:none}
+  #lname,#lsheen{font-family:"Cormorant";font-weight:600;font-size:106px;line-height:1;letter-spacing:.045em;color:var(--ivory);white-space:nowrap}
+  #lname .pl,#lsheen .pl{font-size:.6em;letter-spacing:.07em;margin-left:.22em}
+  #lsheen{position:absolute;left:0;top:0;color:transparent;-webkit-background-clip:text;background-clip:text;opacity:0;
+          background-image:linear-gradient(100deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.95) 50%,rgba(255,255,255,0) 58%);
+          background-size:300% 100%;background-repeat:no-repeat}
+  #ltag{font-family:"Cormorant";font-weight:600;font-size:46px;letter-spacing:.38em;color:var(--gold);margin-top:22px;white-space:nowrap}
+  #pill{position:absolute;top:585px;left:50%;display:flex;align-items:center;gap:26px;padding:24px 56px 24px 44px;border-radius:999px;
+        border:2px solid rgba(194,154,91,.8);background:rgba(4,10,26,.45);white-space:nowrap}
   #pill .n{font-family:"Montserrat";font-weight:700;font-size:84px;letter-spacing:.03em;color:#fff;line-height:1}
+  #city{font-family:"Montserrat";font-weight:600;font-size:28px;letter-spacing:.34em;color:rgba(245,240,230,.88);top:760px;padding-left:.34em}
+  #notice{font-family:"Montserrat";font-weight:600;font-size:22px;letter-spacing:.16em;color:rgba(245,240,230,.66);top:992px;padding-left:.16em}
 
   #flash{background:radial-gradient(ellipse at 50% 45%,rgba(235,244,255,1) 0%,rgba(120,175,255,1) 45%,rgba(30,90,255,1) 100%);opacity:0}
 </style>
@@ -92,19 +103,29 @@
     </div>
 
     <div id="sceneB" class="abs">
-      <div id="kicker" class="row"><span class="w">You’re</span> <span class="w">an</span> <span class="w">adult.</span></div>
-      <div id="l2" class="row"><span class="w">What</span> <span class="w">you</span> <span class="w">tell</span> <span class="w">us</span></div>
-      <div id="l3" class="row"><span class="w">stays</span> <span class="w">between</span> <span class="w">us.</span></div>
-      <div id="chip">
-        <div id="lockWrap">
-          <div id="lockPulse"></div>
-          <svg width="52" height="52" viewBox="0 0 24 24" style="position:absolute;left:0;top:0;overflow:visible">
-            <g id="shackle"><path d="M7.5 11V7.5a4.5 4.5 0 0 1 9 0V11" fill="none" stroke="#8fbcff" stroke-width="2.2" stroke-linecap="round"/></g>
-            <rect x="4.5" y="10.5" width="15" height="11" rx="2.2" fill="#8fbcff"/>
-            <circle cx="12" cy="15.4" r="1.6" fill="#0b2a6b"/><rect x="11.25" y="15.6" width="1.5" height="3" rx=".7" fill="#0b2a6b"/>
-          </svg>
+      <div id="photoPanel">
+        <img id="photo" src="../assets/attorneys_crop.jpg" alt="">
+        <div id="photoShade"></div>
+        <div id="photoWash"></div>
+      </div>
+      <div id="seam"></div>
+      <div id="textB">
+        <div id="kicker" class="lb"><span class="w">You’re</span> <span class="w">an</span> <span class="w">adult.</span></div>
+        <div id="b1" class="lb big"><span class="w">What</span> <span class="w">you</span></div>
+        <div id="b2" class="lb big"><span class="w">tell</span> <span class="w">us</span></div>
+        <div id="b3" class="lb big"><span class="w">stays</span></div>
+        <div id="b4" class="lb big"><span class="w">between</span> <span class="w">us.</span></div>
+        <div id="chip">
+          <div id="lockWrap">
+            <div id="lockPulse"></div>
+            <svg width="50" height="50" viewBox="0 0 24 24" style="position:absolute;left:0;top:0;overflow:visible">
+              <g id="shackle"><path d="M7.5 11V7.5a4.5 4.5 0 0 1 9 0V11" fill="none" stroke="#8fbcff" stroke-width="2.2" stroke-linecap="round"/></g>
+              <rect x="4.5" y="10.5" width="15" height="11" rx="2.2" fill="#8fbcff"/>
+              <circle cx="12" cy="15.4" r="1.6" fill="#0b2a6b"/><rect x="11.25" y="15.6" width="1.5" height="3" rx=".7" fill="#0b2a6b"/>
+            </svg>
+          </div>
+          <span>PRIVATE &amp; CONFIDENTIAL</span>
         </div>
-        <span>PRIVATE &amp; CONFIDENTIAL</span>
       </div>
     </div>
 
@@ -121,19 +142,38 @@
     <div id="outroBg" class="abs"></div>
     <div id="og1" class="oglow"></div><div id="og2" class="oglow"></div>
     <div id="oGroup" class="abs">
-      <svg id="mono" viewBox="0 0 200 200">
-        <circle id="ring1" cx="100" cy="100" r="94" fill="none" stroke="#d2ad66" stroke-width="3" transform="rotate(-90 100 100)"/>
-        <circle id="ring2" cx="100" cy="100" r="84" fill="none" stroke="#f5f0e6" stroke-opacity=".45" stroke-width="1.2" transform="rotate(90 100 100)"/>
-      </svg>
-      <div id="monoText">L<i>&amp;</i>H</div>
-      <div id="word" class="row"></div>
-      <div id="wordSheen" class="row">LITTLE <i>&amp;</i> HOLLAND</div>
-      <div id="orule"></div>
-      <div id="pllc" class="row">PLLC &nbsp;·&nbsp; ATTORNEYS AT LAW &nbsp;·&nbsp; OXFORD, MISSISSIPPI</div>
+      <div id="lockup">
+        <!-- fleur-de-lis redrawn as vector from the firm's logo -->
+        <svg id="fleur" viewBox="0 0 100 120">
+          <defs>
+            <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#d1a868"/><stop offset=".55" stop-color="#b8894b"/><stop offset="1" stop-color="#9c7036"/>
+            </linearGradient>
+          </defs>
+          <g fill="url(#gold)">
+            <g id="fhalf">
+              <path d="M50 0 C56 10 62 21 62.5 33 C63 50 59 66 55 79 L50 79 Z"/>
+              <path d="M57 79 C57 60 66 45 79 43 C90 41 100 47 100 57 C100 65 96 71 91 75 C91 70 88 66 83 65.5 C76 65 68 70 64 79 Z"/>
+              <path d="M56.5 84 C63 85 71 87 75.5 91.5 C79.5 95.5 79 102 74.5 103 C71.5 103.6 69.5 101 71 98.5 C68 96.5 62 94 57 90 Z"/>
+              <path d="M50 84 L54 84 C57 92 57 104 50 120 Z"/>
+            </g>
+            <use href="#fhalf" transform="translate(100 0) scale(-1 1)"/>
+            <rect x="37" y="79" width="26" height="5" rx="2.5"/>
+          </g>
+          <rect x="49.45" y="26" width="1.1" height="24" rx=".55" fill="#5a3f17" opacity=".75"/>
+        </svg>
+        <div id="ltext">
+          <div id="lname"></div>
+          <div id="lsheen">LITTLE &amp; HOLLAND,<span class="pl">PLLC</span></div>
+          <div id="ltag">CONCIERGE ATTORNEYS</div>
+        </div>
+      </div>
       <div id="pill">
-        <svg width="66" height="66" viewBox="0 0 24 24"><path fill="#d2ad66" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        <svg width="66" height="66" viewBox="0 0 24 24"><path fill="#c29a5b" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.250.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
         <span class="n">662.232.9500</span>
       </div>
+      <div id="city" class="row">OXFORD, MISSISSIPPI</div>
+      <div id="notice" class="row">FREE BACKGROUND INFORMATION AVAILABLE UPON REQUEST</div>
     </div>
   </div>
 
@@ -176,8 +216,8 @@ function exitBlur(el, t, start, dur, dy = -60, blur = 14) {
 
 // ---------- build split text ----------
 $('num').innerHTML = [...PHONE].map(c => `<span class="w">${c}</span>`).join('');
-$('word').innerHTML = [...'LITTLE & HOLLAND'].map(c =>
-  c === ' ' ? ' ' : c === '&' ? '<span class="w"><i>&amp;</i></span>' : `<span class="w">${c}</span>`).join('');
+$('lname').innerHTML = [...'LITTLE & HOLLAND,'].map(c =>
+  c === ' ' ? ' ' : `<span class="w">${c === '&' ? '&amp;' : c}</span>`).join('') + '<span class="w pl">PLLC</span>';
 
 // ---------- police lights (canvas) ----------
 const cv = $('bg'), ctx = cv.getContext('2d');
@@ -306,28 +346,41 @@ function seek(t) {
     A.style.transform = `translateY(${-70 * xp}px)`;
   }
 
-  // ----- Scene B: You're an adult. / What you tell us stays between us. -----
+  // ----- Scene B: attorneys photo (left) | You're an adult. What you tell us stays between us. (right) -----
   const B = $('sceneB');
-  B.style.display = t > 3.9 && t < 8.3 ? 'block' : 'none';
-  if (t > 3.9 && t < 8.3) {
-    [...$('kicker').children].forEach((w, i) => reveal(w, t, 4.0 + i * .08, .5, { dy: 24, blur: 8 }));
-    [...$('l2').children].forEach((w, i) => reveal(w, t, 4.45 + i * .07, .55, { dy: 40, blur: 12 }));
-    [...$('l3').children].forEach((w, i) => reveal(w, t, 4.95 + i * .1, .6, { dy: 40, blur: 12 }));
-    $('l3').style.filter = `drop-shadow(0 0 ${14 + 16 * I}px rgba(43,123,255,${.35 + .3 * I}))`;
-    const cp = E.outCubic(prog(t, 5.55, 6.0));
+  const showB = t > 3.7 && t < 8.3;
+  B.style.display = showB ? 'block' : 'none';
+  if (showB) {
+    // photo wipes in from the left behind a glowing blue edge, then wipes back out
+    const wi = E.inOutCubic(prog(t, 3.75, 4.35)), wo = E.inOutCubic(prog(t, 7.85, 8.25));
+    const edge = 960 * (wi - wo);
+    $('photoPanel').style.clipPath = `inset(0 ${960 - edge}px 0 0)`;
+    $('seam').style.left = `${edge - 3}px`;
+    $('seam').style.opacity = edge > 1 ? 1 : 0;
+    $('seam').style.filter = `drop-shadow(0 0 ${8 + 14 * I}px rgba(43,123,255,${.6 + .4 * I}))`;
+    $('photo').style.transform = `scale(${lerp(1.12, 1.0, E.outCubic(prog(t, 3.75, 8.25)))})`;
+    $('photoWash').style.opacity = .22 * lI;
+
+    [...$('kicker').children].forEach((w, i) => reveal(w, t, 4.25 + i * .07, .5, { dy: 24, blur: 8 }));
+    [['b1', 4.55], ['b2', 4.75], ['b3', 5.05], ['b4', 5.25]].forEach(([id, st]) =>
+      [...$(id).children].forEach((w, i) => reveal(w, t, st + i * .08, .55, { dy: 44, blur: 12 })));
+    const glowB = `drop-shadow(0 0 ${12 + 14 * I}px rgba(43,123,255,${.35 + .3 * I}))`;
+    $('b3').style.filter = glowB; $('b4').style.filter = glowB;
+    const cp = E.outCubic(prog(t, 5.75, 6.2));
     const chip = $('chip');
     chip.style.opacity = cp;
-    chip.style.transform = `translateX(-50%) translateY(${(1 - cp) * 30}px)`;
-    const lp = E.inCubic(prog(t, 5.8, 5.98));
+    chip.style.transform = `translateY(${(1 - cp) * 30}px)`;
+    const lp = E.inCubic(prog(t, 6.0, 6.18));
     $('shackle').setAttribute('transform', `translate(0 ${-3.2 * (1 - lp)})`);
-    const pp = prog(t, 5.98, 6.6);
+    const pp = prog(t, 6.18, 6.8);
     $('lockPulse').style.opacity = pp > 0 && pp < 1 ? .7 * (1 - pp) : 0;
     $('lockPulse').style.transform = `scale(${1 + 1.3 * E.outCubic(pp)})`;
-    // exit
+    // text exit
     const xp = E.inCubic(prog(t, 7.85, 8.25));
-    B.style.opacity = 1 - xp;
-    B.style.transform = `translateY(${-60 * xp}px)`;
-    B.style.filter = xp > 0 ? `blur(${14 * xp}px)` : 'none';
+    const tb = $('textB');
+    tb.style.opacity = 1 - xp;
+    tb.style.transform = `translateY(${-60 * xp}px)`;
+    tb.style.filter = xp > 0 ? `blur(${14 * xp}px)` : 'none';
   }
 
   // ----- Scene C: Call Little & Holland 662.232.9500 -----
@@ -364,27 +417,26 @@ function seek(t) {
     $('og2').style.opacity = .55 + .25 * (1 - breathe);
     $('oGroup').style.transform = `scale(${1 + .025 * E.inOutCubic(prog(u, 0, 4.4))})`;
 
-    const C1 = 2 * Math.PI * 94, C2 = 2 * Math.PI * 84;
-    const r1 = $('ring1'), r2 = $('ring2');
-    r1.style.strokeDasharray = C1; r1.style.strokeDashoffset = C1 * (1 - E.inOutCubic(prog(u, .1, .95)));
-    r2.style.strokeDasharray = C2; r2.style.strokeDashoffset = C2 * (1 - E.inOutCubic(prog(u, .3, 1.05)));
-    reveal($('monoText'), u, .45, .6, { dy: 0, blur: 10, scale: .82 });
+    // fleur grows up from its base, then the name resolves letter by letter
+    const fp = E.outCubic(prog(u, .1, .8));
+    const fl = $('fleur');
+    fl.style.clipPath = fp < 1 ? `inset(${100 * (1 - fp)}% 0 0 0)` : 'none';
+    fl.style.opacity = clamp(fp * 1.6);
+    fl.style.transform = `translateY(${(1 - fp) * 18}px) scale(${lerp(.92, 1, fp)})`;
+    const shine = prog(u, 2.6, 3.5);
+    fl.style.filter = `drop-shadow(0 0 ${10 + 18 * Math.sin(Math.PI * shine)}px rgba(210,170,100,${.25 + .35 * Math.sin(Math.PI * shine)}))`;
 
-    [...$('word').querySelectorAll('.w')].forEach((c, i) => reveal(c, u, .6 + i * .035, .55, { dy: 26, blur: 9 }));
-    const rp = E.inOutCubic(prog(u, 1.15, 1.75));
-    $('orule').style.transform = `scaleX(${rp})`;
-    $('orule').style.opacity = rp;
-    const tp = E.outCubic(prog(u, 1.35, 2.0));
-    $('pllc').style.opacity = tp;
-    $('pllc').style.letterSpacing = `${lerp(.5, .34, tp)}em`;
-    const pp = E.outCubic(prog(u, 1.75, 2.3));
+    [...$('lname').querySelectorAll('.w')].forEach((c, i) => reveal(c, u, .45 + i * .03, .5, { dy: 22, blur: 8 }));
+    reveal($('ltag'), u, 1.2, .6, { dy: 14, blur: 8 });
+    const pp = E.outCubic(prog(u, 1.7, 2.25));
     $('pill').style.opacity = pp;
     $('pill').style.transform = `translateX(-50%) translateY(${(1 - pp) * 34}px)`;
+    reveal($('city'), u, 1.95, .5, { dy: 16, blur: 6 });
+    reveal($('notice'), u, 2.2, .5, { dy: 0, blur: 0 });
 
-    const sh = prog(u, 2.6, 3.5);
-    const sheen = $('wordSheen');
-    sheen.style.opacity = sh > 0 && sh < 1 ? 1 : 0;
-    sheen.style.backgroundPosition = `${lerp(110, -10, E.inOutCubic(sh))}% 0`;
+    const sheen = $('lsheen');
+    sheen.style.opacity = shine > 0 && shine < 1 ? 1 : 0;
+    sheen.style.backgroundPosition = `${lerp(110, -10, E.inOutCubic(shine))}% 0`;
   }
 }
 
