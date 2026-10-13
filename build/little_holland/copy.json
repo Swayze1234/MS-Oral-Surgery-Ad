@@ -1,0 +1,46 @@
+{
+ "date": "October 13, 2026",
+ "cover_kicker": "Advertising Proposal",
+ "cover_title": "A campaign built for *Little & Holland.*",
+ "intro_headline": "Be the firm Oxford *remembers.*",
+ "intro_body": "Every day, Oxford waits — in clinic lobbies, at the gas pump, between sets at the gym. MCTV puts Little & Holland on the screen in those moments with two custom 15-second commercials that play back-to-back on every loop. No skip button, no scrolling past. Just your firm, in front of your neighbors, all month long.",
+ "why_points": [
+  {"title":"Seen where people wait","body":"55+ minute average dwell means your message is seen again and again — not once in a scroll."},
+  {"title":"Two jobs, one slot","body":"One spot builds trust in the name; the other speaks to the moment someone needs a lawyer."},
+  {"title":"Hyper-local Oxford reach","body":"44 Oxford and Lafayette County venues — the places your future clients already go."},
+  {"title":"Done for you","body":"We script, design and produce both spots, refresh them quarterly, and report every play."}
+ ],
+ "spots": [
+  {"label":"Spot A","name":"Your Oxford Law Firm","angle":"Builds name recognition and trust: who Little & Holland is and where to find them.","frames":[
+    {"timecode":"0:00–0:05","visual":"Courthouse Square at golden hour; firm logo fades in","on_screen_text":"Rooted in Oxford."},
+    {"timecode":"0:05–0:10","visual":"Attorneys in the office, warm and approachable","on_screen_text":"Real people. Straight answers."},
+    {"timecode":"0:10–0:15","visual":"End card: logo, phone, website, required disclaimer","on_screen_text":"Little & Holland PLLC"}]},
+  {"label":"Spot B","name":"When You Need Us","angle":"Speaks to the moment someone needs legal help and gives one clear next step.","frames":[
+    {"timecode":"0:00–0:05","visual":"Simple text on navy; no dramatization","on_screen_text":"Questions after an accident?"},
+    {"timecode":"0:05–0:10","visual":"Practice areas listed one by one","on_screen_text":"Talk to a local attorney."},
+    {"timecode":"0:10–0:15","visual":"End card: phone number large, website, disclaimer","on_screen_text":"Call Little & Holland"}]}
+ ],
+ "concept_note": "Concepts are starting points. Final scripts, visuals and disclaimers are written with your team and approved by the firm before anything airs.",
+ "rotation_explainer": "Your two 15-second commercials run back-to-back in one 30-second slot, so both spots play every loop on every screen in your plan.",
+ "compliance_note": "We leave room on every end card for any disclaimer the Mississippi Rules of Professional Conduct require, and nothing airs until your firm approves the final files.",
+ "venue_picks_intro": "Suggested placements for Little & Holland — venues where Oxford adults wait, with time to read your message.",
+ "venue_picks": [
+  {"venue":"RedMed Urgent Clinic of Oxford - Jackson Ave","why":"Patients waiting after injuries"},
+  {"venue":"Cannon Collision Center","why":"Drivers dealing with a wreck"},
+  {"venue":"Oxford-Lafayette County Chamber of Commerce","why":"Business owners and professionals"},
+  {"venue":"Internal Medicine Associates of Oxford","why":"Long waits, adult patients"},
+  {"venue":"Right Track Medical Group - Oxford","why":"Injury & recovery patients"},
+  {"venue":"Cannon Chevrolet Buick Cadillac of Oxford","why":"Service-lounge waits"},
+  {"venue":"Rebel Body Fitness","why":"Daily local regulars"},
+  {"venue":"James Food Center Post Office","why":"Everyday errands, every age"}
+ ],
+ "footprint_note": "20 and 40-screen plans can be concentrated in Oxford / Lafayette County. The 80-screen plan saturates Oxford and carries both spots to Tupelo and the Golden Triangle.",
+ "package_blurbs": {"s20":"A focused Oxford start for both spots.","s40":"Saturate Oxford — the sweet spot for most firms.","s80":"Own Oxford and reach across North Mississippi."},
+ "next_steps": [
+  {"step":"Pick your footprint","detail":"Choose 20, 40 or 80 screens and sign the order form on the last page."},
+  {"step":"Script kickoff","detail":"A short call with Stan to finalize both scripts, visuals and disclaimer language."},
+  {"step":"We produce both spots","detail":"Our in-house team builds Spot A and Spot B in 1920×1080 HD for your approval."},
+  {"step":"Go live & get reports","detail":"Once approved, both spots go live. You get proof-of-play reporting and a fresh build every quarter."}
+ ],
+ "closing_line": "Let's put Little & Holland on screen this month."
+}

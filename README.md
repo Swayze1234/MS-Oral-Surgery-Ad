@@ -38,3 +38,37 @@ python3 build.py        # applies image + text edits, writes ../MCTV_Media_Kit_T
 
 To spin up another market version, drop in new photos and adjust the contact
 strings in `build.py`.
+
+---
+
+# Client Proposal — Little & Holland PLLC (Oxford)
+
+`MCTV_Proposal_Little_Holland_PLLC.pdf` is a 10-page proposal for **Stan Little,
+Little & Holland PLLC**: two different 15-second commercials on **20, 40 or 80
+screens** ($500 / $800 / $1,400 per month). It uses the same look as the media kit.
+
+| Page | What's on it |
+|------|--------------|
+| 1 | Cover (Oxford stadium photo), prepared for Stan Little |
+| 2 | Overview, why MCTV fits the firm, network stats |
+| 3 | Partner logos *(media kit p2, reused)* |
+| 4 | Storyboards for Spot A and Spot B (concepts) |
+| 5 | How both spots run back-to-back every loop; what's included |
+| 6 | Suggested Oxford venues + all 44 Oxford/Lafayette host venues |
+| 7 | Local CPM comparison *(media kit p4, reused)* |
+| 8 | 20 / 40 / 80-screen options, 6- and 12-month totals, prepay bonuses |
+| 9 | Next steps + Swayze's contact info |
+| 10 | Agreement & order form, pre-filled for Little & Holland |
+
+## Rebuilding
+
+```bash
+pip install pymupdf jinja2 playwright
+python3 build/little_holland/build_proposal.py
+```
+
+- Edit the words in `build/little_holland/copy.json`.
+- Edit the layout in `build/little_holland/template.html`.
+- Prices and the totals table come from `PLANS` in `build_proposal.py`.
+- Photos and logos are pulled from `build/source/MCTV_Media_Kit_Oxford_original.pdf`
+  at build time (into `build/little_holland/_assets/`, which isn't committed).
