@@ -1,13 +1,15 @@
 """
-Builds MCTV_Proposal_Little_Holland_PLLC.pdf — a 2-page portrait proposal for
+Builds MCTV_Proposal_Little_Holland_PLLC.pdf — a 9-page landscape proposal for
 Stan Little covering two businesses:
 
-  * Little & Holland, PLLC — a 15-second commercial, four options
-    (20 / 40 / 80 screens, or 80 screens + Oxford traffic-updates sponsorship)
-  * Stan's rental car business — a 30-second commercial at 50% off the
-    matching screen package, on the same screens
+  * Little & Holland, PLLC — 15-second spots, four options (20 / 40 / 80
+    screens, or 80 screens + MCTV Traffic sponsorship in Oxford). One spot on
+    every screen, or two split by venue type (DUI in college-crowd venues,
+    The Oxford Family Membership in family/professional venues), same price.
+  * Stan's rental car business — a 15-second spot at 50% off the matching
+    screen package, on the same screens
 
-Page 1 = options, ad plays and pay-up-front savings. Page 2 = order form.
+Styled after MCTV's Schwartz 2027 proposal.
 
 Pipeline: pull logos/headshot out of the original media kit, knock out the
 client logo's background, fill template.html (Jinja2), print with Chromium.
@@ -36,7 +38,7 @@ CLIENT_LOGO = os.path.join(HERE, "little_holland_logo.png")   # supplied by the 
 SCREEN_RATE = {20: 500, 40: 800, 80: 1400}       # media kit package page
 PLAYS = {20: "30K", 40: "60K", 80: "120K"}       # 1,500 plays per screen per month
 PER_SCREEN = {20: "$25", 40: "$20", 80: "$17.50"}
-RENTAL_DISCOUNT = 0.50                           # rental car spot: 50% off the matching screen rate
+RENTAL_DISCOUNT = 0.50                           # rental car :15: 50% off the matching screen rate, same plays
 
 OPTIONS = [  # Little & Holland's four options; "where"/"foot" are the card's last lines
     {"n": 1, "title": "20 Screens", "short": "20 screens", "screens": 20, "monthly": 500,
@@ -105,6 +107,9 @@ def client_logo():
 
 # ---------- render ----------
 def render_html(copy):
+    kit_venues = fitz.open(KIT)[4].get_text()          # media kit host-network page
+    unknown = [v for v in copy["venues_dui"] + copy["venues_member"] if v not in kit_venues]
+    assert not unknown, f"venues not on the media kit's host list: {unknown}"
     env = Environment(loader=FileSystemLoader(HERE), autoescape=True)
     page = env.get_template("template.html").render(c=copy, opts=pricing(), rental=rental_tiers())
     with open(HTML_OUT, "w") as f:
@@ -123,7 +128,7 @@ def print_pdf():
     doc = fitz.open(OUT)
     doc.set_metadata({"title": "MCTV Digital — Advertising Proposal for Stan Little",
                       "author": "Swayze Hollingsworth · MCTV Digital",
-                      "subject": "Little & Holland, PLLC (:15) and rental car (:30) spots on the MCTV screen network"})
+                      "subject": "Little & Holland, PLLC and rental car :15 spots on the MCTV screen network"})
     doc.saveIncr()
     print("saved", OUT, f"({len(doc)} pages)")
 

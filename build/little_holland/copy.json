@@ -1,4 +1,24 @@
 {
  "date": "October 2026",
- "footer": "Stan Little · Little & Holland + rental car · MCTV proposal"
+ "footer": "Stan Little · Little & Holland + rental car · MCTV proposal",
+ "venues_dui": [
+  "Rebel Yell Rooftop Bar",
+  "The Blind Pig Pub",
+  "Rafters Music and Food",
+  "The Velvet Ditch - Sports Bar & Seafood",
+  "The Oxford Growler",
+  "Rosati's Pizza",
+  "Southern Coop",
+  "Rebel Body Fitness"
+ ],
+ "venues_member": [
+  "Internal Medicine Associates of Oxford",
+  "Right Track Medical Group - Oxford",
+  "Oxford Dental",
+  "The Children's Dental Center",
+  "Cannon Chevrolet Buick Cadillac of Oxford",
+  "Oxford-Lafayette County Chamber of Commerce",
+  "Oxford Park Commission",
+  "Stouts Carpet & Flooring"
+ ]
 }

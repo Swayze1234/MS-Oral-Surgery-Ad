@@ -106,7 +106,20 @@
   .every .t { font-family: "Playfair Display", serif; font-weight: 700; font-size: 10.5pt; color: var(--navy); flex: none; }
   .every span.d::before { content: "●"; color: var(--gold); font-size: 6pt; margin-right: 5pt; vertical-align: 1pt; }
 
-  /* ---------- 4. rental ---------- */
+  /* ---------- 4. two spots ---------- */
+  .duo { position: absolute; left: 40pt; right: 40pt; top: 112pt; display: grid; grid-template-columns: 1fr 1fr; gap: 16pt; }
+  .duo .ph { position: relative; height: 150pt; border-radius: 4pt; background-size: cover; background-repeat: no-repeat; }
+  .duo .ph .mock { left: 8pt; bottom: 8pt; }
+  .duo .tag { margin-top: 9pt; font-weight: 700; font-size: 6.6pt; letter-spacing: .22em; color: var(--slate); }
+  .duo h3 { margin: 2pt 0 0; font-family: "Playfair Display", serif; font-weight: 700; font-size: 13pt; color: var(--navy); }
+  .duo p { margin: 3pt 0 0; font-size: 8pt; line-height: 1.45; color: var(--ink); }
+  .duo p i { color: var(--navy); }
+  .duo ul { margin: 5pt 0 0; padding: 0; list-style: none; columns: 2; column-gap: 12pt; font-size: 7.2pt; line-height: 1.6; color: var(--slate); }
+  .duo li::before { content: "●"; color: var(--gold); font-size: 5pt; margin-right: 5pt; vertical-align: 1pt; }
+  .split { position: absolute; left: 40pt; right: 40pt; top: 396pt; border-top: 1pt solid var(--rule); padding-top: 8pt; font-size: 7.8pt; line-height: 1.5; color: var(--slate); }
+  .split b { font-weight: 600; color: var(--navy); }
+
+  /* ---------- 5. rental ---------- */
   .rphoto { position: absolute; left: 40pt; top: 92pt; width: 330pt; height: 190pt; border-radius: 4pt; background: url("../photos/rental_mockup.jpg") 35% 50%/cover no-repeat; }
   .rhow { position: absolute; left: 40pt; top: 306pt; width: 330pt; font-size: 8.2pt; line-height: 1.5; color: var(--ink); }
   .rhow b { font-weight: 600; color: var(--navy); }
@@ -231,16 +244,16 @@
   <img class="abs logo" src="logo_white.png" alt="MCTV">
   <div class="elite">ELITE ADVERTISING</div>
   <div class="glr"></div>
-  <div class="k">PROPOSAL · TWO COMMERCIALS, ONE NETWORK</div>
+  <div class="k">PROPOSAL · TWO BUSINESSES, ONE NETWORK</div>
   <h1>Put both your names where Oxford <em>sits still.</em></h1>
-  <div class="lede">A 15-second spot for Little &amp; Holland, PLLC and a 30-second spot for your rental car business, on MCTV's indoor screens. Four ways to build it, from {{ opts[0].lh_s }} a month.</div>
+  <div class="lede">Two 15-second spots for Little &amp; Holland, PLLC, each matched to the room, and a 15-second spot for your rental car business, on MCTV's indoor screens. Four ways to build it, from {{ opts[0].lh_s }} a month.</div>
   <div class="meta">
     <div>PREPARED FOR<b>Stan Little</b></div>
     <div>PREPARED BY<b>Swayze Hollingsworth</b></div>
     <div>DATE<b>{{ c.date }}</b></div>
   </div>
   <div class="cfoot"><span>MCTV DIGITAL, INC. · MISSISSIPPI OWNED</span><span>MCTVOFMS.COM</span></div>
-  <div class="mock" style="right:14pt; bottom:14pt"><b>MOCKUP</b> · Little &amp; Holland on an MCTV screen in a host dining room</div>
+  <div class="mock" style="right:14pt; bottom:14pt"><b>MOCKUP</b> · The Oxford Family Membership on an MCTV screen in a host dining room</div>
 </section>
 
 <!-- ============ 2. THE ASK ============ -->
@@ -249,20 +262,20 @@
   <div class="band"></div>
   <div class="credit" style="right:40pt; top:162pt">The Oxford Square from the air. Photo: Pilot MKN / Wikimedia Commons, CC BY 2.0, cropped</div>
   <div class="six">
-    <div class="it"><div class="n">1</div><p><b>What.</b> A silent 15-second spot for Little &amp; Holland, PLLC, in rotation in every loop, all day, on the MCTV screens in the option you pick. MCTV designs and produces it.</p></div>
+    <div class="it"><div class="n">1</div><p><b>What.</b> Silent 15-second spots for Little &amp; Holland, PLLC: one on every screen, or two matched to the room, a DUI spot in our college-crowd venues and The Oxford Family Membership where families and professionals wait. Same price either way.</p></div>
     <div class="it"><div class="n">4</div><p><b>What it costs.</b> Little &amp; Holland from <span class="hl">{{ opts[0].lh_s }} a month</span>, both businesses from <span class="hl">{{ opts[0].both_s }}</span>. Option 4 adds the presenting sponsorship of MCTV Traffic in Oxford: {{ opts[3].lh_s }} a month, {{ opts[3].both_s }} with both spots.</p></div>
-    <div class="it"><div class="n">2</div><p><b>Plus.</b> A 30-second spot for your rental car business on the same screens, at half our screen rate: {% for t in rental %}{{ t.price_s }}{% if loop.index == 2 %} or {% elif not loop.last %}, {% endif %}{% endfor %} a month.</p></div>
+    <div class="it"><div class="n">2</div><p><b>Plus.</b> A 15-second spot for your rental car business on the same screens, at half our screen rate: {% for t in rental %}{{ t.price_s }}{% if loop.index == 2 %} or {% elif not loop.last %}, {% endif %}{% endfor %} a month.</p></div>
     <div class="it"><div class="n">5</div><p><b>Pay up front.</b> Prepay six months and the seventh is free. Prepay twelve and the thirteenth and fourteenth are free. Monthly billing has a six-month minimum.</p></div>
     <div class="it"><div class="n">3</div><p><b>Where.</b> Oxford first. Twenty or forty screens can stay inside Oxford's 44 host venues. Eighty screens add Tupelo and the Golden Triangle.</p></div>
-    <div class="it"><div class="n">6</div><p><b>What we need.</b> Your option and a signature on page eight, plus the phone number each spot should carry. Screens start about two weeks after you approve the ads.</p></div>
+    <div class="it"><div class="n">6</div><p><b>What we need.</b> Your option and a signature on page nine, plus the phone number each spot should carry. Screens start about two weeks after you approve the ads.</p></div>
   </div>
-  <div class="bottomline"><b>Both spots run full-screen, unskippable, in rooms where people are already sitting.</b> One agreement, one invoice, one point of contact: Swayze Hollingsworth, 662-907-0404, swayze@mctvofms.com.</div>
+  <div class="bottomline"><b>Every spot runs full-screen, unskippable, in rooms where people are already sitting.</b> One agreement, one invoice, one point of contact: Swayze Hollingsworth, 662-907-0404, swayze@mctvofms.com.</div>
   <div class="foot"><span>{{ c.footer }}</span><span>02</span></div>
 </section>
 
 <!-- ============ 3. FOUR WAYS ============ -->
 <section class="page">
-  <div class="head"><div class="gr"></div><div class="k">The investment · Little &amp; Holland, :15</div><h1>Four ways to build it.</h1></div>
+  <div class="head"><div class="gr"></div><div class="k">The investment · Little &amp; Holland, one or two :15 spots</div><h1>Four ways to build it.</h1></div>
   <div class="why"><div class="t">Our standard rates.</div><p>Options 1 to 3 are our standard network package prices, not a discount made for this proposal. Option 4 is the 80-screen package plus the presenting sponsorship of MCTV Traffic in Oxford.</p></div>
   <div class="tiers">
     {% for o in opts %}
@@ -283,19 +296,43 @@
     {% endfor %}
   </div>
   <div class="every"><div class="t">In every option</div>
-    <span class="d">Spot designed &amp; produced by MCTV</span><span class="d">Proof of play, monthly</span><span class="d">A fresh spot each quarter</span><span class="d">You own your ads</span><span class="d">Bar Filing Packet</span></div>
+    <span class="d">Spots designed &amp; produced by MCTV</span><span class="d">One spot or two, same price</span><span class="d">Proof of play, monthly</span><span class="d">A fresh spot each quarter</span><span class="d">Bar Filing Packet</span></div>
   <div class="foot"><span>{{ c.footer }}</span><span>03</span></div>
+</section>
+
+<!-- ============ 4. TWO SPOTS, MATCHED TO THE ROOM ============ -->
+<section class="page">
+  <div class="head"><div class="gr"></div><div class="k">Little &amp; Holland · two :15 spots, same price</div><h1>Two spots, matched to the room.</h1>
+    <div class="sub">Run one spot on every screen, or split your screens by audience at no extra cost.</div></div>
+  <div class="duo">
+    <div>
+      <div class="ph" style="background-image:url('../photos/dui_mockup.jpg'); background-position: 45% 45%"><div class="mock"><b>MOCKUP</b> · Spot A in a host dining room</div></div>
+      <div class="tag">SPOT A · COLLEGE-CROWD VENUES</div>
+      <h3>DUI.</h3>
+      <p><i>“Charged with a DUI? Know your options.”</i>&nbsp; Runs where Oxford's college crowd spends its nights and weekends: bars, restaurants, gyms and tanning.</p>
+      <ul>{% for v in c.venues_dui %}<li>{{ v }}</li>{% endfor %}</ul>
+    </div>
+    <div>
+      <div class="ph" style="background-image:url('../photos/member_mockup.jpg'); background-position: 55% 45%"><div class="mock"><b>MOCKUP</b> · Spot B in a host recreation center lobby</div></div>
+      <div class="tag">SPOT B · FAMILY &amp; PROFESSIONAL VENUES</div>
+      <h3>The Oxford Family Membership.</h3>
+      <p><i>“You don't need to know what kind of lawyer you need. That's our job.”</i>&nbsp; Runs where Oxford's families and professionals wait: clinics, dental offices, the dealership and the Chamber.</p>
+      <ul>{% for v in c.venues_member %}<li>{{ v }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+  <div class="split"><b>How the split works.</b> Your option's screens are divided between the two spots by venue type, so each spot plays only where its audience is. Total ad plays stay at {{ opts[0].plays }}, {{ opts[1].plays }} or {{ opts[2].plays }} a month. Venues above are examples; we set the split with you, venue by venue, before launch. Room photos: MCTV.</div>
+  <div class="foot"><span>{{ c.footer }}</span><span>04</span></div>
 </section>
 
 <!-- ============ 4. RENTAL CAR SPOT ============ -->
 <section class="page">
-  <div class="head"><div class="gr"></div><div class="k">The second spot · your rental car business, :30</div><h1>Add the rental car spot at half the rate.</h1></div>
+  <div class="head"><div class="gr"></div><div class="k">The rental car spot · :15, same screens</div><h1>Add the rental car spot at half the rate.</h1></div>
   <div class="rphoto"></div>
   <div class="mock" style="left:48pt; top:262pt"><b>MOCKUP</b> · Your rental car spot on an MCTV screen at a host service station</div>
   <div class="credit" style="left:40pt; top:287pt; background:none; color:var(--slate); padding:0">Room photo: MCTV. The ad is a placeholder until we build yours.</div>
-  <div class="rhow"><b>How it runs.</b> The rental car spot gets its own 30-second slot in the loop, on every screen in the Little &amp; Holland option you pick: 1,500 plays per screen, every month. Same production, reporting and quarterly refresh as the law firm spot, and no Bar filing.</div>
+  <div class="rhow"><b>How it runs.</b> The rental car spot gets its own 15-second slot in the loop, on every screen in the Little &amp; Holland option you pick: 1,500 plays per screen, every month. Same production, reporting and quarterly refresh as the law firm spots, and no Bar filing.</div>
   <div class="rcol">
-    <div class="lbl">RENTAL CAR SPOT, 30 SECONDS · SAME SCREENS AS YOUR OPTION</div>
+    <div class="lbl">RENTAL CAR SPOT, 15 SECONDS · SAME SCREENS AS YOUR OPTION</div>
     {% for t in rental %}
     <div class="rtier"><div class="s">{{ t.screens }} screens</div><div class="p">{{ t.plays }} ad plays a month</div>
       <div class="pr">{{ t.price_s }}<small>/mo</small><s>{{ t.reg_s }}/mo standard</s></div></div>
@@ -309,7 +346,7 @@
     </table>
     <div class="rnote">The rental car spot runs on the same screens as the Little &amp; Holland option. With option 4 it is billed at the 80-screen rate, {{ opts[3].rental_s }}; the traffic sponsorship is counted once.</div>
   </div>
-  <div class="foot"><span>{{ c.footer }}</span><span>04</span></div>
+  <div class="foot"><span>{{ c.footer }}</span><span>05</span></div>
 </section>
 
 <!-- ============ 5. PAY UP FRONT ============ -->
@@ -334,7 +371,7 @@
     {% endfor %}
   </table>
   <div class="ppnote"><b>“Both”</b> = Little &amp; Holland plus the rental car spot. “Saves” is the value of the free months. Monthly billing has a six-month minimum, then runs month to month with 30 days' written notice to stop.</div>
-  <div class="foot"><span>{{ c.footer }}</span><span>05</span></div>
+  <div class="foot"><span>{{ c.footer }}</span><span>06</span></div>
 </section>
 
 <!-- ============ 6. TERMS ============ -->
@@ -343,10 +380,10 @@
   <div class="terms">
     <div class="row"><div class="l">TERM</div><div class="v">Six-month minimum. After that, month to month, with 30 days' written notice to stop. Prepaid terms run seven or fourteen months on air.</div></div>
     <div class="row"><div class="l">BILLING</div><div class="v">On signing, the first month is billed, or the full amount if you pay up front. On monthly billing, the next cycle starts 30 days after your ads are approved and live.</div></div>
-    <div class="row"><div class="l">CREATIVE</div><div class="v">MCTV designs and produces both spots: Little &amp; Holland's <b>:15</b> and the rental car <b>:30</b>. Silent, with on-screen text. Three rounds of changes each, then $200 a round. A fresh spot each quarter if you want one. You own them.</div></div>
-    <div class="row"><div class="l">SCREENS</div><div class="v">Little &amp; Holland picks the option; the rental car spot runs on the same screens. Host venues are independent businesses, and MCTV may substitute a venue. Proof of play every month.</div></div>
-    <div class="row"><div class="l">SPONSORSHIP</div><div class="v">Option 4 only. Presenting sponsor of MCTV Traffic on the Oxford board, credited to the business you pick on page eight.</div></div>
-    <div class="row"><div class="l">BAR FILING</div><div class="v">Little &amp; Holland's spot, and its traffic lockup if the firm is the sponsor, is filed with the Mississippi Bar before it first airs: <b>$25 per ad, paid by the firm</b>. We hand you the Bar Filing Packet: the file as it will run, a transcript and a where-and-when schedule. The rental car spot needs no filing.</div></div>
+    <div class="row"><div class="l">CREATIVE</div><div class="v">MCTV designs and produces every spot: Little &amp; Holland's <b>:15</b> (or both: DUI and The Oxford Family Membership) and the rental car <b>:15</b>. Silent, with on-screen text. Three rounds of changes each, then $200 a round. A fresh spot each quarter if you want one. You own them.</div></div>
+    <div class="row"><div class="l">SCREENS</div><div class="v">Little &amp; Holland picks the option; the rental car spot runs on the same screens. With two Little &amp; Holland spots, the screens are split by venue type, set with you before launch. Host venues are independent businesses: a venue may decline a category, and MCTV may substitute a venue. Proof of play every month.</div></div>
+    <div class="row"><div class="l">SPONSORSHIP</div><div class="v">Option 4 only. Presenting sponsor of MCTV Traffic on the Oxford board, credited to the business you pick on page nine.</div></div>
+    <div class="row"><div class="l">BAR FILING</div><div class="v">Each Little &amp; Holland spot, and its traffic lockup if the firm is the sponsor, is filed with the Mississippi Bar before it first airs: <b>$25 per ad, paid by the firm</b>, so two spots means two filings. We hand you the Bar Filing Packet: the file as it will run, a transcript and a where-and-when schedule. The rental car spot needs no filing.</div></div>
     <div class="row"><div class="l">ONE CONTACT</div><div class="v">One agreement, one invoice, one point of contact: Swayze Hollingsworth.</div></div>
   </div>
   <div class="side">
@@ -355,7 +392,7 @@
     <div class="board"><div class="lock"><b>PRESENTED BY</b><span>YOUR BUSINESS</span></div></div>
     <div class="cap"><b>MOCKUP</b> · THE TUPELO BOARD, LIVE MDOT DATA.<br>YOUR NAME RUNS ON THE OXFORD BOARD.</div>
     <div class="box">
-      <h4 style="font-size:10pt">Little &amp; Holland's spot, laid out to file.</h4>
+      <h4 style="font-size:10pt">Every Little &amp; Holland spot, laid out to file.</h4>
       <ol>
         <li>The notice <b>FREE BACKGROUND INFORMATION AVAILABLE UPON REQUEST</b>. Rule 7.4(a).</li>
         <li>The city and state of an office. Rule 7.2(c).</li>
@@ -364,7 +401,7 @@
       <p style="margin-top:4pt; font-size:6.4pt; color:var(--slate)">What the published rules say, not a compliance opinion. Your firm owns the call.</p>
     </div>
   </div>
-  <div class="foot"><span>{{ c.footer }}</span><span>06</span></div>
+  <div class="foot"><span>{{ c.footer }}</span><span>07</span></div>
 </section>
 
 <!-- ============ 7. NEXT ============ -->
@@ -372,9 +409,9 @@
   <div class="bg"></div><div class="shade"></div>
   <div class="head"><div class="gr"></div><div class="k">Next</div><h1>Five steps and four questions.</h1></div>
   <div class="steps">
-    <div class="s"><div class="w">SIGN</div><div class="d">Pick your option on page eight, tick the rental car spot if you want it, and sign. We countersign within two business days.</div></div>
-    <div class="s"><div class="w">CREATIVE</div><div class="d">Creative directions for both spots from us. Silent, and for Little &amp; Holland, laid out to file.</div></div>
-    <div class="s"><div class="w">YOU APPROVE</div><div class="d">You approve both spots. We hand over the Bar Filing Packet, and your firm files the Little &amp; Holland spot.</div></div>
+    <div class="s"><div class="w">SIGN</div><div class="d">Pick your option and one spot or two on page nine, tick the rental car spot if you want it, and sign. We countersign within two business days.</div></div>
+    <div class="s"><div class="w">CREATIVE</div><div class="d">Creative directions for every spot from us. Silent, and for Little &amp; Holland, laid out to file.</div></div>
+    <div class="s"><div class="w">YOU APPROVE</div><div class="d">You approve the spots. We hand over the Bar Filing Packet, and your firm files each Little &amp; Holland spot.</div></div>
     <div class="s"><div class="w">ON AIR</div><div class="d">About two weeks after you approve, your spots go live, and we photograph them on the wall.</div></div>
     <div class="s" style="border-bottom:0"><div class="w">EVERY MONTH</div><div class="d">Proof of play by venue. Every quarter, a fresh spot if you want one.</div></div>
   </div>
@@ -391,7 +428,7 @@
       <div class="ct">662-907-0404 · swayze@mctvofms.com<br>mctvofms.com</div></div>
   </div>
   <div class="credit" style="left:40pt; bottom:34pt; background:none; color:var(--on-dark-2); padding:0">Background: holiday lights on the Oxford Square. Photo: Pilot MKN / Wikimedia Commons, CC BY 2.0, cropped. Photo of Swayze: Ash Taylor, Local Focal Photography.</div>
-  <div class="foot dark"><span>{{ c.footer }}</span><span>07</span></div>
+  <div class="foot dark"><span>{{ c.footer }}</span><span>08</span></div>
 </section>
 
 <!-- ============ 8. ACCEPTANCE ============ -->
@@ -404,13 +441,18 @@
     <div class="bt">LITTLE &amp; HOLLAND, :15 <span>Tick one</span></div>
     {% for o in opts %}<div class="tick"><span class="b"></span>Option {{ o.n }}, {{ o.long }}<span class="r">{{ o.lh_s }}/mo</span></div>{% endfor %}
   </div>
-  <div class="bx" style="left:40pt; top:180pt; width:348pt">
-    <div class="bt">RENTAL CAR SPOT, :30, SAME SCREENS <span>Tick if wanted</span></div>
+  <div class="bx" style="left:40pt; top:177pt; width:348pt">
+    <div class="bt">LITTLE &amp; HOLLAND CREATIVE <span>Tick one · same price</span></div>
+    <div class="tick"><span class="b"></span>One spot on every screen</div>
+    <div class="tick"><span class="b"></span>Two spots, matched to the room<span class="r">DUI + The Oxford Family Membership</span></div>
+  </div>
+  <div class="bx" style="left:40pt; top:244pt; width:348pt">
+    <div class="bt">RENTAL CAR SPOT, :15, SAME SCREENS <span>Tick if wanted</span></div>
     <div class="tick"><span class="b"></span>Add it at half the screen rate<span class="r">{% for t in rental %}{{ t.price_s }}{% if not loop.last %} / {% endif %}{% endfor %}</span></div>
     <div class="fld">BUSINESS NAME<i></i></div>
     <div class="fn">Billed at the rate for your option's screen count; option 4 uses the 80-screen rate.</div>
   </div>
-  <div class="bx" style="left:40pt; top:262pt; width:348pt">
+  <div class="bx" style="left:404pt; top:286pt; width:348pt">
     <div class="bt">MCTV TRAFFIC, PRESENTED BY <span>Option 4 only · tick one</span></div>
     <div class="tick"><span class="b"></span>Little &amp; Holland, PLLC</div>
     <div class="tick"><span class="b"></span>The rental car business</div>
@@ -420,21 +462,17 @@
     <div class="tick"><span class="b"></span>Monthly, six-month minimum</div>
     <div class="tick"><span class="b"></span>Six months up front<span class="r">7th month free</span></div>
     <div class="tick"><span class="b"></span>Twelve months up front<span class="r">13th &amp; 14th months free</span></div>
-    <div class="fld">TOTAL, FROM THE TABLE ON PAGE FIVE &nbsp;$<i></i></div>
+    <div class="fld">TOTAL, FROM THE TABLE ON PAGE SIX &nbsp;$<i></i></div>
   </div>
-  <div class="bx" style="left:404pt; top:180pt; width:348pt">
+  <div class="bx" style="left:404pt; top:177pt; width:348pt">
     <div class="bt">PAYMENT METHOD <span>Tick one</span></div>
     <div class="tick"><span class="b"></span>ACH bank draft<span class="r">No fee. Preferred.</span></div>
     <div class="tick"><span class="b"></span>Check, payable to MCTV Elite Advertising<span class="r">No fee</span></div>
     <div class="tick"><span class="b"></span>Card, by secure link sent with the invoice</div>
+    <div class="fld">BILLING CONTACT EMAIL<i></i></div>
     <div class="fn">No card or bank numbers go on this sheet. We set up the ACH draft, or send the card link, with your first invoice.</div>
   </div>
-  <div class="bx" style="left:404pt; top:282pt; width:348pt">
-    <div class="bt">BILLING CONTACT</div>
-    <div class="fld">NAME<i></i>PHONE<i></i></div>
-    <div class="fld">EMAIL<i></i></div>
-  </div>
-  <div class="acc-fine">The terms on page six are part of this order. MCTV countersigns within two business days of receiving it. <span>By signing, you authorize MCTV Digital, Inc. to bill the option, spots and payment plan ticked above.</span></div>
+  <div class="acc-fine">The terms on page seven are part of this order. MCTV countersigns within two business days of receiving it. <span>By signing, you authorize MCTV Digital, Inc. to bill the option, spots and payment plan ticked above.</span></div>
   <div class="sig" style="left:40pt">
     <div class="who">Advertiser · Stan Little, for Little &amp; Holland, PLLC and the rental car business</div>
     <div class="ln"><span>AUTHORIZED SIGNATURE</span><span>DATE</span></div>
@@ -445,7 +483,7 @@
     <div class="ln"><span>AUTHORIZED REPRESENTATIVE</span><span>DATE</span></div>
     <div class="ln ln2"><span>REPRESENTATIVE NAME</span></div>
   </div>
-  <div class="foot"><span>PROPOSAL ACCEPTANCE · RETURN TO SWAYZE@MCTVOFMS.COM</span><span>08</span></div>
+  <div class="foot"><span>PROPOSAL ACCEPTANCE · RETURN TO SWAYZE@MCTVOFMS.COM</span><span>09</span></div>
 </section>
 
 </body>

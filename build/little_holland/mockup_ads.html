@@ -12,17 +12,18 @@
   .ad { width: 1920px; height: 1080px; position: relative; overflow: hidden; font-family: "Barlow", sans-serif; }
 
   /* ---- Little & Holland (silent, laid out with the three Mississippi notices) ---- */
-  #lh { background: linear-gradient(135deg, #0a2350 0%, #00102c 70%); color: #fff; }
-  #lh .logo { position: absolute; left: 110px; top: 80px; width: 880px; }
-  #lh h1 { position: absolute; left: 110px; top: 300px; margin: 0; font-family: "Playfair Display", serif; font-weight: 700;
+  .lhad { background: linear-gradient(135deg, #0a2350 0%, #00102c 70%); color: #fff; }
+  .lhad .logo { position: absolute; left: 110px; top: 80px; width: 880px; }
+  .lhad h1 { position: absolute; left: 110px; top: 300px; margin: 0; font-family: "Playfair Display", serif; font-weight: 700;
            font-size: 150px; line-height: 1.02; letter-spacing: -1px; }
-  #lh h1 em { font-style: normal; color: #d9b25c; }
-  #lh .sub { position: absolute; left: 114px; top: 640px; font-size: 54px; color: #c9d6ea; }
-  #lh .notice { position: absolute; left: 114px; top: 742px; font-size: 40px; font-weight: 700; letter-spacing: 1px; }
-  #lh .resp { position: absolute; left: 114px; top: 798px; font-size: 36px; color: #c9d6ea; }
-  #lh .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 190px; background: #d9b25c; display: flex; align-items: center; padding: 0 114px; gap: 48px; }
-  #lh .bar b { font-family: "Barlow Semi Condensed", sans-serif; font-size: 140px; color: #00102c; letter-spacing: 1px; }
-  #lh .bar span { font-size: 52px; font-weight: 700; color: #00102c; letter-spacing: 3px; }
+  .lhad h1 em { font-style: normal; color: #d9b25c; }
+  .lhad h1.sm { top: 280px; font-size: 104px; line-height: 1.1; }
+  .lhad .sub { position: absolute; left: 114px; top: 640px; font-size: 54px; color: #c9d6ea; }
+  .lhad .notice { position: absolute; left: 114px; top: 742px; font-size: 40px; font-weight: 700; letter-spacing: 1px; }
+  .lhad .resp { position: absolute; left: 114px; top: 798px; font-size: 36px; color: #c9d6ea; }
+  .lhad .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 190px; background: #d9b25c; display: flex; align-items: center; padding: 0 114px; gap: 48px; }
+  .lhad .bar b { font-family: "Barlow Semi Condensed", sans-serif; font-size: 140px; color: #00102c; letter-spacing: 1px; }
+  .lhad .bar span { font-size: 52px; font-weight: 700; color: #00102c; letter-spacing: 3px; }
 
   /* ---- rental car (placeholder brand) ---- */
   #rent { background: #f7f6f2; color: #13203a; }
@@ -38,10 +39,18 @@
 </style>
 </head>
 <body>
-  <div class="ad" id="lh">
+  <div class="ad lhad" id="member">
     <img class="logo" src="lh_logo.png" alt="">
-    <h1>Talk to a lawyer<br><em>you already know.</em></h1>
-    <div class="sub">Concierge Attorneys · Oxford, Mississippi</div>
+    <h1 class="sm">You don't need to know what<br>kind of lawyer you need.<br><em>That's our job.</em></h1>
+    <div class="sub" style="top:668px">The Oxford Family Membership · littleandholland.com</div>
+    <div class="notice" style="top:752px">FREE BACKGROUND INFORMATION AVAILABLE UPON REQUEST</div>
+    <div class="resp" style="top:806px">[Attorney name], responsible for this ad · Oxford, Mississippi</div>
+    <div class="bar"><b>YOUR NUMBER</b><span>LITTLE &amp; HOLLAND, PLLC</span></div>
+  </div>
+  <div class="ad lhad" id="dui">
+    <img class="logo" src="lh_logo.png" alt="">
+    <h1>Charged with a DUI?<br><em>Know your options.</em></h1>
+    <div class="sub">Little &amp; Holland · Concierge Attorneys · Oxford, Mississippi</div>
     <div class="notice">FREE BACKGROUND INFORMATION AVAILABLE UPON REQUEST</div>
     <div class="resp">[Attorney name], responsible for this ad · Oxford, Mississippi</div>
     <div class="bar"><b>YOUR NUMBER</b><span>LITTLE &amp; HOLLAND, PLLC</span></div>

@@ -43,7 +43,7 @@ strings in `build.py`.
 
 # Client Proposal — Stan Little (Little & Holland + rental car business)
 
-`MCTV_Proposal_Little_Holland_PLLC.pdf` is an 8-page landscape proposal for
+`MCTV_Proposal_Little_Holland_PLLC.pdf` is a 9-page landscape proposal for
 **Stan Little**, styled after MCTV's Schwartz 2027 proposal (Playfair Display +
 Barlow, navy/cream/gold, real-screen mockups). Stan already has the Oxford media
 kit, so it sticks to the deal: options, prices, ad plays, pay-up-front savings,
@@ -51,14 +51,15 @@ terms and a sign-off page.
 
 | Page | What's on it |
 |------|--------------|
-| 1 | Cover, with a Little & Holland mockup on a real MCTV screen |
+| 1 | Cover, with The Oxford Family Membership spot on a real MCTV screen |
 | 2 | The proposal, in six lines |
-| 3 | Four ways to build it: Little & Holland's :15 at 20 / 40 / 80 screens ($500 / $800 / $1,400) or 80 screens + MCTV Traffic sponsorship in Oxford ($2,000) |
-| 4 | The rental car :30 at half the screen rate ($250 / $400 / $700), with totals for both businesses |
-| 5 | Pay up front: 6 months → 7th free; 12 months → 13th & 14th free (totals for L&H only and both) |
-| 6 | The terms, in plain words + MCTV Traffic + the Bar-filing notes for the law firm spot |
-| 7 | Five steps and four questions, with Swayze's contact card |
-| 8 | Pick your build and sign |
+| 3 | Four ways to build it: Little & Holland at 20 / 40 / 80 screens ($500 / $800 / $1,400) or 80 screens + MCTV Traffic sponsorship in Oxford ($2,000) |
+| 4 | Two spots, matched to the room: DUI in college-crowd venues, The Oxford Family Membership in family & professional venues (same price, screens split by venue type) |
+| 5 | The rental car :15 at half the screen rate ($250 / $400 / $700, 30K / 60K / 120K plays), with totals for both businesses |
+| 6 | Pay up front: 6 months → 7th free; 12 months → 13th & 14th free (totals for L&H only and both) |
+| 7 | The terms, in plain words + MCTV Traffic + the Bar-filing notes for the law firm spots |
+| 8 | Five steps and four questions, with Swayze's contact card |
+| 9 | Pick your build and sign |
 
 ## Rebuilding
 
@@ -69,7 +70,7 @@ python3 build/little_holland/build_proposal.py
 
 - Prices, ad plays and the 50% rental discount: top of `build/little_holland/build_proposal.py`
   (`SCREEN_RATE`, `PLAYS`, `RENTAL_DISCOUNT`, `OPTIONS`). Every total is calculated from these.
-- Layout and wording: `build/little_holland/template.html`; date and footer: `copy.json`.
+- Layout and wording: `build/little_holland/template.html`; date, footer and the example venues on page 4: `copy.json` (the build checks each venue against the media kit's host list).
 - Fonts: `build/little_holland/fonts/` (Playfair Display and Barlow, SIL Open Font License).
 - Photos: `build/little_holland/photos/`. These were made once by `make_mockups.py`, which
   takes room and Oxford photos from the Schwartz proposal PDF (not kept here) and

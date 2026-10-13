@@ -7,7 +7,8 @@ mock ads from mockup_ads.html, and warps each ad onto a real MCTV screen.
 
     python3 build/little_holland/make_mockups.py /path/to/Schwartz-MCTV-2027-Exclusivity.pdf
 
-Outputs (committed):  photos/cover_mockup.jpg, photos/rental_mockup.jpg,
+Outputs (committed):  photos/cover_mockup.jpg, photos/dui_mockup.jpg,
+photos/member_mockup.jpg, photos/rental_mockup.jpg,
 photos/oxford_aerial.jpg, photos/oxford_lights.jpg, photos/swayze.jpg,
 photos/traffic_board.jpg
 """
@@ -25,9 +26,13 @@ CHROMIUM = "/opt/pw-browsers/chromium"
 # image xrefs inside the Schwartz PDF
 X_COVER_ROOM, X_STATION, X_AERIAL, X_LIGHTS, X_SWAYZE, X_TRAFFIC = 4, 110, 147, 330, 60, 204
 
+X_DINING, X_LOBBY = 117, 103
+
 # screen corners (TL, TR, BR, BL) in each room photo, in that photo's pixels
 COVER_QUAD = [(389, 530), (1471, 592), (1616, 1142), (356, 1123)]
 STATION_QUAD = [(270, 94), (824, 119), (824, 414), (245, 404)]
+DINING_QUAD = [(364, 145), (805, 164), (859, 392), (349, 382)]     # host dining room, close up
+LOBBY_QUAD = [(640, 419), (1201, 369), (1207, 731), (639, 731)]    # host recreation center lobby
 
 def pdf_image(doc, xref):
     return Image.open(io.BytesIO(doc.extract_image(xref)["image"])).convert("RGB")
@@ -46,7 +51,7 @@ def render_ads():
         page = browser.new_page(viewport={"width": 1920, "height": 1080})
         page.goto("file://" + src)
         page.wait_for_load_state("networkidle")
-        for ad in ("lh", "rent"):
+        for ad in ("member", "dui", "rent"):
             ads[ad] = Image.open(io.BytesIO(page.locator(f"#{ad}").screenshot())).convert("RGB")
         browser.close()
     return ads
@@ -77,7 +82,9 @@ def main(schwartz_pdf):
     client_logo()
     doc = fitz.open(schwartz_pdf)
     ads = render_ads()
-    place(pdf_image(doc, X_COVER_ROOM), ads["lh"], COVER_QUAD).save(os.path.join(PHOTOS, "cover_mockup.jpg"), quality=88)
+    place(pdf_image(doc, X_COVER_ROOM), ads["member"], COVER_QUAD).save(os.path.join(PHOTOS, "cover_mockup.jpg"), quality=88)
+    place(pdf_image(doc, X_DINING), ads["dui"], DINING_QUAD).save(os.path.join(PHOTOS, "dui_mockup.jpg"), quality=88)
+    place(pdf_image(doc, X_LOBBY), ads["member"], LOBBY_QUAD).save(os.path.join(PHOTOS, "member_mockup.jpg"), quality=88)
     place(pdf_image(doc, X_STATION), ads["rent"], STATION_QUAD).save(os.path.join(PHOTOS, "rental_mockup.jpg"), quality=88)
     for xref, name in [(X_AERIAL, "oxford_aerial.jpg"), (X_LIGHTS, "oxford_lights.jpg"),
                        (X_SWAYZE, "swayze.jpg"), (X_TRAFFIC, "traffic_board.jpg")]:
