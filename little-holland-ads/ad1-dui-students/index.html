@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Little &amp; Holland — DUI (Students) :15</title>
+<style>
+  @font-face{font-family:"Anton";src:url("../fonts/anton-latin-400-normal.woff2") format("woff2");font-weight:400}
+  @font-face{font-family:"Montserrat";src:url("../fonts/montserrat-latin-500-normal.woff2") format("woff2");font-weight:500}
+  @font-face{font-family:"Montserrat";src:url("../fonts/montserrat-latin-600-normal.woff2") format("woff2");font-weight:600}
+  @font-face{font-family:"Montserrat";src:url("../fonts/montserrat-latin-700-normal.woff2") format("woff2");font-weight:700}
+  @font-face{font-family:"Montserrat";src:url("../fonts/montserrat-latin-800-normal.woff2") format("woff2");font-weight:800}
+  @font-face{font-family:"Cormorant";src:url("../fonts/cormorant-garamond-latin-500-normal.woff2") format("woff2");font-weight:500}
+  @font-face{font-family:"Cormorant";src:url("../fonts/cormorant-garamond-latin-600-normal.woff2") format("woff2");font-weight:600}
+  @font-face{font-family:"Cormorant";src:url("../fonts/cormorant-garamond-latin-700-normal.woff2") format("woff2");font-weight:700}
+  @font-face{font-family:"Cormorant";src:url("../fonts/cormorant-garamond-latin-600-italic.woff2") format("woff2");font-weight:600;font-style:italic}
+
+  :root{
+    --blue:#2b7bff; --blue-hi:#8fbcff; --navy:#07122a;
+    --ivory:#f5f0e6; --gold:#d2ad66;
+  }
+  html,body{margin:0;background:#000}
+  #stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:#02040a}
+  .abs{position:absolute;left:0;top:0;width:1920px;height:1080px}
+  .row{position:absolute;left:0;width:1920px;text-align:center;white-space:nowrap}
+  .w{display:inline-block;will-change:transform,opacity,filter}
+
+  /* Scene A — DUI? */
+  #dui{font-family:"Anton";font-size:400px;line-height:1;color:#fff;letter-spacing:.01em;top:220px;transform-origin:50% 55%}
+  #dui .q{color:var(--blue-hi)}
+  .ghost{color:rgba(60,130,255,.9)!important}
+  .ghost .q{color:rgba(60,130,255,.9)}
+  #know{font-family:"Montserrat";font-weight:800;font-size:86px;letter-spacing:.13em;color:#fff;top:690px}
+  #know span{display:inline-block;padding-left:.13em}
+  #rule{position:absolute;left:560px;top:820px;width:800px;height:6px;border-radius:3px;
+        background:linear-gradient(90deg,rgba(43,123,255,0),#2b7bff 20%,#8fbcff 50%,#2b7bff 80%,rgba(43,123,255,0));transform-origin:50% 50%}
+
+  /* Scene B — confidentiality */
+  #kicker{font-family:"Montserrat";font-weight:700;font-size:64px;letter-spacing:.06em;color:var(--blue-hi);top:250px}
+  #l2{font-family:"Montserrat";font-weight:800;font-size:124px;letter-spacing:-.01em;color:#fff;top:350px}
+  #l3{font-family:"Montserrat";font-weight:800;font-size:124px;letter-spacing:-.01em;top:500px}
+  #l3 .w{background:linear-gradient(180deg,#cfe2ff 0%,#6fa6ff 55%,#2b7bff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  #chip{position:absolute;top:720px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:22px;
+        padding:20px 40px 20px 30px;border-radius:999px;border:2px solid rgba(143,188,255,.55);
+        background:rgba(18,52,140,.32);font-family:"Montserrat";font-weight:700;font-size:32px;letter-spacing:.22em;color:#e6efff;white-space:nowrap}
+  #lockWrap{position:relative;width:52px;height:52px}
+  #lockPulse{position:absolute;left:50%;top:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;border:3px solid #8fbcff;opacity:0}
+
+  /* Scene C — call */
+  #badge{position:absolute;left:905px;top:270px;width:110px;height:110px;border-radius:50%;
+         background:radial-gradient(circle at 50% 40%,#3d8bff,#1d5be0);display:flex;align-items:center;justify-content:center;
+         box-shadow:0 0 0 0 rgba(43,123,255,.0)}
+  #call{font-family:"Montserrat";font-weight:700;font-size:64px;letter-spacing:.14em;color:#fff;top:430px}
+  #num{font-family:"Anton";font-size:250px;line-height:1;color:#fff;top:520px;letter-spacing:.02em}
+
+  /* Scene D — outro / logo */
+  #outro{opacity:0}
+  #outroBg{background:radial-gradient(ellipse 75% 70% at 50% 42%,#13295a 0%,#0a1838 45%,#040a1a 100%)}
+  .oglow{position:absolute;width:1400px;height:1400px;border-radius:50%;
+         background:radial-gradient(circle,rgba(43,123,255,.35) 0%,rgba(43,123,255,.10) 35%,rgba(43,123,255,0) 65%)}
+  #og1{left:-700px;top:-760px} #og2{left:1220px;top:-760px}
+  #oGroup{transform-origin:50% 45%;top:30px}
+  #mono{position:absolute;left:860px;top:110px;width:200px;height:200px}
+  #monoText{position:absolute;left:860px;top:110px;width:200px;height:200px;display:flex;align-items:center;justify-content:center;
+            font-family:"Cormorant";font-weight:600;font-size:84px;color:var(--ivory);letter-spacing:.02em;line-height:1}
+  #monoText i{font-style:italic;color:var(--gold);font-size:.8em;margin:0 .02em;position:relative;top:.02em}
+  #word,#wordSheen{font-family:"Cormorant";font-weight:600;font-size:140px;letter-spacing:.07em;color:var(--ivory);top:350px;line-height:1.1}
+  #word i, #wordSheen i{font-style:italic;color:var(--gold)}
+  #wordSheen{color:transparent;-webkit-background-clip:text;background-clip:text;
+             background-image:linear-gradient(100deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.95) 50%,rgba(255,255,255,0) 58%);
+             background-size:300% 100%;background-repeat:no-repeat;opacity:0}
+  #wordSheen i{color:transparent}
+  #orule{position:absolute;left:600px;top:540px;width:720px;height:2px;background:linear-gradient(90deg,rgba(210,173,102,0),var(--gold) 15%,var(--gold) 85%,rgba(210,173,102,0))}
+  #pllc{font-family:"Montserrat";font-weight:600;font-size:28px;letter-spacing:.34em;color:rgba(245,240,230,.88);top:572px;padding-left:.34em}
+  #pill{position:absolute;top:705px;left:50%;display:flex;align-items:center;gap:26px;padding:24px 56px 24px 44px;border-radius:999px;
+        border:2px solid rgba(210,173,102,.75);background:rgba(4,10,26,.45);white-space:nowrap}
+  #pill .n{font-family:"Montserrat";font-weight:700;font-size:84px;letter-spacing:.03em;color:#fff;line-height:1}
+
+  #flash{background:radial-gradient(ellipse at 50% 45%,rgba(235,244,255,1) 0%,rgba(120,175,255,1) 45%,rgba(30,90,255,1) 100%);opacity:0}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="shake" class="abs">
+    <canvas id="bg" class="abs"></canvas>
+
+    <div id="sceneA" class="abs">
+      <div id="duiG1" class="row ghost" style="font-family:Anton;font-size:400px;line-height:1;top:220px;transform-origin:50% 55%;opacity:0">DUI<span class="q">?</span></div>
+      <div id="duiG2" class="row ghost" style="font-family:Anton;font-size:400px;line-height:1;top:220px;transform-origin:50% 55%;opacity:0">DUI<span class="q">?</span></div>
+      <div id="dui" class="row">DUI<span class="q">?</span></div>
+      <div id="know" class="row"><span>KNOW YOUR OPTIONS.</span></div>
+      <div id="rule"></div>
+    </div>
+
+    <div id="sceneB" class="abs">
+      <div id="kicker" class="row"><span class="w">You’re</span> <span class="w">an</span> <span class="w">adult.</span></div>
+      <div id="l2" class="row"><span class="w">What</span> <span class="w">you</span> <span class="w">tell</span> <span class="w">us</span></div>
+      <div id="l3" class="row"><span class="w">stays</span> <span class="w">between</span> <span class="w">us.</span></div>
+      <div id="chip">
+        <div id="lockWrap">
+          <div id="lockPulse"></div>
+          <svg width="52" height="52" viewBox="0 0 24 24" style="position:absolute;left:0;top:0;overflow:visible">
+            <g id="shackle"><path d="M7.5 11V7.5a4.5 4.5 0 0 1 9 0V11" fill="none" stroke="#8fbcff" stroke-width="2.2" stroke-linecap="round"/></g>
+            <rect x="4.5" y="10.5" width="15" height="11" rx="2.2" fill="#8fbcff"/>
+            <circle cx="12" cy="15.4" r="1.6" fill="#0b2a6b"/><rect x="11.25" y="15.6" width="1.5" height="3" rx=".7" fill="#0b2a6b"/>
+          </svg>
+        </div>
+        <span>PRIVATE &amp; CONFIDENTIAL</span>
+      </div>
+    </div>
+
+    <div id="sceneC" class="abs">
+      <div id="badge">
+        <svg id="phoneIco" width="60" height="60" viewBox="0 0 24 24"><path fill="#fff" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      </div>
+      <div id="call" class="row"><span class="w">CALL</span> <span class="w">LITTLE</span> <span class="w">&amp;</span> <span class="w">HOLLAND</span></div>
+      <div id="num" class="row"></div>
+    </div>
+  </div>
+
+  <div id="outro" class="abs">
+    <div id="outroBg" class="abs"></div>
+    <div id="og1" class="oglow"></div><div id="og2" class="oglow"></div>
+    <div id="oGroup" class="abs">
+      <svg id="mono" viewBox="0 0 200 200">
+        <circle id="ring1" cx="100" cy="100" r="94" fill="none" stroke="#d2ad66" stroke-width="3" transform="rotate(-90 100 100)"/>
+        <circle id="ring2" cx="100" cy="100" r="84" fill="none" stroke="#f5f0e6" stroke-opacity=".45" stroke-width="1.2" transform="rotate(90 100 100)"/>
+      </svg>
+      <div id="monoText">L<i>&amp;</i>H</div>
+      <div id="word" class="row"></div>
+      <div id="wordSheen" class="row">LITTLE <i>&amp;</i> HOLLAND</div>
+      <div id="orule"></div>
+      <div id="pllc" class="row">PLLC &nbsp;·&nbsp; ATTORNEYS AT LAW &nbsp;·&nbsp; OXFORD, MISSISSIPPI</div>
+      <div id="pill">
+        <svg width="66" height="66" viewBox="0 0 24 24"><path fill="#d2ad66" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        <span class="n">662.232.9500</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="flash" class="abs"></div>
+</div>
+
+<script>
+// ---------- config ----------
+const FPS = 30, DURATION = 15;
+const PHONE = "662.232.9500";
+
+// ---------- helpers ----------
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const lerp = (a, b, p) => a + (b - a) * p;
+const E = {
+  outCubic: p => 1 - Math.pow(1 - p, 3),
+  inCubic: p => p * p * p,
+  inOutCubic: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+  outExpo: p => p >= 1 ? 1 : 1 - Math.pow(2, -10 * p),
+  outBack: p => { const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+};
+function rng(seed) { return () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+
+// fade/slide/blur-in for one element; returns eased progress
+function reveal(el, t, start, dur, { dy = 30, blur = 10, scale = 1, ease = E.outCubic } = {}) {
+  const p = ease(prog(t, start, start + dur));
+  el.style.opacity = p;
+  el.style.transform = `translateY(${(1 - p) * dy}px) scale(${lerp(scale, 1, p)})`;
+  el.style.filter = blur && p < 1 ? `blur(${(1 - p) * blur}px)` : 'none';
+  return p;
+}
+function exitBlur(el, t, start, dur, dy = -60, blur = 14) {
+  const p = E.inCubic(prog(t, start, start + dur));
+  el.style.opacity = 1 - p;
+  el.style.transform = `translateY(${p * dy}px)`;
+  el.style.filter = p > 0 ? `blur(${p * blur}px)` : 'none';
+}
+
+// ---------- build split text ----------
+$('num').innerHTML = [...PHONE].map(c => `<span class="w">${c}</span>`).join('');
+$('word').innerHTML = [...'LITTLE & HOLLAND'].map(c =>
+  c === ' ' ? ' ' : c === '&' ? '<span class="w"><i>&amp;</i></span>' : `<span class="w">${c}</span>`).join('');
+
+// ---------- police lights (canvas) ----------
+const cv = $('bg'), ctx = cv.getContext('2d');
+const DPR = window.devicePixelRatio || 1;
+cv.width = 1920 * DPR; cv.height = 1080 * DPR;
+cv.style.width = '1920px'; cv.style.height = '1080px';
+
+const R = rng(7);
+const bokeh = Array.from({ length: 34 }, (_, i) => {
+  const warm = R() < .18;
+  return {
+    x: R() * 1920, y: 80 + Math.pow(R(), 1.3) * 900, r: 18 + Math.pow(R(), 1.8) * 95,
+    a: warm ? .10 + R() * .10 : .10 + R() * .22,
+    col: warm ? [255, 176, 96] : [lerp(40, 120, R()) | 0, lerp(110, 170, R()) | 0, 255],
+    react: warm ? .15 : .6 + R() * .4, ph: R() * 6.28,
+  };
+});
+
+// One flash: on for 2 frames, then quick decay. Double-blip per side once a second
+// (keeps each side at 2 flashes/sec — under the 3/sec photosensitivity guideline).
+const blip = x => x < 0 ? 0 : x < .07 ? 1 : Math.exp(-(x - .07) / .06);
+function side(t, offset) {
+  const ph = (((t - offset) % 1) + 1) % 1;
+  return Math.max(blip(ph), blip(ph - .15));
+}
+
+function radial(x, y, r, stops) {
+  const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+  for (const [o, c] of stops) g.addColorStop(o, c);
+  ctx.fillStyle = g;
+  ctx.fillRect(x - r, y - r, r * 2, r * 2);
+}
+function glow(x, y, I) {
+  if (I <= .001) return;
+  radial(x, y, 1000, [[0, `rgba(40,110,255,${.55 * I})`], [.35, `rgba(20,70,230,${.22 * I})`], [1, 'rgba(0,30,160,0)']]);
+  radial(x, y, 280, [[0, `rgba(120,180,255,${.85 * I})`], [1, 'rgba(120,180,255,0)']]);
+  radial(x, y, 70, [[0, `rgba(240,248,255,${I})`], [.5, `rgba(160,205,255,${.8 * I})`], [1, 'rgba(160,205,255,0)']]);
+  ctx.save(); ctx.translate(x, y); ctx.scale(7.5, .11);
+  radial(0, 0, 260, [[0, `rgba(170,210,255,${.75 * I})`], [1, 'rgba(120,180,255,0)']]);
+  ctx.restore();
+  ctx.save(); ctx.translate(x, y); ctx.scale(3, .5);
+  radial(0, 0, 260, [[0, `rgba(80,140,255,${.25 * I})`], [1, 'rgba(80,140,255,0)']]);
+  ctx.restore();
+}
+
+function drawBG(t, lI, rI, g) {
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  ctx.globalCompositeOperation = 'source-over';
+  const base = ctx.createLinearGradient(0, 0, 0, 1080);
+  base.addColorStop(0, '#020409'); base.addColorStop(1, '#070d1e');
+  ctx.fillStyle = base; ctx.fillRect(0, 0, 1920, 1080);
+
+  const z = 1 + .07 * clamp(t / 10.6);           // slow push-in
+  ctx.save(); ctx.translate(960, 540); ctx.scale(z, z); ctx.translate(-960, -540);
+  ctx.globalCompositeOperation = 'lighter';
+  for (const b of bokeh) {
+    const near = b.x < 960 ? lI : rI;
+    const a = b.a * (.5 * g + 1.1 * near * b.react);
+    if (a < .003) continue;
+    const [r0, g0, b0] = b.col, x = b.x + Math.sin(t * .35 + b.ph) * 8;
+    radial(x, b.y, b.r, [[0, `rgba(${r0},${g0},${b0},${a * .75})`], [.78, `rgba(${r0},${g0},${b0},${a})`],
+                         [.9, `rgba(${r0},${g0},${b0},${a * .55})`], [1, `rgba(${r0},${g0},${b0},0)`]]);
+  }
+  glow(320, 130, lI);
+  glow(1600, 130, rI);
+  ctx.restore();
+
+  ctx.globalCompositeOperation = 'lighter';
+  ctx.fillStyle = `rgba(20,70,255,${.09 * Math.max(lI, rI)})`;
+  ctx.fillRect(0, 0, 1920, 1080);
+  // floor bounce
+  const fl = ctx.createLinearGradient(0, 760, 0, 1080);
+  fl.addColorStop(0, 'rgba(30,90,255,0)'); fl.addColorStop(1, `rgba(30,90,255,${.16 * (lI + rI) / 2 + .03 * g})`);
+  ctx.fillStyle = fl; ctx.fillRect(0, 760, 1920, 320);
+
+  ctx.globalCompositeOperation = 'source-over';
+  radial(960, 540, 1180, [[.5, 'rgba(0,0,0,0)'], [1, 'rgba(0,0,0,.7)']]);
+}
+
+// ---------- timeline ----------
+function seek(t) {
+  // light gain per scene: full on A, dimmer behind the confidentiality message, full again for the call
+  let g = E.outCubic(prog(t, 0, .35));
+  g *= 1 - .5 * E.inOutCubic(prog(t, 3.7, 4.3)) + .5 * E.inOutCubic(prog(t, 7.9, 8.4));
+  const L = side(t, 0), Rr = side(t, .5);
+  const lI = g * (.12 + .88 * L), rI = g * (.12 + .88 * Rr);
+  const I = Math.max(lI, rI);
+  const inOutro = t >= 10.62;
+
+  if (!inOutro) drawBG(t, lI, rI, g);
+
+  // camera shake on the slam
+  const sp = prog(t, .42, .9);
+  const amp = sp > 0 && sp < 1 ? 16 * Math.pow(1 - sp, 2) : 0;
+  $('shake').style.transform = amp ? `translate(${amp * Math.sin(t * 91)}px,${amp * Math.cos(t * 73)}px) scale(${1 + amp * .0022})` : 'none';
+  $('shake').style.visibility = inOutro ? 'hidden' : 'visible';
+
+  // ----- Scene A: DUI? / KNOW YOUR OPTIONS. -----
+  const A = $('sceneA');
+  A.style.display = t < 4.2 ? 'block' : 'none';
+  if (t < 4.2) {
+    const pS = E.outExpo(prog(t, .30, .66));
+    const push = 1 + .04 * E.inOutCubic(prog(t, .7, 3.7));
+    const s = lerp(1.9, 1, pS) * push;
+    const dui = $('dui');
+    dui.style.opacity = E.outCubic(prog(t, .30, .40));
+    dui.style.transform = `scale(${s})`;
+    dui.style.filter = `drop-shadow(0 0 ${10 + 14 * I}px rgba(90,160,255,${.35 + .55 * I})) drop-shadow(0 0 ${36 + 40 * I}px rgba(40,110,255,${.25 + .5 * I}))`;
+    [['duiG1', -1], ['duiG2', 1]].forEach(([id, d]) => {
+      const gEl = $(id), k = 1 - pS;
+      gEl.style.opacity = t < .30 ? 0 : .55 * k;
+      gEl.style.transform = `translateX(${d * 70 * k}px) scale(${s * (1 + .18 * k)})`;
+    });
+    const kp = E.outCubic(prog(t, 1.25, 1.85));
+    const know = $('know');
+    know.style.clipPath = `inset(0 ${100 * (1 - kp)}% 0 0)`;
+    know.style.transform = `translateX(${(1 - kp) * -30}px) scale(${push})`;
+    know.style.filter = `drop-shadow(0 0 ${12 + 12 * I}px rgba(60,130,255,${.15 + .4 * I}))`;
+    const rp = E.inOutCubic(prog(t, 1.55, 2.15));
+    $('rule').style.transform = `scaleX(${rp})`;
+    $('rule').style.opacity = rp;
+    // exit
+    const xp = E.inCubic(prog(t, 3.7, 4.1));
+    A.style.opacity = 1 - xp;
+    A.style.filter = xp > 0 ? `blur(${14 * xp}px)` : 'none';
+    A.style.transform = `translateY(${-70 * xp}px)`;
+  }
+
+  // ----- Scene B: You're an adult. / What you tell us stays between us. -----
+  const B = $('sceneB');
+  B.style.display = t > 3.9 && t < 8.3 ? 'block' : 'none';
+  if (t > 3.9 && t < 8.3) {
+    [...$('kicker').children].forEach((w, i) => reveal(w, t, 4.0 + i * .08, .5, { dy: 24, blur: 8 }));
+    [...$('l2').children].forEach((w, i) => reveal(w, t, 4.45 + i * .07, .55, { dy: 40, blur: 12 }));
+    [...$('l3').children].forEach((w, i) => reveal(w, t, 4.95 + i * .1, .6, { dy: 40, blur: 12 }));
+    $('l3').style.filter = `drop-shadow(0 0 ${14 + 16 * I}px rgba(43,123,255,${.35 + .3 * I}))`;
+    const cp = E.outCubic(prog(t, 5.55, 6.0));
+    const chip = $('chip');
+    chip.style.opacity = cp;
+    chip.style.transform = `translateX(-50%) translateY(${(1 - cp) * 30}px)`;
+    const lp = E.inCubic(prog(t, 5.8, 5.98));
+    $('shackle').setAttribute('transform', `translate(0 ${-3.2 * (1 - lp)})`);
+    const pp = prog(t, 5.98, 6.6);
+    $('lockPulse').style.opacity = pp > 0 && pp < 1 ? .7 * (1 - pp) : 0;
+    $('lockPulse').style.transform = `scale(${1 + 1.3 * E.outCubic(pp)})`;
+    // exit
+    const xp = E.inCubic(prog(t, 7.85, 8.25));
+    B.style.opacity = 1 - xp;
+    B.style.transform = `translateY(${-60 * xp}px)`;
+    B.style.filter = xp > 0 ? `blur(${14 * xp}px)` : 'none';
+  }
+
+  // ----- Scene C: Call Little & Holland 662.232.9500 -----
+  const C = $('sceneC');
+  C.style.display = t > 8.1 && !inOutro ? 'block' : 'none';
+  if (t > 8.1 && !inOutro) {
+    const bp = E.outBack(prog(t, 8.2, 8.6));
+    const badge = $('badge');
+    badge.style.opacity = clamp(bp * 1.5);
+    const ring = Math.sin(2 * Math.PI * 7.5 * t) * 13 * (prog(t, 8.55, 8.65) - prog(t, 9.15, 9.35))
+               + Math.sin(2 * Math.PI * 7.5 * t) * 13 * (prog(t, 9.75, 9.85) - prog(t, 10.2, 10.4));
+    badge.style.transform = `scale(${bp}) rotate(${ring}deg)`;
+    badge.style.boxShadow = `0 0 ${30 + 50 * I}px rgba(43,123,255,${.35 + .45 * I})`;
+    [...$('call').children].forEach((w, i) => reveal(w, t, 8.3 + i * .07, .45, { dy: 26, blur: 8 }));
+    [...$('num').children].forEach((c, i) => {
+      reveal(c, t, 8.6 + i * .035, .45, { dy: -70, blur: 10, ease: E.outBack });
+    });
+    $('num').style.filter = `drop-shadow(0 0 ${10 + 14 * I}px rgba(90,160,255,${.35 + .5 * I})) drop-shadow(0 0 ${34 + 36 * I}px rgba(40,110,255,${.25 + .45 * I}))`;
+    const push = 1 + .03 * E.inOutCubic(prog(t, 8.6, 10.6));
+    C.style.transform = `scale(${push})`;
+  }
+
+  // ----- transition flash -----
+  const f = prog(t, 10.45, 10.62) - E.outCubic(prog(t, 10.62, 11.05));
+  $('flash').style.opacity = .92 * clamp(f);
+
+  // ----- Scene D: logo + contact -----
+  const O = $('outro');
+  O.style.opacity = inOutro ? 1 : 0;
+  if (inOutro) {
+    const u = t - 10.62;
+    const breathe = .5 + .5 * Math.sin(u * 2.2);
+    $('og1').style.opacity = .55 + .25 * breathe;
+    $('og2').style.opacity = .55 + .25 * (1 - breathe);
+    $('oGroup').style.transform = `scale(${1 + .025 * E.inOutCubic(prog(u, 0, 4.4))})`;
+
+    const C1 = 2 * Math.PI * 94, C2 = 2 * Math.PI * 84;
+    const r1 = $('ring1'), r2 = $('ring2');
+    r1.style.strokeDasharray = C1; r1.style.strokeDashoffset = C1 * (1 - E.inOutCubic(prog(u, .1, .95)));
+    r2.style.strokeDasharray = C2; r2.style.strokeDashoffset = C2 * (1 - E.inOutCubic(prog(u, .3, 1.05)));
+    reveal($('monoText'), u, .45, .6, { dy: 0, blur: 10, scale: .82 });
+
+    [...$('word').querySelectorAll('.w')].forEach((c, i) => reveal(c, u, .6 + i * .035, .55, { dy: 26, blur: 9 }));
+    const rp = E.inOutCubic(prog(u, 1.15, 1.75));
+    $('orule').style.transform = `scaleX(${rp})`;
+    $('orule').style.opacity = rp;
+    const tp = E.outCubic(prog(u, 1.35, 2.0));
+    $('pllc').style.opacity = tp;
+    $('pllc').style.letterSpacing = `${lerp(.5, .34, tp)}em`;
+    const pp = E.outCubic(prog(u, 1.75, 2.3));
+    $('pill').style.opacity = pp;
+    $('pill').style.transform = `translateX(-50%) translateY(${(1 - pp) * 34}px)`;
+
+    const sh = prog(u, 2.6, 3.5);
+    const sheen = $('wordSheen');
+    sheen.style.opacity = sh > 0 && sh < 1 ? 1 : 0;
+    sheen.style.backgroundPosition = `${lerp(110, -10, E.inOutCubic(sh))}% 0`;
+  }
+}
+
+window.seek = seek;
+window.FPS = FPS; window.DURATION = DURATION;
+window.ready = document.fonts.ready.then(() => Promise.all([...document.fonts].map(f => f.load()))).then(() => { seek(0); return true; });
+
+// live preview when opened directly in a browser (no ?render)
+if (!location.search.includes('render')) {
+  const t0 = performance.now();
+  const loop = now => { seek(((now - t0) / 1000) % DURATION); requestAnimationFrame(loop); };
+  window.ready.then(() => requestAnimationFrame(loop));
+}
+</script>
+</body>
+</html>
