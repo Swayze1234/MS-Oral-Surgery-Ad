@@ -16,7 +16,9 @@ Needs:  pip install pymupdf jinja2 playwright
 Output is written to the repo root.
 """
 import html, json, os, re
+import numpy as np
 import pymupdf as fitz
+from PIL import Image
 from jinja2 import Environment, FileSystemLoader
 from playwright.sync_api import sync_playwright
 
@@ -38,6 +40,21 @@ PHOTOS = {83: "oxford_stadium.jpg",     # Oxford cover: Vaught-Hemingway at nigh
           416: "swayze.jpg"}            # Swayze headshot (footer block)
 LOGOS = {84: (85, "logo_white.png"),     # (image xref, soft-mask xref)
          86: (87, "logo_navy.png")}
+
+CLIENT_LOGO = os.path.join(HERE, "little_holland_logo.png")   # supplied by the client (navy bg)
+
+def client_logo():
+    """Knock out the logo's navy background (colour-to-alpha) and upscale it,
+    so it sits cleanly on any dark MCTV background."""
+    im = np.asarray(Image.open(CLIENT_LOGO).convert("RGB")).astype(float)
+    bg = np.array([0x00, 0x10, 0x2c], float)
+    room = np.where(im >= bg, 255 - bg, bg)                 # distance to white or black per channel
+    a = np.clip((np.abs(im - bg) / room).max(axis=2), 0, 1)
+    fg = bg + (im - bg) / np.maximum(a, 1e-6)[..., None]
+    rgba = np.dstack([np.clip(fg, 0, 255), a * 255]).astype("uint8")
+    out = Image.fromarray(rgba, "RGBA")
+    out = out.resize((out.width * 4, out.height * 4), Image.LANCZOS)
+    out.save(os.path.join(ASSETS, "lh_logo.png"))
 
 def extract_assets():
     os.makedirs(ASSETS, exist_ok=True)
@@ -147,7 +164,7 @@ def assemble():
         pg.insert_text((50.4, 518.1), f"{n:02d}", fontfile=LIB, fontname="lib",
                        fontsize=6.38, color=tuple(c / 255 for c in NUM_COLOR[idx]))
     assert h == len(src), f"template has {len(src)} pages, ORDER expects {h}"
-    out.set_metadata({"title": "MCTV Digital — Advertising Proposal for Little & Holland PLLC",
+    out.set_metadata({"title": "MCTV Digital — Advertising Proposal for Little & Holland, PLLC",
                       "author": "Swayze Hollingsworth · MCTV Digital",
                       "subject": "Two 15-second commercials on the MCTV indoor screen network"})
     out.save(OUT, garbage=4, deflate=True)
@@ -157,6 +174,7 @@ if __name__ == "__main__":
     with open(os.path.join(HERE, "copy.json")) as f:
         copy = json.load(f)
     extract_assets()
+    client_logo()
     render_html(copy)
     print_pdf()
     assemble()

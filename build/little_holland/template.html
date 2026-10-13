@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>MCTV Proposal — Little &amp; Holland PLLC</title>
+<title>MCTV Proposal — Little &amp; Holland, PLLC</title>
 <style>
   @page { size: 960pt 540pt; margin: 0; }
   :root {
@@ -49,9 +49,13 @@
   .cover h1 em { font-style: normal; color: var(--gold-bright); }
   .cover .sub { margin-top: 16pt; font-size: 8.2pt; letter-spacing: .32em; color: #cfdbec; text-transform: uppercase; }
   .cover .gbar { margin-top: 18pt; width: 60pt; height: 3pt; background: var(--gold-bright); }
-  .cover .meta { position: absolute; left: 72pt; bottom: 56pt; color: #e3eef9; font-size: 10.5pt; line-height: 1.75; }
-  .cover .meta b { color: #fff; }
-  .cover .meta .lbl { display: inline-block; width: 92pt; font-size: 7.5pt; font-weight: 700; letter-spacing: .28em; color: var(--gold-bright); text-transform: uppercase; }
+  .cover .client { position: absolute; left: 72pt; top: 352pt; }
+  .cover .client .lbl { font-size: 7.5pt; font-weight: 700; letter-spacing: .32em; color: var(--gold-bright); }
+  .cover .client img { display: block; width: 228pt; margin: 9pt 0 0 -3pt; }
+  .cover .client .who { margin-top: 8pt; color: #e3eef9; font-size: 10.5pt; }
+  .cover .client .who b { color: #fff; }
+  .cover .by { position: absolute; left: 72pt; bottom: 44pt; color: #9fb3cf; font-size: 8.4pt; letter-spacing: .04em; }
+  .cover .by b { color: #e3eef9; font-weight: 700; }
 
   /* ---- 2. overview ---- */
   .ov-left { position: absolute; left: 50pt; top: 98pt; width: 400pt; }
@@ -90,8 +94,9 @@
                    border: 4pt solid #0b1730; border-radius: 3pt; display: flex; align-items: center; justify-content: center; padding: 0 12pt; }
   .frame .screen .tc { position: absolute; left: 7pt; top: 5pt; font-size: 6.4pt; letter-spacing: .14em; color: var(--gold-bright); font-weight: 700; }
   .frame .screen .ost { font-family: "DejaVu Serif", Georgia, serif; color: #fff; font-size: 12.4pt; line-height: 1.25; text-align: center; }
-  .frame .screen.endcard { background: linear-gradient(135deg, #f6f2e9, #ece3cf); }
-  .frame .screen.endcard .ost { color: var(--navy); }
+  .frame .screen.endcard { background: #00102c; flex-direction: column; gap: 6pt; }
+  .frame .screen.endcard img { width: 88%; }
+  .frame .screen.endcard .ost { font-family: "Liberation Sans", Arial, sans-serif; color: var(--gold-bright); font-size: 8.4pt; letter-spacing: .04em; }
   .frame .vis { margin-top: 6pt; font-size: 7.6pt; line-height: 1.45; color: var(--muted); }
 
   /* ---- 5. how it runs ---- */
@@ -211,18 +216,19 @@
     <div class="sub">The Indoor Billboard Company · North Mississippi</div>
     <div class="gbar"></div>
   </div>
-  <div class="meta">
-    <div><span class="lbl">Prepared for</span><b>Stan Little</b> · Little &amp; Holland PLLC · Oxford, MS</div>
-    <div><span class="lbl">Presented by</span><b>Swayze Hollingsworth</b> · MCTV Digital</div>
-    <div><span class="lbl">Date</span>{{ c.date }}</div>
+  <div class="client">
+    <div class="lbl">PREPARED FOR</div>
+    <img src="lh_logo.png" alt="Little &amp; Holland, PLLC — Concierge Attorneys">
+    <div class="who">Attn: <b>Stan Little</b> &nbsp;·&nbsp; Oxford, Mississippi</div>
   </div>
+  <div class="by">Presented by <b>Swayze Hollingsworth</b> · MCTV Digital &nbsp;·&nbsp; {{ c.date }}</div>
 </section>
 
 <!-- ================= 2. OVERVIEW ================= -->
 <section class="page">
   <img class="hdr-logo" src="logo_navy.png" alt="MCTV"><div class="hdr-label">Proposal Overview</div><div class="hdr-rule"></div>
   <div class="ov-left">
-    <div class="kicker">Prepared for Little &amp; Holland PLLC</div>
+    <div class="kicker">Prepared for Little &amp; Holland, PLLC</div>
     <h2 class="title" style="margin-top:5pt">{{ c.intro_headline_html | safe }}</h2>
     <div class="bar" style="margin-top:10pt"></div>
     <div class="ov-body">{{ c.intro_body }}</div>
@@ -269,7 +275,11 @@
     <div class="frames">
       {% for f in s.frames %}
       <div class="frame">
-        <div class="screen {{ 'endcard' if loop.last else '' }}"><span class="tc">{{ f.timecode }}</span><div class="ost">{{ f.on_screen_text }}</div></div>
+        {% if loop.last %}
+        <div class="screen endcard"><span class="tc">{{ f.timecode }}</span><img src="lh_logo.png" alt="Little &amp; Holland, PLLC"><div class="ost">{{ f.on_screen_text }}</div></div>
+        {% else %}
+        <div class="screen"><span class="tc">{{ f.timecode }}</span><div class="ost">{{ f.on_screen_text }}</div></div>
+        {% endif %}
         <div class="vis">{{ f.visual }}</div>
       </div>
       {% endfor %}
@@ -397,7 +407,7 @@
   <img class="hdr-logo" src="logo_navy.png" alt="MCTV"><div class="hdr-label">Agreement &amp; Order Form</div><div class="hdr-rule"></div>
   <div class="of-col" style="left:50pt">
     <h3>Advertiser Information</h3>
-    <div class="fld"><span class="l">Business name</span><span class="v fill">Little &amp; Holland PLLC</span></div>
+    <div class="fld"><span class="l">Business name</span><span class="v fill">Little &amp; Holland, PLLC</span></div>
     <div class="fld"><span class="l">Contact name</span><span class="v fill">Stan Little</span></div>
     <div class="fld"><span class="l">Phone</span><span class="v"></span><span class="l l2" style="padding-bottom:3pt">Email</span><span class="v"></span></div>
     <div class="fld"><span class="l">Billing address</span><span class="v"></span></div>
