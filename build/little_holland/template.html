@@ -2,297 +2,450 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>MCTV Proposal — Stan Little</title>
+<title>Stan Little × MCTV · Two Commercials, One Network</title>
 <style>
-  @page { size: 612pt 792pt; margin: 0; }
+  @font-face { font-family: "Playfair Display"; src: url("../fonts/PlayfairDisplay-Variable.ttf"); font-weight: 400 900; }
+  @font-face { font-family: "Playfair Display"; src: url("../fonts/PlayfairDisplay-Italic-Variable.ttf"); font-weight: 400 900; font-style: italic; }
+  @font-face { font-family: "Barlow"; src: url("../fonts/Barlow-Regular.ttf"); font-weight: 400; }
+  @font-face { font-family: "Barlow"; src: url("../fonts/Barlow-Medium.ttf"); font-weight: 500; }
+  @font-face { font-family: "Barlow"; src: url("../fonts/Barlow-SemiBold.ttf"); font-weight: 600; }
+  @font-face { font-family: "Barlow"; src: url("../fonts/Barlow-Bold.ttf"); font-weight: 700; }
+  @font-face { font-family: "Barlow Semi Condensed"; src: url("../fonts/BarlowSemiCondensed-Medium.ttf"); font-weight: 500; }
+  @font-face { font-family: "Barlow Semi Condensed"; src: url("../fonts/BarlowSemiCondensed-SemiBold.ttf"); font-weight: 600; }
+  @font-face { font-family: "Barlow Semi Condensed"; src: url("../fonts/BarlowSemiCondensed-Bold.ttf"); font-weight: 700; }
+
+  @page { size: 792pt 468pt; margin: 0; }
   :root {
-    --cream: #f6f2e9; --rule: #e4dbc8; --navy: #00377e; --ink: #13203a; --muted: #6a7891;
-    --gold: #c79a3b; --gold-bright: #e8b84b; --gold-deep: #9a6a12; --band: #01132f;
-    --panel-a: #0b4391; --panel-b: #01295f; --tint: #f4ebd6; --line: #b8af9a; --green: #2f7a3a;
+    --navy: #0b2044; --navy-deep: #08172e; --paper: #f5f4f0; --card: #fafaf6; --line: #dbd5ca; --rule: #d9d5cd;
+    --gold: #c8a226; --gold-soft: #e8c87a; --ink: #3a3a38; --slate: #5e7391;
+    --on-dark: #bfcee5; --on-dark-2: #93a4bf; --on-dark-3: #a9bbd6; --green: #2e7a46;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
-  body { font-family: "Liberation Sans", Arial, Helvetica, sans-serif; color: var(--ink);
-         -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .serif { font-family: "DejaVu Serif", Georgia, serif; }
-  .page { width: 612pt; height: 792pt; position: relative; overflow: hidden; background: var(--cream);
-          page-break-after: always; break-after: page; }
-  .page:last-child { page-break-after: auto; break-after: auto; }
-  .kicker { font-weight: 700; font-size: 7.6pt; letter-spacing: .26em; color: var(--gold); text-transform: uppercase; }
-  .ftr { position: absolute; left: 40pt; right: 40pt; bottom: 18pt; display: flex; justify-content: space-between;
-         font-size: 6pt; letter-spacing: .1em; color: var(--muted); }
+  body { font-family: "Barlow", sans-serif; color: var(--ink); font-variant-numeric: lining-nums; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .pf { font-family: "Playfair Display", serif; font-weight: 700; }
+  .page { width: 792pt; height: 468pt; position: relative; overflow: hidden; background: var(--paper); break-after: page; }
+  .page:last-child { break-after: auto; }
+  .abs { position: absolute; }
 
-  /* ---------- page 1 header band ---------- */
-  .band { position: absolute; left: 0; top: 0; width: 612pt; height: 142pt;
-          background: linear-gradient(120deg, #0a3f8c 0%, #002d68 55%, #01224f 100%); }
-  .band .logo { position: absolute; left: 40pt; top: 30pt; width: 104pt; }
-  .band .elite { position: absolute; left: 41pt; top: 54pt; font-weight: 700; font-size: 6.4pt; letter-spacing: .42em; color: var(--gold-bright); }
-  .band .doc { position: absolute; right: 40pt; top: 32pt; text-align: right; }
-  .band .doc .k { font-weight: 700; font-size: 7.4pt; letter-spacing: .3em; color: var(--gold-bright); }
-  .band .doc .d { margin-top: 4pt; font-size: 8.4pt; color: #cfdbec; }
-  .band .for { position: absolute; left: 40pt; right: 40pt; top: 82pt; border-top: 1pt solid rgba(255,255,255,.14); padding-top: 10pt;
-               display: flex; align-items: center; gap: 12pt; }
-  .band .for .lbl { font-weight: 700; font-size: 6.8pt; letter-spacing: .28em; color: var(--gold-bright); line-height: 1.5; width: 96pt; flex: none; }
-  .band .for .lbl b { display: block; font-family: "DejaVu Serif", Georgia, serif; font-weight: 400; font-size: 12pt; letter-spacing: 0; color: #fff; }
-  .band .for img { width: 178pt; flex: none; }
-  .band .for .plus { font-family: "DejaVu Serif", Georgia, serif; color: var(--gold-bright); font-size: 16pt; }
-  .band .for .rent { font-family: "DejaVu Serif", Georgia, serif; color: #fff; font-size: 11pt; line-height: 1.25; }
-  .band .for .rent small { display: block; font-family: "Liberation Sans", Arial, sans-serif; font-size: 6.6pt; letter-spacing: .24em; color: #9ec1ec; margin-top: 2pt; }
+  /* shared page head + foot (Schwartz layout) */
+  .head { position: absolute; left: 40pt; top: 26pt; right: 40pt; }
+  .head .gr { width: 32pt; height: 2.5pt; background: var(--gold); }
+  .head .k { margin-top: 8pt; font-weight: 600; font-size: 7.4pt; letter-spacing: .3em; color: var(--slate); text-transform: uppercase; }
+  .head h1 { margin: 4pt 0 0; font-family: "Playfair Display", serif; font-weight: 700; font-size: 23pt; color: var(--navy); line-height: 1.1; }
+  .head .sub { margin-top: 4pt; font-size: 8.4pt; color: var(--slate); }
+  .foot { position: absolute; left: 40pt; right: 40pt; bottom: 18pt; display: flex; justify-content: space-between;
+          font-weight: 500; font-size: 6.8pt; letter-spacing: .26em; color: var(--slate); text-transform: uppercase; }
+  .foot.dark { color: var(--on-dark-2); }
+  .credit { position: absolute; font-size: 5.6pt; color: #e6ecf5; background: rgba(8,23,46,.55); padding: 2pt 5pt; border-radius: 2pt; }
+  .mock { position: absolute; font-weight: 600; font-size: 6.2pt; letter-spacing: .14em; color: #dce5f2; background: rgba(8,23,46,.82);
+          padding: 4pt 7pt; border-radius: 3pt; text-transform: uppercase; }
+  .mock b { color: var(--gold-soft); font-weight: 700; }
 
-  /* ---------- intro ---------- */
-  .intro { position: absolute; left: 40pt; right: 40pt; top: 158pt; }
-  .intro h1 { font-family: "DejaVu Serif", Georgia, serif; font-weight: 400; font-size: 21pt; color: var(--navy); margin: 0; line-height: 1.15; }
-  .intro h1 em { font-style: normal; color: var(--gold); }
-  .intro p { margin: 6pt 0 0; font-size: 8.8pt; line-height: 1.5; color: #2a3a57; }
+  /* ---------- 1. cover ---------- */
+  .cover { background: var(--navy-deep); }
+  .cover .photo { position: absolute; left: 356pt; top: 0; width: 436pt; height: 468pt; background: url("../photos/cover_mockup.jpg") 0% 50%/cover no-repeat; }
+  .cover .fade { position: absolute; left: 330pt; top: 0; width: 90pt; height: 468pt; background: linear-gradient(90deg, #0a2044 0%, rgba(10,32,68,0) 100%); }
+  .cover .panel { position: absolute; left: 0; top: 0; width: 356pt; height: 468pt; background: #0a2044; }
+  .cover .logo { position: absolute; left: 40pt; top: 32pt; width: 150pt; }
+  .cover .elite { position: absolute; left: 41pt; top: 66pt; font-weight: 500; font-size: 7pt; letter-spacing: .48em; color: var(--on-dark-2); }
+  .cover .glr { position: absolute; left: 40pt; top: 88pt; width: 47pt; height: 2.5pt; background: var(--gold-soft); }
+  .cover .k { position: absolute; left: 40pt; top: 154pt; font-weight: 600; font-size: 8pt; letter-spacing: .26em; color: var(--gold-soft); }
+  .cover h1 { position: absolute; left: 40pt; top: 168pt; width: 300pt; margin: 0; font-family: "Playfair Display", serif; font-weight: 700;
+              font-size: 29pt; line-height: 1.08; color: #fff; }
+  .cover h1 em { color: var(--gold-soft); font-style: italic; }
+  .cover .lede { position: absolute; left: 40pt; top: 284pt; width: 296pt; font-size: 10.5pt; line-height: 1.5; color: var(--on-dark); }
+  .cover .meta { position: absolute; left: 40pt; top: 352pt; width: 296pt; border-top: 1pt solid rgba(255,255,255,.14); padding-top: 12pt; display: flex; gap: 22pt; }
+  .cover .meta div { font-weight: 600; font-size: 6.6pt; letter-spacing: .2em; color: var(--on-dark-2); }
+  .cover .meta b { display: block; margin-top: 5pt; font-size: 10pt; letter-spacing: 0; color: #fff; }
+  .cover .cfoot { position: absolute; left: 40pt; width: 296pt; bottom: 26pt; display: flex; justify-content: space-between;
+                  font-weight: 500; font-size: 6.8pt; letter-spacing: .26em; color: var(--on-dark-2); }
 
-  .sec { position: absolute; left: 40pt; right: 40pt; }
-  .sec-h { display: flex; align-items: baseline; gap: 8pt; border-bottom: 1.2pt solid var(--gold); padding-bottom: 4pt; margin-bottom: 8pt; }
-  .sec-h .num { font-family: "DejaVu Serif", Georgia, serif; color: var(--gold); font-size: 12pt; }
-  .sec-h .t { font-family: "DejaVu Serif", Georgia, serif; color: var(--navy); font-size: 11.5pt; }
-  .sec-h .s { margin-left: auto; font-size: 7.2pt; color: var(--muted); letter-spacing: .04em; }
+  /* ---------- 2. six lines ---------- */
+  .band { position: absolute; left: 0; top: 83pt; width: 792pt; height: 93pt; background: url("../photos/oxford_aerial.jpg") center 55%/cover no-repeat; }
+  .six { position: absolute; left: 40pt; right: 40pt; top: 192pt; display: grid; grid-template-columns: 1fr 1fr; gap: 12pt 40pt; }
+  .six .it { display: flex; gap: 12pt; }
+  .six .n { flex: none; width: 17pt; height: 17pt; border-radius: 50%; background: var(--navy); color: var(--gold-soft);
+            font-family: "Playfair Display", serif; font-weight: 700; font-size: 9.5pt; display: flex; align-items: center; justify-content: center; margin-top: 1pt; }
+  .six p { margin: 0; font-size: 9.2pt; line-height: 1.5; color: var(--ink); }
+  .six p b { font-weight: 600; color: var(--navy); }
+  .six p .hl { font-weight: 600; color: var(--navy); }
+  .bottomline { position: absolute; left: 40pt; right: 40pt; top: 398pt; border-top: 1pt solid var(--rule); padding-top: 9pt; font-size: 8.4pt; line-height: 1.5; color: var(--slate); }
+  .bottomline b { font-weight: 600; color: var(--navy); }
 
-  /* ---------- section 1: L&H options ---------- */
-  .opts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8pt; }
-  .opt { position: relative; background: linear-gradient(140deg, var(--panel-a), var(--panel-b)); color: #fff; padding: 9pt 10pt 9pt; height: 112pt; }
-  .opt.traffic { background: linear-gradient(140deg, #0d1f45, var(--band)); outline: 1.6pt solid var(--gold-bright); outline-offset: -1.6pt; }
-  .opt .on { font-size: 6.4pt; letter-spacing: .26em; color: #9ec1ec; font-weight: 700; }
-  .opt .nm { margin-top: 3pt; font-size: 8.8pt; font-weight: 700; color: #fff; line-height: 1.2; min-height: 21pt; }
-  .opt .pr { font-family: "DejaVu Serif", Georgia, serif; color: var(--gold-bright); font-size: 20pt; margin-top: 2pt; }
-  .opt .pr small { font-size: 8pt; color: #cfe0f5; }
-  .opt .rows { margin-top: 5pt; border-top: 1pt solid rgba(255,255,255,.16); padding-top: 4pt; font-size: 7.2pt; color: #bcd2ec; }
-  .opt .rows div { display: flex; justify-content: space-between; line-height: 1.6; }
-  .opt .rows b { color: #fff; }
-  .opt .rows .g { color: var(--gold-bright); font-weight: 700; }
+  /* ---------- 3. four ways ---------- */
+  .why { position: absolute; left: 40pt; right: 40pt; top: 88pt; background: var(--card); border: 1pt solid var(--line); border-radius: 4pt;
+         padding: 9pt 14pt; display: flex; align-items: center; gap: 16pt; }
+  .why .t { font-family: "Playfair Display", serif; font-weight: 700; font-size: 11pt; color: var(--navy); flex: none; }
+  .why p { margin: 0; font-size: 8pt; line-height: 1.45; color: var(--ink); }
+  .tiers { position: absolute; left: 40pt; right: 40pt; top: 138pt; height: 252pt; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10pt; }
+  .tier { background: var(--card); border: 1pt solid var(--line); border-radius: 4pt; padding: 11pt 12pt; position: relative; display: flex; flex-direction: column; }
+  .tier .tk { font-weight: 600; font-size: 6.6pt; letter-spacing: .24em; color: var(--slate); }
+  .tier h3 { margin: 3pt 0 0; font-family: "Playfair Display", serif; font-weight: 700; font-size: 12pt; color: var(--navy); line-height: 1.15; min-height: 28pt; }
+  .tier .pr { margin-top: 4pt; font-family: "Playfair Display", serif; font-weight: 700; color: var(--navy); font-size: 26pt; line-height: 1; }
+  .tier .pr small { font-family: "Barlow", sans-serif; font-weight: 400; font-size: 8.5pt; color: var(--slate); }
+  .tier .pr sup { font-size: 13pt; vertical-align: 9pt; font-weight: 400; color: var(--slate); }
+  .tier .pp { margin-top: 7pt; font-size: 7.4pt; line-height: 1.5; color: var(--slate); }
+  .tier .pp b { font-weight: 600; color: var(--navy); }
+  .tier .rows { margin-top: 8pt; border-top: 1pt solid var(--line); padding-top: 6pt; }
+  .tier .rows div { display: flex; justify-content: space-between; font-size: 7.4pt; line-height: 1.75; color: var(--slate); }
+  .tier .rows b { font-weight: 600; color: var(--navy); }
+  .tier .where { margin-top: 6pt; font-size: 7.8pt; line-height: 1.4; color: var(--ink); }
+  .tier .ft { margin-top: auto; font-weight: 600; font-size: 7pt; line-height: 1.4; color: var(--navy); }
+  .tier.dark { background: var(--navy); border-color: var(--navy); }
+  .tier.dark .tk { color: var(--gold-soft); }
+  .tier.dark h3, .tier.dark .rows b, .tier.dark .ft { color: #fff; }
+  .tier.dark .pr { color: var(--gold-soft); }
+  .tier.dark .pr small, .tier.dark .pr sup, .tier.dark .pp, .tier.dark .rows div { color: var(--on-dark-3); }
+  .tier.dark .pp b { color: #fff; }
+  .tier.dark .rows { border-color: rgba(255,255,255,.16); }
+  .tier.dark .where { color: #d6deeb; }
+  .tier.dark .ft { color: var(--gold-soft); }
+  .every { position: absolute; left: 40pt; right: 40pt; top: 398pt; background: var(--card); border: 1pt solid var(--line); border-radius: 4pt;
+           padding: 7pt 14pt; display: flex; align-items: center; gap: 14pt; font-size: 7.6pt; color: var(--ink); }
+  .every .t { font-family: "Playfair Display", serif; font-weight: 700; font-size: 10.5pt; color: var(--navy); flex: none; }
+  .every span.d::before { content: "●"; color: var(--gold); font-size: 6pt; margin-right: 5pt; vertical-align: 1pt; }
 
-  /* ---------- section 2: rental add-on ---------- */
-  .rent-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8pt; }
-  .tier { background: #fff; border-left: 3pt solid var(--gold); padding: 7pt 10pt; box-shadow: 0 1pt 3pt rgba(19,32,58,.08);
-          display: flex; align-items: baseline; justify-content: space-between; }
-  .tier .sc { font-size: 8.4pt; font-weight: 700; color: var(--navy); }
-  .tier .sc small { display: block; font-weight: 400; font-size: 6.8pt; color: var(--muted); margin-top: 2pt; }
-  .tier .pr { font-family: "DejaVu Serif", Georgia, serif; color: var(--navy); font-size: 15pt; text-align: right; }
-  .tier .pr small { font-size: 7.4pt; color: var(--muted); }
-  .tier .pr s { display: block; font-family: "Liberation Sans", Arial, sans-serif; font-size: 6.8pt; color: var(--muted); }
-  .note { margin-top: 6pt; font-size: 7.4pt; color: var(--muted); line-height: 1.45; }
-  .note b { color: var(--navy); }
+  /* ---------- 4. rental ---------- */
+  .rphoto { position: absolute; left: 40pt; top: 92pt; width: 330pt; height: 190pt; border-radius: 4pt; background: url("../photos/rental_mockup.jpg") 35% 50%/cover no-repeat; }
+  .rhow { position: absolute; left: 40pt; top: 306pt; width: 330pt; font-size: 8.2pt; line-height: 1.5; color: var(--ink); }
+  .rhow b { font-weight: 600; color: var(--navy); }
+  .rcol { position: absolute; left: 392pt; right: 40pt; top: 92pt; }
+  .rcol .lbl { font-weight: 700; font-size: 6.8pt; letter-spacing: .24em; color: var(--slate); margin-bottom: 5pt; }
+  .rtier { display: flex; align-items: center; background: var(--card); border: 1pt solid var(--line); border-radius: 4pt; padding: 7pt 12pt; margin-bottom: 6pt; }
+  .rtier .s { font-family: "Playfair Display", serif; font-weight: 700; font-size: 11pt; color: var(--navy); width: 92pt; }
+  .rtier .p { font-size: 7.4pt; color: var(--slate); }
+  .rtier .pr { margin-left: auto; text-align: right; font-family: "Playfair Display", serif; font-weight: 700; font-size: 17pt; color: var(--navy); line-height: 1; }
+  .rtier .pr small { font-family: "Barlow", sans-serif; font-weight: 400; font-size: 7.6pt; color: var(--slate); }
+  .rtier .pr s { display: block; font-family: "Barlow", sans-serif; font-weight: 400; font-size: 7pt; color: var(--slate); margin-top: 2pt; }
+  table.both { width: 100%; border-collapse: collapse; margin-top: 4pt; }
+  table.both th { font-weight: 600; font-size: 6.4pt; letter-spacing: .18em; color: var(--slate); text-align: right; padding: 0 6pt 4pt; border-bottom: 1.2pt solid var(--navy); }
+  table.both th:first-child, table.both td:first-child { text-align: left; padding-left: 0; }
+  table.both td { font-size: 8.2pt; text-align: right; padding: 4.5pt 6pt; border-bottom: 1pt solid var(--line); color: var(--ink); }
+  table.both td:first-child { color: var(--navy); font-weight: 600; }
+  table.both td.t { font-family: "Playfair Display", serif; font-weight: 700; color: var(--navy); font-size: 10pt; }
+  .rnote { margin-top: 7pt; font-size: 7.4pt; line-height: 1.5; color: var(--slate); }
 
-  /* ---------- section 3: pay up front ---------- */
-  table.pp { width: 100%; border-collapse: collapse; font-size: 8pt; }
-  table.pp th { font-size: 6.4pt; letter-spacing: .14em; color: var(--muted); font-weight: 700; text-transform: uppercase; text-align: right; padding: 0 6pt 3pt; line-height: 1.35; }
-  table.pp tr.g1 th { color: var(--navy); font-size: 6.8pt; letter-spacing: .12em; text-align: center; padding-bottom: 4pt; }
-  table.pp tr.g1 th span { display: block; color: var(--green); font-size: 6.4pt; letter-spacing: .08em; margin-top: 1pt; }
-  table.pp tr.g2 th { border-bottom: 1.2pt solid var(--gold); }
+  /* ---------- 5. pay up front ---------- */
+  .strip { position: absolute; left: 40pt; right: 40pt; }
+  .strip .lbl { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4pt; }
+  .strip .lbl b { font-family: "Playfair Display", serif; font-weight: 700; font-size: 10.5pt; color: var(--navy); }
+  .strip .lbl span { font-size: 7.6pt; color: var(--slate); }
+  .months { display: grid; grid-template-columns: repeat(14, 1fr); gap: 3pt; }
+  .months div { height: 22pt; border-radius: 2pt; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 6.4pt; letter-spacing: .14em; }
+  .months .paid { background: var(--navy); color: var(--on-dark-3); }
+  .months .free { background: var(--gold); color: var(--navy-deep); }
+  .months .none { background: transparent; }
+  table.pp { position: absolute; left: 40pt; right: 40pt; top: 232pt; width: 712pt; border-collapse: collapse; }
+  table.pp th { font-weight: 600; font-size: 6.4pt; letter-spacing: .16em; color: var(--slate); text-align: right; padding: 0 8pt 4pt; text-transform: uppercase; line-height: 1.4; }
+  table.pp tr.g th { color: var(--navy); font-size: 6.8pt; text-align: center; padding-bottom: 3pt; }
+  table.pp tr.g th span { display: block; color: var(--gold); letter-spacing: .12em; }
+  table.pp tr.h th { border-bottom: 1.2pt solid var(--navy); }
   table.pp th:first-child, table.pp td:first-child { text-align: left; padding-left: 0; }
-  table.pp td { text-align: right; padding: 5pt 6pt; border-bottom: 1pt solid var(--rule); color: var(--ink); white-space: nowrap; }
-  table.pp td:first-child { font-family: "DejaVu Serif", Georgia, serif; color: var(--navy); font-size: 8.4pt; }
-  table.pp td.both { font-weight: 700; color: var(--navy); }
-  table.pp td.sep, table.pp th.sep { border-left: 1pt solid var(--rule); }
-  table.pp td small { display: block; font-size: 6.2pt; color: var(--green); font-weight: 700; }
-  .deal { margin-top: 8pt; background: var(--tint); border: 1pt solid #d8c38f; padding: 6pt 10pt; text-align: center; font-size: 8.2pt; color: var(--navy); }
-  .deal b { color: var(--gold-deep); }
+  table.pp td { text-align: right; padding: 5pt 8pt; border-bottom: 1pt solid var(--line); font-size: 8.4pt; color: var(--ink); white-space: nowrap; }
+  table.pp td:first-child { font-weight: 600; color: var(--navy); }
+  table.pp td.b { font-family: "Playfair Display", serif; font-weight: 700; color: var(--navy); font-size: 9.6pt; }
+  table.pp td small { display: block; font-family: "Barlow", sans-serif; font-weight: 600; font-size: 6.2pt; color: var(--green); }
+  table.pp .sep { border-left: 1pt solid var(--line); }
+  .ppnote { position: absolute; left: 40pt; right: 40pt; top: 400pt; font-size: 7.6pt; line-height: 1.5; color: var(--slate); }
+  .ppnote b { font-weight: 600; color: var(--navy); }
 
-  /* ---------- includes + contact ---------- */
-  .incl { display: flex; flex-wrap: wrap; gap: 4pt 14pt; font-size: 7.6pt; color: var(--ink); }
-  .incl span::before { content: "✓"; color: var(--gold); font-weight: 700; margin-right: 5pt; }
-  .contact { position: absolute; left: 0; right: 0; bottom: 0; height: 66pt; background: var(--band); display: flex; align-items: center; padding: 0 40pt; gap: 11pt; }
-  .contact img { width: 38pt; height: 38pt; border-radius: 50%; border: 1.4pt solid var(--gold-bright); object-fit: cover; }
-  .contact .nm { font-family: "DejaVu Serif", Georgia, serif; color: #fff; font-size: 11pt; }
-  .contact .rl { font-size: 6.2pt; letter-spacing: .26em; color: var(--gold-bright); margin-top: 2pt; }
-  .contact .ct { font-size: 7.6pt; color: #cfdbec; margin-top: 3pt; }
-  .contact .go { margin-left: auto; background: linear-gradient(90deg, #c9962e, var(--gold-bright)); color: #3a2c08; padding: 8pt 13pt;
-                 font-family: "DejaVu Serif", Georgia, serif; font-size: 9.6pt; }
+  /* ---------- 6. terms ---------- */
+  .terms { position: absolute; left: 40pt; top: 86pt; width: 440pt; }
+  .terms .row { display: flex; gap: 12pt; padding: 5.2pt 0; border-bottom: 1pt solid var(--line); }
+  .terms .row:first-child { border-top: 1pt solid var(--line); }
+  .terms .l { width: 78pt; flex: none; font-weight: 700; font-size: 6.6pt; letter-spacing: .18em; color: var(--slate); padding-top: 1pt; }
+  .terms .v { font-size: 7.6pt; line-height: 1.45; color: var(--ink); }
+  .terms .v b { font-weight: 600; color: var(--navy); }
+  .side { position: absolute; left: 500pt; right: 40pt; top: 86pt; }
+  .side h4 { margin: 0 0 3pt; font-family: "Playfair Display", serif; font-weight: 700; font-size: 11.5pt; color: var(--navy); }
+  .side p { margin: 0; font-size: 7.4pt; line-height: 1.45; color: var(--ink); }
+  .board { position: relative; margin-top: 7pt; width: 252pt; height: 141.75pt; border-radius: 3pt; overflow: hidden;
+           background: url("../photos/traffic_board.jpg") center/cover no-repeat; border: 3pt solid #0d0f14; }
+  .board .lock { position: absolute; left: 32.2%; top: 83.4%; width: 35.6%; height: 15.6%; background: #11141b; border: 1pt solid #3a3f4a; border-radius: 4pt;
+                 display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1pt; }
+  .board .lock b { font-weight: 700; font-size: 4.2pt; letter-spacing: .22em; color: #cfd6e2; }
+  .board .lock span { font-family: "Barlow Semi Condensed", sans-serif; font-weight: 700; font-size: 6.2pt; color: #fff; letter-spacing: .04em; }
+  .side .cap { margin-top: 4pt; font-size: 6.2pt; line-height: 1.4; color: var(--slate); }
+  .side .cap b { font-weight: 700; color: var(--gold); letter-spacing: .1em; }
+  .side .box { margin-top: 10pt; background: var(--card); border: 1pt solid var(--line); border-radius: 4pt; padding: 8pt 10pt; }
+  .side ol { margin: 4pt 0 0; padding-left: 12pt; font-size: 7.2pt; line-height: 1.5; color: var(--ink); }
+  .side ol b { font-weight: 600; color: var(--navy); }
 
-  /* ---------- page 2: order form ---------- */
-  .hdr-logo { position: absolute; left: 40pt; top: 34pt; width: 92pt; }
-  .hdr-label { position: absolute; right: 40pt; top: 44pt; font-size: 7.4pt; letter-spacing: .32em; color: var(--muted); }
-  .hdr-rule { position: absolute; left: 40pt; right: 40pt; top: 72pt; height: 1.2pt; background: var(--rule); }
-  .of { position: absolute; left: 40pt; right: 40pt; }
-  .of h3 { font-family: "DejaVu Serif", Georgia, serif; font-weight: 400; font-size: 12pt; color: var(--navy); margin: 0 0 3pt; padding-bottom: 4pt; border-bottom: 1.2pt solid var(--gold); }
-  .fld { display: flex; align-items: flex-end; gap: 8pt; height: 20pt; font-size: 6.8pt; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
-  .fld .l { width: 112pt; flex: none; padding-bottom: 3pt; }
-  .fld .l2 { width: auto; flex: none; padding-bottom: 3pt; }
-  .fld .v { flex: 1; border-bottom: 1pt solid var(--line); height: 15pt; font-size: 10pt; letter-spacing: 0; text-transform: none; color: var(--ink); padding-left: 2pt; }
-  .fld .v.fill { font-family: "DejaVu Serif", Georgia, serif; color: var(--navy); }
-  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22pt; }
-  .chk { display: flex; align-items: center; gap: 7pt; font-size: 8.8pt; color: var(--ink); min-height: 17pt; }
-  .chk .b { width: 9pt; height: 9pt; border: 1.3pt solid var(--navy); border-radius: 1.5pt; flex: none; }
-  .chk .p { font-family: "DejaVu Serif", Georgia, serif; font-weight: 700; color: var(--navy); }
-  .chk small { color: var(--muted); font-size: 7.4pt; }
-  .sub-k { margin-top: 7pt; font-size: 6.6pt; letter-spacing: .24em; color: var(--muted); font-weight: 700; }
-  .tintbox { margin-top: 6pt; background: var(--tint); border-left: 3pt solid var(--gold); padding: 6pt 10pt; font-size: 7.8pt; color: #3a2c08; line-height: 1.5; }
-  .tintbox b { color: var(--gold-deep); }
-  .fine { font-size: 7pt; line-height: 1.6; color: var(--muted); }
-  .fine b { color: var(--navy); }
-  .sigs { display: flex; gap: 28pt; }
-  .sigs div { flex: 1; border-top: 1.2pt solid var(--navy); padding-top: 4pt; font-size: 6.4pt; letter-spacing: .1em; color: var(--muted); }
+  /* ---------- 7. next ---------- */
+  .next { background: var(--navy-deep); }
+  .next .bg { position: absolute; inset: 0; background: url("../photos/oxford_lights.jpg") center 40%/cover no-repeat; opacity: .32; }
+  .next .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,23,46,.92) 0%, rgba(8,23,46,.78) 55%, rgba(8,23,46,.9) 100%); }
+  .next .head .k { color: var(--on-dark-2); }
+  .next .head h1 { color: #fff; }
+  .next .head .gr { background: var(--gold-soft); }
+  .steps { position: absolute; left: 40pt; top: 96pt; width: 390pt; }
+  .steps .s { display: flex; gap: 14pt; padding: 6.5pt 0; border-bottom: 1pt solid rgba(255,255,255,.1); }
+  .steps .w { width: 96pt; flex: none; font-weight: 700; font-size: 6.8pt; letter-spacing: .18em; color: var(--gold-soft); padding-top: 1.5pt; }
+  .steps .d { font-size: 8.6pt; line-height: 1.45; color: #d6deeb; }
+  .need { position: absolute; left: 462pt; right: 40pt; top: 96pt; }
+  .need .t { font-weight: 700; font-size: 6.8pt; letter-spacing: .24em; color: var(--on-dark-2); margin-bottom: 6pt; }
+  .need .q { display: flex; gap: 10pt; margin-bottom: 8pt; }
+  .need .n { flex: none; width: 16pt; height: 16pt; border-radius: 50%; border: 1pt solid var(--gold-soft); color: var(--gold-soft);
+             font-family: "Playfair Display", serif; font-weight: 700; font-size: 8.5pt; display: flex; align-items: center; justify-content: center; }
+  .need .q p { margin: 0; font-size: 8.6pt; line-height: 1.4; color: #fff; }
+  .card { position: absolute; left: 462pt; right: 40pt; top: 232pt; display: flex; gap: 12pt; align-items: center;
+          background: rgba(255,255,255,.06); border: 1pt solid rgba(255,255,255,.14); border-radius: 4pt; padding: 10pt 12pt; }
+  .card img { width: 50pt; height: 62pt; object-fit: cover; border-radius: 3pt; }
+  .card .nm { font-family: "Playfair Display", serif; font-weight: 700; font-size: 12pt; color: #fff; }
+  .card .rl { margin-top: 2pt; font-weight: 600; font-size: 6.4pt; letter-spacing: .2em; color: var(--gold-soft); }
+  .card .ct { margin-top: 5pt; font-size: 7.6pt; line-height: 1.5; color: var(--on-dark); }
+
+  /* ---------- 8. acceptance ---------- */
+  .acc-h { position: absolute; left: 40pt; right: 40pt; top: 26pt; display: flex; justify-content: space-between; align-items: flex-end;
+           border-bottom: 1.6pt solid var(--navy); padding-bottom: 7pt; }
+  .acc-h .k { font-weight: 500; font-size: 7.4pt; letter-spacing: .3em; color: var(--slate); }
+  .acc-h h1 { margin: 3pt 0 0; font-family: "Playfair Display", serif; font-weight: 700; font-size: 19pt; color: var(--navy); }
+  .acc-h .r { text-align: right; font-weight: 600; font-size: 6.8pt; letter-spacing: .2em; color: var(--slate); line-height: 1.8; }
+  .acc-h .r b { color: var(--navy); }
+  .bx { position: absolute; background: #fff; border: 1pt solid #cfc7b9; border-radius: 4pt; padding: 7pt 10pt; }
+  .bx .bt { display: flex; justify-content: space-between; font-weight: 700; font-size: 6.8pt; letter-spacing: .2em; color: var(--navy); margin-bottom: 3pt; }
+  .bx .bt span { font-weight: 600; font-size: 6.4pt; letter-spacing: .06em; color: var(--slate); }
+  .tick { display: flex; align-items: center; gap: 6pt; font-size: 7.8pt; color: #333; padding: 2.6pt 0; border-bottom: 1pt dotted #d5d0c3; }
+  .tick:last-of-type { border-bottom: 0; }
+  .tick .b { width: 8pt; height: 8pt; border: 1pt solid var(--navy); border-radius: 1.5pt; flex: none; }
+  .tick .r { margin-left: auto; font-weight: 600; color: var(--navy); white-space: nowrap; }
+  .bx .fn { margin-top: 3pt; font-size: 6.4pt; line-height: 1.45; color: #6a6558; }
+  .fld { display: flex; align-items: flex-end; gap: 6pt; margin-top: 5pt; font-weight: 600; font-size: 6pt; letter-spacing: .14em; color: var(--slate); }
+  .fld i { flex: 1; border-bottom: 1pt solid #b8af9a; height: 10pt; }
+  .acc-fine { position: absolute; left: 40pt; right: 40pt; top: 346pt; font-size: 7pt; line-height: 1.5; color: var(--navy); font-weight: 600; }
+  .acc-fine span { font-weight: 400; color: var(--slate); }
+  .sig { position: absolute; top: 364pt; width: 342pt; }
+  .sig .who { font-weight: 600; font-size: 7.4pt; color: var(--navy); }
+  .sig .ln { margin-top: 18pt; border-top: 1pt solid var(--navy); padding-top: 3pt; display: flex; justify-content: space-between;
+             font-weight: 500; font-size: 6pt; letter-spacing: .14em; color: var(--slate); }
+  .sig .ln2 { margin-top: 13pt; }
 </style>
 </head>
 <body>
 
-<!-- ======================= PAGE 1 — OPTIONS & PRICING ======================= -->
-<section class="page">
-  <div class="band">
-    <img class="logo" src="logo_white.png" alt="MCTV">
-    <div class="elite">ELITE ADVERTISING</div>
-    <div class="doc"><div class="k">ADVERTISING PROPOSAL</div><div class="d">{{ c.date }}</div></div>
-    <div class="for">
-      <div class="lbl">PREPARED FOR<b>Stan Little</b></div>
-      <img src="lh_logo.png" alt="Little &amp; Holland, PLLC — Concierge Attorneys">
-      <div class="plus">+</div>
-      <div class="rent">Your Rental Car<br>Business<small>OXFORD, MISSISSIPPI</small></div>
-    </div>
+<!-- ============ 1. COVER ============ -->
+<section class="page cover">
+  <div class="photo"></div>
+  <div class="panel"></div><div class="fade"></div>
+  <img class="abs logo" src="logo_white.png" alt="MCTV">
+  <div class="elite">ELITE ADVERTISING</div>
+  <div class="glr"></div>
+  <div class="k">PROPOSAL · TWO COMMERCIALS, ONE NETWORK</div>
+  <h1>Put both your names where Oxford <em>sits still.</em></h1>
+  <div class="lede">A 15-second spot for Little &amp; Holland, PLLC and a 30-second spot for your rental car business, on MCTV's indoor screens. Four ways to build it, from {{ opts[0].lh_s }} a month.</div>
+  <div class="meta">
+    <div>PREPARED FOR<b>Stan Little</b></div>
+    <div>PREPARED BY<b>Swayze Hollingsworth</b></div>
+    <div>DATE<b>{{ c.date }}</b></div>
   </div>
-
-  <div class="intro">
-    <h1>{{ c.title_html | safe }}</h1>
-    <p>{{ c.intro }}</p>
-  </div>
-
-  <!-- 1. Little & Holland -->
-  <div class="sec" style="top:236pt">
-    <div class="sec-h"><span class="num">1</span><span class="t">Little &amp; Holland — 15-second commercial</span><span class="s">Choose one option · 6-month minimum</span></div>
-    <div class="opts">
-      {% for o in opts %}
-      <div class="opt {{ 'traffic' if o.traffic else '' }}">
-        <div class="on">OPTION {{ o.n }}</div>
-        <div class="nm">{{ o.name }}</div>
-        <div class="pr">{{ o.lh_s }}<small>/mo</small></div>
-        <div class="rows">
-          <div><span>Ad plays / mo</span><b>{{ o.plays }}</b></div>
-          {% if o.traffic %}
-          <div><span>Traffic updates</span><span class="g">Sponsor</span></div>
-          {% else %}
-          <div><span>Per screen</span><span class="g">{{ o.per_screen }}</span></div>
-          {% endif %}
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-    <div class="note">{{ c.traffic_note }}</div>
-  </div>
-
-  <!-- 2. Rental car add-on -->
-  <div class="sec" style="top:400pt">
-    <div class="sec-h"><span class="num">2</span><span class="t">Add your rental car commercial — 30 seconds</span><span class="s"><b style="color:var(--green)">50% OFF</b> · same screens as option chosen</span></div>
-    <div class="rent-row">
-      {% for t in rental %}
-      <div class="tier">
-        <div class="sc">{{ t.screens }} Screens<small>{{ t.plays }} ad plays / mo</small></div>
-        <div class="pr">{{ t.price_s }}<small>/mo</small><s>{{ t.reg_s }}/mo</s></div>
-      </div>
-      {% endfor %}
-    </div>
-    <div class="note">Option 4 uses the 80-screen rate ($700/mo); the traffic-updates sponsorship is counted once.</div>
-  </div>
-
-  <!-- 3. Pay up front -->
-  <div class="sec" style="top:494pt">
-    <div class="sec-h"><span class="num">3</span><span class="t">Pay up front &amp; save</span><span class="s">Monthly totals · “Both” = Little &amp; Holland + rental car</span></div>
-    <table class="pp">
-      <tr class="g1">
-        <th></th>
-        <th colspan="2" class="sep">Pay monthly</th>
-        <th colspan="2" class="sep">6 months up front<span>7TH MONTH FREE</span></th>
-        <th colspan="2" class="sep">12 months up front<span>13TH &amp; 14TH MONTHS FREE</span></th>
-      </tr>
-      <tr class="g2">
-        <th>Option</th>
-        <th class="sep">L&amp;H only</th><th>Both</th>
-        <th class="sep">L&amp;H only</th><th>Both</th>
-        <th class="sep">L&amp;H only</th><th>Both</th>
-      </tr>
-      {% for o in opts %}
-      <tr>
-        <td>{{ o.n }} · {{ o.name }}</td>
-        <td class="sep">{{ o.lh_s }}</td><td class="both">{{ o.both_s }}</td>
-        <td class="sep">{{ o.lh6_s }}<small>save {{ o.save6_lh_s }}</small></td><td class="both">{{ o.both6_s }}<small>save {{ o.save6_both_s }}</small></td>
-        <td class="sep">{{ o.lh12_s }}<small>save {{ o.save12_lh_s }}</small></td><td class="both">{{ o.both12_s }}<small>save {{ o.save12_both_s }}</small></td>
-      </tr>
-      {% endfor %}
-    </table>
-  </div>
-
-  <!-- includes -->
-  <div class="sec" style="top:668pt">
-    <div class="incl">
-      <span>Custom production of both commercials</span><span>Full-screen · unskippable</span><span>Proof-of-play reporting</span>
-      <span>Fresh ad build every quarter</span><span>You own your ads forever</span>
-    </div>
-    <div class="note" style="margin-top:5pt">{{ c.footprint_note }}</div>
-  </div>
-
-  <div class="contact">
-    <img src="swayze.jpg" alt="">
-    <div><div class="nm">Swayze Hollingsworth</div><div class="rl">DIRECTOR OF SALES · MCTV DIGITAL</div>
-      <div class="ct">swayze@mctvofms.com &nbsp;·&nbsp; 662-907-0404 &nbsp;·&nbsp; www.mctvofms.com</div></div>
-    <div class="go">Ready? Sign the order form on page 2.</div>
-  </div>
+  <div class="cfoot"><span>MCTV DIGITAL, INC. · MISSISSIPPI OWNED</span><span>MCTVOFMS.COM</span></div>
+  <div class="mock" style="right:14pt; bottom:14pt"><b>MOCKUP</b> · Little &amp; Holland on an MCTV screen in a host dining room</div>
 </section>
 
-<!-- ======================= PAGE 2 — ORDER FORM ======================= -->
+<!-- ============ 2. THE ASK ============ -->
 <section class="page">
-  <img class="hdr-logo" src="logo_navy.png" alt="MCTV"><div class="hdr-label">AGREEMENT &amp; ORDER FORM</div><div class="hdr-rule"></div>
-
-  <div class="of" style="top:90pt">
-    <h3>Advertiser Information</h3>
-    <div class="fld"><span class="l">Contact name</span><span class="v fill">Stan Little</span></div>
-    <div class="fld"><span class="l">Business 1</span><span class="v fill">Little &amp; Holland, PLLC</span></div>
-    <div class="fld"><span class="l">Business 2 (rental car)</span><span class="v"></span></div>
-    <div class="fld"><span class="l">Phone</span><span class="v"></span><span class="l2">Email</span><span class="v"></span></div>
-    <div class="fld"><span class="l">Billing address</span><span class="v"></span></div>
+  <div class="head"><div class="gr"></div><div class="k">The ask</div><h1>The proposal, in six lines.</h1></div>
+  <div class="band"></div>
+  <div class="credit" style="right:40pt; top:162pt">The Oxford Square from the air. Photo: Pilot MKN / Wikimedia Commons, CC BY 2.0, cropped</div>
+  <div class="six">
+    <div class="it"><div class="n">1</div><p><b>What.</b> A silent 15-second spot for Little &amp; Holland, PLLC, in rotation in every loop, all day, on the MCTV screens in the option you pick. MCTV designs and produces it.</p></div>
+    <div class="it"><div class="n">4</div><p><b>What it costs.</b> Little &amp; Holland from <span class="hl">{{ opts[0].lh_s }} a month</span>, both businesses from <span class="hl">{{ opts[0].both_s }}</span>. Option 4 adds the presenting sponsorship of MCTV Traffic in Oxford: {{ opts[3].lh_s }} a month, {{ opts[3].both_s }} with both spots.</p></div>
+    <div class="it"><div class="n">2</div><p><b>Plus.</b> A 30-second spot for your rental car business on the same screens, at half our screen rate: {% for t in rental %}{{ t.price_s }}{% if loop.index == 2 %} or {% elif not loop.last %}, {% endif %}{% endfor %} a month.</p></div>
+    <div class="it"><div class="n">5</div><p><b>Pay up front.</b> Prepay six months and the seventh is free. Prepay twelve and the thirteenth and fourteenth are free. Monthly billing has a six-month minimum.</p></div>
+    <div class="it"><div class="n">3</div><p><b>Where.</b> Oxford first. Twenty or forty screens can stay inside Oxford's 44 host venues. Eighty screens add Tupelo and the Golden Triangle.</p></div>
+    <div class="it"><div class="n">6</div><p><b>What we need.</b> Your option and a signature on page eight, plus the phone number each spot should carry. Screens start about two weeks after you approve the ads.</p></div>
   </div>
+  <div class="bottomline"><b>Both spots run full-screen, unskippable, in rooms where people are already sitting.</b> One agreement, one invoice, one point of contact: Swayze Hollingsworth, 662-907-0404, swayze@mctvofms.com.</div>
+  <div class="foot"><span>{{ c.footer }}</span><span>02</span></div>
+</section>
 
-  <div class="of" style="top:222pt">
-    <h3>1 · Little &amp; Holland — 15-second commercial</h3>
-    <div class="cols">
+<!-- ============ 3. FOUR WAYS ============ -->
+<section class="page">
+  <div class="head"><div class="gr"></div><div class="k">The investment · Little &amp; Holland, :15</div><h1>Four ways to build it.</h1></div>
+  <div class="why"><div class="t">Our standard rates.</div><p>Options 1 to 3 are the same network package prices in the media kit you have seen, not numbers made up for this proposal. Option 4 is the 80-screen package plus the presenting sponsorship of MCTV Traffic in Oxford.</p></div>
+  <div class="tiers">
+    {% for o in opts %}
+    <div class="tier {{ 'dark' if o.traffic else '' }}">
+      <div class="tk">OPTION {{ o.n }}</div>
+      <h3>{{ o.title }}</h3>
+      <div class="pr"><sup>$</sup>{{ o.lh_num }}<small>/mo</small></div>
+      <div class="pp"><b>{{ o.lh6_s }}</b> up front: 7 months for 6<br><b>{{ o.lh12_s }}</b> up front: 14 months for 12</div>
+      <div class="rows">
+        <div><span>Screens</span><b>{{ o.screens }}</b></div>
+        <div><span>Ad plays a month</span><b>{{ o.plays }}</b></div>
+        {% if o.traffic %}<div><span>MCTV Traffic, Oxford</span><b>Presenting sponsor</b></div>
+        {% else %}<div><span>Per screen</span><b>{{ o.per_screen }}</b></div>{% endif %}
+      </div>
+      <div class="where">{{ o.where }}</div>
+      <div class="ft">{{ o.foot }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="every"><div class="t">In every option</div>
+    <span class="d">Spot designed &amp; produced by MCTV</span><span class="d">Proof of play, monthly</span><span class="d">A fresh spot each quarter</span><span class="d">You own your ads</span><span class="d">Bar Filing Packet</span></div>
+  <div class="foot"><span>{{ c.footer }}</span><span>03</span></div>
+</section>
+
+<!-- ============ 4. RENTAL CAR SPOT ============ -->
+<section class="page">
+  <div class="head"><div class="gr"></div><div class="k">The second spot · your rental car business, :30</div><h1>Add the rental car spot at half the rate.</h1></div>
+  <div class="rphoto"></div>
+  <div class="mock" style="left:48pt; top:262pt"><b>MOCKUP</b> · Your rental car spot on an MCTV screen at a host service station</div>
+  <div class="credit" style="left:40pt; top:287pt; background:none; color:var(--slate); padding:0">Room photo: MCTV. The ad is a placeholder until we build yours.</div>
+  <div class="rhow"><b>How it runs.</b> The rental car spot gets its own 30-second slot in the loop, on every screen in the Little &amp; Holland option you pick: 1,500+ plays per screen, every month. Same production, reporting and quarterly refresh as the law firm spot, and no Bar filing.</div>
+  <div class="rcol">
+    <div class="lbl">RENTAL CAR SPOT, 30 SECONDS · SAME SCREENS AS YOUR OPTION</div>
+    {% for t in rental %}
+    <div class="rtier"><div class="s">{{ t.screens }} screens</div><div class="p">{{ t.plays }} ad plays a month</div>
+      <div class="pr">{{ t.price_s }}<small>/mo</small><s>{{ t.reg_s }}/mo standard</s></div></div>
+    {% endfor %}
+    <div class="lbl" style="margin-top:10pt">BOTH BUSINESSES, PER MONTH</div>
+    <table class="both">
+      <tr><th>Option</th><th>Little &amp; Holland</th><th>Rental car</th><th>Both</th></tr>
       {% for o in opts %}
-      <div class="chk"><span class="b"></span><span>Option {{ o.n }} · {{ o.name }} — <span class="p">{{ o.lh_s }}</span>/mo</span></div>
+      <tr><td>{{ o.n }} · {{ o.short }}</td><td>{{ o.lh_s }}</td><td>{{ o.rental_s }}</td><td class="t">{{ o.both_s }}</td></tr>
       {% endfor %}
+    </table>
+    <div class="rnote">The rental car spot runs on the same screens as the Little &amp; Holland option. With option 4 it is billed at the 80-screen rate, {{ opts[3].rental_s }}; the traffic sponsorship is counted once.</div>
+  </div>
+  <div class="foot"><span>{{ c.footer }}</span><span>04</span></div>
+</section>
+
+<!-- ============ 5. PAY UP FRONT ============ -->
+<section class="page">
+  <div class="head"><div class="gr"></div><div class="k">Pay up front</div><h1>Prepay, and the last months are on us.</h1></div>
+  <div class="strip" style="top:96pt">
+    <div class="lbl"><b>Six months, paid up front</b><span>Seven months on air for six paid</span></div>
+    <div class="months">{% for i in range(6) %}<div class="paid">PAID</div>{% endfor %}<div class="free">FREE</div>{% for i in range(7) %}<div class="none"></div>{% endfor %}</div>
+  </div>
+  <div class="strip" style="top:156pt">
+    <div class="lbl"><b>Twelve months, paid up front</b><span>Fourteen months on air for twelve paid</span></div>
+    <div class="months">{% for i in range(12) %}<div class="paid">PAID</div>{% endfor %}<div class="free">FREE</div><div class="free">FREE</div></div>
+  </div>
+  <table class="pp">
+    <tr class="g"><th></th><th colspan="2" class="sep">Pay monthly<span>PER MONTH</span></th><th colspan="2" class="sep">Six months up front<span>TOTAL PAID AT SIGNING · 7TH MONTH FREE</span></th><th colspan="2" class="sep">Twelve months up front<span>TOTAL PAID AT SIGNING · 13TH &amp; 14TH FREE</span></th></tr>
+    <tr class="h"><th>Option</th><th class="sep">L&amp;H only</th><th>Both</th><th class="sep">L&amp;H only</th><th>Both</th><th class="sep">L&amp;H only</th><th>Both</th></tr>
+    {% for o in opts %}
+    <tr><td>{{ o.n }} · {{ o.short }}</td>
+      <td class="sep">{{ o.lh_s }}</td><td class="b">{{ o.both_s }}</td>
+      <td class="sep">{{ o.lh6_s }}<small>saves {{ o.save6_lh_s }}</small></td><td class="b">{{ o.both6_s }}<small>saves {{ o.save6_both_s }}</small></td>
+      <td class="sep">{{ o.lh12_s }}<small>saves {{ o.save12_lh_s }}</small></td><td class="b">{{ o.both12_s }}<small>saves {{ o.save12_both_s }}</small></td></tr>
+    {% endfor %}
+  </table>
+  <div class="ppnote"><b>“Both”</b> = Little &amp; Holland plus the rental car spot. “Saves” is the value of the free months. Monthly billing has a six-month minimum, then runs month to month with 30 days' written notice to stop.</div>
+  <div class="foot"><span>{{ c.footer }}</span><span>05</span></div>
+</section>
+
+<!-- ============ 6. TERMS ============ -->
+<section class="page">
+  <div class="head"><div class="gr"></div><div class="k">The agreement</div><h1>The terms, in plain words.</h1></div>
+  <div class="terms">
+    <div class="row"><div class="l">TERM</div><div class="v">Six-month minimum. After that, month to month, with 30 days' written notice to stop. Prepaid terms run seven or fourteen months on air.</div></div>
+    <div class="row"><div class="l">BILLING</div><div class="v">On signing, the first month is billed, or the full amount if you pay up front. On monthly billing, the next cycle starts 30 days after your ads are approved and live.</div></div>
+    <div class="row"><div class="l">CREATIVE</div><div class="v">MCTV designs and produces both spots: Little &amp; Holland's <b>:15</b> and the rental car <b>:30</b>. Silent, with on-screen text. Three rounds of changes each, then $200 a round. A fresh spot each quarter if you want one. You own them.</div></div>
+    <div class="row"><div class="l">SCREENS</div><div class="v">Little &amp; Holland picks the option; the rental car spot runs on the same screens. Host venues are independent businesses, and MCTV may substitute a venue. Proof of play every month.</div></div>
+    <div class="row"><div class="l">SPONSORSHIP</div><div class="v">Option 4 only. Presenting sponsor of MCTV Traffic on the Oxford board, credited to the business you pick on page eight.</div></div>
+    <div class="row"><div class="l">BAR FILING</div><div class="v">Little &amp; Holland's spot, and its traffic lockup if the firm is the sponsor, is filed with the Mississippi Bar before it first airs: <b>$25 per ad, paid by the firm</b>. We hand you the Bar Filing Packet: the file as it will run, a transcript and a where-and-when schedule. The rental car spot needs no filing.</div></div>
+    <div class="row"><div class="l">ONE CONTACT</div><div class="v">One agreement, one invoice, one point of contact: Swayze Hollingsworth.</div></div>
+  </div>
+  <div class="side">
+    <h4>MCTV Traffic, in Oxford.</h4>
+    <p>Road work and lane closures on the state routes around Oxford, from Mississippi DOT, refreshed about every two minutes. Your name presents it in the main loop. It never shows a crash report.</p>
+    <div class="board"><div class="lock"><b>PRESENTED BY</b><span>YOUR BUSINESS</span></div></div>
+    <div class="cap"><b>MOCKUP</b> · The Tupelo board, live MDOT data. Oxford's board runs the same way, with your lockup.</div>
+    <div class="box">
+      <h4 style="font-size:10pt">Little &amp; Holland's spot, laid out to file.</h4>
+      <ol>
+        <li>The notice <b>FREE BACKGROUND INFORMATION AVAILABLE UPON REQUEST</b>. Rule 7.4(a).</li>
+        <li>The city and state of an office. Rule 7.2(c).</li>
+        <li>The name of a lawyer responsible for the ad. Rule 7.2(d).</li>
+      </ol>
+      <p style="margin-top:4pt; font-size:6.4pt; color:var(--slate)">What the published rules say, not a compliance opinion. Your firm owns the call.</p>
     </div>
-    <div class="sub-k">TRAFFIC-UPDATES SPONSOR (OPTION 4 ONLY)</div>
-    <div class="chk"><span class="b"></span><span>Little &amp; Holland</span>&nbsp;&nbsp;&nbsp;<span class="b"></span><span>Rental car business</span></div>
   </div>
+  <div class="foot"><span>{{ c.footer }}</span><span>06</span></div>
+</section>
 
-  <div class="of" style="top:330pt">
-    <h3>2 · Rental car commercial — 30 seconds, 50% off</h3>
-    <div class="cols">
-      <div class="chk"><span class="b"></span><span>Add rental car commercial on the same screens</span></div>
-      <div class="chk"><span class="b"></span><span>No rental car commercial</span></div>
-    </div>
-    <div class="note" style="margin-top:2pt">{% for t in rental %}{{ t.screens }} screens <b>{{ t.price_s }}/mo</b>{% if not loop.last %} &nbsp;·&nbsp; {% endif %}{% endfor %} &nbsp;(Option 4 → 80-screen rate)</div>
+<!-- ============ 7. NEXT ============ -->
+<section class="page next">
+  <div class="bg"></div><div class="shade"></div>
+  <div class="head"><div class="gr"></div><div class="k">Next</div><h1>Five steps and four questions.</h1></div>
+  <div class="steps">
+    <div class="s"><div class="w">SIGN</div><div class="d">Pick your option on page eight, tick the rental car spot if you want it, and sign. We countersign within two business days.</div></div>
+    <div class="s"><div class="w">CREATIVE</div><div class="d">Creative directions for both spots from us. Silent, and for Little &amp; Holland, laid out to file.</div></div>
+    <div class="s"><div class="w">YOU APPROVE</div><div class="d">You approve both spots. We hand over the Bar Filing Packet, and your firm files the Little &amp; Holland spot.</div></div>
+    <div class="s"><div class="w">ON AIR</div><div class="d">About two weeks after you approve, your spots go live, and we photograph them on the wall.</div></div>
+    <div class="s" style="border-bottom:0"><div class="w">EVERY MONTH</div><div class="d">Proof of play by venue. Every quarter, a fresh spot if you want one.</div></div>
   </div>
-
-  <div class="of" style="top:400pt">
-    <h3>3 · Payment plan &amp; authorization</h3>
-    <div class="cols">
-      <div>
-        <div class="chk"><span class="b"></span><span>Pay monthly <small>(6-month minimum)</small></span></div>
-        <div class="chk"><span class="b"></span><span>6 months up front — <b style="color:var(--gold-deep)">7th month FREE</b></span></div>
-        <div class="chk"><span class="b"></span><span>12 months up front — <b style="color:var(--gold-deep)">13th &amp; 14th FREE</b></span></div>
-        <div class="fld" style="margin-top:4pt"><span class="l" style="width:92pt">Monthly total</span><span class="v">$</span></div>
-        <div class="fld"><span class="l" style="width:92pt">Up-front total</span><span class="v">$</span></div>
-        <div class="fld"><span class="l" style="width:92pt">Start date</span><span class="v"></span></div>
-      </div>
-      <div>
-        <div class="sub-k" style="margin-top:2pt">PAYMENT METHOD</div>
-        <div class="chk"><span class="b"></span><span>Check</span>&nbsp;&nbsp;<span class="b"></span><span>Bank draft (ACH)</span>&nbsp;&nbsp;<span class="b"></span><span>Card</span></div>
-        <div class="fld"><span class="l" style="width:92pt">Name on acct/card</span><span class="v"></span></div>
-        <div class="fld"><span class="l" style="width:92pt">Acct/card number</span><span class="v"></span></div>
-        <div class="fld"><span class="l" style="width:92pt">Routing / exp.</span><span class="v"></span><span class="l2">CVV</span><span class="v"></span></div>
-        <div class="fld"><span class="l" style="width:92pt">Billing zip</span><span class="v"></span></div>
-      </div>
-    </div>
+  <div class="need">
+    <div class="t">FOUR THINGS WE NEED FROM YOU</div>
+    <div class="q"><div class="n">1</div><p>Your rental car business's name and logo.</p></div>
+    <div class="q"><div class="n">2</div><p>Which phone number each spot should carry.</p></div>
+    <div class="q"><div class="n">3</div><p>Which attorney is named as responsible for the Little &amp; Holland spot.</p></div>
+    <div class="q"><div class="n">4</div><p>For option 4, which business presents MCTV Traffic.</p></div>
   </div>
-
-  <div class="of" style="top:574pt">
-    <div class="fine">I authorize MCTV Digital, Inc. to charge the payment method above according to the plan selected. <b>Billing:</b> upon signing, the first month — or the full amount if paying up front — is billed immediately. For monthly plans, the remaining billing cycle begins 30 days after creative is approved and pushed live. Minimum 6-month term; continues month-to-month thereafter with 30-day written cancellation notice. Setup fees are non-refundable. Each commercial includes custom production with a quarterly refresh; additional creative revisions billed at $200/round after three rounds. Pay-up-front bonus: 6-month agreements receive the 7th month free; 12-month agreements receive the 13th and 14th months free. The rental car commercial is billed at 50% of the matching screen-package rate and runs on the same screens as the Little &amp; Holland plan. {{ c.compliance_line }}</div>
+  <div class="card">
+    <img src="../photos/swayze.jpg" alt="">
+    <div><div class="nm">Swayze Hollingsworth</div><div class="rl">DIRECTOR OF SALES · MCTV DIGITAL, INC.</div>
+      <div class="ct">662-907-0404 · swayze@mctvofms.com<br>mctvofms.com</div></div>
   </div>
+  <div class="credit" style="left:40pt; bottom:34pt; background:none; color:var(--on-dark-2); padding:0">Background: holiday lights on the Oxford Square. Photo: Pilot MKN / Wikimedia Commons, CC BY 2.0, cropped. Photo of Swayze: Ash Taylor, Local Focal Photography.</div>
+  <div class="foot dark"><span>{{ c.footer }}</span><span>07</span></div>
+</section>
 
-  <div class="of" style="top:700pt">
-    <div class="sigs"><div>CLIENT SIGNATURE / DATE</div><div>SWAYZE HOLLINGSWORTH · MCTV DIGITAL / DATE</div></div>
+<!-- ============ 8. ACCEPTANCE ============ -->
+<section class="page">
+  <div class="acc-h">
+    <div><div class="k">PROPOSAL ACCEPTANCE</div><h1>Pick your build and sign.</h1></div>
+    <div class="r"><b>STAN LITTLE · LITTLE &amp; HOLLAND, PLLC + RENTAL CAR BUSINESS</b><br>PREPARED {{ c.date | upper }}</div>
   </div>
-
-  <div class="ftr"><span>MCTV DIGITAL, INC · The Indoor Billboard Company</span><span>swayze@mctvofms.com · 662-907-0404</span></div>
+  <div class="bx" style="left:40pt; top:80pt; width:348pt">
+    <div class="bt">LITTLE &amp; HOLLAND, :15 <span>Tick one</span></div>
+    {% for o in opts %}<div class="tick"><span class="b"></span>Option {{ o.n }}, {{ o.title }}<span class="r">{{ o.lh_s }}/mo</span></div>{% endfor %}
+  </div>
+  <div class="bx" style="left:40pt; top:180pt; width:348pt">
+    <div class="bt">RENTAL CAR SPOT, :30, SAME SCREENS <span>Tick if wanted</span></div>
+    <div class="tick"><span class="b"></span>Add it at half the screen rate<span class="r">{% for t in rental %}{{ t.price_s }}{% if not loop.last %} / {% endif %}{% endfor %}</span></div>
+    <div class="fld">BUSINESS NAME<i></i></div>
+    <div class="fn">Billed at the rate for your option's screen count; option 4 uses the 80-screen rate.</div>
+  </div>
+  <div class="bx" style="left:40pt; top:262pt; width:348pt">
+    <div class="bt">MCTV TRAFFIC, PRESENTED BY <span>Option 4 only · tick one</span></div>
+    <div class="tick"><span class="b"></span>Little &amp; Holland, PLLC</div>
+    <div class="tick"><span class="b"></span>The rental car business</div>
+  </div>
+  <div class="bx" style="left:404pt; top:80pt; width:348pt">
+    <div class="bt">HOW YOU PAY <span>Tick one</span></div>
+    <div class="tick"><span class="b"></span>Monthly, six-month minimum</div>
+    <div class="tick"><span class="b"></span>Six months up front<span class="r">7th month free</span></div>
+    <div class="tick"><span class="b"></span>Twelve months up front<span class="r">13th &amp; 14th months free</span></div>
+    <div class="fld">MONTHLY OR UP-FRONT TOTAL &nbsp;$<i></i></div>
+  </div>
+  <div class="bx" style="left:404pt; top:180pt; width:348pt">
+    <div class="bt">PAYMENT METHOD <span>Tick one</span></div>
+    <div class="tick"><span class="b"></span>ACH bank draft<span class="r">No fee</span></div>
+    <div class="tick"><span class="b"></span>Check, payable to MCTV Elite Advertising</div>
+    <div class="tick"><span class="b"></span>Card, by secure link sent with the invoice</div>
+    <div class="fn">No card or bank numbers go on this sheet. We send the details with your first invoice.</div>
+  </div>
+  <div class="bx" style="left:404pt; top:282pt; width:348pt">
+    <div class="bt">BILLING CONTACT</div>
+    <div class="fld">NAME<i></i>PHONE<i></i></div>
+    <div class="fld">EMAIL<i></i></div>
+  </div>
+  <div class="acc-fine">The terms on page six are part of this order. MCTV countersigns within two business days of receiving it. <span>By signing, you authorize MCTV Digital, Inc. to bill the option, spots and payment plan ticked above.</span></div>
+  <div class="sig" style="left:40pt">
+    <div class="who">Advertiser · Stan Little, for Little &amp; Holland, PLLC and the rental car business</div>
+    <div class="ln"><span>AUTHORIZED SIGNATURE</span><span>DATE</span></div>
+    <div class="ln ln2"><span>PRINTED NAME AND TITLE</span></div>
+  </div>
+  <div class="sig" style="left:410pt">
+    <div class="who">MCTV Digital, Inc.</div>
+    <div class="ln"><span>AUTHORIZED REPRESENTATIVE</span><span>DATE</span></div>
+    <div class="ln ln2"><span>REPRESENTATIVE NAME</span></div>
+  </div>
+  <div class="foot"><span>PROPOSAL ACCEPTANCE · RETURN TO SWAYZE@MCTVOFMS.COM</span><span>08</span></div>
 </section>
 
 </body>

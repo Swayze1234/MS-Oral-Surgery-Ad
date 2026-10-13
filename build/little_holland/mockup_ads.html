@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "Playfair Display"; src: url("../fonts/PlayfairDisplay-Variable.ttf"); font-weight: 400 900; }
+  @font-face { font-family: "Barlow"; src: url("../fonts/Barlow-Regular.ttf"); font-weight: 400; }
+  @font-face { font-family: "Barlow"; src: url("../fonts/Barlow-SemiBold.ttf"); font-weight: 600; }
+  @font-face { font-family: "Barlow"; src: url("../fonts/Barlow-Bold.ttf"); font-weight: 700; }
+  @font-face { font-family: "Barlow Semi Condensed"; src: url("../fonts/BarlowSemiCondensed-Bold.ttf"); font-weight: 700; }
+  html, body { margin: 0; padding: 0; }
+  .ad { width: 1920px; height: 1080px; position: relative; overflow: hidden; font-family: "Barlow", sans-serif; }
+
+  /* ---- Little & Holland (silent, laid out with the three Mississippi notices) ---- */
+  #lh { background: linear-gradient(135deg, #0a2350 0%, #00102c 70%); color: #fff; }
+  #lh .logo { position: absolute; left: 110px; top: 80px; width: 880px; }
+  #lh h1 { position: absolute; left: 110px; top: 300px; margin: 0; font-family: "Playfair Display", serif; font-weight: 700;
+           font-size: 150px; line-height: 1.02; letter-spacing: -1px; }
+  #lh h1 em { font-style: normal; color: #d9b25c; }
+  #lh .sub { position: absolute; left: 114px; top: 640px; font-size: 54px; color: #c9d6ea; }
+  #lh .notice { position: absolute; left: 114px; top: 742px; font-size: 40px; font-weight: 700; letter-spacing: 1px; }
+  #lh .resp { position: absolute; left: 114px; top: 798px; font-size: 36px; color: #c9d6ea; }
+  #lh .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 190px; background: #d9b25c; display: flex; align-items: center; padding: 0 114px; gap: 48px; }
+  #lh .bar b { font-family: "Barlow Semi Condensed", sans-serif; font-size: 140px; color: #00102c; letter-spacing: 1px; }
+  #lh .bar span { font-size: 52px; font-weight: 700; color: #00102c; letter-spacing: 3px; }
+
+  /* ---- rental car (placeholder brand) ---- */
+  #rent { background: #f7f6f2; color: #13203a; }
+  #rent .logo { position: absolute; left: 110px; top: 90px; width: 520px; height: 170px; border: 6px dashed #9aa5b8; border-radius: 18px;
+                display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 54px; letter-spacing: 6px; color: #9aa5b8; }
+  #rent h1 { position: absolute; left: 110px; top: 330px; margin: 0; font-family: "Barlow Semi Condensed", sans-serif; font-weight: 700;
+             font-size: 190px; line-height: .95; color: #0b2044; }
+  #rent h1 em { font-style: normal; color: #c8a226; }
+  #rent .sub { position: absolute; left: 116px; top: 730px; font-size: 58px; color: #4a5a78; }
+  #rent .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 190px; background: #0b2044; display: flex; align-items: center; padding: 0 116px; gap: 48px; }
+  #rent .bar b { font-family: "Barlow Semi Condensed", sans-serif; font-size: 140px; color: #fff; letter-spacing: 1px; }
+  #rent .bar span { font-size: 52px; font-weight: 700; color: #e8c87a; letter-spacing: 3px; }
+</style>
+</head>
+<body>
+  <div class="ad" id="lh">
+    <img class="logo" src="lh_logo.png" alt="">
+    <h1>Talk to a lawyer<br><em>you already know.</em></h1>
+    <div class="sub">Concierge Attorneys · Oxford, Mississippi</div>
+    <div class="notice">FREE BACKGROUND INFORMATION AVAILABLE UPON REQUEST</div>
+    <div class="resp">[Attorney name], responsible for this ad · Oxford, Mississippi</div>
+    <div class="bar"><b>YOUR NUMBER</b><span>LITTLE &amp; HOLLAND, PLLC</span></div>
+  </div>
+  <div class="ad" id="rent">
+    <div class="logo">YOUR LOGO</div>
+    <h1>Need a car<br><em>in Oxford?</em></h1>
+    <div class="sub">Your rental car business · Oxford, Mississippi</div>
+    <div class="bar"><b>YOUR NUMBER</b><span>RESERVE TODAY</span></div>
+  </div>
+</body>
+</html>

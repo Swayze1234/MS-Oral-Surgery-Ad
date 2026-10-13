@@ -43,21 +43,22 @@ strings in `build.py`.
 
 # Client Proposal — Stan Little (Little & Holland + rental car business)
 
-`MCTV_Proposal_Little_Holland_PLLC.pdf` is a 2-page, portrait (Letter) proposal
-for **Stan Little**. Stan already has the Oxford media kit, so this sticks to
-options and pricing.
+`MCTV_Proposal_Little_Holland_PLLC.pdf` is an 8-page landscape proposal for
+**Stan Little**, styled after MCTV's Schwartz 2027 proposal (Playfair Display +
+Barlow, navy/cream/gold, real-screen mockups). Stan already has the Oxford media
+kit, so it sticks to the deal: options, prices, ad plays, pay-up-front savings,
+terms and a sign-off page.
 
-**Page 1: options & pricing**
-1. **Little & Holland, PLLC: 15-second commercial.** Pick one option:
-   20 screens $500/mo · 40 screens $800/mo · 80 screens $1,400/mo ·
-   80 screens + Oxford traffic-updates sponsorship $2,000/mo (Stan picks which business sponsors it).
-2. **Rental car business: 30-second commercial, 50% off** the matching screen
-   rate, on the same screens ($250 / $400 / $700 per month).
-3. **Pay up front & save:** 6 months up front → 7th month free; 12 months up
-   front → 13th & 14th months free. The table shows totals for Little & Holland
-   only and for both businesses.
-
-**Page 2: agreement & order form**, pre-filled for Stan / Little & Holland.
+| Page | What's on it |
+|------|--------------|
+| 1 | Cover, with a Little & Holland mockup on a real MCTV screen |
+| 2 | The proposal, in six lines |
+| 3 | Four ways to build it: Little & Holland's :15 at 20 / 40 / 80 screens ($500 / $800 / $1,400) or 80 screens + MCTV Traffic sponsorship in Oxford ($2,000) |
+| 4 | The rental car :30 at half the screen rate ($250 / $400 / $700), with totals for both businesses |
+| 5 | Pay up front: 6 months → 7th free; 12 months → 13th & 14th free (totals for L&H only and both) |
+| 6 | The terms, in plain words + MCTV Traffic + the Bar-filing notes for the law firm spot |
+| 7 | Five steps and four questions, with Swayze's contact card |
+| 8 | Pick your build and sign |
 
 ## Rebuilding
 
@@ -67,8 +68,12 @@ python3 build/little_holland/build_proposal.py
 ```
 
 - Prices, ad plays and the 50% rental discount: top of `build/little_holland/build_proposal.py`
-  (`SCREEN_RATE`, `PLAYS`, `RENTAL_DISCOUNT`, `OPTIONS`). All totals are calculated from these.
-- Wording: `build/little_holland/copy.json`. Layout: `build/little_holland/template.html`.
+  (`SCREEN_RATE`, `PLAYS`, `RENTAL_DISCOUNT`, `OPTIONS`). Every total is calculated from these.
+- Layout and wording: `build/little_holland/template.html`; date and footer: `copy.json`.
+- Fonts: `build/little_holland/fonts/` (Playfair Display and Barlow, SIL Open Font License).
+- Photos: `build/little_holland/photos/`. These were made once by `make_mockups.py`, which
+  takes room and Oxford photos from the Schwartz proposal PDF (not kept here) and
+  puts the mock ads from `mockup_ads.html` onto the real screens. Re-run it only to
+  change the mockups:
+  `python3 build/little_holland/make_mockups.py /path/to/Schwartz-MCTV-2027-Exclusivity.pdf`
 - `little_holland_logo.png` is the firm's logo; its navy background is removed at build time.
-- MCTV logos and Swayze's headshot are pulled from `build/source/MCTV_Media_Kit_Oxford_original.pdf`
-  into `build/little_holland/_assets/` (not committed).

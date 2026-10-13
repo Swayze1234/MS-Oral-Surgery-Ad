@@ -16,7 +16,7 @@ Run from anywhere:  python3 build/little_holland/build_proposal.py
 Needs:  pip install pymupdf jinja2 playwright pillow numpy
 Output is written to the repo root.
 """
-import html, json, os, re
+import json, os
 import numpy as np
 import pymupdf as fitz
 from PIL import Image
@@ -38,11 +38,16 @@ PLAYS = {20: "30K", 40: "60K", 80: "120K"}       # 1,500 plays per screen per mo
 PER_SCREEN = {20: "$25", 40: "$20", 80: "$17.50"}
 RENTAL_DISCOUNT = 0.50                           # rental car spot: 50% off the matching screen rate
 
-OPTIONS = [
-    {"n": 1, "name": "20 Screens", "screens": 20, "monthly": 500},
-    {"n": 2, "name": "40 Screens", "screens": 40, "monthly": 800},
-    {"n": 3, "name": "80 Screens", "screens": 80, "monthly": 1400},
-    {"n": 4, "name": "80 Screens + Traffic Updates", "screens": 80, "monthly": 2000, "traffic": True},
+OPTIONS = [  # Little & Holland's four options; "where"/"foot" are the card's last lines
+    {"n": 1, "title": "20 Screens", "short": "20 screens", "screens": 20, "monthly": 500,
+     "where": "Can run entirely inside Oxford's host venues.", "foot": "Entry network reach."},
+    {"n": 2, "title": "40 Screens", "short": "40 screens", "screens": 40, "monthly": 800,
+     "where": "Can run entirely inside Oxford's host venues.", "foot": "Market saturation."},
+    {"n": 3, "title": "80 Screens", "short": "80 screens", "screens": 80, "monthly": 1400,
+     "where": "Oxford, plus Tupelo and the Golden Triangle.", "foot": "Deep saturation."},
+    {"n": 4, "title": "80 Screens + MCTV Traffic", "short": "80 + Traffic", "screens": 80, "monthly": 2000, "traffic": True,
+     "where": "Oxford, plus Tupelo and the Golden Triangle, and your name on Oxford's traffic board.",
+     "foot": "Presenting sponsor, credited to the business you pick."},
 ]
 
 def money(v):
@@ -58,7 +63,7 @@ def pricing():
         rows.append({**o,
             "plays": PLAYS[s], "per_screen": PER_SCREEN[s],
             "lh": lh, "rental": rental, "both": both,
-            "lh_s": money(lh), "rental_s": money(rental), "both_s": money(both),
+            "lh_s": money(lh), "rental_s": money(rental), "both_s": money(both), "lh_num": f"{lh:,}",
             "rental_reg_s": money(SCREEN_RATE[s]),
             # pay up front: 6 months -> 7 on air, 12 months -> 14 on air
             "lh6_s": money(6 * lh), "both6_s": money(6 * both),
@@ -98,12 +103,7 @@ def client_logo():
     out.save(os.path.join(ASSETS, "lh_logo.png"))
 
 # ---------- render ----------
-def accent(text):
-    """Escape, then turn *words* into the gold accent used in kit headlines."""
-    return re.sub(r"\*(.+?)\*", r"<em>\1</em>", html.escape(text))
-
 def render_html(copy):
-    copy = {**copy, "title_html": accent(copy["title"])}
     env = Environment(loader=FileSystemLoader(HERE), autoescape=True)
     page = env.get_template("template.html").render(c=copy, opts=pricing(), rental=rental_tiers())
     with open(HTML_OUT, "w") as f:
@@ -116,13 +116,13 @@ def print_pdf():
         page = browser.new_page()
         page.goto("file://" + HTML_OUT)
         page.wait_for_load_state("networkidle")
-        page.pdf(path=OUT, width="8.5in", height="11in", print_background=True,
+        page.pdf(path=OUT, width="11in", height="6.5in", print_background=True,
                  prefer_css_page_size=True)
         browser.close()
     doc = fitz.open(OUT)
     doc.set_metadata({"title": "MCTV Digital — Advertising Proposal for Stan Little",
                       "author": "Swayze Hollingsworth · MCTV Digital",
-                      "subject": "Little & Holland, PLLC and rental car commercials on the MCTV screen network"})
+                      "subject": "Little & Holland, PLLC (:15) and rental car (:30) spots on the MCTV screen network"})
     doc.saveIncr()
     print("saved", OUT, f"({len(doc)} pages)")
 
