@@ -155,10 +155,10 @@
   table.pp tr.g th span { display: block; color: var(--gold); letter-spacing: .12em; }
   table.pp tr.h th { border-bottom: 1.2pt solid var(--navy); }
   table.pp th:first-child, table.pp td:first-child { text-align: left; padding-left: 0; }
-  table.pp td { text-align: right; padding: 5pt 8pt; border-bottom: 1pt solid var(--line); font-size: 8.4pt; color: var(--ink); white-space: nowrap; }
+  table.pp td { text-align: right; padding: 5pt 8pt; border-bottom: 1pt solid var(--line); font-size: 8.4pt; line-height: 12pt; color: var(--ink); white-space: nowrap; vertical-align: top; }
   table.pp td:first-child { font-weight: 600; color: var(--navy); }
   table.pp td.b { font-family: "Playfair Display", serif; font-weight: 700; color: var(--navy); font-size: 9.6pt; }
-  table.pp td small { display: block; font-family: "Barlow", sans-serif; font-weight: 600; font-size: 6.2pt; color: var(--green); }
+  table.pp td small { display: block; font-family: "Barlow", sans-serif; font-weight: 600; font-size: 6.2pt; line-height: 8pt; color: var(--green); }
   table.pp .sep { border-left: 1pt solid var(--line); }
   .ppnote { position: absolute; left: 40pt; right: 40pt; top: 400pt; font-size: 7.6pt; line-height: 1.5; color: var(--slate); }
   .ppnote b { font-weight: 600; color: var(--navy); }
@@ -253,7 +253,7 @@
     <div>DATE<b>{{ c.date }}</b></div>
   </div>
   <div class="cfoot"><span>MCTV DIGITAL, INC. · MISSISSIPPI OWNED</span><span>MCTVOFMS.COM</span></div>
-  <div class="mock" style="right:14pt; bottom:14pt"><b>MOCKUP</b> · The Oxford Family Membership on an MCTV screen in a host dining room</div>
+  <div class="mock" style="right:14pt; bottom:14pt"><b>MOCKUP</b> · The Oxford Family Membership on an MCTV screen</div>
 </section>
 
 <!-- ============ 2. THE ASK ============ -->
@@ -263,7 +263,7 @@
   <div class="credit" style="right:40pt; top:162pt">The Oxford Square from the air. Photo: Pilot MKN / Wikimedia Commons, CC BY 2.0, cropped</div>
   <div class="six">
     <div class="it"><div class="n">1</div><p><b>What.</b> Silent 15-second spots for Little &amp; Holland, PLLC: one on every screen, or two matched to the room, a DUI spot in our college-crowd venues and The Oxford Family Membership where families and professionals wait. Same price either way.</p></div>
-    <div class="it"><div class="n">4</div><p><b>What it costs.</b> Little &amp; Holland from <span class="hl">{{ opts[0].lh_s }} a month</span>, both businesses from <span class="hl">{{ opts[0].both_s }}</span>. Option 4 adds the presenting sponsorship of MCTV Traffic in Oxford: {{ opts[3].lh_s }} a month, {{ opts[3].both_s }} with both spots.</p></div>
+    <div class="it"><div class="n">4</div><p><b>What it costs.</b> Little &amp; Holland from <span class="hl">{{ opts[0].lh_s }} a month</span>, both businesses from <span class="hl">{{ opts[0].both_s }}</span>. Option 4 adds the presenting sponsorship of MCTV Traffic in Oxford: {{ opts[3].lh_s }} a month, {{ opts[3].both_s }} with the rental car spot.</p></div>
     <div class="it"><div class="n">2</div><p><b>Plus.</b> A 15-second spot for your rental car business on the same screens, at half our screen rate: {% for t in rental %}{{ t.price_s }}{% if loop.index == 2 %} or {% elif not loop.last %}, {% endif %}{% endfor %} a month.</p></div>
     <div class="it"><div class="n">5</div><p><b>Pay up front.</b> Prepay six months and the seventh is free. Prepay twelve and the thirteenth and fourteenth are free. Monthly billing has a six-month minimum.</p></div>
     <div class="it"><div class="n">3</div><p><b>Where.</b> Oxford first. Twenty or forty screens can stay inside Oxford's 44 host venues. Eighty screens add Tupelo and the Golden Triangle.</p></div>
@@ -309,7 +309,7 @@
       <div class="ph" style="background-image:url('../photos/dui_mockup.jpg'); background-position: 45% 45%"><div class="mock"><b>MOCKUP</b> · Spot A in a host dining room</div></div>
       <div class="tag">SPOT A · COLLEGE-CROWD VENUES</div>
       <h3>DUI.</h3>
-      <p><i>“Charged with a DUI? Know your options.”</i>&nbsp; Runs where Oxford's college crowd spends its nights and weekends: bars, restaurants, gyms and tanning.</p>
+      <p><i>“Charged with a DUI? Know your options.”</i>&nbsp; Runs where Oxford's college crowd spends its nights and weekends: bars, restaurants and gyms.</p>
       <ul>{% for v in c.venues_dui %}<li>{{ v }}</li>{% endfor %}</ul>
     </div>
     <div>
@@ -419,7 +419,7 @@
     <div class="t">FOUR QUESTIONS FOR YOU</div>
     <div class="q"><div class="n">1</div><p>What is your rental car business called, and can you send its logo?</p></div>
     <div class="q"><div class="n">2</div><p>Which phone number should each spot carry?</p></div>
-    <div class="q"><div class="n">3</div><p>Which attorney should be named as responsible for the Little &amp; Holland spot?</p></div>
+    <div class="q"><div class="n">3</div><p>Which attorney is responsible for each Little &amp; Holland spot?</p></div>
     <div class="q"><div class="n">4</div><p>If you pick option 4, which business should present MCTV Traffic?</p></div>
   </div>
   <div class="card">

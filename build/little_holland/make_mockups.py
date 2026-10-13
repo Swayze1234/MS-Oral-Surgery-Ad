@@ -31,7 +31,7 @@ X_DINING, X_LOBBY = 117, 103
 # screen corners (TL, TR, BR, BL) in each room photo, in that photo's pixels
 COVER_QUAD = [(389, 530), (1471, 592), (1616, 1142), (356, 1123)]
 STATION_QUAD = [(270, 94), (824, 119), (824, 414), (245, 404)]
-DINING_QUAD = [(364, 145), (805, 164), (859, 392), (349, 382)]     # host dining room, close up
+DINING_QUAD = [(364, 145), (805, 164), (857, 390), (349, 382)]     # host dining room, close up
 LOBBY_QUAD = [(640, 419), (1201, 369), (1207, 731), (639, 731)]    # host recreation center lobby
 
 def pdf_image(doc, xref):
@@ -64,14 +64,20 @@ def perspective_coeffs(dst, src):
     b = [c for p in src for c in p]
     return np.linalg.solve(np.array(a, float), np.array(b, float)).tolist()
 
-def place(photo, ad, quad, shade=0.92):
+def place(photo, ad, quad, shade=0.92, upscale=1, ss=3):
+    """Warp `ad` onto the screen `quad` of `photo`. Small photos are upscaled first,
+    and the warp is supersampled `ss`x then downsampled, so the ad's edges stay smooth."""
+    if upscale > 1:
+        photo = photo.resize((photo.width * upscale, photo.height * upscale), Image.LANCZOS)
+        quad = [(x * upscale, y * upscale) for x, y in quad]
     w, h = ad.size
-    coeffs = perspective_coeffs(quad, [(0, 0), (w, 0), (w, h), (0, h)])
-    warped = ad.transform(photo.size, Image.PERSPECTIVE, coeffs, Image.BICUBIC)
-    mask = Image.new("L", ad.size, 255).transform(photo.size, Image.PERSPECTIVE, coeffs, Image.BICUBIC)
-    warped = Image.eval(warped, lambda c: int(c * shade)).filter(ImageFilter.GaussianBlur(0.6))
+    big = (photo.width * ss, photo.height * ss)
+    coeffs = perspective_coeffs([(x * ss, y * ss) for x, y in quad], [(0, 0), (w, 0), (w, h), (0, h)])
+    warped = ad.transform(big, Image.PERSPECTIVE, coeffs, Image.BICUBIC).resize(photo.size, Image.LANCZOS)
+    mask = Image.new("L", ad.size, 255).transform(big, Image.PERSPECTIVE, coeffs, Image.BICUBIC).resize(photo.size, Image.LANCZOS)
+    warped = Image.eval(warped, lambda c: int(c * shade))
     out = photo.copy()
-    out.paste(warped, (0, 0), mask.filter(ImageFilter.GaussianBlur(0.8)))
+    out.paste(warped, (0, 0), mask)
     return out
 
 def main(schwartz_pdf):
@@ -83,9 +89,9 @@ def main(schwartz_pdf):
     doc = fitz.open(schwartz_pdf)
     ads = render_ads()
     place(pdf_image(doc, X_COVER_ROOM), ads["member"], COVER_QUAD).save(os.path.join(PHOTOS, "cover_mockup.jpg"), quality=88)
-    place(pdf_image(doc, X_DINING), ads["dui"], DINING_QUAD).save(os.path.join(PHOTOS, "dui_mockup.jpg"), quality=88)
+    place(pdf_image(doc, X_DINING), ads["dui"], DINING_QUAD, upscale=2).save(os.path.join(PHOTOS, "dui_mockup.jpg"), quality=88)
     place(pdf_image(doc, X_LOBBY), ads["member"], LOBBY_QUAD).save(os.path.join(PHOTOS, "member_mockup.jpg"), quality=88)
-    place(pdf_image(doc, X_STATION), ads["rent"], STATION_QUAD).save(os.path.join(PHOTOS, "rental_mockup.jpg"), quality=88)
+    place(pdf_image(doc, X_STATION), ads["rent"], STATION_QUAD, upscale=2).save(os.path.join(PHOTOS, "rental_mockup.jpg"), quality=88)
     for xref, name in [(X_AERIAL, "oxford_aerial.jpg"), (X_LIGHTS, "oxford_lights.jpg"),
                        (X_SWAYZE, "swayze.jpg"), (X_TRAFFIC, "traffic_board.jpg")]:
         pdf_image(doc, xref).save(os.path.join(PHOTOS, name), quality=88)
