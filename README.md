@@ -41,34 +41,34 @@ strings in `build.py`.
 
 ---
 
-# Client Proposal — Little & Holland PLLC (Oxford)
+# Client Proposal — Stan Little (Little & Holland + rental car business)
 
-`MCTV_Proposal_Little_Holland_PLLC.pdf` is a 10-page proposal for **Stan Little,
-Little & Holland PLLC**: two different 15-second commercials on **20, 40 or 80
-screens** ($500 / $800 / $1,400 per month). It uses the same look as the media kit.
+`MCTV_Proposal_Little_Holland_PLLC.pdf` is a 2-page, portrait (Letter) proposal
+for **Stan Little**. Stan already has the Oxford media kit, so this sticks to
+options and pricing.
 
-| Page | What's on it |
-|------|--------------|
-| 1 | Cover (Oxford stadium photo), prepared for Stan Little |
-| 2 | Overview, why MCTV fits the firm, network stats |
-| 3 | Partner logos *(media kit p2, reused)* |
-| 4 | Storyboards for Spot A and Spot B (concepts) |
-| 5 | How both spots run back-to-back every loop; what's included |
-| 6 | Suggested Oxford venues + all 44 Oxford/Lafayette host venues |
-| 7 | Local CPM comparison *(media kit p4, reused)* |
-| 8 | 20 / 40 / 80-screen options, 6- and 12-month totals, prepay bonuses |
-| 9 | Next steps + Swayze's contact info |
-| 10 | Agreement & order form, pre-filled for Little & Holland |
+**Page 1: options & pricing**
+1. **Little & Holland, PLLC: 15-second commercial.** Pick one option:
+   20 screens $500/mo · 40 screens $800/mo · 80 screens $1,400/mo ·
+   80 screens + Oxford traffic-updates sponsorship $2,000/mo (Stan picks which business sponsors it).
+2. **Rental car business: 30-second commercial, 50% off** the matching screen
+   rate, on the same screens ($250 / $400 / $700 per month).
+3. **Pay up front & save:** 6 months up front → 7th month free; 12 months up
+   front → 13th & 14th months free. The table shows totals for Little & Holland
+   only and for both businesses.
+
+**Page 2: agreement & order form**, pre-filled for Stan / Little & Holland.
 
 ## Rebuilding
 
 ```bash
-pip install pymupdf jinja2 playwright
+pip install pymupdf jinja2 playwright pillow numpy
 python3 build/little_holland/build_proposal.py
 ```
 
-- Edit the words in `build/little_holland/copy.json`.
-- Edit the layout in `build/little_holland/template.html`.
-- Prices and the totals table come from `PLANS` in `build_proposal.py`.
-- Photos and logos are pulled from `build/source/MCTV_Media_Kit_Oxford_original.pdf`
-  at build time (into `build/little_holland/_assets/`, which isn't committed).
+- Prices, ad plays and the 50% rental discount: top of `build/little_holland/build_proposal.py`
+  (`SCREEN_RATE`, `PLAYS`, `RENTAL_DISCOUNT`, `OPTIONS`). All totals are calculated from these.
+- Wording: `build/little_holland/copy.json`. Layout: `build/little_holland/template.html`.
+- `little_holland_logo.png` is the firm's logo; its navy background is removed at build time.
+- MCTV logos and Swayze's headshot are pulled from `build/source/MCTV_Media_Kit_Oxford_original.pdf`
+  into `build/little_holland/_assets/` (not committed).

@@ -1,18 +1,19 @@
 """
-Builds MCTV_Proposal_Little_Holland_PLLC.pdf — a client proposal for
-Little & Holland PLLC (Oxford, MS; contact Stan Little): two 15-second
-commercials on 20, 40 or 80 screens.
+Builds MCTV_Proposal_Little_Holland_PLLC.pdf — a 2-page portrait proposal for
+Stan Little covering two businesses:
 
-Pipeline:
-  1. Pull brand assets (logos, Oxford photos, Swayze headshot) straight out of
-     the original Oxford media kit, so nothing is duplicated in the repo.
-  2. Fill template.html with copy.json + pricing math (Jinja2).
-  3. Print the HTML to PDF with headless Chromium (Playwright).
-  4. Splice in two pages from the media kit as-is (partner logos, CPM
-     comparison) and renumber them.
+  * Little & Holland, PLLC — a 15-second commercial, four options
+    (20 / 40 / 80 screens, or 80 screens + Oxford traffic-updates sponsorship)
+  * Stan's rental car business — a 30-second commercial at 50% off the
+    matching screen package, on the same screens
+
+Page 1 = options, ad plays and pay-up-front savings. Page 2 = order form.
+
+Pipeline: pull logos/headshot out of the original media kit, knock out the
+client logo's background, fill template.html (Jinja2), print with Chromium.
 
 Run from anywhere:  python3 build/little_holland/build_proposal.py
-Needs:  pip install pymupdf jinja2 playwright
+Needs:  pip install pymupdf jinja2 playwright pillow numpy
 Output is written to the repo root.
 """
 import html, json, os, re
@@ -27,21 +28,61 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 KIT = os.path.join(ROOT, "build", "source", "MCTV_Media_Kit_Oxford_original.pdf")
 ASSETS = os.path.join(HERE, "_assets")
 HTML_OUT = os.path.join(ASSETS, "proposal.html")
-PDF_TMP = os.path.join(ASSETS, "proposal_html.pdf")
 OUT = os.path.join(ROOT, "MCTV_Proposal_Little_Holland_PLLC.pdf")
-LIB = "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf"
 CHROMIUM = "/opt/pw-browsers/chromium"
-
-# ---------- 1. assets from the media kit ----------
-# xref -> filename (xrefs found with page.get_image_info(xrefs=True))
-PHOTOS = {83: "oxford_stadium.jpg",     # Oxford cover: Vaught-Hemingway at night
-          414: "oxford_tower.jpg",      # Oxford back page: water tower
-          89: "in_the_wild.jpg",        # "Your ad, in the wild" (airport lobby)
-          416: "swayze.jpg"}            # Swayze headshot (footer block)
-LOGOS = {84: (85, "logo_white.png"),     # (image xref, soft-mask xref)
-         86: (87, "logo_navy.png")}
-
 CLIENT_LOGO = os.path.join(HERE, "little_holland_logo.png")   # supplied by the client (navy bg)
+
+# ---------- pricing ----------
+SCREEN_RATE = {20: 500, 40: 800, 80: 1400}       # media kit package page
+PLAYS = {20: "30K", 40: "60K", 80: "120K"}       # 1,500 plays per screen per month
+PER_SCREEN = {20: "$25", 40: "$20", 80: "$17.50"}
+RENTAL_DISCOUNT = 0.50                           # rental car spot: 50% off the matching screen rate
+
+OPTIONS = [
+    {"n": 1, "name": "20 Screens", "screens": 20, "monthly": 500},
+    {"n": 2, "name": "40 Screens", "screens": 40, "monthly": 800},
+    {"n": 3, "name": "80 Screens", "screens": 80, "monthly": 1400},
+    {"n": 4, "name": "80 Screens + Traffic Updates", "screens": 80, "monthly": 2000, "traffic": True},
+]
+
+def money(v):
+    return f"${v:,.0f}"
+
+def pricing():
+    rows = []
+    for o in OPTIONS:
+        s = o["screens"]
+        lh = o["monthly"]
+        rental = round(SCREEN_RATE[s] * (1 - RENTAL_DISCOUNT))
+        both = lh + rental
+        rows.append({**o,
+            "plays": PLAYS[s], "per_screen": PER_SCREEN[s],
+            "lh": lh, "rental": rental, "both": both,
+            "lh_s": money(lh), "rental_s": money(rental), "both_s": money(both),
+            "rental_reg_s": money(SCREEN_RATE[s]),
+            # pay up front: 6 months -> 7 on air, 12 months -> 14 on air
+            "lh6_s": money(6 * lh), "both6_s": money(6 * both),
+            "lh12_s": money(12 * lh), "both12_s": money(12 * both),
+            "save6_lh_s": money(lh), "save6_both_s": money(both),
+            "save12_lh_s": money(2 * lh), "save12_both_s": money(2 * both)})
+    return rows
+
+def rental_tiers():
+    return [{"screens": s, "price_s": money(round(r * (1 - RENTAL_DISCOUNT))), "reg_s": money(r),
+             "plays": PLAYS[s]} for s, r in SCREEN_RATE.items()]
+
+# ---------- assets ----------
+LOGOS = {84: (85, "logo_white.png"),     # (image xref, soft-mask xref) in the media kit
+         86: (87, "logo_navy.png")}
+HEADSHOT = 416                           # Swayze headshot
+
+def extract_assets():
+    os.makedirs(ASSETS, exist_ok=True)
+    kit = fitz.open(KIT)
+    with open(os.path.join(ASSETS, "swayze.jpg"), "wb") as f:
+        f.write(kit.extract_image(HEADSHOT)["image"])
+    for xref, (mask, name) in LOGOS.items():
+        fitz.Pixmap(fitz.Pixmap(kit, xref), fitz.Pixmap(kit, mask)).save(os.path.join(ASSETS, name))
 
 def client_logo():
     """Knock out the logo's navy background (colour-to-alpha) and upscale it,
@@ -56,75 +97,15 @@ def client_logo():
     out = out.resize((out.width * 4, out.height * 4), Image.LANCZOS)
     out.save(os.path.join(ASSETS, "lh_logo.png"))
 
-def extract_assets():
-    os.makedirs(ASSETS, exist_ok=True)
-    kit = fitz.open(KIT)
-    for xref, name in PHOTOS.items():
-        with open(os.path.join(ASSETS, name), "wb") as f:
-            f.write(kit.extract_image(xref)["image"])
-    for xref, (mask, name) in LOGOS.items():
-        fitz.Pixmap(fitz.Pixmap(kit, xref), fitz.Pixmap(kit, mask)).save(os.path.join(ASSETS, name))
-
-# ---------- 2. pricing ----------
-PLANS = [  # straight from the media kit's package page
-    {"screens": 20, "monthly": 500,  "plays": "30K",  "per_screen": "$25",    "tag": "",             "label": "Entry network reach"},
-    {"screens": 40, "monthly": 800,  "plays": "60K",  "per_screen": "$20",    "tag": "MOST POPULAR", "label": "Market saturation"},
-    {"screens": 80, "monthly": 1400, "plays": "120K", "per_screen": "$17.50", "tag": "",             "label": "Deep saturation"},
-]
-
-def money(v, cents=False):
-    return f"${v:,.2f}" if cents else f"${v:,.0f}"
-
-def pricing():
-    rows = []
-    for p in PLANS:
-        m = p["monthly"]
-        six, twelve = 6 * m, 12 * m
-        eff = twelve / 14           # prepaid 12 -> 14 months on air (same ratio as 6 -> 7)
-        rows.append({**p,
-                     "monthly_s": money(m),
-                     "six_s": money(six),
-                     "twelve_s": money(twelve),
-                     "eff_s": money(round(eff)),
-                     "eff_exact": abs(eff - round(eff)) < 1e-9,
-                     "bonus6_s": money(m),
-                     "bonus12_s": money(2 * m)})
-    return rows
-
-# ---------- 3. render ----------
-OXFORD_VENUES = [  # media kit, host network page (Oxford / Lafayette, 44)
-    "4 Corner's Chevron (Chicken On A Stick)", "Amara Salon & Aesthetics", "B's Hickory Smoke BBQ",
-    "Bep Haus", "Booth's Barbeque and Yard", "Built Different Fitness",
-    "Cannon Chevrolet Buick Cadillac of Oxford", "Cannon Collision Center", "Casa Mexicana of Oxford",
-    "El Charro Cocina & Cantina", "Element Hair Studio", "Finch & Kelly",
-    "Internal Medicine Associates of Oxford", "James Food Center Post Office", "LandShark Seafood & Catfish",
-    "Luxe Styling Studio", "Magnolia Wine & Spirits", "MARATHON South Lamar",
-    "Mississippi Asthma & Allergy Clinic, P.A.", "Nail E!", "Nail Thology", "Oxford Dental",
-    "Oxford Park Commission", "Oxford Super Tan", "Oxford T-Shirt Co.",
-    "Oxford-Lafayette County Chamber of Commerce", "Party in the Sip", "Rafters Music and Food",
-    "Rainbow Cleaners", "Rebel Body Fitness", "Rebel Yell Rooftop Bar",
-    "RedMed Urgent Clinic of Oxford - Jackson Ave", "Revive Wellness of Oxford",
-    "Right Track Medical Group - Oxford", "Rosati's Pizza", "Sip Oxford", "Southern Coop",
-    "Stouts Carpet & Flooring", "Texaco Lamar Express", "The Blind Pig Pub",
-    "The Children's Dental Center", "The Oxford Growler", "The Velvet Ditch - Sports Bar & Seafood",
-    "Uno Mas Tacos y Tequila Jackson Ave"]
-
+# ---------- render ----------
 def accent(text):
     """Escape, then turn *words* into the gold accent used in kit headlines."""
     return re.sub(r"\*(.+?)\*", r"<em>\1</em>", html.escape(text))
 
 def render_html(copy):
-    assert len(OXFORD_VENUES) == 44
-    picks = [v["venue"] for v in copy["venue_picks"]]
-    missing = [v for v in picks if v not in OXFORD_VENUES]
-    assert not missing, f"venue picks not in the Oxford host list: {missing}"
-    copy = {**copy,
-            "cover_title_html": accent(copy["cover_title"]),
-            "intro_headline_html": accent(copy["intro_headline"]),
-            "oxford_venues": OXFORD_VENUES,
-            "pick_names": picks}
+    copy = {**copy, "title_html": accent(copy["title"])}
     env = Environment(loader=FileSystemLoader(HERE), autoescape=True)
-    page = env.get_template("template.html").render(c=copy, plans=pricing())
+    page = env.get_template("template.html").render(c=copy, opts=pricing(), rental=rental_tiers())
     with open(HTML_OUT, "w") as f:
         f.write(page)
 
@@ -135,40 +116,15 @@ def print_pdf():
         page = browser.new_page()
         page.goto("file://" + HTML_OUT)
         page.wait_for_load_state("networkidle")
-        page.pdf(path=PDF_TMP, width="13.3333in", height="7.5in",   # 960 x 540 pt
-                 print_background=True, prefer_css_page_size=True)
+        page.pdf(path=OUT, width="8.5in", height="11in", print_background=True,
+                 prefer_css_page_size=True)
         browser.close()
-
-# ---------- 4. splice kit pages + renumber ----------
-# final order: (source, page index). "html" pages come from our render in order.
-ORDER = ["html", "html", ("kit", 1), "html", "html", "html", ("kit", 3), "html", "html", "html"]
-NUM_COLOR = {1: (0x6a, 0x78, 0x91), 3: (0x9e, 0xc1, 0xec)}   # page-number colour on each kit page
-
-def assemble():
-    src = fitz.open(PDF_TMP)
-    kit = fitz.open(KIT)
-    out = fitz.open()
-    h = 0
-    for n, item in enumerate(ORDER, start=1):
-        if item == "html":
-            out.insert_pdf(src, from_page=h, to_page=h)
-            h += 1
-            continue
-        _, idx = item
-        out.insert_pdf(kit, from_page=idx, to_page=idx)
-        pg = out[-1]
-        # swap the kit's page number for this proposal's page number
-        pg.add_redact_annot(fitz.Rect(48, 512, 62, 521), fill=False)
-        pg.apply_redactions(images=fitz.PDF_REDACT_IMAGE_NONE,
-                            graphics=fitz.PDF_REDACT_LINE_ART_NONE)
-        pg.insert_text((50.4, 518.1), f"{n:02d}", fontfile=LIB, fontname="lib",
-                       fontsize=6.38, color=tuple(c / 255 for c in NUM_COLOR[idx]))
-    assert h == len(src), f"template has {len(src)} pages, ORDER expects {h}"
-    out.set_metadata({"title": "MCTV Digital — Advertising Proposal for Little & Holland, PLLC",
+    doc = fitz.open(OUT)
+    doc.set_metadata({"title": "MCTV Digital — Advertising Proposal for Stan Little",
                       "author": "Swayze Hollingsworth · MCTV Digital",
-                      "subject": "Two 15-second commercials on the MCTV indoor screen network"})
-    out.save(OUT, garbage=4, deflate=True)
-    print("saved", OUT, f"({len(out)} pages)")
+                      "subject": "Little & Holland, PLLC and rental car commercials on the MCTV screen network"})
+    doc.saveIncr()
+    print("saved", OUT, f"({len(doc)} pages)")
 
 if __name__ == "__main__":
     with open(os.path.join(HERE, "copy.json")) as f:
@@ -177,4 +133,3 @@ if __name__ == "__main__":
     client_logo()
     render_html(copy)
     print_pdf()
-    assemble()
