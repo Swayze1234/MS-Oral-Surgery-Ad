@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <title>Little &amp; Holland — DUI (Students) :15</title>
 <style>
-  @font-face{font-family:"Anton";src:url("../fonts/anton-latin-400-normal.woff2") format("woff2");font-weight:400}
   @font-face{font-family:"Montserrat";src:url("../fonts/montserrat-latin-500-normal.woff2") format("woff2");font-weight:500}
   @font-face{font-family:"Montserrat";src:url("../fonts/montserrat-latin-600-normal.woff2") format("woff2");font-weight:600}
   @font-face{font-family:"Montserrat";src:url("../fonts/montserrat-latin-700-normal.woff2") format("woff2");font-weight:700}
@@ -15,27 +14,50 @@
   @font-face{font-family:"Cormorant";src:url("../fonts/cormorant-garamond-latin-600-italic.woff2") format("woff2");font-weight:600;font-style:italic}
 
   :root{
-    --blue:#2b7bff; --blue-hi:#8fbcff; --navy:#07122a;
+    --navy:#07122a;
     --ivory:#efebe6; --gold:#c29a5b;
   }
   html,body{margin:0;background:#000}
-  #stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:#02040a}
+  #stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:#040a1a}
   .abs{position:absolute;left:0;top:0;width:1920px;height:1080px}
   .row{position:absolute;left:0;width:1920px;text-align:center;white-space:nowrap}
   .w{display:inline-block;will-change:transform,opacity,filter}
 
-  /* Scene A — DUI? (brand: Cormorant Garamond, ivory + gold) */
-  #dui{font-family:"Cormorant";font-weight:700;font-size:440px;line-height:1;color:var(--ivory);letter-spacing:.005em;top:175px;transform-origin:50% 55%}
+  /* Brand background behind every slide after the intro (same as the outro) */
+  #brandBg{background:radial-gradient(ellipse 75% 70% at 50% 42%,#13295a 0%,#0a1838 45%,#040a1a 100%)}
+  .oglow{position:absolute;width:1400px;height:1400px;border-radius:50%;
+         background:radial-gradient(circle,rgba(43,123,255,.35) 0%,rgba(43,123,255,.10) 35%,rgba(43,123,255,0) 65%)}
+  #og1{left:-700px;top:-760px} #og2{left:1220px;top:-760px}
+
+  /* Scene A — intro over police-light footage */
+  #footWrap{overflow:hidden}
+  #foot{position:absolute;left:0;top:0;width:1920px;height:1080px;object-fit:cover;transform-origin:50% 40%;
+        filter:brightness(.82) contrast(1.06) saturate(1.05)}
+  #footScrim{background:
+      radial-gradient(ellipse 64% 58% at 50% 43%,rgba(4,10,26,.70) 0%,rgba(4,10,26,.46) 62%,rgba(4,10,26,.28) 100%),
+      linear-gradient(180deg,rgba(4,10,26,.30) 0%,rgba(4,10,26,0) 26%,rgba(4,10,26,0) 62%,rgba(4,10,26,.6) 100%)}
+  #blackIn{background:#000}
+  #arrested{font-family:"Cormorant";font-weight:700;font-size:76px;letter-spacing:.32em;color:var(--ivory);top:118px;padding-left:.32em}
+  #dui{font-family:"Cormorant";font-weight:700;font-size:360px;line-height:1;color:var(--ivory);letter-spacing:.005em;top:185px;transform-origin:50% 55%}
   .goldtxt{background:linear-gradient(180deg,#e2be7e 0%,#c29a5b 55%,#9c7036 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
   .ghost{color:rgba(194,154,91,.85)!important}
   .ghost .q{background:none;color:rgba(194,154,91,.85)}
-  #divA{position:absolute;left:0;top:643px;width:1920px;height:60px}
-  #divA .ln{position:absolute;top:29px;width:330px;height:2px}
-  #lnL{left:600px;background:linear-gradient(90deg,rgba(194,154,91,0),#c29a5b);transform-origin:100% 50%}
-  #lnR{left:990px;background:linear-gradient(90deg,#c29a5b,rgba(194,154,91,0));transform-origin:0 50%}
-  #fleurA{position:absolute;left:937px;top:2px;width:46px;height:55px;overflow:visible}
-  #know{font-family:"Cormorant";font-weight:700;font-size:92px;letter-spacing:.16em;color:var(--ivory);top:725px}
-  #know span{display:inline-block;padding-left:.16em}
+  #talk{font-family:"Cormorant";font-weight:600;font-style:italic;font-size:150px;line-height:1.15;top:520px}
+  #talk span{background:linear-gradient(180deg,#ecd096 0%,#c9a062 55%,#a2763a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .08em}
+  /* logo band: solid navy, gold edge, so the brand sits apart from the flashing footage */
+  #band{position:absolute;left:0;top:830px;width:1920px;height:250px;
+        background:linear-gradient(180deg,#0f2550 0%,#0a1a3c 55%,#07122a 100%);box-shadow:0 -24px 60px rgba(0,0,0,.55)}
+  #bandLine{position:absolute;left:0;top:-2px;width:1920px;height:4px;transform-origin:50% 50%;
+            background:linear-gradient(90deg,rgba(210,170,100,0) 0%,#e2be7e 22%,#f3dcae 50%,#e2be7e 78%,rgba(210,170,100,0) 100%)}
+  #bLockup{position:absolute;left:0;top:52px;width:1920px;display:flex;justify-content:center;align-items:center;gap:34px}
+  #bFleur{width:118px;height:142px;overflow:visible}
+  #bText{position:relative;font-kerning:none}
+  #bName,#bSheen{font-family:"Cormorant";font-weight:600;font-size:82px;line-height:1;letter-spacing:.045em;color:var(--ivory);white-space:nowrap}
+  #bName .pl,#bSheen .pl{font-size:.6em;letter-spacing:.07em;margin-left:.22em}
+  #bSheen{position:absolute;left:0;top:0;color:transparent;-webkit-background-clip:text;background-clip:text;opacity:0;
+          background-image:linear-gradient(100deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.95) 50%,rgba(255,255,255,0) 58%);
+          background-size:300% 100%;background-repeat:no-repeat}
+  #bTag{font-family:"Cormorant";font-weight:600;font-size:35px;letter-spacing:.38em;color:var(--gold);margin-top:16px;white-space:nowrap}
 
   /* Scene B — split screen: attorneys photo | confidentiality message */
   #photoPanel{position:absolute;left:0;top:0;width:960px;height:1080px;overflow:hidden;background:#0a1430}
@@ -44,8 +66,6 @@
   #photoShade{position:absolute;left:0;top:0;width:960px;height:1080px;
          background:linear-gradient(180deg,rgba(4,10,26,.30) 0%,rgba(4,10,26,0) 18%,rgba(4,10,26,0) 72%,rgba(4,10,26,.55) 100%),
                     linear-gradient(270deg,rgba(4,10,26,.45) 0%,rgba(4,10,26,0) 9%)}
-  #photoWash{position:absolute;left:0;top:0;width:960px;height:1080px;mix-blend-mode:screen;opacity:0;
-         background:radial-gradient(ellipse 85% 55% at 0% 0%,rgba(40,110,255,.9),rgba(40,110,255,0) 70%)}
   #seam{position:absolute;left:957px;top:0;width:5px;height:1080px;
         background:linear-gradient(180deg,rgba(210,170,100,0),#e2be7e 18%,#b8894b 50%,#e2be7e 82%,rgba(210,170,100,0))}
   #textB{position:absolute;left:1035px;top:0;width:860px;height:1080px}
@@ -72,10 +92,6 @@
 
   /* Scene D — outro / logo */
   #outro{opacity:0}
-  #outroBg{background:radial-gradient(ellipse 75% 70% at 50% 42%,#13295a 0%,#0a1838 45%,#040a1a 100%)}
-  .oglow{position:absolute;width:1400px;height:1400px;border-radius:50%;
-         background:radial-gradient(circle,rgba(43,123,255,.35) 0%,rgba(43,123,255,.10) 35%,rgba(43,123,255,0) 65%)}
-  #og1{left:-700px;top:-760px} #og2{left:1220px;top:-760px}
   #oGroup{transform-origin:50% 45%;top:22px}
   #lockup{position:absolute;left:0;top:235px;width:1920px;display:flex;justify-content:center;align-items:center;gap:44px}
   #fleur{width:196px;height:235px;overflow:visible}
@@ -92,30 +108,39 @@
   #city{font-family:"Montserrat";font-weight:600;font-size:28px;letter-spacing:.34em;color:rgba(245,240,230,.88);top:760px;padding-left:.34em}
   #notice{font-family:"Montserrat";font-weight:600;font-size:22px;letter-spacing:.16em;color:rgba(245,240,230,.66);top:992px;padding-left:.16em}
 
-  #flash{background:radial-gradient(ellipse at 50% 45%,rgba(235,244,255,1) 0%,rgba(120,175,255,1) 45%,rgba(30,90,255,1) 100%);opacity:0}
 </style>
 </head>
 <body>
 <div id="stage">
-  <div id="shake" class="abs">
-    <canvas id="bg" class="abs"></canvas>
+  <div id="brandBg" class="abs"></div>
+  <div id="og1" class="oglow"></div><div id="og2" class="oglow"></div>
 
+  <div id="shake" class="abs">
     <div id="sceneA" class="abs">
-      <div id="duiG1" class="row ghost" style="font-family:Cormorant;font-weight:700;font-size:440px;line-height:1;top:175px;transform-origin:50% 55%;opacity:0">DUI<span class="q">?</span></div>
-      <div id="duiG2" class="row ghost" style="font-family:Cormorant;font-weight:700;font-size:440px;line-height:1;top:175px;transform-origin:50% 55%;opacity:0">DUI<span class="q">?</span></div>
+      <div id="footWrap" class="abs"><img id="foot" alt=""><div id="footScrim" class="abs"></div></div>
+      <div id="arrested" class="row">ARRESTED FOR</div>
+      <div id="duiG1" class="row ghost" style="font-family:Cormorant;font-weight:700;font-size:360px;line-height:1;top:185px;transform-origin:50% 55%;opacity:0">DUI<span class="q">?</span></div>
+      <div id="duiG2" class="row ghost" style="font-family:Cormorant;font-weight:700;font-size:360px;line-height:1;top:185px;transform-origin:50% 55%;opacity:0">DUI<span class="q">?</span></div>
       <div id="dui" class="row">DUI<span class="q goldtxt">?</span></div>
-      <div id="divA">
-        <div id="lnL" class="ln"></div><div id="lnR" class="ln"></div>
-        <svg id="fleurA" viewBox="0 0 100 120"><use href="#fleurArt"/></svg>
+      <div id="talk" class="row"><span>Let’s talk.</span></div>
+      <div id="band">
+        <div id="bandLine"></div>
+        <div id="bLockup">
+          <svg id="bFleur" viewBox="0 0 100 120"><use href="#fleurArt"/></svg>
+          <div id="bText">
+            <div id="bName"></div>
+            <div id="bSheen">LITTLE &amp; HOLLAND,<span class="pl">PLLC</span></div>
+            <div id="bTag">CONCIERGE ATTORNEYS</div>
+          </div>
+        </div>
       </div>
-      <div id="know" class="row"><span>KNOW YOUR OPTIONS.</span></div>
+      <div id="blackIn" class="abs"></div>
     </div>
 
     <div id="sceneB" class="abs">
       <div id="photoPanel">
         <img id="photo" src="../assets/attorneys_crop.jpg" alt="">
         <div id="photoShade"></div>
-        <div id="photoWash"></div>
       </div>
       <div id="seam"></div>
       <div id="textB">
@@ -152,8 +177,6 @@
   </div>
 
   <div id="outro" class="abs">
-    <div id="outroBg" class="abs"></div>
-    <div id="og1" class="oglow"></div><div id="og2" class="oglow"></div>
     <div id="oGroup" class="abs">
       <div id="lockup">
         <!-- fleur-de-lis redrawn as vector from the firm's logo -->
@@ -192,7 +215,6 @@
     </div>
   </div>
 
-  <div id="flash" class="abs"></div>
 </div>
 
 <script>
@@ -212,7 +234,6 @@ const E = {
   outExpo: p => p >= 1 ? 1 : 1 - Math.pow(2, -10 * p),
   outBack: p => { const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
 };
-function rng(seed) { return () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
 
 // fade/slide/blur-in for one element; returns eased progress
 function reveal(el, t, start, dur, { dy = 30, blur = 10, scale = 1, ease = E.outCubic } = {}) {
@@ -222,148 +243,105 @@ function reveal(el, t, start, dur, { dy = 30, blur = 10, scale = 1, ease = E.out
   el.style.filter = blur && p < 1 ? `blur(${(1 - p) * blur}px)` : 'none';
   return p;
 }
-function exitBlur(el, t, start, dur, dy = -60, blur = 14) {
-  const p = E.inCubic(prog(t, start, start + dur));
-  el.style.opacity = 1 - p;
-  el.style.transform = `translateY(${p * dy}px)`;
-  el.style.filter = p > 0 ? `blur(${p * blur}px)` : 'none';
-}
-
 // ---------- build split text ----------
 $('num').innerHTML = [...PHONE].map(c => `<span class="w">${c}</span>`).join('');
-$('lname').innerHTML = [...'LITTLE & HOLLAND,'].map(c =>
+const nameSpans = () => [...'LITTLE & HOLLAND,'].map(c =>
   c === ' ' ? ' ' : `<span class="w">${c === '&' ? '&amp;' : c}</span>`).join('') + '<span class="w pl">PLLC</span>';
+$('lname').innerHTML = nameSpans();
+$('bName').innerHTML = nameSpans();
 
-// ---------- police lights (canvas) ----------
-const cv = $('bg'), ctx = cv.getContext('2d');
-const DPR = window.devicePixelRatio || 1;
-cv.width = 1920 * DPR; cv.height = 1080 * DPR;
-cv.style.width = '1920px'; cv.style.height = '1080px';
-
-const R = rng(7);
-const bokeh = Array.from({ length: 34 }, (_, i) => {
-  const warm = R() < .18;
-  return {
-    x: R() * 1920, y: 80 + Math.pow(R(), 1.3) * 900, r: 18 + Math.pow(R(), 1.8) * 95,
-    a: warm ? .10 + R() * .10 : .10 + R() * .22,
-    col: warm ? [255, 176, 96] : [lerp(40, 120, R()) | 0, lerp(110, 170, R()) | 0, 255],
-    react: warm ? .15 : .6 + R() * .4, ph: R() * 6.28,
-  };
-});
-
-// One flash: on for 2 frames, then quick decay. Double-blip per side once a second
-// (keeps each side at 2 flashes/sec — under the 3/sec photosensitivity guideline).
-const blip = x => x < 0 ? 0 : x < .07 ? 1 : Math.exp(-(x - .07) / .06);
-function side(t, offset) {
-  const ph = (((t - offset) % 1) + 1) % 1;
-  return Math.max(blip(ph), blip(ph - .15));
-}
-
-function radial(x, y, r, stops) {
-  const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-  for (const [o, c] of stops) g.addColorStop(o, c);
-  ctx.fillStyle = g;
-  ctx.fillRect(x - r, y - r, r * 2, r * 2);
-}
-function glow(x, y, I) {
-  if (I <= .001) return;
-  radial(x, y, 1000, [[0, `rgba(40,110,255,${.55 * I})`], [.35, `rgba(20,70,230,${.22 * I})`], [1, 'rgba(0,30,160,0)']]);
-  radial(x, y, 280, [[0, `rgba(120,180,255,${.85 * I})`], [1, 'rgba(120,180,255,0)']]);
-  radial(x, y, 70, [[0, `rgba(240,248,255,${I})`], [.5, `rgba(160,205,255,${.8 * I})`], [1, 'rgba(160,205,255,0)']]);
-  ctx.save(); ctx.translate(x, y); ctx.scale(7.5, .11);
-  radial(0, 0, 260, [[0, `rgba(170,210,255,${.75 * I})`], [1, 'rgba(120,180,255,0)']]);
-  ctx.restore();
-  ctx.save(); ctx.translate(x, y); ctx.scale(3, .5);
-  radial(0, 0, 260, [[0, `rgba(80,140,255,${.25 * I})`], [1, 'rgba(80,140,255,0)']]);
-  ctx.restore();
-}
-
-function drawBG(t, lI, rI, g) {
-  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-  ctx.globalCompositeOperation = 'source-over';
-  const base = ctx.createLinearGradient(0, 0, 0, 1080);
-  base.addColorStop(0, '#020409'); base.addColorStop(1, '#070d1e');
-  ctx.fillStyle = base; ctx.fillRect(0, 0, 1920, 1080);
-
-  const z = 1 + .07 * clamp(t / 10.6);           // slow push-in
-  ctx.save(); ctx.translate(960, 540); ctx.scale(z, z); ctx.translate(-960, -540);
-  ctx.globalCompositeOperation = 'lighter';
-  for (const b of bokeh) {
-    const near = b.x < 960 ? lI : rI;
-    const a = b.a * (.5 * g + 1.1 * near * b.react);
-    if (a < .003) continue;
-    const [r0, g0, b0] = b.col, x = b.x + Math.sin(t * .35 + b.ph) * 8;
-    radial(x, b.y, b.r, [[0, `rgba(${r0},${g0},${b0},${a * .75})`], [.78, `rgba(${r0},${g0},${b0},${a})`],
-                         [.9, `rgba(${r0},${g0},${b0},${a * .55})`], [1, `rgba(${r0},${g0},${b0},0)`]]);
-  }
-  glow(320, 130, lI);
-  glow(1600, 130, rI);
-  ctx.restore();
-
-  ctx.globalCompositeOperation = 'lighter';
-  ctx.fillStyle = `rgba(20,70,255,${.09 * Math.max(lI, rI)})`;
-  ctx.fillRect(0, 0, 1920, 1080);
-  // floor bounce
-  const fl = ctx.createLinearGradient(0, 760, 0, 1080);
-  fl.addColorStop(0, 'rgba(30,90,255,0)'); fl.addColorStop(1, `rgba(30,90,255,${.16 * (lI + rI) / 2 + .03 * g})`);
-  ctx.fillStyle = fl; ctx.fillRect(0, 760, 1920, 320);
-
-  ctx.globalCompositeOperation = 'source-over';
-  radial(960, 540, 1180, [[.5, 'rgba(0,0,0,0)'], [1, 'rgba(0,0,0,.7)']]);
+// ---------- intro footage (pre-extracted stills, see prepare.sh) ----------
+const FOOT_FRAMES = 153;
+const foot = $('foot');
+let footSrc = '';
+function setFootage(t) {
+  const n = Math.min(FOOT_FRAMES - 1, Math.max(0, Math.round(t * FPS))) + 1;
+  const src = `../.work/footage/intro_${String(n).padStart(4, '0')}.jpg`;
+  if (src === footSrc) return null;
+  footSrc = src;
+  foot.src = src;
+  return foot.decode().catch(() => {});
 }
 
 // ---------- timeline ----------
 function seek(t) {
-  // light gain per scene: full on A, dimmer behind the confidentiality message, full again for the call
-  let g = E.outCubic(prog(t, 0, .35));
-  g *= 1 - .5 * E.inOutCubic(prog(t, 3.7, 4.3)) + .5 * E.inOutCubic(prog(t, 7.9, 8.4));
-  const L = side(t, 0), Rr = side(t, .5);
-  const lI = g * (.12 + .88 * L), rI = g * (.12 + .88 * Rr);
-  const I = Math.max(lI, rI);
   const inOutro = t >= 10.62;
-
-  if (!inOutro) drawBG(t, lI, rI, g);
+  const breathe = .5 + .5 * Math.sin(t * 2.2);
+  $('og1').style.opacity = .55 + .25 * breathe;
+  $('og2').style.opacity = .55 + .25 * (1 - breathe);
 
   // camera shake on the slam
-  const sp = prog(t, .42, .9);
+  const sp = prog(t, .62, 1.1);
   const amp = sp > 0 && sp < 1 ? 16 * Math.pow(1 - sp, 2) : 0;
   $('shake').style.transform = amp ? `translate(${amp * Math.sin(t * 91)}px,${amp * Math.cos(t * 73)}px) scale(${1 + amp * .0022})` : 'none';
-  $('shake').style.visibility = inOutro ? 'hidden' : 'visible';
 
-  // ----- Scene A: DUI? / KNOW YOUR OPTIONS. -----
+  // ----- Scene A: footage · ARRESTED FOR / DUI? / Let's talk. · logo band -----
   const A = $('sceneA');
-  A.style.display = t < 4.2 ? 'block' : 'none';
-  if (t < 4.2) {
-    const pS = E.outExpo(prog(t, .30, .66));
-    const push = 1 + .04 * E.inOutCubic(prog(t, .7, 3.7));
+  const showA = t < 4.25;
+  A.style.display = showA ? 'block' : 'none';
+  let pending = null;
+  if (showA) {
+    pending = setFootage(t);
+    $('blackIn').style.opacity = 1 - E.outCubic(prog(t, 0, .2));
+    const fw = $('footWrap');
+    fw.style.opacity = 1 - E.inOutCubic(prog(t, 3.7, 4.2));
+    foot.style.transform = `scale(${1.02 + .05 * E.inOutCubic(prog(t, 0, 4.2))})`;
+
+    const xp = E.inCubic(prog(t, 3.7, 4.05));            // text + band exit
+    const exitTxt = el => {
+      if (xp <= 0) return;
+      el.style.opacity = Number(el.style.opacity || 1) * (1 - xp);
+      el.style.filter = `blur(${14 * xp}px)`;
+    };
+    const push = 1 + .035 * E.inOutCubic(prog(t, .9, 3.7));
+    const shadow = 'drop-shadow(0 6px 24px rgba(0,0,0,.6))';
+
+    const ap = reveal($('arrested'), t, .15, .5, { dy: 20, blur: 10 });
+    $('arrested').style.letterSpacing = `${lerp(.5, .32, ap)}em`;
+    if (ap >= 1) $('arrested').style.filter = shadow;
+
+    const pS = E.outExpo(prog(t, .5, .86));
     const s = lerp(1.9, 1, pS) * push;
     const dui = $('dui');
-    dui.style.opacity = E.outCubic(prog(t, .30, .40));
+    dui.style.opacity = E.outCubic(prog(t, .5, .6));
     dui.style.transform = `scale(${s})`;
-    dui.style.filter = `drop-shadow(0 8px 28px rgba(0,0,0,.55)) drop-shadow(0 0 ${8 + 12 * I}px rgba(90,150,255,${.12 + .3 * I}))`;
+    dui.style.filter = `drop-shadow(0 8px 30px rgba(0,0,0,.65))`;
     [['duiG1', -1], ['duiG2', 1]].forEach(([id, d]) => {
       const gEl = $(id), k = 1 - pS;
-      gEl.style.opacity = t < .30 ? 0 : .5 * k;
+      gEl.style.opacity = t < .5 ? 0 : .5 * k;
       gEl.style.transform = `translateX(${d * 70 * k}px) scale(${s * (1 + .18 * k)})`;
     });
-    // gold divider: fleur blooms, rules draw outward, then the line wipes in
-    const fp = E.outBack(prog(t, 1.05, 1.5));
-    const fa = $('fleurA');
-    fa.style.opacity = clamp(prog(t, 1.05, 1.25));
-    fa.style.transform = `scale(${fp})`;
-    const lp = E.inOutCubic(prog(t, 1.2, 1.8));
-    $('lnL').style.transform = $('lnR').style.transform = `scaleX(${lp})`;
-    $('divA').style.transform = `scale(${push})`;
-    const kp = E.outCubic(prog(t, 1.35, 1.95));
-    const know = $('know');
-    know.style.clipPath = `inset(0 ${100 * (1 - kp)}% 0 0)`;
-    know.style.transform = `translateX(${(1 - kp) * -30}px) scale(${push})`;
-    know.style.filter = `drop-shadow(0 4px 16px rgba(0,0,0,.6)) drop-shadow(0 0 ${6 + 8 * I}px rgba(90,150,255,${.1 + .25 * I}))`;
-    // exit
-    const xp = E.inCubic(prog(t, 3.7, 4.1));
-    A.style.opacity = 1 - xp;
-    A.style.filter = xp > 0 ? `blur(${14 * xp}px)` : 'none';
-    A.style.transform = `translateY(${-70 * xp}px)`;
+
+    const tp = E.outCubic(prog(t, 1.55, 2.15));
+    const talk = $('talk');
+    talk.style.clipPath = tp < 1 ? `inset(0 ${100 * (1 - tp)}% 0 0)` : 'none';
+    talk.style.transform = `translateY(${(1 - tp) * 16}px) scale(${push})`;
+    talk.style.filter = 'drop-shadow(0 0 3px rgba(0,0,0,.45)) drop-shadow(0 6px 26px rgba(0,0,0,.8))';
+
+    // logo band rises, gold edge draws out from the centre, logo resolves, then a sheen and a fleur glint
+    const bp = E.outCubic(prog(t, .95, 1.45)), bx = E.inCubic(prog(t, 3.7, 4.05));
+    $('band').style.transform = `translateY(${(1 - bp) * 260 + bx * 260}px)`;
+    $('bandLine').style.transform = `scaleX(${E.inOutCubic(prog(t, 1.15, 1.75))})`;
+    const fp = E.outBack(prog(t, 1.3, 1.8));
+    const bf = $('bFleur');
+    bf.style.opacity = clamp(prog(t, 1.3, 1.45));
+    bf.style.transform = `scale(${fp})`;
+    const glint = Math.sin(Math.PI * prog(t, 2.6, 3.4));
+    bf.style.filter = `drop-shadow(0 0 ${8 + 20 * glint}px rgba(226,190,126,${.25 + .5 * glint}))`;
+    [...$('bName').querySelectorAll('.w')].forEach((c, i) => reveal(c, t, 1.4 + i * .025, .45, { dy: 18, blur: 8 }));
+    reveal($('bTag'), t, 1.95, .5, { dy: 10, blur: 6 });
+    const sh = prog(t, 2.6, 3.4);
+    const bs = $('bSheen');
+    bs.style.opacity = sh > 0 && sh < 1 ? 1 : 0;
+    bs.style.backgroundPosition = `${lerp(110, -10, E.inOutCubic(sh))}% 0`;
+
+    [$('arrested'), dui, talk].forEach(exitTxt);
+    if (xp > 0) {
+      const lift = `translateY(${-60 * xp}px)`;
+      $('arrested').style.transform = lift;
+      dui.style.transform = `${lift} scale(${s})`;
+      talk.style.transform = `${lift} scale(${push})`;
+    }
   }
 
   // ----- Scene B: attorneys photo (left) | You're an adult. What you tell us stays between us. (right) -----
@@ -371,21 +349,20 @@ function seek(t) {
   const showB = t > 3.7 && t < 8.3;
   B.style.display = showB ? 'block' : 'none';
   if (showB) {
-    // photo wipes in from the left behind a glowing blue edge, then wipes back out
+    // photo wipes in from the left behind a glowing gold edge, then wipes back out
     const wi = E.inOutCubic(prog(t, 3.75, 4.35)), wo = E.inOutCubic(prog(t, 7.85, 8.25));
     const edge = 960 * (wi - wo);
     $('photoPanel').style.clipPath = `inset(0 ${960 - edge}px 0 0)`;
     $('seam').style.left = `${edge - 3}px`;
     $('seam').style.opacity = edge > 1 ? 1 : 0;
-    $('seam').style.filter = `drop-shadow(0 0 ${10 + 6 * I}px rgba(226,190,126,.75))`;
+    $('seam').style.filter = 'drop-shadow(0 0 12px rgba(226,190,126,.75))';
     $('photo').style.transform = `scale(${lerp(1.12, 1.0, E.outCubic(prog(t, 3.75, 8.25)))})`;
-    $('photoWash').style.opacity = .22 * lI;
 
     [...$('kicker').children].forEach((w, i) => reveal(w, t, 4.25 + i * .07, .5, { dy: 24, blur: 8 }));
     $('b1').style.filter = $('b2').style.filter = 'drop-shadow(0 4px 18px rgba(0,0,0,.55))';
     [['b1', 4.55], ['b2', 4.75], ['b3', 5.05], ['b4', 5.25]].forEach(([id, st]) =>
       [...$(id).children].forEach((w, i) => reveal(w, t, st + i * .08, .55, { dy: 44, blur: 12 })));
-    const glowB = `drop-shadow(0 4px 18px rgba(0,0,0,.55)) drop-shadow(0 0 ${8 + 8 * I}px rgba(226,190,126,${.18 + .12 * I}))`;
+    const glowB = 'drop-shadow(0 4px 18px rgba(0,0,0,.55)) drop-shadow(0 0 10px rgba(226,190,126,.2))';
     $('b3').style.filter = glowB; $('b4').style.filter = glowB;
     const cp = E.outCubic(prog(t, 5.75, 6.2));
     const chip = $('chip');
@@ -415,30 +392,27 @@ function seek(t) {
     const mi = $('medalImg');
     mi.style.opacity = clamp(prog(t, 8.3, 8.5));
     mi.style.transform = `scale(${lerp(.6, 1, mp)})`;
-    $('medal').style.filter = `drop-shadow(0 0 ${10 + 10 * I}px rgba(90,150,255,${.12 + .25 * I}))`;
+    $('medal').style.filter = 'drop-shadow(0 0 14px rgba(226,190,126,.25))';
     reveal($('cap'), t, 8.6, .45, { dy: 14, blur: 6 });
     [...$('call').children].forEach((w, i) => reveal(w, t, 8.45 + i * .07, .45, { dy: 26, blur: 8 }));
     $('call').style.filter = 'drop-shadow(0 4px 16px rgba(0,0,0,.6))';
     [...$('num').children].forEach((c, i) => {
       reveal(c, t, 8.75 + i * .035, .45, { dy: -70, blur: 10, ease: E.outBack });
     });
-    $('num').style.filter = `drop-shadow(0 8px 26px rgba(0,0,0,.6)) drop-shadow(0 0 ${8 + 12 * I}px rgba(90,150,255,${.15 + .3 * I}))`;
+    $('num').style.filter = 'drop-shadow(0 8px 26px rgba(0,0,0,.55))';
+    // exit into the outro: blur up and out over the shared navy background
+    const xp = E.inCubic(prog(t, 10.25, 10.6));
     const push = 1 + .03 * E.inOutCubic(prog(t, 8.6, 10.6));
-    C.style.transform = `scale(${push})`;
+    C.style.transform = `translateY(${-50 * xp}px) scale(${push})`;
+    C.style.opacity = 1 - xp;
+    C.style.filter = xp > 0 ? `blur(${14 * xp}px)` : 'none';
   }
-
-  // ----- transition flash -----
-  const f = prog(t, 10.45, 10.62) - E.outCubic(prog(t, 10.62, 11.05));
-  $('flash').style.opacity = .92 * clamp(f);
 
   // ----- Scene D: logo + contact -----
   const O = $('outro');
   O.style.opacity = inOutro ? 1 : 0;
   if (inOutro) {
     const u = t - 10.62;
-    const breathe = .5 + .5 * Math.sin(u * 2.2);
-    $('og1').style.opacity = .55 + .25 * breathe;
-    $('og2').style.opacity = .55 + .25 * (1 - breathe);
     $('oGroup').style.transform = `scale(${1 + .025 * E.inOutCubic(prog(u, 0, 4.4))})`;
 
     // fleur grows up from its base, then the name resolves letter by letter
@@ -462,6 +436,7 @@ function seek(t) {
     sheen.style.opacity = shine > 0 && shine < 1 ? 1 : 0;
     sheen.style.backgroundPosition = `${lerp(110, -10, E.inOutCubic(shine))}% 0`;
   }
+  return pending;   // resolves once the footage frame is decoded
 }
 
 window.seek = seek;
@@ -471,7 +446,7 @@ window.ready = document.fonts.ready.then(() => Promise.all([...document.fonts].m
 // live preview when opened directly in a browser (no ?render)
 if (!location.search.includes('render')) {
   const t0 = performance.now();
-  const loop = now => { seek(((now - t0) / 1000) % DURATION); requestAnimationFrame(loop); };
+  const loop = now => { seek(((now - t0) / 1000) % DURATION); requestAnimationFrame(loop); };  // run prepare.sh first
   window.ready.then(() => requestAnimationFrame(loop));
 }
 </script>

@@ -5,6 +5,7 @@
 //
 // Options: --scale 2 (supersample factor), --workers 4 (parallel browser pages)
 // Frames are captured at 2x (3840x2160) and downsampled to 1920x1080 for extra-clean edges.
+// If the ad folder has a prepare.sh, it runs first (ad1 uses it to extract its footage frames).
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -38,6 +39,10 @@ async function openPage(browser) {
   await page.evaluate(() => window.ready);
   return page;
 }
+
+// optional per-ad prep step (e.g. extracting footage frames)
+const prep = path.join(root, adDir, 'prepare.sh');
+if (fs.existsSync(prep)) execFileSync(prep, { stdio: 'inherit' });
 
 (async () => {
   const browser = await chromium.launch({ args: ['--force-color-profile=srgb', '--disable-lcd-text', '--font-render-hinting=none'] });
