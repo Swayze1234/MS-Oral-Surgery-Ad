@@ -93,19 +93,28 @@
   /* Scene D — outro / logo */
   #outro{opacity:0}
   #oGroup{transform-origin:50% 45%;top:22px}
-  #lockup{position:absolute;left:0;top:235px;width:1920px;display:flex;justify-content:center;align-items:center;gap:44px}
-  #fleur{width:196px;height:235px;overflow:visible}
+  #lockup{position:absolute;left:0;top:100px;width:1920px;display:flex;justify-content:center;align-items:center;gap:38px}
+  #fleur{width:162px;height:194px;overflow:visible}
   #ltext{position:relative;font-kerning:none}
-  #lname,#lsheen{font-family:"Cormorant";font-weight:600;font-size:106px;line-height:1;letter-spacing:.045em;color:var(--ivory);white-space:nowrap}
+  #lname,#lsheen{font-family:"Cormorant";font-weight:600;font-size:90px;line-height:1;letter-spacing:.045em;color:var(--ivory);white-space:nowrap}
   #lname .pl,#lsheen .pl{font-size:.6em;letter-spacing:.07em;margin-left:.22em}
   #lsheen{position:absolute;left:0;top:0;color:transparent;-webkit-background-clip:text;background-clip:text;opacity:0;
           background-image:linear-gradient(100deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.95) 50%,rgba(255,255,255,0) 58%);
           background-size:300% 100%;background-repeat:no-repeat}
-  #ltag{font-family:"Cormorant";font-weight:600;font-size:46px;letter-spacing:.38em;color:var(--gold);margin-top:22px;white-space:nowrap}
-  #pill{position:absolute;top:585px;left:50%;display:flex;align-items:center;gap:26px;padding:24px 56px 24px 44px;border-radius:999px;
-        border:2px solid rgba(194,154,91,.8);background:rgba(4,10,26,.45);white-space:nowrap}
-  #pill .n{font-family:"Montserrat";font-weight:700;font-size:84px;letter-spacing:.03em;color:#fff;line-height:1}
-  #city{font-family:"Montserrat";font-weight:600;font-size:28px;letter-spacing:.34em;color:rgba(245,240,230,.88);top:760px;padding-left:.34em}
+  #ltag{font-family:"Cormorant";font-weight:600;font-size:39px;letter-spacing:.38em;color:var(--gold);margin-top:18px;white-space:nowrap}
+  #oRule{position:absolute;left:660px;top:352px;width:600px;height:2px;
+         background:linear-gradient(90deg,rgba(194,154,91,0),#c29a5b 18%,#c29a5b 82%,rgba(194,154,91,0))}
+  /* contact block, styled after the firm's website (Cormorant Garamond, old-style figures, gold line icons) */
+  #contact{position:absolute;top:395px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;gap:26px;font-family:"Cormorant"}
+  .crow{display:flex;align-items:center;gap:30px}
+  .ico{width:72px;display:flex;justify-content:center;flex:none}
+  .ico svg{fill:none;stroke:var(--gold);stroke-linecap:round;stroke-linejoin:round}
+  #phoneTxt{font-weight:500;font-size:126px;line-height:1;color:var(--ivory);white-space:nowrap}
+  #addrRow{align-items:flex-start}
+  #addrRow .ico{padding-top:6px}
+  #addr{font-weight:500;font-size:50px;line-height:1.2;color:rgba(239,235,230,.9);white-space:nowrap}
+  #hours{font-family:"Cormorant";font-weight:500;font-size:39px;color:rgba(239,235,230,.8);top:752px}
+  #circa{font-family:"Cormorant";font-weight:600;font-style:italic;font-size:46px;color:var(--gold);top:812px}
   #notice{font-family:"Montserrat";font-weight:600;font-size:22px;letter-spacing:.16em;color:rgba(245,240,230,.66);top:992px;padding-left:.16em}
 
 </style>
@@ -206,11 +215,19 @@
           <div id="ltag">CONCIERGE ATTORNEYS</div>
         </div>
       </div>
-      <div id="pill">
-        <svg width="66" height="66" viewBox="0 0 24 24"><path fill="#c29a5b" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.250.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-        <span class="n">662.232.9500</span>
+      <div id="oRule"></div>
+      <div id="contact">
+        <div id="phoneRow" class="crow">
+          <div class="ico"><svg width="66" height="66" viewBox="0 0 24 24" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div id="phoneTxt"></div>
+        </div>
+        <div id="addrRow" class="crow">
+          <div class="ico"><svg width="52" height="52" viewBox="0 0 24 24" stroke-width="1.6"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div id="addr">1013 East Jackson Avenue<br>Oxford, Mississippi 38655</div>
+        </div>
       </div>
-      <div id="city" class="row">OXFORD, MISSISSIPPI</div>
+      <div id="hours" class="row">Office open Monday through Friday. Emergencies answered evenings and weekends.</div>
+      <div id="circa" class="row">In Mississippi’s oldest law office, circa 1893.</div>
       <div id="notice" class="row">FREE BACKGROUND INFORMATION AVAILABLE UPON REQUEST</div>
     </div>
   </div>
@@ -220,7 +237,8 @@
 <script>
 // ---------- config ----------
 const FPS = 30, DURATION = 15;
-const PHONE = "662.232.9500";
+const PHONE = "662.232.9500";          // call slide
+const PHONE_SITE = "(662) 232-9500";    // outro, styled like the firm's website
 
 // ---------- helpers ----------
 const $ = id => document.getElementById(id);
@@ -249,6 +267,7 @@ const nameSpans = () => [...'LITTLE & HOLLAND,'].map(c =>
   c === ' ' ? ' ' : `<span class="w">${c === '&' ? '&amp;' : c}</span>`).join('') + '<span class="w pl">PLLC</span>';
 $('lname').innerHTML = nameSpans();
 $('bName').innerHTML = nameSpans();
+$('phoneTxt').innerHTML = [...PHONE_SITE].map(c => c === ' ' ? ' ' : `<span class="w">${c}</span>`).join('');
 
 // ---------- intro footage (pre-extracted stills, see prepare.sh) ----------
 const FOOT_FRAMES = 153;
@@ -426,11 +445,16 @@ function seek(t) {
 
     [...$('lname').querySelectorAll('.w')].forEach((c, i) => reveal(c, u, .45 + i * .03, .5, { dy: 22, blur: 8 }));
     reveal($('ltag'), u, 1.2, .6, { dy: 14, blur: 8 });
-    const pp = E.outCubic(prog(u, 1.7, 2.25));
-    $('pill').style.opacity = pp;
-    $('pill').style.transform = `translateX(-50%) translateY(${(1 - pp) * 34}px)`;
-    reveal($('city'), u, 1.95, .5, { dy: 16, blur: 6 });
-    reveal($('notice'), u, 2.2, .5, { dy: 0, blur: 0 });
+    const rp = E.inOutCubic(prog(u, .95, 1.5));
+    $('oRule').style.transform = `scaleX(${rp})`;
+    $('oRule').style.opacity = rp;
+    // phone: icon pops, digits resolve; then address, hours and the circa-1893 line
+    reveal($('phoneRow').querySelector('.ico'), u, 1.1, .45, { dy: 0, blur: 6, scale: .6, ease: E.outBack });
+    [...$('phoneTxt').children].forEach((c, i) => reveal(c, u, 1.2 + i * .028, .45, { dy: 20, blur: 8 }));
+    reveal($('addrRow'), u, 1.55, .5, { dy: 18, blur: 8 });
+    reveal($('hours'), u, 1.8, .5, { dy: 14, blur: 6 });
+    reveal($('circa'), u, 1.95, .5, { dy: 14, blur: 6 });
+    reveal($('notice'), u, 2.15, .5, { dy: 0, blur: 0 });
 
     const sheen = $('lsheen');
     sheen.style.opacity = shine > 0 && shine < 1 ? 1 : 0;

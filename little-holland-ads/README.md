@@ -2,7 +2,7 @@
 
 | # | Spot | Audience | Status |
 |---|------|----------|--------|
-| 1 | `ad1-dui-students` — "Arrested for DUI? Let's talk." | College students | Draft v4 |
+| 1 | `ad1-dui-students` — "Arrested for DUI? Let's talk." | College students | Draft v5 |
 | 2 | Parents spot | Parents of college students | Not started |
 
 ## Spot 1 — storyboard (15 s, 1920×1080, 30 fps, silent)
@@ -12,7 +12,7 @@
 | 0.0–4.2 s | Police-light footage (`assets/police_lights_intro.mp4`) under a navy tint → *ARRESTED FOR* → **DUI?** (ivory serif, gold “?”) slams in with a camera shake → logo band rises from the bottom (solid navy, gold edge, fleur glint and sheen) → *Let's talk.* in gold italic |
 | 3.75–8.3 s | Split screen: the attorneys' photo wipes in on the left behind a glowing gold edge; on the right, *You're an adult.* (gold italic) / **What you tell us** (ivory) / **stays between us.** (gold) → gold lock clicks shut: PRIVATE & CONFIDENTIAL |
 | 8.2–10.6 s | Gold ring draws around Stan Little's portrait (*STAN LITTLE, ATTORNEY*) → **CALL LITTLE & HOLLAND** / **662.232.9500** (digits drop in) |
-| 10.6–15.0 s | Call slide blurs away → logo outro: gold fleur-de-lis grows up, *LITTLE & HOLLAND, PLLC* resolves letter by letter, *CONCIERGE ATTORNEYS*, phone number, *Oxford, Mississippi*, Bar notice line, light sheen across the name |
+| 10.6–15.0 s | Call slide blurs away → logo outro: gold fleur-de-lis grows up, *LITTLE & HOLLAND, PLLC* resolves letter by letter, *CONCIERGE ATTORNEYS* → contact block styled after the firm's website: **(662) 232-9500** (Cormorant Garamond, old-style figures, gold line phone icon), *1013 East Jackson Avenue, Oxford, Mississippi 38655* (gold pin icon), office hours line, *In Mississippi's oldest law office, circa 1893.* in gold italic, Bar notice line, light sheen across the name |
 
 All on-screen type follows the firm's branding to match the outro: Cormorant
 Garamond (the logo's serif) in ivory and gold on navy, with Montserrat for the
@@ -32,7 +32,7 @@ fleur-de-lis is redrawn in SVG and the name is set in Cormorant Garamond to
 match. Swap in a high-res logo if the firm has one.
 
 **Bar notice:** the outro carries *FREE BACKGROUND INFORMATION AVAILABLE UPON
-REQUEST* and *Oxford, Mississippi*, as laid out in the proposal. Still needed:
+REQUEST* and the office address in Oxford, Mississippi, as laid out in the proposal. Still needed:
 the name of the attorney responsible for the ad.
 
 **Photos:** `assets/attorneys_source.jpg` (cropped to `attorneys_crop.jpg` for
