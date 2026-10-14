@@ -90,7 +90,9 @@
   #call .amp{color:var(--gold)}
   #num{font-family:"Montserrat";font-weight:700;font-size:196px;line-height:1;color:#fff;top:680px;letter-spacing:.01em}
 
-  /* Scene D — outro / logo */
+  /* Scene D — outro: opens on the homepage hero photo, then the site's navy veil fades in under the logo */
+  #heroBg{position:absolute;left:0;top:0;width:1920px;height:1080px;object-fit:cover;object-position:center 55%;opacity:0;transform-origin:50% 55%}
+  #heroVeil{background:linear-gradient(to top,rgba(0,16,44,.94) 0%,rgba(0,16,44,.74) 45%,rgba(0,16,44,.68) 100%);opacity:0}
   #outro{opacity:0}
   #oGroup{transform-origin:50% 45%;top:22px}
   #lockup{position:absolute;left:0;top:100px;width:1920px;display:flex;justify-content:center;align-items:center;gap:38px}
@@ -184,6 +186,9 @@
       <div id="num" class="row"></div>
     </div>
   </div>
+
+  <img id="heroBg" src="../assets/home_hero_building.png" alt="" onerror="this.style.display='none'">
+  <div id="heroVeil" class="abs"></div>
 
   <div id="outro" class="abs">
     <div id="oGroup" class="abs">
@@ -284,7 +289,8 @@ function setFootage(t) {
 
 // ---------- timeline ----------
 function seek(t) {
-  const inOutro = t >= 10.62;
+  const OUTRO = 10.95;                      // outro content starts after the hero photo has filled the screen
+  const inOutro = t >= OUTRO;
   const breathe = .5 + .5 * Math.sin(t * 2.2);
   $('og1').style.opacity = .55 + .25 * breathe;
   $('og2').style.opacity = .55 + .25 * (1 - breathe);
@@ -402,8 +408,9 @@ function seek(t) {
 
   // ----- Scene C: Call Little & Holland 662.232.9500 -----
   const C = $('sceneC');
-  C.style.display = t > 8.1 && !inOutro ? 'block' : 'none';
-  if (t > 8.1 && !inOutro) {
+  const showC = t > 8.1 && t < 10.6;
+  C.style.display = showC ? 'block' : 'none';
+  if (showC) {
     // portrait medallion: gold ring draws, photo pops in
     const RC = 2 * Math.PI * 136, rp = E.inOutCubic(prog(t, 8.2, 8.95));
     $('mr1').style.strokeDasharray = RC; $('mr1').style.strokeDashoffset = RC * (1 - rp);
@@ -420,18 +427,23 @@ function seek(t) {
     });
     $('num').style.filter = 'drop-shadow(0 8px 26px rgba(0,0,0,.55))';
     // exit into the outro: blur up and out over the shared navy background
-    const xp = E.inCubic(prog(t, 10.25, 10.6));
+    const xp = E.inCubic(prog(t, 10.2, 10.55));
     const push = 1 + .03 * E.inOutCubic(prog(t, 8.6, 10.6));
     C.style.transform = `translateY(${-50 * xp}px) scale(${push})`;
     C.style.opacity = 1 - xp;
     C.style.filter = xp > 0 ? `blur(${14 * xp}px)` : 'none';
   }
 
+  // ----- homepage hero photo: fades up full screen, then the navy veil settles over it -----
+  $('heroBg').style.opacity = E.inOutCubic(prog(t, 10.25, 10.75));
+  $('heroBg').style.transform = `scale(${lerp(1.08, 1, E.outCubic(prog(t, 10.25, 15)))})`;
+  $('heroVeil').style.opacity = E.inOutCubic(prog(t, 10.95, 11.6));
+
   // ----- Scene D: logo + contact -----
   const O = $('outro');
   O.style.opacity = inOutro ? 1 : 0;
   if (inOutro) {
-    const u = t - 10.62;
+    const u = t - OUTRO;
     $('oGroup').style.transform = `scale(${1 + .025 * E.inOutCubic(prog(u, 0, 4.4))})`;
 
     // fleur grows up from its base, then the name resolves letter by letter
