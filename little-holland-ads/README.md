@@ -2,17 +2,21 @@
 
 | # | Spot | Audience | Status |
 |---|------|----------|--------|
-| 1 | `ad1-dui-students` — "DUI? Know Your Options." | College students | Draft v2 |
+| 1 | `ad1-dui-students` — "DUI? Know Your Options." | College students | Draft v3 |
 | 2 | Parents spot | Parents of college students | Not started |
 
 ## Spot 1 — storyboard (15 s, 1920×1080, 30 fps, silent)
 
 | Time | Beat |
 |------|------|
-| 0.0–3.7 s | Blue police lights strobe in out of the dark → **DUI?** slams in with a camera shake → **KNOW YOUR OPTIONS.** wipes in |
-| 3.75–8.3 s | Split screen: the attorneys' photo wipes in on the left behind a glowing blue edge; on the right, *You're an adult.* / **What you tell us / stays between us.** → lock clicks shut: PRIVATE & CONFIDENTIAL |
-| 8.2–10.6 s | Lights back up → **CALL LITTLE & HOLLAND** / **662.232.9500** (digits drop in, phone badge rings) |
+| 0.0–3.7 s | Blue police lights strobe in out of the dark → **DUI?** (ivory serif, gold “?”) slams in with a camera shake → gold fleur-de-lis divider draws out → **KNOW YOUR OPTIONS.** wipes in |
+| 3.75–8.3 s | Split screen: the attorneys' photo wipes in on the left behind a glowing gold edge; on the right, *You're an adult.* (gold italic) / **What you tell us** (ivory) / **stays between us.** (gold) → gold lock clicks shut: PRIVATE & CONFIDENTIAL |
+| 8.2–10.6 s | Lights back up → gold ring draws around Stan Little's portrait (*STAN LITTLE, ATTORNEY*) → **CALL LITTLE & HOLLAND** / **662.232.9500** (digits drop in) |
 | 10.6–15.0 s | Light flash → logo outro: gold fleur-de-lis grows up, *LITTLE & HOLLAND, PLLC* resolves letter by letter, *CONCIERGE ATTORNEYS*, phone number, *Oxford, Mississippi*, Bar notice line, light sheen across the name |
+
+All on-screen type follows the firm's branding to match the outro: Cormorant
+Garamond (the logo's serif) in ivory and gold on navy, with Montserrat for the
+phone number and small caps lines. The blue police lights stay in the background.
 
 The strobe keeps each light to 2 flashes per second, under the 3-per-second
 photosensitivity guideline for public screens.
@@ -26,8 +30,10 @@ match. Swap in a high-res logo if the firm has one.
 REQUEST* and *Oxford, Mississippi*, as laid out in the proposal. Still needed:
 the name of the attorney responsible for the ad.
 
-**Photo:** `assets/attorneys_source.jpg` (the photo sent in for this spot),
-cropped to `assets/attorneys_crop.jpg` for the half-frame.
+**Photos:** `assets/attorneys_source.jpg` (cropped to `attorneys_crop.jpg` for
+the half-frame) and `assets/stan_little_source.webp` (Stan Little's headshot,
+cropped to `stan_little_crop.jpg`; the source is only 1002×602, so it is used as
+a small round portrait to stay sharp).
 
 ## Outputs (`out/`)
 

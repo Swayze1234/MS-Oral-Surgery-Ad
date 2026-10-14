@@ -24,15 +24,18 @@
   .row{position:absolute;left:0;width:1920px;text-align:center;white-space:nowrap}
   .w{display:inline-block;will-change:transform,opacity,filter}
 
-  /* Scene A — DUI? */
-  #dui{font-family:"Anton";font-size:400px;line-height:1;color:#fff;letter-spacing:.01em;top:220px;transform-origin:50% 55%}
-  #dui .q{color:var(--blue-hi)}
-  .ghost{color:rgba(60,130,255,.9)!important}
-  .ghost .q{color:rgba(60,130,255,.9)}
-  #know{font-family:"Montserrat";font-weight:800;font-size:86px;letter-spacing:.13em;color:#fff;top:690px}
-  #know span{display:inline-block;padding-left:.13em}
-  #rule{position:absolute;left:560px;top:820px;width:800px;height:6px;border-radius:3px;
-        background:linear-gradient(90deg,rgba(43,123,255,0),#2b7bff 20%,#8fbcff 50%,#2b7bff 80%,rgba(43,123,255,0));transform-origin:50% 50%}
+  /* Scene A — DUI? (brand: Cormorant Garamond, ivory + gold) */
+  #dui{font-family:"Cormorant";font-weight:700;font-size:440px;line-height:1;color:var(--ivory);letter-spacing:.005em;top:175px;transform-origin:50% 55%}
+  .goldtxt{background:linear-gradient(180deg,#e2be7e 0%,#c29a5b 55%,#9c7036 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .ghost{color:rgba(194,154,91,.85)!important}
+  .ghost .q{background:none;color:rgba(194,154,91,.85)}
+  #divA{position:absolute;left:0;top:643px;width:1920px;height:60px}
+  #divA .ln{position:absolute;top:29px;width:330px;height:2px}
+  #lnL{left:600px;background:linear-gradient(90deg,rgba(194,154,91,0),#c29a5b);transform-origin:100% 50%}
+  #lnR{left:990px;background:linear-gradient(90deg,#c29a5b,rgba(194,154,91,0));transform-origin:0 50%}
+  #fleurA{position:absolute;left:937px;top:2px;width:46px;height:55px;overflow:visible}
+  #know{font-family:"Cormorant";font-weight:700;font-size:92px;letter-spacing:.16em;color:var(--ivory);top:725px}
+  #know span{display:inline-block;padding-left:.16em}
 
   /* Scene B — split screen: attorneys photo | confidentiality message */
   #photoPanel{position:absolute;left:0;top:0;width:960px;height:1080px;overflow:hidden;background:#0a1430}
@@ -43,26 +46,29 @@
                     linear-gradient(270deg,rgba(4,10,26,.45) 0%,rgba(4,10,26,0) 9%)}
   #photoWash{position:absolute;left:0;top:0;width:960px;height:1080px;mix-blend-mode:screen;opacity:0;
          background:radial-gradient(ellipse 85% 55% at 0% 0%,rgba(40,110,255,.9),rgba(40,110,255,0) 70%)}
-  #seam{position:absolute;left:957px;top:0;width:6px;height:1080px;
-        background:linear-gradient(180deg,rgba(143,188,255,0),#8fbcff 18%,#2b7bff 50%,#8fbcff 82%,rgba(143,188,255,0))}
-  #textB{position:absolute;left:1040px;top:0;width:840px;height:1080px}
+  #seam{position:absolute;left:957px;top:0;width:5px;height:1080px;
+        background:linear-gradient(180deg,rgba(210,170,100,0),#e2be7e 18%,#b8894b 50%,#e2be7e 82%,rgba(210,170,100,0))}
+  #textB{position:absolute;left:1035px;top:0;width:860px;height:1080px}
   .lb{position:absolute;left:0;white-space:nowrap}
-  #kicker{font-family:"Montserrat";font-weight:700;font-size:54px;letter-spacing:.05em;color:var(--blue-hi);top:205px}
-  .big{font-family:"Montserrat";font-weight:800;font-size:112px;line-height:1;letter-spacing:-.015em;color:#fff}
-  #b1{top:290px} #b2{top:405px} #b3{top:540px} #b4{top:655px}
-  #b3 .w,#b4 .w{background:linear-gradient(180deg,#cfe2ff 0%,#6fa6ff 55%,#2b7bff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-  #chip{position:absolute;top:815px;left:0;display:flex;align-items:center;gap:20px;
-        padding:18px 36px 18px 26px;border-radius:999px;border:2px solid rgba(143,188,255,.55);
-        background:rgba(18,52,140,.32);font-family:"Montserrat";font-weight:700;font-size:30px;letter-spacing:.2em;color:#e6efff;white-space:nowrap}
-  #lockWrap{position:relative;width:50px;height:50px}
-  #lockPulse{position:absolute;left:50%;top:50%;width:50px;height:50px;margin:-25px 0 0 -25px;border-radius:50%;border:3px solid #8fbcff;opacity:0}
+  #kicker{font-family:"Cormorant";font-weight:600;font-style:italic;font-size:70px;letter-spacing:.01em;color:var(--gold);top:190px}
+  .big{font-family:"Cormorant";font-weight:700;font-size:146px;line-height:1;letter-spacing:.005em;color:var(--ivory)}
+  #b1{top:262px} #b2{top:387px} #b3{top:530px} #b4{top:655px}
+  #b3 .w,#b4 .w{background:linear-gradient(180deg,#e9c88a 0%,#c9a062 55%,#a2763a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  #chip{position:absolute;top:832px;left:0;display:flex;align-items:center;gap:20px;
+        padding:18px 38px 18px 28px;border-radius:999px;border:2px solid rgba(194,154,91,.8);
+        background:rgba(6,16,38,.6);font-family:"Montserrat";font-weight:600;font-size:26px;letter-spacing:.24em;color:var(--ivory);white-space:nowrap}
+  #lockWrap{position:relative;width:46px;height:46px}
+  #lockPulse{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;border:3px solid #c29a5b;opacity:0}
 
-  /* Scene C — call */
-  #badge{position:absolute;left:905px;top:270px;width:110px;height:110px;border-radius:50%;
-         background:radial-gradient(circle at 50% 40%,#3d8bff,#1d5be0);display:flex;align-items:center;justify-content:center;
-         box-shadow:0 0 0 0 rgba(43,123,255,.0)}
-  #call{font-family:"Montserrat";font-weight:700;font-size:64px;letter-spacing:.14em;color:#fff;top:430px}
-  #num{font-family:"Anton";font-size:250px;line-height:1;color:#fff;top:520px;letter-spacing:.02em}
+  /* Scene C — call, with Stan Little's portrait */
+  #medal{position:absolute;left:820px;top:190px;width:280px;height:280px}
+  #medalImg{position:absolute;left:14px;top:14px;width:252px;height:252px;border-radius:50%;object-fit:cover;
+            box-shadow:0 10px 40px rgba(0,0,0,.45)}
+  #medalRing{position:absolute;left:0;top:0;width:280px;height:280px;overflow:visible}
+  #cap{font-family:"Montserrat";font-weight:600;font-size:24px;letter-spacing:.3em;color:rgba(239,235,230,.85);top:494px;padding-left:.3em}
+  #call{font-family:"Cormorant";font-weight:700;font-size:78px;letter-spacing:.12em;color:var(--ivory);top:562px;padding-left:.12em}
+  #call .amp{color:var(--gold)}
+  #num{font-family:"Montserrat";font-weight:700;font-size:196px;line-height:1;color:#fff;top:680px;letter-spacing:.01em}
 
   /* Scene D — outro / logo */
   #outro{opacity:0}
@@ -95,11 +101,14 @@
     <canvas id="bg" class="abs"></canvas>
 
     <div id="sceneA" class="abs">
-      <div id="duiG1" class="row ghost" style="font-family:Anton;font-size:400px;line-height:1;top:220px;transform-origin:50% 55%;opacity:0">DUI<span class="q">?</span></div>
-      <div id="duiG2" class="row ghost" style="font-family:Anton;font-size:400px;line-height:1;top:220px;transform-origin:50% 55%;opacity:0">DUI<span class="q">?</span></div>
-      <div id="dui" class="row">DUI<span class="q">?</span></div>
+      <div id="duiG1" class="row ghost" style="font-family:Cormorant;font-weight:700;font-size:440px;line-height:1;top:175px;transform-origin:50% 55%;opacity:0">DUI<span class="q">?</span></div>
+      <div id="duiG2" class="row ghost" style="font-family:Cormorant;font-weight:700;font-size:440px;line-height:1;top:175px;transform-origin:50% 55%;opacity:0">DUI<span class="q">?</span></div>
+      <div id="dui" class="row">DUI<span class="q goldtxt">?</span></div>
+      <div id="divA">
+        <div id="lnL" class="ln"></div><div id="lnR" class="ln"></div>
+        <svg id="fleurA" viewBox="0 0 100 120"><use href="#fleurArt"/></svg>
+      </div>
       <div id="know" class="row"><span>KNOW YOUR OPTIONS.</span></div>
-      <div id="rule"></div>
     </div>
 
     <div id="sceneB" class="abs">
@@ -118,10 +127,10 @@
         <div id="chip">
           <div id="lockWrap">
             <div id="lockPulse"></div>
-            <svg width="50" height="50" viewBox="0 0 24 24" style="position:absolute;left:0;top:0;overflow:visible">
-              <g id="shackle"><path d="M7.5 11V7.5a4.5 4.5 0 0 1 9 0V11" fill="none" stroke="#8fbcff" stroke-width="2.2" stroke-linecap="round"/></g>
-              <rect x="4.5" y="10.5" width="15" height="11" rx="2.2" fill="#8fbcff"/>
-              <circle cx="12" cy="15.4" r="1.6" fill="#0b2a6b"/><rect x="11.25" y="15.6" width="1.5" height="3" rx=".7" fill="#0b2a6b"/>
+            <svg width="46" height="46" viewBox="0 0 24 24" style="position:absolute;left:0;top:0;overflow:visible">
+              <g id="shackle"><path d="M7.5 11V7.5a4.5 4.5 0 0 1 9 0V11" fill="none" stroke="#c29a5b" stroke-width="2.2" stroke-linecap="round"/></g>
+              <rect x="4.5" y="10.5" width="15" height="11" rx="2.2" fill="#c29a5b"/>
+              <circle cx="12" cy="15.4" r="1.6" fill="#0b1a3a"/><rect x="11.25" y="15.6" width="1.5" height="3" rx=".7" fill="#0b1a3a"/>
             </svg>
           </div>
           <span>PRIVATE &amp; CONFIDENTIAL</span>
@@ -130,10 +139,14 @@
     </div>
 
     <div id="sceneC" class="abs">
-      <div id="badge">
-        <svg id="phoneIco" width="60" height="60" viewBox="0 0 24 24"><path fill="#fff" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      <div id="medal">
+        <img id="medalImg" src="../assets/stan_little_crop.jpg" alt="">
+        <svg id="medalRing" viewBox="0 0 280 280">
+          <circle id="mr1" cx="140" cy="140" r="136" fill="none" stroke="url(#gold)" stroke-width="4" transform="rotate(-90 140 140)"/>
+        </svg>
       </div>
-      <div id="call" class="row"><span class="w">CALL</span> <span class="w">LITTLE</span> <span class="w">&amp;</span> <span class="w">HOLLAND</span></div>
+      <div id="cap" class="row">STAN LITTLE, ATTORNEY</div>
+      <div id="call" class="row"><span class="w">CALL</span> <span class="w">LITTLE</span> <span class="w amp">&amp;</span> <span class="w">HOLLAND</span></div>
       <div id="num" class="row"></div>
     </div>
   </div>
@@ -150,6 +163,7 @@
               <stop offset="0" stop-color="#d1a868"/><stop offset=".55" stop-color="#b8894b"/><stop offset="1" stop-color="#9c7036"/>
             </linearGradient>
           </defs>
+          <g id="fleurArt">
           <g fill="url(#gold)">
             <g id="fhalf">
               <path d="M50 0 C56 10 62 21 62.5 33 C63 50 59 66 55 79 L50 79 Z"/>
@@ -161,6 +175,7 @@
             <rect x="37" y="79" width="26" height="5" rx="2.5"/>
           </g>
           <rect x="49.45" y="26" width="1.1" height="24" rx=".55" fill="#5a3f17" opacity=".75"/>
+          </g>
         </svg>
         <div id="ltext">
           <div id="lname"></div>
@@ -325,20 +340,25 @@ function seek(t) {
     const dui = $('dui');
     dui.style.opacity = E.outCubic(prog(t, .30, .40));
     dui.style.transform = `scale(${s})`;
-    dui.style.filter = `drop-shadow(0 0 ${10 + 14 * I}px rgba(90,160,255,${.35 + .55 * I})) drop-shadow(0 0 ${36 + 40 * I}px rgba(40,110,255,${.25 + .5 * I}))`;
+    dui.style.filter = `drop-shadow(0 8px 28px rgba(0,0,0,.55)) drop-shadow(0 0 ${8 + 12 * I}px rgba(90,150,255,${.12 + .3 * I}))`;
     [['duiG1', -1], ['duiG2', 1]].forEach(([id, d]) => {
       const gEl = $(id), k = 1 - pS;
-      gEl.style.opacity = t < .30 ? 0 : .55 * k;
+      gEl.style.opacity = t < .30 ? 0 : .5 * k;
       gEl.style.transform = `translateX(${d * 70 * k}px) scale(${s * (1 + .18 * k)})`;
     });
-    const kp = E.outCubic(prog(t, 1.25, 1.85));
+    // gold divider: fleur blooms, rules draw outward, then the line wipes in
+    const fp = E.outBack(prog(t, 1.05, 1.5));
+    const fa = $('fleurA');
+    fa.style.opacity = clamp(prog(t, 1.05, 1.25));
+    fa.style.transform = `scale(${fp})`;
+    const lp = E.inOutCubic(prog(t, 1.2, 1.8));
+    $('lnL').style.transform = $('lnR').style.transform = `scaleX(${lp})`;
+    $('divA').style.transform = `scale(${push})`;
+    const kp = E.outCubic(prog(t, 1.35, 1.95));
     const know = $('know');
     know.style.clipPath = `inset(0 ${100 * (1 - kp)}% 0 0)`;
     know.style.transform = `translateX(${(1 - kp) * -30}px) scale(${push})`;
-    know.style.filter = `drop-shadow(0 0 ${12 + 12 * I}px rgba(60,130,255,${.15 + .4 * I}))`;
-    const rp = E.inOutCubic(prog(t, 1.55, 2.15));
-    $('rule').style.transform = `scaleX(${rp})`;
-    $('rule').style.opacity = rp;
+    know.style.filter = `drop-shadow(0 4px 16px rgba(0,0,0,.6)) drop-shadow(0 0 ${6 + 8 * I}px rgba(90,150,255,${.1 + .25 * I}))`;
     // exit
     const xp = E.inCubic(prog(t, 3.7, 4.1));
     A.style.opacity = 1 - xp;
@@ -357,14 +377,15 @@ function seek(t) {
     $('photoPanel').style.clipPath = `inset(0 ${960 - edge}px 0 0)`;
     $('seam').style.left = `${edge - 3}px`;
     $('seam').style.opacity = edge > 1 ? 1 : 0;
-    $('seam').style.filter = `drop-shadow(0 0 ${8 + 14 * I}px rgba(43,123,255,${.6 + .4 * I}))`;
+    $('seam').style.filter = `drop-shadow(0 0 ${10 + 6 * I}px rgba(226,190,126,.75))`;
     $('photo').style.transform = `scale(${lerp(1.12, 1.0, E.outCubic(prog(t, 3.75, 8.25)))})`;
     $('photoWash').style.opacity = .22 * lI;
 
     [...$('kicker').children].forEach((w, i) => reveal(w, t, 4.25 + i * .07, .5, { dy: 24, blur: 8 }));
+    $('b1').style.filter = $('b2').style.filter = 'drop-shadow(0 4px 18px rgba(0,0,0,.55))';
     [['b1', 4.55], ['b2', 4.75], ['b3', 5.05], ['b4', 5.25]].forEach(([id, st]) =>
       [...$(id).children].forEach((w, i) => reveal(w, t, st + i * .08, .55, { dy: 44, blur: 12 })));
-    const glowB = `drop-shadow(0 0 ${12 + 14 * I}px rgba(43,123,255,${.35 + .3 * I}))`;
+    const glowB = `drop-shadow(0 4px 18px rgba(0,0,0,.55)) drop-shadow(0 0 ${8 + 8 * I}px rgba(226,190,126,${.18 + .12 * I}))`;
     $('b3').style.filter = glowB; $('b4').style.filter = glowB;
     const cp = E.outCubic(prog(t, 5.75, 6.2));
     const chip = $('chip');
@@ -387,18 +408,21 @@ function seek(t) {
   const C = $('sceneC');
   C.style.display = t > 8.1 && !inOutro ? 'block' : 'none';
   if (t > 8.1 && !inOutro) {
-    const bp = E.outBack(prog(t, 8.2, 8.6));
-    const badge = $('badge');
-    badge.style.opacity = clamp(bp * 1.5);
-    const ring = Math.sin(2 * Math.PI * 7.5 * t) * 13 * (prog(t, 8.55, 8.65) - prog(t, 9.15, 9.35))
-               + Math.sin(2 * Math.PI * 7.5 * t) * 13 * (prog(t, 9.75, 9.85) - prog(t, 10.2, 10.4));
-    badge.style.transform = `scale(${bp}) rotate(${ring}deg)`;
-    badge.style.boxShadow = `0 0 ${30 + 50 * I}px rgba(43,123,255,${.35 + .45 * I})`;
-    [...$('call').children].forEach((w, i) => reveal(w, t, 8.3 + i * .07, .45, { dy: 26, blur: 8 }));
+    // portrait medallion: gold ring draws, photo pops in
+    const RC = 2 * Math.PI * 136, rp = E.inOutCubic(prog(t, 8.2, 8.95));
+    $('mr1').style.strokeDasharray = RC; $('mr1').style.strokeDashoffset = RC * (1 - rp);
+    const mp = E.outBack(prog(t, 8.3, 8.8));
+    const mi = $('medalImg');
+    mi.style.opacity = clamp(prog(t, 8.3, 8.5));
+    mi.style.transform = `scale(${lerp(.6, 1, mp)})`;
+    $('medal').style.filter = `drop-shadow(0 0 ${10 + 10 * I}px rgba(90,150,255,${.12 + .25 * I}))`;
+    reveal($('cap'), t, 8.6, .45, { dy: 14, blur: 6 });
+    [...$('call').children].forEach((w, i) => reveal(w, t, 8.45 + i * .07, .45, { dy: 26, blur: 8 }));
+    $('call').style.filter = 'drop-shadow(0 4px 16px rgba(0,0,0,.6))';
     [...$('num').children].forEach((c, i) => {
-      reveal(c, t, 8.6 + i * .035, .45, { dy: -70, blur: 10, ease: E.outBack });
+      reveal(c, t, 8.75 + i * .035, .45, { dy: -70, blur: 10, ease: E.outBack });
     });
-    $('num').style.filter = `drop-shadow(0 0 ${10 + 14 * I}px rgba(90,160,255,${.35 + .5 * I})) drop-shadow(0 0 ${34 + 36 * I}px rgba(40,110,255,${.25 + .45 * I}))`;
+    $('num').style.filter = `drop-shadow(0 8px 26px rgba(0,0,0,.6)) drop-shadow(0 0 ${8 + 12 * I}px rgba(90,150,255,${.15 + .3 * I}))`;
     const push = 1 + .03 * E.inOutCubic(prog(t, 8.6, 10.6));
     C.style.transform = `scale(${push})`;
   }
