@@ -70,11 +70,10 @@
         background:linear-gradient(180deg,rgba(210,170,100,0),#e2be7e 18%,#b8894b 50%,#e2be7e 82%,rgba(210,170,100,0))}
   #textB{position:absolute;left:1035px;top:0;width:860px;height:1080px}
   .lb{position:absolute;left:0;white-space:nowrap}
-  #kicker{font-family:"Cormorant";font-weight:600;font-style:italic;font-size:70px;letter-spacing:.01em;color:var(--gold);top:190px}
   .big{font-family:"Cormorant";font-weight:700;font-size:146px;line-height:1;letter-spacing:.005em;color:var(--ivory)}
-  #b1{top:262px} #b2{top:387px} #b3{top:530px} #b4{top:655px}
+  #b1{top:212px} #b2{top:337px} #b3{top:480px} #b4{top:605px}
   #b3 .w,#b4 .w{background:linear-gradient(180deg,#e9c88a 0%,#c9a062 55%,#a2763a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-  #chip{position:absolute;top:832px;left:0;display:flex;align-items:center;gap:20px;
+  #chip{position:absolute;top:782px;left:0;display:flex;align-items:center;gap:20px;
         padding:18px 38px 18px 28px;border-radius:999px;border:2px solid rgba(194,154,91,.8);
         background:rgba(6,16,38,.6);font-family:"Montserrat";font-weight:600;font-size:26px;letter-spacing:.24em;color:var(--ivory);white-space:nowrap}
   #lockWrap{position:relative;width:46px;height:46px}
@@ -165,7 +164,6 @@
       </div>
       <div id="seam"></div>
       <div id="textB">
-        <div id="kicker" class="lb"><span class="w">You’re</span> <span class="w">an</span> <span class="w">adult.</span></div>
         <div id="b1" class="lb big"><span class="w">What</span> <span class="w">you</span></div>
         <div id="b2" class="lb big"><span class="w">tell</span> <span class="w">us</span></div>
         <div id="b3" class="lb big"><span class="w">stays</span></div>
@@ -372,7 +370,7 @@ function seek(t) {
 
   }
 
-  // ----- Scene B: attorneys photo (left) | You're an adult. What you tell us stays between us. (right) -----
+  // ----- Scene B: attorneys photo (left) | What you tell us stays between us. (right) -----
   const B = $('sceneB');
   const showB = t > 6.5 && t < 10.4;
   B.style.display = showB ? 'block' : 'none';
@@ -386,19 +384,18 @@ function seek(t) {
     $('seam').style.filter = 'drop-shadow(0 0 12px rgba(226,190,126,.75))';
     $('photo').style.transform = `scale(${lerp(1.12, 1.0, E.outCubic(prog(t, 6.55, 10.35)))})`;
 
-    [...$('kicker').children].forEach((w, i) => reveal(w, t, 7.0 + i * .07, .5, { dy: 24, blur: 8 }));
     $('b1').style.filter = $('b2').style.filter = 'drop-shadow(0 4px 18px rgba(0,0,0,.55))';
-    [['b1', 7.25], ['b2', 7.42], ['b3', 7.65], ['b4', 7.82]].forEach(([id, st]) =>
+    [['b1', 7.05], ['b2', 7.22], ['b3', 7.45], ['b4', 7.62]].forEach(([id, st]) =>
       [...$(id).children].forEach((w, i) => reveal(w, t, st + i * .08, .55, { dy: 44, blur: 12 })));
     const glowB = 'drop-shadow(0 4px 18px rgba(0,0,0,.55)) drop-shadow(0 0 10px rgba(226,190,126,.2))';
     $('b3').style.filter = glowB; $('b4').style.filter = glowB;
-    const cp = E.outCubic(prog(t, 8.3, 8.7));
+    const cp = E.outCubic(prog(t, 8.1, 8.5));
     const chip = $('chip');
     chip.style.opacity = cp;
     chip.style.transform = `translateY(${(1 - cp) * 30}px)`;
-    const lp = E.inCubic(prog(t, 8.5, 8.68));
+    const lp = E.inCubic(prog(t, 8.3, 8.48));
     $('shackle').setAttribute('transform', `translate(0 ${-3.2 * (1 - lp)})`);
-    const pp = prog(t, 8.68, 9.3);
+    const pp = prog(t, 8.48, 9.1);
     $('lockPulse').style.opacity = pp > 0 && pp < 1 ? .7 * (1 - pp) : 0;
     $('lockPulse').style.transform = `scale(${1 + 1.3 * E.outCubic(pp)})`;
     // text exit
