@@ -2,7 +2,7 @@
 
 | # | Spot | Audience | Status |
 |---|------|----------|--------|
-| 1 | `ad1-dui-students` — "Arrested for DUI? Let's talk." | College students | Draft v6 |
+| 1 | `ad1-dui-students` — "Arrested for DUI? Let's talk." | College students | Draft v7 |
 | 2 | Parents spot | Parents of college students | Not started |
 
 ## Spot 1 — storyboard (15 s, 1920×1080, 30 fps, silent)
@@ -28,7 +28,9 @@ The renderer can't decode H.264 in headless Chromium, so `ad1-dui-students/prepa
 (run automatically by `render.cjs`) extracts the footage to stills in `.work/footage/`.
 
 **Outro photo:** `assets/home_hero_building_source.webp` (the homepage hero image,
-1774×887) is cropped to 16:9 and resized to `assets/home_hero_building.jpg`.
+1774×887) is cropped tight on the house front (780×439 from x 592, y 140, so the
+sky and trees mostly drop out), upscaled with Lanczos plus light sharpening, and
+saved as `assets/home_hero_building.jpg`.
 
 **Logo:** the firm's logo file (`assets/little_holland_logo_reference.png`, from
 the proposal) is only 327 px wide, so the outro rebuilds it as vector: the

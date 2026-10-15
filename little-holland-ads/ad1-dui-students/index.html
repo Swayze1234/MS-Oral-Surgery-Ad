@@ -440,7 +440,7 @@ function seek(t) {
   const vp = E.inOutCubic(prog(t, 10.95, 11.6));
   const hb = $('heroBg');
   hb.style.opacity = E.inOutCubic(prog(t, 10.25, 10.75));
-  hb.style.transform = `scale(${lerp(1.1, 1.03, E.outCubic(prog(t, 10.25, 15)))})`;
+  hb.style.transform = `scale(${lerp(1.05, 1.02, E.outCubic(prog(t, 10.25, 15)))})`;
   hb.style.filter = vp > 0 ? `blur(${5 * vp}px)` : 'none';
   $('heroVeil').style.opacity = vp;
 
