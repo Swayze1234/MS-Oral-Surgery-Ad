@@ -92,9 +92,10 @@
 
   /* Scene D — outro: opens on the homepage hero photo, then the site's navy veil fades in under the logo */
   #heroBg{position:absolute;left:0;top:0;width:1920px;height:1080px;object-fit:cover;object-position:center 55%;opacity:0;transform-origin:50% 55%}
-  #heroVeil{background:linear-gradient(to top,rgba(0,16,44,.94) 0%,rgba(0,16,44,.74) 45%,rgba(0,16,44,.68) 100%);opacity:0}
+  #heroVeil{background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(0,16,44,.2) 0%,rgba(0,16,44,0) 100%),
+                     linear-gradient(to top,rgba(0,16,44,.95) 0%,rgba(0,16,44,.8) 45%,rgba(0,16,44,.74) 100%);opacity:0}
   #outro{opacity:0}
-  #oGroup{transform-origin:50% 45%;top:22px}
+  #oGroup{transform-origin:50% 45%;top:22px;filter:drop-shadow(0 2px 14px rgba(0,0,0,.55))}
   #lockup{position:absolute;left:0;top:100px;width:1920px;display:flex;justify-content:center;align-items:center;gap:38px}
   #fleur{width:162px;height:194px;overflow:visible}
   #ltext{position:relative;font-kerning:none}
@@ -187,7 +188,7 @@
     </div>
   </div>
 
-  <img id="heroBg" src="../assets/home_hero_building.png" alt="" onerror="this.style.display='none'">
+  <img id="heroBg" src="../assets/home_hero_building.jpg" alt="" onerror="this.style.display='none'">
   <div id="heroVeil" class="abs"></div>
 
   <div id="outro" class="abs">
@@ -435,9 +436,13 @@ function seek(t) {
   }
 
   // ----- homepage hero photo: fades up full screen, then the navy veil settles over it -----
-  $('heroBg').style.opacity = E.inOutCubic(prog(t, 10.25, 10.75));
-  $('heroBg').style.transform = `scale(${lerp(1.08, 1, E.outCubic(prog(t, 10.25, 15)))})`;
-  $('heroVeil').style.opacity = E.inOutCubic(prog(t, 10.95, 11.6));
+  // as the veil settles the photo also drops slightly out of focus, so the contact text reads cleanly
+  const vp = E.inOutCubic(prog(t, 10.95, 11.6));
+  const hb = $('heroBg');
+  hb.style.opacity = E.inOutCubic(prog(t, 10.25, 10.75));
+  hb.style.transform = `scale(${lerp(1.1, 1.03, E.outCubic(prog(t, 10.25, 15)))})`;
+  hb.style.filter = vp > 0 ? `blur(${5 * vp}px)` : 'none';
+  $('heroVeil').style.opacity = vp;
 
   // ----- Scene D: logo + contact -----
   const O = $('outro');
