@@ -170,7 +170,16 @@ const scaleX=(el,p)=>{el.style.transform=`scaleX(${p})`;};
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
 
 // ---------- timeline ----------
-const T={s2:6.5,s3:12.5,s4:18.5,s5:24.5,end:30};
+// Duration presets. Open ad.html?dur=30 for the original cut; default is the 20s cut.
+// K = speed-up applied to the in-scene animations (text reveals, logo build, etc.).
+const PRESETS={
+  30:{T:{s2:6.5,s3:12.5,s4:18.5,s5:24.5,end:30},K:1},
+  20:{T:{s2:5.0,s3:8.5,s4:12.0,s5:15.5,end:20},K:1.3},
+};
+const DUR=PRESETS[new URLSearchParams(location.search).get('dur')]?Number(new URLSearchParams(location.search).get('dur')):20;
+const {T,K}=PRESETS[DUR];
+window.AD_END=T.end;
+const LEN={s1:T.s2,s2:T.s3-T.s2,s3:T.s4-T.s3,s4:T.s5-T.s4,s5:T.end-T.s5};
 const WIPE=0.36; // half-duration of the wipe around each boundary
 
 // ---------- logo ----------
@@ -258,6 +267,7 @@ function renderConfetti(parts,t,t0){
 
 // ---------- scene renderers ----------
 function renderS1(t){
+  t=t*K; // intro choreography runs K× faster in shorter cuts
   // red -> cream circular pop reveal
   const R=lerp(0,1250,seg(t,0.05,0.8,E.outExpo));
   $('s1-cream').style.clipPath=R>=1200?'none':`circle(${R}px at 960px 540px)`;
@@ -276,7 +286,7 @@ function renderS1(t){
   ph.style.opacity=clamp(pp*2);ph.style.transform=`translateY(${(1-pp)*40}px) scale(${lerp(.8,1,pp)})`;
 }
 function renderS2(t){
-  const s=t-T.s2,u=clamp(s/6.2);
+  const s=t-T.s2,u=clamp(s/(LEN.s2+.2));t=T.s2+s*K;
   $('s2-photo').style.transform=`scale(${lerp(1.16,1.03,u)}) translate(${lerp(-1.6,0,u)}%,${lerp(1.2,0,u)}%)`;
   scaleX($('s2-rule'),seg(t,T.s2+.25,T.s2+.75,E.outQuint));
   fadeUp($('s2-kicker'),seg(t,T.s2+.35,T.s2+.85),20);
@@ -286,7 +296,7 @@ function renderS2(t){
   const p=seg(t,T.s2+1.3,T.s2+1.95,E.outBack),lg=$('s2-logo');lg.style.opacity=p>0?1:0;lg.style.transform=`rotate(${(1-p)*-12}deg) scale(${Math.max(0,p)})`;
 }
 function renderS3(t){
-  const s=t-T.s3,u=clamp(s/6.2);
+  const s=t-T.s3,u=clamp(s/(LEN.s3+.2));t=T.s3+s*K;
   $('s3-photo').style.transform=`scale(${lerp(1.0,1.13,u)}) translate(${lerp(0,1.2,u)}%,${lerp(0,-1.5,u)}%)`;
   scaleX($('s3-rule'),seg(t,T.s3+.25,T.s3+.75,E.outQuint));
   fadeUp($('s3-kicker'),seg(t,T.s3+.35,T.s3+.85),20);
@@ -298,7 +308,7 @@ function renderS3(t){
   fadeUp($('s3-logo'),seg(t,T.s3+.6,T.s3+1.2),-20);
 }
 function renderS4(t){
-  const s=t-T.s4,u=clamp(s/6.2);
+  const s=t-T.s4,u=clamp(s/(LEN.s4+.2));t=T.s4+s*K;
   $('s4-photo').style.transform=`scale(${lerp(1.0,1.12,u)}) translate(${lerp(0,-1.2,u)}%,${lerp(0,1.5,u)}%)`;
   scaleX($('s4-rule'),seg(t,T.s4+.25,T.s4+.75,E.outQuint));
   fadeUp($('s4-kicker'),seg(t,T.s4+.35,T.s4+.85),20);
@@ -309,7 +319,7 @@ function renderS4(t){
   const p=seg(t,T.s4+1.4,T.s4+2.05,E.outBack),lg=$('s4-logo');lg.style.opacity=p>0?1:0;lg.style.transform=`rotate(${(1-p)*12}deg) scale(${Math.max(0,p)})`;
 }
 function renderS5(t){
-  const s=t-T.s5,u=clamp(s/5.6);
+  const s=t-T.s5,u=clamp(s/(LEN.s5+.1));t=T.s5+s*K;
   $('s5-photo').style.transform=`scale(${lerp(1.1,1.2,u)})`;
   const lp=seg(t,T.s5+.15,T.s5+.85,E.outBack),lg=$('s5-logo');lg.style.opacity=clamp(lp*2);lg.style.transform=`scale(${lerp(.55,1,lp)})`;
   scaleX($('s5-rule'),seg(t,T.s5+.75,T.s5+1.25,E.outQuint));

@@ -1,17 +1,21 @@
-# Uno Mas Tacos & Tequila — 30s silent digital ad (1920x1080)
+# Uno Mas Tacos & Tequila — silent digital ad (1920x1080)
 
-`out/uno-mas-30s-1920x1080.mp4` is a 30-second, silent, 1920x1080 H.264 ad
-for Uno Mas Tacos & Tequila (Starkville & Oxford, MS).
+`out/uno-mas-20s-1920x1080.mp4` is the 20-second, silent, 1920x1080 H.264 ad
+for Uno Mas Tacos & Tequila (Starkville, MS). `out/uno-mas-30s-1920x1080.mp4`
+is the original 30-second cut; both come from the same `ad.html` (see presets).
 
 ## Storyboard
 
+Times are for the 20s cut (30s cut in parentheses). The 20s cut keeps every scene
+and runs the in-scene animations 1.3x faster; the outro holds longest.
+
 | Time | Scene |
 |------|-------|
-| 0–6.5s | **Intro.** Red-to-cream pop reveal. The sugar-skull logo draws on as an outline, fills in, the side flowers bloom out, and the "UNO MAS" letters bounce in one at a time, followed by a confetti burst. Under the logo, the address tracks in and the phone number pops up: 106 Maxwell St, Starkville, MS 39759 · (662) 338-4644. |
-| 6.5–12.5s | **Tacos & Tequila.** Flat-lay photo (chips, queso, loaded fries) with slow zoom, headline "Tacos & Tequila", "Salsas, tortillas & chips made in-house daily". |
-| 12.5–18.5s | **Fresh. Handcrafted. Fun.** Full-bleed al pastor close-up, headline reveals word by word. |
-| 18.5–24.5s | **Agave bar.** "50+ Tequilas & Mezcals", "Handcrafted margaritas · Patio seating", "Open late Thu–Sat 'til 1 AM", game-day taco photo. |
-| 24.5–30s | **Outro.** Logo with the Starkville location centered beneath it (Starkville · Cotton District, 106 Maxwell St, (662) 338-4644) and a bottom bar with @unomastacos · unomastacos.com · Dine in · Takeout · Catering. |
+| 0–5s (0–6.5s) | **Intro.** Red-to-cream pop reveal. The sugar-skull logo draws on as an outline, fills in, the side flowers bloom out, and the "UNO MAS" letters bounce in one at a time, followed by a confetti burst. Under the logo, the address tracks in and the phone number pops up: 106 Maxwell St, Starkville, MS 39759 · (662) 338-4644. |
+| 5–8.5s (6.5–12.5s) | **Tacos & Tequila.** Flat-lay photo (chips, queso, loaded fries) with slow zoom, headline "Tacos & Tequila", "Salsas, tortillas & chips made in-house daily". |
+| 8.5–12s (12.5–18.5s) | **Fresh. Handcrafted. Fun.** Full-bleed al pastor close-up, headline reveals word by word. |
+| 12–15.5s (18.5–24.5s) | **Agave bar.** "50+ Tequilas & Mezcals", "Handcrafted margaritas · Patio seating", "Open late Thu–Sat 'til 1 AM", game-day taco photo. |
+| 15.5–20s (24.5–30s) | **Outro.** Logo with the Starkville location centered beneath it (Starkville · Cotton District, 106 Maxwell St, (662) 338-4644) and a bottom bar with @unomastacos · unomastacos.com · Dine in · Takeout · Catering. |
 
 Scene changes use a skewed red/mustard wipe. The logo pieces are vectorized
 from `assets/logo.png` so every element (skull, flowers, sprigs, each letter)
@@ -29,10 +33,12 @@ environment, so the site's own video is not included):
 ## Editing / rebuilding
 
 Everything is one HTML page driven by a `render(t)` function, so the whole ad
-is deterministic and can be previewed in any browser: open `ad.html#play`.
+is deterministic and can be previewed in any browser: open `ad.html#play`
+(20s cut) or `ad.html?dur=30#play` (30s cut).
 
-- Copy, colors, timings: edit `ad.html` (timeline constants are in the `T`
-  object; each scene has its own `renderS*` function).
+- Copy, colors, timings: edit `ad.html`. Scene boundaries and the animation
+  speed-up factor `K` for each cut live in the `PRESETS` object; each scene has
+  its own `renderS*` function.
 - Photos: swap the files in `assets/` (same file names) or change the
   `object-position` on each `<img>` to re-crop.
 - Logo: `assets/logo_glyphs.js` was generated from `assets/logo.png` with
@@ -42,7 +48,8 @@ Render the MP4 (needs Node with Playwright + Chromium, and an ffmpeg with
 libx264; `pip install imageio-ffmpeg` provides one):
 
 ```bash
-NODE_PATH=/opt/node22/lib/node_modules node render.cjs                 # full 30s MP4
+NODE_PATH=/opt/node22/lib/node_modules node render.cjs                   # 20s MP4
+NODE_PATH=/opt/node22/lib/node_modules node render.cjs --dur 30          # 30s MP4
 NODE_PATH=/opt/node22/lib/node_modules node render.cjs --preview 2,9,15  # stills at given seconds
 ```
 
