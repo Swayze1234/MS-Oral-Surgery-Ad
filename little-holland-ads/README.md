@@ -2,14 +2,14 @@
 
 | # | Spot | Audience | Status |
 |---|------|----------|--------|
-| 1 | `ad1-dui-students` — "Arrested for DUI? Call me." | College students | Draft v9 |
+| 1 | `ad1-dui-students` — "Arrested for DUI? Call us." | College students | Draft v10 |
 | 2 | Parents spot | Parents of college students | Not started |
 
 ## Spot 1 — storyboard (15 s, 1920×1080, 30 fps, silent)
 
 | Time | Beat |
 |------|------|
-| 0.0–3.4 s | Police-light footage (`assets/police_lights_intro.mp4`) under a navy tint → *ARRESTED FOR* → **DUI?** (ivory serif, gold “?”) slams in with a camera shake → logo band rises from the bottom (solid navy, gold edge, fleur glint and sheen) → *Call me.* in gold italic |
+| 0.0–3.4 s | Police-light footage (`assets/police_lights_intro.mp4`) under a navy tint → *ARRESTED FOR* → **DUI?** (ivory serif, gold “?”) slams in with a camera shake → logo band rises from the bottom (solid navy, gold edge, fleur glint and sheen) → *Call us.* in gold italic |
 | 3.35–6.8 s | Gold iris: a glowing ring bursts open from the centre of the frame while the intro pushes forward and blurs, wiping straight to Stan Little → his portrait pops in with a flash, gold rays flare behind it, a ripple rings out → *STAN LITTLE, ATTORNEY* → **CALL LITTLE & HOLLAND** / **662.232.9500** (digits drop in) |
 | 6.55–10.35 s | Split screen: the attorneys' photo wipes in on the left behind a glowing gold edge; on the right, **What you tell us** (ivory) / **stays between us.** (gold) → gold lock clicks shut: PRIVATE & CONFIDENTIAL |
 | 10.0–15.0 s | The firm's homepage photo (the 1013 East Jackson Avenue office) dissolves in full screen → the website's navy veil settles over it and the photo softens slightly as the logo outro builds: gold fleur-de-lis grows up, *LITTLE & HOLLAND, PLLC* resolves letter by letter, *CONCIERGE ATTORNEYS* → contact block styled after the firm's website: **(662) 232-9500** (Cormorant Garamond, old-style figures, gold line phone icon), *1013 East Jackson Avenue, Oxford, Mississippi 38655* (gold pin icon), office hours line, *In Mississippi's oldest law office, circa 1893.* in gold italic, Bar notice line, light sheen across the name |

@@ -79,7 +79,7 @@
   #lockWrap{position:relative;width:46px;height:46px}
   #lockPulse{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;border:3px solid #c29a5b;opacity:0}
 
-  /* Scene C — Stan Little: revealed through a gold iris straight out of "Call me." */
+  /* Scene C — Stan Little: revealed through a gold iris straight out of "Call us." */
   #cBg{background:radial-gradient(ellipse 75% 70% at 50% 42%,#13295a 0%,#0a1838 45%,#040a1a 100%)}
   #rays{position:absolute;left:440px;top:-200px;width:1040px;height:1040px;border-radius:50%;
         background:repeating-conic-gradient(from 0deg,rgba(226,190,126,0) 0deg 4deg,rgba(226,190,126,.30) 7.5deg,rgba(226,190,126,0) 11deg 15deg);
@@ -142,7 +142,7 @@
       <div id="duiG1" class="row ghost" style="font-family:Cormorant;font-weight:700;font-size:360px;line-height:1;top:185px;transform-origin:50% 55%;opacity:0">DUI<span class="q">?</span></div>
       <div id="duiG2" class="row ghost" style="font-family:Cormorant;font-weight:700;font-size:360px;line-height:1;top:185px;transform-origin:50% 55%;opacity:0">DUI<span class="q">?</span></div>
       <div id="dui" class="row">DUI<span class="q goldtxt">?</span></div>
-      <div id="talk" class="row"><span>Call me.</span></div>
+      <div id="talk" class="row"><span>Call us.</span></div>
       <div id="band">
         <div id="bandLine"></div>
         <div id="bLockup">
@@ -312,7 +312,7 @@ function seek(t) {
   const amp = sp > 0 && sp < 1 ? 16 * Math.pow(1 - sp, 2) : 0;
   $('shake').style.transform = amp ? `translate(${amp * Math.sin(t * 91)}px,${amp * Math.cos(t * 73)}px) scale(${1 + amp * .0022})` : 'none';
 
-  // ----- Scene A: footage · ARRESTED FOR / DUI? / Call me. · logo band -----
+  // ----- Scene A: footage · ARRESTED FOR / DUI? / Call us. · logo band -----
   const A = $('sceneA');
   const showA = t < 4.0;
   A.style.display = showA ? 'block' : 'none';
@@ -406,7 +406,7 @@ function seek(t) {
     tb.style.filter = xp > 0 ? `blur(${14 * xp}px)` : 'none';
   }
 
-  // ----- Scene C: "Call me." -> gold iris opens on Stan Little -> Call Little & Holland 662.232.9500 -----
+  // ----- Scene C: "Call us." -> gold iris opens on Stan Little -> Call Little & Holland 662.232.9500 -----
   const C = $('sceneC');
   const showC = t > 3.3 && t < 6.85;
   C.style.display = showC ? 'block' : 'none';
