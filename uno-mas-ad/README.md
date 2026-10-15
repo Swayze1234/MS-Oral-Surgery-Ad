@@ -8,7 +8,7 @@ for Uno Mas Tacos & Tequila (Starkville & Oxford, MS).
 | Time | Scene |
 |------|-------|
 | 0–6.5s | **Intro.** Red-to-cream pop reveal. The sugar-skull logo draws on as an outline, fills in, the side flowers bloom out, and the "UNO MAS" letters bounce in one at a time, followed by a confetti burst. Under the logo, the address tracks in and the phone number pops up: 106 Maxwell St, Starkville, MS 39759 · (662) 338-4644. |
-| 6.5–12.5s | **Tacos & Tequila.** Flat-lay photo (chips, queso, loaded fries) with slow zoom, headline "Tacos & Tequila", "A modern taqueria & agave bar", "Salsas, tortillas & chips made in-house daily". |
+| 6.5–12.5s | **Tacos & Tequila.** Flat-lay photo (chips, queso, loaded fries) with slow zoom, headline "Tacos & Tequila", "Salsas, tortillas & chips made in-house daily". |
 | 12.5–18.5s | **Fresh. Handcrafted. Fun.** Full-bleed al pastor close-up, headline reveals word by word. |
 | 18.5–24.5s | **Agave bar.** "50+ Tequilas & Mezcals", "Handcrafted margaritas · Patio seating", "Open late Thu–Sat 'til 1 AM", game-day taco photo. |
 | 24.5–30s | **Outro.** Logo with the Starkville location centered beneath it (Starkville · Cotton District, 106 Maxwell St, (662) 338-4644) and a bottom bar with @unomastacos · unomastacos.com · Dine in · Takeout · Catering. |
