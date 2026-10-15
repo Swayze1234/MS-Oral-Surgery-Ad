@@ -80,13 +80,22 @@
   #lockWrap{position:relative;width:46px;height:46px}
   #lockPulse{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;border:3px solid #c29a5b;opacity:0}
 
-  /* Scene C — call, with Stan Little's portrait */
-  #medal{position:absolute;left:820px;top:190px;width:280px;height:280px}
-  #medalImg{position:absolute;left:14px;top:14px;width:252px;height:252px;border-radius:50%;object-fit:cover;
+  /* Scene C — Stan Little: revealed through a gold iris straight out of "Call me." */
+  #cBg{background:radial-gradient(ellipse 75% 70% at 50% 42%,#13295a 0%,#0a1838 45%,#040a1a 100%)}
+  #rays{position:absolute;left:440px;top:-200px;width:1040px;height:1040px;border-radius:50%;
+        background:repeating-conic-gradient(from 0deg,rgba(226,190,126,0) 0deg 4deg,rgba(226,190,126,.30) 7.5deg,rgba(226,190,126,0) 11deg 15deg);
+        -webkit-mask-image:radial-gradient(circle,#000 16%,rgba(0,0,0,0) 62%);mask-image:radial-gradient(circle,#000 16%,rgba(0,0,0,0) 62%);
+        filter:blur(1.5px);opacity:0}
+  #shock{position:absolute;left:800px;top:160px;width:320px;height:320px;border-radius:50%;box-sizing:border-box;
+         border:3px solid #e2be7e;box-shadow:0 0 18px rgba(226,190,126,.6);opacity:0}
+  #irisRing{position:absolute;border-radius:50%;box-sizing:border-box;border:7px solid #ecd096;
+            box-shadow:0 0 34px rgba(226,190,126,.85),inset 0 0 34px rgba(226,190,126,.6);opacity:0;pointer-events:none}
+  #medal{position:absolute;left:800px;top:160px;width:320px;height:320px}
+  #medalImg{position:absolute;left:16px;top:16px;width:288px;height:288px;border-radius:50%;object-fit:cover;
             box-shadow:0 10px 40px rgba(0,0,0,.45)}
-  #medalRing{position:absolute;left:0;top:0;width:280px;height:280px;overflow:visible}
-  #cap{font-family:"Montserrat";font-weight:600;font-size:24px;letter-spacing:.3em;color:rgba(239,235,230,.85);top:494px;padding-left:.3em}
-  #call{font-family:"Cormorant";font-weight:700;font-size:78px;letter-spacing:.12em;color:var(--ivory);top:562px;padding-left:.12em}
+  #medalRing{position:absolute;left:0;top:0;width:320px;height:320px;overflow:visible}
+  #cap{font-family:"Montserrat";font-weight:600;font-size:24px;letter-spacing:.3em;color:rgba(239,235,230,.85);top:505px;padding-left:.3em}
+  #call{font-family:"Cormorant";font-weight:700;font-size:78px;letter-spacing:.12em;color:var(--ivory);top:568px;padding-left:.12em}
   #call .amp{color:var(--gold)}
   #num{font-family:"Montserrat";font-weight:700;font-size:196px;line-height:1;color:#fff;top:680px;letter-spacing:.01em}
 
@@ -134,7 +143,7 @@
       <div id="duiG1" class="row ghost" style="font-family:Cormorant;font-weight:700;font-size:360px;line-height:1;top:185px;transform-origin:50% 55%;opacity:0">DUI<span class="q">?</span></div>
       <div id="duiG2" class="row ghost" style="font-family:Cormorant;font-weight:700;font-size:360px;line-height:1;top:185px;transform-origin:50% 55%;opacity:0">DUI<span class="q">?</span></div>
       <div id="dui" class="row">DUI<span class="q goldtxt">?</span></div>
-      <div id="talk" class="row"><span>Let’s talk.</span></div>
+      <div id="talk" class="row"><span>Call me.</span></div>
       <div id="band">
         <div id="bandLine"></div>
         <div id="bLockup">
@@ -176,6 +185,9 @@
     </div>
 
     <div id="sceneC" class="abs">
+      <div id="cBg" class="abs"></div>
+      <div id="rays"></div>
+      <div id="shock"></div>
       <div id="medal">
         <img id="medalImg" src="../assets/stan_little_crop.jpg" alt="">
         <svg id="medalRing" viewBox="0 0 280 280">
@@ -186,6 +198,7 @@
       <div id="call" class="row"><span class="w">CALL</span> <span class="w">LITTLE</span> <span class="w amp">&amp;</span> <span class="w">HOLLAND</span></div>
       <div id="num" class="row"></div>
     </div>
+    <div id="irisRing"></div>
   </div>
 
   <img id="heroBg" src="../assets/home_hero_building.jpg" alt="" onerror="this.style.display='none'">
@@ -301,24 +314,20 @@ function seek(t) {
   const amp = sp > 0 && sp < 1 ? 16 * Math.pow(1 - sp, 2) : 0;
   $('shake').style.transform = amp ? `translate(${amp * Math.sin(t * 91)}px,${amp * Math.cos(t * 73)}px) scale(${1 + amp * .0022})` : 'none';
 
-  // ----- Scene A: footage · ARRESTED FOR / DUI? / Let's talk. · logo band -----
+  // ----- Scene A: footage · ARRESTED FOR / DUI? / Call me. · logo band -----
   const A = $('sceneA');
-  const showA = t < 4.25;
+  const showA = t < 4.0;
   A.style.display = showA ? 'block' : 'none';
   let pending = null;
   if (showA) {
     pending = setFootage(t);
     $('blackIn').style.opacity = 1 - E.outCubic(prog(t, 0, .2));
-    const fw = $('footWrap');
-    fw.style.opacity = 1 - E.inOutCubic(prog(t, 3.7, 4.2));
-    foot.style.transform = `scale(${1.02 + .05 * E.inOutCubic(prog(t, 0, 4.2))})`;
-
-    const xp = E.inCubic(prog(t, 3.7, 4.05));            // text + band exit
-    const exitTxt = el => {
-      if (xp <= 0) return;
-      el.style.opacity = Number(el.style.opacity || 1) * (1 - xp);
-      el.style.filter = `blur(${14 * xp}px)`;
-    };
+    foot.style.transform = `scale(${1.02 + .05 * E.inOutCubic(prog(t, 0, 4.0))})`;
+    // as the iris opens, the whole intro pushes forward and softens, as if we fly through the ring
+    const ip = E.inCubic(prog(t, 3.35, 3.95));
+    A.style.transformOrigin = '50% 30%';
+    A.style.transform = ip > 0 ? `scale(${1 + .22 * ip})` : 'none';
+    A.style.filter = ip > 0 ? `blur(${9 * ip}px)` : 'none';
     const push = 1 + .035 * E.inOutCubic(prog(t, .9, 3.7));
     const shadow = 'drop-shadow(0 6px 24px rgba(0,0,0,.6))';
 
@@ -345,8 +354,8 @@ function seek(t) {
     talk.style.filter = 'drop-shadow(0 0 3px rgba(0,0,0,.45)) drop-shadow(0 6px 26px rgba(0,0,0,.8))';
 
     // logo band rises, gold edge draws out from the centre, logo resolves, then a sheen and a fleur glint
-    const bp = E.outCubic(prog(t, .95, 1.45)), bx = E.inCubic(prog(t, 3.7, 4.05));
-    $('band').style.transform = `translateY(${(1 - bp) * 260 + bx * 260}px)`;
+    const bp = E.outCubic(prog(t, .95, 1.45));
+    $('band').style.transform = `translateY(${(1 - bp) * 260}px)`;
     $('bandLine').style.transform = `scaleX(${E.inOutCubic(prog(t, 1.15, 1.75))})`;
     const fp = E.outBack(prog(t, 1.3, 1.8));
     const bf = $('bFleur');
@@ -361,75 +370,83 @@ function seek(t) {
     bs.style.opacity = sh > 0 && sh < 1 ? 1 : 0;
     bs.style.backgroundPosition = `${lerp(110, -10, E.inOutCubic(sh))}% 0`;
 
-    [$('arrested'), dui, talk].forEach(exitTxt);
-    if (xp > 0) {
-      const lift = `translateY(${-60 * xp}px)`;
-      $('arrested').style.transform = lift;
-      dui.style.transform = `${lift} scale(${s})`;
-      talk.style.transform = `${lift} scale(${push})`;
-    }
   }
 
   // ----- Scene B: attorneys photo (left) | You're an adult. What you tell us stays between us. (right) -----
   const B = $('sceneB');
-  const showB = t > 3.7 && t < 8.3;
+  const showB = t > 6.5 && t < 10.4;
   B.style.display = showB ? 'block' : 'none';
   if (showB) {
     // photo wipes in from the left behind a glowing gold edge, then wipes back out
-    const wi = E.inOutCubic(prog(t, 3.75, 4.35)), wo = E.inOutCubic(prog(t, 7.85, 8.25));
+    const wi = E.inOutCubic(prog(t, 6.55, 7.15)), wo = E.inOutCubic(prog(t, 10.0, 10.35));
     const edge = 960 * (wi - wo);
     $('photoPanel').style.clipPath = `inset(0 ${960 - edge}px 0 0)`;
     $('seam').style.left = `${edge - 3}px`;
     $('seam').style.opacity = edge > 1 ? 1 : 0;
     $('seam').style.filter = 'drop-shadow(0 0 12px rgba(226,190,126,.75))';
-    $('photo').style.transform = `scale(${lerp(1.12, 1.0, E.outCubic(prog(t, 3.75, 8.25)))})`;
+    $('photo').style.transform = `scale(${lerp(1.12, 1.0, E.outCubic(prog(t, 6.55, 10.35)))})`;
 
-    [...$('kicker').children].forEach((w, i) => reveal(w, t, 4.25 + i * .07, .5, { dy: 24, blur: 8 }));
+    [...$('kicker').children].forEach((w, i) => reveal(w, t, 7.0 + i * .07, .5, { dy: 24, blur: 8 }));
     $('b1').style.filter = $('b2').style.filter = 'drop-shadow(0 4px 18px rgba(0,0,0,.55))';
-    [['b1', 4.55], ['b2', 4.75], ['b3', 5.05], ['b4', 5.25]].forEach(([id, st]) =>
+    [['b1', 7.25], ['b2', 7.42], ['b3', 7.65], ['b4', 7.82]].forEach(([id, st]) =>
       [...$(id).children].forEach((w, i) => reveal(w, t, st + i * .08, .55, { dy: 44, blur: 12 })));
     const glowB = 'drop-shadow(0 4px 18px rgba(0,0,0,.55)) drop-shadow(0 0 10px rgba(226,190,126,.2))';
     $('b3').style.filter = glowB; $('b4').style.filter = glowB;
-    const cp = E.outCubic(prog(t, 5.75, 6.2));
+    const cp = E.outCubic(prog(t, 8.3, 8.7));
     const chip = $('chip');
     chip.style.opacity = cp;
     chip.style.transform = `translateY(${(1 - cp) * 30}px)`;
-    const lp = E.inCubic(prog(t, 6.0, 6.18));
+    const lp = E.inCubic(prog(t, 8.5, 8.68));
     $('shackle').setAttribute('transform', `translate(0 ${-3.2 * (1 - lp)})`);
-    const pp = prog(t, 6.18, 6.8);
+    const pp = prog(t, 8.68, 9.3);
     $('lockPulse').style.opacity = pp > 0 && pp < 1 ? .7 * (1 - pp) : 0;
     $('lockPulse').style.transform = `scale(${1 + 1.3 * E.outCubic(pp)})`;
     // text exit
-    const xp = E.inCubic(prog(t, 7.85, 8.25));
+    const xp = E.inCubic(prog(t, 10.0, 10.3));
     const tb = $('textB');
     tb.style.opacity = 1 - xp;
     tb.style.transform = `translateY(${-60 * xp}px)`;
     tb.style.filter = xp > 0 ? `blur(${14 * xp}px)` : 'none';
   }
 
-  // ----- Scene C: Call Little & Holland 662.232.9500 -----
+  // ----- Scene C: "Call me." -> gold iris opens on Stan Little -> Call Little & Holland 662.232.9500 -----
   const C = $('sceneC');
-  const showC = t > 8.1 && t < 10.6;
+  const showC = t > 3.3 && t < 6.85;
   C.style.display = showC ? 'block' : 'none';
+  const ir = $('irisRing');
+  ir.style.opacity = 0;
   if (showC) {
-    // portrait medallion: gold ring draws, photo pops in
-    const RC = 2 * Math.PI * 136, rp = E.inOutCubic(prog(t, 8.2, 8.95));
+    // iris: a glowing gold ring bursts open from the portrait's centre and wipes the whole frame to Stan's slide
+    const ipr = prog(t, 3.35, 3.95), R = 1300 * E.inOutCubic(ipr);
+    C.style.clipPath = ipr < 1 ? `circle(${R}px at 960px 320px)` : 'none';
+    if (ipr > 0 && ipr < 1) {
+      Object.assign(ir.style, { left: `${960 - R}px`, top: `${320 - R}px`, width: `${2 * R}px`, height: `${2 * R}px` });
+      ir.style.opacity = ipr < .8 ? 1 : (1 - ipr) / .2;
+    }
+    // portrait pops in with a flash of light, gold rays flare behind it, then a ripple rings out
+    const RC = 2 * Math.PI * 136, rp = E.inOutCubic(prog(t, 3.55, 4.25));
     $('mr1').style.strokeDasharray = RC; $('mr1').style.strokeDashoffset = RC * (1 - rp);
-    const mp = E.outBack(prog(t, 8.3, 8.8));
+    const mp = E.outBack(prog(t, 3.55, 4.05));
     const mi = $('medalImg');
-    mi.style.opacity = clamp(prog(t, 8.3, 8.5));
-    mi.style.transform = `scale(${lerp(.6, 1, mp)})`;
-    $('medal').style.filter = 'drop-shadow(0 0 14px rgba(226,190,126,.25))';
-    reveal($('cap'), t, 8.6, .45, { dy: 14, blur: 6 });
-    [...$('call').children].forEach((w, i) => reveal(w, t, 8.45 + i * .07, .45, { dy: 26, blur: 8 }));
+    mi.style.opacity = clamp(prog(t, 3.55, 3.7));
+    mi.style.transform = `scale(${lerp(.4, 1, mp)})`;
+    mi.style.filter = `brightness(${lerp(1.9, 1, E.outCubic(prog(t, 3.6, 4.25)))})`;
+    $('medal').style.filter = 'drop-shadow(0 0 16px rgba(226,190,126,.3))';
+    const rays = $('rays');
+    rays.style.opacity = E.outCubic(prog(t, 3.6, 3.95)) - .65 * E.inOutCubic(prog(t, 4.0, 4.8));
+    rays.style.transform = `rotate(${t * 14}deg) scale(${lerp(.6, 1, E.outCubic(prog(t, 3.55, 4.1)))})`;
+    const sk = prog(t, 4.0, 4.65), shock = $('shock');
+    shock.style.opacity = sk > 0 && sk < 1 ? .85 * (1 - sk) : 0;
+    shock.style.transform = `scale(${1 + 1.6 * E.outCubic(sk)})`;
+
+    reveal($('cap'), t, 4.0, .45, { dy: 14, blur: 6 });
+    [...$('call').children].forEach((w, i) => reveal(w, t, 4.1 + i * .07, .45, { dy: 26, blur: 8 }));
     $('call').style.filter = 'drop-shadow(0 4px 16px rgba(0,0,0,.6))';
-    [...$('num').children].forEach((c, i) => {
-      reveal(c, t, 8.75 + i * .035, .45, { dy: -70, blur: 10, ease: E.outBack });
-    });
+    [...$('num').children].forEach((c, i) => reveal(c, t, 4.35 + i * .035, .45, { dy: -70, blur: 10, ease: E.outBack }));
     $('num').style.filter = 'drop-shadow(0 8px 26px rgba(0,0,0,.55))';
-    // exit into the outro: blur up and out over the shared navy background
-    const xp = E.inCubic(prog(t, 10.2, 10.55));
-    const push = 1 + .03 * E.inOutCubic(prog(t, 8.6, 10.6));
+    // exit: blur up and away, revealing the split screen
+    const xp = E.inCubic(prog(t, 6.45, 6.8));
+    const push = 1 + .03 * E.inOutCubic(prog(t, 4.0, 6.8));
     C.style.transform = `translateY(${-50 * xp}px) scale(${push})`;
     C.style.opacity = 1 - xp;
     C.style.filter = xp > 0 ? `blur(${14 * xp}px)` : 'none';
@@ -439,8 +456,8 @@ function seek(t) {
   // as the veil settles the photo also drops slightly out of focus, so the contact text reads cleanly
   const vp = E.inOutCubic(prog(t, 10.95, 11.6));
   const hb = $('heroBg');
-  hb.style.opacity = E.inOutCubic(prog(t, 10.25, 10.75));
-  hb.style.transform = `scale(${lerp(1.05, 1.02, E.outCubic(prog(t, 10.25, 15)))})`;
+  hb.style.opacity = E.inOutCubic(prog(t, 10.0, 10.55));
+  hb.style.transform = `scale(${lerp(1.05, 1.02, E.outCubic(prog(t, 10.0, 15)))})`;
   hb.style.filter = vp > 0 ? `blur(${5 * vp}px)` : 'none';
   $('heroVeil').style.opacity = vp;
 
