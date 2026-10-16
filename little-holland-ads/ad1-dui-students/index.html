@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Little &amp; Holland — DUI (Students) :15</title>
+<title>Little &amp; Holland — DUI (Students) :15 / :20 / :30</title>
 <style>
   @font-face{font-family:"Montserrat";src:url("../fonts/montserrat-latin-500-normal.woff2") format("woff2");font-weight:500}
   @font-face{font-family:"Montserrat";src:url("../fonts/montserrat-latin-600-normal.woff2") format("woff2");font-weight:600}
@@ -97,6 +97,25 @@
   #call{font-family:"Cormorant";font-weight:700;font-size:78px;letter-spacing:.12em;color:var(--ivory);top:568px;padding-left:.12em}
   #call .amp{color:var(--gold)}
   #num{font-family:"Montserrat";font-weight:700;font-size:196px;line-height:1;color:#fff;top:680px;letter-spacing:.01em}
+
+  /* Scene E (:30 only) — "Emergencies answered evenings and weekends." (from the firm's website) */
+  #clock{position:absolute;left:875px;top:262px;width:170px;height:170px;overflow:visible}
+  #clock circle,#clock line{fill:none;stroke:var(--gold);stroke-linecap:round}
+  #e1{font-family:"Cormorant";font-weight:700;font-size:128px;line-height:1;color:var(--ivory);top:478px}
+  #e2{font-family:"Cormorant";font-weight:600;font-style:italic;font-size:128px;line-height:1.1;top:612px}
+  #e2 span,#tag2 span{background:linear-gradient(180deg,#ecd096 0%,#c9a062 55%,#a2763a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .08em}
+
+  /* Office tagline (:20 / :30) — set over the roofline under a light top scrim, so the office stays in view */
+  #tagScrim{background:linear-gradient(180deg,rgba(0,16,44,.72) 0%,rgba(0,16,44,.42) 24%,rgba(0,16,44,0) 44%);opacity:0}
+  #tagLayer{display:none}
+  #tag1{font-family:"Cormorant";font-weight:700;font-size:118px;line-height:1;color:var(--ivory);top:58px}
+  #tag2,#tag2s{font-family:"Cormorant";font-weight:600;font-style:italic;font-size:118px;line-height:1.1;top:176px}
+  #tag2s{opacity:0}
+  #tag2s span{color:transparent;-webkit-background-clip:text;background-clip:text;padding:0 .08em;
+              background-image:linear-gradient(100deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.9) 50%,rgba(255,255,255,0) 58%);
+              background-size:300% 100%;background-repeat:no-repeat}
+  #tagRule{position:absolute;left:700px;top:322px;width:520px;height:2px;
+           background:linear-gradient(90deg,rgba(194,154,91,0),#e2be7e 20%,#e2be7e 80%,rgba(194,154,91,0))}
 
   /* Scene D — outro: opens on the homepage hero photo, then the site's navy veil fades in under the logo */
   #heroBg{position:absolute;left:0;top:0;width:1920px;height:1080px;object-fit:cover;object-position:center 55%;opacity:0;transform-origin:50% 55%}
@@ -196,10 +215,27 @@
       <div id="call" class="row"><span class="w">CALL</span> <span class="w">LITTLE</span> <span class="w amp">&amp;</span> <span class="w">HOLLAND</span></div>
       <div id="num" class="row"></div>
     </div>
+    <div id="sceneE" class="abs" style="display:none">
+      <svg id="clock" viewBox="0 0 100 100">
+        <circle id="clkRing" cx="50" cy="50" r="44" stroke-width="3" transform="rotate(-90 50 50)"/>
+        <line id="clkH" x1="50" y1="50" x2="50" y2="29" stroke-width="4.5"/>
+        <line id="clkM" x1="50" y1="50" x2="50" y2="15" stroke-width="3"/>
+        <circle cx="50" cy="50" r="3.2" style="fill:var(--gold);stroke:none"/>
+      </svg>
+      <div id="e1" class="row"><span class="w">Emergencies</span> <span class="w">answered</span></div>
+      <div id="e2" class="row"><span>evenings and weekends.</span></div>
+    </div>
     <div id="irisRing"></div>
   </div>
 
   <img id="heroBg" src="../assets/home_hero_building.jpg" alt="" onerror="this.style.display='none'">
+  <div id="tagScrim" class="abs"></div>
+  <div id="tagLayer" class="abs">
+    <div id="tag1" class="row"><span class="w">On</span> <span class="w">the</span> <span class="w">Square,</span></div>
+    <div id="tag2" class="row"><span>In Your Corner.</span></div>
+    <div id="tag2s" class="row"><span>In Your Corner.</span></div>
+    <div id="tagRule"></div>
+  </div>
   <div id="heroVeil" class="abs"></div>
 
   <div id="outro" class="abs">
@@ -253,7 +289,20 @@
 
 <script>
 // ---------- config ----------
-const FPS = 30, DURATION = 15;
+const FPS = 30;
+// One page builds all three lengths: index.html?dur=15 | 20 | 30 (default 15).
+const DUR_PARAM = +new URLSearchParams(location.search).get('dur');
+const DURATION = [15, 20, 30].includes(DUR_PARAM) ? DUR_PARAM : 15;
+// Scene cues in seconds.
+//   iris       gold iris opens from "Call us." onto Stan's slide     cEnd   Stan's slide leaves
+//   b0 / bEnd  split screen in / out                                 e0 / eEnd  "Emergencies answered..." (:30 only)
+//   hero       office photo dissolves in                             tag / tagEnd  "On the Square, In Your Corner." (:20 / :30)
+//   outro      navy veil settles and the logo outro builds
+const K = {
+  15: { iris: 3.35, cEnd: 6.45, b0: 6.55, bEnd: 10.0, hero: 10.0, outro: 10.95 },
+  20: { iris: 3.9, cEnd: 7.6, b0: 7.7, bEnd: 11.6, hero: 11.6, tag: 11.95, tagEnd: 14.5, outro: 14.6 },
+  30: { iris: 4.5, cEnd: 9.6, b0: 9.7, bEnd: 14.4, e0: 14.45, eEnd: 18.3, hero: 18.3, tag: 18.65, tagEnd: 22.1, outro: 22.2 },
+}[DURATION];
 const PHONE = "662.232.9500";          // call slide
 const PHONE_SITE = "(662) 232-9500";    // outro, styled like the firm's website
 
@@ -301,7 +350,7 @@ function setFootage(t) {
 
 // ---------- timeline ----------
 function seek(t) {
-  const OUTRO = 10.95;                      // outro content starts after the hero photo has filled the screen
+  const OUTRO = K.outro;                     // outro content starts once the veil begins to settle
   const inOutro = t >= OUTRO;
   const breathe = .5 + .5 * Math.sin(t * 2.2);
   $('og1').style.opacity = .55 + .25 * breathe;
@@ -314,19 +363,19 @@ function seek(t) {
 
   // ----- Scene A: footage · ARRESTED FOR / DUI? / Call us. · logo band -----
   const A = $('sceneA');
-  const showA = t < 4.0;
+  const showA = t < K.iris + .65;
   A.style.display = showA ? 'block' : 'none';
   let pending = null;
   if (showA) {
     pending = setFootage(t);
     $('blackIn').style.opacity = 1 - E.outCubic(prog(t, 0, .2));
-    foot.style.transform = `scale(${1.02 + .05 * E.inOutCubic(prog(t, 0, 4.0))})`;
+    foot.style.transform = `scale(${1.02 + .05 * E.inOutCubic(prog(t, 0, K.iris + .65))})`;
     // as the iris opens, the whole intro pushes forward and softens, as if we fly through the ring
-    const ip = E.inCubic(prog(t, 3.35, 3.95));
+    const ip = E.inCubic(prog(t, K.iris, K.iris + .6));
     A.style.transformOrigin = '50% 30%';
     A.style.transform = ip > 0 ? `scale(${1 + .22 * ip})` : 'none';
     A.style.filter = ip > 0 ? `blur(${9 * ip}px)` : 'none';
-    const push = 1 + .035 * E.inOutCubic(prog(t, .9, 3.7));
+    const push = 1 + .035 * E.inOutCubic(prog(t, .9, K.iris + .35));
     const shadow = 'drop-shadow(0 6px 24px rgba(0,0,0,.6))';
 
     const ap = reveal($('arrested'), t, .15, .5, { dy: 20, blur: 10 });
@@ -359,11 +408,11 @@ function seek(t) {
     const bf = $('bFleur');
     bf.style.opacity = clamp(prog(t, 1.3, 1.45));
     bf.style.transform = `scale(${fp})`;
-    const glint = Math.sin(Math.PI * prog(t, 2.6, 3.4));
+    const glint = Math.sin(Math.PI * prog(t, K.iris - .75, K.iris + .05));
     bf.style.filter = `drop-shadow(0 0 ${8 + 20 * glint}px rgba(226,190,126,${.25 + .5 * glint}))`;
     [...$('bName').querySelectorAll('.w')].forEach((c, i) => reveal(c, t, 1.4 + i * .025, .45, { dy: 18, blur: 8 }));
     reveal($('bTag'), t, 1.95, .5, { dy: 10, blur: 6 });
-    const sh = prog(t, 2.6, 3.4);
+    const sh = prog(t, K.iris - .75, K.iris + .05);
     const bs = $('bSheen');
     bs.style.opacity = sh > 0 && sh < 1 ? 1 : 0;
     bs.style.backgroundPosition = `${lerp(110, -10, E.inOutCubic(sh))}% 0`;
@@ -372,34 +421,34 @@ function seek(t) {
 
   // ----- Scene B: attorneys photo (left) | What you tell us stays between us. (right) -----
   const B = $('sceneB');
-  const showB = t > 6.5 && t < 10.4;
+  const showB = t > K.b0 - .05 && t < K.bEnd + .4;
   B.style.display = showB ? 'block' : 'none';
   if (showB) {
     // photo wipes in from the left behind a glowing gold edge, then wipes back out
-    const wi = E.inOutCubic(prog(t, 6.55, 7.15)), wo = E.inOutCubic(prog(t, 10.0, 10.35));
+    const wi = E.inOutCubic(prog(t, K.b0, K.b0 + .6)), wo = E.inOutCubic(prog(t, K.bEnd, K.bEnd + .35));
     const edge = 960 * (wi - wo);
     $('photoPanel').style.clipPath = `inset(0 ${960 - edge}px 0 0)`;
     $('seam').style.left = `${edge - 3}px`;
     $('seam').style.opacity = edge > 1 ? 1 : 0;
     $('seam').style.filter = 'drop-shadow(0 0 12px rgba(226,190,126,.75))';
-    $('photo').style.transform = `scale(${lerp(1.12, 1.0, E.outCubic(prog(t, 6.55, 10.35)))})`;
+    $('photo').style.transform = `scale(${lerp(1.12, 1.0, E.outCubic(prog(t, K.b0, K.bEnd + .35)))})`;
 
     $('b1').style.filter = $('b2').style.filter = 'drop-shadow(0 4px 18px rgba(0,0,0,.55))';
-    [['b1', 7.05], ['b2', 7.22], ['b3', 7.45], ['b4', 7.62]].forEach(([id, st]) =>
+    [['b1', K.b0 + .5], ['b2', K.b0 + .67], ['b3', K.b0 + .9], ['b4', K.b0 + 1.07]].forEach(([id, st]) =>
       [...$(id).children].forEach((w, i) => reveal(w, t, st + i * .08, .55, { dy: 44, blur: 12 })));
     const glowB = 'drop-shadow(0 4px 18px rgba(0,0,0,.55)) drop-shadow(0 0 10px rgba(226,190,126,.2))';
     $('b3').style.filter = glowB; $('b4').style.filter = glowB;
-    const cp = E.outCubic(prog(t, 8.1, 8.5));
+    const cp = E.outCubic(prog(t, K.b0 + 1.55, K.b0 + 1.95));
     const chip = $('chip');
     chip.style.opacity = cp;
     chip.style.transform = `translateY(${(1 - cp) * 30}px)`;
-    const lp = E.inCubic(prog(t, 8.3, 8.48));
+    const lp = E.inCubic(prog(t, K.b0 + 1.75, K.b0 + 1.93));
     $('shackle').setAttribute('transform', `translate(0 ${-3.2 * (1 - lp)})`);
-    const pp = prog(t, 8.48, 9.1);
+    const pp = prog(t, K.b0 + 1.93, K.b0 + 2.55);
     $('lockPulse').style.opacity = pp > 0 && pp < 1 ? .7 * (1 - pp) : 0;
     $('lockPulse').style.transform = `scale(${1 + 1.3 * E.outCubic(pp)})`;
     // text exit
-    const xp = E.inCubic(prog(t, 10.0, 10.3));
+    const xp = E.inCubic(prog(t, K.bEnd, K.bEnd + .3));
     const tb = $('textB');
     tb.style.opacity = 1 - xp;
     tb.style.transform = `translateY(${-60 * xp}px)`;
@@ -408,55 +457,108 @@ function seek(t) {
 
   // ----- Scene C: "Call us." -> gold iris opens on Stan Little -> Call Little & Holland 662.232.9500 -----
   const C = $('sceneC');
-  const showC = t > 3.3 && t < 6.85;
+  const showC = t > K.iris - .05 && t < K.cEnd + .4;
   C.style.display = showC ? 'block' : 'none';
   const ir = $('irisRing');
   ir.style.opacity = 0;
   if (showC) {
     // iris: a glowing gold ring bursts open from the portrait's centre and wipes the whole frame to Stan's slide
-    const ipr = prog(t, 3.35, 3.95), R = 1300 * E.inOutCubic(ipr);
+    const i0 = K.iris, ipr = prog(t, i0, i0 + .6), R = 1300 * E.inOutCubic(ipr);
     C.style.clipPath = ipr < 1 ? `circle(${R}px at 960px 320px)` : 'none';
     if (ipr > 0 && ipr < 1) {
       Object.assign(ir.style, { left: `${960 - R}px`, top: `${320 - R}px`, width: `${2 * R}px`, height: `${2 * R}px` });
       ir.style.opacity = ipr < .8 ? 1 : (1 - ipr) / .2;
     }
     // portrait pops in with a flash of light, gold rays flare behind it, then a ripple rings out
-    const RC = 2 * Math.PI * 136, rp = E.inOutCubic(prog(t, 3.55, 4.25));
+    const RC = 2 * Math.PI * 136, rp = E.inOutCubic(prog(t, i0 + .2, i0 + .9));
     $('mr1').style.strokeDasharray = RC; $('mr1').style.strokeDashoffset = RC * (1 - rp);
-    const mp = E.outBack(prog(t, 3.55, 4.05));
+    const mp = E.outBack(prog(t, i0 + .2, i0 + .7));
     const mi = $('medalImg');
-    mi.style.opacity = clamp(prog(t, 3.55, 3.7));
+    mi.style.opacity = clamp(prog(t, i0 + .2, i0 + .35));
     mi.style.transform = `scale(${lerp(.4, 1, mp)})`;
-    mi.style.filter = `brightness(${lerp(1.9, 1, E.outCubic(prog(t, 3.6, 4.25)))})`;
+    mi.style.filter = `brightness(${lerp(1.9, 1, E.outCubic(prog(t, i0 + .25, i0 + .9)))})`;
     $('medal').style.filter = 'drop-shadow(0 0 16px rgba(226,190,126,.3))';
     const rays = $('rays');
-    rays.style.opacity = E.outCubic(prog(t, 3.6, 3.95)) - .65 * E.inOutCubic(prog(t, 4.0, 4.8));
-    rays.style.transform = `rotate(${t * 14}deg) scale(${lerp(.6, 1, E.outCubic(prog(t, 3.55, 4.1)))})`;
-    const sk = prog(t, 4.0, 4.65), shock = $('shock');
+    rays.style.opacity = E.outCubic(prog(t, i0 + .25, i0 + .6)) - .65 * E.inOutCubic(prog(t, i0 + .65, i0 + 1.45));
+    rays.style.transform = `rotate(${t * 14}deg) scale(${lerp(.6, 1, E.outCubic(prog(t, i0 + .2, i0 + .75)))})`;
+    const sk = prog(t, i0 + .65, i0 + 1.3), shock = $('shock');
     shock.style.opacity = sk > 0 && sk < 1 ? .85 * (1 - sk) : 0;
     shock.style.transform = `scale(${1 + 1.6 * E.outCubic(sk)})`;
 
-    reveal($('cap'), t, 4.0, .45, { dy: 14, blur: 6 });
-    [...$('call').children].forEach((w, i) => reveal(w, t, 4.1 + i * .07, .45, { dy: 26, blur: 8 }));
+    reveal($('cap'), t, i0 + .65, .45, { dy: 14, blur: 6 });
+    [...$('call').children].forEach((w, i) => reveal(w, t, i0 + .75 + i * .07, .45, { dy: 26, blur: 8 }));
     $('call').style.filter = 'drop-shadow(0 4px 16px rgba(0,0,0,.6))';
-    [...$('num').children].forEach((c, i) => reveal(c, t, 4.35 + i * .035, .45, { dy: -70, blur: 10, ease: E.outBack }));
+    [...$('num').children].forEach((c, i) => reveal(c, t, i0 + 1.0 + i * .035, .45, { dy: -70, blur: 10, ease: E.outBack }));
     $('num').style.filter = 'drop-shadow(0 8px 26px rgba(0,0,0,.55))';
     // exit: blur up and away, revealing the split screen
-    const xp = E.inCubic(prog(t, 6.45, 6.8));
-    const push = 1 + .03 * E.inOutCubic(prog(t, 4.0, 6.8));
+    const xp = E.inCubic(prog(t, K.cEnd, K.cEnd + .35));
+    const push = 1 + .03 * E.inOutCubic(prog(t, i0 + .65, K.cEnd + .35));
     C.style.transform = `translateY(${-50 * xp}px) scale(${push})`;
     C.style.opacity = 1 - xp;
     C.style.filter = xp > 0 ? `blur(${14 * xp}px)` : 'none';
   }
 
+  // ----- Scene E (:30 only): Emergencies answered evenings and weekends. -----
+  const SE = $('sceneE');
+  const showE = !!K.e0 && t > K.e0 - .05 && t < K.eEnd + .4;
+  SE.style.display = showE ? 'block' : 'none';
+  if (showE) {
+    const e0 = K.e0;
+    // gold clock draws itself while two hours tick past (12:00 -> 2:00), then the line resolves
+    const RCk = 2 * Math.PI * 44, cr = E.inOutCubic(prog(t, e0 + .1, e0 + .7));
+    $('clkRing').style.strokeDasharray = RCk; $('clkRing').style.strokeDashoffset = RCk * (1 - cr);
+    const spin = 720 * E.outCubic(prog(t, e0 + .15, e0 + 1.5));
+    $('clkM').setAttribute('transform', `rotate(${spin} 50 50)`);
+    $('clkH').setAttribute('transform', `rotate(${spin / 12} 50 50)`);
+    reveal($('clock'), t, e0 + .05, .4, { dy: 0, blur: 0, scale: .7, ease: E.outBack });
+    $('clock').style.filter = 'drop-shadow(0 0 14px rgba(226,190,126,.35))';
+    [...$('e1').children].forEach((w, i) => reveal(w, t, e0 + .45 + i * .1, .55, { dy: 36, blur: 10 }));
+    $('e1').style.filter = 'drop-shadow(0 4px 18px rgba(0,0,0,.55))';
+    const e2p = E.outCubic(prog(t, e0 + .95, e0 + 1.55)), e2 = $('e2');
+    e2.style.clipPath = e2p < 1 ? `inset(0 ${100 * (1 - e2p)}% 0 0)` : 'none';
+    e2.style.transform = `translateY(${(1 - e2p) * 14}px)`;
+    e2.style.filter = 'drop-shadow(0 4px 18px rgba(0,0,0,.55))';
+    const xp = E.inCubic(prog(t, K.eEnd, K.eEnd + .35));
+    SE.style.opacity = 1 - xp;
+    SE.style.transform = `translateY(${-50 * xp}px)`;
+    SE.style.filter = xp > 0 ? `blur(${14 * xp}px)` : 'none';
+  }
+
   // ----- homepage hero photo: fades up full screen, then the navy veil settles over it -----
   // as the veil settles the photo also drops slightly out of focus, so the contact text reads cleanly
-  const vp = E.inOutCubic(prog(t, 10.95, 11.6));
+  const vp = E.inOutCubic(prog(t, K.outro, K.outro + .65));
   const hb = $('heroBg');
-  hb.style.opacity = E.inOutCubic(prog(t, 10.0, 10.55));
-  hb.style.transform = `scale(${lerp(1.05, 1.02, E.outCubic(prog(t, 10.0, 15)))})`;
+  hb.style.opacity = E.inOutCubic(prog(t, K.hero, K.hero + .55));
+  if (K.tag) {
+    // longer cuts: a slow push in toward the front door while the tagline plays over the clear photo
+    hb.style.transformOrigin = '64% 62%';
+    hb.style.transform = `scale(${lerp(1.02, 1.07, E.inOutCubic(prog(t, K.hero, DURATION)))})`;
+  } else {
+    hb.style.transform = `scale(${lerp(1.05, 1.02, E.outCubic(prog(t, K.hero, DURATION)))})`;
+  }
   hb.style.filter = vp > 0 ? `blur(${5 * vp}px)` : 'none';
   $('heroVeil').style.opacity = vp;
+
+  // ----- office tagline (:20 / :30): "On the Square, In Your Corner." while the office is still clear -----
+  if (K.tag) {
+    const tg = K.tag, tl = $('tagLayer');
+    tl.style.display = t > tg - .1 && t < K.tagEnd + .4 ? 'block' : 'none';
+    $('tagScrim').style.opacity = E.inOutCubic(prog(t, tg - .2, tg + .4)) * (1 - E.inOutCubic(prog(t, K.tagEnd, K.tagEnd + .5)));
+    [...$('tag1').children].forEach((w, i) => reveal(w, t, tg + i * .1, .55, { dy: 30, blur: 10 }));
+    const t2 = E.outCubic(prog(t, tg + .45, tg + 1.05)), tag2 = $('tag2');
+    tag2.style.clipPath = t2 < 1 ? `inset(0 ${100 * (1 - t2)}% 0 0)` : 'none';
+    tag2.style.transform = `translateY(${(1 - t2) * 14}px)`;
+    const tr = E.inOutCubic(prog(t, tg + .8, tg + 1.4));
+    $('tagRule').style.transform = `scaleX(${tr})`;
+    $('tagRule').style.opacity = tr;
+    const ts = prog(t, tg + 1.5, tg + 2.3), sh2 = $('tag2s');
+    sh2.style.opacity = ts > 0 && ts < 1 ? 1 : 0;
+    sh2.firstElementChild.style.backgroundPosition = `${lerp(110, -10, E.inOutCubic(ts))}% 0`;
+    const tx = E.inCubic(prog(t, K.tagEnd, K.tagEnd + .35));
+    tl.style.opacity = 1 - tx;
+    tl.style.transform = `translateY(${-40 * tx}px)`;
+    tl.style.filter = tx > 0 ? `blur(${12 * tx}px)` : 'drop-shadow(0 4px 18px rgba(0,0,0,.6))';
+  }
 
   // ----- Scene D: logo + contact -----
   const O = $('outro');

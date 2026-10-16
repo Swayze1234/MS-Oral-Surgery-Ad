@@ -3,7 +3,8 @@
 //   node render.cjs ad1-dui-students --name LittleHolland_DUI_Students_15s
 //   node render.cjs ad1-dui-students --stills 0.5,2.5,6,9.5,13.5      # preview PNGs only
 //
-// Options: --scale 2 (supersample factor), --workers 4 (parallel browser pages)
+// Options: --dur 15|20|30 (spot length, passed to the page as ?dur=), --scale 2 (supersample factor),
+//          --workers 4 (parallel browser pages)
 // Frames are captured at 2x (3840x2160) and downsampled to 1920x1080 for extra-clean edges.
 // If the ad folder has a prepare.sh, it runs first (ad1 uses it to extract its footage frames).
 const fs = require('fs');
@@ -16,15 +17,17 @@ try { ({ chromium } = require('playwright')); }
 catch { ({ chromium } = require('/opt/node22/lib/node_modules/playwright')); }
 
 const adDir = process.argv[2];
-if (!adDir) { console.error('usage: node render.cjs <ad-folder> [--name N] [--stills t1,t2] [--scale 2] [--workers 4]'); process.exit(1); }
+if (!adDir) { console.error('usage: node render.cjs <ad-folder> [--name N] [--dur 15|20|30] [--stills t1,t2 [--outdir DIR]] [--scale 2] [--workers 4]'); process.exit(1); }
 const arg = (name, def) => { const i = process.argv.indexOf(name); return i > 0 ? process.argv[i + 1] : def; };
 const SCALE = Number(arg('--scale', '2'));
 const WORKERS = Number(arg('--workers', String(Math.max(1, os.cpus().length))));
 const stills = arg('--stills', null);
 const name = arg('--name', adDir);
+const DUR = arg('--dur', null);
+const stillDir = arg('--outdir', null);   // where --stills writes (default: .work/<ad>/)
 
 const root = __dirname;
-const pageUrl = 'file://' + path.join(root, adDir, 'index.html') + '?render';
+const pageUrl = 'file://' + path.join(root, adDir, 'index.html') + '?render' + (DUR ? `&dur=${DUR}` : '');
 const outDir = path.join(root, 'out');
 const workDir = path.join(root, '.work', adDir);
 const framesDir = path.join(workDir, 'frames');
@@ -51,7 +54,9 @@ if (fs.existsSync(prep)) execFileSync(prep, { stdio: 'inherit' });
     const page = await openPage(browser);
     for (const s of stills.split(',').map(Number)) {
       await page.evaluate(t => window.seek(t), s);
-      const raw = path.join(workDir, `_raw.png`), file = path.join(workDir, `still_${s.toFixed(2)}.png`);
+      const dir = stillDir ? path.resolve(stillDir) : workDir;
+      fs.mkdirSync(dir, { recursive: true });
+      const raw = path.join(dir, `_raw_${s.toFixed(2)}.png`), file = path.join(dir, `still_${s.toFixed(2)}.png`);
       await page.screenshot({ path: raw, type: 'png' });
       ffmpeg(['-i', raw, '-vf', 'scale=1920:1080:flags=lanczos', file]);
       console.log('wrote', file);

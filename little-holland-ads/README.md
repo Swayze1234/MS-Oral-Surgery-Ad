@@ -1,11 +1,11 @@
-# Little & Holland PLLC — :15 spots for MCTV
+# Little & Holland PLLC — spots for MCTV
 
 | # | Spot | Audience | Status |
 |---|------|----------|--------|
-| 1 | `ad1-dui-students` — "Arrested for DUI? Call us." | College students | Draft v10 |
+| 1 | `ad1-dui-students` — "Arrested for DUI? Call us." (:15, :20, :30) | College students | :15 draft v10 · :20/:30 draft 1 |
 | 2 | Parents spot | Parents of college students | Not started |
 
-## Spot 1 — storyboard (15 s, 1920×1080, 30 fps, silent)
+## Spot 1 — storyboard (:15; 1920×1080, 30 fps, silent)
 
 | Time | Beat |
 |------|------|
@@ -13,6 +13,22 @@
 | 3.35–6.8 s | Gold iris: a glowing ring bursts open from the centre of the frame while the intro pushes forward and blurs, wiping straight to Stan Little → his portrait pops in with a flash, gold rays flare behind it, a ripple rings out → *STAN LITTLE, ATTORNEY* → **CALL LITTLE & HOLLAND** / **662.232.9500** (digits drop in) |
 | 6.55–10.35 s | Split screen: the attorneys' photo wipes in on the left behind a glowing gold edge; on the right, **What you tell us** (ivory) / **stays between us.** (gold) → gold lock clicks shut: PRIVATE & CONFIDENTIAL |
 | 10.0–15.0 s | The firm's homepage photo (the 1013 East Jackson Avenue office) dissolves in full screen → the website's navy veil settles over it and the photo softens slightly as the logo outro builds: gold fleur-de-lis grows up, *LITTLE & HOLLAND, PLLC* resolves letter by letter, *CONCIERGE ATTORNEYS* → contact block styled after the firm's website: **(662) 232-9500** (Cormorant Garamond, old-style figures, gold line phone icon), *1013 East Jackson Avenue, Oxford, Mississippi 38655* (gold pin icon), office hours line, *In Mississippi's oldest law office, circa 1893.* in gold italic, Bar notice line, light sheen across the name |
+
+### :20 and :30 cuts
+
+One page builds all three lengths (`index.html?dur=15|20|30`); the scene cues are
+the `K` table at the top of its script. The longer cuts hold each beat longer and add:
+
+| Cut | Added beat |
+|-----|-----------|
+| :20, :30 | After the office photo dissolves in, **On the Square,** / *In Your Corner.* (gold italic, gold rule, sheen) animates over the roofline while the office is still fully visible, under a light top-only scrim; the photo slowly pushes in toward the front door. Then the veil settles and the outro builds. |
+| :30 | Before the office: **Emergencies answered** / *evenings and weekends.* (verbatim from the firm's website) with a gold clock that draws itself while its hands sweep from 12 to 2. |
+
+| Cue (s) | iris | Stan out | split | emergencies | office in | tagline | outro |
+|---------|------|----------|-------|-------------|-----------|---------|-------|
+| :15 | 3.35 | 6.45 | 6.55–10.0 | — | 10.0 | — | 10.95 |
+| :20 | 3.9 | 7.6 | 7.7–11.6 | — | 11.6 | 11.95–14.5 | 14.6 |
+| :30 | 4.5 | 9.6 | 9.7–14.4 | 14.45–18.3 | 18.3 | 18.65–22.1 | 22.2 |
 
 All on-screen type follows the firm's branding to match the outro: Cormorant
 Garamond (the logo's serif) in ivory and gold on navy, with Montserrat for the
@@ -62,7 +78,9 @@ preview, or render:
 cd little-holland-ads
 npm i playwright            # once (or use a global install)
 node render.cjs ad1-dui-students --name LittleHolland_DUI_Students_15s
-node render.cjs ad1-dui-students --stills 2.6,6.4,9.3,14.9   # quick preview frames
+node render.cjs ad1-dui-students --dur 20 --name LittleHolland_DUI_Students_20s
+node render.cjs ad1-dui-students --dur 30 --name LittleHolland_DUI_Students_30s
+node render.cjs ad1-dui-students --dur 20 --stills 12.5,14.0 --outdir .work/preview   # quick preview frames
 ```
 
 Requires `ffmpeg`. Fonts (Montserrat, Cormorant Garamond — SIL OFL)
