@@ -27,7 +27,7 @@ GRADE = {
     'bar': 'eq=contrast=1.04:saturation=1.05',
     'ext': 'eq=saturation=1.06',
     'ext_warm': 'colorbalance=rm=0.04:bm=-0.04:rs=0.02:bs=-0.02,eq=saturation=1.06',
-    'ext_lift': 'eq=gamma=1.12:brightness=0.02:saturation=1.08',
+    'ext_lift': 'eq=gamma=1.08:brightness=0.01:saturation=1.08',   # gentle lift; keeps the facade white, no clipped highlights
 }
 
 # start: source time (s); dur: source seconds; slow: slow-motion factor; w,h: output size;

@@ -15,7 +15,7 @@
 @font-face{font-family:'Fraunces';src:url(assets/fonts/fraunces-700-italic.woff2) format('woff2');font-weight:700;font-style:italic}
 /* Accent rule: on dark use --lime; on light use --red (one brand red everywhere, logo included);
    lime TEXT on a light background must use --leaf (lime itself is only for fills and rules). */
-:root{--ink:#17171B;--ink2:#26262C;--white:#FAFAF7;--paper:#F1EEE6;--grout:#E2DDD1;--lime:#A8D03C;--lime2:#8DB92A;--leaf:#3E7A2B;--red:#E2492F;--chile:#E2492F}
+:root{--ink:#17171B;--ink2:#26262C;--white:#FAFAF7;--paper:#F1EEE6;--grout:#E2DDD1;--lime:#A8D03C;--lime2:#8DB92A;--leaf:#3E7A2B;--red:#ED5643;--chile:#ED5643}
 html,body{margin:0;padding:0;background:#000}
 body{width:1920px;height:1080px;overflow:hidden;position:relative;font-family:'Barlow',sans-serif;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;color:var(--ink)}
 #stage{position:absolute;inset:0;overflow:hidden;background:var(--ink)}
@@ -115,17 +115,16 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;font-family:'B
   <!-- ===== SCENE 4: FULL-BLEED FOOTAGE — bar shelf, then the big spread ===== -->
   <div class="scene" id="s4" style="background:#000">
     <div class="footage" id="s4-fx"><img id="s4-fx-u" alt=""><img id="s4-fx-o" alt=""></div>
-    <div class="abs" style="inset:0;background:linear-gradient(to top,rgba(10,10,12,.88) 0%,rgba(10,10,12,.7) 36%,rgba(10,10,12,.3) 66%,rgba(10,10,12,0) 84%)"></div>
+    <div class="abs" style="inset:0;background:linear-gradient(to top,rgba(10,10,12,.88) 0%,rgba(10,10,12,.68) 36%,rgba(10,10,12,.2) 66%,rgba(10,10,12,0) 84%)"></div>
     <div class="abs" style="inset:0;background:linear-gradient(to right,rgba(10,10,12,.5) 0%,rgba(10,10,12,0) 55%)"></div>
-    <div class="abs" id="s4-veil" style="inset:0;background:linear-gradient(to bottom,rgba(10,10,12,.5) 0%,rgba(10,10,12,0) 48%)"></div>
-    <div class="abs" id="s4-badge" style="left:1510px;top:80px;width:300px;height:300px;opacity:0;will-change:transform;filter:drop-shadow(0 16px 30px rgba(0,0,0,.4))"></div>
+    <div class="abs" id="s4-badge" style="left:1580px;top:80px;width:230px;height:230px;opacity:0;will-change:transform;filter:drop-shadow(0 16px 30px rgba(0,0,0,.4))"></div>
     <div class="abs" style="left:110px;bottom:100px;width:1500px;text-shadow:0 2px 16px rgba(10,10,12,.55)">
       <div class="kicker"><div class="bar" id="s4-bar"></div><div class="tx" id="s4-kick" style="opacity:0;color:var(--lime)">Tequila bar &amp; taqueria</div></div>
       <div class="h1" style="font-size:168px;color:var(--white);margin-top:18px;line-height:.92">
         <div class="reveal"><span id="s4-h1a">Full bar.</span></div>
         <div class="reveal"><span id="s4-h1b">Full <span style="color:var(--lime)">table.</span></span></div>
       </div>
-      <div class="sub" id="s4-sub" style="font-size:42px;color:#FAFAF7;margin-top:28px;opacity:0;text-shadow:0 2px 12px rgba(0,0,0,.6)">Tequila &nbsp;·&nbsp; Margaritas &nbsp;·&nbsp; 1101 E Jackson Ave, Oxford</div>
+      <div class="sub" id="s4-sub" style="font-size:42px;color:#FAFAF7;margin-top:28px;opacity:0;text-shadow:0 2px 12px rgba(0,0,0,.6)">Margaritas &nbsp;·&nbsp; Tacos &nbsp;·&nbsp; 1101 E Jackson Ave, Oxford</div>
     </div>
   </div>
 
@@ -367,7 +366,6 @@ function renderS3(t){
 function renderS4(t){
   const s=t-T.s4;
   renderFootage('s4-fx',SHOTS.s4,s);
-  $('s4-veil').style.opacity=1-seg(t,T.s4+1.7,T.s4+2.1); // extra top-down veil only while the bottle shelf is up
   scaleX($('s4-bar'),seg(t,T.s4+.3,T.s4+.75,E.outQuint));
   fadeUp($('s4-kick'),seg(t,T.s4+.36,T.s4+.82),18);
   revealUp($('s4-h1a'),seg(t,T.s4+.42,T.s4+1.1,E.outQuint));
