@@ -10,7 +10,7 @@ th = os.path.join(HERE,'thumbs'); os.makedirs(th, exist_ok=True)
 for f in os.listdir(os.path.join(ROOT,'output','stills')):
     if f.endswith('.jpg'):
         im = Image.open(os.path.join(ROOT,'output','stills',f)); im.thumbnail((720,405)); im.save(os.path.join(th,f), quality=86)
-today = datetime.date(2026,10,15).strftime('%B %-d, %Y')
+today = datetime.date.today().strftime('%B %-d, %Y')
 artist_note = os.environ.get('ARTIST_NOTE', 'Featured-artist slots shown with placeholder photos until artist photos are supplied.')
 html = (open(os.path.join(HERE,'template.html')).read()
         .replace('{{FONTS_CSS}}',fonts_css).replace('{{LOGO_SVG}}',logo)

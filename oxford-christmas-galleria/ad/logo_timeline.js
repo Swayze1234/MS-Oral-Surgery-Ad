@@ -9,7 +9,6 @@
     const mk=(tag,attrs)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);return e;};
     const wreath=s1svg.querySelector('.wreath'), wordmark=s1svg.querySelector('.wordmark');
     // bigger lockup for TV legibility
-    wCg.setAttribute('font-size','66'); wCg.setAttribute('letter-spacing','2'); wCg.setAttribute('y','578');
     // ---- table group: kraft annulus, disc + shadow, sprigs + shadows
     const defs=mk('defs',{}); defs.innerHTML='<filter id="dblur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur id="dblurStd" stdDeviation="30"/></filter>';
     s1svg.insertBefore(defs,s1svg.firstChild);
@@ -116,7 +115,7 @@
   const U=1.12, px=x=>960+(x-500)*U, py=y=>540+(y-500)*U;   // svg units -> page px (svg is 1120px wide)
   sparks1.forEach((s,i)=>{ let op=0,sc=0,rot=0,x=0,y=0;
     if(i<4){ const c=L.clusters[i*2]; if(c){ const t0=c.start+0.16; const p=clamp((t-t0)/0.22,0,1); if(t>=t0&&t<=t0+0.22){op=1;sc=Math.sin(p*Math.PI)*0.9;rot=p*40;} x=px(c.cx); y=py(c.cy);} }
-    else if(i<9){ const k=i-4; const spots=[[500+470*Math.cos(-Math.PI/3),500+470*Math.sin(-Math.PI/3)],[500+470*Math.cos(Math.PI/6),500+470*Math.sin(Math.PI/6)],[500+470*Math.cos(2*Math.PI/3),500+470*Math.sin(2*Math.PI/3)],[500+470*Math.cos(-5*Math.PI/6),500+470*Math.sin(-5*Math.PI/6)],[700,470]];
+    else if(i<9){ const k=i-4; const spots=[[500+425*Math.cos(-Math.PI/3),500+425*Math.sin(-Math.PI/3)],[500+425*Math.cos(Math.PI/6),500+425*Math.sin(Math.PI/6)],[500+425*Math.cos(2*Math.PI/3),500+425*Math.sin(2*Math.PI/3)],[500+425*Math.cos(-5*Math.PI/6),500+425*Math.sin(-5*Math.PI/6)],[735,392]];
       x=px(spots[k][0]); y=py(spots[k][1]); const t0=2.40+k*0.15; const up=u(t,t0,t0+0.2,'outCubic'); const ph=k*1.1;
       const tw_=0.45+0.55*Math.sin(2*Math.PI*(1.3*t)+ph); op=up*tw_*(1-exitFade); sc=(0.85+0.15*Math.sin(2*Math.PI*(1.3*t)+ph))*up; rot=30*u(t,2.4,3.6,'linear'); }
     s.style.left=(x-23)+'px'; s.style.top=(y-23)+'px'; s.style.opacity=op; s.style.transform=`scale(${sc}) rotate(${rot}deg)`; });

@@ -63,7 +63,7 @@ if not args.preview:
     # MCTV spec version: 300-700 kb/s, <= 20 MB (two-pass, capped at 700 kb/s)
     spec = os.path.join(OUT, 'OCG_30s_1920x1080_MCTV.mp4')
     log = os.path.join(OUT, 'ffpass')
-    common = ['-c:v', 'libx264', '-preset', 'slow', '-b:v', '650k', '-maxrate', '700k', '-bufsize', '1400k', '-pix_fmt', 'yuv420p', '-r', str(fps), '-an']
+    common = ['-c:v', 'libx264', '-preset', 'slow', '-profile:v', 'high', '-level', '4.1', '-refs', '4', '-b:v', '650k', '-maxrate', '700k', '-bufsize', '1400k', '-pix_fmt', 'yuv420p', '-r', str(fps), '-an']
     subprocess.run([FFMPEG, '-y', '-loglevel', 'error', '-i', master, *common, '-pass', '1', '-passlogfile', log, '-f', 'null', '/dev/null'], check=True)
     subprocess.run([FFMPEG, '-y', '-loglevel', 'error', '-i', master, *common, '-pass', '2', '-passlogfile', log, '-movflags', '+faststart', spec], check=True)
     for f in os.listdir(OUT):

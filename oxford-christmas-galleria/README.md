@@ -30,7 +30,8 @@ Three to five artists fit the 9-second slot; the per-artist time adapts automati
 
 ## Rebuilding
 ```bash
-pip install pillow imageio-ffmpeg numpy fonttools pymupdf "playwright==1.56.0"
+pip install pillow imageio-ffmpeg pymupdf "playwright==1.56.0"
+python3 -m playwright install chromium            # one-time browser download
 cd assets/logo && python3 make_logo.py          # vector wreath logo (logo.svg + fragment)
 cd ../../ad && python3 build.py                  # assembles ad/index.html
 python3 render.py --stills                       # renders 900 frames -> output/*.mp4 (+ key stills)

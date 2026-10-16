@@ -78,7 +78,7 @@ wreath = '\n'.join(els)
 FONT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'fonts'))
 text = f'''
 <text class="word-oxford" x="500" y="482" text-anchor="middle" font-family="Pacifico" font-size="132" fill="{CORAL}">Oxford</text>
-<text class="word-cg" x="500" y="572" text-anchor="middle" font-family="Bree Serif" font-size="58" fill="{CORAL}" letter-spacing="1">Christmas Galleria</text>
+<text class="word-cg" x="500" y="576" text-anchor="middle" font-family="Bree Serif" font-size="60" fill="{CORAL}" letter-spacing="1">Christmas Galleria</text>
 '''
 svg_inner = f'<g class="wreath">\n{wreath}\n</g>\n<g class="wordmark">{text}</g>'
 standalone = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">
