@@ -18,12 +18,18 @@ catch { ({ chromium } = require('/opt/node22/lib/node_modules/playwright')); }
 
 const adDir = process.argv[2];
 if (!adDir) { console.error('usage: node render.cjs <ad-folder> [--name N] [--dur 15|20|30] [--stills t1,t2 [--outdir DIR]] [--scale 2] [--workers 4]'); process.exit(1); }
-const arg = (name, def) => { const i = process.argv.indexOf(name); return i > 0 ? process.argv[i + 1] : def; };
+const arg = (name, def) => {
+  const eq = process.argv.find(a => a.startsWith(name + '='));
+  if (eq) return eq.slice(name.length + 1);
+  const i = process.argv.indexOf(name);
+  return i > 0 ? process.argv[i + 1] : def;
+};
 const SCALE = Number(arg('--scale', '2'));
 const WORKERS = Number(arg('--workers', String(Math.max(1, os.cpus().length))));
 const stills = arg('--stills', null);
 const name = arg('--name', adDir);
 const DUR = arg('--dur', null);
+if (DUR !== null && !['15', '20', '30'].includes(DUR)) { console.error(`--dur must be 15, 20 or 30 (got "${DUR}")`); process.exit(1); }
 const stillDir = arg('--outdir', null);   // where --stills writes (default: .work/<ad>/)
 
 const root = __dirname;
@@ -40,6 +46,8 @@ async function openPage(browser) {
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: SCALE });
   await page.goto(pageUrl);
   await page.evaluate(() => window.ready);
+  const built = await page.evaluate(() => window.DURATION);
+  if (DUR !== null && Number(DUR) !== built) throw new Error(`asked for a :${DUR} but the page built a :${built}`);
   return page;
 }
 
@@ -59,6 +67,7 @@ if (fs.existsSync(prep)) execFileSync(prep, { stdio: 'inherit' });
       const raw = path.join(dir, `_raw_${s.toFixed(2)}.png`), file = path.join(dir, `still_${s.toFixed(2)}.png`);
       await page.screenshot({ path: raw, type: 'png' });
       ffmpeg(['-i', raw, '-vf', 'scale=1920:1080:flags=lanczos', file]);
+      fs.unlinkSync(raw);
       console.log('wrote', file);
     }
     await browser.close();

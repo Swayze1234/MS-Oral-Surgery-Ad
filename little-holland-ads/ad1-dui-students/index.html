@@ -102,14 +102,14 @@
   #clock{position:absolute;left:875px;top:262px;width:170px;height:170px;overflow:visible}
   #clock circle,#clock line{fill:none;stroke:var(--gold);stroke-linecap:round}
   #e1{font-family:"Cormorant";font-weight:700;font-size:128px;line-height:1;color:var(--ivory);top:478px}
-  #e2{font-family:"Cormorant";font-weight:600;font-style:italic;font-size:128px;line-height:1.1;top:612px}
+  #e2{font-family:"Cormorant";font-weight:600;font-style:italic;font-size:128px;line-height:1.1;top:612px;padding-bottom:48px}  /* room for the "g" descender inside the wipe clip */
   #e2 span,#tag2 span{background:linear-gradient(180deg,#ecd096 0%,#c9a062 55%,#a2763a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .08em}
 
   /* Office tagline (:20 / :30) — set over the roofline under a light top scrim, so the office stays in view */
   #tagScrim{background:linear-gradient(180deg,rgba(0,16,44,.72) 0%,rgba(0,16,44,.42) 24%,rgba(0,16,44,0) 44%);opacity:0}
   #tagLayer{display:none}
   #tag1{font-family:"Cormorant";font-weight:700;font-size:118px;line-height:1;color:var(--ivory);top:58px}
-  #tag2,#tag2s{font-family:"Cormorant";font-weight:600;font-style:italic;font-size:118px;line-height:1.1;top:176px}
+  #tag2,#tag2s{font-family:"Cormorant";font-weight:600;font-style:italic;font-size:118px;line-height:1.1;top:176px;padding-bottom:40px}
   #tag2s{opacity:0}
   #tag2s span{color:transparent;-webkit-background-clip:text;background-clip:text;padding:0 .08em;
               background-image:linear-gradient(100deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.9) 50%,rgba(255,255,255,0) 58%);
@@ -505,12 +505,12 @@ function seek(t) {
   if (showE) {
     const e0 = K.e0;
     // gold clock draws itself while two hours tick past (12:00 -> 2:00), then the line resolves
-    const RCk = 2 * Math.PI * 44, cr = E.inOutCubic(prog(t, e0 + .1, e0 + .7));
+    const RCk = 2 * Math.PI * 44, cr = E.inOutCubic(prog(t, e0 + .25, e0 + .85));
     $('clkRing').style.strokeDasharray = RCk; $('clkRing').style.strokeDashoffset = RCk * (1 - cr);
-    const spin = 720 * E.outCubic(prog(t, e0 + .15, e0 + 1.5));
+    const spin = 720 * E.outCubic(prog(t, e0 + .3, e0 + 1.6));
     $('clkM').setAttribute('transform', `rotate(${spin} 50 50)`);
     $('clkH').setAttribute('transform', `rotate(${spin / 12} 50 50)`);
-    reveal($('clock'), t, e0 + .05, .4, { dy: 0, blur: 0, scale: .7, ease: E.outBack });
+    reveal($('clock'), t, e0 + .25, .4, { dy: 0, blur: 0, scale: .7, ease: E.outBack });
     $('clock').style.filter = 'drop-shadow(0 0 14px rgba(226,190,126,.35))';
     [...$('e1').children].forEach((w, i) => reveal(w, t, e0 + .45 + i * .1, .55, { dy: 36, blur: 10 }));
     $('e1').style.filter = 'drop-shadow(0 4px 18px rgba(0,0,0,.55))';
@@ -557,7 +557,7 @@ function seek(t) {
     const tx = E.inCubic(prog(t, K.tagEnd, K.tagEnd + .35));
     tl.style.opacity = 1 - tx;
     tl.style.transform = `translateY(${-40 * tx}px)`;
-    tl.style.filter = tx > 0 ? `blur(${12 * tx}px)` : 'drop-shadow(0 4px 18px rgba(0,0,0,.6))';
+    tl.style.filter = 'drop-shadow(0 4px 18px rgba(0,0,0,.6))' + (tx > 0 ? ` blur(${12 * tx}px)` : '');
   }
 
   // ----- Scene D: logo + contact -----
