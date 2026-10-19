@@ -2,7 +2,7 @@
 
 | # | Spot | Audience | Status |
 |---|------|----------|--------|
-| 1 | `ad1-dui-students` — "Arrested for DUI? Call us." (:15, :20, :30) | College students | :15 draft v10 · :20/:30 draft 1 |
+| 1 | `ad1-dui-students` — "Arrested for DUI? Call us." (:15, :20, :30) | College students | :15 draft v10 · :20/:30 draft 1 (QA-reviewed) |
 | 2 | Parents spot | Parents of college students | Not started |
 
 ## Spot 1 — storyboard (:15; 1920×1080, 30 fps, silent)
