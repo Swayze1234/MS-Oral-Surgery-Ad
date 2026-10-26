@@ -30,21 +30,24 @@ campaign proposal for the event director.
 - an image: `{"type":"image","src":"../assets/photos/x.jpg","focus":"50% 40%"}` (slow Ken Burns zoom), or
 - a video clip as a folder of JPEG frames: `{"type":"video","frames":"../assets/video/clip1","count":135,"fps":30,"focus":[0.5,0.5]}`.
 
-To make a frame folder from a video file (example: seconds 2–18 of last year's
-Facebook video, 4.5 s per slot):
+The current cut uses last year's Facebook reel (`assets/video/reel-2025.mp4`, 720×1280).
+`assets/video/extract_clips.py` cuts it into the two frame folders (`clipA`, `clipB`, 135
+frames each; the segments are listed at the top of the script). The frame folders are not
+committed, so run the script once before rendering:
 
 ```bash
-FF=$(python3 -c "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())")
-mkdir -p assets/video/clip1 && $FF -ss 2 -t 4.5 -i galleria-2025.mp4 -vf "scale=1920:-2,fps=30" -q:v 3 assets/video/clip1/f%04d.jpg
+python3 assets/video/extract_clips.py
 ```
 
-Then point a slot at the folder with the frame count, and rebuild (below). The
-scene-3 polaroids and the scene-2 photo are set directly in `ad/template.html`.
+Vertical footage is drawn sharp at full height with a blurred fill at the sides; landscape
+footage is cover-cropped. The scene-3 polaroids and the scene-2 photo are set directly in
+`ad/template.html`.
 
 ## Rebuilding
 ```bash
 pip install pillow imageio-ffmpeg pymupdf "playwright==1.56.0"
 python3 -m playwright install chromium            # one-time browser download
+python3 assets/video/extract_clips.py            # frame folders for the two footage slots
 cd ad && python3 build.py                        # assembles ad/index.html from the template + logo slices + media.json
 python3 render.py --stills                       # renders 900 frames -> output/*.mp4 (+ key stills)
 cd ../one-pager && python3 build_pdf.py          # one-pager PDF

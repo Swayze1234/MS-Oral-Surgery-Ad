@@ -1,4 +1,4 @@
 [
-  {"type": "image", "src": "../assets/photos/booth-shopping-2025.jpg", "focus": "50% 45%"},
-  {"type": "image", "src": "../assets/photos/artist-booth-2025.jpg", "focus": "50% 40%"}
+  {"type": "video", "frames": "../assets/video/clipA", "count": 135, "fps": 30, "focus": [0.5, 0.5]},
+  {"type": "video", "frames": "../assets/video/clipB", "count": 135, "fps": 30, "focus": [0.5, 0.5]}
 ]
