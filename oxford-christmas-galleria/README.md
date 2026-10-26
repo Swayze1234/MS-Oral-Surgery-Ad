@@ -24,6 +24,8 @@ campaign proposal for the event director.
 | 23–27 s | "Consider your Christmas shopping handled." |
 | 27–30 s | End card: wordmark, date, time, The Jefferson, 50+ artists, free admission and parking. |
 
+An MCTV wordmark bug (`assets/logo/mctv-wordmark-green.png`, from the media kit) sits bottom-right on every frame.
+
 ## Swapping in photos or video
 `ad/media.json` lists the two media slots used at 14–23 s. Each entry is either
 
