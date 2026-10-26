@@ -1,11 +1,11 @@
-"""Assemble ad/index.html from template.html + logo SVG + artists.json + logo_timeline.js"""
+"""Assemble ad/index.html from template.html + logo SVG + media.json + logo_timeline.js"""
 import json, os, math, random
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 fonts_dir = os.path.join(ROOT, 'assets', 'fonts')
 fonts_css = open(os.path.join(fonts_dir, 'fonts.css')).read().replace("url('", "url('../assets/fonts/")
 logo = open(os.path.join(ROOT, 'assets', 'logo', 'logo-inner.svg.fragment')).read()
-artists = json.load(open(os.path.join(HERE, 'artists.json')))
+media = json.load(open(os.path.join(HERE, 'media.json')))
 timeline_path = os.path.join(HERE, 'logo_timeline.js')
 timeline = open(timeline_path).read() if os.path.exists(timeline_path) else "  // stub\n  s1svg.style.opacity=1;"
 
@@ -31,8 +31,8 @@ def sprig():
 html = open(os.path.join(HERE, 'template.html')).read()
 html = (html.replace('{{FONTS_CSS}}', fonts_css)
             .replace('{{LOGO_SVG}}', logo)
-            .replace('{{ARTISTS_JSON}}', json.dumps(artists))
-            .replace('{{SPRIG_JSON}}', json.dumps(sprig()))
+            .replace('{{MEDIA_JSON}}', json.dumps(media))
+            .replace('{{SPRIG_SVG_RAW}}', sprig())
             .replace('{{LOGO_TIMELINE}}', timeline))
 open(os.path.join(HERE, 'index.html'), 'w').write(html)
-print('built index.html', len(html), 'bytes;', len(artists), 'artists')
+print('built index.html', len(html), 'bytes;', len(media), 'media slots')

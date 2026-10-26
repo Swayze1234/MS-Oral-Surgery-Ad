@@ -1,7 +1,8 @@
 # Oxford Christmas Galleria · 30-second MCTV ad + director one-pager
 
 Silent 30-second digital ad (1920×1080, MP4) for the Oxford Christmas Galleria
-(Sat Nov 28, 2026, 9 AM – 4:30 PM, 365 MS 6, Oxford MS 38655), plus a one-page
+(Sat Nov 28, 2026, 9 AM – 4 PM, The Jefferson, 365 MS 6, Oxford MS 38655; free
+admission, free parking, tote bags for the first 100 shoppers), plus a one-page
 campaign proposal for the event director.
 
 ## Deliverables (`output/`)
@@ -9,7 +10,7 @@ campaign proposal for the event director.
 |---|---|
 | `OCG_30s_1920x1080_MCTV.mp4` | The ad at MCTV screen spec (H.264, 30 fps, ~640 kb/s, no audio). Upload this one. |
 | `OCG_30s_1920x1080_master.mp4` | Same ad, high-quality master (for social or re-encoding). |
-| `OCG_MCTV_One_Pager.pdf` | One-page proposal: event, storyboard, where it runs, spotlight calendar, pricing, timeline. |
+| `OCG_MCTV_One_Pager.pdf` | One-page proposal: event, storyboard, where it runs, on-screen copy, pricing, timeline. |
 | `OCG_30s_filmstrip.jpg` | One frame per second of the finished ad, for a quick review. |
 | `stills/` | Key frames used in the one-pager storyboard. |
 
@@ -17,16 +18,28 @@ campaign proposal for the event director.
 | Time | Scene |
 |---|---|
 | 0–4 s | Logo intro: cream disc lands on a kraft table, cut-paper sprigs set down one pair at a time, berries pop, "Oxford" stamps down with one bounce, the red dots flick out from under it, "Christmas Galleria" sets in glyph by glyph, then we fly through the wreath into the next scene. |
-| 4–9 s | Save the date: Saturday · Nov. 28 · 9 AM – 4:30 PM · address, with last year's banner photo. |
+| 4–9 s | Save the date: Saturday · Nov. 28 · 9 AM – 4 PM · The Jefferson, with last year's banner photo. |
 | 9–14 s | "50+" counts up; three polaroids of last year drop in. |
-| 14–23 s | Three featured artists, 3 s each (photo, name, medium, handle). |
+| 14–23 s | Two perk beats, 4.5 s each: "Free admission / Free parking", then "First 100 shoppers get a free OCG tote bag". Each beat has a photo or video slot. |
 | 23–27 s | "Consider your Christmas shopping handled." |
-| 27–30 s | End card: logo, date, time, address, 50+ artists. |
+| 27–30 s | End card: logo, date, time, The Jefferson, 50+ artists, free admission and parking. |
 
-## Swapping in the real artists
-Edit `ad/artists.json` (name, medium, handle, photo path, optional `focus` for the
-photo crop), drop the photos into `assets/photos/`, then rebuild (below).
-Three to five artists fit the 9-second slot; the per-artist time adapts automatically.
+## Swapping in photos or video
+`ad/media.json` lists the two media slots used at 14–23 s. Each entry is either
+
+- an image: `{"type":"image","src":"../assets/photos/x.jpg","focus":"50% 40%"}` (slow Ken Burns zoom), or
+- a video clip as a folder of JPEG frames: `{"type":"video","frames":"../assets/video/clip1","count":135,"fps":30,"focus":[0.5,0.5]}`.
+
+To make a frame folder from a video file (example: seconds 2–18 of last year's
+Facebook video, 4.5 s per slot):
+
+```bash
+FF=$(python3 -c "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())")
+mkdir -p assets/video/clip1 && $FF -ss 2 -t 4.5 -i galleria-2025.mp4 -vf "scale=1920:-2,fps=30" -q:v 3 assets/video/clip1/f%04d.jpg
+```
+
+Then point a slot at the folder with the frame count, and rebuild (below). The
+scene-3 polaroids and the scene-2 photo are set directly in `ad/template.html`.
 
 ## Rebuilding
 ```bash

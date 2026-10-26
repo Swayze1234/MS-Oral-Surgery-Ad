@@ -38,6 +38,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--cream)}
 #s2 .serif{font-size:150px;letter-spacing:-.01em}
 #s2 .mont{font-size:62px;margin-top:34px;color:var(--dark)}
 #s2 .addr{font:500 40px/1.3 'Montserrat';color:var(--ink);margin-top:28px}
+#s2 .addr b{font-weight:700;color:var(--dark);font-size:48px}
 #s2 .rule{width:140px;margin-top:34px}
 
 /* ---------- S3 fifty ---------- */
@@ -50,16 +51,20 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--cream)}
 .polaroid .photo{position:relative;width:100%;height:100%}
 .polaroid .cap{position:absolute;left:0;right:0;bottom:18px;text-align:center;font:400 34px 'Pacifico';color:var(--deep)}
 
-/* ---------- S4 artists ---------- */
-#s4 .card{position:absolute;inset:0}
-#s4 .photo{left:0;top:0;width:960px;height:1080px}
-#s4 .side{position:absolute;left:960px;top:0;width:960px;height:1080px;background:var(--cream);padding:200px 110px 0 120px}
+/* ---------- S4 perks montage ---------- */
+#s4 .beat{position:absolute;inset:0;display:none}
+#s4 .media{position:absolute;top:0;width:1120px;height:1080px;overflow:hidden;background:var(--sage)}
+#s4 .media img,#s4 .media canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+#s4 .side{position:absolute;top:0;width:800px;height:1080px;background:var(--cream);padding:170px 90px 0 100px}
+#s4 .beat.flip .side{padding-top:250px}
+#s4 .beat.flip .media{left:0} #s4 .beat.flip .side{left:1120px}
+#s4 .beat:not(.flip) .side{left:0} #s4 .beat:not(.flip) .media{left:800px}
 #s4 .eyebrow{color:var(--berry)}
-#s4 .name{font:900 112px/1.02 'Playfair Display';color:var(--dark);margin-top:34px}
-#s4 .medium{font:400 62px/1.15 'Bree Serif';color:var(--deep);margin-top:30px}
-#s4 .handle{font:600 44px/1 'Montserrat';color:var(--berry);margin-top:40px;letter-spacing:.02em}
-#s4 .sprig{position:absolute;right:60px;bottom:40px;width:420px;height:420px;opacity:.9}
-#s4 .num{position:absolute;right:120px;top:190px;font:400 44px 'Bree Serif';color:var(--deep)}
+#s4 .big{font:900 118px/1.0 'Playfair Display';color:var(--dark);margin-top:30px;letter-spacing:-.01em}
+#s4 .big+.big{margin-top:14px}
+#s4 .sub{font:400 60px/1.12 'Bree Serif';color:var(--coral);margin-top:26px}
+#s4 .small{font:600 38px/1.2 'Montserrat';color:var(--deep);margin-top:40px}
+#s4 .sprig{position:absolute;right:40px;bottom:30px;width:280px;height:280px;opacity:.9}
 
 /* ---------- S5 tagline ---------- */
 #s5{background:var(--cream)}
@@ -77,7 +82,9 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--cream)}
 #s6 .d2{font:900 108px/1 'Playfair Display';color:var(--dark);margin-top:18px}
 #s6 .d3{font:600 54px/1.2 'Montserrat';color:var(--dark);margin-top:34px}
 #s6 .d4{font:500 40px/1.35 'Montserrat';color:var(--ink);margin-top:26px}
-#s6 .d5{font:400 50px/1.2 'Bree Serif';color:var(--deep);margin-top:46px}
+#s6 .d4 b{font-weight:700;color:var(--dark);font-size:48px}
+#s6 .d5{font:400 50px/1.2 'Bree Serif';color:var(--deep);margin-top:40px}
+#s6 .d6{font:600 38px/1.2 'Montserrat';color:var(--berry);margin-top:14px}
 #s6 .rule{width:120px;margin-top:36px}
 </style>
 </head>
@@ -97,9 +104,9 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--cream)}
     <div class="eyebrow line">Save the date</div>
     <div class="script line">Saturday</div>
     <div class="serif line">Nov. 28</div>
-    <div class="mont line">9 AM – 4:30 PM</div>
+    <div class="mont line">9 AM – 4 PM</div>
     <div class="rule line"></div>
-    <div class="addr line">365 MS 6<br>Oxford, Mississippi 38655</div>
+    <div class="addr line"><b>The Jefferson</b><br>Oxford, Mississippi</div>
   </div>
 </div>
 
@@ -115,15 +122,36 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--cream)}
   <div class="polaroid" id="p3" style="left:1490px;top:380px;width:400px;height:500px"><div class="photo"><img src="../assets/photos/banner-2025.jpg" style="width:700px;height:851px;margin-left:-262px;margin-top:-128px"></div><div class="cap">holiday cheer</div></div>
 </div>
 
-<!-- S4: artist spotlights (cards generated from ARTISTS) -->
-<div class="scene" id="s4"></div>
+<!-- S4: perks montage (media from media.json) -->
+<div class="scene" id="s4">
+  <div class="beat" id="beat0">
+    <div class="side">
+      <div class="eyebrow line">All welcome</div>
+      <div class="big line">Free<br>admission</div>
+      <div class="big line">Free<br>parking</div>
+      <div class="small line">All day, 9 AM – 4 PM</div>
+      <svg class="sprig" viewBox="0 0 420 420">{{SPRIG_SVG_RAW}}</svg>
+    </div>
+    <div class="media" data-m="0"></div>
+  </div>
+  <div class="beat flip" id="beat1">
+    <div class="media" data-m="1"></div>
+    <div class="side">
+      <div class="eyebrow line">Early birds</div>
+      <div class="big line">First 100 shoppers</div>
+      <div class="sub line">get a free OCG tote bag</div>
+      <div class="small line">Doors open at 9 AM</div>
+      <svg class="sprig" viewBox="0 0 420 420">{{SPRIG_SVG_RAW}}</svg>
+    </div>
+  </div>
+</div>
 
 <!-- S5: tagline -->
 <div class="scene" id="s5">
   <div class="wrap">
     <div class="l1 line">Consider your Christmas shopping</div>
     <div class="l2 line">handled.</div>
-    <div class="sub line">Saturday, November 28 · Oxford, MS</div>
+    <div class="sub line">Saturday, November 28 · The Jefferson, Oxford</div>
   </div>
   <div id="sparks5"></div>
 </div>
@@ -134,18 +162,18 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--cream)}
   <div class="info">
     <div class="d1 line">Saturday</div>
     <div class="d2 line">November 28</div>
-    <div class="d3 line">9 AM – 4:30 PM</div>
-    <div class="d4 line">365 MS 6<br>Oxford, Mississippi 38655</div>
+    <div class="d3 line">9 AM – 4 PM</div>
+    <div class="d4 line"><b>The Jefferson</b><br>Oxford, Mississippi</div>
     <div class="rule line"></div>
     <div class="d5 line">50+ local &amp; regional artists</div>
+    <div class="d6 line">Free admission · Free parking</div>
   </div>
 </div>
 
 </div>
 
 <script>
-const ARTISTS = {{ARTISTS_JSON}};
-const SPRIG_SVG = {{SPRIG_JSON}};
+const MEDIA = {{MEDIA_JSON}};
 
 /* ---------- timing (seconds) ---------- */
 const T = { s1:[0,4.0], s2:[4.0,9.0], s3:[9.0,14.0], s4:[14.0,23.0], s5:[23.0,27.0], s6:[27.0,30.0] };
@@ -174,23 +202,27 @@ function riseLines(nodes,t,t0,gap,dur,dy){
     n.style.opacity=p; n.style.transform=`translateY(${(1-pb)*(dy||60)}px)`; });
 }
 
-/* ---------- build S4 cards ---------- */
+/* ---------- S4 media slots: an image (Ken Burns) or a folder of video frames drawn on a canvas ---------- */
+const VIDEO = []; // preloaded frame Images per slot
 (function(){
-  const s4=document.getElementById('s4');
-  ARTISTS.forEach((a,i)=>{
-    const c=document.createElement('div'); c.className='card'; c.id='card'+i;
-    c.innerHTML=`<div class="photo"><img src="${a.photo}" style="object-position:${a.focus||'50% 50%'}"></div>
-      <div class="side">
-        <div class="num">${String(i+1).padStart(2,'0')} / ${String(ARTISTS.length).padStart(2,'0')}</div>
-        <div class="eyebrow line">Featured artist</div>
-        <div class="name line">${a.name}</div>
-        <div class="medium line">${a.medium}</div>
-        <div class="handle line">${a.handle||''}</div>
-        <svg class="sprig" viewBox="0 0 420 420">${SPRIG_SVG}</svg>
-      </div>`;
-    s4.appendChild(c);
+  document.querySelectorAll('#s4 .media').forEach(box=>{
+    const m=MEDIA[+box.dataset.m]; if(!m) return;
+    if(m.type==='video'){
+      const cv=document.createElement('canvas'); cv.width=1920; cv.height=1080; box.appendChild(cv);
+      const frames=[]; for(let i=1;i<=m.count;i++){ const im=new Image(); im.src=`${m.frames}/f${String(i).padStart(4,'0')}.jpg`; frames.push(im); }
+      VIDEO[+box.dataset.m]={cv,frames,fps:m.fps||30,focus:m.focus||[0.5,0.5]};
+    } else {
+      const im=document.createElement('img'); im.src=m.src; im.style.objectPosition=m.focus||'50% 50%'; box.appendChild(im);
+    }
   });
 })();
+function drawVideo(slot,tLocal){
+  const v=VIDEO[slot]; if(!v) return; const n=v.frames.length; if(!n) return;
+  const idx=Math.min(n-1, Math.max(0, Math.floor(tLocal*v.fps))); const im=v.frames[idx]; if(!im.complete||!im.naturalWidth) return;
+  const cv=v.cv, ctx=cv.getContext('2d'); const W=cv.width, H=cv.height; const s=Math.max(W/im.naturalWidth, H/im.naturalHeight);
+  const dw=im.naturalWidth*s, dh=im.naturalHeight*s; const dx=(W-dw)*v.focus[0], dy=(H-dh)*v.focus[1];
+  ctx.drawImage(im, dx, dy, dw, dh);
+}
 
 /* ---------- sparkles ---------- */
 function makeSparks(containerId,n,seed){
@@ -252,19 +284,19 @@ function render(t){
     });
   }
 
-  /* S4 */
-  if(sceneWin(t,'s4')){ const l=t-T.s4[0]; const per=(T.s4[1]-T.s4[0])/ARTISTS.length;
-    ARTISTS.forEach((a,i)=>{ const c=document.getElementById('card'+i); const a0=i*per, a1=a0+per; const on=l>=a0-0.6 && l<a1+0.1;
+  /* S4: two beats, 4.5 s each */
+  if(sceneWin(t,'s4')){ const l=t-T.s4[0]; const per=(T.s4[1]-T.s4[0])/2;
+    [0,1].forEach(i=>{ const c=document.getElementById('beat'+i); const a0=i*per, a1=a0+per; const on=l>=a0-0.6 && l<a1+0.1;
       c.style.display=on?'block':'none'; if(!on)return;
-      const lt=l-a0;
-      const ph=c.querySelector('.photo'); const img=ph.querySelector('img');
-      img.style.transform=`scale(${tw(lt,0,per,1.0,1.08,'linear')})`;
-      // wipe photo in from the left, side panel slides in from right
-      ph.style.clipPath=`inset(0 ${(1-u(lt,0,0.7,'outQuint'))*100}% 0 0)`;
-      c.querySelector('.side').style.transform=`translateX(${(1-u(lt,0.05,0.75,'outQuint'))*960}px)`;
+      const lt=l-a0; const flip=c.classList.contains('flip');
+      const box=c.querySelector('.media'); const img=box.querySelector('img');
+      if(img) img.style.transform=`scale(${tw(lt,0,per,1.0,1.09,'linear')})`;
+      drawVideo(i, Math.max(0,lt));
+      // media wipes in, panel slides in from its own edge
+      box.style.clipPath = flip ? `inset(0 ${(1-u(lt,0,0.7,'outQuint'))*100}% 0 0)` : `inset(0 0 0 ${(1-u(lt,0,0.7,'outQuint'))*100}%)`;
+      c.querySelector('.side').style.transform=`translateX(${(1-u(lt,0.05,0.75,'outQuint'))*(flip?800:-800)}px)`;
       riseLines(Array.from(c.querySelectorAll('.line')),lt,0.35,0.11,0.55,60);
-      c.querySelector('.sprig').style.transform=`rotate(${tw(lt,0.4,1.3,-25,0,'outBack')}deg) scale(${u(lt,0.4,1.1,'outBack')})`;
-      c.querySelector('.sprig').style.transformOrigin='100% 100%';
+      const sp=c.querySelector('.sprig'); sp.style.transformOrigin='100% 100%'; sp.style.transform=`rotate(${tw(lt,0.4,1.3,-25,0,'outBack')}deg) scale(${u(lt,0.4,1.1,'outBack')})`;
       c.style.zIndex=10+i;
     });
   }
@@ -288,7 +320,7 @@ function render(t){
   }
 }
 window.render=render;
-window.__ready = Promise.all(Array.from(document.fonts).map(f=>f.load())).then(()=>document.fonts.ready).then(()=>Promise.all(Array.from(document.images).map(im=>im.decode().catch(()=>{})))).then(()=>{render(0);return true;});
+window.__ready = Promise.all(Array.from(document.fonts).map(f=>f.load())).then(()=>document.fonts.ready).then(()=>Promise.all(Array.from(document.images).concat(VIDEO.flatMap(v=>v?v.frames:[])).map(im=>im.decode().catch(()=>{})))).then(()=>{render(0);return true;});
 </script>
 </body>
 </html>

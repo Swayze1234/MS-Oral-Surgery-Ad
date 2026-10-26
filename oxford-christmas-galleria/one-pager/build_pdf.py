@@ -11,7 +11,7 @@ for f in os.listdir(os.path.join(ROOT,'output','stills')):
     if f.endswith('.jpg'):
         im = Image.open(os.path.join(ROOT,'output','stills',f)); im.thumbnail((720,405)); im.save(os.path.join(th,f), quality=86)
 today = datetime.date.today().strftime('%B %-d, %Y')
-artist_note = os.environ.get('ARTIST_NOTE', 'Featured-artist slots shown with placeholder photos until artist photos are supplied.')
+artist_note = os.environ.get('ARTIST_NOTE', 'More photos and video footage can be dropped into the 14–23 s slots.')
 html = (open(os.path.join(HERE,'template.html')).read()
         .replace('{{FONTS_CSS}}',fonts_css).replace('{{LOGO_SVG}}',logo)
         .replace('../output/stills/','thumbs/').replace('{{TODAY}}',today).replace('{{ARTIST_NOTE}}',artist_note))

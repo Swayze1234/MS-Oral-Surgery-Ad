@@ -28,7 +28,7 @@ fps = args.fps if not args.preview else 10
 n = int(round((args.dur - args.start) * fps))
 master = os.path.join(OUT, 'OCG_30s_1920x1080_master' + ('_preview' if args.preview else '') + '.mp4')
 
-STILL_TIMES = [0.9, 1.8, 3.2, 6.0, 12.0, 15.5, 18.5, 21.5, 25.5, 29.0]
+STILL_TIMES = [0.9, 1.8, 3.2, 6.0, 12.0, 16.5, 21.5, 25.5, 29.0]
 
 with sync_playwright() as p:
     b = p.chromium.launch()
