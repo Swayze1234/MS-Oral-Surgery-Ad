@@ -3,7 +3,7 @@ import os, sys, datetime
 from playwright.sync_api import sync_playwright
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 fonts_css = open(os.path.join(ROOT,'assets','fonts','fonts.css')).read().replace("url('","url('../assets/fonts/")
-logo = open(os.path.join(ROOT,'assets','logo','logo-inner.svg.fragment')).read()
+logo = ''
 # small thumbnails for the storyboard row (keeps the PDF light)
 from PIL import Image
 th = os.path.join(HERE,'thumbs'); os.makedirs(th, exist_ok=True)

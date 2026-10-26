@@ -27,7 +27,14 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--cream)}
 
 /* ---------- S1 logo ---------- */
 #s1{background:transparent;z-index:5}
-#s1 svg{position:absolute;left:400px;top:-20px;width:1120px;height:1120px;overflow:visible}
+#table{position:absolute;inset:0;transform-origin:960px 540px}
+#kraft{position:absolute;inset:-300px;background:var(--kraft)}
+#card,#cardShadow{position:absolute;left:280px;top:180px;width:1360px;height:720px;border-radius:30px;transform-origin:center}
+#card{background:var(--cream)}
+#cardShadow{background:#46301A;opacity:.28;filter:blur(36px)}
+#logo{position:absolute;left:394.5px;top:291px;width:905px;height:398px;transform:scale(1.25);transform-origin:center;will-change:transform,opacity}
+#logo .piece,#logo .pshadow{position:absolute;display:block;will-change:transform,opacity;transform-origin:50% 100%}
+#logo .pshadow{filter:brightness(0);opacity:.22}
 #sparks{position:absolute;inset:0;z-index:6}
 .spark{position:absolute;width:64px;height:64px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 0 C53 35 65 47 100 50 C65 53 53 65 50 100 C47 65 35 53 0 50 C35 47 47 35 50 0 Z' fill='%23D9B45B'/></svg>") center/contain no-repeat;will-change:transform,opacity}
 
@@ -76,7 +83,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--cream)}
 
 /* ---------- S6 end ---------- */
 #s6{background:var(--cream)}
-#s6 svg{position:absolute;left:110px;top:90px;width:900px;height:900px}
+#s6 #endLogo{position:absolute;left:90px;top:352px;width:860px;height:auto;transform-origin:center}
 #s6 .info{position:absolute;left:1010px;top:230px;width:820px}
 #s6 .d1{font:400 92px/1 'Pacifico';color:var(--coral)}
 #s6 .d2{font:900 108px/1 'Playfair Display';color:var(--dark);margin-top:18px}
@@ -93,7 +100,8 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--cream)}
 
 <!-- S1: logo animation -->
 <div class="scene" id="s1">
-  <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">{{LOGO_SVG}}</svg>
+  <div id="table"><div id="kraft"></div><div id="cardShadow"></div><div id="card"></div></div>
+  <div id="logo">{{LOGO_PIECES}}</div>
   <div id="sparks"></div>
 </div>
 
@@ -158,7 +166,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:var(--cream)}
 
 <!-- S6: end card -->
 <div class="scene" id="s6">
-  <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">{{LOGO_SVG}}</svg>
+  <img id="endLogo" src="../assets/logo/ocg-wordmark.png" alt="">
   <div class="info">
     <div class="d1 line">Saturday</div>
     <div class="d2 line">November 28</div>
@@ -233,16 +241,9 @@ function makeSparks(containerId,n,seed){
 const sparks1=makeSparks('sparks',22,1);
 const sparks5=makeSparks('sparks5',16,5);
 
-/* ---------- logo element lists ---------- */
-const s1svg=document.querySelector('#s1 svg');
-const leaves=Array.from(s1svg.querySelectorAll('.leaf'));
-const stems=Array.from(s1svg.querySelectorAll('.stem'));
-const berries=Array.from(s1svg.querySelectorAll('.berry'));
-const dots=Array.from(s1svg.querySelectorAll('.dot'));
-const wOx=s1svg.querySelector('.word-oxford');
-const wCg=s1svg.querySelector('.word-cg');
-const N_SPRIGS=18;
-const ORDER = leaves.map(l=>({el:l,s:+l.dataset.sprig,k:+l.dataset.k}));
+/* ---------- logo pieces (sliced from the wordmark PNG) ---------- */
+const PIECES={}; document.querySelectorAll('#logo .piece').forEach(el=>{ PIECES[el.dataset.p]={el, sh:document.querySelector(`#logo .pshadow[data-p="${el.dataset.p}"]`), x:parseFloat(el.style.left), y:parseFloat(el.style.top), w:parseFloat(el.style.width), h:parseFloat(el.style.height)}; });
+const OX=['ox0','ox1','ox2','ox3','ox4','ox5'], GA=['ga0','ga1','ga2','ga3','ga4','ga5','ga6','ga7'];
 
 /* ---------- S1: logo animation (filled in from the approved spec) ---------- */
 function renderLogo(t){
@@ -315,7 +316,7 @@ function render(t){
 
   /* S6 */
   if(sceneWin(t,'s6')){ const l=t-T.s6[0];
-    const svg=document.querySelector('#s6 svg'); svg.style.opacity=u(l,0,0.4); svg.style.transform=`scale(${0.92+0.08*u(l,0,0.6,'outBackSoft')})`;
+    const lg=document.getElementById('endLogo'); lg.style.opacity=u(l,0,0.4); lg.style.transform=`scale(${0.92+0.08*u(l,0,0.6,'outBackSoft')})`;
     riseLines(Array.from(document.querySelectorAll('#s6 .line')),l,0.1,0.06,0.35,50);
   }
 }

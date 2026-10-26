@@ -17,12 +17,12 @@ campaign proposal for the event director.
 ## Ad structure
 | Time | Scene |
 |---|---|
-| 0–4 s | Logo intro: cream disc lands on a kraft table, cut-paper sprigs set down one pair at a time, berries pop, "Oxford" stamps down with one bounce, the red dots flick out from under it, "Christmas Galleria" sets in glyph by glyph, then we fly through the wreath into the next scene. |
+| 0–4 s | Logo intro: a cream card lands on a kraft table, the OXFORD letters are set down one by one, "Christmas" is written on with a gold pen tip, the tree pops onto the i, the GALLERIA letters set in, a short hold with foil-star twinkles, then the card grows to hand off to the next scene. |
 | 4–9 s | Save the date: Saturday · Nov. 28 · 9 AM – 4 PM · The Jefferson, with last year's banner photo. |
 | 9–14 s | "50+" counts up; three polaroids of last year drop in. |
 | 14–23 s | Two perk beats, 4.5 s each: "Free admission / Free parking", then "First 100 shoppers get a free OCG tote bag". Each beat has a photo or video slot. |
 | 23–27 s | "Consider your Christmas shopping handled." |
-| 27–30 s | End card: logo, date, time, The Jefferson, 50+ artists, free admission and parking. |
+| 27–30 s | End card: wordmark, date, time, The Jefferson, 50+ artists, free admission and parking. |
 
 ## Swapping in photos or video
 `ad/media.json` lists the two media slots used at 14–23 s. Each entry is either
@@ -45,18 +45,25 @@ scene-3 polaroids and the scene-2 photo are set directly in `ad/template.html`.
 ```bash
 pip install pillow imageio-ffmpeg pymupdf "playwright==1.56.0"
 python3 -m playwright install chromium            # one-time browser download
-cd assets/logo && python3 make_logo.py          # vector wreath logo (logo.svg + fragment)
-cd ../../ad && python3 build.py                  # assembles ad/index.html
+cd ad && python3 build.py                        # assembles ad/index.html from the template + logo slices + media.json
 python3 render.py --stills                       # renders 900 frames -> output/*.mp4 (+ key stills)
 cd ../one-pager && python3 build_pdf.py          # one-pager PDF
 ```
 `render.py --preview` renders a fast 10-fps check; `--only-stills` just refreshes the key frames.
 
-The ad is plain HTML/CSS/SVG driven by a deterministic `render(t)` function
+The ad is plain HTML/CSS driven by a deterministic `render(t)` function
 (`ad/template.html` for the scenes, `ad/logo_timeline.js` for the logo intro),
 captured frame by frame with headless Chromium and encoded with ffmpeg.
 
+### Logo
+`assets/logo/wordmark-original-1200.jpg` is the client's logo. `assets/logo/ocg-wordmark.png`
+is the same wordmark cut out with transparency, and `assets/logo/slices/` holds it split into
+16 pieces (6 OXFORD letters, the script, the tree, 8 GALLERIA letters) plus `manifest.json`
+with their positions; the intro animates those pieces. A larger PNG or vector master of the
+logo would sharpen the intro slightly; drop it in as `wordmark-original-1200.jpg` and re-run `python3 slice_wordmark.py`.
+The earlier wreath rebuild (`make_logo.py`, `logo.svg`) is kept for reference only.
+
 ## Assets
-- `assets/logo/` — the original 540 px logo and the vector rebuild used on screen.
+- `assets/logo/` — the client's wordmark (JPG), its transparent cutout and animation slices, plus the earlier wreath logo for reference.
 - `assets/photos/` — last year's event photos supplied by the client.
 - `assets/fonts/` — Pacifico, Bree Serif, Playfair Display, Montserrat (Google Fonts, OFL).

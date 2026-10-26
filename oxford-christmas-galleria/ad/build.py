@@ -4,7 +4,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 fonts_dir = os.path.join(ROOT, 'assets', 'fonts')
 fonts_css = open(os.path.join(fonts_dir, 'fonts.css')).read().replace("url('", "url('../assets/fonts/")
-logo = open(os.path.join(ROOT, 'assets', 'logo', 'logo-inner.svg.fragment')).read()
+manifest = json.load(open(os.path.join(ROOT, 'assets', 'logo', 'slices', 'manifest.json')))
+def pieces_html():
+    out = []
+    for cls in ('pshadow', 'piece'):
+        for m in manifest['pieces']:
+            out.append(f'<img class="{cls}" data-p="{m["name"]}" src="../assets/logo/slices/{m["name"]}.png" '
+                       f'style="left:{m["x"]}px;top:{m["y"]}px;width:{m["w"]}px;height:{m["h"]}px" alt="">')
+    return '\n'.join(out)
 media = json.load(open(os.path.join(HERE, 'media.json')))
 timeline_path = os.path.join(HERE, 'logo_timeline.js')
 timeline = open(timeline_path).read() if os.path.exists(timeline_path) else "  // stub\n  s1svg.style.opacity=1;"
@@ -30,7 +37,7 @@ def sprig():
 
 html = open(os.path.join(HERE, 'template.html')).read()
 html = (html.replace('{{FONTS_CSS}}', fonts_css)
-            .replace('{{LOGO_SVG}}', logo)
+            .replace('{{LOGO_PIECES}}', pieces_html())
             .replace('{{MEDIA_JSON}}', json.dumps(media))
             .replace('{{SPRIG_SVG_RAW}}', sprig())
             .replace('{{LOGO_TIMELINE}}', timeline))
