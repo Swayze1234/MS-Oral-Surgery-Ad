@@ -10,11 +10,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 SRC = os.path.join(HERE, 'reel-2025.mp4')
 FPS = 30
+# Segment edges sit exactly on the reel's own shot changes (found by frame differencing):
+#   2.00 3.13 4.30 5.07 6.30 7.63 8.60 9.60 10.97 12.17 12.90 15.20 16.37 17.17 18.60
 CLIPS = {
-    # free admission / free parking beat: shoppers at the booths, artist waving, ornament close-up
-    'clipA': [(2.0, 4.5)],
-    # tote-bag beat: the embroidered tote first, then Santa with the kids, then the ribbon wall
-    'clipB': [(17.0, 1.6), (15.0, 1.5), (11.0, 1.4)],
+    # free admission / free parking beat: shoppers at the tent, artist waving, ornament close-up, Santa waving
+    'clipA': [(3.13, 4.50)],
+    # tote-bag beat: the embroidered tote first, then Santa with the kids, the ribbon wall, a nutcracker tail
+    'clipB': [(17.17, 1.43), (15.20, 1.13), (10.97, 1.16), (16.37, 0.77)],
 }
 for name, segs in CLIPS.items():
     out = os.path.join(HERE, name); shutil.rmtree(out, ignore_errors=True); os.makedirs(out)

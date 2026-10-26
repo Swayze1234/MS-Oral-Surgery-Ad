@@ -1,8 +1,10 @@
 """Render ad/index.html frame-by-frame with Chromium, pipe frames to ffmpeg.
 
-Usage: python3 render.py [--fps 30] [--dur 30] [--stills] [--preview]
-  --stills   also save key frames as PNG into output/stills
-  --preview  render at 1/2 fps for a quick check (writes *_preview.mp4)
+Usage: python3 render.py [--fps 30] [--dur 30] [--start S] [--stills] [--only-stills] [--preview]
+  --stills       also save key frames as JPEG into output/stills
+  --only-stills  just refresh those key frames, no video
+  --preview      render at 10 fps for a quick check (writes *_preview.mp4, no spec encode)
+  --start S      begin rendering at second S
 """
 import argparse, os, subprocess, sys, time
 from playwright.sync_api import sync_playwright

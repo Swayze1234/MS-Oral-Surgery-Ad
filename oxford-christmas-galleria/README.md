@@ -12,6 +12,7 @@ campaign proposal for the event director.
 | `OCG_30s_1920x1080_master.mp4` | Same ad, high-quality master (for social or re-encoding). |
 | `OCG_MCTV_One_Pager.pdf` | One-page proposal: event, storyboard, where it runs, on-screen copy, pricing, timeline. |
 | `OCG_30s_filmstrip.jpg` | One frame per second of the finished ad, for a quick review. |
+| `OCG_MCTV_One_Pager_preview.png` | PNG preview of the one-pager. |
 | `stills/` | Key frames used in the one-pager storyboard. |
 
 ## Ad structure
@@ -47,7 +48,7 @@ footage is cover-cropped. The scene-3 polaroids and the scene-2 photo are set di
 
 ## Rebuilding
 ```bash
-pip install pillow imageio-ffmpeg pymupdf "playwright==1.56.0"
+pip install pillow numpy scipy imageio-ffmpeg pymupdf "playwright==1.56.0"
 python3 -m playwright install chromium            # one-time browser download
 python3 assets/video/extract_clips.py            # frame folders for the two footage slots
 cd ad && python3 build.py                        # assembles ad/index.html from the template + logo slices + media.json

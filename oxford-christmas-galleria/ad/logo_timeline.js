@@ -8,8 +8,8 @@
     sparks1.forEach(s=>{ s.style.background=star; s.style.backgroundSize='contain'; s.style.width='46px'; s.style.height='46px'; s.style.opacity=0; });
   }
   const dsin=(x,f,dec)=>Math.exp(-dec*x)*Math.sin(2*Math.PI*f*x);
-  const exitFade=u(t,3.6,3.8,'inCubic');
-  const tableZoom=u(t,3.6,4.0,'inCubic');
+  const exitFade=u(t,3.66,3.94,'inCubic');          // logo pieces
+  const tableZoom=u(t,3.55,4.0,'inCubic');          // card + kraft grow toward the viewer
   const LS=1.25, LX=394.5, LY=291;                       // #logo scale + offset: native px -> screen px
   const toScreen=(x,y)=>[960+(x-452.5)*LS, 540+(y-199)*LS];
 
@@ -17,9 +17,10 @@
   { const p=u(t,0.05,0.40,'outCubic'); const pb=u(t,0.05,0.45,'outBackSoft'); const op=u(t,0.05,0.13,'linear');
     const sc=1.12-0.12*p, dy=-18*(1-pb);
     const card=document.getElementById('card'), sh=document.getElementById('cardShadow');
-    card.style.transform=`translateY(${dy}px) scale(${sc})`; card.style.opacity=op*(1-u(t,3.8,4.02,'linear'));
-    sh.style.transform=`translateY(${dy+26-21*p}px) scale(${sc})`; sh.style.opacity=0.28*op*(1-u(t,3.7,3.95,'linear')); sh.style.filter=`blur(${Math.max(2,36-28*p)}px)`;
-    document.getElementById('kraft').style.opacity=1-u(t,3.7,3.95,'linear');
+    const leave=u(t,3.68,3.97,'inCubic');
+    card.style.transform=`translateY(${dy}px) scale(${sc})`; card.style.opacity=op*(1-leave);
+    sh.style.transform=`translateY(${dy+26-21*p}px) scale(${sc})`; sh.style.opacity=0.28*op*(1-leave); sh.style.filter=`blur(${Math.max(2,36-28*p)}px)`;
+    document.getElementById('kraft').style.opacity=1-leave;
     const z=1+1.6*tableZoom; document.getElementById('table').style.transform=`scale(${z})`; }
 
   /* ----- stamp helper: piece set down from above, shadow tightens in sync ----- */
