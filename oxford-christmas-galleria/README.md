@@ -10,7 +10,7 @@ campaign proposal for the event director.
 |---|---|
 | `OCG_30s_1920x1080_MCTV.mp4` | The ad at MCTV screen spec (H.264, 30 fps, ~640 kb/s, no audio). Upload this one. |
 | `OCG_30s_1920x1080_master.mp4` | Same ad, high-quality master (for social or re-encoding). |
-| `OCG_MCTV_One_Pager.pdf` | One-page proposal: event, storyboard, where it runs, on-screen copy, pricing, timeline. |
+| `OCG_MCTV_One_Pager.pdf` | One-page proposal: event, storyboard, where it runs, one-payment pricing for the 5-week run. |
 | `OCG_30s_filmstrip.jpg` | One frame per second of the finished ad, for a quick review. |
 | `OCG_MCTV_One_Pager_preview.png` | PNG preview of the one-pager. |
 | `stills/` | Key frames used in the one-pager storyboard. |
