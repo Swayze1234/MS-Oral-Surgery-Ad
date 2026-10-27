@@ -31,7 +31,7 @@ ul.ticks li{position:relative;padding-left:12pt;margin:3pt 0;font-size:9.6pt}
 ul.ticks li:before{content:"";position:absolute;left:0;top:4.5pt;width:5pt;height:5pt;border-radius:50%;background:var(--coral)}
 table{width:100%;border-collapse:collapse;font-size:10pt}
 th{font:700 7pt/1 'Montserrat';letter-spacing:.1em;text-transform:uppercase;color:var(--deep);text-align:left;padding:3pt 4pt;border-bottom:1.5px solid var(--sage);white-space:nowrap}
-td{padding:5pt 6pt;border-bottom:1px solid var(--line);vertical-align:top}
+td{padding:4pt 6pt;border-bottom:1px solid var(--line);vertical-align:top}
 td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
 tr.pick td{background:#FBF1EC;font-weight:700}
 .tag{display:inline-block;font:700 6.4pt/1 'Montserrat';letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--coral);border-radius:3pt;padding:2pt 4pt;margin-left:4pt;vertical-align:1pt}
@@ -43,6 +43,32 @@ tr.pick td{background:#FBF1EC;font-weight:700}
 .tagline{font:400 14pt/1.1 'Pacifico';color:var(--coral);text-align:center;margin:4pt 0 0}
 .foot{position:absolute;left:.5in;right:.5in;bottom:.28in;border-top:1.5px solid var(--sage);padding-top:6pt;display:flex;justify-content:space-between;font:500 7.6pt/1.3 'Montserrat';color:var(--mute)}
 .foot b{color:var(--dark);font-weight:700}
+
+.sign{margin-top:10pt;border-top:1.5px solid var(--sage);padding-top:8pt}
+.sign .pick{font:600 9.6pt/1.5 'Montserrat';color:var(--ink);margin-bottom:8pt}
+.sign .box{display:inline-block;width:9pt;height:9pt;border:1.2px solid var(--dark);border-radius:2pt;vertical-align:-1pt;margin:0 4pt 0 10pt}
+.sign .box:first-child{margin-left:0}
+.sigrow{display:grid;grid-template-columns:1fr 1fr;gap:24pt}
+.sigcell .line{border-bottom:1px solid var(--ink);height:24pt;position:relative}
+.sigcell .script{position:absolute;left:6pt;bottom:2pt;font:400 22pt/1 'Great Vibes';color:#1F3A2C}
+.sigcell .lab{font:600 7.4pt/1.3 'Montserrat';letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:3pt;display:flex;justify-content:space-between}
+.sigcell .who{font:600 9.4pt/1.3 'Montserrat';color:var(--dark);margin-top:5pt}
+.sigcell .who span{font-weight:500;color:var(--mute)}
+.page+.page{page-break-before:always}
+.page2 h1{font-size:19pt}
+.loc h2{margin:10pt 0 4pt}
+.loc h2 small{font:600 8pt/1 'Montserrat';letter-spacing:.05em;color:var(--mute);text-transform:none;margin-left:6pt}
+.loc ul{column-gap:14pt;list-style:none;font:500 8.6pt/1.42 'Montserrat';color:var(--ink)}
+.loc.c3 ul{columns:3}
+.loc.c4 ul{columns:4;font-size:8pt;line-height:1.38}
+.loc.c5 ul{columns:5;column-gap:8pt;font-size:7.2pt;line-height:1.3}
+.loc.c5 h2{margin:6pt 0 2pt}
+.loc.c5 li{padding:0}
+.page3 .head{padding-bottom:6pt}
+.page3 .head .sub{margin-top:3pt}
+.loc li{break-inside:avoid;padding:0.5pt 0;border-bottom:1px dotted var(--line)}
+.loc li span{color:var(--mute);font-weight:400}
+.loc .intro{font:500 9pt/1.4 'Montserrat';color:var(--mute);margin-top:4pt}
 </style>
 </head>
 <style>
@@ -81,11 +107,11 @@ tr.pick td{background:#FBF1EC;font-weight:700}
   </div>
 </section>
 
-<div class="grid2" style="margin-top:10pt">
+<div class="grid2" style="margin-top:8pt">
   <section>
     <h2>Where it runs</h2>
     <ul class="ticks">
-      <li><b>Oxford's restaurants, salons, clinics, gyms and shops</b>, 44 screens across Oxford and Lafayette County.</li>
+      <li><b>Oxford's restaurants, salons, clinics, gyms and shops</b>, 41 screens across Oxford and Lafayette County (full list on page 2).</li>
       <li>Your ad shares the screen with no one: 15-minute loop, <b>1,500+ plays per screen every month</b>.</li>
       <li>Can't be skipped, blocked or scrolled past. People sit in front of these screens for 55+ minutes on average.</li>
     </ul>
@@ -107,14 +133,66 @@ tr.pick td{background:#FBF1EC;font-weight:700}
     <tr><td>20 screens</td><td>Entry Oxford reach · about 30,000 plays a month</td><td class="n pricebig">$500</td></tr>
     <tr class="pick"><td>40 screens<span class="tag">Recommended</span></td><td>Nearly every Oxford screen · about 60,000 plays a month</td><td class="n pricebig">$800</td></tr>
     <tr><td>80 screens</td><td>Oxford plus Tupelo and part of the Golden Triangle · 120,000 plays a month</td><td class="n pricebig">$1,400</td></tr>
-    <tr><td>125+ screens</td><td>The entire three-market network · 187,500 plays a month</td><td class="n pricebig">$2,000</td></tr>
+    <tr><td>125+ screens</td><td>The entire MCTV network, every market on pages 2–3 · 187,500 plays a month</td><td class="n pricebig">$2,000</td></tr>
   </table>
-  <div class="note" style="font-size:8.6pt;margin-top:6pt">Event pricing: the full run through Nov 28 for our regular one-month rate, paid once. Includes the finished ad, unlimited rotation and a proof-of-play report. No contract beyond the event.</div>
+  <div class="note" style="font-size:8.6pt;margin-top:4pt">Event pricing: the full run through Nov 28 for our regular one-month rate, paid once. Includes the finished ad, unlimited rotation and a proof-of-play report. No contract beyond the event.</div>
 </section>
+
+<div class="sign">
+  <div class="pick">Package: <span class="box"></span>20 screens, $500 <span class="box"></span>40 screens, $800 <span class="box"></span>80 screens, $1,400 <span class="box"></span>125+ screens, $2,000</div>
+  <div class="sigrow">
+    <div class="sigcell">
+      <div class="line"></div>
+      <div class="lab"><span>Signature</span><span>Date</span></div>
+      <div class="who">Anna Wink <span>· Oxford Christmas Galleria</span></div>
+    </div>
+    <div class="sigcell">
+      <div class="line"><span class="script">Swayze Hollingsworth</span><span class="script" style="left:auto;right:4pt;font:600 9pt/1 'Montserrat';color:var(--ink);bottom:4pt">{{TODAY}}</span></div>
+      <div class="lab"><span>Signature</span><span>Date</span></div>
+      <div class="who">Swayze Hollingsworth <span>· MCTV Digital</span></div>
+    </div>
+  </div>
+</div>
 
 <div class="foot">
   <div><b>Swayze Hollingsworth</b> · MCTV Digital, The Indoor Billboard Company<br>swayze@mctvofms.com · 662-907-0404 · www.mctvofms.com</div>
-  <div style="text-align:right">Prepared for the Oxford Christmas Galleria<br>{{TODAY}}</div>
+  <div style="text-align:right">Prepared for the Oxford Christmas Galleria<br>{{TODAY}} · page 1 of 3</div>
 </div>
 
-</div></body></html>
+</div>
+
+<!-- page 2: Oxford, Tupelo, Golden Triangle -->
+<div class="page page2">
+  <div class="head">
+    <div>
+      <div class="brand">MCTV Digital · Host locations · {{TODAY}}</div>
+      <h1 style="margin-top:6pt">Where your ad runs</h1>
+      <div class="sub">Every screen on the network, by market. Source: mctvofms.com/inventory. Oxford screens are included in every package; the larger packages add the other markets.</div>
+    </div>
+    <img class="logo" src="../assets/logo/mctv-wordmark-green.png" alt="MCTV" style="width:1.4in;margin-top:10pt">
+  </div>
+  {{LOC_PAGE2}}
+  <div class="foot">
+    <div><b>Swayze Hollingsworth</b> · MCTV Digital · swayze@mctvofms.com · 662-907-0404</div>
+    <div style="text-align:right">page 2 of 3</div>
+  </div>
+</div>
+
+<!-- page 3: Jackson, Natchez, Hattiesburg, Gulf Coast -->
+<div class="page page2 page3">
+  <div class="head">
+    <div>
+      <div class="brand">MCTV Digital · Host locations · {{TODAY}}</div>
+      <h1 style="margin-top:4pt">Where your ad runs, continued</h1>
+      <div class="sub">Jackson metro, Natchez, Hattiesburg / Laurel and the Gulf Coast, part of the 125+ screen network package.</div>
+    </div>
+    <img class="logo" src="../assets/logo/mctv-wordmark-green.png" alt="MCTV" style="width:1.4in;margin-top:10pt">
+  </div>
+  {{LOC_PAGE3}}
+  <div class="foot">
+    <div><b>Swayze Hollingsworth</b> · MCTV Digital · swayze@mctvofms.com · 662-907-0404</div>
+    <div style="text-align:right">page 3 of 3</div>
+  </div>
+</div>
+
+</body></html>
