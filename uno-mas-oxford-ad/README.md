@@ -23,7 +23,7 @@ the Starkville spot (`uno-mas-ad/` on branch `claude/beautiful-mayer-3v06fd`):
 | 5.0–10.0s | **Street tacos, elevated.** Client's lime-squeeze photo in an arch window on the right (zoom anchored on the lime). Kicker "Open daily from 11 AM", sub "Classic Mexican fare, upgraded." Rotating lime sticker badge overlapping the arch corner. |
 | 10.0–15.0s | **Tortas, fajitas & fries.** Charcoal background, white UNO MAS wordmark top-left. Two stacked polaroids slide in: the client's torta-tray photo behind, and in front a polaroid that *plays* three slowed shots in headline order (torta → sizzling fajitas → carne asada fries). "MORE THAN TACOS" sticker, kicker "Bring an appetite", sub "Burritos · Enchiladas · Desserts". |
 | 15.0–20.0s | **Full bar. Full table.** Full-bleed video: the bar shelf (Cathead) for 1.7 s, then the big overhead spread; "Full table." lands as the spread resolves. Kicker "Tequila bar & taqueria", sub "Margaritas · Tacos · 1101 E Jackson Ave, Oxford". Badge top-right. |
-| 20.0–25.2s | **Find us in Oxford.** Postcard layout: the **white Oxford building** plays in a 1920x720 strip on top (wide street front → side view → drone aerial) while a white band slides up: kicker "Open daily from 11 AM", headline, then the address and phone at 44 px. An ink "Look for the white building" pill and a skull badge stamp straddle the seam. |
+| 20.0–25.2s | **Find us in Oxford.** Postcard layout: the **white Oxford building** plays in a 1920x720 strip on top (wide street front → side view → painted-sign close-up) while a white band slides up: kicker "Open daily from 11 AM", headline, then the address and phone at 44 px. An ink "Look for the white building" pill and a skull badge stamp straddle the seam. |
 | 25.2–30s | **Outro.** Logo, "TACOS & TEQUILA", @unomastacos, charcoal ticket: "Come hungry.", address, hours, 56 px lime phone; lime stub flips open with unomastacos.com · Dine in · Takeout · Full bar. |
 
 Scene cuts are vertical blinds; slat colour alternates (charcoal with lime edges, lime with charcoal edges into/out of the dark polaroid scene) and direction alternates per cut.
@@ -41,7 +41,7 @@ out as 30 fps JPEG frame sequences that the page swaps in per frame:
 |------|-------------|---------|
 | `p_torta`, `p_fajitas`, `p_fries` | 20s, 4s, 30s | Scene 3 polaroid (924x617) |
 | `f_bar`, `f_spread` | 18s, 45.1–46.5s | Scene 4 full bleed (1920x1080) |
-| `b_wide`, `b_side`, `b_aerial` | 41s, 14s, 0s | Scene 5 building strip (1920x720) |
+| `b_wide`, `b_side`, `b_sign` | 41s, 14s, 1s | Scene 5 building strip (1920x720) |
 
 Shots at 17s, 36s and 8s were skipped because they show Christmas bows,
 garland or a wreath; `b_side` is zoomed 12.5% so the wreath at its right edge

@@ -29,9 +29,10 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;font-family:'B
 .footage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform,opacity}
 .reveal{overflow:hidden}
 .reveal>span{display:block;will-change:transform}
-.kicker{display:flex;align-items:center;gap:20px;height:40px}
+.h1 .reveal,.h1.reveal{padding-bottom:.09em;margin-bottom:-.09em}
+.kicker{display:flex;align-items:center;gap:20px;height:44px}
 .kicker .bar{width:46px;height:8px;background:var(--lime);transform-origin:0 50%}
-.kicker .tx{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:34px;letter-spacing:.22em;text-transform:uppercase;color:var(--chile)}
+.kicker .tx{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:38px;letter-spacing:.2em;text-transform:uppercase;color:var(--chile)}
 .h1{font-family:'Alfa Slab One',serif;line-height:.95;letter-spacing:-.005em;text-transform:uppercase}
 .sub{font-size:40px;font-weight:700;line-height:1.3}
 .dots{background-image:radial-gradient(#DDD8CB 1.6px,transparent 1.7px);background-size:28px 28px}
@@ -95,11 +96,11 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;font-family:'B
       <div class="footage" id="s3-fx" style="position:relative;width:924px;height:617px"><img id="s3-fx-u" alt=""><img id="s3-fx-o" alt=""></div>
       <div class="cap">
         <div class="fraunces" style="font-size:44px;color:var(--ink)">¡Uno más, por favor!</div>
-        <div class="label" style="color:var(--chile)">E Jackson Ave &nbsp;·&nbsp; Oxford</div>
+        <div class="label" style="color:var(--chile)">1101 E Jackson Ave</div>
       </div>
     </div>
     <div class="abs" id="s3-sticker" style="left:790px;top:50px;width:230px;height:230px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;text-align:center;opacity:0;will-change:transform;box-shadow:0 18px 40px rgba(0,0,0,.35)">
-      <div class="cond" style="font-size:37px;font-weight:800;line-height:1.02;letter-spacing:.03em;text-transform:uppercase;color:var(--ink)">More<br>than<br>tacos</div>
+      <div class="cond" style="font-size:40px;font-weight:800;line-height:1.02;letter-spacing:.02em;text-transform:uppercase;color:var(--ink)">More<br>than<br>tacos</div>
     </div>
     <div class="abs" style="left:110px;top:250px;width:724px">
       <div class="kicker"><div class="bar" id="s3-bar"></div><div class="tx" id="s3-kick" style="opacity:0;color:var(--lime)">Bring an appetite</div></div>
@@ -169,7 +170,7 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;font-family:'B
       <div class="abs" style="right:-22px;top:522px;width:44px;height:44px;border-radius:50%;background:var(--white)"></div>
       <div class="abs" id="s6-stub" style="left:0;right:0;top:560px;bottom:0;background:var(--lime);border-radius:0 0 26px 26px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transform-origin:50% 0;">
         <div class="slab" style="font-size:72px;line-height:1;color:var(--ink);letter-spacing:.01em">unomastacos.com</div>
-        <div class="label" style="color:var(--ink)">Dine in &nbsp;·&nbsp; Takeout &nbsp;·&nbsp; Full bar</div>
+        <div class="label" style="color:var(--ink);font-size:34px">Dine in &nbsp;·&nbsp; Takeout &nbsp;·&nbsp; Full bar</div>
       </div>
     </div>
     <div class="ticker" id="s6-ticker"><div class="run" id="s6-run"></div></div>
@@ -195,7 +196,7 @@ const E={
   outBackSoft:p=>{const c1=1.0,c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2);},
   outBounce:p=>{const n1=7.5625,d1=2.75;if(p<1/d1)return n1*p*p;if(p<2/d1)return n1*(p-=1.5/d1)*p+.75;if(p<2.5/d1)return n1*(p-=2.25/d1)*p+.9375;return n1*(p-=2.625/d1)*p+.984375;},
 };
-const seg=(t,t0,t1,e=E.outCubic)=>e(clamp((t-t0)/(t1-t0)));
+const seg=(t,t0,t1,e=E.outCubic)=>{const p=clamp((t-t0)/(t1-t0));return p<=0?0:p>=1?1:e(p);};
 const $=id=>document.getElementById(id);
 const fadeUp=(el,p,dy=40)=>{el.style.opacity=p;el.style.transform=`translateY(${(1-p)*dy}px)`;};
 const revealUp=(el,p)=>{el.style.transform=`translateY(${(1-p)*112}%)`;};
@@ -215,7 +216,7 @@ const CLIPS=window.CLIP_MANIFEST||{};
 const SHOTS={
   s3:[{clip:'p_torta',start:0},{clip:'p_fajitas',start:1.75,fade:.3},{clip:'p_fries',start:3.5,fade:.3}],
   s4:[{clip:'f_bar',start:0},{clip:'f_spread',start:1.7,fade:.4}],
-  s5:[{clip:'b_wide',start:0},{clip:'b_side',start:1.75,fade:.3},{clip:'b_aerial',start:3.5,fade:.3}],
+  s5:[{clip:'b_wide',start:0},{clip:'b_side',start:1.75,fade:.3},{clip:'b_sign',start:3.5,fade:.3}],
 };
 const FPS=30,pending=new Set();
 function frameSrc(clip,localT){
@@ -369,8 +370,8 @@ function renderS4(t){
   scaleX($('s4-bar'),seg(t,T.s4+.3,T.s4+.75,E.outQuint));
   fadeUp($('s4-kick'),seg(t,T.s4+.36,T.s4+.82),18);
   revealUp($('s4-h1a'),seg(t,T.s4+.42,T.s4+1.1,E.outQuint));
-  revealUp($('s4-h1b'),seg(t,T.s4+2.1,T.s4+2.7,E.outQuint));   // "Full table." lands as the spread resolves
-  fadeUp($('s4-sub'),seg(t,T.s4+2.25,T.s4+2.75),24);
+  revealUp($('s4-h1b'),seg(t,T.s4+1.9,T.s4+2.45,E.outQuint));   // "Full table." lands as the spread resolves
+  fadeUp($('s4-sub'),seg(t,T.s4+2.05,T.s4+2.5),24);
   const bp=seg(t,T.s4+.85,T.s4+1.55,E.outBack),bd=$('s4-badge');
   bd.style.opacity=bp>0?1:0;bd.style.transform=`scale(${Math.max(0,bp)}) rotate(${(1-bp)*40}deg)`;
   badgeRing4.style.transform=`rotate(${s*22}deg)`;

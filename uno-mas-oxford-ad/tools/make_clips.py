@@ -40,12 +40,13 @@ SHOTS = {
     'p_fries':   dict(start=30.06, dur=0.94, slow=2.3, w=924, h=617, off=155, grade='food'),
     # scene 4 — full bleed (1920x1080)
     'f_bar':     dict(start=18.05, dur=0.94, slow=2.6, w=1920, h=1080, off=120, grade='bar'),    # Cathead shelf (17 s / 36 s have holiday decor)
-    'f_spread':  dict(start=45.08, dur=1.40, slow=2.4, w=1920, h=1080, off=120, grade='food'),   # stops before the baked-in fade to black
-    # scene 5 — the white Oxford building, postcard strip (1920x720): wide -> side -> aerial
+    'f_spread':  dict(start=45.08, dur=1.40, slow=2.5, w=1920, h=1080, off=120, grade='food'),   # stops before the baked-in fade to black
+    # scene 5 — the white Oxford building, postcard strip (1920x720): wide -> side -> sign close-up
     'b_wide':    dict(start=41.07, dur=0.94, slow=2.4, w=1920, h=720, off=70, grade='ext_warm'),
     'b_side':    dict(start=14.04, dur=1.06, slow=2.0, w=1920, h=720, off=0, grade='ext',
                       scale=(2160, 1080, 0, 0)),                                                 # zoom pushes the wreath at the right edge out of frame
-    'b_aerial':  dict(start=0.03,  dur=0.94, slow=2.2, w=1920, h=720, off=110, grade='ext_lift'),
+    'b_sign':    dict(start=1.04,  dur=0.94, slow=2.2, w=1920, h=720, off=0, grade='ext',
+                      scale=(2160, 1080, 240, 110)),                                               # painted UNO MAS fascia close-up, shifted left so the badge clears the lettering (drone shots show a neighbour's holiday decor)
 }
 
 def build(name):
