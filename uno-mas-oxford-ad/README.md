@@ -1,7 +1,10 @@
 # Uno Mas Tacos & Tequila — Oxford, MS — 30s silent digital ad (1920x1080)
 
 `out/uno-mas-oxford-30s-1920x1080.mp4` is a 30-second, silent, 1920x1080 H.264
-ad for the **Oxford** Uno Mas location only. It mixes the client's two stills
+ad for the **Oxford** Uno Mas location only. `out/uno-mas-oxford-25s-1920x1080.mp4`
+is the same spot cut to 25 seconds (same six scenes at ~4.2 s each; builds play
+~20% faster and the footage cut points scale to match — see `?short=1` in
+`ad.html` and `render.cjs --short`). It mixes the client's two stills
 with slowed-down shots from their Vimeo video (the white Oxford building and
 food only — no Starkville footage). It is deliberately styled differently from
 the Starkville spot (`uno-mas-ad/` on branch `claude/beautiful-mayer-3v06fd`):
@@ -95,7 +98,8 @@ libx264; `pip install imageio-ffmpeg` provides one):
 
 ```bash
 NODE_PATH=/opt/node22/lib/node_modules node render.cjs                    # full 30s MP4
-NODE_PATH=/opt/node22/lib/node_modules node render.cjs --preview 3,9,15   # stills at given seconds
+NODE_PATH=/opt/node22/lib/node_modules node render.cjs --short            # 25s MP4
+NODE_PATH=/opt/node22/lib/node_modules node render.cjs --preview 3,9,15   # stills at given seconds (add --short for the 25s cut)
 ```
 
 Frames are screenshotted at 1920x1080 / 30 fps in headless Chromium and piped

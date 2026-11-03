@@ -204,7 +204,10 @@ const pop=(el,p,rot=0)=>{el.style.opacity=p>0?1:0;el.style.transform=`rotate(${(
 const RED=getComputedStyle(document.documentElement).getPropertyValue('--red').trim();
 
 // ---------- timeline ----------
-const T={s2:5.0,s3:10.0,s4:15.0,s5:20.0,s6:25.2,end:30};
+const SHORT=/[?&]short/.test(location.search);   // ?short=1 -> 25 s cut (render.cjs --short)
+const T=SHORT?{s2:4.0,s3:8.2,s4:12.4,s5:16.6,s6:20.8,end:25}:{s2:5.0,s3:10.0,s4:15.0,s5:20.0,s6:25.2,end:30};
+const K=SHORT?0.8:1;        // build-in speed-up for scenes 2-6 in the short cut
+const INTRO=SHORT?0.58:0.7; // intro clock
 // blinds: slats cover during [B-pre,B] and uncover during [B,B+post]; the last slat finishes
 // covering at B-0.005 and clears at B+0.465, so the layer is never hidden mid-slat.
 const BL={pre:.42,post:.48,stagger:.035,cover:.24,unStart:.03,uncover:.26};
@@ -212,7 +215,11 @@ const BL={pre:.42,post:.48,stagger:.035,cover:.24,unStart:.03,uncover:.26};
 // ---------- footage (30 fps JPEG frame sequences from tools/make_clips.py) ----------
 // Each scene lists its shots with a scene-relative start; consecutive shots crossfade over `fade` seconds.
 const CLIPS=window.CLIP_MANIFEST||{};
-const SHOTS={
+const SHOTS=SHORT?{
+  s3:[{clip:'p_torta',start:0},{clip:'p_fajitas',start:1.4,fade:.3},{clip:'p_fries',start:2.8,fade:.3}],
+  s4:[{clip:'f_bar',start:0},{clip:'f_spread',start:1.4,fade:.4}],
+  s5:[{clip:'b_wide',start:0},{clip:'b_side',start:1.4,fade:.3},{clip:'b_sign',start:2.8,fade:.3}],
+}:{
   s3:[{clip:'p_torta',start:0},{clip:'p_fajitas',start:1.75,fade:.3},{clip:'p_fries',start:3.5,fade:.3}],
   s4:[{clip:'f_bar',start:0},{clip:'f_spread',start:1.7,fade:.4}],
   s5:[{clip:'b_wide',start:0},{clip:'b_side',start:1.75,fade:.3},{clip:'b_sign',start:3.5,fade:.3}],
@@ -314,7 +321,7 @@ function renderTicker(runId,t,speed=150){
   const w=runW[runId]||1000;$(runId).style.transform=`translateX(${-((t*speed)%w)}px)`;
 }
 function renderS1(t){
-  const tt=t/0.7; // choreographed on a ~7s clock, played at 0.7x so the lockup is complete by ~3.1s and holds
+  const tt=t/INTRO; // choreographed on a ~7s clock, played faster so the lockup is complete early and holds
   renderTiles(tt);
   renderIntroLogo(tt);
   revealUp($('s1-h1'),seg(tt,2.8,3.4,E.outQuint));
@@ -326,85 +333,86 @@ function renderS1(t){
 
 // ---------- scene 2 ----------
 function renderS2(t){
-  const s=t-T.s2,u=clamp(s/5);
-  const ap=seg(t,T.s2+.05,T.s2+.9,E.outQuint),arch=$('s2-arch');
+  const s=t-T.s2,u=clamp(s/(T.s3-T.s2)),tw=T.s2+s/K;
+  const ap=seg(tw,T.s2+.05,T.s2+.9,E.outQuint),arch=$('s2-arch');
   arch.style.opacity=ap;arch.style.transform=`translateY(${(1-ap)*260}px)`;
   $('s2-photo').style.transform=`scale(${lerp(1.16,1.04,u)})`;
-  scaleX($('s2-bar'),seg(t,T.s2+.3,T.s2+.75,E.outQuint));
-  fadeUp($('s2-kick'),seg(t,T.s2+.36,T.s2+.82),18);
-  revealUp($('s2-h1a'),seg(t,T.s2+.42,T.s2+1.1,E.outQuint));
-  revealUp($('s2-h1b'),seg(t,T.s2+.54,T.s2+1.22,E.outQuint));
-  revealUp($('s2-h1c'),seg(t,T.s2+.68,T.s2+1.4,E.outQuint));
-  fadeUp($('s2-sub'),seg(t,T.s2+.98,T.s2+1.5),24);
-  const bp=seg(t,T.s2+.85,T.s2+1.55,E.outBack),bd=$('s2-badge');
+  scaleX($('s2-bar'),seg(tw,T.s2+.3,T.s2+.75,E.outQuint));
+  fadeUp($('s2-kick'),seg(tw,T.s2+.36,T.s2+.82),18);
+  revealUp($('s2-h1a'),seg(tw,T.s2+.42,T.s2+1.1,E.outQuint));
+  revealUp($('s2-h1b'),seg(tw,T.s2+.54,T.s2+1.22,E.outQuint));
+  revealUp($('s2-h1c'),seg(tw,T.s2+.68,T.s2+1.4,E.outQuint));
+  fadeUp($('s2-sub'),seg(tw,T.s2+.98,T.s2+1.5),24);
+  const bp=seg(tw,T.s2+.85,T.s2+1.55,E.outBack),bd=$('s2-badge');
   bd.style.opacity=bp>0?1:0;bd.style.transform=`scale(${Math.max(0,bp)}) rotate(${(1-bp)*-40}deg)`;
   badgeRing2.style.transform=`rotate(${s*22}deg)`;
 }
 
 // ---------- scene 3 ----------
 function renderS3(t){
-  const s=t-T.s3;
-  const bp=seg(t,T.s3+.0,T.s3+.8,E.outBackSoft),back=$('s3-back');
+  const s=t-T.s3,tw=T.s3+s/K;
+  const bp=seg(tw,T.s3+.0,T.s3+.8,E.outBackSoft),back=$('s3-back');
   back.style.opacity=bp>0?1:0;
   back.style.transform=`translate(${(1-bp)*560}px,${(1-bp)*-120}px) rotate(${lerp(16,4,bp)}deg)`;
-  const cp=seg(t,T.s3+.1,T.s3+.95,E.outBackSoft),card=$('s3-card');
+  const cp=seg(tw,T.s3+.1,T.s3+.95,E.outBackSoft),card=$('s3-card');
   card.style.opacity=cp>0?1:0;
   card.style.transform=`translate(${(1-cp)*520}px,${(1-cp)*180}px) rotate(${lerp(-14,-3,cp)}deg)`;
   renderFootage('s3-fx',SHOTS.s3,s);
-  fadeUp($('s3-wm'),seg(t,T.s3+.3,T.s3+.75),18);
-  scaleX($('s3-bar'),seg(t,T.s3+.3,T.s3+.75,E.outQuint));
-  fadeUp($('s3-kick'),seg(t,T.s3+.36,T.s3+.82),18);
-  revealUp($('s3-w1'),seg(t,T.s3+.42,T.s3+1.1,E.outQuint));
-  revealUp($('s3-w2'),seg(t,T.s3+.54,T.s3+1.22,E.outQuint));
-  revealUp($('s3-w3'),seg(t,T.s3+.66,T.s3+1.34,E.outQuint));
-  fadeUp($('s3-sub'),seg(t,T.s3+.98,T.s3+1.5),24);
-  const sp=seg(t,T.s3+.85,T.s3+1.55,E.outBack),st=$('s3-sticker');
+  fadeUp($('s3-wm'),seg(tw,T.s3+.3,T.s3+.75),18);
+  scaleX($('s3-bar'),seg(tw,T.s3+.3,T.s3+.75,E.outQuint));
+  fadeUp($('s3-kick'),seg(tw,T.s3+.36,T.s3+.82),18);
+  revealUp($('s3-w1'),seg(tw,T.s3+.42,T.s3+1.1,E.outQuint));
+  revealUp($('s3-w2'),seg(tw,T.s3+.54,T.s3+1.22,E.outQuint));
+  revealUp($('s3-w3'),seg(tw,T.s3+.66,T.s3+1.34,E.outQuint));
+  fadeUp($('s3-sub'),seg(tw,T.s3+.98,T.s3+1.5),24);
+  const sp=seg(tw,T.s3+.85,T.s3+1.55,E.outBack),st=$('s3-sticker');
   st.style.opacity=sp>0?1:0;st.style.transform=`scale(${Math.max(0,sp)}) rotate(${lerp(-60,-12,sp)}deg)`;
 }
 
 // ---------- scene 4 ----------
 function renderS4(t){
-  const s=t-T.s4;
+  const s=t-T.s4,tw=T.s4+s/K;
   renderFootage('s4-fx',SHOTS.s4,s);
-  scaleX($('s4-bar'),seg(t,T.s4+.3,T.s4+.75,E.outQuint));
-  fadeUp($('s4-kick'),seg(t,T.s4+.36,T.s4+.82),18);
-  revealUp($('s4-h1a'),seg(t,T.s4+.42,T.s4+1.1,E.outQuint));
-  revealUp($('s4-h1b'),seg(t,T.s4+1.9,T.s4+2.45,E.outQuint));   // "Full table." lands as the spread resolves
-  fadeUp($('s4-sub'),seg(t,T.s4+2.05,T.s4+2.5),24);
-  const bp=seg(t,T.s4+.85,T.s4+1.55,E.outBack),bd=$('s4-badge');
+  scaleX($('s4-bar'),seg(tw,T.s4+.3,T.s4+.75,E.outQuint));
+  fadeUp($('s4-kick'),seg(tw,T.s4+.36,T.s4+.82),18);
+  revealUp($('s4-h1a'),seg(tw,T.s4+.42,T.s4+1.1,E.outQuint));
+  revealUp($('s4-h1b'),seg(tw,T.s4+1.9,T.s4+2.45,E.outQuint));   // "Full table." lands as the spread resolves
+  fadeUp($('s4-sub'),seg(tw,T.s4+2.05,T.s4+2.5),24);
+  const bp=seg(tw,T.s4+.85,T.s4+1.55,E.outBack),bd=$('s4-badge');
   bd.style.opacity=bp>0?1:0;bd.style.transform=`scale(${Math.max(0,bp)}) rotate(${(1-bp)*40}deg)`;
   badgeRing4.style.transform=`rotate(${s*22}deg)`;
 }
 
 // ---------- scene 5 ----------
 function renderS5(t){
-  const s=t-T.s5;
+  const s=t-T.s5,tw=T.s5+s/K;
   renderFootage('s5-fx',SHOTS.s5,s);
-  const bp=seg(t,T.s5+.05,T.s5+.7,E.outQuint);$('s5-band').style.transform=`translateY(${(1-bp)*370}px)`;
-  scaleX($('s5-bar'),seg(t,T.s5+.3,T.s5+.7,E.outQuint));
-  fadeUp($('s5-kick'),seg(t,T.s5+.35,T.s5+.75),16);
-  revealUp($('s5-h1'),seg(t,T.s5+.45,T.s5+1.05,E.outQuint));
-  ['s5-r1','s5-r2'].forEach((id,k)=>fadeUp($(id),seg(t,T.s5+.8+k*.12,T.s5+1.25+k*.12,E.outQuint),26));
-  const bb=seg(t,T.s5+1.0,T.s5+1.7,E.outBack),bd=$('s5-badge');
+  const bp=seg(tw,T.s5+.05,T.s5+.7,E.outQuint);$('s5-band').style.transform=`translateY(${(1-bp)*370}px)`;
+  scaleX($('s5-bar'),seg(tw,T.s5+.3,T.s5+.7,E.outQuint));
+  fadeUp($('s5-kick'),seg(tw,T.s5+.35,T.s5+.75),16);
+  revealUp($('s5-h1'),seg(tw,T.s5+.45,T.s5+1.05,E.outQuint));
+  ['s5-r1','s5-r2'].forEach((id,k)=>fadeUp($(id),seg(tw,T.s5+.8+k*.12,T.s5+1.25+k*.12,E.outQuint),26));
+  const bb=seg(tw,T.s5+1.0,T.s5+1.7,E.outBack),bd=$('s5-badge');
   bd.style.opacity=bb>0?1:0;bd.style.transform=`scale(${Math.max(0,bb)}) rotate(${(1-bb)*-40}deg)`;
   badgeRing5.style.transform=`rotate(${s*22}deg)`;
 }
 
 // ---------- scene 6 ----------
 function renderS6(t){
-  const lp=seg(t,T.s6+.1,T.s6+.8,E.outBack),lg=$('s6-logo');
+  const tw=T.s6+(t-T.s6)/K;
+  const lp=seg(tw,T.s6+.1,T.s6+.8,E.outBack),lg=$('s6-logo');
   lg.style.opacity=clamp(lp*2);lg.style.transform=`scale(${lerp(.6,1,lp)})`;
-  fadeUp($('s6-tag'),seg(t,T.s6+.6,T.s6+1.1,E.outQuint),26);
-  fadeUp($('s6-ig'),seg(t,T.s6+.75,T.s6+1.25,E.outQuint),20);
-  const tp=seg(t,T.s6+.25,T.s6+1.05,E.outBackSoft),tk=$('s6-ticket');
+  fadeUp($('s6-tag'),seg(tw,T.s6+.6,T.s6+1.1,E.outQuint),26);
+  fadeUp($('s6-ig'),seg(tw,T.s6+.75,T.s6+1.25,E.outQuint),20);
+  const tp=seg(tw,T.s6+.25,T.s6+1.05,E.outBackSoft),tk=$('s6-ticket');
   tk.style.opacity=tp>0?1:0;tk.style.transform=`translate(${(1-tp)*700}px,${(1-tp)*80}px) rotate(${lerp(8,0,tp)}deg)`;
-  scaleX($('s6-bar'),seg(t,T.s6+.6,T.s6+1.0,E.outQuint));
-  fadeUp($('s6-kick'),seg(t,T.s6+.65,T.s6+1.05),16);
-  revealUp($('s6-h1'),seg(t,T.s6+.75,T.s6+1.35,E.outQuint));
-  ['s6-l1','s6-l2','s6-l3'].forEach((id,k)=>fadeUp($(id),seg(t,T.s6+1.1+k*.13,T.s6+1.55+k*.13,E.outQuint),24));
-  const sp=seg(t,T.s6+1.45,T.s6+2.15,E.outBack);
+  scaleX($('s6-bar'),seg(tw,T.s6+.6,T.s6+1.0,E.outQuint));
+  fadeUp($('s6-kick'),seg(tw,T.s6+.65,T.s6+1.05),16);
+  revealUp($('s6-h1'),seg(tw,T.s6+.75,T.s6+1.35,E.outQuint));
+  ['s6-l1','s6-l2','s6-l3'].forEach((id,k)=>fadeUp($(id),seg(tw,T.s6+1.1+k*.13,T.s6+1.55+k*.13,E.outQuint),24));
+  const sp=seg(tw,T.s6+1.45,T.s6+2.15,E.outBack);
   $('s6-stub').style.transform=`perspective(900px) rotateX(${(1-sp)*-70}deg)`;$('s6-stub').style.opacity=sp>0?1:0;
-  const kp=seg(t,T.s6+.45,T.s6+1.05,E.outBackSoft);$('s6-ticker').style.transform=`translateY(${(1-kp)*90}px)`;
+  const kp=seg(tw,T.s6+.45,T.s6+1.05,E.outBackSoft);$('s6-ticker').style.transform=`translateY(${(1-kp)*90}px)`;
   renderTicker('s6-run',t);
 }
 

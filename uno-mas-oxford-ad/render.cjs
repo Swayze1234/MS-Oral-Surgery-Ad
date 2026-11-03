@@ -1,16 +1,18 @@
 // Renders ad.html frame-by-frame with headless Chromium and encodes an H.264 MP4.
 //   node render.cjs                      -> out/uno-mas-oxford-30s-1920x1080.mp4
 //   node render.cjs --preview 1,2.5,4    -> out/preview_<t>.png stills for a quick look
+//   node render.cjs --short              -> 25 s cut: out/uno-mas-oxford-25s-1920x1080.mp4 (add --short to --preview too)
 const { chromium } = require('playwright');
 const { spawn, execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 
-const FPS = 30, DUR = 30, W = 1920, H = 1080;
 const args = process.argv.slice(2);
+const SHORT = args.includes('--short');
+const FPS = 30, DUR = SHORT ? 25 : 30, W = 1920, H = 1080;
 const arg = (k, d) => (args.includes(k) ? args[args.indexOf(k) + 1] : d);
 const preview = args.includes('--preview') ? arg('--preview').split(',').map(Number) : null;
-const outFile = arg('--out', 'out/uno-mas-oxford-30s-1920x1080.mp4');
+const outFile = arg('--out', SHORT ? 'out/uno-mas-oxford-25s-1920x1080.mp4' : 'out/uno-mas-oxford-30s-1920x1080.mp4');
 const ffmpeg = process.env.FFMPEG ||
   execSync('python3 -c "import imageio_ffmpeg as f; print(f.get_ffmpeg_exe())"').toString().trim();
 
@@ -19,7 +21,7 @@ const ffmpeg = process.env.FFMPEG ||
   const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
   page.on('pageerror', e => { console.error('PAGE ERROR', e); process.exit(1); });
   page.on('console', m => { if (m.type() === 'error' && !/ERR_FILE_NOT_FOUND/.test(m.text())) console.error('CONSOLE', m.text()); });
-  await page.goto('file://' + path.resolve(__dirname, 'ad.html'));
+  await page.goto('file://' + path.resolve(__dirname, 'ad.html') + (SHORT ? '?short=1' : ''));
   await page.evaluate(() => window.adReady);
   fs.mkdirSync(path.dirname(path.resolve(outFile)), { recursive: true });
   fs.mkdirSync(path.resolve('out'), { recursive: true });
@@ -27,7 +29,7 @@ const ffmpeg = process.env.FFMPEG ||
   if (preview) {
     for (const t of preview) {
       await page.evaluate(t => window.render(t), t);
-      await page.screenshot({ path: `out/preview_${t.toFixed(2)}.png`, type: 'png' });
+      await page.screenshot({ path: `out/preview_${SHORT ? 'short_' : ''}${t.toFixed(2)}.png`, type: 'png' });
       console.log('preview', t);
     }
     await browser.close();
