@@ -145,7 +145,6 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;font-family:'B
       </div>
     </div>
     <div class="abs" id="s5-badge" style="left:1580px;top:605px;width:230px;height:230px;opacity:0;will-change:transform;filter:drop-shadow(0 16px 30px rgba(0,0,0,.3))"></div>
-    <div class="abs" id="s5-tag" style="left:110px;top:80px;background:var(--ink);color:var(--white);padding:16px 34px;border-radius:60px;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:34px;letter-spacing:.18em;text-transform:uppercase;box-shadow:0 10px 26px rgba(0,0,0,.3);opacity:0;will-change:transform">Look for the white building</div>
   </div>
 
   <!-- ===== SCENE 6: OUTRO — logo + ticket ===== -->
@@ -386,8 +385,6 @@ function renderS5(t){
   fadeUp($('s5-kick'),seg(t,T.s5+.35,T.s5+.75),16);
   revealUp($('s5-h1'),seg(t,T.s5+.45,T.s5+1.05,E.outQuint));
   ['s5-r1','s5-r2'].forEach((id,k)=>fadeUp($(id),seg(t,T.s5+.8+k*.12,T.s5+1.25+k*.12,E.outQuint),26));
-  const tp=seg(t,T.s5+1.0,T.s5+1.6,E.outBackSoft),tg=$('s5-tag');
-  tg.style.opacity=tp>0?1:0;tg.style.transform=`translateX(${(1-tp)*-80}px) scale(${lerp(.9,1,tp)})`;
   const bb=seg(t,T.s5+1.0,T.s5+1.7,E.outBack),bd=$('s5-badge');
   bd.style.opacity=bb>0?1:0;bd.style.transform=`scale(${Math.max(0,bb)}) rotate(${(1-bb)*-40}deg)`;
   badgeRing5.style.transform=`rotate(${s*22}deg)`;
