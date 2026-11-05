@@ -34,10 +34,6 @@ GRADE = {
 # off: crop offset (x when the source is scaled to height, y when scaled to width);
 # scale: optional explicit (sw, sh, cx, cy) override to zoom/crop differently.
 SHOTS = {
-    # scene 3 — inside the polaroid card (924x617): torta -> fajitas -> fries (headline order)
-    'p_torta':   dict(start=20.05, dur=0.94, slow=2.3, w=924, h=617, off=155, grade='food'),
-    'p_fajitas': dict(start=4.03,  dur=0.94, slow=2.3, w=924, h=617, off=155, grade='food'),
-    'p_fries':   dict(start=30.06, dur=0.94, slow=2.3, w=924, h=617, off=155, grade='food'),
     # scene 4 — full bleed (1920x1080)
     'f_bar':     dict(start=18.05, dur=0.94, slow=2.6, w=1920, h=1080, off=120, grade='bar'),    # Cathead shelf (17 s / 36 s have holiday decor)
     'f_spread':  dict(start=45.08, dur=1.40, slow=2.5, w=1920, h=1080, off=120, grade='food'),   # stops before the baked-in fade to black

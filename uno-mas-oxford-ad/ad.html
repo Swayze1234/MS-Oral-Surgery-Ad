@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Uno Mas Tacos &amp; Tequila — Oxford, MS — 30s digital ad (1920x1080)</title>
+<title>Uno Mas Tacos &amp; Tequila — Oxford, MS — 25s / 21s digital ad (1920x1080)</title>
 <style>
 @font-face{font-family:'Alfa Slab One';src:url(assets/fonts/alfa-slab-one-400.woff2) format('woff2');font-weight:400}
 @font-face{font-family:'Barlow';src:url(assets/fonts/barlow-500.woff2) format('woff2');font-weight:500}
@@ -79,37 +79,6 @@ body{width:1920px;height:1080px;overflow:hidden;position:relative;font-family:'B
       </div>
       <div class="reveal" style="margin-top:-6px;padding-bottom:30px"><span class="fraunces" id="s2-h1c" style="font-size:186px;line-height:1;color:var(--leaf);padding-left:6px">elevated.</span></div>
       <div class="sub" id="s2-sub" style="font-size:42px;color:rgba(23,23,27,.88);margin-top:2px;opacity:0">Classic Mexican fare, upgraded.</div>
-    </div>
-  </div>
-
-  <!-- ===== SCENE 3: POLAROID STACK — torta photo behind, food footage in front ===== -->
-  <div class="scene" id="s3" style="background:var(--ink)">
-    <div class="abs dotsdark" style="inset:0"></div>
-    <div class="abs" id="s3-wm" style="left:110px;top:70px;width:340px;height:72px;opacity:0"></div>
-    <div class="card" id="s3-back" style="left:960px;top:134px;width:900px;opacity:0;transform-origin:50% 50%">
-      <div style="position:relative;width:864px;height:577px;overflow:hidden;background:#000">
-        <img class="photo" id="s3-photo" src="assets/torta-tray.jpg" style="object-position:50% 50%;transform:scale(1.4);transform-origin:80% 40%">
-      </div>
-      <div class="cap" style="height:80px"><div class="label" style="color:rgba(23,23,27,.55)">Tortas &amp; fries</div></div>
-    </div>
-    <div class="card" id="s3-card" style="left:880px;top:214px;width:960px;opacity:0">
-      <div class="footage" id="s3-fx" style="position:relative;width:924px;height:617px"><img id="s3-fx-u" alt=""><img id="s3-fx-o" alt=""></div>
-      <div class="cap">
-        <div class="fraunces" style="font-size:44px;color:var(--ink)">¡Uno más, por favor!</div>
-        <div class="label" style="color:var(--chile)">1101 E Jackson Ave</div>
-      </div>
-    </div>
-    <div class="abs" id="s3-sticker" style="left:790px;top:50px;width:230px;height:230px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;text-align:center;opacity:0;will-change:transform;box-shadow:0 18px 40px rgba(0,0,0,.35)">
-      <div class="cond" style="font-size:40px;font-weight:800;line-height:1.02;letter-spacing:.02em;text-transform:uppercase;color:var(--ink)">More<br>than<br>tacos</div>
-    </div>
-    <div class="abs" style="left:110px;top:250px;width:724px">
-      <div class="kicker"><div class="bar" id="s3-bar"></div><div class="tx" id="s3-kick" style="opacity:0;color:var(--lime)">Bring an appetite</div></div>
-      <div class="h1" style="font-size:150px;color:var(--white);margin-top:22px">
-        <div class="reveal"><span id="s3-w1">Tortas,</span></div>
-        <div class="reveal"><span id="s3-w2">Fajitas</span></div>
-        <div class="reveal"><span id="s3-w3">&amp; <span style="color:var(--lime)">Fries.</span></span></div>
-      </div>
-      <div class="sub" id="s3-sub" style="color:rgba(250,250,247,.9);margin-top:30px;opacity:0">Burritos &nbsp;·&nbsp; Enchiladas &nbsp;·&nbsp; Desserts</div>
     </div>
   </div>
 
@@ -204,8 +173,8 @@ const pop=(el,p,rot=0)=>{el.style.opacity=p>0?1:0;el.style.transform=`rotate(${(
 const RED=getComputedStyle(document.documentElement).getPropertyValue('--red').trim();
 
 // ---------- timeline ----------
-const SHORT=/[?&]short/.test(location.search);   // ?short=1 -> 25 s cut (render.cjs --short)
-const T=SHORT?{s2:4.0,s3:8.2,s4:12.4,s5:16.6,s6:20.8,end:25}:{s2:5.0,s3:10.0,s4:15.0,s5:20.0,s6:25.2,end:30};
+const SHORT=/[?&]short/.test(location.search);   // ?short=1 -> 21 s cut (render.cjs --short); default 25 s
+const T=SHORT?{s2:4.0,s4:8.2,s5:12.4,s6:16.6,end:21}:{s2:5.0,s4:10.0,s5:15.0,s6:20.2,end:25};
 const K=SHORT?0.8:1;        // build-in speed-up for scenes 2-6 in the short cut
 const INTRO=SHORT?0.58:0.7; // intro clock
 // blinds: slats cover during [B-pre,B] and uncover during [B,B+post]; the last slat finishes
@@ -216,11 +185,9 @@ const BL={pre:.42,post:.48,stagger:.035,cover:.24,unStart:.03,uncover:.26};
 // Each scene lists its shots with a scene-relative start; consecutive shots crossfade over `fade` seconds.
 const CLIPS=window.CLIP_MANIFEST||{};
 const SHOTS=SHORT?{
-  s3:[{clip:'p_torta',start:0},{clip:'p_fajitas',start:1.4,fade:.3},{clip:'p_fries',start:2.8,fade:.3}],
   s4:[{clip:'f_bar',start:0},{clip:'f_spread',start:1.4,fade:.4}],
   s5:[{clip:'b_wide',start:0},{clip:'b_side',start:1.4,fade:.3},{clip:'b_sign',start:2.8,fade:.3}],
 }:{
-  s3:[{clip:'p_torta',start:0},{clip:'p_fajitas',start:1.75,fade:.3},{clip:'p_fries',start:3.5,fade:.3}],
   s4:[{clip:'f_bar',start:0},{clip:'f_spread',start:1.7,fade:.4}],
   s5:[{clip:'b_wide',start:0},{clip:'b_side',start:1.75,fade:.3},{clip:'b_sign',start:3.5,fade:.3}],
 };
@@ -333,7 +300,7 @@ function renderS1(t){
 
 // ---------- scene 2 ----------
 function renderS2(t){
-  const s=t-T.s2,u=clamp(s/(T.s3-T.s2)),tw=T.s2+s/K;
+  const s=t-T.s2,u=clamp(s/(T.s4-T.s2)),tw=T.s2+s/K;
   const ap=seg(tw,T.s2+.05,T.s2+.9,E.outQuint),arch=$('s2-arch');
   arch.style.opacity=ap;arch.style.transform=`translateY(${(1-ap)*260}px)`;
   $('s2-photo').style.transform=`scale(${lerp(1.16,1.04,u)})`;
@@ -346,27 +313,6 @@ function renderS2(t){
   const bp=seg(tw,T.s2+.85,T.s2+1.55,E.outBack),bd=$('s2-badge');
   bd.style.opacity=bp>0?1:0;bd.style.transform=`scale(${Math.max(0,bp)}) rotate(${(1-bp)*-40}deg)`;
   badgeRing2.style.transform=`rotate(${s*22}deg)`;
-}
-
-// ---------- scene 3 ----------
-function renderS3(t){
-  const s=t-T.s3,tw=T.s3+s/K;
-  const bp=seg(tw,T.s3+.0,T.s3+.8,E.outBackSoft),back=$('s3-back');
-  back.style.opacity=bp>0?1:0;
-  back.style.transform=`translate(${(1-bp)*560}px,${(1-bp)*-120}px) rotate(${lerp(16,4,bp)}deg)`;
-  const cp=seg(tw,T.s3+.1,T.s3+.95,E.outBackSoft),card=$('s3-card');
-  card.style.opacity=cp>0?1:0;
-  card.style.transform=`translate(${(1-cp)*520}px,${(1-cp)*180}px) rotate(${lerp(-14,-3,cp)}deg)`;
-  renderFootage('s3-fx',SHOTS.s3,s);
-  fadeUp($('s3-wm'),seg(tw,T.s3+.3,T.s3+.75),18);
-  scaleX($('s3-bar'),seg(tw,T.s3+.3,T.s3+.75,E.outQuint));
-  fadeUp($('s3-kick'),seg(tw,T.s3+.36,T.s3+.82),18);
-  revealUp($('s3-w1'),seg(tw,T.s3+.42,T.s3+1.1,E.outQuint));
-  revealUp($('s3-w2'),seg(tw,T.s3+.54,T.s3+1.22,E.outQuint));
-  revealUp($('s3-w3'),seg(tw,T.s3+.66,T.s3+1.34,E.outQuint));
-  fadeUp($('s3-sub'),seg(tw,T.s3+.98,T.s3+1.5),24);
-  const sp=seg(tw,T.s3+.85,T.s3+1.55,E.outBack),st=$('s3-sticker');
-  st.style.opacity=sp>0?1:0;st.style.transform=`scale(${Math.max(0,sp)}) rotate(${lerp(-60,-12,sp)}deg)`;
 }
 
 // ---------- scene 4 ----------
@@ -418,13 +364,12 @@ function renderS6(t){
 
 // ---------- blinds transition ----------
 // One row per cut: slat colour alternates so the wipe stays visible against charcoal scenes
-// (lime slats bracket the dark polaroid scene) and direction alternates for rhythm.
+// (lime slats bracket the dark bar-footage scene) and direction alternates for rhythm.
 const CUTS=[
   {B:T.s2,bg:'var(--ink)', edge:'var(--lime)',dir:1},
-  {B:T.s3,bg:'var(--lime)',edge:'var(--ink)', dir:-1},
-  {B:T.s4,bg:'var(--lime)',edge:'var(--ink)', dir:1},
-  {B:T.s5,bg:'var(--ink)', edge:'var(--lime)',dir:-1},
-  {B:T.s6,bg:'var(--ink)', edge:'var(--lime)',dir:1},
+  {B:T.s4,bg:'var(--lime)',edge:'var(--ink)', dir:-1},
+  {B:T.s5,bg:'var(--lime)',edge:'var(--ink)', dir:1},
+  {B:T.s6,bg:'var(--ink)', edge:'var(--lime)',dir:-1},
 ];
 const NB=6,blindEls=[];
 function buildBlinds(){
@@ -457,12 +402,12 @@ function renderBlinds(t){
 }
 
 // ---------- master ----------
-const SCENES=['s1','s2','s3','s4','s5','s6'];
+const SCENES=['s1','s2','s4','s5','s6'];
 async function render(t){
   t=clamp(t,0,T.end);
-  const active=t<T.s2?'s1':t<T.s3?'s2':t<T.s4?'s3':t<T.s5?'s4':t<T.s6?'s5':'s6';
+  const active=t<T.s2?'s1':t<T.s4?'s2':t<T.s5?'s4':t<T.s6?'s5':'s6';
   SCENES.forEach(id=>{$(id).style.display=id===active?'block':'none';});
-  ({s1:renderS1,s2:renderS2,s3:renderS3,s4:renderS4,s5:renderS5,s6:renderS6})[active](t);
+  ({s1:renderS1,s2:renderS2,s4:renderS4,s5:renderS5,s6:renderS6})[active](t);
   renderBlinds(t);
   // make sure every footage frame we just pointed at is decoded before the screenshot is taken
   const imgs=[...pending];pending.clear();
@@ -478,7 +423,6 @@ window.adReady=(async()=>{
   buildTiles();buildBlinds();
   introLogo=buildLogo($('s1-logo'),RED);
   buildLogo($('s6-logo'),RED);
-  buildWordmark($('s3-wm'),'#FAFAF7');
   badgeRing2=buildBadge($('s2-badge'));
   badgeRing4=buildBadge($('s4-badge'));
   badgeRing5=buildBadge($('s5-badge'));

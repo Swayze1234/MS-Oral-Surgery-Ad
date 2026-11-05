@@ -1,10 +1,12 @@
-# Uno Mas Tacos & Tequila — Oxford, MS — 30s silent digital ad (1920x1080)
+# Uno Mas Tacos & Tequila — Oxford, MS — 25s / 21s silent digital ad (1920x1080)
 
-`out/uno-mas-oxford-30s-1920x1080.mp4` is a 30-second, silent, 1920x1080 H.264
-ad for the **Oxford** Uno Mas location only. `out/uno-mas-oxford-25s-1920x1080.mp4`
-is the same spot cut to 25 seconds (same six scenes at ~4.2 s each; builds play
+`out/uno-mas-oxford-25s-1920x1080.mp4` is a 25-second, silent, 1920x1080 H.264
+ad for the **Oxford** Uno Mas location only. `out/uno-mas-oxford-21s-1920x1080.mp4`
+is the same spot cut to 21 seconds (same five scenes at ~4.2 s each; builds play
 ~20% faster and the footage cut points scale to match — see `?short=1` in
-`ad.html` and `render.cjs --short`). It mixes the client's two stills
+`ad.html` and `render.cjs --short`). An earlier six-scene 30 s version had a
+"Tortas, fajitas & fries" polaroid scene between the arch and the bar footage;
+it was removed at the client's request. It mixes the client's two stills
 with slowed-down shots from their Vimeo video (the white Oxford building and
 food only — no Starkville footage). It is deliberately styled differently from
 the Starkville spot (`uno-mas-ad/` on branch `claude/beautiful-mayer-3v06fd`):
@@ -24,12 +26,11 @@ the Starkville spot (`uno-mas-ad/` on branch `claude/beautiful-mayer-3v06fd`):
 |------|-------|
 | 0–5.0s | **Intro.** White tiles flip in over charcoal to build a tile wall (done by ~0.9 s). The sugar-skull logo pops on (skull, flowers, then the UNO MAS letters drop in and bounce), "TACOS & TEQUILA", "OXFORD, MISSISSIPPI" — settled by ~3.1 s and held. Lime ticker along the bottom. |
 | 5.0–10.0s | **Street tacos, elevated.** Client's lime-squeeze photo in an arch window on the right (zoom anchored on the lime). Kicker "Open daily from 11 AM", sub "Classic Mexican fare, upgraded." Rotating lime sticker badge overlapping the arch corner. |
-| 10.0–15.0s | **Tortas, fajitas & fries.** Charcoal background, white UNO MAS wordmark top-left. Two stacked polaroids slide in: the client's torta-tray photo behind, and in front a polaroid that *plays* three slowed shots in headline order (torta → sizzling fajitas → carne asada fries). "MORE THAN TACOS" sticker, kicker "Bring an appetite", sub "Burritos · Enchiladas · Desserts". |
-| 15.0–20.0s | **Full bar. Full table.** Full-bleed video: the bar shelf (Cathead) for 1.7 s, then the big overhead spread; "Full table." lands as the spread resolves. Kicker "Tequila bar & taqueria", sub "Margaritas · Tacos · 1101 E Jackson Ave, Oxford". Badge top-right. |
-| 20.0–25.2s | **Find us on the Square.** Postcard layout: the **white Oxford building** plays in a 1920x720 strip on top (wide street front → side view → painted-sign close-up) while a white band slides up: kicker "Open daily from 11 AM", headline "Find us on the Square.", then the address and phone at 44 px. A skull badge stamp straddles the seam. |
-| 25.2–30s | **Outro.** Logo, "TACOS & TEQUILA", @unomastacos, charcoal ticket: "Come hungry.", address, hours, 56 px lime phone; lime stub flips open with unomastacos.com · Dine in · Takeout · Full bar. |
+| 10.0–15.0s | **Full bar. Full table.** Full-bleed video: the bar shelf (Cathead) for 1.7 s, then the big overhead spread; "Full table." lands as the spread resolves. Kicker "Tequila bar & taqueria", sub "Margaritas · Tacos · 1101 E Jackson Ave, Oxford". Badge top-right. |
+| 15.0–20.2s | **Find us on the Square.** Postcard layout: the **white Oxford building** plays in a 1920x720 strip on top (wide street front → side view → painted-sign close-up) while a white band slides up: kicker "Open daily from 11 AM", headline "Find us on the Square.", then the address and phone at 44 px. A skull badge stamp straddles the seam. |
+| 20.2–25s | **Outro.** Logo, "TACOS & TEQUILA", @unomastacos, charcoal ticket: "Come hungry.", address, hours, 56 px lime phone; lime stub flips open with unomastacos.com · Dine in · Takeout · Full bar. |
 
-Scene cuts are vertical blinds; slat colour alternates (charcoal with lime edges, lime with charcoal edges into/out of the dark polaroid scene) and direction alternates per cut.
+Scene cuts are vertical blinds; slat colour alternates (charcoal with lime edges, lime with charcoal edges into/out of the dark bar-footage scene) and direction alternates per cut. Times above are for the 25 s cut; the 21 s cut uses 4.0 / 4.2 / 4.2 / 4.2 / 4.4 s.
 
 ## Footage
 
@@ -42,9 +43,8 @@ out as 30 fps JPEG frame sequences that the page swaps in per frame:
 
 | Clip | Source time | Used in |
 |------|-------------|---------|
-| `p_torta`, `p_fajitas`, `p_fries` | 20s, 4s, 30s | Scene 3 polaroid (924x617) |
-| `f_bar`, `f_spread` | 18s, 45.1–46.5s | Scene 4 full bleed (1920x1080) |
-| `b_wide`, `b_side`, `b_sign` | 41s, 14s, 1s | Scene 5 building strip (1920x720) |
+| `f_bar`, `f_spread` | 18s, 45.1–46.5s | Bar scene full bleed (1920x1080) |
+| `b_wide`, `b_side`, `b_sign` | 41s, 14s, 1s | Building strip (1920x720) |
 
 Shots at 17s, 36s and 8s were skipped because they show Christmas bows,
 garland or a wreath; `b_side` is zoomed 12.5% so the wreath at its right edge
@@ -78,7 +78,7 @@ Pulled from public listings (site not reachable from the build environment):
   until the client confirms it); "small-batch" / "handcrafted" adjectives were
   dropped because the footage does not support them.
 
-Photos: `assets/lime-squeeze.jpg` and `assets/torta-tray.jpg` (client-supplied);
+Photos: `assets/lime-squeeze.jpg` (client-supplied; `assets/torta-tray.jpg` was used by the removed polaroid scene);
 `assets/logo.png` + `assets/logo_glyphs.js` are shared with the Starkville spot
 (vectorized so every logo piece animates independently and stays sharp).
 
@@ -97,9 +97,9 @@ Render the MP4 (needs Node with Playwright + Chromium, and an ffmpeg with
 libx264; `pip install imageio-ffmpeg` provides one):
 
 ```bash
-NODE_PATH=/opt/node22/lib/node_modules node render.cjs                    # full 30s MP4
-NODE_PATH=/opt/node22/lib/node_modules node render.cjs --short            # 25s MP4
-NODE_PATH=/opt/node22/lib/node_modules node render.cjs --preview 3,9,15   # stills at given seconds (add --short for the 25s cut)
+NODE_PATH=/opt/node22/lib/node_modules node render.cjs                    # 25s MP4
+NODE_PATH=/opt/node22/lib/node_modules node render.cjs --short            # 21s MP4
+NODE_PATH=/opt/node22/lib/node_modules node render.cjs --preview 3,9,15   # stills at given seconds (add --short for the 21s cut)
 ```
 
 Frames are screenshotted at 1920x1080 / 30 fps in headless Chromium and piped

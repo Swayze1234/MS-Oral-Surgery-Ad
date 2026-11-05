@@ -1,1 +1,1 @@
-window.CLIP_MANIFEST={"p_fries": 62, "p_fajitas": 62, "f_bar": 70, "f_spread": 101, "b_wide": 64, "b_side": 62, "p_torta": 62, "b_sign": 58};
+window.CLIP_MANIFEST={"f_bar": 70, "f_spread": 101, "b_wide": 64, "b_side": 62, "b_sign": 58};
