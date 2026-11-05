@@ -1,2 +1,4 @@
 __pycache__/
 *.pyc
+proposals/*/ach_form_flat.pdf
+proposals/*/ach_fields.json
