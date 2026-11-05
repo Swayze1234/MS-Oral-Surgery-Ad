@@ -130,6 +130,24 @@
   .cta { margin-top: 28pt; background: linear-gradient(90deg, #d9a640, #e8b84b); color: #2c2108; font-family: "DejaVu Serif", Georgia, serif; font-size: 12pt; padding: 12pt 18pt; }
   .band { position: absolute; left: 0; right: 0; bottom: 0; height: 90pt; background: var(--band); display: flex; align-items: center; justify-content: center; }
   .band img { height: 45pt; }
+  /* ---------- Page 3: payment options ---------- */
+  .ptable { position: absolute; left: 52pt; right: 52pt; top: 196pt; display: grid; grid-template-columns: 178pt repeat(4, 1fr); gap: 4pt; }
+  .pt-corner { background: transparent; }
+  .pt-head { background: linear-gradient(165deg, #0a3f8f 0%, #012b66 60%, #011d45 100%); color: #fff; padding: 10pt 12pt 9pt; }
+  .pt-pk { font-size: 7.4pt; letter-spacing: 0.2em; color: #dbe4f3; }
+  .pt-mo { font-family: "DejaVu Serif", Georgia, serif; color: var(--gold); font-size: 17pt; margin-top: 4pt; }
+  .pt-mo span { font-size: 9pt; color: #dbe4f3; }
+  .pt-label { background: #fbf8f1; border: 1pt solid var(--rule); padding: 10pt 12pt; display: flex; flex-direction: column; justify-content: center; }
+  .pt-l1 { font-family: "DejaVu Serif", Georgia, serif; font-size: 11pt; color: var(--navy); }
+  .pt-l2 { font-size: 8.4pt; color: var(--muted); margin-top: 3pt; }
+  .pt-label.up .pt-l2 { color: #9a6f12; font-weight: bold; letter-spacing: 0.04em; }
+  .pt-cell { background: #fbf8f1; border: 1pt solid var(--rule); padding: 10pt 12pt; display: flex; flex-direction: column; justify-content: center; }
+  .pt-big { font-family: "DejaVu Serif", Georgia, serif; font-size: 15.5pt; color: var(--navy); }
+  .pt-big span { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8pt; color: var(--muted); }
+  .pt-small { font-size: 8.2pt; color: #4a566b; margin-top: 3pt; }
+  .pt-label.up, .pt-cell.up { background: #fbf0d4; border-color: #e9cf8c; }
+  .pt-cell.up .pt-small { color: #7a5a14; font-weight: bold; }
+  .pfine { position: absolute; left: 52pt; top: 484pt; font-size: 8pt; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -222,19 +240,35 @@
       <div class="inc"><span class="ck">✓</span><span>You own your ad forever</span></div>
     </div>
   </div>
-  <div class="fine">Plays are estimated at 1,500 per screen each month. Your ad comes up full-screen every 15 minutes.</div>
+  <div class="fine">Plays are estimated at 1,500 per screen each month. Your ad comes up full-screen every 15 minutes. See the next page for 6- and 12-month payment options.</div>
 
   <div class="pg-foot"><span>02</span><span>MCTV DIGITAL, INC · The Indoor Billboard Company</span></div>
 </section>
 
-<!-- PAGE 3 · NEXT STEPS + CONTACT -->
+<!-- PAGE 3 · PAYMENT OPTIONS -->
+<section class="page">
+  <div class="pg-head">
+    <img class="wordmark" src="mctv_logo.png" alt="MCTV Elite Advertising">
+    <div class="section">PAYMENT OPTIONS</div>
+  </div>
+  <div class="opt-title">
+    <div class="eyebrow">6- or 12-Month Plans</div>
+    <div class="h1">Pay monthly, or pay upfront for <em>free months.</em></div>
+    <div class="goldrule"></div>
+  </div>
+  <div class="ptable"><div class="pt-corner"></div><div class="pt-head"><div class="pt-pk">10 SCREENS</div><div class="pt-mo">$350<span>/mo</span></div></div><div class="pt-head"><div class="pt-pk">20 SCREENS</div><div class="pt-mo">$500<span>/mo</span></div></div><div class="pt-head"><div class="pt-pk">40 SCREENS</div><div class="pt-mo">$750<span>/mo</span></div></div><div class="pt-head"><div class="pt-pk">ALL 75 OXFORD SCREENS</div><div class="pt-mo">$999<span>/mo</span></div></div><div class="pt-label"><div class="pt-l1">6 Months</div><div class="pt-l2">Pay monthly</div></div><div class="pt-cell"><div class="pt-big">$2,100<span> total</span></div><div class="pt-small">$350/mo for 6 months</div></div><div class="pt-cell"><div class="pt-big">$3,000<span> total</span></div><div class="pt-small">$500/mo for 6 months</div></div><div class="pt-cell"><div class="pt-big">$4,500<span> total</span></div><div class="pt-small">$750/mo for 6 months</div></div><div class="pt-cell"><div class="pt-big">$5,994<span> total</span></div><div class="pt-small">$999/mo for 6 months</div></div><div class="pt-label up"><div class="pt-l1">6 Months, Paid Upfront</div><div class="pt-l2">7th month FREE</div></div><div class="pt-cell up"><div class="pt-big">$2,100<span> upfront</span></div><div class="pt-small">7 months of ads · $350 free</div></div><div class="pt-cell up"><div class="pt-big">$3,000<span> upfront</span></div><div class="pt-small">7 months of ads · $500 free</div></div><div class="pt-cell up"><div class="pt-big">$4,500<span> upfront</span></div><div class="pt-small">7 months of ads · $750 free</div></div><div class="pt-cell up"><div class="pt-big">$5,994<span> upfront</span></div><div class="pt-small">7 months of ads · $999 free</div></div><div class="pt-label"><div class="pt-l1">12 Months</div><div class="pt-l2">Pay monthly</div></div><div class="pt-cell"><div class="pt-big">$4,200<span> total</span></div><div class="pt-small">$350/mo for 12 months</div></div><div class="pt-cell"><div class="pt-big">$6,000<span> total</span></div><div class="pt-small">$500/mo for 12 months</div></div><div class="pt-cell"><div class="pt-big">$9,000<span> total</span></div><div class="pt-small">$750/mo for 12 months</div></div><div class="pt-cell"><div class="pt-big">$11,988<span> total</span></div><div class="pt-small">$999/mo for 12 months</div></div><div class="pt-label up"><div class="pt-l1">12 Months, Paid Upfront</div><div class="pt-l2">13th &amp; 14th months FREE</div></div><div class="pt-cell up"><div class="pt-big">$4,200<span> upfront</span></div><div class="pt-small">14 months of ads · $700 free</div></div><div class="pt-cell up"><div class="pt-big">$6,000<span> upfront</span></div><div class="pt-small">14 months of ads · $1,000 free</div></div><div class="pt-cell up"><div class="pt-big">$9,000<span> upfront</span></div><div class="pt-small">14 months of ads · $1,500 free</div></div><div class="pt-cell up"><div class="pt-big">$11,988<span> upfront</span></div><div class="pt-small">14 months of ads · $1,998 free</div></div></div>
+  <div class="pfine">Upfront plans are paid in full at the start. Monthly plans are billed each month for the length of the plan.</div>
+  <div class="pg-foot"><span>03</span><span>MCTV DIGITAL, INC · The Indoor Billboard Company</span></div>
+</section>
+
+<!-- PAGE 4 · NEXT STEPS + CONTACT -->
 <section class="page">
   <div class="steps-left">
     <img class="wordmark" src="mctv_logo.png" alt="MCTV Elite Advertising">
     <div class="eyebrow">Next Steps</div>
     <div class="h1">Getting started is <em>easy.</em></div>
     <div class="goldrule"></div>
-    <div class="step"><div class="n">1</div><div><div class="t">Pick your package and screens</div><div class="d">Tell us which option fits. On 10, 20 or 40 screens, you pick the spots and can change them anytime.</div></div></div>
+    <div class="step"><div class="n">1</div><div><div class="t">Pick your package and screens</div><div class="d">Tell us which option and payment plan fit. On 10, 20 or 40 screens, you pick the spots and can change them anytime.</div></div></div>
     <div class="step"><div class="n">2</div><div><div class="t">We build your ad</div><div class="d">We design it around your business and what you want to say. You look it over and tell us what to tweak.</div></div></div>
     <div class="step"><div class="n">3</div><div><div class="t">You go live</div><div class="d">Once you approve the ad, it starts running on your screens, and we'll send reports showing it played.</div></div></div>
   </div>
