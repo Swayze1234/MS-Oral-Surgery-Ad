@@ -4,281 +4,257 @@
 <meta charset="utf-8">
 <title>Brunner Air &amp; Heat Services — MCTV Advertising Proposal</title>
 <style>
-  @page { size: 960pt 540pt; margin: 0; }
+  @page { size: 612pt 792pt; margin: 0; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
     --cream: #f6f2e9;
     --navy: #00367e;
-    --navy-deep: #011d45;
     --band: #01132f;
     --gold: #e8b84b;
     --gold-ink: #c69a3b;
     --muted: #5f6b80;
     --rule: #e4dbc8;
     --ink: #1c2638;
+    --card: linear-gradient(165deg, #0a3f8f 0%, #012b66 60%, #011d45 100%);
   }
   html, body { background: var(--cream); }
   body {
-    font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
-    color: var(--ink);
+    font-family: "Liberation Sans", Arial, Helvetica, sans-serif; color: var(--ink);
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
-  .page {
-    width: 960pt; height: 540pt; position: relative; overflow: hidden;
-    background: var(--cream); break-after: page;
-  }
+  .page { width: 612pt; height: 792pt; position: relative; overflow: hidden; background: var(--cream); break-after: page; }
   .page:last-child { break-after: auto; }
-  .serif { font-family: "DejaVu Serif", Georgia, serif; }
-
-  /* MCTV wordmark */
-  .wordmark { display: block; width: 108pt; }
-
-  .eyebrow { font-size: 8.4pt; font-weight: bold; letter-spacing: 0.32em; color: var(--gold-ink); text-transform: uppercase; }
+  .eyebrow { font-size: 7.4pt; font-weight: bold; letter-spacing: 0.28em; color: var(--gold-ink); text-transform: uppercase; }
   .h1 { font-family: "DejaVu Serif", Georgia, serif; color: var(--navy); font-weight: normal; letter-spacing: -0.3pt; }
   .h1 em { font-style: normal; color: var(--gold-ink); white-space: nowrap; }
-  .goldrule { width: 52pt; height: 3pt; background: var(--gold-ink); }
+  .goldrule { width: 44pt; height: 2.5pt; background: var(--gold-ink); }
 
-  /* ---------- Page 1: cover ---------- */
-  .cover-left { position: absolute; left: 0; top: 0; width: 520pt; height: 540pt; padding: 40pt 0 0 50pt; }
-  .cover-left .eyebrow { margin-top: 62pt; }
-  .cover-left .h1 { font-size: 38pt; line-height: 1.14; margin-top: 12pt; width: 430pt; }
-  .cover-left .goldrule { margin-top: 20pt; }
-  .cover-left .lede { margin-top: 18pt; width: 400pt; font-size: 11.5pt; line-height: 1.55; color: #3b475c; }
-  .meta { position: absolute; left: 52pt; bottom: 46pt; display: flex; gap: 46pt; }
-  .meta .lbl { font-size: 7pt; letter-spacing: 0.28em; color: var(--muted); font-weight: bold; }
-  .meta .name { font-family: "DejaVu Serif", Georgia, serif; font-size: 13pt; color: var(--navy); margin-top: 6pt; }
-  .meta .sub { font-size: 9pt; color: #4a566b; margin-top: 3pt; line-height: 1.4; }
+  .head { position: absolute; left: 44pt; right: 44pt; top: 38pt; display: flex; justify-content: space-between; align-items: center; padding-bottom: 12pt; border-bottom: 1pt solid var(--rule); }
+  .head img { width: 96pt; display: block; }
+  .head .section { font-size: 7pt; letter-spacing: 0.26em; color: var(--muted); text-align: right; line-height: 1.6; }
+  .foot { position: absolute; left: 44pt; right: 44pt; bottom: 24pt; display: flex; justify-content: space-between; font-size: 6.6pt; color: var(--muted); letter-spacing: 0.12em; }
 
-  .cover-right {
-    position: absolute; right: 0; top: 0; width: 440pt; height: 540pt;
-    background: linear-gradient(160deg, #0a3f8f 0%, #012b66 55%, #011d45 100%);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-  }
-  .screen {
-    width: 344pt; height: 193.5pt; background: #070b12; border-radius: 9pt; padding: 7pt;
-    box-shadow: 0 14pt 30pt rgba(0,0,0,0.38);
-  }
-  .screen-inner {
-    width: 100%; height: 100%; border-radius: 3pt; background: #ffffff;
-    display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
-  }
-  .screen-inner::after {
-    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 9pt;
-    background: linear-gradient(90deg, #c69a3b, #e8b84b);
-  }
-  .screen-inner img { width: 214pt; margin-bottom: 6pt; }
-  .stand { width: 64pt; height: 12pt; background: #070b12; margin-top: 0; border-radius: 0 0 3pt 3pt; }
-  .stand-base { width: 120pt; height: 4pt; background: #050810; border-radius: 3pt; }
-  .screen-caption { margin-top: 22pt; width: 320pt; text-align: center; color: #c9d4e6; font-size: 9pt; line-height: 1.5; }
-  .screen-caption b { color: var(--gold); font-weight: bold; letter-spacing: 0.2em; font-size: 7.4pt; display: block; margin-bottom: 5pt; }
+  /* ---------- Page 1 ---------- */
+  .intro { position: absolute; left: 44pt; top: 104pt; width: 300pt; }
+  .intro .h1 { font-size: 25pt; line-height: 1.16; margin-top: 9pt; }
+  .intro .goldrule { margin-top: 13pt; }
+  .intro .lede { margin-top: 12pt; font-size: 9.6pt; line-height: 1.58; color: #3b475c; }
 
-  /* ---------- Page 2: options ---------- */
-  .pg-head { position: absolute; left: 50pt; right: 52pt; top: 40pt; display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 12pt; border-bottom: 1pt solid var(--rule); }
-  .pg-head .section { font-size: 8pt; letter-spacing: 0.3em; color: var(--muted); margin-top: 10pt; }
-  .opt-title { position: absolute; left: 52pt; top: 104pt; }
-  .opt-title .h1 { font-size: 30pt; margin-top: 9pt; }
-  .opt-title .goldrule { margin-top: 12pt; }
-  .opt-for { position: absolute; right: 52pt; top: 116pt; text-align: right; }
-  .opt-for img { width: 118pt; }
+  .preview { position: absolute; right: 44pt; top: 112pt; width: 184pt; text-align: center; }
+  .screen { width: 184pt; height: 110pt; background: #070b12; border-radius: 6pt; padding: 5pt; box-shadow: 0 8pt 18pt rgba(1,19,47,0.22); }
+  .screen-inner { width: 100%; height: 100%; background: #fff; border-radius: 2pt; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .screen-inner::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 5pt; background: linear-gradient(90deg, #c69a3b, #e8b84b); }
+  .screen-inner img { width: 118pt; margin-bottom: 4pt; }
+  .stand { width: 36pt; height: 7pt; background: #070b12; margin: 0 auto; }
+  .stand-base { width: 70pt; height: 2.5pt; background: #050810; margin: 0 auto; border-radius: 2pt; }
+  .preview .cap { margin-top: 9pt; font-size: 7.4pt; color: var(--muted); line-height: 1.45; }
 
-  .cards { position: absolute; left: 52pt; right: 52pt; top: 202pt; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12pt; }
-  .card {
-    position: relative; height: 150pt; padding: 17pt 15pt 14pt;
-    background: linear-gradient(165deg, #0a3f8f 0%, #012b66 60%, #011d45 100%);
-    color: #ffffff;
-  }
-  .card.featured { outline: 2.2pt solid var(--gold-ink); outline-offset: -1pt; }
-  .tag { position: absolute; top: 0; right: 0; background: var(--gold); color: #3a2a07; font-size: 6.4pt; font-weight: bold; letter-spacing: 0.18em; padding: 4pt 9pt; }
-  .card .count { font-size: 8.2pt; letter-spacing: 0.24em; color: #dbe4f3; }
-  .card .price { font-family: "DejaVu Serif", Georgia, serif; color: var(--gold); font-size: 31pt; margin-top: 8pt; line-height: 1; white-space: nowrap; }
-  .card .price span { font-size: 11pt; color: #dbe4f3; }
-  .card .div { height: 1pt; background: rgba(255,255,255,0.18); margin: 13pt 0 10pt; }
-  .card .row { display: flex; justify-content: space-between; align-items: baseline; font-size: 8.6pt; color: #dbe4f3; margin-top: 5pt; }
-  .card .row b { color: #ffffff; font-size: 9pt; }
-  .card .row .g { font-family: "DejaVu Serif", Georgia, serif; color: var(--gold); font-weight: bold; font-size: 10.5pt; }
-  .card .note { position: absolute; left: 15pt; bottom: 13pt; font-family: "DejaVu Serif", Georgia, serif; font-style: italic; font-size: 8.8pt; color: var(--gold); }
+  .who { position: absolute; left: 44pt; right: 44pt; top: 318pt; display: flex; gap: 52pt; padding-top: 14pt; border-top: 1pt solid var(--rule); }
+  .who .lbl { font-size: 6.4pt; letter-spacing: 0.26em; color: var(--muted); font-weight: bold; }
+  .who .name { font-family: "DejaVu Serif", Georgia, serif; font-size: 11.5pt; color: var(--navy); margin-top: 5pt; }
+  .who .sub { font-size: 8.2pt; color: #4a566b; margin-top: 2pt; line-height: 1.4; }
 
-  .includes { position: absolute; left: 52pt; right: 52pt; top: 378pt; }
-  .includes .eyebrow { font-size: 7.8pt; }
-  .inc-row { display: flex; gap: 10pt; margin-top: 11pt; }
-  .inc { flex: 1; background: #fbf8f1; border: 1pt solid var(--rule); padding: 9pt 10pt; display: flex; gap: 7pt; align-items: center; font-size: 8.8pt; line-height: 1.35; color: #2a3548; }
-  .inc .ck { color: var(--gold-ink); font-family: "DejaVu Sans", sans-serif; font-size: 9.5pt; line-height: 1.2; }
-  .fine { position: absolute; left: 52pt; top: 452pt; font-size: 8pt; color: var(--muted); }
+  .opts { position: absolute; left: 44pt; right: 44pt; top: 398pt; }
+  .opts .h1 { font-size: 18pt; margin-top: 7pt; }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8pt; margin-top: 14pt; }
+  .card { position: relative; height: 128pt; padding: 13pt 11pt 11pt; background: var(--card); color: #fff; }
+  .card.featured { outline: 1.8pt solid var(--gold-ink); outline-offset: -1pt; }
+  .tag { position: absolute; top: 0; right: 0; background: var(--gold); color: #3a2a07; font-size: 5.6pt; font-weight: bold; letter-spacing: 0.14em; padding: 3pt 6pt; }
+  .card .count { font-size: 6.8pt; letter-spacing: 0.2em; color: #dbe4f3; }
+  .card .price { font-family: "DejaVu Serif", Georgia, serif; color: var(--gold); font-size: 24pt; margin-top: 6pt; line-height: 1; white-space: nowrap; }
+  .card .price span { font-size: 8.5pt; color: #dbe4f3; }
+  .card .div { height: 1pt; background: rgba(255,255,255,0.18); margin: 10pt 0 6pt; }
+  .card .row { display: flex; justify-content: space-between; align-items: baseline; font-size: 7.4pt; color: #dbe4f3; margin-top: 4pt; }
+  .card .row b { color: #fff; font-size: 7.8pt; }
+  .card .row .g { font-family: "DejaVu Serif", Georgia, serif; color: var(--gold); font-weight: bold; font-size: 8.8pt; }
+  .card .note { position: absolute; left: 11pt; bottom: 10pt; font-family: "DejaVu Serif", Georgia, serif; font-style: italic; font-size: 7.8pt; color: var(--gold); }
 
-  .pg-foot { position: absolute; left: 52pt; right: 52pt; bottom: 24pt; display: flex; justify-content: space-between; font-size: 7pt; color: var(--muted); letter-spacing: 0.12em; }
+  .includes { position: absolute; left: 44pt; right: 44pt; top: 604pt; }
+  .inc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6pt 8pt; margin-top: 9pt; }
+  .inc { background: #fbf8f1; border: 1pt solid var(--rule); padding: 8pt 10pt; display: flex; gap: 7pt; align-items: center; font-size: 8.6pt; color: #2a3548; }
+  .inc .ck { color: var(--gold-ink); font-family: "DejaVu Sans", sans-serif; font-size: 9pt; }
+  .fine1 { position: absolute; left: 44pt; right: 44pt; top: 700pt; font-size: 7.6pt; color: var(--muted); line-height: 1.5; }
 
-  /* ---------- Page 3: next steps + contact ---------- */
-  .steps-left { position: absolute; left: 0; top: 0; width: 500pt; height: 450pt; padding: 40pt 0 0 50pt; }
-  .steps-left .eyebrow { margin-top: 44pt; }
-  .steps-left .h1 { font-size: 30pt; margin-top: 9pt; }
-  .steps-left .goldrule { margin-top: 12pt; }
-  .step { display: flex; gap: 16pt; margin-top: 22pt; width: 400pt; }
-  .step .n { flex: none; width: 30pt; height: 30pt; border-radius: 50%; background: var(--navy); color: var(--gold); font-family: "DejaVu Serif", Georgia, serif; font-size: 13pt; display: flex; align-items: center; justify-content: center; }
-  .step .t { font-family: "DejaVu Serif", Georgia, serif; font-size: 12.5pt; color: var(--navy); margin-top: 2pt; }
-  .step .d { font-size: 9.4pt; color: #4a566b; line-height: 1.5; margin-top: 4pt; }
+  /* ---------- Page 2 ---------- */
+  .pay { position: absolute; left: 44pt; right: 44pt; top: 104pt; }
+  .pay .h1 { font-size: 18pt; margin-top: 7pt; }
+  .ptable { display: grid; grid-template-columns: 124pt repeat(4, 1fr); gap: 3pt; margin-top: 16pt; }
+  .pt-head { background: var(--card); color: #fff; padding: 8pt 9pt 7pt; }
+  .pt-pk { font-size: 6.4pt; letter-spacing: 0.18em; color: #dbe4f3; }
+  .pt-mo { font-family: "DejaVu Serif", Georgia, serif; color: var(--gold); font-size: 13.5pt; margin-top: 3pt; }
+  .pt-mo span { font-size: 7.4pt; color: #dbe4f3; }
+  .pt-label, .pt-cell { background: #fbf8f1; border: 1pt solid var(--rule); padding: 8pt 9pt; display: flex; flex-direction: column; justify-content: center; min-height: 52pt; }
+  .pt-l1 { font-family: "DejaVu Serif", Georgia, serif; font-size: 9.6pt; color: var(--navy); }
+  .pt-l2 { font-size: 7.4pt; color: var(--muted); margin-top: 3pt; }
+  .pt-big { font-family: "DejaVu Serif", Georgia, serif; font-size: 13pt; color: var(--navy); }
+  .pt-small { font-size: 7.2pt; color: #4a566b; margin-top: 3pt; line-height: 1.35; }
+  .up { background: #fbf0d4 !important; border-color: #e9cf8c !important; }
+  .pt-label.up .pt-l2 { color: #8a6210; font-weight: bold; }
+  .pt-cell.up .pt-small b { color: #7a5a14; }
+  .fine2 { margin-top: 9pt; font-size: 7.4pt; color: var(--muted); }
 
-  .contact-right {
-    position: absolute; right: 0; top: 0; width: 460pt; height: 450pt;
-    background: linear-gradient(160deg, #0a3f8f 0%, #012b66 55%, #011d45 100%);
-    padding: 0 52pt 0 56pt; color: #ffffff;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .contact-right .big { font-family: "DejaVu Serif", Georgia, serif; font-size: 32pt; line-height: 1.2; }
-  .contact-right .line { font-size: 11pt; margin-top: 11pt; color: #e3eaf6; }
-  .contact-right .line b { color: var(--gold); }
-  .contact-right .first { margin-top: 24pt; }
-  .cta { margin-top: 28pt; background: linear-gradient(90deg, #d9a640, #e8b84b); color: #2c2108; font-family: "DejaVu Serif", Georgia, serif; font-size: 12pt; padding: 12pt 18pt; }
-  .band { position: absolute; left: 0; right: 0; bottom: 0; height: 90pt; background: var(--band); display: flex; align-items: center; justify-content: center; }
-  .band img { height: 45pt; }
-  /* ---------- Page 3: payment options ---------- */
-  .ptable { position: absolute; left: 52pt; right: 52pt; top: 196pt; display: grid; grid-template-columns: 178pt repeat(4, 1fr); gap: 4pt; }
-  .pt-corner { background: transparent; }
-  .pt-head { background: linear-gradient(165deg, #0a3f8f 0%, #012b66 60%, #011d45 100%); color: #fff; padding: 10pt 12pt 9pt; }
-  .pt-pk { font-size: 7.4pt; letter-spacing: 0.2em; color: #dbe4f3; }
-  .pt-mo { font-family: "DejaVu Serif", Georgia, serif; color: var(--gold); font-size: 17pt; margin-top: 4pt; }
-  .pt-mo span { font-size: 9pt; color: #dbe4f3; }
-  .pt-label { background: #fbf8f1; border: 1pt solid var(--rule); padding: 10pt 12pt; display: flex; flex-direction: column; justify-content: center; }
-  .pt-l1 { font-family: "DejaVu Serif", Georgia, serif; font-size: 11pt; color: var(--navy); }
-  .pt-l2 { font-size: 8.4pt; color: var(--muted); margin-top: 3pt; }
-  .pt-label.up .pt-l2 { color: #9a6f12; font-weight: bold; letter-spacing: 0.04em; }
-  .pt-cell { background: #fbf8f1; border: 1pt solid var(--rule); padding: 10pt 12pt; display: flex; flex-direction: column; justify-content: center; }
-  .pt-big { font-family: "DejaVu Serif", Georgia, serif; font-size: 15.5pt; color: var(--navy); }
-  .pt-big span { font-family: "Liberation Sans", Arial, sans-serif; font-size: 8pt; color: var(--muted); }
-  .pt-small { font-size: 8.2pt; color: #4a566b; margin-top: 3pt; }
-  .pt-label.up, .pt-cell.up { background: #fbf0d4; border-color: #e9cf8c; }
-  .pt-cell.up .pt-small { color: #7a5a14; font-weight: bold; }
-  .pfine { position: absolute; left: 52pt; top: 484pt; font-size: 8pt; color: var(--muted); }
+  .steps { margin-top: 26pt; }
+  .steps .h1 { font-size: 18pt; margin-top: 7pt; }
+  .step-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16pt; margin-top: 14pt; }
+  .step .n { width: 24pt; height: 24pt; border-radius: 50%; background: var(--navy); color: var(--gold); font-family: "DejaVu Serif", Georgia, serif; font-size: 11pt; display: flex; align-items: center; justify-content: center; }
+  .step .t { font-family: "DejaVu Serif", Georgia, serif; font-size: 10.4pt; color: var(--navy); margin-top: 8pt; }
+  .step .d { font-size: 8.2pt; color: #4a566b; line-height: 1.5; margin-top: 4pt; }
+
+  .closer { position: absolute; left: 0; right: 0; bottom: 0; height: 140pt; background: var(--band); color: #fff; }
+  .cta { position: absolute; left: 44pt; right: 44pt; top: -17pt; background: linear-gradient(90deg, #d9a640, #e8b84b); color: #2c2108; font-family: "DejaVu Serif", Georgia, serif; font-size: 11pt; padding: 10pt 16pt; }
+  .closer .thanks { position: absolute; left: 44pt; top: 38pt; }
+  .closer .big { font-family: "DejaVu Serif", Georgia, serif; font-size: 21pt; }
+  .closer .line { font-size: 8.8pt; color: #d6deec; margin-top: 7pt; }
+  .closer .me { position: absolute; right: 44pt; top: 44pt; }
+  .closer .me img { height: 44pt; display: block; }
 </style>
 </head>
 <body>
 
-<!-- PAGE 1 · COVER -->
+<!-- PAGE 1 -->
 <section class="page">
-  <div class="cover-left">
-    <img class="wordmark" src="mctv_logo.png" alt="MCTV Elite Advertising">
-    <div class="eyebrow">Advertising Proposal · November 2026</div>
+  <div class="head">
+    <img src="mctv_logo.png" alt="MCTV Elite Advertising">
+    <div class="section">ADVERTISING PROPOSAL<br>NOVEMBER 2026</div>
+  </div>
+
+  <div class="intro">
+    <div class="eyebrow">Prepared for Brunner Air &amp; Heat Services</div>
     <div class="h1">Keeping Brunner<br><em>top of mind</em><br>across Oxford.</div>
     <div class="goldrule"></div>
     <div class="lede">Your custom ad runs on MCTV's indoor screens in the restaurants, gyms, salons and shops where Oxford spends its time. When the AC quits or the heat goes out, you want Brunner to be the name folks already know.</div>
   </div>
-  <div class="meta">
-    <div>
-      <div class="lbl">PREPARED FOR</div>
-      <div class="name">Jason Brunner</div>
-      <div class="sub">Owner<br>Brunner Air &amp; Heat Services</div>
-    </div>
-    <div>
-      <div class="lbl">PREPARED BY</div>
-      <div class="name">Swayze Hollingsworth</div>
-      <div class="sub">Director of Sales<br>MCTV Digital, Inc</div>
-    </div>
-  </div>
-  <div class="cover-right">
-    <div class="screen"><div class="screen-inner"><img src="logo_dark.png" alt="Brunner Air &amp; Heat Services"></div></div>
-    <div class="stand"></div>
-    <div class="stand-base"></div>
-    <div class="screen-caption"><b>YOUR BRAND, ON OUR SCREENS</b>Just a sneak peek. Your finished ad will be designed with you, start to finish.</div>
-  </div>
-</section>
 
-<!-- PAGE 2 · OPTIONS -->
-<section class="page">
-  <div class="pg-head">
-    <img class="wordmark" src="mctv_logo.png" alt="MCTV Elite Advertising">
-    <div class="section">YOUR OPTIONS</div>
+  <div class="preview">
+    <div class="screen"><div class="screen-inner"><img src="logo_dark.png" alt="Brunner Air &amp; Heat Services"></div></div>
+    <div class="stand"></div><div class="stand-base"></div>
+    <div class="cap">Just a sneak peek. Your finished ad<br>will be designed with you, start to finish.</div>
   </div>
-  <div class="opt-title">
+
+  <div class="who">
+    <div><div class="lbl">PREPARED FOR</div><div class="name">Jason Brunner</div><div class="sub">Owner, Brunner Air &amp; Heat Services</div></div>
+    <div><div class="lbl">PREPARED BY</div><div class="name">Swayze Hollingsworth</div><div class="sub">Director of Sales, MCTV Digital, Inc</div></div>
+  </div>
+
+  <div class="opts">
     <div class="eyebrow">Your Custom Rates · Oxford Screens</div>
     <div class="h1">Choose how much of <em>Oxford</em> to cover.</div>
-    <div class="goldrule"></div>
-  </div>
-  <div class="opt-for"><img src="logo_dark.png" alt="Brunner Air &amp; Heat Services"></div>
-
-  <div class="cards">
-    <div class="card">
-      <div class="count">10 SCREENS</div>
-      <div class="price">$350<span>/mo</span></div>
-      <div class="div"></div>
-      <div class="row"><span>Ad Plays / Mo</span><b>15,000</b></div>
-      <div class="row"><span>Per Screen / Mo</span><span class="g">$35</span></div>
-      <div class="note">A strong start</div>
-    </div>
-    <div class="card">
-      <div class="count">20 SCREENS</div>
-      <div class="price">$500<span>/mo</span></div>
-      <div class="div"></div>
-      <div class="row"><span>Ad Plays / Mo</span><b>30,000</b></div>
-      <div class="row"><span>Per Screen / Mo</span><span class="g">$25</span></div>
-      <div class="note">Wider reach</div>
-    </div>
-    <div class="card featured">
-      <div class="tag">MOST POPULAR</div>
-      <div class="count">40 SCREENS</div>
-      <div class="price">$750<span>/mo</span></div>
-      <div class="div"></div>
-      <div class="row"><span>Ad Plays / Mo</span><b>60,000</b></div>
-      <div class="row"><span>Per Screen / Mo</span><span class="g">$18.75</span></div>
-      <div class="note">Seen all over town</div>
-    </div>
-    <div class="card">
-      <div class="tag">BEST VALUE</div>
-      <div class="count">ALL 75 OXFORD SCREENS</div>
-      <div class="price">$999<span>/mo</span></div>
-      <div class="div"></div>
-      <div class="row"><span>Ad Plays / Mo</span><b>112,500</b></div>
-      <div class="row"><span>Per Screen / Mo</span><span class="g">$13.32</span></div>
-      <div class="note">Every screen in Oxford</div>
+    <div class="cards">
+      <div class="card">
+        <div class="count">10 SCREENS</div>
+        <div class="price">$350<span>/mo</span></div>
+        <div class="div"></div>
+        <div class="row"><span>Ad plays / mo</span><b>15,000</b></div>
+        <div class="row"><span>Per screen / mo</span><span class="g">$35</span></div>
+        <div class="note">A strong start</div>
+      </div>
+      <div class="card">
+        <div class="count">20 SCREENS</div>
+        <div class="price">$500<span>/mo</span></div>
+        <div class="div"></div>
+        <div class="row"><span>Ad plays / mo</span><b>30,000</b></div>
+        <div class="row"><span>Per screen / mo</span><span class="g">$25</span></div>
+        <div class="note">Wider reach</div>
+      </div>
+      <div class="card featured">
+        <div class="tag">MOST POPULAR</div>
+        <div class="count">40 SCREENS</div>
+        <div class="price">$750<span>/mo</span></div>
+        <div class="div"></div>
+        <div class="row"><span>Ad plays / mo</span><b>60,000</b></div>
+        <div class="row"><span>Per screen / mo</span><span class="g">$18.75</span></div>
+        <div class="note">Seen all over town</div>
+      </div>
+      <div class="card">
+        <div class="tag">BEST VALUE</div>
+        <div class="count">75 SCREENS</div>
+        <div class="price">$999<span>/mo</span></div>
+        <div class="div"></div>
+        <div class="row"><span>Ad plays / mo</span><b>112,500</b></div>
+        <div class="row"><span>Per screen / mo</span><span class="g">$13.32</span></div>
+        <div class="note">Every screen in Oxford</div>
+      </div>
     </div>
   </div>
 
   <div class="includes">
     <div class="eyebrow">Every Package Includes</div>
-    <div class="inc-row">
+    <div class="inc-grid">
       <div class="inc"><span class="ck">✓</span><span>A custom 15–30 second ad, made by our team</span></div>
       <div class="inc"><span class="ck">✓</span><span>Your ad refreshed every quarter</span></div>
       <div class="inc"><span class="ck">✓</span><span>Reports showing your ad ran</span></div>
       <div class="inc"><span class="ck">✓</span><span>You own your ad forever</span></div>
     </div>
   </div>
-  <div class="fine">Plays are estimated at 1,500 per screen each month. Your ad comes up full-screen every 15 minutes. See the next page for 6- and 12-month payment options.</div>
+  <div class="fine1">Plays are estimated at 1,500 per screen each month. Your ad comes up full-screen every 15 minutes. See page 2 for 6- and 12-month payment options.</div>
 
-  <div class="pg-foot"><span>02</span><span>MCTV DIGITAL, INC · The Indoor Billboard Company</span></div>
+  <div class="foot"><span>01</span><span>MCTV DIGITAL, INC · The Indoor Billboard Company</span></div>
 </section>
 
-<!-- PAGE 3 · PAYMENT OPTIONS -->
+<!-- PAGE 2 -->
 <section class="page">
-  <div class="pg-head">
-    <img class="wordmark" src="mctv_logo.png" alt="MCTV Elite Advertising">
-    <div class="section">PAYMENT OPTIONS</div>
+  <div class="head">
+    <img src="mctv_logo.png" alt="MCTV Elite Advertising">
+    <div class="section">PAYMENT OPTIONS<br>&amp; NEXT STEPS</div>
   </div>
-  <div class="opt-title">
+
+  <div class="pay">
     <div class="eyebrow">6- or 12-Month Plans</div>
     <div class="h1">Pay monthly, or pay upfront for <em>free months.</em></div>
-    <div class="goldrule"></div>
-  </div>
-  <div class="ptable"><div class="pt-corner"></div><div class="pt-head"><div class="pt-pk">10 SCREENS</div><div class="pt-mo">$350<span>/mo</span></div></div><div class="pt-head"><div class="pt-pk">20 SCREENS</div><div class="pt-mo">$500<span>/mo</span></div></div><div class="pt-head"><div class="pt-pk">40 SCREENS</div><div class="pt-mo">$750<span>/mo</span></div></div><div class="pt-head"><div class="pt-pk">ALL 75 OXFORD SCREENS</div><div class="pt-mo">$999<span>/mo</span></div></div><div class="pt-label"><div class="pt-l1">6 Months</div><div class="pt-l2">Pay monthly</div></div><div class="pt-cell"><div class="pt-big">$2,100<span> total</span></div><div class="pt-small">$350/mo for 6 months</div></div><div class="pt-cell"><div class="pt-big">$3,000<span> total</span></div><div class="pt-small">$500/mo for 6 months</div></div><div class="pt-cell"><div class="pt-big">$4,500<span> total</span></div><div class="pt-small">$750/mo for 6 months</div></div><div class="pt-cell"><div class="pt-big">$5,994<span> total</span></div><div class="pt-small">$999/mo for 6 months</div></div><div class="pt-label up"><div class="pt-l1">6 Months, Paid Upfront</div><div class="pt-l2">7th month FREE</div></div><div class="pt-cell up"><div class="pt-big">$2,100<span> upfront</span></div><div class="pt-small">7 months of ads · $350 free</div></div><div class="pt-cell up"><div class="pt-big">$3,000<span> upfront</span></div><div class="pt-small">7 months of ads · $500 free</div></div><div class="pt-cell up"><div class="pt-big">$4,500<span> upfront</span></div><div class="pt-small">7 months of ads · $750 free</div></div><div class="pt-cell up"><div class="pt-big">$5,994<span> upfront</span></div><div class="pt-small">7 months of ads · $999 free</div></div><div class="pt-label"><div class="pt-l1">12 Months</div><div class="pt-l2">Pay monthly</div></div><div class="pt-cell"><div class="pt-big">$4,200<span> total</span></div><div class="pt-small">$350/mo for 12 months</div></div><div class="pt-cell"><div class="pt-big">$6,000<span> total</span></div><div class="pt-small">$500/mo for 12 months</div></div><div class="pt-cell"><div class="pt-big">$9,000<span> total</span></div><div class="pt-small">$750/mo for 12 months</div></div><div class="pt-cell"><div class="pt-big">$11,988<span> total</span></div><div class="pt-small">$999/mo for 12 months</div></div><div class="pt-label up"><div class="pt-l1">12 Months, Paid Upfront</div><div class="pt-l2">13th &amp; 14th months FREE</div></div><div class="pt-cell up"><div class="pt-big">$4,200<span> upfront</span></div><div class="pt-small">14 months of ads · $700 free</div></div><div class="pt-cell up"><div class="pt-big">$6,000<span> upfront</span></div><div class="pt-small">14 months of ads · $1,000 free</div></div><div class="pt-cell up"><div class="pt-big">$9,000<span> upfront</span></div><div class="pt-small">14 months of ads · $1,500 free</div></div><div class="pt-cell up"><div class="pt-big">$11,988<span> upfront</span></div><div class="pt-small">14 months of ads · $1,998 free</div></div></div>
-  <div class="pfine">Upfront plans are paid in full at the start. Monthly plans are billed each month for the length of the plan.</div>
-  <div class="pg-foot"><span>03</span><span>MCTV DIGITAL, INC · The Indoor Billboard Company</span></div>
-</section>
+    <div class="ptable">
+      <div></div>
+      <div class="pt-head"><div class="pt-pk">10 SCREENS</div><div class="pt-mo">$350<span>/mo</span></div></div>
+      <div class="pt-head"><div class="pt-pk">20 SCREENS</div><div class="pt-mo">$500<span>/mo</span></div></div>
+      <div class="pt-head"><div class="pt-pk">40 SCREENS</div><div class="pt-mo">$750<span>/mo</span></div></div>
+      <div class="pt-head"><div class="pt-pk">75 SCREENS</div><div class="pt-mo">$999<span>/mo</span></div></div>
 
-<!-- PAGE 4 · NEXT STEPS + CONTACT -->
-<section class="page">
-  <div class="steps-left">
-    <img class="wordmark" src="mctv_logo.png" alt="MCTV Elite Advertising">
-    <div class="eyebrow">Next Steps</div>
-    <div class="h1">Getting started is <em>easy.</em></div>
-    <div class="goldrule"></div>
-    <div class="step"><div class="n">1</div><div><div class="t">Pick your package and screens</div><div class="d">Tell us which option and payment plan fit. On 10, 20 or 40 screens, you pick the spots and can change them anytime.</div></div></div>
-    <div class="step"><div class="n">2</div><div><div class="t">We build your ad</div><div class="d">We design it around your business and what you want to say. You look it over and tell us what to tweak.</div></div></div>
-    <div class="step"><div class="n">3</div><div><div class="t">You go live</div><div class="d">Once you approve the ad, it starts running on your screens, and we'll send reports showing it played.</div></div></div>
+      <div class="pt-label"><div class="pt-l1">6 months</div><div class="pt-l2">Billed monthly</div></div>
+      <div class="pt-cell"><div class="pt-big">$2,100</div><div class="pt-small">total · $350/mo</div></div>
+      <div class="pt-cell"><div class="pt-big">$3,000</div><div class="pt-small">total · $500/mo</div></div>
+      <div class="pt-cell"><div class="pt-big">$4,500</div><div class="pt-small">total · $750/mo</div></div>
+      <div class="pt-cell"><div class="pt-big">$5,994</div><div class="pt-small">total · $999/mo</div></div>
+
+      <div class="pt-label up"><div class="pt-l1">6 months upfront</div><div class="pt-l2">7th month FREE</div></div>
+      <div class="pt-cell up"><div class="pt-big">$2,100</div><div class="pt-small">7 months of ads<br><b>$350 in free ads</b></div></div>
+      <div class="pt-cell up"><div class="pt-big">$3,000</div><div class="pt-small">7 months of ads<br><b>$500 in free ads</b></div></div>
+      <div class="pt-cell up"><div class="pt-big">$4,500</div><div class="pt-small">7 months of ads<br><b>$750 in free ads</b></div></div>
+      <div class="pt-cell up"><div class="pt-big">$5,994</div><div class="pt-small">7 months of ads<br><b>$999 in free ads</b></div></div>
+
+      <div class="pt-label"><div class="pt-l1">12 months</div><div class="pt-l2">Billed monthly</div></div>
+      <div class="pt-cell"><div class="pt-big">$4,200</div><div class="pt-small">total · $350/mo</div></div>
+      <div class="pt-cell"><div class="pt-big">$6,000</div><div class="pt-small">total · $500/mo</div></div>
+      <div class="pt-cell"><div class="pt-big">$9,000</div><div class="pt-small">total · $750/mo</div></div>
+      <div class="pt-cell"><div class="pt-big">$11,988</div><div class="pt-small">total · $999/mo</div></div>
+
+      <div class="pt-label up"><div class="pt-l1">12 months upfront</div><div class="pt-l2">13th &amp; 14th months FREE</div></div>
+      <div class="pt-cell up"><div class="pt-big">$4,200</div><div class="pt-small">14 months of ads<br><b>$700 in free ads</b></div></div>
+      <div class="pt-cell up"><div class="pt-big">$6,000</div><div class="pt-small">14 months of ads<br><b>$1,000 in free ads</b></div></div>
+      <div class="pt-cell up"><div class="pt-big">$9,000</div><div class="pt-small">14 months of ads<br><b>$1,500 in free ads</b></div></div>
+      <div class="pt-cell up"><div class="pt-big">$11,988</div><div class="pt-small">14 months of ads<br><b>$1,998 in free ads</b></div></div>
+    </div>
+    <div class="fine2">Upfront plans are paid in full at the start. Monthly plans are billed each month for the length of the plan.</div>
+
+    <div class="steps">
+      <div class="eyebrow">Next Steps</div>
+      <div class="h1">Getting started is <em>easy.</em></div>
+      <div class="step-row">
+        <div class="step"><div class="n">1</div><div class="t">Pick your package</div><div class="d">Tell us which option and payment plan fit. On 10, 20 or 40 screens, you pick the spots and can change them anytime.</div></div>
+        <div class="step"><div class="n">2</div><div class="t">We build your ad</div><div class="d">We design it around your business and what you want to say. You look it over and tell us what to tweak.</div></div>
+        <div class="step"><div class="n">3</div><div class="t">You go live</div><div class="d">Once you approve the ad, it starts running on your screens, and we'll send reports showing it played.</div></div>
+      </div>
+    </div>
+
   </div>
-  <div class="contact-right">
-    <div class="big">Thank you,<br>Jason.</div>
-    <div class="line first">Questions? Call or text me anytime. I'm happy to help.</div>
-    <div class="line">www.mctvofms.com</div>
+
+  <div class="closer">
     <div class="cta">Let's get Brunner on screens around Oxford.</div>
+    <div class="thanks">
+      <div class="big">Thank you, Jason.</div>
+      <div class="line">Questions? Call or text me anytime. I'm happy to help.</div>
+      <div class="line">www.mctvofms.com</div>
+    </div>
+    <div class="me"><img src="swayze_block.png" alt="Swayze Hollingsworth, Director of Sales"></div>
   </div>
-  <div class="band"><img src="swayze_block.png" alt="Swayze Hollingsworth, Director of Sales"></div>
 </section>
 
 </body>
