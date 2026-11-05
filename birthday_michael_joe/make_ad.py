@@ -1,7 +1,7 @@
 """Builds a 15-second 1080p Happy Birthday ad for Michael Joe.
 Run: python3 make_ad.py  -> happy_birthday_michael_joe.mp4
 """
-import math, random, subprocess, wave, struct, os
+import math, random, subprocess, os
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -218,53 +218,8 @@ for i in range(N):
     if i % 60 == 0:
         print("frame", i)
 
-# ---------- music: "Happy Birthday" melody (public domain), synthesized ----------
-SR = 44100
-G4, A4, B4, C5, D5, E5, F5, G5 = 392.0, 440.0, 493.88, 523.25, 587.33, 659.25, 698.46, 783.99
-C3, G2, F2 = 130.81, 98.0, 87.31
-mel = [(G4, .75), (G4, .25), (A4, 1), (G4, 1), (C5, 1), (B4, 2),
-       (G4, .75), (G4, .25), (A4, 1), (G4, 1), (D5, 1), (C5, 2),
-       (G4, .75), (G4, .25), (G5, 1), (E5, 1), (C5, 1), (B4, 1), (A4, 2),
-       (F5, .75), (F5, .25), (E5, 1), (C5, 1), (D5, 1), (C5, 3)]
-beat = 0.52
-start = 0.5
-buf = [0.0] * (SR * DUR)
-
-def tone(freq, t0, dur, amp, decay=3.0):
-    n0, n = int(t0 * SR), int(dur * SR)
-    for j in range(n):
-        if n0 + j >= len(buf):
-            break
-        tt = j / SR
-        env = min(1, tt / 0.01) * math.exp(-decay * tt) * min(1, (n - j) / (0.03 * SR))
-        s = (math.sin(2 * math.pi * freq * tt) + 0.35 * math.sin(4 * math.pi * freq * tt)
-             + 0.12 * math.sin(6 * math.pi * freq * tt))
-        buf[n0 + j] += amp * env * s
-
-t0 = start
-for fr, b in mel:
-    tone(fr, t0, b * beat * 1.1, 0.28)
-    t0 += b * beat
-# simple bass/chord pulses on each bar (3/4 time, pickup of 1 beat)
-bass = [C3, G2, G2, C3, C3, F2, C3, G2 * 2 / 2, C3]
-bt = start + beat
-for k, fr in enumerate(bass):
-    for m in range(3):
-        tone(fr * (1 if m == 0 else 2), bt + m * beat, beat * 0.9, 0.12 if m == 0 else 0.06, decay=4)
-    bt += 3 * beat
-peak = max(abs(v) for v in buf) or 1
-wav_path = os.path.join(HERE, "_music.wav")
-with wave.open(wav_path, "w") as w:
-    w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
-    fade_n = int(0.8 * SR)
-    data = bytearray()
-    for j, v in enumerate(buf):
-        g = min(1, (len(buf) - j) / fade_n)
-        data += struct.pack("<h", int(v / peak * 0.85 * g * 32767))
-    w.writeframes(bytes(data))
-
 out = os.path.join(HERE, "happy_birthday_michael_joe.mp4")
 subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(FPS), "-i", os.path.join(FRAMES, "f%04d.png"),
-                "-i", wav_path, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-preset", "medium",
-                "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", out], check=True)
+                "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-preset", "medium",
+                "-an", "-movflags", "+faststart", out], check=True)
 print("done ->", out)
